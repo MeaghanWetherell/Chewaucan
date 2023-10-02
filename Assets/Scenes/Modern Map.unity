@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 493631815}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 1
   minViewDist: 25
-  mouseSensitivity: 25
+  mouseSensitivity: 10
   mainCamera: {fileID: 968836691}
 --- !u!114 &493631816
 MonoBehaviour:
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotationSpeed: 1
+  rotationSpeed: 5
   gravity: -2
   jumpHeight: 2
 --- !u!114 &493631817
@@ -617,7 +617,7 @@ Transform:
   m_GameObject: {fileID: 493631814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 314, y: 5.02, z: 80}
+  m_LocalPosition: {x: 383.19, y: 5.02, z: 183.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1016,7 +1016,7 @@ Transform:
   m_GameObject: {fileID: 968836690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.53, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

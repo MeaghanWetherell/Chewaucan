@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 verticalMovement;
     float constantGravity = -9.18f;
     float moveSpeedDefault;
+    bool grounded;
     
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool grounded = controller.isGrounded; //checks if the player if standing on the ground
+        grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
         if (grounded && verticalMovement.y < gravity) 
         {
@@ -51,6 +52,30 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    /**
+     * This function acts as a secondary check for telling when the player is grounded, to ensure they cannot jump up
+     * walls. With this, it is considerably harder to jump up walls, but still possible with some effort.
+     */
+    private bool RaycastToGround()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, controller.height))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.black);
+            GameObject objectHit = hit.collider.gameObject;
+            
+            //Terrain hasTerrain = objectHit.GetComponent<Terrain>();
+            // <1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
+            if (hit.distance <= 1.1f)
+            { 
+                Debug.Log("Distance: "+ hit.distance+" Raycast points towards ground");
+                return true;
+            }
+            
+        }
+        return false;
+    }
+
     /* The following 3 functions are called as part of the action map. The PlayerInput component on the player sends 
      * messages to these function when the corresponding input actions are used (WASD, Space, left shift).
      */
@@ -61,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump()
     {
-        if (controller.isGrounded)
+        if (grounded)
         {
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * constantGravity);
         }
