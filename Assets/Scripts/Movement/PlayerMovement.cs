@@ -10,6 +10,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed = 5f;
     [SerializeField] float gravity = -2f; //this constanly move the player down, so isGrounded works correctly.
     [SerializeField] float jumpHeight = 2;
+    [SerializeField] float maxStamina = 100f;
+    [SerializeField] float currStamina = 100f;
+    [SerializeField] float staminaDepletionRate = 10f;
 
     CharacterController controller;
     Vector2 moveInput;
@@ -49,12 +52,33 @@ public class PlayerMovement : MonoBehaviour
         //moves the player downward to ensure isGrounded returns correctly
         verticalMovement.y += constantGravity * Time.deltaTime;
         controller.Move(verticalMovement * Time.deltaTime);
+
+        //determining when the player is sprinting and stopping sprinting when out of stamina
+        if (moveSpeed != moveSpeedDefault && currStamina > 0)
+        {
+            currStamina -= staminaDepletionRate * Time.deltaTime;
+            Debug.Log("Sprinting");
+        }
+        else
+        {
+            if (currStamina < 0) { currStamina = 0; }
+
+            moveSpeed = moveSpeedDefault;
+            if (currStamina < maxStamina)
+            {
+                currStamina += staminaDepletionRate * Time.deltaTime;
+            }
+            else
+            {
+                currStamina = maxStamina;
+            }
+        }
         
     }
 
     /**
      * This function acts as a secondary check for telling when the player is grounded, to ensure they cannot jump up
-     * walls. With this, it is considerably harder to jump up walls, but still possible with some effort.
+     * walls. 
      */
     private bool RaycastToGround()
     {
@@ -68,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             // <1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
             if (hit.distance <= 1.1f)
             { 
-                Debug.Log("Distance: "+ hit.distance+" Raycast points towards ground");
+                //Debug.Log("Distance: "+ hit.distance+" Raycast points towards ground");
                 return true;
             }
             
@@ -95,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
     void OnSprint(InputValue value)
     {
         bool sprint = value.isPressed;
-        if (sprint)
+        if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
         }
