@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     Vector2 moveInput;
     Vector3 verticalMovement;
-    float constantGravity = -9.18f;
+    private const float GRAVITY = -9.18f;
     float moveSpeedDefault;
     bool grounded;
     
@@ -50,14 +50,13 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(movement * Time.deltaTime);
 
         //moves the player downward to ensure isGrounded returns correctly
-        verticalMovement.y += constantGravity * Time.deltaTime;
+        verticalMovement.y += GRAVITY * Time.deltaTime;
         controller.Move(verticalMovement * Time.deltaTime);
 
         //determining when the player is sprinting and stopping sprinting when out of stamina
         if (moveSpeed != moveSpeedDefault && currStamina > 0)
         {
-            currStamina -= staminaDepletionRate * Time.deltaTime;
-            Debug.Log("Sprinting");
+            currStamina -= staminaDepletionRate * Time.deltaTime; //depletes stamina when sprinting
         }
         else
         {
@@ -66,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeedDefault;
             if (currStamina < maxStamina)
             {
-                currStamina += staminaDepletionRate * Time.deltaTime;
+                currStamina += staminaDepletionRate * Time.deltaTime; //restores stamina when not sprinting, up to maxStamina
             }
             else
             {
@@ -87,9 +86,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.black);
             GameObject objectHit = hit.collider.gameObject;
-            
-            //Terrain hasTerrain = objectHit.GetComponent<Terrain>();
-            // <1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
+
+            //<1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
             if (hit.distance <= 1.1f)
             { 
                 //Debug.Log("Distance: "+ hit.distance+" Raycast points towards ground");
@@ -112,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded)
         {
-            verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * constantGravity);
+            verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
         }
     }
 
