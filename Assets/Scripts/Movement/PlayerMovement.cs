@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float rotationSpeed = 5f;
+    [SerializeField] float rotationSpeed = 4f;
     [SerializeField] float gravity = -2f; //this constanly move the player down, so isGrounded works correctly.
     [SerializeField] float jumpHeight = 2;
     [SerializeField] float maxStamina = 100f;
