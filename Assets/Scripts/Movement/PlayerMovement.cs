@@ -20,12 +20,16 @@ public class PlayerMovement : MonoBehaviour
     private const float GRAVITY = -9.18f;
     float moveSpeedDefault;
     bool grounded;
+
+    MovementSoundEffects walkingSound;
     
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        walkingSound = GetComponent<MovementSoundEffects>();
         verticalMovement = new Vector3(0f, gravity, 0f);
+        moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
     }
 
@@ -47,12 +51,26 @@ public class PlayerMovement : MonoBehaviour
         float moveAmount = moveInput.y * moveSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
-        controller.Move(movement * Time.deltaTime);
+        controller.Move(movement * Time.deltaTime); //forward movement
 
         //moves the player downward to ensure isGrounded returns correctly
         verticalMovement.y += GRAVITY * Time.deltaTime;
         controller.Move(verticalMovement * Time.deltaTime);
 
+        UpdateStamina();
+
+        if (moveInput.y != 0 && grounded)
+        {
+            walkingSound.PlayWalkingSound();
+        }
+    }
+
+    /**
+     * Called every frame, updates the current stamina level
+     * Either recovering stamina when not sprinting or losing stamina when sprinting
+     */
+    private void UpdateStamina()
+    {
         //determining when the player is sprinting and stopping sprinting when out of stamina
         if (moveSpeed != moveSpeedDefault && currStamina > 0)
         {
@@ -72,7 +90,6 @@ public class PlayerMovement : MonoBehaviour
                 currStamina = maxStamina;
             }
         }
-        
     }
 
     /**
