@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,14 @@ public class CameraLook : MonoBehaviour
     float xRotation;
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
+    }
+
+    private void OnDisable()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame

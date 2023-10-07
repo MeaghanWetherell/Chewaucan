@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Misc;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,21 +13,25 @@ namespace QuestSystem
 
         public UnityAction<float> onAction;
 
-        protected string shortDescription;
+        public string shortDescription;
 
-        protected string longDescription;
+        public string longDescription;
 
-        protected string objective;
+        public string objective;
 
-        protected float requiredCount;
+        public float requiredCount;
 
-        protected float count;
+        public float count;
 
-        protected float countPerAction;
+        private float countPerAction;
 
-        protected bool isComplete = false;
+        private bool _isComplete = false;
 
-        protected bool isPinned = false;
+        public bool isComplete => _isComplete;
+
+        private bool _isPinned = false;
+
+        public bool isPinned => _isPinned;
 
         public QuestNode(QuestObj data)
         {
@@ -38,9 +43,22 @@ namespace QuestSystem
             onAction = new UnityAction<float>(addCount);
         }
 
-        public void addCount(float toAdd = 0.0f)
+        public void changePinned()
         {
-            if (isComplete)
+            _isPinned = !_isPinned;
+            if (_isPinned)
+            {
+                QuestManager.questManager.AddPin(this);
+            }
+            else
+            {
+                QuestManager.questManager.RemovePin(this);
+            }
+        }
+        
+        private void addCount(float toAdd = 0.0f)
+        {
+            if (_isComplete)
             {
                 return;
             }
@@ -51,9 +69,20 @@ namespace QuestSystem
             count += toAdd;
             if (count >= requiredCount)
             {
-                isPinned = false;
-                isComplete = true;
-                QuestManager.questManager.reportCompletion();
+                _isComplete = true;
+                if (_isPinned)
+                {
+                    QuestManager.questManager.reportCompletion(true, this);
+                }
+                else
+                {
+                    QuestManager.questManager.reportCompletion();
+                }
+                _isPinned = false;
+            }
+            else if (_isPinned)
+            {
+                HUDManager.hudManager.resetPins();
             }
         }
 
@@ -92,13 +121,25 @@ namespace QuestSystem
 
         public int CompareTo(QuestNode other)
         {
-            if (isPinned && !other.isPinned)
+            if (name.Equals(other.name))
+            {
+                return 0;
+            }
+            if (_isPinned && !other._isPinned)
             {
                 return -1;
             }
-            if (!isComplete && other.isComplete)
+            if (other._isPinned && !_isPinned)
+            {
+                return 1;
+            }
+            if (!_isComplete && other._isComplete)
             {
                 return -1;
+            }
+            if (!other._isComplete && _isComplete)
+            {
+                return 1;
             }
             return String.Compare(name, other.name);
         }
