@@ -22,12 +22,14 @@ public class PlayerMovement : MonoBehaviour
     bool grounded;
 
     MovementSoundEffects walkingSound;
+    CheckGroundTexture terrainTexture;
     
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         walkingSound = GetComponent<MovementSoundEffects>();
+        terrainTexture = GetComponent<CheckGroundTexture>();
         verticalMovement = new Vector3(0f, gravity, 0f);
         moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.y != 0 && grounded)
         {
+            terrainTexture.GetGroundTexture();
             walkingSound.PlayWalkingSound();
         }
     }
