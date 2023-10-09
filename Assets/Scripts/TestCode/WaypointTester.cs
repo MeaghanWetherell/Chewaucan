@@ -4,20 +4,13 @@ using UnityEngine;
 
 namespace TestCode
 {
-    public class WaypointTester : MonoBehaviour
+    public class WaypointTester : QuestHandler
     {
-        public QuestObj waypointInfo;
-
-        private WaypointReached obj = new WaypointReached();
-            private void Start()
-        {
-            QuestNode quest = new QuestNode(waypointInfo);
-            obj.AddListener(quest.onAction);
-        }
-
+        public int waypointNumber;
         private void OnTriggerEnter(Collider other)
         {
-            obj.Invoke(1);
+            invokeMyEvent();
+            QuestHandler.InvokeFromHandler("reachallwp", waypointNumber-1);
             Destroy(this.gameObject);
         }
     }

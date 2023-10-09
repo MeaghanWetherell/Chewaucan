@@ -1,0 +1,10 @@
+Art Team: If you want to write a quest, you need to do three things: 
+1. write a quest description in a text file containing a short description of the quest and a long description of the quest (long is optional)
+2. Right click in project view > create > QuestObj and fill out the fields in your new quest object. All of the fields have tooltips for more in depth descriptions of what they are.
+3. Tell someone from the code team you made a quest and what the objective is. They'll finish hooking it up. 
+----------------------------------------------------------------------------------------------------------------
+Code Team: Quest system is pretty much a fully closed system. If you need to refactor it, look at my comments in the class files.
+If you just need to interface with it to get a quest hooked up you have two options:
+1. Write a class that extends QuestHandler, assign the appropriate quest object in the inspector, and call this.invokeMyEvent when an objective is completed
+2. Put a QuestHandler object on something and assign the quest object. From there, you can call QuestHandler.invokeFromHandler with a questID from any script to register objective completion.
+or, use both these methods.

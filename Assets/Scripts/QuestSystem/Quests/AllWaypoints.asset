@@ -10,14 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16fd1777aece194fa4a91dcef9642d1, type: 3}
-  m_Name: Waypoint4
+  m_Name: AllWaypoints
   m_EditorClassIdentifier: 
-  questName: Waypoint 4
-  uniqueID: wp4
-  descriptionFile: {fileID: 4900000, guid: cc45ee152e20d6843a6e68b2f1781bb4, type: 3}
+  questName: Reach All Waypoints
+  uniqueID: reachallwp
+  descriptionFile: {fileID: 4900000, guid: 4a2403bf9fc704245bf61091a4e35278, type: 3}
   objectives:
-  - Reach waypoint 4
+  - Reach Waypoint 1
+  - Reach Waypoint 2
+  - Reach Waypoint 3
+  - Reach Waypoint 4
   countsRequired:
   - 1
+  - 1
+  - 1
+  - 1
   countsAdded:
+  - 1
+  - 1
+  - 1
   - 1

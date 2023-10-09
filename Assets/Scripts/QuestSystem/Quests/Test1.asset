@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Test1
   m_EditorClassIdentifier: 
   questName: Test1
+  uniqueID: test1
   descriptionFile: {fileID: 4900000, guid: de84ad05a548d2d4f86fc4e9fbdcc65d, type: 3}
-  objective: Press W
-  countRequired: 1
-  countAdded: 1
+  objectives:
+  - Press W
+  countsRequired:
+  - 1
+  countsAdded:
+  - 1

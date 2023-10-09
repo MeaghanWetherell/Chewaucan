@@ -7,23 +7,38 @@ using UnityEngine.Events;
 
 namespace QuestSystem
 {
+    //object storing data about a particular quest
     public class QuestNode : IComparable<QuestNode>
     {
+        //name of the quest, used as an identifier, should ensure unique names
         public string name;
 
-        public UnityAction<float> onAction;
+        //unique id of the quest
+        public string ID;
 
+        //the function that should be called when quest progress is made
+        //int: index of the objective completed (0 for single objective quests)
+        //float: the amount of progress on the quest that should be gained (send 0 for default value)
+        public readonly UnityAction<int, float> onObjectiveComplete;
+
+        //short description of the quest
         public string shortDescription;
 
+        //long description of the quest
         public string longDescription;
 
-        public string objective;
+        //list of the objectives to be completed
+        public List<string> objectives;
 
-        public float requiredCount;
+        //list of the required count per objective mapped by index
+        public List<float> requiredCounts;
 
-        public float count;
+        //current count per objective mapped by index
+        public List<float> counts = new List<float>();
 
-        private float countPerAction;
+        //default count increment for each objective, mapped by index.
+        //initialized to 1 if a value is not received
+        private List<float> countsPerAction;
 
         private bool _isComplete = false;
 
@@ -33,16 +48,38 @@ namespace QuestSystem
 
         public bool isPinned => _isPinned;
 
+        //builds a quest node from the passed data object
+        //registers itself with the quest manager
+        //warning: the quest manager will not accept nodes with duplicate names, therefore,
+        //use QuestManager.questManager.getNode([name]) to save references to node objects
         public QuestNode(QuestObj data)
         {
             name = data.questName;
+            ID = data.uniqueID;
+            if (!QuestManager.questManager.registerNode(this))
+            {
+                return;
+            }
             readDescriptionFile(data.descriptionFile);
-            objective = data.objective;
-            requiredCount = data.countRequired;
-            QuestManager.questManager.registerNode(this);
-            onAction = new UnityAction<float>(addCount);
+            objectives = data.objectives;
+            requiredCounts = data.countsRequired;
+            countsPerAction = data.countsAdded;
+            if (countsPerAction == null)
+            {
+                countsPerAction = new List<float>();
+            }
+            while (countsPerAction.Count < requiredCounts.Count)
+            {
+                countsPerAction.Add(1);
+            }
+            for (int i = 0; i < requiredCounts.Count; i++)
+            {
+                counts.Add(0);
+            }
+            onObjectiveComplete = new UnityAction<int, float>(addCount);
         }
 
+        //change the pinned status of this node
         public void changePinned()
         {
             _isPinned = !_isPinned;
@@ -56,7 +93,8 @@ namespace QuestSystem
             }
         }
         
-        private void addCount(float toAdd = 0.0f)
+        //adds the passed count to the count for the objective at index
+        private void addCount(int index, float toAdd = 0.0f)
         {
             if (_isComplete)
             {
@@ -64,21 +102,31 @@ namespace QuestSystem
             }
             if (toAdd == 0)
             {
-                toAdd = countPerAction;
+                toAdd = countsPerAction[index];
             }
-            count += toAdd;
-            if (count >= requiredCount)
+            counts[index] += toAdd;
+            if (counts[index] >= requiredCounts[index])
             {
+                counts[index] = requiredCounts[index];
+                for (int i = 0; i < requiredCounts.Count; i++)
+                {
+                    // ReSharper disable once CompareOfFloatsByEqualityOperator
+                    if (counts[i] != requiredCounts[i])
+                    {
+                        HUDManager.hudManager.resetPins();
+                        return;
+                    }
+                }
                 _isComplete = true;
                 if (_isPinned)
                 {
+                    _isPinned = false;
                     QuestManager.questManager.reportCompletion(true, this);
                 }
                 else
                 {
                     QuestManager.questManager.reportCompletion();
                 }
-                _isPinned = false;
             }
             else if (_isPinned)
             {
@@ -86,6 +134,7 @@ namespace QuestSystem
             }
         }
 
+        //reads in description data from text file
         private void readDescriptionFile(TextAsset file)
         {
             string fileText = file.ToString();
@@ -109,16 +158,21 @@ namespace QuestSystem
                         }
                     }
                     longDescription = desc;
-                    break;
+                    return;
                 }
                 if (fileSplit[i][0] != '#')
                 {
                     desc += fileSplit[i] + "\n";
                 }
             }
-
+            shortDescription = desc;
+            longDescription = "";
         }
-
+        
+        //order quest nodes
+        //pinned->unpinned->complete
+        //for two nodes in the same category, returns alphabetical based on string compare
+        //use of string compare is a possible issue if game is made multi-language.
         public int CompareTo(QuestNode other)
         {
             if (name.Equals(other.name))

@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 namespace QuestSystem
 {
+    //pins and unpins an attached quest on click
     public class PinButton : MonoBehaviour
     {
+        //the quest to be pinned
         public QuestNode node;
 
         private void OnEnable()
@@ -17,6 +19,7 @@ namespace QuestSystem
             this.gameObject.GetComponent<Button>().onClick.RemoveListener(OnClick);
         }
 
+        //pin or unpin the quest
         private void OnClick()
         {
             node.changePinned();

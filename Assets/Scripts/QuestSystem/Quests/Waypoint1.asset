@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Waypoint1
   m_EditorClassIdentifier: 
   questName: Waypoint 1
+  uniqueID: wp1
   descriptionFile: {fileID: 4900000, guid: 5c1cee62c1a80484faa35064a23ca288, type: 3}
-  objective: Reach Waypoint 1
-  countRequired: 1
-  countAdded: 1
+  objectives:
+  - Reach waypoint 1
+  countsRequired:
+  - 1
+  countsAdded:
+  - 1

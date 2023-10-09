@@ -4,37 +4,39 @@ using UnityEngine;
 
 namespace QuestSystem
 {
+    //initializes the buttons on the quest GUI
     public class InitQuestGUI : MonoBehaviour
     {
-        public Vector3 start;
-
+        //quest button prefab
         public GameObject questButton;
 
+        //scroll under which to instantiate buttons
         public Transform scrollContent;
 
-        [Tooltip("Height of a button")]
-        public int height;
-        
+        //when the quest gui loads, initialize it
         void Start()
         {
             List<QuestNode> nodes = QuestManager.questManager.getQuests();
             int num = 0;
             foreach (QuestNode node in nodes)
             {
-                createButtonPrefab(node, num);
+                createButtonPrefab(node);
                 num++;
             }
         }
 
-        private void createButtonPrefab(QuestNode node, int num)
+        //creates a button prefab with the details of the passed quest
+        private void createButtonPrefab(QuestNode node)
         {
             GameObject newButton = Instantiate(questButton, scrollContent, false);
-            //var position = start;
-            //position.y += 125-height*num;
-            //newButton.transform.position = position;
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = node.name;
             newButton.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = node.shortDescription;
-            newButton.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = node.count+"/"+node.requiredCount+" "+node.objective;
+            TextMeshProUGUI text = newButton.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+            text.text = node.counts[0] + "/" + node.requiredCounts[0] + " " + node.objectives[0];
+            for (int i = 1; i < node.objectives.Count; i++)
+            {
+                text.text += ", "+node.counts[i] + "/" + node.requiredCounts[i] + " " + node.objectives[i];
+            }
             if (node.isComplete)
             {
                 newButton.transform.GetChild(3).gameObject.SetActive(true);
