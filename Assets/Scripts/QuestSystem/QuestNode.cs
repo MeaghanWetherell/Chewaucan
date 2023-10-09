@@ -16,11 +16,6 @@ namespace QuestSystem
         //unique id of the quest
         public string ID;
 
-        //the function that should be called when quest progress is made
-        //int: index of the objective completed (0 for single objective quests)
-        //float: the amount of progress on the quest that should be gained (send 0 for default value)
-        public readonly UnityAction<int, float> onObjectiveComplete;
-
         //short description of the quest
         public string shortDescription;
 
@@ -76,7 +71,6 @@ namespace QuestSystem
             {
                 counts.Add(0);
             }
-            onObjectiveComplete = new UnityAction<int, float>(addCount);
         }
 
         //change the pinned status of this node
@@ -94,11 +88,12 @@ namespace QuestSystem
         }
         
         //adds the passed count to the count for the objective at index
-        private void addCount(int index, float toAdd = 0.0f)
+        //returns true if the quest is complete, false otherwise
+        public bool addCount(int index, float toAdd = 0.0f)
         {
             if (_isComplete)
             {
-                return;
+                return true;
             }
             if (toAdd == 0)
             {
@@ -114,7 +109,7 @@ namespace QuestSystem
                     if (counts[i] != requiredCounts[i])
                     {
                         HUDManager.hudManager.resetPins();
-                        return;
+                        return false;
                     }
                 }
                 _isComplete = true;
@@ -127,11 +122,14 @@ namespace QuestSystem
                 {
                     QuestManager.questManager.reportCompletion();
                 }
+
+                return true;
             }
-            else if (_isPinned)
+            if (_isPinned)
             {
                 HUDManager.hudManager.resetPins();
             }
+            return false;
         }
 
         //reads in description data from text file
