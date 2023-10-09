@@ -19,9 +19,16 @@ public class CheckGroundTexture : MonoBehaviour
 
     public void GetGroundTexture()
     {
-        SetTerrain();
-        FindTexturePosition(controller.gameObject.transform.position);
-        FindTextureValue();
+        bool hasTerrain = SetTerrain();
+        if (hasTerrain)
+        {
+            FindTexturePosition(controller.gameObject.transform.position);
+            FindTextureValue();
+        }
+        else
+        {
+            Debug.Log("Not standing over terrain");
+        }
     }
 
     void FindTexturePosition(Vector3 playerPos)
@@ -50,7 +57,7 @@ public class CheckGroundTexture : MonoBehaviour
         return textureVals;
     }
 
-    void SetTerrain()
+    bool SetTerrain()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, controller.height))
@@ -59,6 +66,15 @@ public class CheckGroundTexture : MonoBehaviour
             GameObject objectHit = hit.collider.gameObject;
 
             terrain = objectHit.GetComponent<Terrain>();
+            if (terrain != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+        return false;
     }
 }
