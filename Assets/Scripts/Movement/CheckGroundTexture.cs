@@ -27,7 +27,7 @@ public class CheckGroundTexture : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not standing over terrain");
+            //Debug.Log("Not standing over terrain");
         }
     }
 

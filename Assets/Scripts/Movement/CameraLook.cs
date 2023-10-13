@@ -10,19 +10,22 @@ public class CameraLook : MonoBehaviour
     [SerializeField] float mouseSensitivity = 25f;
 
     public Transform mainCamera;
+    public InputActionReference lookRef;
 
     Vector2 lookInput;
     float xRotation;
     
     // Start is called before the first frame update
-    void OnEnable()
+    private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
+        lookRef.action.performed += OnLook;
     }
 
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.None;
+        lookRef.action.performed -= OnLook;
     }
 
     // Update is called once per frame
@@ -39,8 +42,8 @@ public class CameraLook : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        lookInput = value.Get<Vector2>();
+        lookInput = context.ReadValue<Vector2>();
     }
 }
