@@ -29,6 +29,17 @@ namespace QuestSystem
             return quests;
         }
 
+        //if the passed node is new, create it and return it,
+        //otherwise return a reference to the existing quest
+        public QuestNode createQuestNode(QuestObj obj)
+        {
+            QuestNode node = getNode(obj.uniqueID);
+            if (node != null)
+                return node;
+            node = new QuestNode(obj);
+            return node;
+        }
+
         //use to get specific nodes from the manager. 
         public QuestNode getNode(string ID)
         {

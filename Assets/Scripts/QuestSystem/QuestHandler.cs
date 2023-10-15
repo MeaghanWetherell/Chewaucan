@@ -16,8 +16,7 @@ namespace QuestSystem
         //initialize the quest associated with this handler
         public void startQuest()
         {
-            new QuestNode(questData);
-            quest = QuestManager.questManager.getNode(questData.uniqueID);
+            quest = QuestManager.questManager.createQuestNode(questData);
         }
 
         //progresses an objective on the quest associated with this handler passing it index and toAdd
