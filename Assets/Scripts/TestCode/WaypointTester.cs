@@ -11,6 +11,10 @@ namespace TestCode
         private void Start()
         {
             startQuest();
+            if (QuestManager.questManager.getNode("wp" + waypointNumber).isComplete)
+            {
+                GameObject.Destroy(gameObject);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
