@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using Misc;
 using UnityEditor.Experimental.GraphView;
@@ -10,6 +12,9 @@ namespace QuestSystem
     public class QuestManager : MonoBehaviour
     {
         public static QuestManager questManager;
+
+        [Tooltip("Testing flag. Enable this to disable loading saved quest data.")]
+        public bool resetQuests;
         
         //quests the player has received
         private List<QuestNode> quests = new List<QuestNode>();
@@ -17,18 +22,7 @@ namespace QuestSystem
         //the three quests currently pinned. if we want more than 3 the hud will need refactoring
         //but nothing else will need to be touched here
         private QuestNode[] pins = new QuestNode[3];
-
-        private void Awake()
-        {
-            questManager = this;
-            DontDestroyOnLoad(transform.gameObject);
-        }
-
-        public List<QuestNode> getQuests()
-        {
-            return quests;
-        }
-
+        
         //if the passed node is new, create it and return it,
         //otherwise return a reference to the existing quest
         public QuestNode createQuestNode(QuestObj obj)
@@ -45,7 +39,7 @@ namespace QuestSystem
         {
             foreach(QuestNode node in quests)
             {
-                if (node.ID == ID)
+                if (node.ID.Equals(ID))
                 {
                     return node;
                 }
@@ -53,7 +47,87 @@ namespace QuestSystem
 
             return null;
         }
-        
+
+        private void Awake()
+        {
+            questManager = this;
+            DontDestroyOnLoad(transform.gameObject);
+            if (!resetQuests)
+            {
+                loadFromFile();
+            }
+        }
+
+        public List<QuestNode> getQuests()
+        {
+            return quests;
+        }
+
+        private void loadFromFile()
+        {
+            string allQuestFiles = "";
+            string line = "";
+            StreamReader streamReader;
+            try
+            {
+                streamReader = new StreamReader("SavedQuests.txt");
+                line = streamReader.ReadLine();
+                if (line != null)
+                {
+                    allQuestFiles += line;
+                }
+                line = streamReader.ReadLine();
+                while (line != null)
+                {
+                    allQuestFiles += " " + line;
+                    line = streamReader.ReadLine();
+                }
+                streamReader.Close();
+            }
+            catch (Exception)
+            { Debug.LogError("Error in quest json deserializer"); }
+            if (allQuestFiles.Equals(""))
+                return;
+            string[] files = allQuestFiles.Split(" ");
+            foreach (string fileName in files)
+            {
+                try
+                {
+                    streamReader = new StreamReader(fileName);
+                    line = streamReader.ReadLine();
+                    streamReader.Close();
+                }
+                catch (Exception)
+                { Debug.LogError("Error in quest json deserializer");}
+                QuestNode quest = JsonUtility.FromJson<QuestNode>(line);
+                quest.callOnceInitialized();
+                if (quest.isPinned)
+                {
+                    AddPin(quest);
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            serializeToJSON();
+        }
+
+        //save the quest data
+        private void serializeToJSON()
+        {
+            string allSavedQuests = "";
+            foreach (QuestNode quest in quests)
+            {
+                string questJSON = JsonUtility.ToJson(quest);
+                File.WriteAllText(quest.ID+".json", questJSON);
+                if (!allSavedQuests.Equals(""))
+                    allSavedQuests += " ";
+                allSavedQuests += quest.ID + ".json";
+            }
+            File.WriteAllText("SavedQuests.txt", allSavedQuests);
+        }
+
         //register a new quest node with the manager. automatically called by new nodes
         //will not add duplicate quests. Make sure to use getNode to save node references,
         //otherwise you could end up with a reference to a duplicate node that is registered with the manager
