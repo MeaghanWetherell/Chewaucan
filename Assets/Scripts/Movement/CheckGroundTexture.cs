@@ -50,6 +50,10 @@ public class CheckGroundTexture : MonoBehaviour
         textureVals[1] = alphaMap[0, 0, 1];
         textureVals[2] = alphaMap[0, 0, 2];
         textureVals[3] = alphaMap[0, 0, 3];
+        textureVals[4] = alphaMap[0, 0, 4];
+        textureVals[5] = alphaMap[0, 0, 5];
+        textureVals[6] = alphaMap[0, 0, 6];
+        textureVals[7] = alphaMap[0, 0, 7];
     }
 
     public float[] GetValues()
@@ -60,7 +64,7 @@ public class CheckGroundTexture : MonoBehaviour
     bool SetTerrain()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, controller.height))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.black);
             GameObject objectHit = hit.collider.gameObject;

@@ -16,6 +16,7 @@ public class MovementSoundEffects : MonoBehaviour
     private bool isPlaying;
 
     public MovementSounds rockSounds;
+    public MovementSounds grassSounds;
 
     private void Start()
     {
@@ -30,8 +31,8 @@ public class MovementSoundEffects : MonoBehaviour
         if (!isPlaying)
         {
             float[] values = groundTexture.GetValues();
-            //Debug.Log(values[0]+" "+ values[1] + " " + values[2] + " " + values[3] + " " + values[4] + " " + values[5] + " " + values[6] + " " + values[7]);
-            clipList_step = rockSounds.stepSounds;
+            Debug.Log(values[0]+" "+ values[1] + " " + values[2] + " " + values[3] + " " + values[4] + " " + values[5] + " " + values[6] + " " + values[7]);
+            SetSoundList(values);
             StartCoroutine(PlaySound(clipList_step));
         }
     }
@@ -39,7 +40,9 @@ public class MovementSoundEffects : MonoBehaviour
     public void PlayJumpSound()
     {
         StopAllCoroutines();
-        clipList_jump = rockSounds.jumpSounds;
+        isPlaying = false;
+        float[] values = groundTexture.GetValues();
+        SetSoundList(values);
         StartCoroutine(PlaySound(clipList_jump));
         
     }
@@ -48,7 +51,8 @@ public class MovementSoundEffects : MonoBehaviour
     {
         if (!isPlaying)
         {
-            clipList_land = rockSounds.landSounds;
+            float[] values = groundTexture.GetValues();
+            SetSoundList(values);
             StartCoroutine(PlaySound(clipList_land));
         }
     }
@@ -88,5 +92,21 @@ public class MovementSoundEffects : MonoBehaviour
     public void setPlaySpeed(float s)
     {
         playSpeed = s;
+    }
+
+    void SetSoundList(float[] textureVals)
+    {
+        if (textureVals[7] > 0.5f)
+        {
+            clipList_step = grassSounds.stepSounds;
+            clipList_jump = grassSounds.jumpSounds;
+            clipList_land = grassSounds.landSounds;
+        }
+        else
+        {
+            clipList_step = rockSounds.stepSounds;
+            clipList_jump = rockSounds.jumpSounds;
+            clipList_land = rockSounds.landSounds;
+        }
     }
 }

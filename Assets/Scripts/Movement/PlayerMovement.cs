@@ -83,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void LandMovement()
     {
+        terrainTexture.GetGroundTexture();
         prevGrounded = grounded;
         grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
@@ -114,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.y != 0 && grounded)
         {
-            terrainTexture.GetGroundTexture();
             soundEffects.PlayWalkingSound();
         }
     }
