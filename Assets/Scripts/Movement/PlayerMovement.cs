@@ -21,13 +21,14 @@ public class PlayerMovement : MonoBehaviour
     private const float GRAVITY = -9.18f;
     float moveSpeedDefault;
     bool grounded;
+    bool prevGrounded;
 
     bool isSwimming;
     bool surfaceSwimming;
     Vector3 waterPosition;
     float swimSpeed = 3f;
 
-    MovementSoundEffects walkingSound;
+    MovementSoundEffects soundEffects;
     CheckGroundTexture terrainTexture;
 
     public InputActionReference moveRef;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        walkingSound = GetComponent<MovementSoundEffects>();
+        soundEffects = GetComponent<MovementSoundEffects>();
         terrainTexture = GetComponent<CheckGroundTexture>();
         verticalMovement = new Vector3(0f, gravity, 0f);
         moveInput = Vector2.zero;
@@ -82,7 +83,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void LandMovement()
     {
+        prevGrounded = grounded;
         grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
+
+        if (!prevGrounded && grounded)
+        {
+            soundEffects.PlayLandSound();
+        }
 
         if (grounded && verticalMovement.y < gravity)
         {
@@ -108,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.y != 0 && grounded)
         {
             terrainTexture.GetGroundTexture();
-            walkingSound.PlayWalkingSound();
+            soundEffects.PlayWalkingSound();
         }
     }
 
@@ -211,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded && !isSwimming)
         {
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
+            soundEffects.PlayJumpSound();
         }
     }
 
@@ -220,10 +228,12 @@ public class PlayerMovement : MonoBehaviour
         if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
+            soundEffects.setPlaySpeed(0.5f);
         }
         else
         {
             moveSpeed = moveSpeedDefault;
+            soundEffects.setPlaySpeed(0.9f);
         }
     }
 }
