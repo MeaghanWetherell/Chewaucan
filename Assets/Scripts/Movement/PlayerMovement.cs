@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,27 +21,78 @@ public class PlayerMovement : MonoBehaviour
     private const float GRAVITY = -9.18f;
     float moveSpeedDefault;
     bool grounded;
+    bool prevGrounded;
 
-    MovementSoundEffects walkingSound;
+    bool isSwimming;
+    bool surfaceSwimming;
+    Vector3 waterPosition;
+    float swimSpeed = 3f;
+
+    MovementSoundEffects soundEffects;
     CheckGroundTexture terrainTexture;
+
+    public InputActionReference moveRef;
+    public InputActionReference jumpRef;
+    public InputActionReference sprintRef;
     
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        walkingSound = GetComponent<MovementSoundEffects>();
+        soundEffects = GetComponent<MovementSoundEffects>();
         terrainTexture = GetComponent<CheckGroundTexture>();
         verticalMovement = new Vector3(0f, gravity, 0f);
         moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
+        isSwimming = false;
+        
+    }
+
+    private void OnEnable()
+    {
+        moveRef.action.performed += OnMove;
+        moveRef.action.canceled += (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
+        jumpRef.action.started += JumpOnce;
+        jumpRef.action.performed += (InputAction.CallbackContext context) => { surfaceSwimming = true; };
+        jumpRef.action.canceled += (InputAction.CallbackContext context) => { surfaceSwimming = false; };
+        sprintRef.action.performed += OnSprint;
+    }
+
+    private void OnDisable()
+    {
+        moveRef.action.performed -= OnMove;
+        moveRef.action.canceled -= (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
+        jumpRef.action.started -= JumpOnce;
+        jumpRef.action.performed -= (InputAction.CallbackContext context) => { surfaceSwimming = true; };
+        jumpRef.action.canceled -= (InputAction.CallbackContext context) => { surfaceSwimming = false; };
+        sprintRef.action.performed -= OnSprint;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isSwimming)
+        {
+            LandMovement();
+        }
+        else
+        {
+            SwimMovement();
+        }
+    }
+
+    private void LandMovement()
+    {
+        terrainTexture.GetGroundTexture();
+        prevGrounded = grounded;
         grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
-        if (grounded && verticalMovement.y < gravity) 
+        if (!prevGrounded && grounded)
+        {
+            soundEffects.PlayLandSound();
+        }
+
+        if (grounded && verticalMovement.y < gravity)
         {
             verticalMovement.y = gravity;
         }
@@ -63,9 +115,38 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.y != 0 && grounded)
         {
-            terrainTexture.GetGroundTexture();
-            walkingSound.PlayWalkingSound();
+            soundEffects.PlayWalkingSound();
         }
+    }
+
+    private void SwimMovement()
+    {
+        float waterSurface = waterPosition.y;
+        //Debug.Log("Water: " + waterSurface);
+        if (surfaceSwimming)
+        {
+            if (this.transform.position.y < waterSurface)
+            {
+                controller.Move(Vector3.up * Time.deltaTime *swimSpeed);
+            }
+            else
+            {
+                float newY = Mathf.Sin(Time.time) * swimSpeed;
+                Vector3 pos = this.transform.position;
+                Vector3 newPos = new Vector3(0, newY, 0);
+                Debug.Log("Swimming UP");
+                controller.Move(newPos * Time.deltaTime);
+            }
+        }
+        //regular swimming movement
+        //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
+        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
+        float moveAmount = moveInput.y * moveSpeed;
+        Vector3 movement = forwardDir * moveAmount;
+
+        controller.Move(movement * Time.deltaTime); //forward movement
+
+        UpdateStamina();
     }
 
     /**
@@ -118,32 +199,41 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
+    public void setSwimming(bool swim, Vector3 waterLevel)
+    {
+        isSwimming = swim;
+        waterPosition = waterLevel;
+    }
+
     /* The following 3 functions are called as part of the action map. The PlayerInput component on the player sends 
      * messages to these function when the corresponding input actions are used (WASD, Space, left shift).
      */
-    void OnMove(InputValue value)
+    void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = value.Get<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
     }
 
-    void OnJump()
+    void JumpOnce(InputAction.CallbackContext context)
     {
-        if (grounded)
+        if (grounded && !isSwimming)
         {
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
+            soundEffects.PlayJumpSound();
         }
     }
 
-    void OnSprint(InputValue value)
+    void OnSprint(InputAction.CallbackContext context)
     {
-        bool sprint = value.isPressed;
+        bool sprint = context.performed;
         if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
+            soundEffects.setPlaySpeed(0.5f);
         }
         else
         {
             moveSpeed = moveSpeedDefault;
+            soundEffects.setPlaySpeed(0.9f);
         }
     }
 }
