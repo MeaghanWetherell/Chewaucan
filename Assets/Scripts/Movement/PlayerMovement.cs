@@ -8,12 +8,14 @@ using UnityEngine.InputSystem.Interactions;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float maxDistToGround = 1.15f;
     [SerializeField] float rotationSpeed = 4f;
     [SerializeField] float gravity = -2f; //this constanly move the player down, so isGrounded works correctly.
     [SerializeField] float jumpHeight = 2;
     [SerializeField] float maxStamina = 100f;
     [SerializeField] float currStamina = 100f;
     [SerializeField] float staminaDepletionRate = 10f;
+    public GameObject cameraObj;
 
     CharacterController controller;
     Vector2 moveInput;
@@ -53,8 +55,6 @@ public class PlayerMovement : MonoBehaviour
         moveRef.action.performed += OnMove;
         moveRef.action.canceled += (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
         jumpRef.action.started += JumpOnce;
-        jumpRef.action.performed += (InputAction.CallbackContext context) => { surfaceSwimming = true; };
-        jumpRef.action.canceled += (InputAction.CallbackContext context) => { surfaceSwimming = false; };
         sprintRef.action.performed += OnSprint;
     }
 
@@ -63,8 +63,6 @@ public class PlayerMovement : MonoBehaviour
         moveRef.action.performed -= OnMove;
         moveRef.action.canceled -= (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
         jumpRef.action.started -= JumpOnce;
-        jumpRef.action.performed -= (InputAction.CallbackContext context) => { surfaceSwimming = true; };
-        jumpRef.action.canceled -= (InputAction.CallbackContext context) => { surfaceSwimming = false; };
         sprintRef.action.performed -= OnSprint;
     }
 
@@ -121,30 +119,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void SwimMovement()
     {
+        swimSpeed = moveSpeed * 0.75f;
         float waterSurface = waterPosition.y;
-        //Debug.Log("Water: " + waterSurface);
-        if (surfaceSwimming)
-        {
-            if (this.transform.position.y < waterSurface)
-            {
-                controller.Move(Vector3.up * Time.deltaTime *swimSpeed);
-            }
-            else
-            {
-                float newY = Mathf.Sin(Time.time) * swimSpeed;
-                Vector3 pos = this.transform.position;
-                Vector3 newPos = new Vector3(0, newY, 0);
-                Debug.Log("Swimming UP");
-                controller.Move(newPos * Time.deltaTime);
-            }
-        }
-        //regular swimming movement
+
+        //regular swimming movement, like land movement but uses camera forward instead of the player forward
+
+        float rotateMovement = moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
+        this.transform.Rotate(0f, rotateMovement, 0f);
+
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
-        float moveAmount = moveInput.y * moveSpeed;
+        Vector3 forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+        float moveAmount = moveInput.y * swimSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
         controller.Move(movement * Time.deltaTime); //forward movement
+
+        if (this.transform.position.y > waterSurface)
+        {
+            controller.Move(Vector3.down * swimSpeed * Time.deltaTime);
+        }
 
         UpdateStamina();
     }
@@ -163,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             if (currStamina < 0) { currStamina = 0; }
-
+            soundEffects.setPlaySpeed(0.9f);
             moveSpeed = moveSpeedDefault;
             if (currStamina < maxStamina)
             {
@@ -185,13 +178,11 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, controller.height))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.black);
             GameObject objectHit = hit.collider.gameObject;
-
+            //Debug.Log("Distance: " + hit.distance + " Raycast points towards ground");
             //<1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
-            if (hit.distance <= 1.1f)
+            if (hit.distance <= maxDistToGround)
             { 
-                //Debug.Log("Distance: "+ hit.distance+" Raycast points towards ground");
                 return true;
             }
             
