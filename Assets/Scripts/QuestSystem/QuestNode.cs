@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Misc;
@@ -8,6 +9,7 @@ using UnityEngine.Events;
 namespace QuestSystem
 {
     //object storing data about a particular quest
+    [Serializable]
     public class QuestNode : IComparable<QuestNode>
     {
         //name of the quest, used as an identifier, should ensure unique names
@@ -33,15 +35,61 @@ namespace QuestSystem
 
         //default count increment for each objective, mapped by index.
         //initialized to 1 if a value is not received
-        private List<float> countsPerAction;
+        public List<float> countsPerAction;
 
-        private bool _isComplete = false;
+        public bool isComplete = false;
 
-        public bool isComplete => _isComplete;
+        public bool isPinned = false;
+        
+        //adds the passed count to the count for the objective at index
+        //returns true if the quest is complete, false otherwise
+        public bool addCount(int index, float toAdd = 0.0f)
+        {
+            if (isComplete)
+            {
+                return true;
+            }
 
-        private bool _isPinned = false;
+            if (toAdd == 0)
+            {
+                toAdd = countsPerAction[index];
+            }
 
-        public bool isPinned => _isPinned;
+            counts[index] += toAdd;
+            if (counts[index] >= requiredCounts[index])
+            {
+                counts[index] = requiredCounts[index];
+                for (int i = 0; i < requiredCounts.Count; i++)
+                {
+                    // ReSharper disable once CompareOfFloatsByEqualityOperator
+                    if (counts[i] != requiredCounts[i])
+                    {
+                        HUDManager.hudManager.resetPins();
+                        return false;
+                    }
+                }
+
+                isComplete = true;
+                if (isPinned)
+                {
+                    isPinned = false;
+                    QuestManager.questManager.reportCompletion(true, this);
+                }
+                else
+                {
+                    QuestManager.questManager.reportCompletion();
+                }
+
+                return true;
+            }
+
+            if (isPinned)
+            {
+                HUDManager.hudManager.resetPins();
+            }
+
+            return false;
+        }
 
         //builds a quest node from the passed data object
         //registers itself with the quest manager
@@ -73,11 +121,31 @@ namespace QuestSystem
             }
         }
 
+        public void callOnceInitialized()
+        {
+            if (!QuestManager.questManager.registerNode(this))
+            {
+                return;
+            }
+            if (countsPerAction == null)
+            {
+                countsPerAction = new List<float>();
+            }
+            while (countsPerAction.Count < requiredCounts.Count)
+            {
+                countsPerAction.Add(1);
+            }
+            for (int i = 0; i < requiredCounts.Count; i++)
+            {
+                counts.Add(0);
+            }
+        }
+
         //change the pinned status of this node
         public void changePinned()
         {
-            _isPinned = !_isPinned;
-            if (_isPinned)
+            isPinned = !isPinned;
+            if (isPinned)
             {
                 QuestManager.questManager.AddPin(this);
             }
@@ -85,51 +153,6 @@ namespace QuestSystem
             {
                 QuestManager.questManager.RemovePin(this);
             }
-        }
-        
-        //adds the passed count to the count for the objective at index
-        //returns true if the quest is complete, false otherwise
-        public bool addCount(int index, float toAdd = 0.0f)
-        {
-            if (_isComplete)
-            {
-                return true;
-            }
-            if (toAdd == 0)
-            {
-                toAdd = countsPerAction[index];
-            }
-            counts[index] += toAdd;
-            if (counts[index] >= requiredCounts[index])
-            {
-                counts[index] = requiredCounts[index];
-                for (int i = 0; i < requiredCounts.Count; i++)
-                {
-                    // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if (counts[i] != requiredCounts[i])
-                    {
-                        HUDManager.hudManager.resetPins();
-                        return false;
-                    }
-                }
-                _isComplete = true;
-                if (_isPinned)
-                {
-                    _isPinned = false;
-                    QuestManager.questManager.reportCompletion(true, this);
-                }
-                else
-                {
-                    QuestManager.questManager.reportCompletion();
-                }
-
-                return true;
-            }
-            if (_isPinned)
-            {
-                HUDManager.hudManager.resetPins();
-            }
-            return false;
         }
 
         //reads in description data from text file
@@ -177,19 +200,19 @@ namespace QuestSystem
             {
                 return 0;
             }
-            if (_isPinned && !other._isPinned)
+            if (isPinned && !other.isPinned)
             {
                 return -1;
             }
-            if (other._isPinned && !_isPinned)
+            if (other.isPinned && !isPinned)
             {
                 return 1;
             }
-            if (!_isComplete && other._isComplete)
+            if (!isComplete && other.isComplete)
             {
                 return -1;
             }
-            if (!other._isComplete && _isComplete)
+            if (!other.isComplete && isComplete)
             {
                 return 1;
             }
