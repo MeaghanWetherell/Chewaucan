@@ -12,7 +12,7 @@ public class StartSwimming : MonoBehaviour
         {
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             playerMovement.setSwimming(true, this.transform.position);
-            Debug.Log("IN WATER");
+            //Debug.Log("IN WATER");
         }
     }
 
@@ -22,7 +22,7 @@ public class StartSwimming : MonoBehaviour
         {
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             playerMovement.setSwimming(false, this.transform.position);
-            Debug.Log("ON LAND");
+            //Debug.Log("ON LAND");
         }
     }
 }

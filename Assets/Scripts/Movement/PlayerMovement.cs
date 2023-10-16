@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     private void SwimMovement()
     {
         float waterSurface = waterPosition.y;
-
+        //Debug.Log("Water: " + waterSurface);
         if (surfaceSwimming)
         {
             if (this.transform.position.y < waterSurface)
@@ -124,24 +124,22 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                float newY = Mathf.Sin(Time.time * swimSpeed);
+                float newY = Mathf.Sin(Time.time) * swimSpeed;
                 Vector3 pos = this.transform.position;
-                Vector3 newPos = new Vector3(pos.x, newY, pos.z);
+                Vector3 newPos = new Vector3(0, newY, 0);
+                Debug.Log("Swimming UP");
                 controller.Move(newPos * Time.deltaTime);
             }
         }
-        else
-        {
-            //regular swimming movement
-            //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-            Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
-            float moveAmount = moveInput.y * moveSpeed;
-            Vector3 movement = forwardDir * moveAmount;
+        //regular swimming movement
+        //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
+        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
+        float moveAmount = moveInput.y * moveSpeed;
+        Vector3 movement = forwardDir * moveAmount;
 
-            controller.Move(movement * Time.deltaTime); //forward movement
+        controller.Move(movement * Time.deltaTime); //forward movement
 
-            UpdateStamina();
-        }
+        UpdateStamina();
     }
 
     /**
