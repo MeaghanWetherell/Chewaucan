@@ -17,6 +17,9 @@ public class MovementSoundEffects : MonoBehaviour
 
     public MovementSounds rockSounds;
     public MovementSounds grassSounds;
+    public MovementSounds leafSounds;
+    public MovementSounds soilSounds;
+    public MovementSounds gravelSounds;
 
     private void Start()
     {
@@ -96,17 +99,33 @@ public class MovementSoundEffects : MonoBehaviour
 
     void SetSoundList(float[] textureVals)
     {
+        if (textureVals[0] > 0.5f)
+        {
+            clipList_step = gravelSounds.stepSounds;
+            clipList_jump = gravelSounds.jumpSounds;
+            clipList_land = gravelSounds.landSounds;
+            return;
+        }
+
+        if (textureVals[1] > 0.5f)
+        {
+            clipList_step = soilSounds.stepSounds;
+            clipList_jump = soilSounds.jumpSounds;
+            clipList_land = soilSounds.landSounds;
+        }
+
         if (textureVals[7] > 0.5f)
         {
             clipList_step = grassSounds.stepSounds;
             clipList_jump = grassSounds.jumpSounds;
             clipList_land = grassSounds.landSounds;
+            return;
         }
-        else
-        {
-            clipList_step = rockSounds.stepSounds;
-            clipList_jump = rockSounds.jumpSounds;
-            clipList_land = rockSounds.landSounds;
-        }
+
+        //indexes 2-6 are rock textures, so it is treated as the default sounds to play
+        //if none of the above if statements are true
+        clipList_step = rockSounds.stepSounds;
+        clipList_jump = rockSounds.jumpSounds;
+        clipList_land = rockSounds.landSounds;
     }
 }
