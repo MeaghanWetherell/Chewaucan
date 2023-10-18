@@ -46,4 +46,9 @@ public class CameraLook : MonoBehaviour
     {
         lookInput = context.ReadValue<Vector2>();
     }
+
+    public void setMinDist(float n)
+    {
+        minViewDist = n;
+    }
 }

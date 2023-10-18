@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StartSwimming : MonoBehaviour
 {
-    
+    public Transform waterBlock;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,8 +12,8 @@ public class StartSwimming : MonoBehaviour
         {
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
-            playerMovement.setSwimming(true, this.transform.position);
-            camLook.minViewDist = 10f;
+            playerMovement.setSwimming(true, waterBlock.position);
+            camLook.setMinDist(50f);
             //Debug.Log("IN WATER");
         }
     }
@@ -24,8 +24,8 @@ public class StartSwimming : MonoBehaviour
         {
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
-            playerMovement.setSwimming(false, this.transform.position);
-            camLook.minViewDist = 25f;
+            playerMovement.setSwimming(false, waterBlock.position);
+            camLook.setMinDist(25f);
             //Debug.Log("ON LAND");
         }
     }
