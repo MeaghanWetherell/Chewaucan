@@ -112,6 +112,7 @@ public class MovementSoundEffects : MonoBehaviour
             clipList_step = soilSounds.stepSounds;
             clipList_jump = soilSounds.jumpSounds;
             clipList_land = soilSounds.landSounds;
+            return;
         }
 
         if (textureVals[7] > 0.5f)
