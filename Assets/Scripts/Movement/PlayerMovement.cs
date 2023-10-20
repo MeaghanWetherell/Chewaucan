@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float currStamina = 100f;
     [SerializeField] float staminaDepletionRate = 10f;
     public GameObject cameraObj;
+    public Slider staminaUI;
 
     CharacterController controller;
     Vector2 moveInput;
@@ -47,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
         isSwimming = false;
+        staminaUI.minValue = 0f;
+        staminaUI.maxValue = maxStamina;
         
     }
 
@@ -109,10 +113,9 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement.y += GRAVITY * Time.deltaTime;
         controller.Move(verticalMovement * Time.deltaTime);
 
-        UpdateStamina();
-
         if (moveInput.y != 0 && grounded)
         {
+            UpdateStamina();
             soundEffects.PlayWalkingSound();
         }
     }
@@ -167,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
                 currStamina = maxStamina;
             }
         }
+        staminaUI.value = currStamina;
     }
 
     /**

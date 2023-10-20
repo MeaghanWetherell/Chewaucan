@@ -19,6 +19,7 @@ public class CameraLook : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
+        Cursor.visible = true;
         lookRef.action.performed += OnLook;
     }
 
