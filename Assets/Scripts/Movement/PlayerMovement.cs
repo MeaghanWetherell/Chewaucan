@@ -16,8 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxStamina = 100f;
     [SerializeField] float currStamina = 100f;
     [SerializeField] float staminaDepletionRate = 10f;
+    [SerializeField] float oxygenDepletionRate = 4f;
+    [SerializeField] float currOxygen = 100f;
     public GameObject cameraObj;
     public Slider staminaUI;
+    public Slider oxygenUI;
 
     CharacterController controller;
     Vector2 moveInput;
@@ -29,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool isSwimming;
     bool surfaceSwimming;
+    bool isDiving;
     Vector3 waterPosition;
     float swimSpeed = 3f;
 
@@ -48,9 +52,10 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement = new Vector3(0f, gravity, 0f);
         moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
-        isSwimming = false;
         staminaUI.minValue = 0f;
         staminaUI.maxValue = maxStamina;
+        oxygenUI.minValue = 0f;
+        oxygenUI.maxValue = maxStamina;
         
     }
 
@@ -75,10 +80,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isSwimming)
         {
+            oxygenUI.gameObject.SetActive(false);
             LandMovement();
         }
         else
         {
+            oxygenUI.gameObject.SetActive(true);
             SwimMovement();
         }
     }
@@ -115,9 +122,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.y != 0 && grounded)
         {
-            UpdateStamina();
             soundEffects.PlayWalkingSound();
         }
+        UpdateStamina();
     }
 
     private void SwimMovement()
@@ -125,24 +132,34 @@ public class PlayerMovement : MonoBehaviour
         swimSpeed = moveSpeed * 0.75f;
         float waterSurface = waterPosition.y;
 
+        if (this.transform.position.y >= waterSurface)
+        {
+            surfaceSwimming = true;
+            isDiving = false;
+        }
+
         //regular swimming movement, like land movement but uses camera forward instead of the player forward
 
         float rotateMovement = moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-        Vector3 forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+        Vector3 forwardDir = Vector3.forward;
+        if (surfaceSwimming)
+        {
+            forwardDir = this.transform.TransformDirection(Vector3.forward);
+        }
+        else if (isDiving)
+        {
+            forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+        }
         float moveAmount = moveInput.y * swimSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
         controller.Move(movement * Time.deltaTime); //forward movement
 
-        if (this.transform.position.y > waterSurface)
-        {
-            controller.Move(Vector3.down * swimSpeed * Time.deltaTime);
-        }
-
         UpdateStamina();
+        UpdateOxygen();
     }
 
     /**
@@ -171,6 +188,27 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         staminaUI.value = currStamina;
+    }
+
+    private void UpdateOxygen()
+    {
+        if (currOxygen < 0) { 
+            currOxygen = 0;
+            this.transform.position = new Vector3(transform.position.x, waterPosition.y, transform.position.z);
+        }
+        if (currOxygen < maxStamina && surfaceSwimming)
+        {
+            currOxygen += oxygenDepletionRate * Time.deltaTime;
+        }
+        else if (isDiving)
+        {
+            currOxygen -= oxygenDepletionRate * Time.deltaTime;
+        }
+        else
+        {
+            currOxygen = maxStamina;
+        }
+        oxygenUI.value = currOxygen;
     }
 
     /**
@@ -214,6 +252,11 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
             soundEffects.PlayJumpSound();
+        }
+        else if (isSwimming)
+        {
+            isDiving = true;
+            surfaceSwimming = false;
         }
     }
 

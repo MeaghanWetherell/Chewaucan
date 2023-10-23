@@ -18,6 +18,16 @@ public class StartSwimming : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
+            playerMovement.setSwimming(true, waterBlock.position);
+            //Debug.Log("IN WATER");
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
