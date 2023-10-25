@@ -31,8 +31,8 @@ public class PlayerMovement : MonoBehaviour
     bool prevGrounded;
 
     bool isSwimming;
-    bool surfaceSwimming;
     bool isDiving;
+    bool dive;
     Vector3 waterPosition;
     float swimSpeed = 3f;
 
@@ -132,9 +132,9 @@ public class PlayerMovement : MonoBehaviour
         swimSpeed = moveSpeed * 0.75f;
         float waterSurface = waterPosition.y;
 
-        if (this.transform.position.y >= waterSurface)
+        if (this.transform.position.y >= waterSurface && isDiving && !dive)
         {
-            surfaceSwimming = true;
+            Debug.Log("Setting dive to false");
             isDiving = false;
         }
 
@@ -144,9 +144,10 @@ public class PlayerMovement : MonoBehaviour
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-        Vector3 forwardDir = Vector3.forward;
-        if (surfaceSwimming)
+        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
+        if (!isDiving)
         {
+            //Debug.Log("not diving");
             forwardDir = this.transform.TransformDirection(Vector3.forward);
         }
         else if (isDiving)
@@ -192,16 +193,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateOxygen()
     {
+        Debug.Log("OXYGEN");
         if (currOxygen < 0) { 
             currOxygen = 0;
             this.transform.position = new Vector3(transform.position.x, waterPosition.y, transform.position.z);
         }
-        if (currOxygen < maxStamina && surfaceSwimming)
+        if (currOxygen < maxStamina && !isDiving)
         {
             currOxygen += oxygenDepletionRate * Time.deltaTime;
         }
         else if (isDiving)
         {
+            Debug.Log("Deplete");
             currOxygen -= oxygenDepletionRate * Time.deltaTime;
         }
         else
@@ -255,8 +258,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (isSwimming)
         {
+            Debug.Log("DIVE");
             isDiving = true;
-            surfaceSwimming = false;
+            StartCoroutine(Dive());
         }
     }
 
@@ -273,5 +277,16 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeedDefault;
             soundEffects.setPlaySpeed(0.9f);
         }
+    }
+
+    IEnumerator Dive()
+    {
+        dive = true;
+        yield return new WaitForSeconds(3f);
+        //this.transform.Rotate(30f, 0f, 0f, Space.Self);
+        //this.transform.Translate(0f, 0f, 5f, Space.Self);
+        //this.transform.Rotate(-30f, 0f, 0f, Space.Self);
+        dive = false;
+        yield return null;
     }
 }

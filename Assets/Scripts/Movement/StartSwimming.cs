@@ -14,6 +14,8 @@ public class StartSwimming : MonoBehaviour
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
             playerMovement.setSwimming(true, waterBlock.position);
             camLook.setMinDist(50f);
+            other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x, 
+                waterBlock.position.y, other.gameObject.transform.position.z);
             //Debug.Log("IN WATER");
         }
     }
