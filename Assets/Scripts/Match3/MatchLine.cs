@@ -58,6 +58,8 @@ namespace Match3
 
         private void bubbleDown(int index)
         {
+            if (myObjects[index] == null)
+                return;
             for (int i = index; i <= myObjects.Length - 2; i++)
             {
                 if (myObjects[i + 1] == null)

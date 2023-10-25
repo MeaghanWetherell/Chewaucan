@@ -7,10 +7,14 @@ namespace Match3
 {
     public class MatchObject : MonoBehaviour
     {
-        private static List<Sprite> sprites;
+        private static List<Mesh> meshes;
 
-        private static float gravity = 10;
-    
+        private static List<Material> materials;
+        
+        private static float gravity = 20;
+
+        public static List<int> validMeshes;
+
         public int myType;
 
         public int index;
@@ -19,12 +23,11 @@ namespace Match3
         
         private void Start()
         {
-            if (sprites == null)
-            {
-                sprites = Resources.Load<SpriteCollection>("Match3Sprites").spriteList;
-            }
-            myType = Random.Range((int) 0, (int) sprites.Count);
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[myType];
+            meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
+            materials ??= Resources.Load<MeshDataList>("Match3Meshes").materials;
+            myType = validMeshes[Random.Range((int) 0, (int) validMeshes.Count)];
+            this.gameObject.GetComponent<MeshFilter>().mesh = meshes[myType];
+            this.gameObject.GetComponent<MeshRenderer>().material = materials[myType];
         }
 
         private void Update()
