@@ -149,16 +149,19 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log("not diving");
             forwardDir = this.transform.TransformDirection(Vector3.forward);
+            this.GetComponent<CameraLook>().setMinDist(10f);
         }
-        else if (isDiving)
+        else
         {
+            this.GetComponent<CameraLook>().setMinDist(50f);
             forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+            controller.Move(Vector3.up * Time.deltaTime);
         }
         float moveAmount = moveInput.y * swimSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
         controller.Move(movement * Time.deltaTime); //forward movement
-
+        
         UpdateStamina();
         UpdateOxygen();
     }
@@ -279,13 +282,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+     * Moves the player under the water surface
+     */
     IEnumerator Dive()
     {
         dive = true;
-        yield return new WaitForSeconds(3f);
-        //this.transform.Rotate(30f, 0f, 0f, Space.Self);
-        //this.transform.Translate(0f, 0f, 5f, Space.Self);
-        //this.transform.Rotate(-30f, 0f, 0f, Space.Self);
+        //yield return new WaitForSeconds(3f);
+        for (int i = 0; i < 30; i++)
+        {
+            this.transform.Rotate(1f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            controller.Move(this.transform.TransformDirection(Vector3.forward));
+            yield return new WaitForEndOfFrame();
+        }
+        for (int i = 0; i < 30; i++)
+        {
+            this.transform.Rotate(-1f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+        }
         dive = false;
         yield return null;
     }

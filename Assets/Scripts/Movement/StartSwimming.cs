@@ -13,7 +13,7 @@ public class StartSwimming : MonoBehaviour
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
             playerMovement.setSwimming(true, waterBlock.position);
-            camLook.setMinDist(50f);
+            camLook.setMinDist(10f);
             other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x, 
                 waterBlock.position.y, other.gameObject.transform.position.z);
             //Debug.Log("IN WATER");
@@ -37,7 +37,7 @@ public class StartSwimming : MonoBehaviour
             PlayerMovement playerMovement = other.gameObject.GetComponent<PlayerMovement>();
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
             playerMovement.setSwimming(false, waterBlock.position);
-            camLook.setMinDist(25f);
+            camLook.setMinDist(30f);
             //Debug.Log("ON LAND");
         }
     }
