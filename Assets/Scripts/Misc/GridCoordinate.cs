@@ -8,10 +8,10 @@ namespace Misc
         public readonly int x;
         public readonly int y;
 
-        public GridCoordinate(int i, int j)
+        public GridCoordinate(int x, int y)
         {
-            x = i;
-            y = j;
+            this.x = x;
+            this.y = y;
         }
 
         public int CompareTo(GridCoordinate other)

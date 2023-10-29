@@ -20,6 +20,8 @@ namespace Match3
 
         private List<float> spawns = new List<float>();
 
+        public int index;
+
         private void Awake()
         {
             myObjects = new MatchObject[size];
@@ -75,11 +77,11 @@ namespace Match3
             }
         }
 
-        public void removeObject(int index)
+        public void removeObject(int indexToRemove)
         {
-            myObjects[index].remove();
-            myObjects[index] = null;
-            for (int i = index-1; i > 0; i--)
+            myObjects[indexToRemove].remove();
+            myObjects[indexToRemove] = null;
+            for (int i = indexToRemove-1; i >= 0; i--)
             {
                 bubbleDown(i);
             }

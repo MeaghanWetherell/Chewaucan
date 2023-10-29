@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 namespace Match3
 {
-    public class MatchObject : MonoBehaviour
+    public class MatchObject : MonoBehaviour, IPointerDownHandler
     {
         private static List<Mesh> meshes;
 
@@ -43,6 +44,11 @@ namespace Match3
         public void remove()
         {
             Destroy(this.gameObject);
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            MatchGrid.matchGrid.registerActiveMatchObj(this);
         }
     }
 }
