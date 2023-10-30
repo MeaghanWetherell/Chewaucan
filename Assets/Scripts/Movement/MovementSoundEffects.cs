@@ -20,6 +20,7 @@ public class MovementSoundEffects : MonoBehaviour
     public MovementSounds leafSounds;
     public MovementSounds soilSounds;
     public MovementSounds gravelSounds;
+    public AudioClip swimSounds;
 
     private void Start()
     {
@@ -58,6 +59,26 @@ public class MovementSoundEffects : MonoBehaviour
             SetSoundList(values);
             StartCoroutine(PlaySound(clipList_land));
         }
+    }
+
+    public void PlaySwimSound()
+    {
+        if (!isPlaying)
+        {
+            StartCoroutine(SwimSound());
+        }
+    }
+
+    IEnumerator SwimSound()
+    {
+        isPlaying = true;
+
+        playerAudio.clip = swimSounds;
+        playerAudio.Play();
+
+        yield return new WaitForSeconds(playerAudio.clip.length * playSpeed + 2f);
+
+        isPlaying = false;
     }
 
     /**

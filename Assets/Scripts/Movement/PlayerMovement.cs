@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             oxygenUI.gameObject.SetActive(false);
             LandMovement();
         }
-        else
+        else if (isSwimming && !dive)
         {
             oxygenUI.gameObject.SetActive(true);
             SwimMovement();
@@ -164,6 +164,10 @@ public class PlayerMovement : MonoBehaviour
         
         UpdateStamina();
         UpdateOxygen();
+        if (moveInput != Vector2.zero)
+        {
+            soundEffects.PlaySwimSound();
+        }
     }
 
     /**
@@ -199,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("OXYGEN");
         if (currOxygen < 0) { 
             currOxygen = 0;
+            this.transform.rotation.eulerAngles.Set(0f, transform.rotation.eulerAngles.y, 0f);
             this.transform.position = new Vector3(transform.position.x, waterPosition.y, transform.position.z);
         }
         if (currOxygen < maxStamina && !isDiving)
@@ -259,7 +264,7 @@ public class PlayerMovement : MonoBehaviour
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
             soundEffects.PlayJumpSound();
         }
-        else if (isSwimming)
+        else if (isSwimming && !isDiving)
         {
             Debug.Log("DIVE");
             isDiving = true;
@@ -289,9 +294,9 @@ public class PlayerMovement : MonoBehaviour
     {
         dive = true;
         //yield return new WaitForSeconds(3f);
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 15; i++)
         {
-            this.transform.Rotate(1f, 0f, 0f);
+            this.transform.Rotate(2f, 0f, 0f);
             yield return new WaitForEndOfFrame();
         }
         for (int i = 0; i < 10; i++)
@@ -299,9 +304,9 @@ public class PlayerMovement : MonoBehaviour
             controller.Move(this.transform.TransformDirection(Vector3.forward));
             yield return new WaitForEndOfFrame();
         }
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 15; i++)
         {
-            this.transform.Rotate(-1f, 0f, 0f);
+            this.transform.Rotate(-2f, 0f, 0f);
             yield return new WaitForEndOfFrame();
         }
         dive = false;
