@@ -16,6 +16,7 @@ public class StartSwimming : MonoBehaviour
             camLook.setMinDist(10f);
             other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x, 
                 waterBlock.position.y, other.gameObject.transform.position.z);
+            playerMovement.SetWaterSoundSource(this.GetComponent<AudioSource>());
             //Debug.Log("IN WATER");
         }
     }

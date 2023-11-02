@@ -76,7 +76,7 @@ public class MovementSoundEffects : MonoBehaviour
         playerAudio.clip = swimSounds;
         playerAudio.Play();
 
-        yield return new WaitForSeconds(playerAudio.clip.length * playSpeed + 2f);
+        yield return new WaitForSeconds(playerAudio.clip.length);
 
         isPlaying = false;
     }

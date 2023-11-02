@@ -213,13 +213,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   maxDistToGround: 1.15
-  rotationSpeed: 4
+  rotationSpeed: 1.5
   gravity: -2
   jumpHeight: 2
   maxStamina: 100
   currStamina: 100
   staminaDepletionRate: 10
+  oxygenDepletionRate: 4
+  currOxygen: 100
   cameraObj: {fileID: 0}
+  staminaUI: {fileID: 0}
+  oxygenUI: {fileID: 0}
   moveRef: {fileID: 0}
   jumpRef: {fileID: 0}
   sprintRef: {fileID: 0}
@@ -364,6 +368,7 @@ MonoBehaviour:
   leafSounds: {fileID: 11400000, guid: 5a4296cedf3a0fb438b5e0257edc4415, type: 2}
   soilSounds: {fileID: 11400000, guid: 1dc02c11b163e49499a5679f6e7d9a20, type: 2}
   gravelSounds: {fileID: 11400000, guid: 8d79712634acccb44b721f602c25387a, type: 2}
+  swimSounds: {fileID: 0}
 --- !u!114 &5456242101680291397
 MonoBehaviour:
   m_ObjectHideFlags: 0
