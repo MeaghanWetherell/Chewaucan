@@ -10,10 +10,29 @@ public class MapController : MonoBehaviour
     private VisualElement _root;
     private bool IsMapOpen => _root.ClassListContains("root-container-full");
 
+    public GameObject Player;
+    [Range(-10, 15)]
+    public float miniMultiplyer = 5.3f;
+    [Range(-10, 15)]
+    public float fullMultiplyer = 7f;
+    private VisualElement _playerRepresentation;
+
     // Start is called before the first frame update
     void Start()
     {
         _root = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("Container");
+        _playerRepresentation = _root.Q<VisualElement>("Player");
+    }
+
+    private void LateUpdate()
+    {
+        var multiplyer = IsMapOpen ? fullMultiplyer : miniMultiplyer;
+
+        //another idea, use transform origin
+
+        //_playerRepresentation.style.translate = new Translate(Player.transform.position.x * multiplyer,
+            //Player.transform.position.z * -multiplyer, 0);
+        _playerRepresentation.style.rotate = new Rotate(new Angle(Player.transform.rotation.eulerAngles.y));
     }
 
     private void OnEnable()

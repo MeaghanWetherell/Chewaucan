@@ -15,7 +15,7 @@
     height: 100%;
     position: absolute;
     -unity-background-scale-mode: scale-and-crop;
-    background-image: url('project://database/Assets/Prefabs/UI/Map_Img.png?fileID=21300000&guid=c4d499efe97f42e43a28d3b576f17617&type=3#Map_Img');
+    background-image: url('project://database/Assets/Scripts/MapSystem/Map_Img.png?fileID=21300000&guid=c4d499efe97f42e43a28d3b576f17617&type=3#Map_Img');
 }
 
 .map-container {
@@ -29,7 +29,7 @@
 
 .root-container-mini {
     flex-grow: 1;
-    align-items: flex-start;
+    align-items: flex-end;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
@@ -56,4 +56,30 @@
     -unity-background-scale-mode: scale-and-crop;
     width: 512px;
     height: 512px;
+}
+
+.player-container {
+    width: 10px;
+    height: 10px;
+}
+
+.player-cone {
+    width: 80px;
+    height: 60px;
+    -unity-background-scale-mode: scale-to-fit;
+    position: absolute;
+    top: -54px;
+    left: -35px;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.29);
+    align-items: center;
+    justify-content: flex-end;
+    background-image: url('project://database/Assets/Scripts/MapSystem/playerCone.png?fileID=21300000&guid=6d9235d6746424a4ea727fc3500d2d04&type=3#playerCone');
+}
+
+.player-arrow {
+    width: 10px;
+    height: 10px;
+    -unity-background-image-tint-color: rgb(255, 50, 73);
+    top: 4px;
+    background-image: url('project://database/Assets/Scripts/MapSystem/player_arrow.png?fileID=21300000&guid=fb60a926c5080304fa949e916acb4d7e&type=3#player_arrow');
 }
