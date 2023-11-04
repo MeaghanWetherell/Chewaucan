@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f85637db9bd75e49a08876624ae97c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 100
+  timeLeft: 80
   text: {fileID: 77212191}
 --- !u!114 &77212191
 MonoBehaviour:
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 125756947}
   - component: {fileID: 125756946}
   m_Layer: 5
-  m_Name: Score
+  m_Name: FinalScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,6 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 721546177}
   score: 0
+  scoreRequired: 10000
   scorePerBone: 100
   scoreMult: 0.15
 --- !u!1001 &723220396
@@ -942,8 +943,7 @@ MonoBehaviour:
   UIObj: {fileID: 1782173452}
   mainText: {fileID: 1968512394}
   buttonText: {fileID: 1369134016}
-  scoreText: {fileID: 0}
-  scoreRequired: 10000
+  scoreText: {fileID: 125756946}
 --- !u!4 &729984995
 Transform:
   m_ObjectHideFlags: 0
@@ -1881,7 +1881,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 8, z: 1}
+  m_LocalScale: {x: 11, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1863839077}
@@ -2056,8 +2056,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 4.3190985
+  orthographic: 1
+  orthographic size: 5.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
