@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Misc;
 using UnityEngine;
@@ -32,10 +33,7 @@ namespace Match3
 
         private Vector2 initialMousePos;
 
-        private void OnEnable()
-        {
-            click.action.canceled += clickAction;
-        }
+        private float timeLeft;
 
         private void OnDisable()
         {
@@ -48,9 +46,11 @@ namespace Match3
         }
         
         //TODO set up for different levels
-        private void Awake()
+        private void OnEnable()
         {
-            UnityEngine.Random.seed = 110;
+            click.action.canceled += clickAction;
+            UnityEngine.Random.seed = 160;
+            //Time.timeScale = 0.25f;
             matchGrid = this;
             MatchObject.validMeshes = new List<int>();
             MatchObject.validMeshes.Add(0);
@@ -62,6 +62,7 @@ namespace Match3
             MatchObject.validMeshes.Add(6);
             StartCoroutine(removeObjs());
             StartCoroutine(waitToCheckMatch(2));
+            StartCoroutine(checkForLock());
         }
 
         private void Start()
@@ -91,6 +92,21 @@ namespace Match3
             }
         }
 
+        IEnumerator checkForLock()
+        {
+            while (true)
+            {
+                if (!waitingOnMatchCheck)
+                {
+                    if (!detectMatchesPossible())
+                    {
+                        MatchUIManager.matchUIManager.endGame("No valid matches remaining!");
+                    }
+                }
+                yield return new WaitForSeconds(0.6f);
+            }
+        }
+
         IEnumerator removeObjs()
         {
             while (true)
@@ -98,8 +114,8 @@ namespace Match3
                 List<GridCoordinate> coords;
                 if (removalQueue.TryDequeue(out coords))
                 {
-                    StartCoroutine(waitToCheckMatch(0.6f));
-                    yield return new WaitForSeconds(0.6f);
+                    StartCoroutine(waitToCheckMatch(0.4f));
+                    yield return new WaitForSeconds(0.4f);
                     ScoreTracker.scoreTracker.addScore(coords.Count);
                     foreach(GridCoordinate coord in coords)
                         lines[coord.x].removeObject(coord.y);
@@ -123,6 +139,38 @@ namespace Match3
             StartCoroutine(waitToCheckMatch(time));
             yield return new WaitForSeconds(time);
             swap(a, b);
+        }
+
+        private bool detectMatchesPossible()
+        {
+            foreach (MatchObject[] line in objects)
+            {
+                if (line.Contains(null))
+                    return true;
+            }
+            for (int i = 0; i < objects.Count; i++)
+            {
+                for (int j = 0; j < objects[i].Length; j++)
+                {
+                    if (i - 1 > 0 && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i-1, j)))
+                    {
+                        return true;
+                    }
+                    if (i + 1 < objects.Count && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i+1, j)))
+                    {
+                        return true;
+                    }
+                    if (j - 1 > 0 && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j-1)))
+                    {
+                        return true;
+                    }
+                    if (j + 1 < objects[i].Length && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j+1)))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void checkMatches()
@@ -272,12 +320,26 @@ namespace Match3
 
         private void swapWithValidityDetection(GridCoordinate a, GridCoordinate b)
         {
-            swap(a, b);
-            if (findAltMatches(a).Count < 3 &&
-                findAltMatches(b).Count < 3)
+            if (!checkSwapValid(a,b))
             {
                 StartCoroutine(waitToSwapBack(1f, a, b));
             }
+            swap(a, b);
+        }
+
+        private bool checkSwapValid(GridCoordinate a, GridCoordinate b)
+        {
+            if (objects[a.x][a.y] == null || objects[b.x][b.y] == null)
+                return false;
+            swap(a,b);
+            if (findAltMatches(a).Count >= 3 ||
+                findAltMatches(b).Count >= 3)
+            {
+                swap(a, b);
+                return true;
+            }
+            swap(a,b);
+            return false;
         }
 
         private void swap(GridCoordinate a, GridCoordinate b)

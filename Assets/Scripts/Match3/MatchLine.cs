@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,31 +17,34 @@ namespace Match3
 
         public GameObject matchObjPrefab;
 
-        private int toSpawn = 0;
+        private int toSpawn;
 
-        private List<float> spawns = new List<float>();
+        private float spawnTime;
 
         public int index;
 
-        private void Awake()
+        private void OnEnable()
         {
+            if (myObjects.Length > 0)
+            {
+                while(myObjects[^1] != null)
+                    removeObject(myObjects.Length-1);
+            }
+            toSpawn = size;
+            spawnTime = Time.time + waitTime;
             myObjects = new MatchObject[size];
             StartCoroutine(spawner());
-            for (int i = 0; i < myObjects.Length; i++)
-            {
-                spawns.Add(Time.time);
-            }
         }
 
         private IEnumerator spawner()
         {
             while (true)
             {
-                if (spawns.Count > 0 && Time.time > spawns[0]+0.25f)
+                if (toSpawn > 0 && Time.time > spawnTime)
                 {
-                    spawns.Remove(0);
+                    toSpawn--;
                     addObject();
-                    yield return new WaitForSeconds(0.25f);
+                    yield return new WaitForSeconds(waitTime);
                 }
                 else
                 {
@@ -85,7 +89,7 @@ namespace Match3
             {
                 bubbleDown(i);
             }
-            addObject();
+            toSpawn++;
         }
     }
 }
