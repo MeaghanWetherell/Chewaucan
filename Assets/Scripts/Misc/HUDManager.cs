@@ -13,6 +13,8 @@ namespace Misc
         
         public List<GameObject> pins;
 
+        public TextMeshProUGUI messageText;
+
         private void Awake()
         {
             hudManager = this;
@@ -20,7 +22,19 @@ namespace Misc
 
         private void OnEnable()
         {
+            messageText.gameObject.transform.parent.gameObject.SetActive(false);
             StartCoroutine(waitForQuestLoad());
+        }
+
+        public void sendMessage(String message)
+        {
+            messageText.gameObject.transform.parent.gameObject.SetActive(true);
+            messageText.text = message;
+        }
+
+        public void closeMessage()
+        {
+            messageText.gameObject.transform.parent.gameObject.SetActive(false);
         }
 
         //if the quest manager hasn't been initialized yet, wait a frame to set up quest pins
