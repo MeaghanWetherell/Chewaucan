@@ -2,8 +2,8 @@
     <Style src="project://database/Assets/Scripts/MapSystem/MapStyles.uss?fileID=7433441132597879392&amp;guid=4820fae1308e4054d826375a80a3c754&amp;type=3#MapStyles" />
     <ui:VisualElement name="Container" class="root-container-mini" style="flex-grow: 1;">
         <ui:VisualElement name="Map" class="map-container" style="flex-grow: 1;">
-            <ui:VisualElement name="Image" class="map-img" style="flex-grow: 1;">
-                <ui:VisualElement name="Player" class="player-container" style="flex-grow: 1;">
+            <ui:VisualElement name="Image" class="map-img" style="flex-grow: 1; transform-origin: left bottom;">
+                <ui:VisualElement name="Player" class="player-container" style="flex-grow: 1; transform-origin: center;">
                     <ui:VisualElement name="Cone" class="player-cone" style="flex-grow: 1; top: 225px; height: 23px; width: 79px; left: -35px;">
                         <ui:VisualElement name="Arrow" class="player-arrow" style="flex-grow: 1; top: 23px; height: 14px; width: 17px; left: 0;" />
                     </ui:VisualElement>
