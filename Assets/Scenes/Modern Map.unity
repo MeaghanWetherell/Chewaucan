@@ -380,11 +380,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapRef: {fileID: -4852545399476511214, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  hideMapRef: {fileID: 1234179045230633567, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   Player: {fileID: 1696369619}
-  miniMultiplyerX: -1.1
-  fullMultiplyerX: -1.1
-  miniMultiplyerY: -1.6
-  fullMultiplyerY: -1.6
+  differenceX: 275
+  differenceY: 265
 --- !u!1001 &289513892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2755,7 +2754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.03
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.z
