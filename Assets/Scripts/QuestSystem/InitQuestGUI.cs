@@ -17,11 +17,9 @@ namespace QuestSystem
         void Start()
         {
             List<QuestNode> nodes = QuestManager.questManager.getQuests();
-            int num = 0;
             foreach (QuestNode node in nodes)
             {
                 createButtonPrefab(node);
-                num++;
             }
         }
 

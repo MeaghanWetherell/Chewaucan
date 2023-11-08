@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4607294004319653680}
   - component: {fileID: 6701135232965166305}
   - component: {fileID: 5456242101680291397}
+  - component: {fileID: 7660846152654478699}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2485d31f33128498f6815e5e1df874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadScene: QuestGUI
   openGUI: {fileID: 4710351890966612040, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &5122460959738869530
 MonoBehaviour:
@@ -391,6 +393,19 @@ MonoBehaviour:
   - 0
   - 0
   numOfTextures: 8
+--- !u!114 &7660846152654478699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6a5b173d97f84419e56c6d78fd9378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interact: {fileID: 3951754327330509360, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &8539058024222695338
 GameObject:
   m_ObjectHideFlags: 0
