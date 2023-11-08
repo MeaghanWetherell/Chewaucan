@@ -69,13 +69,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HideMap",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "bb07b803-fc16-433a-89d9-c32082cd5b85",
+                    "id": "7c327dd1-b2ad-458e-b86c-bdc5a9af28b1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HideMap",
+                    "type": "Button",
+                    "id": "bb07b803-fc16-433a-89d9-c32082cd5b85",
                 }
             ],
             "bindings": [
@@ -439,6 +444,14 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "HideMap",
+                },
+                    "name": "",
+                    "id": "d798b48a-eda5-4130-a8ee-9d7db6e3e8fc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

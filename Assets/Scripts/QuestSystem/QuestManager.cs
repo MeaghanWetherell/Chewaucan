@@ -50,6 +50,11 @@ namespace QuestSystem
 
         private void Awake()
         {
+            if (questManager != null)
+            {
+                Debug.LogError("Loaded persistent objects twice!");
+                Destroy(questManager.gameObject);
+            }
             questManager = this;
             DontDestroyOnLoad(transform.gameObject);
             if (!resetQuests)
