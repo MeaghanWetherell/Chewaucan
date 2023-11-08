@@ -8,7 +8,7 @@ public class LoadPersistentObjects : MonoBehaviour
 {
     private void Awake()
     {
-        if (GameObject.Find("QuestManager") == null || GameObject.Find("MatchLevelManager") == null)
+        if (GameObject.Find("QuestManager") == null)
         {
             SceneManager.LoadScene("PersistentObjects", LoadSceneMode.Additive);
         }
