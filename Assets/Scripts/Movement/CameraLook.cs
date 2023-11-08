@@ -19,6 +19,7 @@ public class CameraLook : MonoBehaviour
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
+        Cursor.visible = true;
         lookRef.action.performed += OnLook;
     }
 
@@ -44,7 +45,14 @@ public class CameraLook : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        lookInput = context.ReadValue<Vector2>();
+        if (!(this.GetComponent<PlayerMovement>().DiveOngoing()))
+        {
+            lookInput = context.ReadValue<Vector2>();
+        }
+        else
+        {
+            lookInput = Vector3.zero;
+        }
     }
 
     public void setMinDist(float n)

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxStamina = 100f;
     [SerializeField] float currStamina = 100f;
     [SerializeField] float staminaDepletionRate = 10f;
+    [SerializeField] float oxygenDepletionRate = 4f;
+    [SerializeField] float currOxygen = 100f;
     public GameObject cameraObj;
+    public Slider staminaUI;
+    public Slider oxygenUI;
 
     CharacterController controller;
     Vector2 moveInput;
@@ -26,9 +31,11 @@ public class PlayerMovement : MonoBehaviour
     bool prevGrounded;
 
     bool isSwimming;
-    bool surfaceSwimming;
+    bool isDiving;
+    bool dive;
     Vector3 waterPosition;
     float swimSpeed = 3f;
+    AudioSource waterAudio;
 
     MovementSoundEffects soundEffects;
     CheckGroundTexture terrainTexture;
@@ -46,7 +53,10 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement = new Vector3(0f, gravity, 0f);
         moveInput = Vector2.zero;
         moveSpeedDefault = moveSpeed;
-        isSwimming = false;
+        staminaUI.minValue = 0f;
+        staminaUI.maxValue = maxStamina;
+        oxygenUI.minValue = 0f;
+        oxygenUI.maxValue = maxStamina;
         
     }
 
@@ -71,10 +81,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isSwimming)
         {
+            oxygenUI.gameObject.SetActive(false);
             LandMovement();
         }
-        else
+        else if (isSwimming && !dive)
         {
+            oxygenUI.gameObject.SetActive(true);
             SwimMovement();
         }
     }
@@ -109,12 +121,11 @@ public class PlayerMovement : MonoBehaviour
         verticalMovement.y += GRAVITY * Time.deltaTime;
         controller.Move(verticalMovement * Time.deltaTime);
 
-        UpdateStamina();
-
         if (moveInput.y != 0 && grounded)
         {
             soundEffects.PlayWalkingSound();
         }
+        UpdateStamina();
     }
 
     private void SwimMovement()
@@ -122,24 +133,42 @@ public class PlayerMovement : MonoBehaviour
         swimSpeed = moveSpeed * 0.75f;
         float waterSurface = waterPosition.y;
 
+        if (this.transform.position.y >= waterSurface && isDiving && !dive)
+        {
+            waterAudio.Stop();
+            isDiving = false;
+        }
+
         //regular swimming movement, like land movement but uses camera forward instead of the player forward
 
         float rotateMovement = moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-        Vector3 forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+        //Uses the camera forward direction if underwater, otherwise uses the normal player transform forward
+        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
+        if (!isDiving)
+        {
+            forwardDir = this.transform.TransformDirection(Vector3.forward);
+            this.GetComponent<CameraLook>().setMinDist(10f);
+        }
+        else
+        {
+            this.GetComponent<CameraLook>().setMinDist(50f);
+            forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
+            controller.Move(Vector3.up * Time.deltaTime);
+        }
         float moveAmount = moveInput.y * swimSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
         controller.Move(movement * Time.deltaTime); //forward movement
-
-        if (this.transform.position.y > waterSurface)
-        {
-            controller.Move(Vector3.down * swimSpeed * Time.deltaTime);
-        }
-
+        
         UpdateStamina();
+        UpdateOxygen();
+        if (moveInput != Vector2.zero)
+        {
+            soundEffects.PlaySwimSound(); //plays swimming sounds if moving
+        }
     }
 
     /**
@@ -149,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateStamina()
     {
         //determining when the player is sprinting and stopping sprinting when out of stamina
-        if (moveSpeed != moveSpeedDefault && currStamina > 0)
+        if (moveSpeed != moveSpeedDefault && currStamina > 0 && moveInput != Vector2.zero)
         {
             currStamina -= staminaDepletionRate * Time.deltaTime; //depletes stamina when sprinting
         }
@@ -167,6 +196,29 @@ public class PlayerMovement : MonoBehaviour
                 currStamina = maxStamina;
             }
         }
+        staminaUI.value = currStamina;
+    }
+
+    private void UpdateOxygen()
+    {
+        if (currOxygen < 0) { 
+            currOxygen = 0;
+            this.transform.rotation.eulerAngles.Set(0f, transform.rotation.eulerAngles.y, 0f);
+            this.transform.position = new Vector3(transform.position.x, waterPosition.y, transform.position.z);
+        }
+        if (currOxygen < maxStamina && !isDiving)
+        {
+            currOxygen += oxygenDepletionRate * Time.deltaTime;
+        }
+        else if (isDiving)
+        {
+            currOxygen -= oxygenDepletionRate * Time.deltaTime;
+        }
+        else
+        {
+            currOxygen = maxStamina;
+        }
+        oxygenUI.value = currOxygen;
     }
 
     /**
@@ -211,6 +263,12 @@ public class PlayerMovement : MonoBehaviour
             verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
             soundEffects.PlayJumpSound();
         }
+        else if (isSwimming && !isDiving)
+        {
+            waterAudio.Play();
+            isDiving = true;
+            StartCoroutine(Dive());
+        }
     }
 
     void OnSprint(InputAction.CallbackContext context)
@@ -226,5 +284,44 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = moveSpeedDefault;
             soundEffects.setPlaySpeed(0.9f);
         }
+    }
+
+    /*
+     * Moves the player under the water surface
+     */
+    IEnumerator Dive()
+    {
+        dive = true;
+        Vector3 rot = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(rot);
+        //yield return new WaitForSeconds(3f);
+        for (int i = 0; i < 15; i++)
+        {
+            this.transform.Rotate(2f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            controller.Move(this.transform.TransformDirection(Vector3.forward));
+            yield return new WaitForEndOfFrame();
+        }
+        for (int i = 0; i < 15; i++)
+        {
+            this.transform.Rotate(-2f, 0f, 0f);
+            yield return new WaitForEndOfFrame();
+        }
+        transform.rotation = Quaternion.Euler(rot);
+        dive = false;
+        yield return null;
+    }
+
+    public void SetWaterSoundSource(AudioSource audioSource)
+    {
+        waterAudio = audioSource;
+    }
+
+    public bool DiveOngoing()
+    {
+        return dive;
     }
 }
