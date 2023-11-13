@@ -7,14 +7,34 @@ namespace Match3
 {
     public class PopulateLevelList : MonoBehaviour
     {
-        //level button prefab
+        [Tooltip("level button prefab")]
         public GameObject levelButton;
 
-        //scroll under which to instantiate buttons
+        [Tooltip("scroll under which to instantiate buttons")]
         public Transform scrollContent;
+
+        [Tooltip("Bone Collection Button")] 
+        public Button boneButton;
 
         //when the gui loads, initialize it
         void Start()
+        {
+            populateGUI();
+        }
+
+        //clean up the gui and repopulate when the user returns to the level menu
+        public void OnLevelButtonClicked()
+        {
+            boneButton.interactable = true;
+            for (int i = 0; i < scrollContent.transform.childCount; i++)
+            {
+                Destroy(scrollContent.GetChild(i).gameObject);
+            }
+            populateGUI();
+        }
+        
+        //add buttons to the GUI
+        private void populateGUI()
         {
             List<LevelData> levels = MatchLevelManager.matchLevelManager.levels;
             bool shouldBeEnabled = true;

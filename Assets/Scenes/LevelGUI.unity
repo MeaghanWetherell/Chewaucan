@@ -269,8 +269,9 @@ GameObject:
   - component: {fileID: 290525477}
   - component: {fileID: 290525476}
   - component: {fileID: 290525475}
+  - component: {fileID: 290525478}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LevelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -339,7 +340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 290525476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 290525478}
+        m_TargetAssemblyTypeName: Match3.PopulateLevelList, Assembly-CSharp
+        m_MethodName: OnLevelButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &290525476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +391,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290525473}
   m_CullTransparentMesh: 1
+--- !u!114 &290525478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290525473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f66304a65a458d4386ce957e86f0286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelButton: {fileID: 6712464899989902189, guid: 5dfbb56eae7c40440addbb5462bed6ba, type: 3}
+  scrollContent: {fileID: 309230898}
+  boneButton: {fileID: 0}
 --- !u!1 &309230897
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,7 +670,7 @@ GameObject:
   - component: {fileID: 620891611}
   - component: {fileID: 620891610}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: BoneButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1121,7 +1149,6 @@ GameObject:
   - component: {fileID: 1667079722}
   - component: {fileID: 1667079721}
   - component: {fileID: 1667079720}
-  - component: {fileID: 1667079724}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1214,20 +1241,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1667079724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667079718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f66304a65a458d4386ce957e86f0286, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelButton: {fileID: 6712464899989902189, guid: 5dfbb56eae7c40440addbb5462bed6ba, type: 3}
-  scrollContent: {fileID: 309230898}
 --- !u!1 &1962044899
 GameObject:
   m_ObjectHideFlags: 0
