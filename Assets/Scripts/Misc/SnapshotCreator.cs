@@ -10,11 +10,12 @@ namespace Misc
         private Camera snapCam;
         private RenderTexture fromTexture;
         public string filename;
+        public string path;
 
         private SerializedObject so;
         private Vector3 initPosition;
         private Quaternion initRotation;
-        
+
         [MenuItem("Tools/SnapshotCreator")]
         public static void ShowWindow()
         {
@@ -24,17 +25,24 @@ namespace Misc
         private void OnEnable()
         {
             so = new SerializedObject(this);
-            snapCam = GameObject.Find("SnapshotCamera").GetComponent<Camera>();
-            var snapTrans = snapCam.transform;
-            initPosition = snapTrans.position;
-            initRotation = snapTrans.rotation;
-            fromTexture = snapCam.targetTexture;
         }
 
         private void OnGUI()
         {
             EditorGUILayout.PropertyField(so.FindProperty("filename"));
+            EditorGUILayout.PropertyField(so.FindProperty("path"));
             so.ApplyModifiedProperties();
+            GameObject temp = GameObject.Find("SnapshotCamera");
+            if (temp == null || temp.GetComponent<Camera>() == null)
+            {
+                Debug.LogWarning("Couldn't find camera with name SnapshotCamera");
+                return;
+            }
+            snapCam = temp.GetComponent<Camera>();
+            var snapTrans = snapCam.transform;
+            initPosition = snapTrans.position;
+            initRotation = snapTrans.rotation;
+            fromTexture = snapCam.targetTexture;
             if (GUILayout.Button("Take Snapshot With Editor Cam Alignment"))
             {
                 Camera editorCam = SceneView.lastActiveSceneView.camera;
@@ -54,7 +62,14 @@ namespace Misc
             snapCam.Render();
             Texture2D newText = toTexture2D(fromTexture);
             byte[] imgData = newText.EncodeToPNG();
-            File.WriteAllBytes($"{Application.dataPath}/Scripts/Match3/Resources/SnapTextures/{filename}.png", imgData);
+            if (string.IsNullOrEmpty(path))
+            {
+                File.WriteAllBytes($"{Application.dataPath}/Scripts/Match3/Resources/SnapTextures/{filename}.png", imgData);
+            }
+            else
+            {
+                File.WriteAllBytes($"{Application.dataPath}/{path}/{filename}.png", imgData);
+            }
         }
 
         private Texture2D toTexture2D(RenderTexture from)

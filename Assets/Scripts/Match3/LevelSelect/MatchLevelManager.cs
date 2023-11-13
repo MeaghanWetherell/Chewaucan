@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text.Json;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -30,12 +31,9 @@ namespace Match3
             DontDestroyOnLoad(this.gameObject);
             try
             {
-                StreamReader streamReader = new StreamReader("match3levelscomplete.json");
-                string line = streamReader.ReadLine();
-                levelsComplete = JsonUtility.FromJson<List<bool>>(line);
-                streamReader.Close();
+                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("match3levelscomplete.json"));
             }
-            catch (Exception){ }
+            catch (IOException e){ Debug.LogError(e.StackTrace);}
             if(levelsComplete == null)
                 levelsComplete = new List<bool>();
             while(levelsComplete.Count < levels.Count)

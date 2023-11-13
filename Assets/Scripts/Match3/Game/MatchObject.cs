@@ -26,11 +26,6 @@ namespace Match3
         {
             meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
             int temp = Random.Range((int) 0, (int) validMeshes.Count);
-            Debug.Log(temp);
-            for (int i = 0; i < validMeshes.Count; i++)
-            {
-                int ree = validMeshes[i];
-            }
             myType = validMeshes[temp];
             this.gameObject.GetComponent<MeshFilter>().mesh = meshes[myType].mesh;
             this.gameObject.GetComponent<MeshRenderer>().material = meshes[myType].material;

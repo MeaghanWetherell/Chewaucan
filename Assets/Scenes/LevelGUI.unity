@@ -405,7 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelButton: {fileID: 6712464899989902189, guid: 5dfbb56eae7c40440addbb5462bed6ba, type: 3}
   scrollContent: {fileID: 309230898}
-  boneButton: {fileID: 0}
+  boneButton: {fileID: 620891610}
 --- !u!1 &309230897
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &309230899
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 30
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -669,6 +669,7 @@ GameObject:
   - component: {fileID: 620891612}
   - component: {fileID: 620891611}
   - component: {fileID: 620891610}
+  - component: {fileID: 620891613}
   m_Layer: 5
   m_Name: BoneButton
   m_TagString: Untagged
@@ -739,7 +740,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 620891611}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 620891613}
+        m_TargetAssemblyTypeName: OpenCatalog, Assembly-CSharp
+        m_MethodName: OnBoneButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &620891611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +791,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620891608}
   m_CullTransparentMesh: 1
+--- !u!114 &620891613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620891608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd807ee24572a3a42b08fa9255e0c308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelButton: {fileID: 290525475}
+  scrollContent: {fileID: 309230898}
+  boneButton: {fileID: 2798243736497588861, guid: 63f108b8355f28343aa359821661e862, type: 3}
 --- !u!1 &1025592015
 GameObject:
   m_ObjectHideFlags: 0
