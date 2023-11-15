@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Match3;
@@ -15,6 +16,12 @@ public class OpenCatalog : MonoBehaviour
 
     [Tooltip("bone button prefab")] 
     public GameObject boneButton;
+
+    private void Awake()
+    {
+        if(OpenLevelSelect.openLevelSelect.shouldLoadBone)
+            populateGUI();
+    }
 
     //clean up the gui and repopulate when the user moves to the bone menu
     public void OnBoneButtonClicked()
@@ -42,6 +49,7 @@ public class OpenCatalog : MonoBehaviour
     private void createButtonPrefab(MeshDataObj bone)
     {
         GameObject newButton = Instantiate(boneButton, scrollContent, false);
+        newButton.GetComponent<BoneButton>().data = bone;
         newButton.transform.GetChild(0).GetComponent<Image>().sprite = bone.flatImage;
         newButton.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().text = bone.boneName;
     }

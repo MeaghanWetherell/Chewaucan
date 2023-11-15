@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,10 +17,10 @@ namespace Match3
         [Tooltip("Bone Collection Button")] 
         public Button boneButton;
 
-        //when the gui loads, initialize it
-        void Start()
+        private void Awake()
         {
-            populateGUI();
+            if(!OpenLevelSelect.openLevelSelect.shouldLoadBone)
+                populateGUI();
         }
 
         //clean up the gui and repopulate when the user returns to the level menu

@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Text.Json;
-using TMPro;
+using Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -50,6 +47,7 @@ namespace Match3
         {
             setValidMeshes(levels[index].meshes);
             curIndex = index;
+            MainSceneDataSaver.mainSceneDataSaver.prepareForUnload();
             SceneManager.LoadScene(2);
             //UnityEngine.Random.InitState(160);
         }

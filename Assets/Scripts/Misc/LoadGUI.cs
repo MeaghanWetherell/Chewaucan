@@ -28,17 +28,20 @@ namespace Misc
 
         //if the gui is open, reenable player movement and close it
         //otherwise close any other active gui and open this one
-        protected void onOpenTrigger()
+        public virtual void onOpenTrigger()
         {
             if (guiOpen)
             {
                 Player.player.GetComponent<PlayerMovement>().enabled = true;
                 Player.player.GetComponent<CameraLook>().enabled = true;
+                if (MainSceneDataSaver.mainSceneDataSaver.curMenu == this)
+                    MainSceneDataSaver.mainSceneDataSaver.curMenu = null;
                 SceneManager.UnloadSceneAsync(loadScene);
                 HUD.SetActive(true);
             }
             else
             {
+                MainSceneDataSaver.mainSceneDataSaver.curMenu = this;
                 Player.player.GetComponent<PlayerMovement>().enabled = false;
                 Player.player.GetComponent<CameraLook>().enabled = false;
                 HUD.SetActive(false);
