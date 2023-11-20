@@ -46,10 +46,6 @@ namespace Misc
                 Player.player.GetComponent<CameraLook>().enabled = false;
                 HUD.SetActive(false);
                 SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
-                if (curGUI != null)
-                {
-                    curGUI.onOpenTrigger();
-                }
                 curGUI = this;
             }
             guiOpen = !guiOpen;
