@@ -6,23 +6,27 @@ using UnityEngine.InputSystem;
 
 public class CameraLook : MonoBehaviour
 {
-    [SerializeField] float minViewDist = 25f;
+    public float minViewDist = 25f;
     [SerializeField] float mouseSensitivity = 25f;
 
     public Transform mainCamera;
+    public InputActionReference lookRef;
 
     Vector2 lookInput;
     float xRotation;
     
     // Start is called before the first frame update
-    void OnEnable()
+    private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
+        Cursor.visible = true;
+        lookRef.action.performed += OnLook;
     }
 
     private void OnDisable()
     {
         Cursor.lockState = CursorLockMode.None;
+        lookRef.action.performed -= OnLook;
     }
 
     // Update is called once per frame
@@ -39,8 +43,20 @@ public class CameraLook : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    void OnLook(InputValue value)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        lookInput = value.Get<Vector2>();
+        if (!(this.GetComponent<PlayerMovement>().DiveOngoing()))
+        {
+            lookInput = context.ReadValue<Vector2>();
+        }
+        else
+        {
+            lookInput = Vector3.zero;
+        }
+    }
+
+    public void setMinDist(float n)
+    {
+        minViewDist = n;
     }
 }

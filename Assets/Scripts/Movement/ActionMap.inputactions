@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "OpenMap",
                     "type": "Button",
-                    "id": "7c327dd1-b2ad-458e-b86c-bdc5a9af28b1",
+                    "id": "bc328e9f-e30d-42b5-bfb4-6fd7e0f6ee03",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HideMap",
+                    "type": "Button",
+                    "id": "bb07b803-fc16-433a-89d9-c32082cd5b85",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -406,19 +415,30 @@
                     "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "QuestMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d798b48a-eda5-4130-a8ee-9d7db6e3e8fc",
-                    "path": "<Keyboard>/e",
+                    "id": "7fbe8f37-532f-4bd0-9b0f-63f066f4857f",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Interact",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OpenMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00bf4a06-887f-48aa-a9dd-fa8c40a2370b",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "HideMap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

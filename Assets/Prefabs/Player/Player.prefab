@@ -22,10 +22,9 @@ GameObject:
   - component: {fileID: 4607294004319653680}
   - component: {fileID: 6701135232965166305}
   - component: {fileID: 5456242101680291397}
-  - component: {fileID: 7660846152654478699}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2485d31f33128498f6815e5e1df874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadScene: QuestGUI
   openGUI: {fileID: 4710351890966612040, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &5122460959738869530
 MonoBehaviour:
@@ -214,12 +212,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  rotationSpeed: 4
+  maxDistToGround: 1.15
+  rotationSpeed: 1.5
   gravity: -2
   jumpHeight: 2
   maxStamina: 100
   currStamina: 100
   staminaDepletionRate: 10
+  oxygenDepletionRate: 4
+  currOxygen: 100
+  cameraObj: {fileID: 0}
+  staminaUI: {fileID: 0}
+  oxygenUI: {fileID: 0}
+  moveRef: {fileID: 0}
+  jumpRef: {fileID: 0}
+  sprintRef: {fileID: 0}
 --- !u!114 &753812688764451313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,9 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aae88d9b79ffd048bc7de8975e68b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minViewDist: 25
+  minViewDist: 30
   mouseSensitivity: 25
   mainCamera: {fileID: 4636437623450494398}
+  lookRef: {fileID: 0}
 --- !u!114 &2186890376376113972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,11 +363,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5715e8aaae5a3cb458a52733a1d78a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipList_soil:
-  - {fileID: 8300000, guid: 7d1ee92f4a239da4c85f1476d36e1c8f, type: 3}
-  - {fileID: 8300000, guid: 11e0fb5a90b1675498242034c960ce11, type: 3}
-  - {fileID: 8300000, guid: 61f4a233447d15e409fc3309f30d5798, type: 3}
-  - {fileID: 8300000, guid: b6ee141a22369ea40aea85f1f6bbba53, type: 3}
+  rockSounds: {fileID: 11400000, guid: a8e9f2102b6c61d49854926ba29d2c9d, type: 2}
+  grassSounds: {fileID: 11400000, guid: 07b8495d48f8fbf418c38433948e30e2, type: 2}
+  leafSounds: {fileID: 11400000, guid: 5a4296cedf3a0fb438b5e0257edc4415, type: 2}
+  soilSounds: {fileID: 11400000, guid: 1dc02c11b163e49499a5679f6e7d9a20, type: 2}
+  gravelSounds: {fileID: 11400000, guid: 8d79712634acccb44b721f602c25387a, type: 2}
+  swimSounds: {fileID: 0}
 --- !u!114 &5456242101680291397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,19 +390,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
---- !u!114 &7660846152654478699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2176073402916056196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d6a5b173d97f84419e56c6d78fd9378, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interact: {fileID: 3951754327330509360, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  numOfTextures: 8
 --- !u!1 &8539058024222695338
 GameObject:
   m_ObjectHideFlags: 0
