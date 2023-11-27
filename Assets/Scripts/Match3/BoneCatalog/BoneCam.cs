@@ -56,8 +56,11 @@ namespace Match3
                 Vector2 diff = mousePos.action.ReadValue<Vector2>()-lastMousePos;
                 if(diff.x > 0.75f)
                     yRot = xFudge * diff.x * Time.deltaTime;
+                //y-rotation was fiddly, so I locked it. 
+                /*
                 if(diff.y > 0.75f)
                     xRot = yFudge * -diff.y * Time.deltaTime;
+                */
             }
 
             orbitAngle += new Vector3(xRot, yRot, 0);

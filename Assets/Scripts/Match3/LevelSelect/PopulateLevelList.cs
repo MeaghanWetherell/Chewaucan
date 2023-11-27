@@ -27,6 +27,7 @@ namespace Match3
         public void OnLevelButtonClicked()
         {
             boneButton.interactable = true;
+            this.GetComponent<Button>().interactable = false;
             for (int i = 0; i < scrollContent.transform.childCount; i++)
             {
                 Destroy(scrollContent.GetChild(i).gameObject);

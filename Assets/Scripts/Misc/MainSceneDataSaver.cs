@@ -29,27 +29,26 @@ namespace Misc
         public void prepareForUnload()
         {
             Transform player = Player.player.transform;
-            lastPlayerPosition = player.position;
-            lastPlayerRotation = player.rotation;
+            if (player != null)
+            {
+                lastPlayerPosition = player.position;
+                lastPlayerRotation = player.rotation;
+            }
         }
 
-        public void reloadMainScene(bool reloadMenu = false)
-        {
-            StartCoroutine(reloadSceneCoroutine(reloadMenu));
-        }
-
-        private IEnumerator reloadSceneCoroutine(bool reloadMenu)
+        public void reloadMainScene()
         {
             SceneManager.LoadScene(5);
-            while (Player.player != null)
+            SceneManager.sceneLoaded += onReload;
+        }
+
+        private void onReload(Scene activeScene, LoadSceneMode loadSceneMode)
+        {
+            if (activeScene.name.Equals("Modern Map"))
             {
-                yield return null;
+                Player.player.transform.SetPositionAndRotation(lastPlayerPosition, lastPlayerRotation);
             }
-            Player.player.transform.SetPositionAndRotation(lastPlayerPosition, lastPlayerRotation);
-            if (reloadMenu)
-            {
-                curMenu.onOpenTrigger();
-            }
+            
         }
     }
 }

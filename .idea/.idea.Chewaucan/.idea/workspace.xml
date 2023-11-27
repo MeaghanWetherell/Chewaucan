@@ -6,20 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Packages.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Match3.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Match3.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/GridCoordinate.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/IListener.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/InteractListenerManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/MainSceneDataSaver.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/ReloadMainScene.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/SnapshotCreator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BoneViewer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BoneViewer.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/QuestGUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QuestGUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneCam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneCam.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/OpenCatalog.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/OpenCatalog.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/PopulateLevelList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/PopulateLevelList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/app-1646213_640 1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/app-1646213_640 1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/MainSceneDataSaver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/MainSceneDataSaver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ScriptTags/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ScriptTags/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/match3levelscomplete.json" beforeDir="false" afterPath="$PROJECT_DIR$/match3levelscomplete.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reachallwp.json" beforeDir="false" afterPath="$PROJECT_DIR$/reachallwp.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test1.json" beforeDir="false" afterPath="$PROJECT_DIR$/test1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test2.json" beforeDir="false" afterPath="$PROJECT_DIR$/test2.json" afterDir="false" />
@@ -105,10 +104,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="19952">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="19952" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -163,6 +162,8 @@
       <workItem from="1699910705526" duration="302000" />
       <workItem from="1699911285112" duration="10919000" />
       <workItem from="1700439849521" duration="2412000" />
+      <workItem from="1701117603766" duration="1124000" />
+      <workItem from="1701118854500" duration="2090000" />
     </task>
     <servers />
   </component>
@@ -205,17 +206,17 @@
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/OpenQuestGUI.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\OpenQuestGUI.cs" initialLine="28" containingFunctionPresentation="method 'OnKPressed'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneSceneManager.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\BoneCatalog\BoneSceneManager.cs" initialLine="31" containingFunctionPresentation="method 'loadBoneScene'">
             <startOffsets>
-              <option value="721" />
+              <option value="798" />
             </startOffsets>
             <endOffsets>
-              <option value="737" />
+              <option value="855" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="38" />
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -27,6 +27,7 @@ public class OpenCatalog : MonoBehaviour
     public void OnBoneButtonClicked()
     {
         levelButton.interactable = true;
+        this.GetComponent<Button>().interactable = false;
         for (int i = 0; i < scrollContent.transform.childCount; i++)
         {
             Destroy(scrollContent.GetChild(i).gameObject);

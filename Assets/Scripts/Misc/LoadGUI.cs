@@ -34,13 +34,14 @@ namespace Misc
             {
                 Player.player.GetComponent<PlayerMovement>().enabled = true;
                 Player.player.GetComponent<CameraLook>().enabled = true;
-                if (MainSceneDataSaver.mainSceneDataSaver.curMenu == this)
-                    MainSceneDataSaver.mainSceneDataSaver.curMenu = null;
+                MainSceneDataSaver.mainSceneDataSaver.curMenu = null;
                 SceneManager.UnloadSceneAsync(loadScene);
                 HUD.SetActive(true);
             }
             else
             {
+                if(MainSceneDataSaver.mainSceneDataSaver.curMenu != null)
+                    MainSceneDataSaver.mainSceneDataSaver.curMenu.onOpenTrigger();
                 MainSceneDataSaver.mainSceneDataSaver.curMenu = this;
                 Player.player.GetComponent<PlayerMovement>().enabled = false;
                 Player.player.GetComponent<CameraLook>().enabled = false;
