@@ -19,8 +19,12 @@ public class OpenCatalog : MonoBehaviour
 
     private void Awake()
     {
-        if(OpenLevelSelect.openLevelSelect.shouldLoadBone)
-            populateGUI();
+        if (OpenLevelSelect.openLevelSelect.shouldLoadBone)
+        {
+            levelButton.interactable = true;
+            this.GetComponent<Button>().interactable = false;
+            PopulateGUI();
+        }
     }
 
     //clean up the gui and repopulate when the user moves to the bone menu
@@ -32,22 +36,22 @@ public class OpenCatalog : MonoBehaviour
         {
             Destroy(scrollContent.GetChild(i).gameObject);
         }
-        populateGUI();
+        PopulateGUI();
     }
     
     //add buttons to the GUI
-    private void populateGUI()
+    private void PopulateGUI()
     {
         List<MeshDataObj> bones = Resources.Load<MeshDataList>("Match3Meshes").meshes;
         bones.Sort();
         for (int i = 0; i < bones.Count; i++)
         {
-            createButtonPrefab(bones[i]);
+            CreateButtonPrefab(bones[i]);
         }
     }
 
     //creates a button prefab with the details of the passed level
-    private void createButtonPrefab(MeshDataObj bone)
+    private void CreateButtonPrefab(MeshDataObj bone)
     {
         GameObject newButton = Instantiate(boneButton, scrollContent, false);
         newButton.GetComponent<BoneButton>().data = bone;

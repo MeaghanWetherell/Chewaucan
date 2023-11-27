@@ -22,23 +22,23 @@ namespace Match3
         [Tooltip("Multiplier to score for matches of >3, applied successively. ex. 0.15 for 15% bonus")]
         public float scoreMult;
 
-        private bool isReq;
+        private bool _isReq;
 
         private void Awake()
         {
             scoreTracker = this;
-            scoreRequired = MatchLevelManager.matchLevelManager.getCurLevel().scoreReq;
+            scoreRequired = MatchLevelManager.matchLevelManager.GETCurLevel().scoreReq;
             if (scoreRequired < 1)
             {
-                isReq = true;
+                _isReq = true;
                 text.text = "Score: 0";
                 return;
             }
             text.text = "Score: 0"+"/"+scoreRequired;
-            isReq = false;
+            _isReq = false;
         }
 
-        public void addScore(int boneCount)
+        public void AddScore(int boneCount)
         {
             score += 3 * scorePerBone;
             boneCount -= 3;
@@ -49,7 +49,7 @@ namespace Match3
                 score += scorePerBone * (1 + curMult);
                 curMult += scoreMult;
             }
-            if (isReq)
+            if (_isReq)
             {
                 text.text = "Score: " + score;
                 return;

@@ -13,7 +13,7 @@ public class MapController : MonoBehaviour
     private VisualElement _root;
     private bool IsMapOpen => _root.ClassListContains("root-container-full");
 
-    public GameObject Player;
+    public GameObject player;
 
     [Range(0, 350)]
     public float differenceX = 275;
@@ -37,10 +37,10 @@ public class MapController : MonoBehaviour
     private void LateUpdate()
     {
         //sets the player icon to a position representative of world position
-        _playerRepresentation.style.rotate = new Rotate(new Angle(Player.transform.rotation.eulerAngles.y));
+        _playerRepresentation.style.rotate = new Rotate(new Angle(player.transform.rotation.eulerAngles.y));
 
-        Length x = new Length((Player.transform.position.x) - differenceX, LengthUnit.Pixel);
-        Length y = new Length((-Player.transform.position.z) + differenceY, LengthUnit.Pixel);
+        Length x = new Length((player.transform.position.x) - differenceX, LengthUnit.Pixel);
+        Length y = new Length((-player.transform.position.z) + differenceY, LengthUnit.Pixel);
 
         _playerRepresentation.style.translate = new Translate(x, y, 0);
 
@@ -52,9 +52,9 @@ public class MapController : MonoBehaviour
             var clampHeight = _mapImage.worldBound.height / 2 -
                 _mapContainer.worldBound.height / 2;
 
-            var xPos = Mathf.Clamp((Player.transform.position.x) - differenceX,
+            var xPos = Mathf.Clamp((player.transform.position.x) - differenceX,
                 -clampWidth, clampWidth);
-            var yPos = Mathf.Clamp((-Player.transform.position.z) + differenceY,
+            var yPos = Mathf.Clamp((-player.transform.position.z) + differenceY,
                 -clampHeight, clampHeight);
 
             _mapImage.style.translate = new Translate(xPos*-1, yPos*-1, 0);

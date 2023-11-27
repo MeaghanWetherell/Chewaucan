@@ -1,73 +1,74 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Match3;
 using TMPro;
 using UnityEngine;
 
-public class MatchUIManager : MonoBehaviour
+// ReSharper disable once CheckNamespace
+namespace Match3
 {
-    public GameObject UIObj;
+    public class MatchUIManager : MonoBehaviour
+    {
+        public GameObject uiObj;
     
-    public TextMeshProUGUI mainText;
+        public TextMeshProUGUI mainText;
 
-    public TextMeshProUGUI buttonText;
+        public TextMeshProUGUI buttonText;
 
-    public TextMeshProUGUI scoreText;
+        public TextMeshProUGUI scoreText;
 
-    public static MatchUIManager matchUIManager;
+        public static MatchUIManager matchUIManager;
 
-    private void Awake()
-    {
-        matchUIManager = this;
-        UIObj.SetActive(false);
-    }
-
-    public void endGame(String reason)
-    {
-        UIObj.SetActive(true);
-        Timer.timer.enabled = false;
-        MatchGrid.matchGrid.enabled = false;
-        if(ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
-            lose(reason);
-        else
+        private void Awake()
         {
-            win(reason);
+            matchUIManager = this;
+            uiObj.SetActive(false);
         }
-    }
 
-    private void lose(String reason)
-    {
-        mainText.text = "You Lose!";
-        buttonText.text = "Retry";
-        scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
-        int num = MatchLevelManager.matchLevelManager.getCurLevel().levelNum;
-        if (num > 0)
+        public void EndGame(String reason)
         {
-            buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+            uiObj.SetActive(true);
+            Timer.timer.enabled = false;
+            MatchGrid.matchGrid.enabled = false;
+            if(ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
+                Lose(reason);
+            else
+            {
+                Win(reason);
+            }
         }
-        else
-        {
-            buttonText.text = "Play Again!";
-        }
-    }
 
-    private void win(String reason)
-    {
-        mainText.text = "You Win!";
-        buttonText.text = "Next Level";
-        scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
-        int num = MatchLevelManager.matchLevelManager.getCurLevel().levelNum;
-        if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count-1)
+        private void Lose(String reason)
         {
-            buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num+1;
-            MatchLevelManager.matchLevelManager.levelsComplete[num] = true;
-        }
-        else
-        {
-            buttonText.text = "Play Again!";
-            if(num>0)
+            mainText.text = "You Lose!";
+            buttonText.text = "Retry";
+            scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
+            int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
+            if (num > 0)
+            {
                 buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+            }
+            else
+            {
+                buttonText.text = "Play Again!";
+            }
+        }
+
+        private void Win(String reason)
+        {
+            mainText.text = "You Win!";
+            buttonText.text = "Next Level";
+            scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
+            int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
+            if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count-1)
+            {
+                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num+1;
+                MatchLevelManager.matchLevelManager.levelsComplete[num] = true;
+            }
+            else
+            {
+                buttonText.text = "Play Again!";
+                if(num>0)
+                    buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+            }
         }
     }
 }

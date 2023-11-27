@@ -6,7 +6,7 @@ namespace Misc
     {
         public void OnClick()
         {
-            MainSceneDataSaver.mainSceneDataSaver.reloadMainScene();
+            MainSceneDataSaver.mainSceneDataSaver.ReloadMainScene();
         }
     }
 }

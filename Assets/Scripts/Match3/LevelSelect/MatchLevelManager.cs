@@ -13,7 +13,7 @@ namespace Match3
 
         public List<LevelData> levels;
 
-        private int curIndex;
+        private int _curIndex;
 
         [System.NonSerialized]
         public List<bool> levelsComplete;
@@ -43,16 +43,24 @@ namespace Match3
             File.WriteAllText("match3levelscomplete.json", completedJson);
         }
 
-        public void loadLevel(int index)
+        public void LoadLevel(int index)
         {
-            setValidMeshes(levels[index].meshes);
-            curIndex = index;
-            MainSceneDataSaver.mainSceneDataSaver.prepareForUnload();
+            SetValidMeshes(levels[index].meshes);
+            if (levels[index].matchType)
+            {
+                MatchObject.compareByGroup = true;
+            }
+            else
+            {
+                MatchObject.compareByGroup = false;
+            }
+            _curIndex = index;
+            MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
             SceneManager.LoadScene(2);
             //UnityEngine.Random.InitState(160);
         }
         
-        public void setValidMeshes(int[] valid)
+        public void SetValidMeshes(int[] valid)
         {
             MatchObject.validMeshes = new List<int>();
             foreach (int index in valid)
@@ -61,9 +69,9 @@ namespace Match3
             }
         }
 
-        public LevelData getCurLevel()
+        public LevelData GETCurLevel()
         {
-            return levels[curIndex];
+            return levels[_curIndex];
         }
     }
 }

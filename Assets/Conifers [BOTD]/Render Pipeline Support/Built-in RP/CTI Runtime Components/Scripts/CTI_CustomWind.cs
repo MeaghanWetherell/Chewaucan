@@ -4,22 +4,22 @@ using System.Collections;
 namespace CTI {
 
 	[RequireComponent (typeof (WindZone))]
-	public class CTI_CustomWind : MonoBehaviour {
+	public class CtiCustomWind : MonoBehaviour {
 
-		private WindZone m_WindZone;
+		private WindZone _mWindZone;
 
-		private Vector3 WindDirection;
-		private float WindStrength;
-		private float WindTurbulence;
+		private Vector3 _windDirection;
+		private float _windStrength;
+		private float _windTurbulence;
 
-	    public float WindMultiplier = 1.0f;
+	    public float windMultiplier = 1.0f;
 
-	    private bool init = false;
-	    private int TerrainLODWindPID;
+	    private bool _init = false;
+	    private int _terrainLODWindPid;
 
 	    void Init () {
-			m_WindZone = GetComponent<WindZone>();
-			TerrainLODWindPID = Shader.PropertyToID("_TerrainLODWind");
+			_mWindZone = GetComponent<WindZone>();
+			_terrainLODWindPid = Shader.PropertyToID("_TerrainLODWind");
 		}
 
 		void OnValidate () {
@@ -27,23 +27,23 @@ namespace CTI {
 		}
 		
 		void Update () {
-			if (!init) {
+			if (!_init) {
 				Init ();
 			}
-			WindDirection = this.transform.forward;
+			_windDirection = this.transform.forward;
 
-			if(m_WindZone == null) {
-				m_WindZone = GetComponent<WindZone>();
+			if(_mWindZone == null) {
+				_mWindZone = GetComponent<WindZone>();
 			}
-			WindStrength = m_WindZone.windMain * WindMultiplier;
-			WindStrength += m_WindZone.windPulseMagnitude * (1.0f + Mathf.Sin(Time.time * m_WindZone.windPulseFrequency) + 1.0f + Mathf.Sin(Time.time * m_WindZone.windPulseFrequency * 3.0f) ) * 0.5f;
-			WindTurbulence = m_WindZone.windTurbulence * m_WindZone.windMain * WindMultiplier;
+			_windStrength = _mWindZone.windMain * windMultiplier;
+			_windStrength += _mWindZone.windPulseMagnitude * (1.0f + Mathf.Sin(Time.time * _mWindZone.windPulseFrequency) + 1.0f + Mathf.Sin(Time.time * _mWindZone.windPulseFrequency * 3.0f) ) * 0.5f;
+			_windTurbulence = _mWindZone.windTurbulence * _mWindZone.windMain * windMultiplier;
 
-			WindDirection.x *= WindStrength;
-			WindDirection.y *= WindStrength;
-			WindDirection.z *= WindStrength;
+			_windDirection.x *= _windStrength;
+			_windDirection.y *= _windStrength;
+			_windDirection.z *= _windStrength;
 
-			Shader.SetGlobalVector(TerrainLODWindPID, new Vector4(WindDirection.x, WindDirection.y, WindDirection.z, WindTurbulence) );
+			Shader.SetGlobalVector(_terrainLODWindPid, new Vector4(_windDirection.x, _windDirection.y, _windDirection.z, _windTurbulence) );
 		}
 	}
 }

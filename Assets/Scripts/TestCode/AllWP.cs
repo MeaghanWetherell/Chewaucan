@@ -3,11 +3,11 @@ using QuestSystem;
 
 namespace TestCode
 {
-    public class AllWP : QuestHandler
+    public class AllWp : QuestHandler
     {
         private void Start()
         {
-            startQuest();
+            StartQuest();
         }
     }
 }

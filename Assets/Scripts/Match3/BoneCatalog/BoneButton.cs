@@ -10,7 +10,7 @@ namespace Match3
         {
             if (data == null)
                 return;
-            BoneSceneManager.boneSceneManager.loadBoneScene(data);
+            BoneSceneManager.boneSceneManager.LoadBoneScene(data);
         }
     }
 }

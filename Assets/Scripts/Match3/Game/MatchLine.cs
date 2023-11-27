@@ -11,15 +11,15 @@ namespace Match3
         
         public MatchObject[] myObjects;
 
-        private static int size = 7;
+        private static int _size = 7;
 
-        private static float waitTime = 0.25f;
+        private static float _waitTime = 0.25f;
 
         public GameObject matchObjPrefab;
 
-        private int toSpawn;
+        private int _toSpawn;
 
-        private float spawnTime;
+        private float _spawnTime;
 
         public int index;
 
@@ -28,23 +28,23 @@ namespace Match3
             if (myObjects.Length > 0)
             {
                 while(myObjects[^1] != null)
-                    removeObject(myObjects.Length-1);
+                    RemoveObject(myObjects.Length-1);
             }
-            toSpawn = size;
-            spawnTime = Time.time + waitTime;
-            myObjects = new MatchObject[size];
-            StartCoroutine(spawner());
+            _toSpawn = _size;
+            _spawnTime = Time.time + _waitTime;
+            myObjects = new MatchObject[_size];
+            StartCoroutine(Spawner());
         }
 
-        private IEnumerator spawner()
+        private IEnumerator Spawner()
         {
             while (true)
             {
-                if (toSpawn > 0 && Time.time > spawnTime)
+                if (_toSpawn > 0 && Time.time > _spawnTime)
                 {
-                    toSpawn--;
-                    addObject();
-                    yield return new WaitForSeconds(waitTime);
+                    _toSpawn--;
+                    AddObject();
+                    yield return new WaitForSeconds(_waitTime);
                 }
                 else
                 {
@@ -53,16 +53,16 @@ namespace Match3
             }
         }
 
-        private void addObject()
+        private void AddObject()
         {
             GameObject newObj = Instantiate(matchObjPrefab, new Vector3(this.transform.position.x, 3.5f, -2), Quaternion.identity);
             myObjects[0] = newObj.GetComponent<MatchObject>();
             myObjects[0].index = 0;
             myObjects[0].parent = this;
-            bubbleDown(0);
+            BubbleDown(0);
         }
 
-        private void bubbleDown(int index)
+        private void BubbleDown(int index)
         {
             if (myObjects[index] == null)
                 return;
@@ -81,15 +81,15 @@ namespace Match3
             }
         }
 
-        public void removeObject(int indexToRemove)
+        public void RemoveObject(int indexToRemove)
         {
-            myObjects[indexToRemove].remove();
+            myObjects[indexToRemove].Remove();
             myObjects[indexToRemove] = null;
             for (int i = indexToRemove-1; i >= 0; i--)
             {
-                bubbleDown(i);
+                BubbleDown(i);
             }
-            toSpawn++;
+            _toSpawn++;
         }
     }
 }

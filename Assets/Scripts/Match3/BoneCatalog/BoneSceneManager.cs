@@ -23,13 +23,13 @@ namespace Match3
             DontDestroyOnLoad(this.gameObject);
         }
 
-        public void loadBoneScene(MeshDataObj toLoad)
+        public void LoadBoneScene(MeshDataObj toLoad)
         {
             if (toLoad == null)
                 return;
             curObj = toLoad;
             wasLoaded = true;
-            MainSceneDataSaver.mainSceneDataSaver.prepareForUnload();
+            MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
             SceneManager.LoadScene(4);
         }
     }

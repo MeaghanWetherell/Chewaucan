@@ -19,8 +19,12 @@ namespace Match3
 
         private void Awake()
         {
-            if(!OpenLevelSelect.openLevelSelect.shouldLoadBone)
-                populateGUI();
+            if (!OpenLevelSelect.openLevelSelect.shouldLoadBone)
+            {
+                boneButton.interactable = true;
+                this.GetComponent<Button>().interactable = false;
+                PopulateGUI();
+            }
         }
 
         //clean up the gui and repopulate when the user returns to the level menu
@@ -32,11 +36,11 @@ namespace Match3
             {
                 Destroy(scrollContent.GetChild(i).gameObject);
             }
-            populateGUI();
+            PopulateGUI();
         }
         
         //add buttons to the GUI
-        private void populateGUI()
+        private void PopulateGUI()
         {
             List<LevelData> levels = MatchLevelManager.matchLevelManager.levels;
             bool shouldBeEnabled = true;
@@ -46,7 +50,7 @@ namespace Match3
                 {
                     shouldBeEnabled = MatchLevelManager.matchLevelManager.levelsComplete[i-1];
                 }
-                createButtonPrefab(levels[i], shouldBeEnabled);
+                CreateButtonPrefab(levels[i], shouldBeEnabled);
             }
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Endless";
@@ -54,7 +58,7 @@ namespace Match3
         }
 
         //creates a button prefab with the details of the passed level
-        private void createButtonPrefab(LevelData level, bool shouldBeEnabled)
+        private void CreateButtonPrefab(LevelData level, bool shouldBeEnabled)
         {
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Level "+level.levelNum;

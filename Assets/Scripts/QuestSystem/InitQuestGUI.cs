@@ -16,15 +16,15 @@ namespace QuestSystem
         //when the quest gui loads, initialize it
         void Start()
         {
-            List<QuestNode> nodes = QuestManager.questManager.getQuests();
+            List<QuestNode> nodes = QuestManager.questManager.GETQuests();
             foreach (QuestNode node in nodes)
             {
-                createButtonPrefab(node);
+                CreateButtonPrefab(node);
             }
         }
 
         //creates a button prefab with the details of the passed quest
-        private void createButtonPrefab(QuestNode node)
+        private void CreateButtonPrefab(QuestNode node)
         {
             GameObject newButton = Instantiate(questButton, scrollContent, false);
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = node.name;

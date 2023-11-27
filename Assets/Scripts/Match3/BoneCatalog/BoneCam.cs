@@ -14,46 +14,46 @@ namespace Match3
 
         public float xFudge;
 
-        private bool mouseDown;
+        private bool _mouseDown;
 
-        private Vector2 lastMousePos;
+        private Vector2 _lastMousePos;
 
-        private Vector3 orbitAngle;
+        private Vector3 _orbitAngle;
 
         private void OnEnable()
         {
-            clicked.action.started += onClickDown;
-            clicked.action.canceled += onClickUp;
+            clicked.action.started += ONClickDown;
+            clicked.action.canceled += ONClickUp;
         }
 
         private void OnDisable()
         {
-            clicked.action.started -= onClickDown;
-            clicked.action.canceled -= onClickUp;
+            clicked.action.started -= ONClickDown;
+            clicked.action.canceled -= ONClickUp;
         }
 
-        private void onClickDown(InputAction.CallbackContext callbackContext)
+        private void ONClickDown(InputAction.CallbackContext callbackContext)
         {
-            mouseDown = true;
+            _mouseDown = true;
         }
 
-        private void onClickUp(InputAction.CallbackContext callbackContext)
+        private void ONClickUp(InputAction.CallbackContext callbackContext)
         {
-            mouseDown = false;
+            _mouseDown = false;
         }
 
         private void Awake()
         {
-            lastMousePos = mousePos.action.ReadValue<Vector2>();
+            _lastMousePos = mousePos.action.ReadValue<Vector2>();
         }
 
         private void Update()
         {
             float yRot=0;
             float xRot=0;
-            if (mouseDown)
+            if (_mouseDown)
             {
-                Vector2 diff = mousePos.action.ReadValue<Vector2>()-lastMousePos;
+                Vector2 diff = mousePos.action.ReadValue<Vector2>()-_lastMousePos;
                 if(diff.x > 0.75f)
                     yRot = xFudge * diff.x * Time.deltaTime;
                 //y-rotation was fiddly, so I locked it. 
@@ -63,11 +63,11 @@ namespace Match3
                 */
             }
 
-            orbitAngle += new Vector3(xRot, yRot, 0);
-            Quaternion lookDir = Quaternion.Euler(orbitAngle );
+            _orbitAngle += new Vector3(xRot, yRot, 0);
+            Quaternion lookDir = Quaternion.Euler(_orbitAngle );
             Vector3 lookPos = Vector3.zero - lookDir*Vector3.forward*10;
             transform.SetPositionAndRotation(lookPos, lookDir);
-            lastMousePos = mousePos.action.ReadValue<Vector2>();
+            _lastMousePos = mousePos.action.ReadValue<Vector2>();
         }
     }
 }

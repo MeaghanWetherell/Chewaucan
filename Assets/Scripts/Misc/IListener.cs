@@ -4,8 +4,8 @@ namespace Misc
 {
     public interface IListener
     {
-        public void listen(int index);
+        public void Listen(int index);
 
-        public void listenerRemoved();
+        public void ListenerRemoved();
     }
 }

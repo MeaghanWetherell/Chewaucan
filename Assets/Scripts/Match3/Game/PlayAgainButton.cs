@@ -6,9 +6,9 @@ namespace Match3
     {
         public int index;
 
-        public void onClick()
+        public void ONClick()
         {
-            MatchLevelManager.matchLevelManager.loadLevel(index);
+            MatchLevelManager.matchLevelManager.LoadLevel(index);
         }
     }
 }

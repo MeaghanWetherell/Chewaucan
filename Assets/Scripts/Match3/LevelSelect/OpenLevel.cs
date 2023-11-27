@@ -7,9 +7,9 @@ namespace Match3
         [System.NonSerialized]
         public int levelIndex;
 
-        public void onClick()
+        public void ONClick()
         {
-            MatchLevelManager.matchLevelManager.loadLevel(levelIndex);
+            MatchLevelManager.matchLevelManager.LoadLevel(levelIndex);
         }
     }
 }

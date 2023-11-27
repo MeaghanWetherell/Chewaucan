@@ -26,7 +26,7 @@ namespace QuestSystem
         //if the quest gui is open, reenable player movement and close it, otherwise do the opposite
         private void OnKPressed(InputAction.CallbackContext callbackContext)
         {
-            onOpenTrigger();
+            ONOpenTrigger();
         }
     }
 }

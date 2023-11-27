@@ -11,61 +11,61 @@ namespace Misc
 
         public InputActionReference interact;
 
-        private IListener currentListener;
+        private IListener _currentListener;
 
-        private int listenerPriority;
+        private int _listenerPriority;
 
-        private int listenerIndexToCall;
+        private int _listenerIndexToCall;
 
-        private ObjectIDGenerator gen;
+        private ObjectIDGenerator _gen;
 
         private void OnEnable()
         {
-            interact.action.started += updateListener;
+            interact.action.started += UpdateListener;
         }
 
         private void OnDisable()
         {
-            interact.action.started -= updateListener;
+            interact.action.started -= UpdateListener;
         }
 
         private void Awake()
         {
             interactListenerManager = this;
-            gen = new ObjectIDGenerator();
+            _gen = new ObjectIDGenerator();
         }
 
-        public bool changeListener(IListener toChange, int priority = 0, int indexToCall = 0)
+        public bool ChangeListener(IListener toChange, int priority = 0, int indexToCall = 0)
         {
             bool temp = true;
-            if (currentListener == null || priority >= listenerPriority)
+            if (_currentListener == null || priority >= _listenerPriority)
             {
-                currentListener?.listenerRemoved();
-                currentListener = toChange;
-                listenerPriority = priority;
-                listenerIndexToCall = indexToCall;
-                gen.GetId(toChange, out temp);
-                HUDManager.hudManager.sendMessage("Press E to interact");
+                _currentListener?.ListenerRemoved();
+                _currentListener = toChange;
+                _listenerPriority = priority;
+                _listenerIndexToCall = indexToCall;
+                _gen.GetId(toChange, out temp);
+                HUDManager.hudManager.DisplayMessageToHUD("Press E to interact");
                 return true;
             }
             return false;
         }
 
-        public void deRegister(IListener toDeregister)
+        public void DeRegister(IListener toDeregister)
         {
-            if (currentListener == null)
+            if (_currentListener == null)
                 return;
             bool temp = true;
-            if (gen.GetId(currentListener, out temp) == gen.GetId(toDeregister, out temp))
+            if (_gen.GetId(_currentListener, out temp) == _gen.GetId(toDeregister, out temp))
             {
-                currentListener = null;
-                HUDManager.hudManager.closeMessage();
+                _currentListener = null;
+                HUDManager.hudManager.CloseMessage();
             }
         }
 
-        private void updateListener(InputAction.CallbackContext callbackContext)
+        private void UpdateListener(InputAction.CallbackContext callbackContext)
         {
-            currentListener?.listen(listenerIndexToCall);
+            _currentListener?.Listen(_listenerIndexToCall);
         }
     }
 }

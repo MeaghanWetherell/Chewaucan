@@ -23,34 +23,34 @@ namespace Misc
         private void OnEnable()
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(false);
-            StartCoroutine(waitForQuestLoad());
+            StartCoroutine(WaitForQuestLoad());
         }
 
-        public void sendMessage(String message)
+        public void DisplayMessageToHUD(String message)
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(true);
             messageText.text = message;
         }
 
-        public void closeMessage()
+        public void CloseMessage()
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(false);
         }
 
         //if the quest manager hasn't been initialized yet, wait a frame to set up quest pins
-        private IEnumerator waitForQuestLoad()
+        private IEnumerator WaitForQuestLoad()
         {
             while (QuestManager.questManager == null)
             {
                 yield return new WaitForSeconds(0);
             }
-            resetPins();
+            ResetPins();
         }
 
-        public void resetPins()
+        public void ResetPins()
         {
-            QuestNode[] pinNodes = QuestManager.questManager.getPinNodes();
-            pinNodes.insertionSort();
+            QuestNode[] pinNodes = QuestManager.questManager.GETPinNodes();
+            pinNodes.InsertionSort();
             GameObject pinField = transform.GetChild(0).gameObject;
             if (pinNodes[0] == null)
             {

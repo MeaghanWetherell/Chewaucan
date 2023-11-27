@@ -6,11 +6,13 @@ using Random = UnityEngine.Random;
 
 namespace Match3
 {
-    public class MatchObject : MonoBehaviour, IPointerDownHandler
+    public class MatchObject : MonoBehaviour, IPointerDownHandler, IComparable<MatchObject>
     {
-        private static List<MeshDataObj> meshes;
+        public static bool compareByGroup = false;
+        
+        private static List<MeshDataObj> _meshes;
 
-        private static float gravity = 20;
+        private static float _gravity = 20;
 
         public static List<int> validMeshes;
 
@@ -24,12 +26,12 @@ namespace Match3
         
         private void Start()
         {
-            meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
+            _meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
             int temp = Random.Range((int) 0, (int) validMeshes.Count);
             myType = validMeshes[temp];
-            this.gameObject.GetComponent<MeshFilter>().mesh = meshes[myType].mesh;
-            this.gameObject.GetComponent<MeshRenderer>().material = meshes[myType].material;
-            myGroup = meshes[myType].type.ToLower();
+            this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
+            this.gameObject.GetComponent<MeshRenderer>().material = _meshes[myType].material;
+            myGroup = _meshes[myType].type.ToLower();
         }
 
         private void Update()
@@ -38,18 +40,36 @@ namespace Match3
             if (this.transform.position != snapPoint)
             {
                 this.transform.position = Vector3.MoveTowards(transform.position, snapPoint,
-                    gravity * Time.deltaTime);
+                    _gravity * Time.deltaTime);
             }
         }
 
-        public void remove()
+        public void Remove()
         {
             Destroy(this.gameObject);
         }
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            MatchGrid.matchGrid.registerActiveMatchObj(this);
+            MatchGrid.matchGrid.RegisterActiveMatchObj(this);
+        }
+
+        public int CompareTo(MatchObject other)
+        {
+            if (compareByGroup)
+            {
+                // ReSharper disable once StringCompareIsCultureSpecific.1
+                return String.Compare(myGroup, other.myGroup);
+            }
+            if (myType == other.myType)
+            {
+                return 0;
+            }
+            if (myType > other.myType)
+            {
+                return 1;
+            }
+            return -1;
         }
     }
 }

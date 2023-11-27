@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
+using System.Text.RegularExpressions;
 using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = System.Random;
 using Vector2 = UnityEngine.Vector2;
 
+// ReSharper disable once CheckNamespace
 namespace Match3
 {
     public class MatchGrid : MonoBehaviour
@@ -23,91 +23,91 @@ namespace Match3
 
         public float minMovementMagnitude;
         
-        private List<MatchObject[]> objects = new List<MatchObject[]>();
+        private List<MatchObject[]> _objects = new List<MatchObject[]>();
 
-        private bool waitingOnMatchCheck;
+        private bool _waitingOnMatchCheck;
 
-        private Queue<List<GridCoordinate>> removalQueue = new Queue<List<GridCoordinate>>();
+        private Queue<List<GridCoordinate>> _removalQueue = new Queue<List<GridCoordinate>>();
 
-        private MatchObject activeObject;
+        private MatchObject _activeObject;
 
-        private Vector2 initialMousePos;
+        private Vector2 _initialMousePos;
 
-        private float timeLeft;
+        private float _timeLeft;
 
         private void OnDisable()
         {
-            click.action.canceled -= clickAction;
+            click.action.canceled -= ClickAction;
         }
 
-        private void clickAction(InputAction.CallbackContext context)
+        private void ClickAction(InputAction.CallbackContext context)
         {
-            activeObject = null;
+            _activeObject = null;
         }
         
         private void OnEnable()
         {
-            click.action.canceled += clickAction;
+            click.action.canceled += ClickAction;
             matchGrid = this;
-            StartCoroutine(removeObjs());
-            StartCoroutine(waitToCheckMatch(2));
-            StartCoroutine(checkForLock());
+            StartCoroutine(RemoveObjs());
+            StartCoroutine(WaitToCheckMatch(2));
+            StartCoroutine(CheckForLock());
         }
 
         private void Start()
         {
             foreach(MatchLine line in lines)
             {
-                line.index = objects.Count;
-                objects.Add(line.myObjects);
+                line.index = _objects.Count;
+                _objects.Add(line.myObjects);
             }
         }
 
         private void FixedUpdate()
         {
             List<GridCoordinate> temp;
-            if (removalQueue.TryPeek(out temp) || waitingOnMatchCheck)
+            if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
                 return;
-            checkMatches();
-            if (removalQueue.TryPeek(out temp) || waitingOnMatchCheck)
+            CheckMatches();
+            if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
                 return;
-            if (activeObject != null)
+            if (_activeObject != null)
             {
-                Vector2 changeInMousePos = mousePos.action.ReadValue<Vector2>()-initialMousePos;
+                Vector2 changeInMousePos = mousePos.action.ReadValue<Vector2>()-_initialMousePos;
                 if (changeInMousePos.magnitude > minMovementMagnitude)
                 {
-                    moveMatchObj(changeInMousePos);
+                    MoveMatchObj(changeInMousePos);
                 }
             }
         }
 
-        IEnumerator checkForLock()
+        IEnumerator CheckForLock()
         {
             while (true)
             {
-                if (!waitingOnMatchCheck)
+                if (!_waitingOnMatchCheck)
                 {
-                    if (!detectMatchesPossible())
+                    if (!DetectMatchesPossible())
                     {
-                        MatchUIManager.matchUIManager.endGame("No valid matches remaining!");
+                        MatchUIManager.matchUIManager.EndGame("No valid matches remaining!");
                     }
                 }
                 yield return new WaitForSeconds(0.6f);
             }
         }
 
-        IEnumerator removeObjs()
+        IEnumerator RemoveObjs()
         {
             while (true)
             {
                 List<GridCoordinate> coords;
-                if (removalQueue.TryDequeue(out coords))
+                if (_removalQueue.TryDequeue(out coords))
                 {
-                    StartCoroutine(waitToCheckMatch(0.4f));
+                    StartCoroutine(WaitToCheckMatch(0.4f));
                     yield return new WaitForSeconds(0.4f);
-                    ScoreTracker.scoreTracker.addScore(coords.Count);
+                    ScoreTracker.scoreTracker.AddScore(coords.Count);
                     foreach(GridCoordinate coord in coords)
-                        lines[coord.x].removeObject(coord.y);
+                        lines[coord.x].RemoveObject(coord.y);
                 }
                 else
                 {
@@ -116,44 +116,44 @@ namespace Match3
             }
         }
 
-        private IEnumerator waitToCheckMatch(float time)
+        private IEnumerator WaitToCheckMatch(float time)
         {
-            waitingOnMatchCheck = true;
+            _waitingOnMatchCheck = true;
             yield return new WaitForSeconds(time);
-            waitingOnMatchCheck = false;
+            _waitingOnMatchCheck = false;
         }
         
-        private IEnumerator waitToSwapBack(float time, GridCoordinate a, GridCoordinate b)
+        private IEnumerator WaitToSwapBack(float time, GridCoordinate a, GridCoordinate b)
         {
-            StartCoroutine(waitToCheckMatch(time));
+            StartCoroutine(WaitToCheckMatch(time));
             yield return new WaitForSeconds(time);
-            swap(a, b);
+            Swap(a, b);
         }
 
-        private bool detectMatchesPossible()
+        private bool DetectMatchesPossible()
         {
-            foreach (MatchObject[] line in objects)
+            foreach (MatchObject[] line in _objects)
             {
                 if (line.Contains(null))
                     return true;
             }
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = 0; i < _objects.Count; i++)
             {
-                for (int j = 0; j < objects[i].Length; j++)
+                for (int j = 0; j < _objects[i].Length; j++)
                 {
-                    if (i - 1 > 0 && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i-1, j)))
+                    if (i - 1 > 0 && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i-1, j)))
                     {
                         return true;
                     }
-                    if (i + 1 < objects.Count && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i+1, j)))
+                    if (i + 1 < _objects.Count && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i+1, j)))
                     {
                         return true;
                     }
-                    if (j - 1 > 0 && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j-1)))
+                    if (j - 1 > 0 && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j-1)))
                     {
                         return true;
                     }
-                    if (j + 1 < objects[i].Length && checkSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j+1)))
+                    if (j + 1 < _objects[i].Length && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j+1)))
                     {
                         return true;
                     }
@@ -162,52 +162,52 @@ namespace Match3
             return false;
         }
 
-        private void checkMatches()
+        private void CheckMatches()
         {
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = 0; i < _objects.Count; i++)
             {
-                for (int j = 0; j < objects[i].Length; j++)
+                for (int j = 0; j < _objects[i].Length; j++)
                 {
-                    List<GridCoordinate> temp = detectMatch(i, j);
+                    List<GridCoordinate> temp = DetectMatch(i, j);
                     if (temp.Count >= 3)
                     {
-                        removalQueue.Enqueue(temp);
+                        _removalQueue.Enqueue(temp);
                         return;
                     }
                 }
             }
         }
 
-        private List<GridCoordinate> detectMatch(int i, int j)
+        private List<GridCoordinate> DetectMatch(int i, int j)
         {
             List<GridCoordinate> validCoords = new List<GridCoordinate>();
-            if (objects[i][j] == null)
+            if (_objects[i][j] == null)
                 return validCoords;
             validCoords.Add(new GridCoordinate(i, j));
-            if (detectMatchHelper(i, j, 1, 0, 1, objects[i][j].myType, validCoords) >= 3)
+            if (DetectMatchHelper(i, j, 1, 0, 1, _objects[i][j], validCoords) >= 3)
             {
-                return findAltMatches(validCoords);
+                return FindAltMatches(validCoords);
             }
             validCoords = new List<GridCoordinate>();
             validCoords.Add(new GridCoordinate(i, j));
-            if (detectMatchHelper(i, j, 0, 1, 1, objects[i][j].myType, validCoords) >= 3)
+            if (DetectMatchHelper(i, j, 0, 1, 1, _objects[i][j], validCoords) >= 3)
             {
-                return findAltMatches(validCoords);
+                return FindAltMatches(validCoords);
             }
             return validCoords;
         }
 
-        private List<GridCoordinate> findAltMatches(GridCoordinate coord)
+        private List<GridCoordinate> FindAltMatches(GridCoordinate coord)
         {
             List<GridCoordinate> coordActual = new List<GridCoordinate>();
             coordActual.Add(coord);
-            return findAltMatches(coordActual);
+            return FindAltMatches(coordActual);
         }
 
-        private List<GridCoordinate> findAltMatches(List<GridCoordinate> coords)
+        private List<GridCoordinate> FindAltMatches(List<GridCoordinate> coords)
         {
             HashSet<GridCoordinate> checkedCoords = new HashSet<GridCoordinate>();
-            int checkType = objects[coords[0].x][coords[0].y].myType;
+            MatchObject checkAgainst = _objects[coords[0].x][coords[0].y];
             List<GridCoordinate> temp = new List<GridCoordinate>();
             GridCoordinate temp2;
             while (coords.Count > 0)
@@ -217,14 +217,14 @@ namespace Match3
                 if(checkedCoords.Contains(toCheck))
                     continue;
                 checkedCoords.Add(toCheck);
-                temp2 = findNextInDir(toCheck, -1, 0);
+                temp2 = FindNextInDir(toCheck, -1, 0);
                 temp.Add(temp2);
-                if(detectMatchHelper(temp2.x, temp2.y, 1, 0, 1, checkType, temp) >= 3)
+                if(DetectMatchHelper(temp2.x, temp2.y, 1, 0, 1, checkAgainst, temp) >= 3)
                     coords.AddRange(temp);
                 temp = new List<GridCoordinate>();
-                temp2 = findNextInDir(toCheck, 0, -1);
+                temp2 = FindNextInDir(toCheck, 0, -1);
                 temp.Add(temp2);
-                if(detectMatchHelper(temp2.x, temp2.y, 0, 1, 1, checkType, temp) >= 3)
+                if(DetectMatchHelper(temp2.x, temp2.y, 0, 1, 1, checkAgainst, temp) >= 3)
                     coords.AddRange(temp);
                 temp = new List<GridCoordinate>();
             }
@@ -236,112 +236,112 @@ namespace Match3
             return temp;
         }
 
-        private GridCoordinate findNextInDir(GridCoordinate coord, int dirx, int diry)
+        private GridCoordinate FindNextInDir(GridCoordinate coord, int dirx, int diry)
         {
-            if (objects[coord.x][coord.y] == null)
+            if (_objects[coord.x][coord.y] == null)
                 return coord;
             while (true)
             {
                 if (coord.x + dirx < 0)
                     return coord;
-                if (coord.x + dirx > objects.Count - 1)
+                if (coord.x + dirx > _objects.Count - 1)
                     return coord;
                 if (coord.y + diry < 0)
                     return coord;
-                if (coord.y + diry > objects[coord.x + dirx].Length - 1)
+                if (coord.y + diry > _objects[coord.x + dirx].Length - 1)
                     return coord;
-                if (objects[coord.x + dirx][coord.y + diry] == null)
+                if (_objects[coord.x + dirx][coord.y + diry] == null)
                     return coord;
-                if (objects[coord.x + dirx][coord.y + diry].myType != objects[coord.x][coord.y].myType)
+                if (_objects[coord.x + dirx][coord.y + diry].myType != _objects[coord.x][coord.y].myType)
                     return coord;
                 coord = new GridCoordinate(coord.x + dirx, coord.y + diry);
             }
         }
 
-        private int detectMatchHelper(int i, int j, int dirx, int diry, int numInRow, int matchType, List<GridCoordinate> coords)
+        private int DetectMatchHelper(int i, int j, int dirx, int diry, int numInRow, MatchObject checkAgainst, List<GridCoordinate> coords)
         {
             i += dirx;
             j += diry;
-            if (i < objects.Count && i >= 0 && j < objects[i].Length && j >= 0 && objects[i][j] != null && objects[i][j].myType == matchType)
+            if (i < _objects.Count && i >= 0 && j < _objects[i].Length && j >= 0 && _objects[i][j] != null && checkAgainst.CompareTo(_objects[i][j]) == 0)
             {
                 coords.Add(new GridCoordinate(i, j));
-                return detectMatchHelper(i, j, dirx, diry, numInRow + 1, matchType, coords);
+                return DetectMatchHelper(i, j, dirx, diry, numInRow + 1, checkAgainst, coords);
             }
             return numInRow;
         }
 
-        public void registerActiveMatchObj(MatchObject obj)
+        public void RegisterActiveMatchObj(MatchObject obj)
         {
-            activeObject = obj;
-            initialMousePos = mousePos.action.ReadValue<Vector2>();
+            _activeObject = obj;
+            _initialMousePos = mousePos.action.ReadValue<Vector2>();
         }
 
-        private void moveMatchObj(Vector2 change)
+        private void MoveMatchObj(Vector2 change)
         {
             if (Mathf.Abs(change.x) > Mathf.Abs(change.y))
             {
                 if (change.x > 0)
                 {
-                    if (activeObject.parent.index + 1 < objects.Count)
-                        swapWithValidityDetection(new GridCoordinate(activeObject.parent.index, activeObject.index), new GridCoordinate(activeObject.parent.index + 1, activeObject.index));
+                    if (_activeObject.parent.index + 1 < _objects.Count)
+                        SwapWithValidityDetection(new GridCoordinate(_activeObject.parent.index, _activeObject.index), new GridCoordinate(_activeObject.parent.index + 1, _activeObject.index));
                 }
                 else
                 {
-                    if (activeObject.parent.index - 1 >= 0)
-                        swapWithValidityDetection(new GridCoordinate(activeObject.parent.index, activeObject.index), new GridCoordinate(activeObject.parent.index-1, activeObject.index));
+                    if (_activeObject.parent.index - 1 >= 0)
+                        SwapWithValidityDetection(new GridCoordinate(_activeObject.parent.index, _activeObject.index), new GridCoordinate(_activeObject.parent.index-1, _activeObject.index));
                 }
             }
             else
             {
                 if (change.y > 0)
                 {
-                    if(activeObject.index-1 >= 0)
-                        swapWithValidityDetection(new GridCoordinate(activeObject.parent.index, activeObject.index), new GridCoordinate(activeObject.parent.index, activeObject.index-1));
+                    if(_activeObject.index-1 >= 0)
+                        SwapWithValidityDetection(new GridCoordinate(_activeObject.parent.index, _activeObject.index), new GridCoordinate(_activeObject.parent.index, _activeObject.index-1));
                 }
                 else
                 {
-                    if(activeObject.index+1 < activeObject.parent.myObjects.Length)
-                        swapWithValidityDetection(new GridCoordinate(activeObject.parent.index, activeObject.index), new GridCoordinate(activeObject.parent.index, activeObject.index+1));
+                    if(_activeObject.index+1 < _activeObject.parent.myObjects.Length)
+                        SwapWithValidityDetection(new GridCoordinate(_activeObject.parent.index, _activeObject.index), new GridCoordinate(_activeObject.parent.index, _activeObject.index+1));
                 }
             }
-            activeObject = null;
+            _activeObject = null;
         }
 
-        private void swapWithValidityDetection(GridCoordinate a, GridCoordinate b)
+        private void SwapWithValidityDetection(GridCoordinate a, GridCoordinate b)
         {
-            if (!checkSwapValid(a,b))
+            if (!CheckSwapValid(a,b))
             {
-                StartCoroutine(waitToSwapBack(1f, a, b));
+                StartCoroutine(WaitToSwapBack(1f, a, b));
             }
-            swap(a, b);
+            Swap(a, b);
         }
 
-        private bool checkSwapValid(GridCoordinate a, GridCoordinate b)
+        private bool CheckSwapValid(GridCoordinate a, GridCoordinate b)
         {
-            if (objects[a.x][a.y] == null || objects[b.x][b.y] == null)
+            if (_objects[a.x][a.y] == null || _objects[b.x][b.y] == null)
                 return false;
-            swap(a,b);
-            if (findAltMatches(a).Count >= 3 ||
-                findAltMatches(b).Count >= 3)
+            Swap(a,b);
+            if (FindAltMatches(a).Count >= 3 ||
+                FindAltMatches(b).Count >= 3)
             {
-                swap(a, b);
+                Swap(a, b);
                 return true;
             }
-            swap(a,b);
+            Swap(a,b);
             return false;
         }
 
-        private void swap(GridCoordinate a, GridCoordinate b)
+        private void Swap(GridCoordinate a, GridCoordinate b)
         {
-            MatchObject vala = objects[a.x][a.y];
+            MatchObject vala = _objects[a.x][a.y];
             MatchLine aParent = vala.parent;
-            MatchObject valb = objects[b.x][b.y];
+            MatchObject valb = _objects[b.x][b.y];
             vala.parent = valb.parent;
             vala.index = b.y;
             valb.parent = aParent;
             valb.index = a.y;
-            objects[a.x][a.y] = valb;
-            objects[b.x][b.y] = vala;
+            _objects[a.x][a.y] = valb;
+            _objects[b.x][b.y] = vala;
         }
     }
 }

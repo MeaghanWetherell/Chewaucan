@@ -14,18 +14,18 @@ namespace Match3
 
         private void Awake()
         {
-            timeLeft = MatchLevelManager.matchLevelManager.getCurLevel().time;
+            timeLeft = MatchLevelManager.matchLevelManager.GETCurLevel().time;
             Timer.timer = this;
             if (timeLeft > 100000)
             {
                 timeLeft = 0;
-                StartCoroutine(timeUp());
+                StartCoroutine(TimeUp());
                 return;
             }
-            StartCoroutine(time());
+            StartCoroutine(Time());
         }
 
-        private IEnumerator timeUp()
+        private IEnumerator TimeUp()
         {
             while (true)
             {
@@ -35,7 +35,7 @@ namespace Match3
             }
         }
         
-        private IEnumerator time()
+        private IEnumerator Time()
         {
             while (timeLeft > 0)
             {
@@ -43,7 +43,7 @@ namespace Match3
                 timeLeft -= 0.1f;
                 text.text = "Time Remaining: " + ((int) timeLeft) + "s";
             }
-            MatchUIManager.matchUIManager.endGame("Time up!");
+            MatchUIManager.matchUIManager.EndGame("Time up!");
         }
     }
 }

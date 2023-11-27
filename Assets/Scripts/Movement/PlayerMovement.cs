@@ -22,23 +22,23 @@ public class PlayerMovement : MonoBehaviour
     public Slider staminaUI;
     public Slider oxygenUI;
 
-    CharacterController controller;
-    Vector2 moveInput;
-    Vector3 verticalMovement;
-    private const float GRAVITY = -9.18f;
-    float moveSpeedDefault;
-    bool grounded;
-    bool prevGrounded;
+    CharacterController _controller;
+    Vector2 _moveInput;
+    Vector3 _verticalMovement;
+    private const float Gravity = -9.18f;
+    float _moveSpeedDefault;
+    bool _grounded;
+    bool _prevGrounded;
 
-    bool isSwimming;
-    bool isDiving;
-    bool dive;
-    Vector3 waterPosition;
-    float swimSpeed = 3f;
-    AudioSource waterAudio;
+    bool _isSwimming;
+    bool _isDiving;
+    bool _dive;
+    Vector3 _waterPosition;
+    float _swimSpeed = 3f;
+    AudioSource _waterAudio;
 
-    MovementSoundEffects soundEffects;
-    CheckGroundTexture terrainTexture;
+    MovementSoundEffects _soundEffects;
+    CheckGroundTexture _terrainTexture;
 
     public InputActionReference moveRef;
     public InputActionReference jumpRef;
@@ -47,12 +47,12 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
-        soundEffects = GetComponent<MovementSoundEffects>();
-        terrainTexture = GetComponent<CheckGroundTexture>();
-        verticalMovement = new Vector3(0f, gravity, 0f);
-        moveInput = Vector2.zero;
-        moveSpeedDefault = moveSpeed;
+        _controller = GetComponent<CharacterController>();
+        _soundEffects = GetComponent<MovementSoundEffects>();
+        _terrainTexture = GetComponent<CheckGroundTexture>();
+        _verticalMovement = new Vector3(0f, gravity, 0f);
+        _moveInput = Vector2.zero;
+        _moveSpeedDefault = moveSpeed;
         staminaUI.minValue = 0f;
         staminaUI.maxValue = maxStamina;
         oxygenUI.minValue = 0f;
@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         moveRef.action.performed += OnMove;
-        moveRef.action.canceled += (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
+        moveRef.action.canceled += (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
         jumpRef.action.started += JumpOnce;
         sprintRef.action.performed += OnSprint;
     }
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         moveRef.action.performed -= OnMove;
-        moveRef.action.canceled -= (InputAction.CallbackContext context) => { moveInput = Vector2.zero; };
+        moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
         jumpRef.action.started -= JumpOnce;
         sprintRef.action.performed -= OnSprint;
     }
@@ -79,12 +79,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isSwimming)
+        if (!_isSwimming)
         {
             oxygenUI.gameObject.SetActive(false);
             LandMovement();
         }
-        else if (isSwimming && !dive)
+        else if (_isSwimming && !_dive)
         {
             oxygenUI.gameObject.SetActive(true);
             SwimMovement();
@@ -93,81 +93,81 @@ public class PlayerMovement : MonoBehaviour
 
     private void LandMovement()
     {
-        terrainTexture.GetGroundTexture();
-        prevGrounded = grounded;
-        grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
+        _terrainTexture.GetGroundTexture();
+        _prevGrounded = _grounded;
+        _grounded = _controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
-        if (!prevGrounded && grounded)
+        if (!_prevGrounded && _grounded)
         {
-            soundEffects.PlayLandSound();
+            _soundEffects.PlayLandSound();
         }
 
-        if (grounded && verticalMovement.y < gravity)
+        if (_grounded && _verticalMovement.y < gravity)
         {
-            verticalMovement.y = gravity;
+            _verticalMovement.y = gravity;
         }
 
-        float rotateMovement = moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
+        float rotateMovement = _moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
         Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
-        float moveAmount = moveInput.y * moveSpeed;
+        float moveAmount = _moveInput.y * moveSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
-        controller.Move(movement * Time.deltaTime); //forward movement
+        _controller.Move(movement * Time.deltaTime); //forward movement
 
         //moves the player downward to ensure isGrounded returns correctly
-        verticalMovement.y += GRAVITY * Time.deltaTime;
-        controller.Move(verticalMovement * Time.deltaTime);
+        _verticalMovement.y += Gravity * Time.deltaTime;
+        _controller.Move(_verticalMovement * Time.deltaTime);
 
-        if (moveInput.y != 0 && grounded)
+        if (_moveInput.y != 0 && _grounded)
         {
-            soundEffects.PlayWalkingSound();
+            _soundEffects.PlayWalkingSound();
         }
         UpdateStamina();
     }
 
     private void SwimMovement()
     {
-        swimSpeed = moveSpeed * 0.75f;
-        float waterSurface = waterPosition.y;
+        _swimSpeed = moveSpeed * 0.75f;
+        float waterSurface = _waterPosition.y;
 
-        if (this.transform.position.y >= waterSurface && isDiving && !dive)
+        if (this.transform.position.y >= waterSurface && _isDiving && !_dive)
         {
-            waterAudio.Stop();
-            isDiving = false;
+            _waterAudio.Stop();
+            _isDiving = false;
         }
 
         //regular swimming movement, like land movement but uses camera forward instead of the player forward
 
-        float rotateMovement = moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
+        float rotateMovement = _moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
         //Uses the camera forward direction if underwater, otherwise uses the normal player transform forward
         Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
-        if (!isDiving)
+        if (!_isDiving)
         {
             forwardDir = this.transform.TransformDirection(Vector3.forward);
-            this.GetComponent<CameraLook>().setMinDist(10f);
+            this.GetComponent<CameraLook>().SetMinDist(10f);
         }
         else
         {
-            this.GetComponent<CameraLook>().setMinDist(50f);
+            this.GetComponent<CameraLook>().SetMinDist(50f);
             forwardDir = cameraObj.transform.TransformDirection(Vector3.forward);
-            controller.Move(Vector3.up * Time.deltaTime);
+            _controller.Move(Vector3.up * Time.deltaTime);
         }
-        float moveAmount = moveInput.y * swimSpeed;
+        float moveAmount = _moveInput.y * _swimSpeed;
         Vector3 movement = forwardDir * moveAmount;
 
-        controller.Move(movement * Time.deltaTime); //forward movement
+        _controller.Move(movement * Time.deltaTime); //forward movement
         
         UpdateStamina();
         UpdateOxygen();
-        if (moveInput != Vector2.zero)
+        if (_moveInput != Vector2.zero)
         {
-            soundEffects.PlaySwimSound(); //plays swimming sounds if moving
+            _soundEffects.PlaySwimSound(); //plays swimming sounds if moving
         }
     }
 
@@ -178,15 +178,15 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateStamina()
     {
         //determining when the player is sprinting and stopping sprinting when out of stamina
-        if (moveSpeed != moveSpeedDefault && currStamina > 0 && moveInput != Vector2.zero)
+        if (moveSpeed != _moveSpeedDefault && currStamina > 0 && _moveInput != Vector2.zero)
         {
             currStamina -= staminaDepletionRate * Time.deltaTime; //depletes stamina when sprinting
         }
         else
         {
             if (currStamina < 0) { currStamina = 0; }
-            soundEffects.setPlaySpeed(0.9f);
-            moveSpeed = moveSpeedDefault;
+            _soundEffects.SetPlaySpeed(0.9f);
+            moveSpeed = _moveSpeedDefault;
             if (currStamina < maxStamina)
             {
                 currStamina += staminaDepletionRate * Time.deltaTime; //restores stamina when not sprinting, up to maxStamina
@@ -204,13 +204,13 @@ public class PlayerMovement : MonoBehaviour
         if (currOxygen < 0) { 
             currOxygen = 0;
             this.transform.rotation.eulerAngles.Set(0f, transform.rotation.eulerAngles.y, 0f);
-            this.transform.position = new Vector3(transform.position.x, waterPosition.y, transform.position.z);
+            this.transform.position = new Vector3(transform.position.x, _waterPosition.y, transform.position.z);
         }
-        if (currOxygen < maxStamina && !isDiving)
+        if (currOxygen < maxStamina && !_isDiving)
         {
             currOxygen += oxygenDepletionRate * Time.deltaTime;
         }
-        else if (isDiving)
+        else if (_isDiving)
         {
             currOxygen -= oxygenDepletionRate * Time.deltaTime;
         }
@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
     private bool RaycastToGround()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, controller.height))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _controller.height))
         {
             GameObject objectHit = hit.collider.gameObject;
             //Debug.Log("Distance: " + hit.distance + " Raycast points towards ground");
@@ -242,10 +242,10 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-    public void setSwimming(bool swim, Vector3 waterLevel)
+    public void SetSwimming(bool swim, Vector3 waterLevel)
     {
-        isSwimming = swim;
-        waterPosition = waterLevel;
+        _isSwimming = swim;
+        _waterPosition = waterLevel;
     }
 
     /* The following 3 functions are called as part of the action map. The PlayerInput component on the player sends 
@@ -253,20 +253,20 @@ public class PlayerMovement : MonoBehaviour
      */
     void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        _moveInput = context.ReadValue<Vector2>();
     }
 
     void JumpOnce(InputAction.CallbackContext context)
     {
-        if (grounded && !isSwimming)
+        if (_grounded && !_isSwimming)
         {
-            verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * GRAVITY);
-            soundEffects.PlayJumpSound();
+            _verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * Gravity);
+            _soundEffects.PlayJumpSound();
         }
-        else if (isSwimming && !isDiving)
+        else if (_isSwimming && !_isDiving)
         {
-            waterAudio.Play();
-            isDiving = true;
+            _waterAudio.Play();
+            _isDiving = true;
             StartCoroutine(Dive());
         }
     }
@@ -277,12 +277,12 @@ public class PlayerMovement : MonoBehaviour
         if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
-            soundEffects.setPlaySpeed(0.5f);
+            _soundEffects.SetPlaySpeed(0.5f);
         }
         else
         {
-            moveSpeed = moveSpeedDefault;
-            soundEffects.setPlaySpeed(0.9f);
+            moveSpeed = _moveSpeedDefault;
+            _soundEffects.SetPlaySpeed(0.9f);
         }
     }
 
@@ -291,7 +291,7 @@ public class PlayerMovement : MonoBehaviour
      */
     IEnumerator Dive()
     {
-        dive = true;
+        _dive = true;
         Vector3 rot = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
         transform.rotation = Quaternion.Euler(rot);
         //yield return new WaitForSeconds(3f);
@@ -302,7 +302,7 @@ public class PlayerMovement : MonoBehaviour
         }
         for (int i = 0; i < 10; i++)
         {
-            controller.Move(this.transform.TransformDirection(Vector3.forward));
+            _controller.Move(this.transform.TransformDirection(Vector3.forward));
             yield return new WaitForEndOfFrame();
         }
         for (int i = 0; i < 15; i++)
@@ -311,17 +311,17 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         transform.rotation = Quaternion.Euler(rot);
-        dive = false;
+        _dive = false;
         yield return null;
     }
 
     public void SetWaterSoundSource(AudioSource audioSource)
     {
-        waterAudio = audioSource;
+        _waterAudio = audioSource;
     }
 
     public bool DiveOngoing()
     {
-        return dive;
+        return _dive;
     }
 }

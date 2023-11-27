@@ -16,7 +16,7 @@ namespace Match3
             openLevelSelect = this;
             if (other.GetComponent<Player>() != null)
             {
-                InteractListenerManager.interactListenerManager.changeListener(this, 1);
+                InteractListenerManager.interactListenerManager.ChangeListener(this, 1);
             }
         }
 
@@ -24,13 +24,13 @@ namespace Match3
         {
             if (other.GetComponent<Player>() != null)
             {
-                InteractListenerManager.interactListenerManager.deRegister(this);
+                InteractListenerManager.interactListenerManager.DeRegister(this);
             }
         }
 
-        public override void onOpenTrigger()
+        public override void ONOpenTrigger()
         {
-            base.onOpenTrigger();
+            base.ONOpenTrigger();
             if (BoneSceneManager.boneSceneManager.wasLoaded)
             {
                 BoneSceneManager.boneSceneManager.wasLoaded = false;
@@ -38,11 +38,11 @@ namespace Match3
             }
         }
 
-        public void listen(int index)
+        public void Listen(int index)
         {
-            onOpenTrigger();
+            ONOpenTrigger();
         }
 
-        public void listenerRemoved(){}
+        public void ListenerRemoved(){}
     }
 }

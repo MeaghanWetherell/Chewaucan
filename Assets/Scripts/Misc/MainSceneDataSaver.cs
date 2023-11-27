@@ -9,9 +9,9 @@ namespace Misc
     {
         public static MainSceneDataSaver mainSceneDataSaver;
 
-        private Vector3 lastPlayerPosition;
+        private Vector3 _lastPlayerPosition;
 
-        private Quaternion lastPlayerRotation;
+        private Quaternion _lastPlayerRotation;
 
         public LoadGUI curMenu;
 
@@ -26,27 +26,27 @@ namespace Misc
             DontDestroyOnLoad(this.gameObject);
         }
 
-        public void prepareForUnload()
+        public void PrepareForUnload()
         {
             Transform player = Player.player.transform;
             if (player != null)
             {
-                lastPlayerPosition = player.position;
-                lastPlayerRotation = player.rotation;
+                _lastPlayerPosition = player.position;
+                _lastPlayerRotation = player.rotation;
             }
         }
 
-        public void reloadMainScene()
+        public void ReloadMainScene()
         {
             SceneManager.LoadScene(5);
-            SceneManager.sceneLoaded += onReload;
+            SceneManager.sceneLoaded += ONReload;
         }
 
-        private void onReload(Scene activeScene, LoadSceneMode loadSceneMode)
+        private void ONReload(Scene activeScene, LoadSceneMode loadSceneMode)
         {
             if (activeScene.name.Equals("Modern Map"))
             {
-                Player.player.transform.SetPositionAndRotation(lastPlayerPosition, lastPlayerRotation);
+                Player.player.transform.SetPositionAndRotation(_lastPlayerPosition, _lastPlayerRotation);
             }
             
         }
