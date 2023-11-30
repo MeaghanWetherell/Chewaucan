@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float oxygenDepletionRate = 4f;
     [SerializeField] float currOxygen = 100f;
     public GameObject cameraObj;
+    public GameObject minimapCam;
     public Slider staminaUI;
     public Slider oxygenUI;
 
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        minimapCam.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         if (!isSwimming)
         {
             oxygenUI.gameObject.SetActive(false);
