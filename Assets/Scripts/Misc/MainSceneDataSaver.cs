@@ -28,6 +28,8 @@ namespace Misc
 
         public void PrepareForUnload()
         {
+            if (Player.player == null)
+                return;
             Transform player = Player.player.transform;
             if (player != null)
             {

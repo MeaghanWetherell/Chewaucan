@@ -46,18 +46,12 @@ namespace Match3
         public void LoadLevel(int index)
         {
             SetValidMeshes(levels[index].meshes);
-            if (levels[index].matchType)
-            {
-                MatchObject.compareByGroup = true;
-            }
-            else
-            {
-                MatchObject.compareByGroup = false;
-            }
+            MatchObject.compareByGroup = levels[index].matchType;
+            MatchLine.shouldRotate = levels[index].rotate;
             _curIndex = index;
             MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
             SceneManager.LoadScene(2);
-            //UnityEngine.Random.InitState(160);
+            UnityEngine.Random.InitState(160);
         }
         
         public void SetValidMeshes(int[] valid)

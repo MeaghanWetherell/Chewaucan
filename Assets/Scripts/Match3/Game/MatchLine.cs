@@ -2,16 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Match3
 {
     public class MatchLine : MonoBehaviour
     {
-        public List<Transform> snapPoints;
-        
-        public MatchObject[] myObjects;
+        public GameObject snapPoint;
 
-        private static int _size = 7;
+        public static bool shouldRotate = false;
+        
+        [System.NonSerialized]
+        public static int height;
+        
+        [System.NonSerialized]
+        public int index;
+        
+        [System.NonSerialized]
+        public MatchObject[] myObjects;
+        
+        [System.NonSerialized]
+        public List<Transform> snapPoints = new List<Transform>();
 
         private static float _waitTime = 0.25f;
 
@@ -21,19 +32,28 @@ namespace Match3
 
         private float _spawnTime;
 
-        public int index;
+        private float scaleFactor = 0;
 
         private void OnEnable()
         {
-            if (myObjects.Length > 0)
+            for (int i = 0; i < height; i++)
             {
-                while(myObjects[^1] != null)
-                    RemoveObject(myObjects.Length-1);
+                Transform temp = Instantiate(snapPoint).transform;
+                temp.SetParent(transform);
+                snapPoints.Add(temp);
             }
-            _toSpawn = _size;
+            myObjects = new MatchObject[height];
             _spawnTime = Time.time + _waitTime;
-            myObjects = new MatchObject[_size];
+            _toSpawn = height;
             StartCoroutine(Spawner());
+        }
+
+        private void UpdateScale()
+        {
+            Rect temp2 = ((RectTransform) snapPoints[0]).rect;
+            scaleFactor = temp2.width;
+            if (temp2.height < scaleFactor)
+                scaleFactor = temp2.height;
         }
 
         private IEnumerator Spawner()
@@ -55,7 +75,15 @@ namespace Match3
 
         private void AddObject()
         {
+            if(scaleFactor <= 0)
+                UpdateScale();
             GameObject newObj = Instantiate(matchObjPrefab, new Vector3(this.transform.position.x, 3.5f, -2), Quaternion.identity);
+            newObj.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+            if (shouldRotate)
+            {
+                Vector3 rot = new Vector3(Random.Range(0, 45), Random.Range(0, 45), 0);
+                newObj.transform.localEulerAngles = rot;
+            }
             myObjects[0] = newObj.GetComponent<MatchObject>();
             myObjects[0].index = 0;
             myObjects[0].parent = this;

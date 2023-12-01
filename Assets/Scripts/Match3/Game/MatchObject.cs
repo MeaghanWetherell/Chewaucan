@@ -37,6 +37,7 @@ namespace Match3
         private void Update()
         {
             Vector3 snapPoint = parent.snapPoints[index].position;
+            snapPoint = new Vector3(snapPoint.x, snapPoint.y, -1);
             if (this.transform.position != snapPoint)
             {
                 this.transform.position = Vector3.MoveTowards(transform.position, snapPoint,

@@ -14,8 +14,12 @@ namespace Match3
     public class MatchGrid : MonoBehaviour
     {
         public static MatchGrid matchGrid;
-        
-        public List<MatchLine> lines;
+
+        public int height;
+
+        public int width;
+
+        public GameObject matchLinePrefab;
 
         public InputActionReference mousePos;
 
@@ -24,6 +28,8 @@ namespace Match3
         public float minMovementMagnitude;
         
         private List<MatchObject[]> _objects = new List<MatchObject[]>();
+        
+        private List<MatchLine> _lines = new List<MatchLine>();
 
         private bool _waitingOnMatchCheck;
 
@@ -49,22 +55,15 @@ namespace Match3
         {
             click.action.canceled += ClickAction;
             matchGrid = this;
+            FillGrid();
             StartCoroutine(RemoveObjs());
             StartCoroutine(WaitToCheckMatch(2));
             StartCoroutine(CheckForLock());
         }
 
-        private void Start()
-        {
-            foreach(MatchLine line in lines)
-            {
-                line.index = _objects.Count;
-                _objects.Add(line.myObjects);
-            }
-        }
-
         private void FixedUpdate()
         {
+            // ReSharper disable once NotAccessedVariable
             List<GridCoordinate> temp;
             if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
                 return;
@@ -78,6 +77,22 @@ namespace Match3
                 {
                     MoveMatchObj(changeInMousePos);
                 }
+            }
+        }
+
+        private void FillGrid()
+        {
+            MatchLine.height = height;
+            for (int i = 0; i < width; i++)
+            {
+                Transform temp = Instantiate(matchLinePrefab).transform;
+                temp.SetParent(transform);
+                _lines.Add(temp.GetComponent<MatchLine>());
+            }
+            foreach(MatchLine line in _lines)
+            {
+                line.index = _objects.Count;
+                _objects.Add(line.myObjects);
             }
         }
 
@@ -107,7 +122,7 @@ namespace Match3
                     yield return new WaitForSeconds(0.4f);
                     ScoreTracker.scoreTracker.AddScore(coords.Count);
                     foreach(GridCoordinate coord in coords)
-                        lines[coord.x].RemoveObject(coord.y);
+                        _lines[coord.x].RemoveObject(coord.y);
                 }
                 else
                 {
@@ -252,7 +267,7 @@ namespace Match3
                     return coord;
                 if (_objects[coord.x + dirx][coord.y + diry] == null)
                     return coord;
-                if (_objects[coord.x + dirx][coord.y + diry].myType != _objects[coord.x][coord.y].myType)
+                if (_objects[coord.x + dirx][coord.y + diry].CompareTo(_objects[coord.x][coord.y]) != 0)
                     return coord;
                 coord = new GridCoordinate(coord.x + dirx, coord.y + diry);
             }
