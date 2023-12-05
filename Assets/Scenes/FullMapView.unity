@@ -241,6 +241,159 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &425418735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425418737}
+  - component: {fileID: 425418736}
+  - component: {fileID: 425418738}
+  m_Layer: 0
+  m_Name: Inputs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &425418736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425418735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0277f736-c5c4-4d42-96f7-1d518cd21138
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c67a3711-801f-416c-8efe-8d76dccffa10
+    m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3c781a08-9d01-485b-86cc-f24eead236be
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 326f9c36-6a38-44a7-89c9-bf7c591976f3
+    m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a749589d-07f8-42fc-a8b0-8beab0d7a28c
+    m_ActionName: Player/Clicked[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aeeca6af-ad15-4634-a72c-8dca5dfdbcd6
+    m_ActionName: Player/QuestMenu[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bc328e9f-e30d-42b5-bfb4-6fd7e0f6ee03
+    m_ActionName: Player/OpenMap[/Keyboard/m]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bb07b803-fc16-433a-89d9-c32082cd5b85
+    m_ActionName: Player/HideMap[/Keyboard/0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 15e3f7c0-c5ec-4e1f-840a-1d2d32ff0f5e
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: caae5a08-e2a8-4092-8e66-671e3ecb7ec7
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c811c8d1-9500-4a90-b747-b75b9540afe8
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 76b2e2f5-375a-4abd-8e87-9f3b3f0406e3
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: befcc6f5-5fb6-4ed4-9e50-02135d10d8ae
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b087297d-c340-4821-a275-b88f8eb9e981
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7173eb8a-35ce-454d-9bfa-c2b526487649
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74c2a5f4-30ed-45f5-ace9-f63961b981eb
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d0f65fd2-7109-42b2-b9a0-b329f6877a31
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 258bd6e5-a393-4349-9d86-2a4c00345d5b
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultActionMap: UI
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 1478449247}
+--- !u!4 &425418737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425418735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 230.61223, y: 24.649706, z: 105.63782}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &425418738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425418735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aba47351270373b42aa5d7ef5c949adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomRate: 0.25
+  minZoom: 50
+  maxZoom: 500
+  mapCameraObj: {fileID: 1478449245}
+  mapZoomRef: {fileID: -2546070893421622177, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  mapMoveRef: {fileID: -8500805412787836947, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &535135820
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 648062433}
+  - component: {fileID: 648062435}
   - component: {fileID: 648062434}
   m_Layer: 0
   m_Name: Waypoint
@@ -410,6 +564,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &648062435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648062432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abb5ead3a3d4e14e9a7735e13bae5d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportToPosition: {x: 0, y: 0, z: 0}
+  waypointObj: {fileID: 0}
 --- !u!1 &1478449245
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,3 +722,4 @@ SceneRoots:
   - {fileID: 1478449248}
   - {fileID: 107433784}
   - {fileID: 535135822}
+  - {fileID: 425418737}
