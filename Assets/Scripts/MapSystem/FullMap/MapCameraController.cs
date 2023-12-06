@@ -12,7 +12,11 @@ public class MapCameraController : MonoBehaviour
     private Camera mapCamera;
 
     public InputActionReference mapZoomRef;
-    public InputActionReference mapMoveRef;
+
+
+    private InputActionReference mapMoveRef;
+
+    private Vector3 clickOrigin;
 
     private void OnEnable()
     {
@@ -29,11 +33,24 @@ public class MapCameraController : MonoBehaviour
     {
         mapCamera = mapCameraObj.GetComponent<Camera>();
         mapCamera.orthographicSize = 400f;
+        clickOrigin = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            clickOrigin = mapCamera.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        if (Input.GetMouseButton(2))
+        {
+            Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
+
+            mapCameraObj.transform.position += posDifference;
+        }
         
     }
 
@@ -41,7 +58,6 @@ public class MapCameraController : MonoBehaviour
     private void MapZoom(InputAction.CallbackContext context)
     {
         Vector2 zoom = context.ReadValue<Vector2>();
-        Debug.Log(zoom);
 
         mapCamera.orthographicSize += zoom.y * -1 * zoomRate;
         if (mapCamera.orthographicSize > maxZoom) { mapCamera.orthographicSize = maxZoom; }
