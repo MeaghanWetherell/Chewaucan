@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class MapCameraController : MonoBehaviour
 {
@@ -12,20 +13,20 @@ public class MapCameraController : MonoBehaviour
     private Camera mapCamera;
 
     public InputActionReference mapZoomRef;
-
-
-    private InputActionReference mapMoveRef;
+    public InputActionReference switchToWorldRef;
 
     private Vector3 clickOrigin;
 
     private void OnEnable()
     {
         mapZoomRef.action.performed += MapZoom;
+        switchToWorldRef.action.performed += SwitchToWorldScene;
     }
 
     private void OnDisable()
     {
         mapZoomRef.action.performed -= MapZoom;
+        switchToWorldRef.action.performed -= SwitchToWorldScene;
     }
 
     // Start is called before the first frame update
@@ -62,5 +63,10 @@ public class MapCameraController : MonoBehaviour
         mapCamera.orthographicSize += zoom.y * -1 * zoomRate;
         if (mapCamera.orthographicSize > maxZoom) { mapCamera.orthographicSize = maxZoom; }
         if (mapCamera.orthographicSize < minZoom) { mapCamera.orthographicSize = minZoom; }
+    }
+
+    private void SwitchToWorldScene(InputAction.CallbackContext context)
+    {
+        SceneManager.LoadScene("Modern Map");
     }
 }
