@@ -7,13 +7,13 @@ namespace Match3
 {
     public class MatchUIManager : MonoBehaviour
     {
-        public GameObject uiObj;
+        [Tooltip("Reference to the hidden UI object that displays win/loss at game end")]public GameObject uiObj;
     
-        public TextMeshProUGUI mainText;
+        [Tooltip("Main text of the uiObj")]public TextMeshProUGUI mainText;
 
-        public TextMeshProUGUI buttonText;
+        [Tooltip("Text on the button on the uiObj")]public TextMeshProUGUI buttonText;
 
-        public TextMeshProUGUI scoreText;
+        [Tooltip("Text on the uiObj that should display final score")]public TextMeshProUGUI scoreText;
 
         public static MatchUIManager matchUIManager;
 
@@ -23,6 +23,7 @@ namespace Match3
             uiObj.SetActive(false);
         }
 
+        //ends the match 3 game and displays results, including the passed reason for game end
         public void EndGame(String reason)
         {
             uiObj.SetActive(true);
@@ -36,6 +37,7 @@ namespace Match3
             }
         }
 
+        //loses the game and displays the passed loss reason
         private void Lose(String reason)
         {
             mainText.text = "You Lose!";
@@ -52,6 +54,7 @@ namespace Match3
             }
         }
 
+        //wins the game and displays the passed win reason
         private void Win(String reason)
         {
             mainText.text = "You Win!";

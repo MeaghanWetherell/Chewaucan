@@ -9,8 +9,8 @@ namespace Misc
     {
         private Camera _snapCam;
         private RenderTexture _fromTexture;
-        public string filename;
-        public string path;
+        [Tooltip("Name of the file to output to")]public string filename;
+        [Tooltip("File path in the project to output to. Leave blank to default to Scripts/Match3/Resources/SnapTextures")]public string path;
 
         private SerializedObject _so;
         private Vector3 _initPosition;

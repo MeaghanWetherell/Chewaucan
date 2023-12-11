@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Match3
 {
+    //responsible for loading and unloading the bone viewer and carrying information to the bone viewer scene
     public class BoneSceneManager : MonoBehaviour
     {
         public static BoneSceneManager boneSceneManager;

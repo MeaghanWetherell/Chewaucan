@@ -1,6 +1,6 @@
 using System;
-using Match3;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Match3
 {
@@ -13,8 +13,8 @@ namespace Match3
         [Tooltip("Material that should be applied to this model")]
         public Material material;
 
-        [Tooltip("Type of this model for matching by type, ex. Pikachu if it's a Pikachu bone")]
-        public string type;
+        [FormerlySerializedAs("type")] [Tooltip("Group of this model for matching by type, ex. Pikachu if it's a Pikachu bone")]
+        public string @group;
 
         [Tooltip("Name for this bone mesh, ex. 'E. Pikachus Electroraticus Skull'")]
         public string boneName;

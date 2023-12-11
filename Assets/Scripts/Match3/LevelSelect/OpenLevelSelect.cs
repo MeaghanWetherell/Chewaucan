@@ -1,10 +1,10 @@
-using System;
 using Misc;
 using ScriptTags;
 using UnityEngine;
 
 namespace Match3
 {
+    //allows the user to press the interact key to open the match3 level select while within this object's trigger collider
     public class OpenLevelSelect : LoadGUI, IListener
     {
         public static OpenLevelSelect openLevelSelect;

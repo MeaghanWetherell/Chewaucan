@@ -6,24 +6,32 @@ using Random = UnityEngine.Random;
 
 namespace Match3
 {
+    //Holds data related to a single bone on the match grid
     public class MatchObject : MonoBehaviour, IPointerDownHandler, IComparable<MatchObject>
     {
+        //whether match objects should check if they are in the same general group as another when being compared
+        //or check if they are of the same specific type
         public static bool compareByGroup = false;
         
+        //a list containing all the possible bones that match object could be
         private static List<MeshDataObj> _meshes;
 
-        private static float _gravity = 20;
+        //constant gravity scalar for manually moving bones into position
+        private const float _gravity = 20;
 
+        //a list containing indices in the main list of the possible bones a match object may become when initialized
         public static List<int> validMeshes;
 
-        public int myType;
+        [NonSerialized]public int myType;
 
-        public String myGroup;
+        [NonSerialized]public String myGroup;
 
-        public int index;
+        //index of the object in the match line
+        [NonSerialized]public int index;
 
-        public MatchLine parent;
+        [NonSerialized]public MatchLine parent;
         
+        //loads in the main mesh list if needed and initializes itself as a random valid bone
         private void Start()
         {
             _meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
@@ -31,9 +39,10 @@ namespace Match3
             myType = validMeshes[temp];
             this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
             this.gameObject.GetComponent<MeshRenderer>().material = _meshes[myType].material;
-            myGroup = _meshes[myType].type.ToLower();
+            myGroup = _meshes[myType].@group.ToLower();
         }
 
+        //move toward a snap point
         private void Update()
         {
             Vector3 snapPoint = parent.snapPoints[index].position;
@@ -50,11 +59,13 @@ namespace Match3
             Destroy(this.gameObject);
         }
         
+        //when a match object is clicked, tells the grid that if the user tries to move a bone, it should be that one
         public void OnPointerDown(PointerEventData eventData)
         {
             MatchGrid.matchGrid.RegisterActiveMatchObj(this);
         }
 
+        //compares itself to another matchobject per IComparable, obeying compareByGroup
         public int CompareTo(MatchObject other)
         {
             if (compareByGroup)

@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,35 +9,41 @@ using Vector2 = UnityEngine.Vector2;
 // ReSharper disable once CheckNamespace
 namespace Match3
 {
+    //main monolithic manager for the match 3 system.
     public class MatchGrid : MonoBehaviour
     {
         public static MatchGrid matchGrid;
 
-        public int height;
+        [Tooltip("The desired height of the grid. Grid will autoscale based on this")]public int height;
 
-        public int width;
+        [Tooltip("The desired width of the grid. Grid will autoscale based on this")]public int width;
 
-        public GameObject matchLinePrefab;
+        [Tooltip("Prefab for the match lines")]public GameObject matchLinePrefab;
 
-        public InputActionReference mousePos;
+        [Tooltip("Vector 2 mouse position from the input sys")]public InputActionReference mousePos;
 
-        public InputActionReference click;
+        [Tooltip("Left click from the input sys")]public InputActionReference click;
 
+        [Tooltip("The minimum required amount of mouse movement for the system to register the user trying to move a bone")]
         public float minMovementMagnitude;
         
+        //All match objects in the grid
         private List<MatchObject[]> _objects = new List<MatchObject[]>();
         
+        //all subordinate match lines
         private List<MatchLine> _lines = new List<MatchLine>();
 
+        //whether the grid's activities should pause so that the user can visually see things
         private bool _waitingOnMatchCheck;
 
+        //queue of coordinates of match objects to remove
         private Queue<List<GridCoordinate>> _removalQueue = new Queue<List<GridCoordinate>>();
 
+        //the object that the user is currently holding down the cursor on
         private MatchObject _activeObject;
 
+        //mouse position when a click on a match object is recorded
         private Vector2 _initialMousePos;
-
-        private float _timeLeft;
 
         private void OnDisable()
         {
@@ -61,6 +65,7 @@ namespace Match3
             StartCoroutine(CheckForLock());
         }
 
+        //if the grid isn't busy, lets the user move a match object
         private void FixedUpdate()
         {
             // ReSharper disable once NotAccessedVariable
@@ -80,6 +85,7 @@ namespace Match3
             }
         }
 
+        //initializes the grid
         private void FillGrid()
         {
             MatchLine.height = height;
@@ -96,6 +102,7 @@ namespace Match3
             }
         }
 
+        //every 0.6 seconds, checks the game for a lock state and ends the game on lock
         IEnumerator CheckForLock()
         {
             while (true)
@@ -111,6 +118,7 @@ namespace Match3
             }
         }
 
+        //corountine to remove matched objects at 1 group per 0.4 seconds so the user can actually visibly see them being removed
         IEnumerator RemoveObjs()
         {
             while (true)
@@ -131,6 +139,7 @@ namespace Match3
             }
         }
 
+        //pauses certain activies of the manager for the specified time, such as lock checks and moving match objects
         private IEnumerator WaitToCheckMatch(float time)
         {
             _waitingOnMatchCheck = true;
@@ -138,6 +147,7 @@ namespace Match3
             _waitingOnMatchCheck = false;
         }
         
+        //after the passed time, swaps coordinates a and b in the grid
         private IEnumerator WaitToSwapBack(float time, GridCoordinate a, GridCoordinate b)
         {
             StartCoroutine(WaitToCheckMatch(time));
@@ -145,6 +155,8 @@ namespace Match3
             Swap(a, b);
         }
 
+        //detects whether there are any valid matches to be made on the grid by brute force
+        //performance intensive.
         private bool DetectMatchesPossible()
         {
             foreach (MatchObject[] line in _objects)
@@ -177,6 +189,8 @@ namespace Match3
             return false;
         }
 
+        //checks the grid for the first valid match from top to bottom right to left. 
+        //on finding one, queues it for removal and returns.
         private void CheckMatches()
         {
             for (int i = 0; i < _objects.Count; i++)
@@ -193,6 +207,7 @@ namespace Match3
             }
         }
 
+        //detects if there is a match either down or to the right from the passed indices
         private List<GridCoordinate> DetectMatch(int i, int j)
         {
             List<GridCoordinate> validCoords = new List<GridCoordinate>();
@@ -212,6 +227,7 @@ namespace Match3
             return validCoords;
         }
 
+        //finds if there any additional matches "hanging on" to another match, such as in an L or T pattern
         private List<GridCoordinate> FindAltMatches(GridCoordinate coord)
         {
             List<GridCoordinate> coordActual = new List<GridCoordinate>();
@@ -219,6 +235,7 @@ namespace Match3
             return FindAltMatches(coordActual);
         }
 
+        //helper overload for FindAltMatches
         private List<GridCoordinate> FindAltMatches(List<GridCoordinate> coords)
         {
             HashSet<GridCoordinate> checkedCoords = new HashSet<GridCoordinate>();
@@ -251,6 +268,8 @@ namespace Match3
             return temp;
         }
 
+        //finds the furthest valid coordinate in the direction given by dirx and diry that is equal to the object
+        //at the passed coordinate. 
         private GridCoordinate FindNextInDir(GridCoordinate coord, int dirx, int diry)
         {
             if (_objects[coord.x][coord.y] == null)
@@ -273,6 +292,8 @@ namespace Match3
             }
         }
 
+        //recursive helper function for match detection that checks if there is a match of 3 or more starting at
+        //coordinate i j and moving in the passed direction
         private int DetectMatchHelper(int i, int j, int dirx, int diry, int numInRow, MatchObject checkAgainst, List<GridCoordinate> coords)
         {
             i += dirx;
@@ -285,12 +306,14 @@ namespace Match3
             return numInRow;
         }
 
+        //registers that the user has clicked on a match object
         public void RegisterActiveMatchObj(MatchObject obj)
         {
             _activeObject = obj;
             _initialMousePos = mousePos.action.ReadValue<Vector2>();
         }
 
+        //swaps the active match object based on the direction the user moved the mouse
         private void MoveMatchObj(Vector2 change)
         {
             if (Mathf.Abs(change.x) > Mathf.Abs(change.y))
@@ -322,6 +345,7 @@ namespace Match3
             _activeObject = null;
         }
 
+        //swaps the objects at a and b. if that swap does not cause a match, swaps them back after 1 second
         private void SwapWithValidityDetection(GridCoordinate a, GridCoordinate b)
         {
             if (!CheckSwapValid(a,b))
@@ -331,6 +355,7 @@ namespace Match3
             Swap(a, b);
         }
 
+        //checks if swapping a and b creates a match
         private bool CheckSwapValid(GridCoordinate a, GridCoordinate b)
         {
             if (_objects[a.x][a.y] == null || _objects[b.x][b.y] == null)
@@ -346,6 +371,7 @@ namespace Match3
             return false;
         }
 
+        //swaps the positions of the match objects at a and b
         private void Swap(GridCoordinate a, GridCoordinate b)
         {
             MatchObject vala = _objects[a.x][a.y];

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace Match3
 {
+    //manages the list of match 3 levels on the ui
     public class PopulateLevelList : MonoBehaviour
     {
         [Tooltip("level button prefab")]

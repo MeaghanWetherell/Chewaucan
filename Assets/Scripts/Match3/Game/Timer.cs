@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace Match3
 {
+    //times a match 3 game
     public class Timer : MonoBehaviour
     {
         [System.NonSerialized]public float timeLeft;
 
-        public TextMeshProUGUI text;
+        [Tooltip("Text on which to display remaining time")]public TextMeshProUGUI text;
 
         public static Timer timer;
 
@@ -25,6 +26,7 @@ namespace Match3
             StartCoroutine(Time());
         }
 
+        //increment time for endless mode
         private IEnumerator TimeUp()
         {
             while (true)
@@ -35,6 +37,7 @@ namespace Match3
             }
         }
         
+        //decrements time, ends game on time up
         private IEnumerator Time()
         {
             while (timeLeft > 0)

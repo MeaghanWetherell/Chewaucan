@@ -1,9 +1,10 @@
-using System;
 using TMPro;
 using UnityEngine;
 
 namespace Match3
 {
+    //loads the description of a bone into the catalog scene's description box.
+    //loads lorem ipsum by default if there is no description
     public class BoneTextSetter : MonoBehaviour
     {
         public TextMeshProUGUI boneName;

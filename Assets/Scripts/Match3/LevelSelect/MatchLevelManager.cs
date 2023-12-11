@@ -11,8 +11,9 @@ namespace Match3
     {
         public static MatchLevelManager matchLevelManager;
 
-        public List<LevelData> levels;
+        [Tooltip("All match 3 levels")]public List<LevelData> levels;
 
+        //stores the index of the level data for the level currently being played
         private int _curIndex;
 
         [System.NonSerialized]
@@ -43,6 +44,7 @@ namespace Match3
             File.WriteAllText("match3levelscomplete.json", completedJson);
         }
 
+        //load the match 3 level at the passed index
         public void LoadLevel(int index)
         {
             SetValidMeshes(levels[index].meshes);
@@ -54,6 +56,7 @@ namespace Match3
             UnityEngine.Random.InitState(160);
         }
         
+        //sets up the match object valid mesh list
         public void SetValidMeshes(int[] valid)
         {
             MatchObject.validMeshes = new List<int>();

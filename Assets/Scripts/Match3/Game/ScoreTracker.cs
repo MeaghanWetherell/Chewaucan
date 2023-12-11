@@ -1,16 +1,14 @@
-using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
 namespace Match3
 {
+    //tracks the match3 game score and displays it to the UI
     public class ScoreTracker : MonoBehaviour
     {
-        //singleton
         public static ScoreTracker scoreTracker;
 
-        public TextMeshProUGUI text;
+        [Tooltip("Text on which to display score")]public TextMeshProUGUI text;
 
         [System.NonSerialized]public float score;
 
@@ -38,6 +36,7 @@ namespace Match3
             _isReq = false;
         }
 
+        //computes score for a certain counts, adds it, and displays it
         public void AddScore(int boneCount)
         {
             score += 3 * scorePerBone;

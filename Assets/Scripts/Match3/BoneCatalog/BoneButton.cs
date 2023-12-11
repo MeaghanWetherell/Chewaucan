@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Match3
 {
+    //loads the bone viewer on click
     public class BoneButton : MonoBehaviour
     {
         public MeshDataObj data;

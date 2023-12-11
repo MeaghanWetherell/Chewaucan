@@ -4,15 +4,17 @@ using UnityEngine.InputSystem;
 
 namespace Match3
 {
+    //Manages the bone viewer camera
     public class BoneCam : MonoBehaviour
     {
-        public InputActionReference mousePos;
+        [Tooltip("Mouse position vector2 from input sys")]public InputActionReference mousePos;
 
-        public InputActionReference clicked;
+        [Tooltip("Left click button from input sys")]public InputActionReference clicked;
+        
+        //currently disabled
+        [NonSerialized][Tooltip("Scalar on the y rotation when moving the camera")]public float yFudge;
 
-        public float yFudge;
-
-        public float xFudge;
+        [Tooltip("Scalar on the x rotation when moving the camera")]public float xFudge;
 
         private bool _mouseDown;
 
