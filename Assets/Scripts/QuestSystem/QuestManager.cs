@@ -75,22 +75,24 @@ namespace QuestSystem
             StreamReader streamReader;
             try
             {
-                streamReader = new StreamReader("SavedQuests.txt");
+                streamReader = new StreamReader("Saves/SavedQuests.txt");
                 line = streamReader.ReadLine();
                 if (line != null)
                 {
                     allQuestFiles += line;
                 }
+
                 line = streamReader.ReadLine();
                 while (line != null)
                 {
                     allQuestFiles += " " + line;
                     line = streamReader.ReadLine();
                 }
+
                 streamReader.Close();
             }
             catch (Exception)
-            { Debug.LogError("Error in quest json deserializer"); }
+            { return; }
             if (allQuestFiles.Equals(""))
                 return;
             string[] files = allQuestFiles.Split(" ");
@@ -98,7 +100,7 @@ namespace QuestSystem
             {
                 try
                 {
-                    streamReader = new StreamReader(fileName);
+                    streamReader = new StreamReader("Saves/"+fileName);
                     line = streamReader.ReadLine();
                     streamReader.Close();
                 }
@@ -122,15 +124,16 @@ namespace QuestSystem
         private void SerializeToJson()
         {
             string allSavedQuests = "";
+            Directory.CreateDirectory("Saves");
             foreach (QuestNode quest in _quests)
             {
                 string questJson = JsonUtility.ToJson(quest);
-                File.WriteAllText(quest.id+".json", questJson);
+                File.WriteAllText("Saves/"+quest.id+".json", questJson);
                 if (!allSavedQuests.Equals(""))
                     allSavedQuests += " ";
                 allSavedQuests += quest.id + ".json";
             }
-            File.WriteAllText("SavedQuests.txt", allSavedQuests);
+            File.WriteAllText("Saves/SavedQuests.txt", allSavedQuests);
         }
 
         //register a new quest node with the manager. automatically called by new nodes

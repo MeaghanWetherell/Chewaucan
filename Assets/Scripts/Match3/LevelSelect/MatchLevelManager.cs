@@ -29,11 +29,12 @@ namespace Match3
             DontDestroyOnLoad(this.gameObject);
             try
             {
-                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("match3levelscomplete.json"));
+                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/match3levelscomplete.json"));
             }
-            catch (IOException e){ Debug.LogError(e.StackTrace);}
-            if(levelsComplete == null)
-                levelsComplete = new List<bool>();
+#pragma warning disable 168
+            catch (IOException e){ levelsComplete = new List<bool>();}
+#pragma warning restore 168
+            // ReSharper disable once PossibleNullReferenceException
             while(levelsComplete.Count < levels.Count)
                 levelsComplete.Add(false);
         }
@@ -41,7 +42,8 @@ namespace Match3
         private void OnDisable()
         {
             string completedJson = JsonSerializer.Serialize(levelsComplete);
-            File.WriteAllText("match3levelscomplete.json", completedJson);
+            Directory.CreateDirectory("Saves");
+            File.WriteAllText("Saves/match3levelscomplete.json", completedJson);
         }
 
         //load the match 3 level at the passed index
