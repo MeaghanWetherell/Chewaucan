@@ -5,11 +5,12 @@ using UnityEngine;
 public class CloseUI : MonoBehaviour
 {
     [SerializeField] private GameObject sidebarUI;
+    [SerializeField] private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = sidebarUI.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,6 @@ public class CloseUI : MonoBehaviour
 
     private void OnMouseDown()
     {
-        sidebarUI.SetActive(false);
+        animator.SetBool("active", false);
     }
 }

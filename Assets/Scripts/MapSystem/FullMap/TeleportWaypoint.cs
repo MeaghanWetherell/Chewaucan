@@ -7,6 +7,7 @@ public class TeleportWaypoint : MonoBehaviour
     [SerializeField] Vector3 teleportToPosition;
     [SerializeField] Transform waypointObj;
     [SerializeField] GameObject teleportUI;
+    [SerializeField] Animator animator;
 
     private Vector3 objPosition;
     
@@ -16,7 +17,7 @@ public class TeleportWaypoint : MonoBehaviour
         waypointObj = this.transform;
         objPosition = waypointObj.localPosition;
         teleportToPosition = new Vector3(objPosition.x, -objPosition.z, objPosition.y);
-        teleportUI.SetActive(false);
+        animator = teleportUI.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class TeleportWaypoint : MonoBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Teleport to "+teleportToPosition);
-        teleportUI.SetActive(true);
+        animator.SetBool("active", true);
     }
 
 
