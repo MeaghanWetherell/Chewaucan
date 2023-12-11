@@ -34,7 +34,7 @@ namespace Match3
         //loads in the main mesh list if needed and initializes itself as a random valid bone
         private void Start()
         {
-            _meshes ??= Resources.Load<MeshDataList>("Match3Meshes").meshes;
+            _meshes ??= Resources.Load<MeshDataList>("Meshes/Match3Meshes").meshes;
             int temp = Random.Range((int) 0, (int) validMeshes.Count);
             myType = validMeshes[temp];
             this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
@@ -57,6 +57,11 @@ namespace Match3
         public void Remove()
         {
             Destroy(this.gameObject);
+        }
+
+        public void RemoveFromGrid()
+        {
+            parent.RemoveObject(index);
         }
         
         //when a match object is clicked, tells the grid that if the user tries to move a bone, it should be that one

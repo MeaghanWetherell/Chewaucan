@@ -37,7 +37,7 @@ namespace Match3
         private bool _waitingOnMatchCheck;
 
         //queue of coordinates of match objects to remove
-        private Queue<List<GridCoordinate>> _removalQueue = new Queue<List<GridCoordinate>>();
+        private Queue<List<MatchObject>> _removalQueue = new Queue<List<MatchObject>>();
 
         //the object that the user is currently holding down the cursor on
         private MatchObject _activeObject;
@@ -69,7 +69,7 @@ namespace Match3
         private void FixedUpdate()
         {
             // ReSharper disable once NotAccessedVariable
-            List<GridCoordinate> temp;
+            List<MatchObject> temp;
             if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
                 return;
             CheckMatches();
@@ -123,14 +123,14 @@ namespace Match3
         {
             while (true)
             {
-                List<GridCoordinate> coords;
+                List<MatchObject> coords;
                 if (_removalQueue.TryDequeue(out coords))
                 {
                     StartCoroutine(WaitToCheckMatch(0.4f));
                     yield return new WaitForSeconds(0.4f);
                     ScoreTracker.scoreTracker.AddScore(coords.Count);
-                    foreach(GridCoordinate coord in coords)
-                        _lines[coord.x].RemoveObject(coord.y);
+                    foreach(MatchObject coord in coords)
+                        coord.RemoveFromGrid();
                 }
                 else
                 {
@@ -200,7 +200,12 @@ namespace Match3
                     List<GridCoordinate> temp = DetectMatch(i, j);
                     if (temp.Count >= 3)
                     {
-                        _removalQueue.Enqueue(temp);
+                        List<MatchObject> temp2 = new List<MatchObject>();
+                        foreach(GridCoordinate coord in temp)
+                        {
+                            temp2.Add(_objects[coord.x][coord.y]);
+                        }
+                        _removalQueue.Enqueue(temp2);
                         return;
                     }
                 }
