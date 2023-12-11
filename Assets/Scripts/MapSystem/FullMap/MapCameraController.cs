@@ -40,19 +40,18 @@ public class MapCameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(2))
+        //map view is moved on either center or right mouse button click
+        if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
         {
             clickOrigin = mapCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(2) || Input.GetMouseButton(1))
         {
             Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
 
             mapCameraObj.transform.position += posDifference;
         }
-        
     }
 
     //uses the scroll wheel to zoom in and out of the map
