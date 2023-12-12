@@ -13,13 +13,7 @@ public class CloseUI : MonoBehaviour
         animator = sidebarUI.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnMouseDown()
+    public void CloseSideMenu()
     {
         animator.SetBool("active", false);
     }
