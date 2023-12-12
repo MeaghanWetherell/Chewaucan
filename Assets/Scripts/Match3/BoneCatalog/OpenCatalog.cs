@@ -41,7 +41,7 @@ namespace Match3
         //add buttons to the GUI
         private void PopulateGUI()
         {
-            List<MeshDataObj> bones = Resources.Load<MeshDataList>("Match3Meshes").meshes;
+            List<MeshDataObj> bones = Resources.Load<MeshDataList>("Meshes/Match3Meshes").meshes;
             bones.Sort();
             for (int i = 0; i < bones.Count; i++)
             {
