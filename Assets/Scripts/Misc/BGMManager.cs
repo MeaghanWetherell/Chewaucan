@@ -58,6 +58,18 @@ namespace Misc
             bgm.Play();
         }
 
+        public void Pause()
+        {
+            bgm.Pause();
+            waiting = true;
+        }
+
+        public void Resume()
+        {
+            bgm.Play();
+            waiting = false;
+        }
+
         public IEnumerator StopBGMForTime(float time)
         {
             bgm.Pause();
