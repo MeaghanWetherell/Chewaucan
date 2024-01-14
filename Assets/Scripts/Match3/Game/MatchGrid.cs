@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Match3.Game;
 using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 // ReSharper disable once CheckNamespace
@@ -13,6 +15,8 @@ namespace Match3
     public class MatchGrid : MonoBehaviour
     {
         public static MatchGrid matchGrid;
+
+        [FormerlySerializedAs("sound")] [Tooltip("Ref to the sound effect maker")] public MatchSoundEffects matchSound;
 
         [Tooltip("The desired height of the grid. Grid will autoscale based on this")]public int height;
 
@@ -112,13 +116,14 @@ namespace Match3
                     if (!DetectMatchesPossible())
                     {
                         MatchUIManager.matchUIManager.EndGame("No valid matches remaining!");
+                        break;
                     }
                 }
                 yield return new WaitForSeconds(0.6f);
             }
         }
 
-        //corountine to remove matched objects at 1 group per 0.4 seconds so the user can actually visibly see them being removed
+        //coroutine to remove matched objects at 1 group per 0.4 seconds so the user can actually visibly see them being removed
         IEnumerator RemoveObjs()
         {
             while (true)
@@ -355,7 +360,12 @@ namespace Match3
         {
             if (!CheckSwapValid(a,b))
             {
+                matchSound.PlayAw();
                 StartCoroutine(WaitToSwapBack(1f, a, b));
+            }
+            else
+            {
+                matchSound.PlayYay();
             }
             Swap(a, b);
         }

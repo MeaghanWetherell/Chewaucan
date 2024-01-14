@@ -20,3 +20,8 @@ There shouldn't be anything here that an artist/designer can't hook up themself,
 Any performance problems are almost certainly due to inefficiencies of the design of MatchGrid that I'm not worrying about because I don't expect performance to be a problem.
 If the system needs major refactoring, it's probably best to mostly just rip out MatchGrid and redesign it from scratch. 
 Match grid mostly contains match detection functionality, as well as swapping bones. All the data is in MatchObject and MatchLine. 
+
+Known Issues:
+Edge case issue where if a double match is made at the top of the screen (e.g. 3 yellows across at the top and 3 reds down below) and another 
+red falls onto the 3 reds down after the yellows are removed, the new red will not be counted in the match and will not be removed.
+Can't figure out why this is.

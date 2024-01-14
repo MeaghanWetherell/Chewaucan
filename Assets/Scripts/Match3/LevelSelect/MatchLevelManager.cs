@@ -55,7 +55,7 @@ namespace Match3
             _curIndex = index;
             MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
             SceneManager.LoadScene(2);
-            //UnityEngine.Random.InitState(160);
+            //UnityEngine.Random.InitState(170);
         }
         
         //sets up the match object valid mesh list
