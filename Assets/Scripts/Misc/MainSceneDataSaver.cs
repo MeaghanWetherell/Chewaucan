@@ -40,6 +40,7 @@ namespace Misc
 
         public void ReloadMainScene()
         {
+            BGMManager.bgmManager.StopBGM();
             SceneManager.LoadScene(5);
             SceneManager.sceneLoaded += ONReload;
         }

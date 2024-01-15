@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Match3.Game
 {
+    //plays sound effects as needed in match 3
     public class MatchSoundEffects : MonoBehaviour
     {
         [Tooltip("Ref to the audio source for matches")] public AudioSource matchAud;

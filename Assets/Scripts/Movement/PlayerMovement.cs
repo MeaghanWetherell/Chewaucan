@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public InputActionReference moveRef;
     public InputActionReference jumpRef;
     public InputActionReference sprintRef;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,15 @@ public class PlayerMovement : MonoBehaviour
         staminaUI.maxValue = maxStamina;
         oxygenUI.minValue = 0f;
         oxygenUI.maxValue = maxStamina;
-        
+        PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
+        PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+    }
+
+    //unsubscribe from event callbacks to prevent leaks
+    private void OnDestroy()
+    {
+        PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
+        PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
     }
 
     private void OnEnable()
@@ -323,5 +333,17 @@ public class PlayerMovement : MonoBehaviour
     public bool DiveOngoing()
     {
         return _dive;
+    }
+
+    //disable movement when paused
+    private void OnPause()
+    {
+        this.enabled = false;
+    }
+
+    //reenable movement on resume
+    private void OnResume()
+    {
+        this.enabled = true;
     }
 }

@@ -10,7 +10,7 @@ namespace Misc
     public class LoadGUI : MonoBehaviour
     {
         //store a ref to the HUD object
-        private GameObject _hud;
+        private static GameObject _hud;
 
         //whether the gui is currently open
         private bool _guiOpen = false;
@@ -23,7 +23,8 @@ namespace Misc
 
         private void Awake()
         {
-            _hud = GameObject.Find("HUD");
+            if(_hud == null)
+                _hud = GameObject.Find("HUD");
         }
 
         //if the gui is open, reenable player movement and close it
@@ -32,8 +33,7 @@ namespace Misc
         {
             if (_guiOpen)
             {
-                Player.player.GetComponent<PlayerMovement>().enabled = true;
-                Player.player.GetComponent<CameraLook>().enabled = true;
+                PauseCallback.pauseManager.Resume();
                 MainSceneDataSaver.mainSceneDataSaver.curMenu = null;
                 SceneManager.UnloadSceneAsync(loadScene);
                 _hud.SetActive(true);
@@ -43,8 +43,7 @@ namespace Misc
                 if(MainSceneDataSaver.mainSceneDataSaver.curMenu != null)
                     MainSceneDataSaver.mainSceneDataSaver.curMenu.ONOpenTrigger();
                 MainSceneDataSaver.mainSceneDataSaver.curMenu = this;
-                Player.player.GetComponent<PlayerMovement>().enabled = false;
-                Player.player.GetComponent<CameraLook>().enabled = false;
+                PauseCallback.pauseManager.Pause();
                 _hud.SetActive(false);
                 SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
                 _curGUI = this;

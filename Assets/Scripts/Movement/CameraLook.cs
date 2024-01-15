@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,8 +15,21 @@ public class CameraLook : MonoBehaviour
 
     Vector2 _lookInput;
     float _xRotation;
-    
-    // Start is called before the first frame update
+
+    //subscribe to event functions
+    private void Start()
+    {
+        PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
+        PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+    }
+
+    //unsubscribe
+    private void OnDestroy()
+    {
+        PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
+        PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+    }
+
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
@@ -58,5 +72,17 @@ public class CameraLook : MonoBehaviour
     public void SetMinDist(float n)
     {
         minViewDist = n;
+    }
+
+    //disable look on pause
+    private void OnPause()
+    {
+        this.enabled = false;
+    }
+
+    //reenable on resume
+    private void OnResume()
+    {
+        this.enabled = true;
     }
 }

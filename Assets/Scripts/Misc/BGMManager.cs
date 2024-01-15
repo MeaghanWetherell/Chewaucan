@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Misc
 {
+    //manages cycling through background music tracks and quieting them when other sounds need to play
     public class BGMManager : MonoBehaviour
     {
         public static BGMManager bgmManager;
@@ -16,9 +16,13 @@ namespace Misc
 
         [Tooltip("Standard volume of the BGM")] public float standVol;
 
+        //list of audio clips to draw from when selecting a new track
         private List<AudioClip> BGMClips;
 
+        //whether the bgm manager should wait to play a new song
         private bool waiting = false;
+        
+        //set up singleton and start corountines
         private void Awake()
         {
             if (bgmManager != null)
@@ -32,6 +36,7 @@ namespace Misc
             StartCoroutine(RunSongs());
         }
 
+        //check each frame if a new song should be started and start it if so
         private IEnumerator RunSongs()
         {
             while (true)
@@ -44,6 +49,7 @@ namespace Misc
             }
         }
 
+        //set the track list for the current areas background music
         public void SetBGM(List<AudioClip> clips)
         {
             BGMClips = clips;
@@ -51,6 +57,14 @@ namespace Misc
                 PlayNewSong();
         }
 
+        //stops the bgm and entirely and resets the track list
+        public void StopBGM()
+        {
+            BGMClips = null;
+            bgm.Stop();
+        }
+
+        //plays a random song from the list
         private void PlayNewSong()
         {
             bgm.Stop();
@@ -58,18 +72,21 @@ namespace Misc
             bgm.Play();
         }
 
+        //pauses the bgm
         public void Pause()
         {
             bgm.Pause();
             waiting = true;
         }
 
+        //resumes the bgm
         public void Resume()
         {
             bgm.Play();
             waiting = false;
         }
 
+        //stops the bgm entirely for the passed time
         public IEnumerator StopBGMForTime(float time)
         {
             bgm.Pause();
@@ -79,6 +96,7 @@ namespace Misc
             bgm.Play();
         }
 
+        //quiets the bgm by the set factor for the passed time
         public IEnumerator QuietBGMForTime(float time)
         {
             bgm.volume = quietVol;
@@ -88,6 +106,7 @@ namespace Misc
             bgm.volume = standVol;
         }
 
+        //stops the bgm until the passed audio source stops playing
         public IEnumerator StopBGMUntilDone(AudioSource running)
         {
             bgm.Pause();
@@ -103,6 +122,7 @@ namespace Misc
             bgm.Play();
         }
         
+        //quiets the bgm by the set factor until the passed audio source stops playing
         public IEnumerator QuietBGMUntilDone(AudioSource running)
         {
             bgm.volume = quietVol;
