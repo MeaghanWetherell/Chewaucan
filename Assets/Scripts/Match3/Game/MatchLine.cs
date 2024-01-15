@@ -30,7 +30,7 @@ namespace Match3
         //how long the line should wait between spawning new bones
         private static float _waitTime = 0.25f;
 
-        [Tooltip("Match object prefab (duh)")]public GameObject matchObjPrefab;
+        [Tooltip("Match object prefab")]public GameObject matchObjPrefab;
 
         //the number of match objects queued to be spawned
         private int _toSpawn;

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Misc;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +15,9 @@ namespace Match3
 
         public static Timer timer;
 
+        //registers pause state, timer stops on pause
+        private bool paused = false;
+
         private void Awake()
         {
             timeLeft = MatchLevelManager.matchLevelManager.GETCurLevel().time;
@@ -26,12 +31,27 @@ namespace Match3
             StartCoroutine(Time());
         }
 
+        //subscribe to pause callbacks
+        private void OnEnable()
+        {
+            PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
+            PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+        }
+        
+        //unsubscribe to prevent leaks
+        private void OnDisable()
+        {
+            PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
+            PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+        }
+
         //increment time for endless mode
         private IEnumerator TimeUp()
         {
             while (true)
             {
                 yield return new WaitForSeconds(0.1f);
+                if (paused) continue;
                 timeLeft += 0.1f;
                 text.text = "Time: " + ((int) timeLeft) + "s";
             }
@@ -43,10 +63,21 @@ namespace Match3
             while (timeLeft > 0)
             {
                 yield return new WaitForSeconds(0.1f);
+                if (paused) continue;
                 timeLeft -= 0.1f;
                 text.text = "Time Remaining: " + ((int) timeLeft) + "s";
             }
             MatchUIManager.matchUIManager.EndGame("Time up!");
+        }
+
+        private void OnPause()
+        {
+            paused = true;
+        }
+
+        private void OnResume()
+        {
+            paused = false;
         }
     }
 }

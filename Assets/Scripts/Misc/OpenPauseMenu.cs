@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Misc
 {
-    //open the pause menu on escape key callback
+    //open the pause menu on escape key callback. If a menu is already open, escape instead closes it
     public class OpenPauseMenu : MonoBehaviour
     {
         [Tooltip("Reference to the pause key")]
@@ -22,7 +22,14 @@ namespace Misc
 
         private void OpenPause(InputAction.CallbackContext context)
         {
-            PauseMenu.pauseMenu.ONOpenTrigger();
+            if (MainSceneDataSaver.mainSceneDataSaver.curMenu != null)
+            {
+                MainSceneDataSaver.mainSceneDataSaver.curMenu.ONOpenTrigger();
+            }
+            else
+            {
+                PauseMenu.pauseMenu.ONOpenTrigger();
+            }
         }
     }
 }

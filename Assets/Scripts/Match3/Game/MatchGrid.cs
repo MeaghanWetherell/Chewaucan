@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,28 @@ namespace Match3
 
         //mouse position when a click on a match object is recorded
         private Vector2 _initialMousePos;
+        
+        //whether the game is paused
+        private bool _isPaused = false;
+
+        //subscribe to pause callbacks
+        private void Awake()
+        {
+            PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
+            PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+            matchGrid = this;
+            FillGrid();
+            StartCoroutine(RemoveObjs());
+            StartCoroutine(WaitToCheckMatch(2));
+            StartCoroutine(CheckForLock());
+        }
+        
+        //unsubscribe to prevent leaks
+        private void OnDestroy()
+        {
+            PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
+            PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+        }
 
         private void OnDisable()
         {
@@ -62,11 +85,6 @@ namespace Match3
         private void OnEnable()
         {
             click.action.canceled += ClickAction;
-            matchGrid = this;
-            FillGrid();
-            StartCoroutine(RemoveObjs());
-            StartCoroutine(WaitToCheckMatch(2));
-            StartCoroutine(CheckForLock());
         }
 
         //if the grid isn't busy, lets the user move a match object
@@ -144,7 +162,7 @@ namespace Match3
             }
         }
 
-        //pauses certain activies of the manager for the specified time, such as lock checks and moving match objects
+        //pauses certain activities of the manager for the specified time, such as lock checks and moving match objects
         private IEnumerator WaitToCheckMatch(float time)
         {
             _waitingOnMatchCheck = true;
@@ -319,6 +337,9 @@ namespace Match3
         //registers that the user has clicked on a match object
         public void RegisterActiveMatchObj(MatchObject obj)
         {
+            Debug.Log("attempting register, _ispaused="+_isPaused);
+            if (_isPaused)
+                return;
             _activeObject = obj;
             _initialMousePos = mousePos.action.ReadValue<Vector2>();
         }
@@ -398,6 +419,16 @@ namespace Match3
             valb.index = a.y;
             _objects[a.x][a.y] = valb;
             _objects[b.x][b.y] = vala;
+        }
+
+        private void OnPause()
+        {
+            _isPaused = true;
+        }
+
+        private void OnResume()
+        {
+            _isPaused = false;
         }
     }
 }

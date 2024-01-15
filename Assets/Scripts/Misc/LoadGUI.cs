@@ -36,7 +36,8 @@ namespace Misc
                 PauseCallback.pauseManager.Resume();
                 MainSceneDataSaver.mainSceneDataSaver.curMenu = null;
                 SceneManager.UnloadSceneAsync(loadScene);
-                _hud.SetActive(true);
+                if(_hud != null)
+                    _hud.SetActive(true);
             }
             else
             {
@@ -44,7 +45,8 @@ namespace Misc
                     MainSceneDataSaver.mainSceneDataSaver.curMenu.ONOpenTrigger();
                 MainSceneDataSaver.mainSceneDataSaver.curMenu = this;
                 PauseCallback.pauseManager.Pause();
-                _hud.SetActive(false);
+                if(_hud != null)
+                    _hud.SetActive(false);
                 SceneManager.LoadScene(loadScene, LoadSceneMode.Additive);
                 _curGUI = this;
             }
