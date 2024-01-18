@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class TeleportWaypoint : MonoBehaviour
 {
+    [SerializeField] float yValue;
     [SerializeField] Vector3 teleportToPosition;
-    [SerializeField] Transform waypointObj;
+    private Transform waypointObj;
     [SerializeField] GameObject teleportUI;
     [SerializeField] TextMeshProUGUI teleportPositionLabel;
-    [SerializeField] Animator animator;
+    private Animator animator;
+    private TeleportButton teleportButton;
 
     private Vector3 objPosition;
     
@@ -18,8 +20,9 @@ public class TeleportWaypoint : MonoBehaviour
     {
         waypointObj = this.transform;
         objPosition = waypointObj.localPosition;
-        teleportToPosition = new Vector3(objPosition.x, -objPosition.z, objPosition.y);
+        teleportToPosition = new Vector3(objPosition.x, yValue, objPosition.y);
         animator = teleportUI.GetComponent<Animator>();
+        teleportButton = FindAnyObjectByType<TeleportButton>();
     }
 
     private void OnMouseDown()
@@ -27,6 +30,7 @@ public class TeleportWaypoint : MonoBehaviour
         Debug.Log("Teleport to "+teleportToPosition);
         animator.SetBool("active", true);
         teleportPositionLabel.text = teleportToPosition.ToString();
+        teleportButton.setTeleportTo(teleportToPosition);
     }
 
 

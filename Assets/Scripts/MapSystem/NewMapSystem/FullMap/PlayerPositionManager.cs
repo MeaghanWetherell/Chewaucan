@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
 
 public class PlayerPositionManager : MonoBehaviour
@@ -20,12 +21,15 @@ public class PlayerPositionManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (player != null)
         {
-            currentPlayerPosition = player.transform.position;
-            Debug.Log("Current Position: " +  currentPlayerPosition);
+            if (currentPlayerPosition != player.transform.position)
+            {
+                currentPlayerPosition = player.transform.position;
+                //Debug.Log("Current Position: " + currentPlayerPosition);
+            }
         }
     }
 
@@ -34,8 +38,20 @@ public class PlayerPositionManager : MonoBehaviour
         return currentPlayerPosition;
     }
 
+    public void setPlayerPosition(Vector3 position)
+    {
+        currentPlayerPosition = position;
+    }
+
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            if (player.transform.position != currentPlayerPosition)
+            {
+                player.transform.position = currentPlayerPosition;
+            }
+        }
     }
 }
