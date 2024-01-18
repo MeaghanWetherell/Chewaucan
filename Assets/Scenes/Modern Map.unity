@@ -14,7 +14,6 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
   m_Fog: 0
   m_FogColor: {r: 0.9805998, g: 0.9811321, b: 0.7358491, a: 1}
   m_FogMode: 3
@@ -874,7 +873,6 @@ Transform:
   m_GameObject: {fileID: 427232526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 201.08441, y: -1.0878386, z: 181.61914}
   m_LocalPosition: {x: -436, y: 104, z: 181.61914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -989,7 +987,6 @@ GameObject:
   - component: {fileID: 593502324}
   - component: {fileID: 593502323}
   m_Layer: 0
-  m_Name: Terrain 1
   m_Name: Sandy Shores
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1976,17 +1973,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2bd4484ce1e1af442b5c10b2d20fff69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2bd4484ce1e1af442b5c10b2d20fff69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
       value: -42.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2bd4484ce1e1af442b5c10b2d20fff69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
       value: -35.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2bd4484ce1e1af442b5c10b2d20fff69, type: 3}
@@ -2094,7 +2088,6 @@ Transform:
   m_GameObject: {fileID: 1022029838}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1896455, y: -0.6078235, z: 0.12321273, w: 0.7611857}
-  m_LocalPosition: {x: 248.4, y: 20.2, z: 237.4}
   m_LocalPosition: {x: 450.7, y: -66.4, z: 26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2151,8 +2144,6 @@ Transform:
   m_GameObject: {fileID: 1053636439}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 115, y: -1, z: 493}
-  m_LocalScale: {x: 2, y: 1, z: 10}
   m_LocalPosition: {x: 472, y: 1.3, z: 734}
   m_LocalScale: {x: 25, y: 1, z: 25}
   m_ConstrainProportionsScale: 0
@@ -2178,7 +2169,6 @@ GameObject:
   - component: {fileID: 1110149031}
   - component: {fileID: 1110149030}
   m_Layer: 0
-  m_Name: Terrain 3
   m_Name: Cave B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2667,17 +2657,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ee9cd113068be4dbfaa033e7b1904a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 200.8356
       value: 426.29
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ee9cd113068be4dbfaa033e7b1904a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.4378395
       value: -83.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ee9cd113068be4dbfaa033e7b1904a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.8691406
       value: 37.69
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c2ee9cd113068be4dbfaa033e7b1904a, type: 3}
@@ -3074,7 +3061,6 @@ GameObject:
   - component: {fileID: 1667869308}
   - component: {fileID: 1667869307}
   m_Layer: 0
-  m_Name: Terrain 2
   m_Name: Cave A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3150,7 +3136,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -241.52158, y: -18.350945, z: -116.70122}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3615,12 +3600,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 129
       value: -103.5
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.96
       value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
