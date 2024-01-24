@@ -9,6 +9,7 @@ public class MapCameraController : MonoBehaviour
     [SerializeField] private float zoomRate = 0.25f;
     [SerializeField] private float minZoom = 50f;
     [SerializeField] private float maxZoom = 500f;
+    [SerializeField] private float dragSpeed = 2f;
     [SerializeField] private GameObject mapCameraObj;
     private Camera mapCamera;
 
@@ -49,9 +50,32 @@ public class MapCameraController : MonoBehaviour
         if (Input.GetMouseButton(2) || Input.GetMouseButton(1))
         {
             Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 targetPos = mapCameraObj.transform.position + posDifference;
 
-            mapCameraObj.transform.position += posDifference;
+            mapCameraObj.transform.position = Vector3.Lerp(mapCameraObj.transform.position, targetPos, Time.deltaTime * dragSpeed);
         }
+
+        if (Input.GetMouseButtonUp(2) || Input.GetMouseButtonUp(1))
+        {
+            StartCoroutine(SmoothCameraStop());
+        }
+    }
+
+    //continues smoothly moving the camera for half a second after the mouse button is released
+    IEnumerator SmoothCameraStop()
+    {
+        int frameRate = (int) (1.0f / Time.deltaTime);
+
+        Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 targetPos = mapCameraObj.transform.position + posDifference;
+
+        for (int i = 0; i < frameRate/2; i++)
+        {
+            mapCameraObj.transform.position = Vector3.Lerp(mapCameraObj.transform.position, targetPos, Time.deltaTime * dragSpeed);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return null;
     }
 
     //uses the scroll wheel to zoom in and out of the map
