@@ -11,9 +11,9 @@ public class LoadSceneOnEnter : MonoBehaviour
 {
  
 
-    public string SampleScene;
-    public string FossilHill;
-    public GameObject LoadingScreen;
+    public string sampleScene;
+    public string fossilHill;
+    public GameObject loadingScreen;
    // AsyncOperation loadingOperation;
    // float loadProgress = loadingOperation.progress;
   //  float progressBar;
@@ -30,22 +30,22 @@ public class LoadSceneOnEnter : MonoBehaviour
         if(other.tag == "TimeTravel") {
 
             StartCoroutine(ExampleCoroutine());
-            SceneManager.LoadScene(SampleScene);
+            SceneManager.LoadScene(sampleScene);
            
         }
 
         if (other.tag == "MoarFossils") {
             print("loading more fossils");
-           SceneManager.LoadScene(FossilHill);
+           SceneManager.LoadScene(fossilHill);
 
         }
     }
 
     IEnumerator ExampleCoroutine() {
         print("Let's go back in time bitch");
-        LoadingScreen.SetActive(true);
+        loadingScreen.SetActive(true);
         yield return new WaitForSeconds(5);
-        LoadingScreen.SetActive(false);
+        loadingScreen.SetActive(false);
         print("we did it");
     }
 }
