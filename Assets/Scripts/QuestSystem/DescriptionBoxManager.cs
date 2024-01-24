@@ -9,7 +9,7 @@ namespace QuestSystem
     public class DescriptionBoxManager : MonoBehaviour
     {
         //current quest being described
-        private QuestNode cur;
+        private QuestNode _cur;
 
         [Tooltip("Checkmark sprite")]
         public Sprite check;
@@ -25,17 +25,17 @@ namespace QuestSystem
         }
 
         //tells the description box to reset itself to describe the passed node
-        public void sendNewNode(QuestNode newNode)
+        public void SendNewNode(QuestNode newNode)
         {
-            cur = newNode;
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cur.name;
-            if (cur.longDescription.Equals(""))
+            _cur = newNode;
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.name;
+            if (_cur.longDescription.Equals(""))
             {
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = cur.shortDescription;
+                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _cur.shortDescription;
             }
             else
             {
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = cur.longDescription;
+                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _cur.longDescription;
             }
             TextMeshProUGUI text = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
             text.text = "";
@@ -44,7 +44,7 @@ namespace QuestSystem
                 text.text += +newNode.counts[i] + "/" + newNode.requiredCounts[i] + " " + newNode.objectives[i]+"\n";
             }
             GameObject pinObj = transform.GetChild(4).gameObject;
-            if (cur.isComplete)
+            if (_cur.isComplete)
             {
                 transform.GetChild(3).gameObject.SetActive(true);
                 pinObj.SetActive(false);
@@ -54,7 +54,7 @@ namespace QuestSystem
                 transform.GetChild(3).gameObject.SetActive(false);
                 pinObj.SetActive(true);
                 Image pin = pinObj.transform.GetChild(0).gameObject.GetComponent<Image>();
-                if (cur.isPinned)
+                if (_cur.isPinned)
                 {
                     pin.sprite = check;
                 }
@@ -62,7 +62,7 @@ namespace QuestSystem
                 {
                     pin.sprite = x;
                 }
-                pin.GetComponent<PinButton>().node = cur;
+                pin.GetComponent<PinButton>().node = _cur;
             }
         }
     }

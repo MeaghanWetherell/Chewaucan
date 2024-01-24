@@ -16,7 +16,7 @@ namespace QuestSystem
         public string name;
 
         //unique id of the quest
-        public string ID;
+        public string id;
 
         //short description of the quest
         public string shortDescription;
@@ -43,7 +43,7 @@ namespace QuestSystem
         
         //adds the passed count to the count for the objective at index
         //returns true if the quest is complete, false otherwise
-        public bool addCount(int index, float toAdd = 0.0f)
+        public bool AddCount(int index, float toAdd = 0.0f)
         {
             if (isComplete)
             {
@@ -64,7 +64,7 @@ namespace QuestSystem
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
                     if (counts[i] != requiredCounts[i])
                     {
-                        HUDManager.hudManager.resetPins();
+                        HUDManager.hudManager.ResetPins();
                         return false;
                     }
                 }
@@ -73,11 +73,11 @@ namespace QuestSystem
                 if (isPinned)
                 {
                     isPinned = false;
-                    QuestManager.questManager.reportCompletion(true, this);
+                    QuestManager.questManager.ReportCompletion(true, this);
                 }
                 else
                 {
-                    QuestManager.questManager.reportCompletion();
+                    QuestManager.questManager.ReportCompletion();
                 }
 
                 return true;
@@ -85,7 +85,7 @@ namespace QuestSystem
 
             if (isPinned)
             {
-                HUDManager.hudManager.resetPins();
+                HUDManager.hudManager.ResetPins();
             }
 
             return false;
@@ -98,12 +98,12 @@ namespace QuestSystem
         public QuestNode(QuestObj data)
         {
             name = data.questName;
-            ID = data.uniqueID;
-            if (!QuestManager.questManager.registerNode(this))
+            id = data.uniqueID;
+            if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;
             }
-            readDescriptionFile(data.descriptionFile);
+            ReadDescriptionFile(data.descriptionFile);
             objectives = data.objectives;
             requiredCounts = data.countsRequired;
             countsPerAction = data.countsAdded;
@@ -123,7 +123,7 @@ namespace QuestSystem
 
         public void callOnceInitialized()
         {
-            if (!QuestManager.questManager.registerNode(this))
+            if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;
             }
@@ -142,7 +142,7 @@ namespace QuestSystem
         }
 
         //change the pinned status of this node
-        public void changePinned()
+        public void ChangePinned()
         {
             isPinned = !isPinned;
             if (isPinned)
@@ -156,7 +156,7 @@ namespace QuestSystem
         }
 
         //reads in description data from text file
-        private void readDescriptionFile(TextAsset file)
+        private void ReadDescriptionFile(TextAsset file)
         {
             string fileText = file.ToString();
             string[] fileSplit = fileText.Split('\n');

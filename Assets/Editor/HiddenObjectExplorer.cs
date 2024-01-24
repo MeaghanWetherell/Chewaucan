@@ -10,8 +10,8 @@ public class HiddenObjectExplorer : EditorWindow
     {
 		GetWindow<HiddenObjectExplorer>();
     }
-    List<GameObject> m_Objects = new List<GameObject>();
-	Vector2 scrollPos = Vector2.zero;
+    List<GameObject> _mObjects = new List<GameObject>();
+	Vector2 _scrollPos = Vector2.zero;
 	
 	void OnEnable()
 	{
@@ -21,19 +21,19 @@ public class HiddenObjectExplorer : EditorWindow
 	void FindObjects()
 	{
 		var objs = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
-		m_Objects.Clear();
-		foreach(var O in objs)
+		_mObjects.Clear();
+		foreach(var o in objs)
 		{
-			var go = O.transform.root.gameObject;
-			if (!m_Objects.Contains(go))
-				m_Objects.Add(go);
+			var go = o.transform.root.gameObject;
+			if (!_mObjects.Contains(go))
+				_mObjects.Add(go);
 		}
 	}
 	void FindObjectsAll()
 	{
 		var objs = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
-		m_Objects.Clear();
-		m_Objects.AddRange(objs);
+		_mObjects.Clear();
+		_mObjects.AddRange(objs);
 	}
 	
 	HideFlags HideFlagsButton(string aTitle, HideFlags aFlags, HideFlags aValue)
@@ -57,25 +57,25 @@ public class HiddenObjectExplorer : EditorWindow
 			FindObjectsAll();
 		}
 		GUILayout.EndHorizontal();
-		scrollPos = GUILayout.BeginScrollView(scrollPos);
-		for(int i = 0; i < m_Objects.Count; i++)
+		_scrollPos = GUILayout.BeginScrollView(_scrollPos);
+		for(int i = 0; i < _mObjects.Count; i++)
 		{
-			GameObject O = m_Objects[i];
-			if (O == null)
+			GameObject o = _mObjects[i];
+			if (o == null)
 				continue;
 			GUILayout.BeginHorizontal();
-			EditorGUILayout.ObjectField(O.name, O,typeof(GameObject),true);
-			HideFlags flags = O.hideFlags;
+			EditorGUILayout.ObjectField(o.name, o,typeof(GameObject),true);
+			HideFlags flags = o.hideFlags;
 			flags = HideFlagsButton("HideInHierarchy",flags, HideFlags.HideInHierarchy);
 			flags = HideFlagsButton("HideInInspector",flags, HideFlags.HideInInspector);
 			flags = HideFlagsButton("DontSave",flags, HideFlags.DontSave);
 			flags = HideFlagsButton("NotEditable",flags, HideFlags.NotEditable);
-			O.hideFlags = flags;
+			o.hideFlags = flags;
 			GUILayout.Label(""+((int)flags),GUILayout.Width(20));
 			GUILayout.Space(20);
 			if (GUILayout.Button("DELETE"))
 			{
-				DestroyImmediate(O);
+				DestroyImmediate(o);
 				FindObjects();
 				GUIUtility.ExitGUI();
 			}

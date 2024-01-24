@@ -17,17 +17,17 @@ namespace QuestSystem
         public bool resetQuests;
         
         //quests the player has received
-        private List<QuestNode> quests = new List<QuestNode>();
+        private List<QuestNode> _quests = new List<QuestNode>();
 
         //the three quests currently pinned. if we want more than 3 the hud will need refactoring
         //but nothing else will need to be touched here
-        private QuestNode[] pins = new QuestNode[3];
+        private QuestNode[] _pins = new QuestNode[3];
         
         //if the passed node is new, create it and return it,
         //otherwise return a reference to the existing quest
-        public QuestNode createQuestNode(QuestObj obj)
+        public QuestNode CreateQuestNode(QuestObj obj)
         {
-            QuestNode node = getNode(obj.uniqueID);
+            QuestNode node = GETNode(obj.uniqueID);
             if (node != null)
                 return node;
             node = new QuestNode(obj);
@@ -35,11 +35,11 @@ namespace QuestSystem
         }
 
         //use to get specific nodes from the manager. 
-        public QuestNode getNode(string ID)
+        public QuestNode GETNode(string id)
         {
-            foreach(QuestNode node in quests)
+            foreach(QuestNode node in _quests)
             {
-                if (node.ID.Equals(ID))
+                if (node.id.Equals(id))
                 {
                     return node;
                 }
@@ -50,42 +50,49 @@ namespace QuestSystem
 
         private void Awake()
         {
+            if (questManager != null)
+            {
+                Debug.LogError("Loaded persistent objects twice!");
+                Destroy(questManager.gameObject);
+            }
             questManager = this;
             DontDestroyOnLoad(transform.gameObject);
             if (!resetQuests)
             {
-                loadFromFile();
+                LoadFromFile();
             }
         }
 
-        public List<QuestNode> getQuests()
+        public List<QuestNode> GETQuests()
         {
-            return quests;
+            return _quests;
         }
 
-        private void loadFromFile()
+        private void LoadFromFile()
         {
             string allQuestFiles = "";
             string line = "";
             StreamReader streamReader;
             try
             {
-                streamReader = new StreamReader("SavedQuests.txt");
+                streamReader = new StreamReader("Saves/SavedQuests.txt");
                 line = streamReader.ReadLine();
                 if (line != null)
                 {
                     allQuestFiles += line;
                 }
+
                 line = streamReader.ReadLine();
                 while (line != null)
                 {
                     allQuestFiles += " " + line;
                     line = streamReader.ReadLine();
                 }
+
                 streamReader.Close();
             }
             catch (Exception)
-            { Debug.LogError("Error in quest json deserializer"); }
+            { return; }
             if (allQuestFiles.Equals(""))
                 return;
             string[] files = allQuestFiles.Split(" ");
@@ -93,7 +100,7 @@ namespace QuestSystem
             {
                 try
                 {
-                    streamReader = new StreamReader(fileName);
+                    streamReader = new StreamReader("Saves/"+fileName);
                     line = streamReader.ReadLine();
                     streamReader.Close();
                 }
@@ -110,64 +117,65 @@ namespace QuestSystem
 
         private void OnDisable()
         {
-            serializeToJSON();
+            SerializeToJson();
         }
 
         //save the quest data
-        private void serializeToJSON()
+        private void SerializeToJson()
         {
             string allSavedQuests = "";
-            foreach (QuestNode quest in quests)
+            Directory.CreateDirectory("Saves");
+            foreach (QuestNode quest in _quests)
             {
-                string questJSON = JsonUtility.ToJson(quest);
-                File.WriteAllText(quest.ID+".json", questJSON);
+                string questJson = JsonUtility.ToJson(quest);
+                File.WriteAllText("Saves/"+quest.id+".json", questJson);
                 if (!allSavedQuests.Equals(""))
                     allSavedQuests += " ";
-                allSavedQuests += quest.ID + ".json";
+                allSavedQuests += quest.id + ".json";
             }
-            File.WriteAllText("SavedQuests.txt", allSavedQuests);
+            File.WriteAllText("Saves/SavedQuests.txt", allSavedQuests);
         }
 
         //register a new quest node with the manager. automatically called by new nodes
         //will not add duplicate quests. Make sure to use getNode to save node references,
         //otherwise you could end up with a reference to a duplicate node that is registered with the manager
-        public bool registerNode(QuestNode toRegister)
+        public bool RegisterNode(QuestNode toRegister)
         {
-            foreach(QuestNode quest in quests)
+            foreach(QuestNode quest in _quests)
             {
                 if (quest.name.Equals(toRegister.name))
                 {
                     return false;
                 }
-                if (quest.ID.Equals(toRegister.ID))
+                if (quest.id.Equals(toRegister.id))
                 {
                     Debug.LogError("Quests "+quest.name+" and "+toRegister.name+" have same ID!");
                 }
             }
-            quests.Add(toRegister);
-            quests.insertionSort();
+            _quests.Add(toRegister);
+            _quests.InsertionSort();
             return true;
         }
 
         //self report quest completion to the manager.
         //nodes handle this, shouldn't be called externally
-        public void reportCompletion(bool wasPinned=false, QuestNode pinNode=null)
+        public void ReportCompletion(bool wasPinned=false, QuestNode pinNode=null)
         {
-            quests.insertionSort();
+            _quests.InsertionSort();
             if (wasPinned)
             {
                 RemovePin(pinNode);
-                HUDManager.hudManager.resetPins();
+                HUDManager.hudManager.ResetPins();
             }
         }
 
         //returns a deep copy of the pin array
-        public QuestNode[] getPinNodes()
+        public QuestNode[] GETPinNodes()
         {
-            QuestNode[] temp = new QuestNode[pins.Length];
-            for (int i = 0; i < pins.Length; i++)
+            QuestNode[] temp = new QuestNode[_pins.Length];
+            for (int i = 0; i < _pins.Length; i++)
             {
-                temp[i] = pins[i];
+                temp[i] = _pins[i];
             }
             return temp;
         }
@@ -177,34 +185,34 @@ namespace QuestSystem
         {
             if (node.isComplete)
                 return;
-            for (int i = 0; i < pins.Length; i++)
+            for (int i = 0; i < _pins.Length; i++)
             {
-                if (pins[i] == null)
+                if (_pins[i] == null)
                 {
-                    pins[i] = node;
+                    _pins[i] = node;
                     return;
                 }
             }
-            pins[0].changePinned();
-            pins[^1] = node;
+            _pins[0].ChangePinned();
+            _pins[^1] = node;
         }
 
         //removes a quest from the pins
         public void RemovePin(QuestNode pin)
         {
-            for (int i = 0; i < pins.Length; i++)
+            for (int i = 0; i < _pins.Length; i++)
             {
-                if (pins[i] == null)
+                if (_pins[i] == null)
                 {
                     break;
                 }
-                if (pins[i].CompareTo(pin) == 0)
+                if (_pins[i].CompareTo(pin) == 0)
                 {
-                    for (int j = i; j < pins.Length-1; j++)
+                    for (int j = i; j < _pins.Length-1; j++)
                     {
-                        pins[j] = pins[j+1];
+                        _pins[j] = _pins[j+1];
                     }
-                    pins[^1] = null;
+                    _pins[^1] = null;
                     return;
                 }
             }

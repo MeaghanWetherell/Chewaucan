@@ -22,7 +22,7 @@ namespace QuestSystem
         //pin or unpin the quest
         private void OnClick()
         {
-            node.changePinned();
+            node.ChangePinned();
             if (node.isPinned)
             {
                 gameObject.GetComponent<Image>().sprite = DescriptionBoxManager.descriptionBoxManager.check;

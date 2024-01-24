@@ -6,10 +6,10 @@ using UnityEngine;
 public class CheckGroundTexture : MonoBehaviour
 {
 
-    CharacterController controller;
-    Terrain terrain;
-    int xPos;
-    int zPos;
+    CharacterController _controller;
+    Terrain _terrain;
+    int _xPos;
+    int _zPos;
     public float[] textureVals;
 
     [Tooltip("The number of textures in the terrain layer palette asset")]
@@ -18,7 +18,7 @@ public class CheckGroundTexture : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        _controller = GetComponent<CharacterController>();
     }
 
     public void GetGroundTexture()
@@ -26,25 +26,25 @@ public class CheckGroundTexture : MonoBehaviour
         bool hasTerrain = SetTerrain();
         if (hasTerrain)
         {
-            FindTexturePosition(controller.gameObject.transform.position);
+            FindTexturePosition(_controller.gameObject.transform.position);
             FindTextureValue();
         }
     }
 
     void FindTexturePosition(Vector3 playerPos)
     {
-        Vector3 terrainPos = playerPos - terrain.transform.position;
-        Vector3 mapPos = new Vector3(terrainPos.x / terrain.terrainData.size.x, 0, terrainPos.z / terrain.terrainData.size.z);
-        float xCoord = mapPos.x * terrain.terrainData.alphamapWidth;
-        float zCoord = mapPos.z * terrain.terrainData.alphamapHeight;
-        xPos = (int)xCoord;
-        zPos = (int)zCoord;
+        Vector3 terrainPos = playerPos - _terrain.transform.position;
+        Vector3 mapPos = new Vector3(terrainPos.x / _terrain.terrainData.size.x, 0, terrainPos.z / _terrain.terrainData.size.z);
+        float xCoord = mapPos.x * _terrain.terrainData.alphamapWidth;
+        float zCoord = mapPos.z * _terrain.terrainData.alphamapHeight;
+        _xPos = (int)xCoord;
+        _zPos = (int)zCoord;
         FindTextureValue();
     }
 
     void FindTextureValue()
     {
-        float[,,] alphaMap = terrain.terrainData.GetAlphamaps(xPos, zPos, 1, 1);
+        float[,,] alphaMap = _terrain.terrainData.GetAlphamaps(_xPos, _zPos, 1, 1);
 
         for (int i = 0; i < numOfTextures; i++)
         {
@@ -64,8 +64,8 @@ public class CheckGroundTexture : MonoBehaviour
         {
             GameObject objectHit = hit.collider.gameObject;
 
-            terrain = objectHit.GetComponent<Terrain>();
-            if (terrain != null)
+            _terrain = objectHit.GetComponent<Terrain>();
+            if (_terrain != null)
             {
                 return true;
             }
