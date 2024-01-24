@@ -5,8 +5,8 @@ using UnityEngine;
 public class WaterReflection : MonoBehaviour
 {
     // referenses
-    Camera _mainCamera;
-    Camera _reflectionCamera;
+    Camera mainCamera;
+    Camera reflectionCamera;
 
     [Tooltip("The plane where the camera will be reflected, the water plane or any object with the same position and rotation")]
     public Transform reflectionPlane;
@@ -16,33 +16,33 @@ public class WaterReflection : MonoBehaviour
     // parameters
     public bool copyCameraParamerers;
     public float verticalOffset;
-    private bool _isReady;
+    private bool isReady;
 
     // cache
-    private Transform _mainCamTransform;
-    private Transform _reflectionCamTransform;
+    private Transform mainCamTransform;
+    private Transform reflectionCamTransform;
 
     public void Awake()
     {
-        _mainCamera = Camera.main;
+        mainCamera = Camera.main;
 
-        _reflectionCamera = GetComponent<Camera>();
+        reflectionCamera = GetComponent<Camera>();
 
         Validate();
     }
 
     private void Update()
     {
-        if (_isReady)
+        if (isReady)
             RenderReflection();
     }
 
     private void RenderReflection()
     {
         // take main camera directions and position world space
-        Vector3 cameraDirectionWorldSpace = _mainCamTransform.forward;
-        Vector3 cameraUpWorldSpace = _mainCamTransform.up;
-        Vector3 cameraPositionWorldSpace = _mainCamTransform.position;
+        Vector3 cameraDirectionWorldSpace = mainCamTransform.forward;
+        Vector3 cameraUpWorldSpace = mainCamTransform.up;
+        Vector3 cameraPositionWorldSpace = mainCamTransform.position;
 
         cameraPositionWorldSpace.y += verticalOffset;
 
@@ -62,34 +62,34 @@ public class WaterReflection : MonoBehaviour
         cameraPositionWorldSpace = reflectionPlane.TransformPoint(cameraPositionPlaneSpace);
 
         // apply direction and position to reflection camera
-        _reflectionCamTransform.position = cameraPositionWorldSpace;
-        _reflectionCamTransform.LookAt(cameraPositionWorldSpace + cameraDirectionWorldSpace, cameraUpWorldSpace);
+        reflectionCamTransform.position = cameraPositionWorldSpace;
+        reflectionCamTransform.LookAt(cameraPositionWorldSpace + cameraDirectionWorldSpace, cameraUpWorldSpace);
     }
 
     private void Validate()
     {
-        if (_mainCamera != null)
+        if (mainCamera != null)
         {
-            _mainCamTransform = _mainCamera.transform;
-            _isReady = true;
+            mainCamTransform = mainCamera.transform;
+            isReady = true;
         }
         else
-            _isReady = false;
+            isReady = false;
 
-        if (_reflectionCamera != null)
+        if (reflectionCamera != null)
         {
-            _reflectionCamTransform = _reflectionCamera.transform;
-            _isReady = true;
+            reflectionCamTransform = reflectionCamera.transform;
+            isReady = true;
         }
         else
-            _isReady = false;
+            isReady = false;
 
-        if (_isReady && copyCameraParamerers)
+        if (isReady && copyCameraParamerers)
         {
             copyCameraParamerers = !copyCameraParamerers;
-            _reflectionCamera.CopyFrom(_mainCamera);
+            reflectionCamera.CopyFrom(mainCamera);
 
-            _reflectionCamera.targetTexture = outputTexture;
+            reflectionCamera.targetTexture = outputTexture;
         }
     }
 }

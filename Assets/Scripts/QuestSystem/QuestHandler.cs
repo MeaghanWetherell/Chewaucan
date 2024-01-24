@@ -11,23 +11,23 @@ namespace QuestSystem
     {
         public QuestObj questData;
 
-        private QuestNode _quest;
+        private QuestNode quest;
 
         //initialize the quest associated with this handler
-        public void StartQuest()
+        public void startQuest()
         {
-            _quest = QuestManager.questManager.CreateQuestNode(questData);
+            quest = QuestManager.questManager.createQuestNode(questData);
         }
 
         //progresses an objective on the quest associated with this handler passing it index and toAdd
         //index is the index of the objective being completed
         //toAdd is the amount of progress to add on that objective
         //if you only have one objective and you only want to add the default progress value for the quest, pass no parameters.
-        public bool ProgressObjective(int index = 0, float toAdd = 0)
+        public bool progressObjective(int index = 0, float toAdd = 0)
         {
-            if (_quest == null)
+            if (quest == null)
                 return false;
-            return _quest.AddCount(index, toAdd);
+            return quest.addCount(index, toAdd);
         }
 
     }

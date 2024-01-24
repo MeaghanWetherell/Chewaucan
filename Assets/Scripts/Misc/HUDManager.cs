@@ -13,8 +13,6 @@ namespace Misc
         
         public List<GameObject> pins;
 
-        public TextMeshProUGUI messageText;
-
         private void Awake()
         {
             hudManager = this;
@@ -22,35 +20,23 @@ namespace Misc
 
         private void OnEnable()
         {
-            messageText.gameObject.transform.parent.gameObject.SetActive(false);
-            StartCoroutine(WaitForQuestLoad());
-        }
-
-        public void DisplayMessageToHUD(String message)
-        {
-            messageText.gameObject.transform.parent.gameObject.SetActive(true);
-            messageText.text = message;
-        }
-
-        public void CloseMessage()
-        {
-            messageText.gameObject.transform.parent.gameObject.SetActive(false);
+            StartCoroutine(waitForQuestLoad());
         }
 
         //if the quest manager hasn't been initialized yet, wait a frame to set up quest pins
-        private IEnumerator WaitForQuestLoad()
+        private IEnumerator waitForQuestLoad()
         {
             while (QuestManager.questManager == null)
             {
                 yield return new WaitForSeconds(0);
             }
-            ResetPins();
+            resetPins();
         }
 
-        public void ResetPins()
+        public void resetPins()
         {
-            QuestNode[] pinNodes = QuestManager.questManager.GETPinNodes();
-            pinNodes.InsertionSort();
+            QuestNode[] pinNodes = QuestManager.questManager.getPinNodes();
+            pinNodes.insertionSort();
             GameObject pinField = transform.GetChild(0).gameObject;
             if (pinNodes[0] == null)
             {

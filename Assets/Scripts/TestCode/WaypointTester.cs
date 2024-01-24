@@ -10,8 +10,8 @@ namespace TestCode
 
         private void Start()
         {
-            StartQuest();
-            if (QuestManager.questManager.GETNode("wp" + waypointNumber).isComplete)
+            startQuest();
+            if (QuestManager.questManager.getNode("wp" + waypointNumber).isComplete)
             {
                 GameObject.Destroy(gameObject);
             }
@@ -19,8 +19,8 @@ namespace TestCode
 
         private void OnTriggerEnter(Collider other)
         {
-            ProgressObjective();
-            QuestManager.questManager.GETNode("reachallwp").AddCount(waypointNumber - 1);
+            progressObjective();
+            QuestManager.questManager.getNode("reachallwp").addCount(waypointNumber - 1);
             Destroy(this.gameObject);
         }
     }

@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEditor;
 
-public class CtiDetailsEnum : MaterialPropertyDrawer {
+public class CTI_DetailsEnum : MaterialPropertyDrawer {
 
-	public enum DetailMode
+	public enum detailMode
 	{
 	    Disabled = 0,
 	    Enabled = 1,
@@ -12,16 +12,16 @@ public class CtiDetailsEnum : MaterialPropertyDrawer {
 	    SkipBaseTextures = 3
 	}
 
-	DetailMode _status;
+	detailMode status;
 
 	override public void OnGUI (Rect position, MaterialProperty prop, string label, MaterialEditor editor)
 	{
 		
 		Material material = editor.target as Material;
 
-		_status = (DetailMode)((int)prop.floatValue);
-		_status = (DetailMode)EditorGUI.EnumPopup(position, label, _status);
-		prop.floatValue = (float)_status;
+		status = (detailMode)((int)prop.floatValue);
+		status = (detailMode)EditorGUI.EnumPopup(position, label, status);
+		prop.floatValue = (float)status;
 
 		if (prop.floatValue == 0.0f) {
 			material.DisableKeyword("GEOM_TYPE_BRANCH");

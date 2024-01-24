@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MovementSoundEffects : MonoBehaviour
 {
-    float _playSpeed = 0.9f;
-    List<AudioClip> _clipListStep;
-    List<AudioClip> _clipListJump;
-    List<AudioClip> _clipListLand;
-    AudioClip _previousClip;
-    AudioSource _playerAudio;
+    float playSpeed = 0.9f;
+    List<AudioClip> clipList_step;
+    List<AudioClip> clipList_jump;
+    List<AudioClip> clipList_land;
+    AudioClip previousClip;
+    AudioSource playerAudio;
 
-    CheckGroundTexture _groundTexture;
+    CheckGroundTexture groundTexture;
 
-    private bool _isPlaying;
+    private bool isPlaying;
 
     public MovementSounds rockSounds;
     public MovementSounds grassSounds;
@@ -24,46 +24,46 @@ public class MovementSoundEffects : MonoBehaviour
 
     private void Start()
     {
-        _playerAudio = GetComponent<AudioSource>();
-        _groundTexture = GetComponent<CheckGroundTexture>();
-        _isPlaying = false;
+        playerAudio = GetComponent<AudioSource>();
+        groundTexture = GetComponent<CheckGroundTexture>();
+        isPlaying = false;
     }
 
     //Plays the walking sounds if the coroutine is not already running
     public void PlayWalkingSound()
     {
-        if (!_isPlaying)
+        if (!isPlaying)
         {
-            float[] values = _groundTexture.GetValues();
+            float[] values = groundTexture.GetValues();
             //Debug.Log(values[0]+" "+ values[1] + " " + values[2] + " " + values[3] + " " + values[4] + " " + values[5] + " " + values[6] + " " + values[7]);
             SetSoundList(values);
-            StartCoroutine(PlaySound(_clipListStep));
+            StartCoroutine(PlaySound(clipList_step));
         }
     }
 
     public void PlayJumpSound()
     {
         StopAllCoroutines();
-        _isPlaying = false;
-        float[] values = _groundTexture.GetValues();
+        isPlaying = false;
+        float[] values = groundTexture.GetValues();
         SetSoundList(values);
-        StartCoroutine(PlaySound(_clipListJump));
+        StartCoroutine(PlaySound(clipList_jump));
         
     }
 
     public void PlayLandSound()
     {
-        if (!_isPlaying)
+        if (!isPlaying)
         {
-            float[] values = _groundTexture.GetValues();
+            float[] values = groundTexture.GetValues();
             SetSoundList(values);
-            StartCoroutine(PlaySound(_clipListLand));
+            StartCoroutine(PlaySound(clipList_land));
         }
     }
 
     public void PlaySwimSound()
     {
-        if (!_isPlaying)
+        if (!isPlaying)
         {
             StartCoroutine(SwimSound());
         }
@@ -71,14 +71,14 @@ public class MovementSoundEffects : MonoBehaviour
 
     IEnumerator SwimSound()
     {
-        _isPlaying = true;
+        isPlaying = true;
 
-        _playerAudio.clip = swimSounds;
-        _playerAudio.Play();
+        playerAudio.clip = swimSounds;
+        playerAudio.Play();
 
-        yield return new WaitForSeconds(_playerAudio.clip.length);
+        yield return new WaitForSeconds(playerAudio.clip.length);
 
-        _isPlaying = false;
+        isPlaying = false;
     }
 
     /**
@@ -86,22 +86,22 @@ public class MovementSoundEffects : MonoBehaviour
      */
     IEnumerator PlaySound(List<AudioClip> clipList)
     {
-        _isPlaying = true;
+        isPlaying = true;
 
         AudioClip clip = GetClip(clipList);
 
-        _playerAudio.clip = clip;
-        _playerAudio.Play();
-        yield return new WaitForSeconds(_playerAudio.clip.length * _playSpeed);
+        playerAudio.clip = clip;
+        playerAudio.Play();
+        yield return new WaitForSeconds(playerAudio.clip.length * playSpeed);
 
-        _isPlaying = false;
+        isPlaying = false;
     }
 
     AudioClip GetClip(List<AudioClip> clipArray)
     {
         int attempts = 3;
         AudioClip selectedClip = clipArray[Random.Range(0, clipArray.Count - 1)];
-        while (selectedClip == _previousClip && attempts > 0)
+        while (selectedClip == previousClip && attempts > 0)
         {
             selectedClip =
             clipArray[Random.Range(0, clipArray.Count - 1)];
@@ -109,45 +109,45 @@ public class MovementSoundEffects : MonoBehaviour
             attempts--;
         }
 
-        _previousClip = selectedClip;
+        previousClip = selectedClip;
         return selectedClip;
     }
 
-    public void SetPlaySpeed(float s)
+    public void setPlaySpeed(float s)
     {
-        _playSpeed = s;
+        playSpeed = s;
     }
 
     void SetSoundList(float[] textureVals)
     {
         if (textureVals[0] > 0.5f)
         {
-            _clipListStep = gravelSounds.stepSounds;
-            _clipListJump = gravelSounds.jumpSounds;
-            _clipListLand = gravelSounds.landSounds;
+            clipList_step = gravelSounds.stepSounds;
+            clipList_jump = gravelSounds.jumpSounds;
+            clipList_land = gravelSounds.landSounds;
             return;
         }
 
         if (textureVals[1] > 0.5f)
         {
-            _clipListStep = soilSounds.stepSounds;
-            _clipListJump = soilSounds.jumpSounds;
-            _clipListLand = soilSounds.landSounds;
+            clipList_step = soilSounds.stepSounds;
+            clipList_jump = soilSounds.jumpSounds;
+            clipList_land = soilSounds.landSounds;
             return;
         }
 
         if (textureVals[7] > 0.5f)
         {
-            _clipListStep = grassSounds.stepSounds;
-            _clipListJump = grassSounds.jumpSounds;
-            _clipListLand = grassSounds.landSounds;
+            clipList_step = grassSounds.stepSounds;
+            clipList_jump = grassSounds.jumpSounds;
+            clipList_land = grassSounds.landSounds;
             return;
         }
 
         //indexes 2-6 are rock textures, so it is treated as the default sounds to play
         //if none of the above if statements are true
-        _clipListStep = rockSounds.stepSounds;
-        _clipListJump = rockSounds.jumpSounds;
-        _clipListLand = rockSounds.landSounds;
+        clipList_step = rockSounds.stepSounds;
+        clipList_jump = rockSounds.jumpSounds;
+        clipList_land = rockSounds.landSounds;
     }
 }

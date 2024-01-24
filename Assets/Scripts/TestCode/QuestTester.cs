@@ -10,14 +10,14 @@ namespace TestCode
 
         private void Start()
         {
-            StartQuest();
+            startQuest();
         }
 
         void Update()
         {
             if (Input.GetKeyDown(key))
             {
-                ProgressObjective();
+                progressObjective();
             }
         }
     }

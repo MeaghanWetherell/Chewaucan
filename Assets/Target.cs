@@ -19,14 +19,14 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     //renderer is the color we add when its moused over
-    private Renderer _renderer;
-    Vector3 _worldPosition;
-    Plane _plane = new Plane(Vector3.up, 0);
+    private Renderer renderer;
+    Vector3 worldPosition;
+    Plane plane = new Plane(Vector3.up, 0);
 
 
     void Start() {
         //when we start, make renderer the render of the object tied to this script
-        _renderer = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
         
     }
 
@@ -39,14 +39,14 @@ public class Target : MonoBehaviour
 
         //This works! If within 10, we can highlight the target.
         if (Physics.Raycast(ray, out hitData, 10)) {
-            _worldPosition = hitData.point;
-            _renderer.material.color = Color.red;
-            print(_worldPosition);
+            worldPosition = hitData.point;
+            renderer.material.color = Color.red;
+            print(worldPosition);
         }
     }
 
     private void OnMouseExit() {
         //when mouse exits, turn that color highlight off. White is default, no overlay.
-        _renderer.material.color = Color.white;
+        renderer.material.color = Color.white;
     }
 }

@@ -10,9 +10,9 @@ using System.Reflection;
 [InitializeOnLoad]
 public class ReadmeEditor : Editor {
 	
-	static string _kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
+	static string kShowedReadmeSessionStateName = "ReadmeEditor.showedReadme";
 	
-	static float _kSpace = 16f;
+	static float kSpace = 16f;
 	
 	static ReadmeEditor()
 	{
@@ -21,10 +21,10 @@ public class ReadmeEditor : Editor {
 	
 	static void SelectReadmeAutomatically()
 	{
-		if (!SessionState.GetBool(_kShowedReadmeSessionStateName, false ))
+		if (!SessionState.GetBool(kShowedReadmeSessionStateName, false ))
 		{
 			var readme = SelectReadme();
-			SessionState.SetBool(_kShowedReadmeSessionStateName, true);
+			SessionState.SetBool(kShowedReadmeSessionStateName, true);
 			
 			if (readme && !readme.loadedLayout)
 			{
@@ -98,46 +98,46 @@ public class ReadmeEditor : Editor {
 					Application.OpenURL(section.url);
 				}
 			}
-			GUILayout.Space(_kSpace);
+			GUILayout.Space(kSpace);
 		}
 	}
 	
 	
-	bool _mInitialized;
+	bool m_Initialized;
 	
-	GUIStyle LinkStyle { get { return mLinkStyle; } }
-	[SerializeField] GUIStyle mLinkStyle;
+	GUIStyle LinkStyle { get { return m_LinkStyle; } }
+	[SerializeField] GUIStyle m_LinkStyle;
 	
-	GUIStyle TitleStyle { get { return mTitleStyle; } }
-	[SerializeField] GUIStyle mTitleStyle;
+	GUIStyle TitleStyle { get { return m_TitleStyle; } }
+	[SerializeField] GUIStyle m_TitleStyle;
 	
-	GUIStyle HeadingStyle { get { return mHeadingStyle; } }
-	[SerializeField] GUIStyle mHeadingStyle;
+	GUIStyle HeadingStyle { get { return m_HeadingStyle; } }
+	[SerializeField] GUIStyle m_HeadingStyle;
 	
-	GUIStyle BodyStyle { get { return mBodyStyle; } }
-	[SerializeField] GUIStyle mBodyStyle;
+	GUIStyle BodyStyle { get { return m_BodyStyle; } }
+	[SerializeField] GUIStyle m_BodyStyle;
 	
 	void Init()
 	{
-		if (_mInitialized)
+		if (m_Initialized)
 			return;
-		mBodyStyle = new GUIStyle(EditorStyles.label);
-		mBodyStyle.wordWrap = true;
-		mBodyStyle.fontSize = 14;
+		m_BodyStyle = new GUIStyle(EditorStyles.label);
+		m_BodyStyle.wordWrap = true;
+		m_BodyStyle.fontSize = 14;
 		
-		mTitleStyle = new GUIStyle(mBodyStyle);
-		mTitleStyle.fontSize = 26;
+		m_TitleStyle = new GUIStyle(m_BodyStyle);
+		m_TitleStyle.fontSize = 26;
 		
-		mHeadingStyle = new GUIStyle(mBodyStyle);
-		mHeadingStyle.fontSize = 18 ;
+		m_HeadingStyle = new GUIStyle(m_BodyStyle);
+		m_HeadingStyle.fontSize = 18 ;
 		
-		mLinkStyle = new GUIStyle(mBodyStyle);
-		mLinkStyle.wordWrap = false;
+		m_LinkStyle = new GUIStyle(m_BodyStyle);
+		m_LinkStyle.wordWrap = false;
 		// Match selection color which works nicely for both light and dark skins
-		mLinkStyle.normal.textColor = new Color (0x00/255f, 0x78/255f, 0xDA/255f, 1f);
-		mLinkStyle.stretchWidth = false;
+		m_LinkStyle.normal.textColor = new Color (0x00/255f, 0x78/255f, 0xDA/255f, 1f);
+		m_LinkStyle.stretchWidth = false;
 		
-		_mInitialized = true;
+		m_Initialized = true;
 	}
 	
 	bool LinkLabel (GUIContent label, params GUILayoutOption[] options)

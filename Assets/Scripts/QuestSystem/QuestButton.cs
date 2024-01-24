@@ -22,7 +22,7 @@ namespace QuestSystem
         //when the button is clicked, bring up a more detailed description
         private void OnClick()
         {
-            DescriptionBoxManager.descriptionBoxManager.SendNewNode(node);
+            DescriptionBoxManager.descriptionBoxManager.sendNewNode(node);
         }
     }
 }

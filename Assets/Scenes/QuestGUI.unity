@@ -642,17 +642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389cdb4c275d0554db42e2ba109c0458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node:
-    name: 
-    ID: 
-    shortDescription: 
-    longDescription: 
-    objectives: []
-    requiredCounts: []
-    counts: []
-    countsPerAction: []
-    isComplete: 0
-    isPinned: 0
 --- !u!1 &992748704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,8 +1262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a678b13379a213243b5276b03fdc962e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {x: 200, y: -200, z: 0}
   questButton: {fileID: 9160324951683126051, guid: b7718c7c9edbb0a4a8826f5b4ae16f2e, type: 3}
   scrollContent: {fileID: 309230898}
+  height: 100
 --- !u!114 &1667079720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1336,7 +1327,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1667079723
 RectTransform:

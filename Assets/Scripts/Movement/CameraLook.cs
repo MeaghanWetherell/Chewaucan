@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,23 +12,10 @@ public class CameraLook : MonoBehaviour
     public Transform mainCamera;
     public InputActionReference lookRef;
 
-    Vector2 _lookInput;
-    float _xRotation;
-
-    //subscribe to event functions
-    private void Start()
-    {
-        PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
-    }
-
-    //unsubscribe
-    private void OnDestroy()
-    {
-        PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
-    }
-
+    Vector2 lookInput;
+    float xRotation;
+    
+    // Start is called before the first frame update
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked; //hides the cursor
@@ -47,13 +33,13 @@ public class CameraLook : MonoBehaviour
     void Update()
     {
         //This code could be altered to only allow camera rotation in the vertical direction, since AD already rotates horizontal
-        float mouseX = _lookInput.x * mouseSensitivity * Time.deltaTime;
-        float mouseY = _lookInput.y * mouseSensitivity * Time.deltaTime;
+        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
+        float mouseY = lookInput.y * mouseSensitivity * Time.deltaTime;
 
-        _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90f, minViewDist);
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, minViewDist);
 
-        mainCamera.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+        mainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -61,28 +47,16 @@ public class CameraLook : MonoBehaviour
     {
         if (!(this.GetComponent<PlayerMovement>().DiveOngoing()))
         {
-            _lookInput = context.ReadValue<Vector2>();
+            lookInput = context.ReadValue<Vector2>();
         }
         else
         {
-            _lookInput = Vector3.zero;
+            lookInput = Vector3.zero;
         }
     }
 
-    public void SetMinDist(float n)
+    public void setMinDist(float n)
     {
         minViewDist = n;
-    }
-
-    //disable look on pause
-    private void OnPause()
-    {
-        this.enabled = false;
-    }
-
-    //reenable on resume
-    private void OnResume()
-    {
-        this.enabled = true;
     }
 }

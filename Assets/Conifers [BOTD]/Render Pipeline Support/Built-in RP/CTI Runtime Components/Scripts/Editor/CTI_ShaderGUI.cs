@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
-public class CtiShaderGUI : ShaderGUI  {
+public class CTI_ShaderGUI : ShaderGUI  {
 
     protected Color avrgCol = Color.gray;
 
@@ -52,7 +52,7 @@ public class CtiShaderGUI : ShaderGUI  {
             GUILayout.Space(8);
             if (GUILayout.Button("Get average Color")) {
                 if (targetMat.HasProperty("_MainTex") && targetMat.GetTexture("_MainTex") != null) {
-                    GETAverageColor( targetMat.GetTexture("_MainTex") as Texture2D );
+                    getAverageColor( targetMat.GetTexture("_MainTex") as Texture2D );
                 }
                 else if (targetMat.HasProperty("_MainTexArray") && targetMat.GetTexture("_MainTexArray") != null) {
                     Texture2DArray sourceTex = targetMat.GetTexture("_MainTexArray") as Texture2DArray;
@@ -70,7 +70,7 @@ public class CtiShaderGUI : ShaderGUI  {
 
     }
 
-    private void GETAverageColor(Texture2D sourceTex) {
+    private void getAverageColor(Texture2D sourceTex) {
         bool wasReadable = false;
         string path = AssetDatabase.GetAssetPath(sourceTex);
         TextureImporter ti = (TextureImporter) TextureImporter.GetAtPath(path);

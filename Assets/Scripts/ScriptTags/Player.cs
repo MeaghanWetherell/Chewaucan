@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ScriptTags
@@ -6,14 +5,9 @@ namespace ScriptTags
     public class Player : MonoBehaviour
     {
         public static GameObject player;
-        void OnEnable()
+        void Awake()
         {
             player = this.gameObject;
-        }
-
-        private void OnDisable()
-        {
-            player = null;
         }
     }
 }

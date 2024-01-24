@@ -45,13 +45,13 @@ public class SceneAnnotation : MonoBehaviour, IComparable<SceneAnnotation>
 [CustomEditor(typeof(SceneAnnotation))]
 public class SceneAnnotationEditor : Editor
 {
-    private static readonly string UxmlPath = "SceneAnnotation";
+    private static readonly string UXMLPath = "SceneAnnotation";
     public static bool isLoaded = false;
 
     public override VisualElement CreateInspectorGUI()
     {
         var root = new VisualElement();
-        var visualTree = Resources.Load<VisualTreeAsset>(UxmlPath);
+        var visualTree = Resources.Load<VisualTreeAsset>(UXMLPath);
         VisualElement inspectorUI = visualTree.CloneTree();
 
         root.Add(inspectorUI);
