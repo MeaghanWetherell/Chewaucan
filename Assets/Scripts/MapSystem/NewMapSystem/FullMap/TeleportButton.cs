@@ -16,7 +16,7 @@ public class TeleportButton : MonoBehaviour
 
     public void Teleport()
     {
-        PlayerPositionManager.playerPositionManager.setPlayerPosition(teleportTo);
+        PlayerPositionManager.playerPositionManager.setPlayerPosition(teleportTo, 0);
         SceneManager.LoadScene("Modern Map");
     }
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
@@ -8,39 +10,29 @@ public class PlayerPositionManager : MonoBehaviour
 {
     public static PlayerPositionManager playerPositionManager;
 
-    private Vector3 currentPlayerPosition;
+    //index 0 is modern, index 1 is pleistocene
+    private List<Vector3> nextPlayerPosition = new List<Vector3>();
+    
     private GameObject player;
     
-    // Start is called before the first frame update
     void Start()
     {
+        nextPlayerPosition.Add(Vector3.zero);
+        nextPlayerPosition.Add(Vector3.zero);
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
         playerPositionManager = this;
         DontDestroyOnLoad(transform.gameObject);
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    public Vector3 getCurrentPlayerPosition(int index)
     {
-        if (player != null)
-        {
-            if (currentPlayerPosition != player.transform.position)
-            {
-                currentPlayerPosition = player.transform.position;
-                //Debug.Log("Current Position: " + currentPlayerPosition);
-            }
-        }
+        return nextPlayerPosition[index];
     }
 
-    public Vector3 getCurrentPlayerPosition()
+    public void setPlayerPosition(Vector3 position, int index)
     {
-        return currentPlayerPosition;
-    }
-
-    public void setPlayerPosition(Vector3 position)
-    {
-        currentPlayerPosition = position;
+        nextPlayerPosition[index] = position;
     }
 
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
@@ -48,10 +40,7 @@ public class PlayerPositionManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            if (player.transform.position != currentPlayerPosition)
-            {
-                player.transform.position = currentPlayerPosition;
-            }
+            player.transform.position = nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
         }
     }
 }

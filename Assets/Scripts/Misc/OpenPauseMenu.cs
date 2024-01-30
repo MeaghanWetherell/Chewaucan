@@ -22,9 +22,9 @@ namespace Misc
 
         private void OpenPause(InputAction.CallbackContext context)
         {
-            if (MainSceneDataSaver.mainSceneDataSaver.curMenu != null)
+            if (LoadGUIManager.loadGUIManager.isGUIOPen())
             {
-                MainSceneDataSaver.mainSceneDataSaver.curMenu.ONOpenTrigger();
+                LoadGUIManager.loadGUIManager.CloseOpenGUI();
             }
             else
             {
