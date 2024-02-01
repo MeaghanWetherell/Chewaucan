@@ -57,6 +57,11 @@ namespace Misc
 
         public void Load(String toLoad)
         {
+            if (toLoad.Equals(GUIName) || toLoad.Equals(""))
+            {
+                CloseOpenGUI();
+                return;
+            }
             CloseOpenGUI();
             GUIName = toLoad;
             PauseCallback.pauseManager.Pause();
