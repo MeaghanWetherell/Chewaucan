@@ -11,14 +11,7 @@ public class RotateDialHand : MonoBehaviour
     [SerializeField] private float minRotation = -180f;
     [SerializeField] private float maxRotation = 0f;
 
-    //the rotation values can be weird in the editor itself, so this keeps track
-    // of how far the hand is rotated instead
-    private float curRotationAmount = 0f;
 
-    private void Start()
-    {
-        curRotationAmount = 0f;
-    }
     public void SelectHand(GameObject obj)
     {
         selectedHand = obj.GetComponent<RectTransform>();

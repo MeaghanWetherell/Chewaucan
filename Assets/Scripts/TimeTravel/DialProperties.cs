@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DialProperties : MonoBehaviour
 {
+
+    //the rotation values can be weird in the editor itself, so this keeps track
+    // of how far the hand is rotated instead
     private float curRotationAmount;
 
     
