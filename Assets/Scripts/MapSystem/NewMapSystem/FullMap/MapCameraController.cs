@@ -85,7 +85,6 @@ public class MapCameraController : MonoBehaviour
         {
             mapCameraObj.transform.position = Vector3.Lerp(mapCameraObj.transform.position, targetPos, Time.deltaTime * dragRate);
             dragRate = dragRate - ( dragSpeed / (frameRate/2) );
-            Debug.Log(dragRate);
             yield return new WaitForEndOfFrame();
         }
 
