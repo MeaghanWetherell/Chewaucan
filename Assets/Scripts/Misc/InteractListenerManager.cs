@@ -45,7 +45,8 @@ namespace Misc
                 _listenerPriority = priority;
                 _listenerIndexToCall = indexToCall;
                 _gen.GetId(toChange, out temp);
-                HUDManager.hudManager.DisplayMessageToHUD("Press E to interact");
+                String key = interact.action.bindings[0].ToDisplayString();
+                HUDManager.hudManager.DisplayMessageToHUD("Press "+key+" to interact");
                 return true;
             }
             return false;

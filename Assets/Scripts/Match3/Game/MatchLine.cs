@@ -28,18 +28,18 @@ namespace Match3
         public List<Transform> snapPoints = new List<Transform>();
 
         //how long the line should wait between spawning new bones
-        private static float _waitTime = 0.25f;
+        public const float WaitTime = 0.25f;
 
         [Tooltip("Match object prefab")]public GameObject matchObjPrefab;
-
-        //the number of match objects queued to be spawned
-        private int _toSpawn;
 
         //the time at which the line should start spawning objects initially, set on enable
         private float _spawnTime;
 
         //determines the size of newly created match objects
         private float _scaleFactor = 0;
+        
+        //the number of match objects queued to be spawned
+        private int _toSpawn;
 
         //generates the snap point list and starts the spawner
         private void OnEnable()
@@ -51,7 +51,7 @@ namespace Match3
                 snapPoints.Add(temp);
             }
             myObjects = new MatchObject[height];
-            _spawnTime = Time.time + _waitTime;
+            _spawnTime = Time.time + WaitTime;
             _toSpawn = height;
             StartCoroutine(Spawner());
         }
@@ -75,7 +75,7 @@ namespace Match3
                 {
                     _toSpawn--;
                     AddObject();
-                    yield return new WaitForSeconds(_waitTime);
+                    yield return new WaitForSeconds(WaitTime);
                 }
                 else
                 {
@@ -103,12 +103,33 @@ namespace Match3
             BubbleDown(0);
         }
 
+        //removes a matchobject at the specified index, performing clean up to keep the internal array accurate
+        public void RemoveObject(int indexToRemove)
+        {
+            myObjects[indexToRemove].Remove();
+            myObjects[indexToRemove] = null;
+        }
+
+        public void SetToSpawn(int toSet)
+        {
+            CleanUp();
+            _toSpawn = toSet;
+        }
+        
+        private void CleanUp()
+        {
+            for (int i = 0; i < myObjects.Length - 1; i++)
+            {
+                BubbleDown(i);
+            }
+        }
+        
         //bubbles the object at the passed index to the lowest open spot in the match object array
         private void BubbleDown(int index)
         {
             if (myObjects[index] == null)
                 return;
-            for (int i = index; i <= myObjects.Length - 2; i++)
+            for (int i = index; i < myObjects.Length - 1; i++)
             {
                 if (myObjects[i + 1] == null)
                 {
@@ -121,18 +142,6 @@ namespace Match3
                     break;
                 }
             }
-        }
-
-        //removes a matchobject at the specified index, performing clean up to keep the internal array accurate
-        public void RemoveObject(int indexToRemove)
-        {
-            myObjects[indexToRemove].Remove();
-            myObjects[indexToRemove] = null;
-            for (int i = indexToRemove-1; i >= 0; i--)
-            {
-                BubbleDown(i);
-            }
-            _toSpawn++;
         }
     }
 }

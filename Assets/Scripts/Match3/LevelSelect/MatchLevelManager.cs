@@ -55,7 +55,7 @@ namespace Match3
             MatchLine.shouldRotate = levels[index].rotate;
             _curIndex = index;
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Match3");
-            //UnityEngine.Random.InitState(170);
+            UnityEngine.Random.InitState(170);
         }
         
         //sets up the match object valid mesh list

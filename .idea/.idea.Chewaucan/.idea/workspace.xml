@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/RebindMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/RebindMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/BindingManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/BindingManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/InstantiateKeyRebinds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/InstantiateKeyRebinds.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchLine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchLine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/InteractListenerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/InteractListenerManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/TimeScaler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/SortExtension.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/fe7039efe678478d9c83e73bc6a6566d94b400/46/349f5192/SerializedObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUIManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchSoundEffects.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/GridCoordinate.cs" root0="FORCE_HIGHLIGHTING" />
@@ -61,6 +63,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/ScrollRect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/QuitButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TestCode/WaypointTester.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneTextSetter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/OpenPauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
@@ -102,10 +105,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="77744">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="77744" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -173,7 +176,8 @@
       <workItem from="1706649037666" duration="12504000" />
       <workItem from="1706810569975" duration="696000" />
       <workItem from="1707008206155" duration="3223000" />
-      <workItem from="1707677564391" duration="479000" />
+      <workItem from="1707677564391" duration="9373000" />
+      <workItem from="1707687046248" duration="678000" />
     </task>
     <servers />
   </component>
@@ -230,16 +234,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs</url>
-          <line>425</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\Game\MatchGrid.cs" initialLine="425" containingFunctionPresentation="method 'OnPause'">
+          <line>131</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\Game\MatchGrid.cs" initialLine="131" containingFunctionPresentation="method 'CheckForLock'">
             <startOffsets>
-              <option value="16530" />
+              <option value="4856" />
             </startOffsets>
             <endOffsets>
-              <option value="16547" />
+              <option value="4902" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="55" />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs</url>
+          <line>252</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\Game\MatchGrid.cs" initialLine="252" containingFunctionPresentation="method 'DetectMatches'">
+            <startOffsets>
+              <option value="9339" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9340" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="76" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -257,5 +274,10 @@
         <PinnedItemInfo parentTag="Type#Match3.MatchGrid" memberName="removalQueue" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
+        <watch expression="cur" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

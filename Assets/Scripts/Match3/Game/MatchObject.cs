@@ -39,7 +39,7 @@ namespace Match3
             myType = validMeshes[temp];
             this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
             this.gameObject.GetComponent<MeshRenderer>().material = _meshes[myType].material;
-            myGroup = _meshes[myType].@group.ToLower();
+            myGroup = _meshes[myType].group.ToLower();
         }
 
         //move toward a snap point

@@ -32,7 +32,7 @@ namespace Match3
         [Tooltip("The minimum required amount of mouse movement for the system to register the user trying to move a bone")]
         public float minMovementMagnitude;
         
-        //All match objects in the grid
+        //All match objects in the grid. Each matchobject array is a line DOWNWARDS
         private List<MatchObject[]> _objects = new List<MatchObject[]>();
         
         //all subordinate match lines
@@ -42,7 +42,7 @@ namespace Match3
         private bool _waitingOnMatchCheck;
 
         //queue of coordinates of match objects to remove
-        private Queue<List<MatchObject>> _removalQueue = new Queue<List<MatchObject>>();
+        private List<List<GridCoordinate>> _removalQueue = new List<List<GridCoordinate>>();
 
         //the object that the user is currently holding down the cursor on
         private MatchObject _activeObject;
@@ -53,16 +53,40 @@ namespace Match3
         //whether the game is paused
         private bool _isPaused = false;
 
+        //list containing grid coords representing each valid direction on the grid (horizontal/vertical both ways)
+        private GridCoordinate[][] allDirs = new GridCoordinate[2][];
+
         //subscribe to pause callbacks
         private void Awake()
         {
             PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
             PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
             matchGrid = this;
+            allDirs[0] = new GridCoordinate[2];
+            allDirs[0][0] = new GridCoordinate(1, 0);
+            allDirs[0][1] = new GridCoordinate(-1, 0);
+            allDirs[1] = new GridCoordinate[2];
+            allDirs[1][0] = new GridCoordinate(0, 1);
+            allDirs[1][1] = new GridCoordinate(0, -1);
             FillGrid();
-            StartCoroutine(RemoveObjs());
-            StartCoroutine(WaitToCheckMatch(2));
+            StartCoroutine(WaitForMatchCheck(MatchLine.WaitTime * (height + 1)));
+            StartCoroutine(CheckForRemoval());
             StartCoroutine(CheckForLock());
+        }
+        
+        //if the grid isn't busy, lets the user move a match object
+        private void FixedUpdate()
+        {
+            if (_removalQueue.Count > 0 || _waitingOnMatchCheck)
+                return;
+            if (_activeObject != null)
+            {
+                Vector2 changeInMousePos = mousePos.action.ReadValue<Vector2>()-_initialMousePos;
+                if (changeInMousePos.magnitude > minMovementMagnitude)
+                {
+                    MoveMatchObj(changeInMousePos);
+                }
+            }
         }
         
         //unsubscribe to prevent leaks
@@ -87,24 +111,238 @@ namespace Match3
             click.action.canceled += ClickAction;
         }
 
-        //if the grid isn't busy, lets the user move a match object
-        private void FixedUpdate()
+        private IEnumerator WaitForMatchCheck(float time)
         {
-            // ReSharper disable once NotAccessedVariable
-            List<MatchObject> temp;
-            if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
-                return;
-            CheckMatches();
-            if (_removalQueue.TryPeek(out temp) || _waitingOnMatchCheck)
-                return;
-            if (_activeObject != null)
+            _waitingOnMatchCheck = true;
+            yield return new WaitForSeconds(time);
+            _waitingOnMatchCheck = false;
+        }
+
+        private IEnumerator CheckForLock()
+        {
+            while (true)
             {
-                Vector2 changeInMousePos = mousePos.action.ReadValue<Vector2>()-_initialMousePos;
-                if (changeInMousePos.magnitude > minMovementMagnitude)
+                bool found = false;
+                if (!_waitingOnMatchCheck && _removalQueue.Count == 0)
                 {
-                    MoveMatchObj(changeInMousePos);
+                    for (int i = 0; i < _objects.Count; i++)
+                    {
+                        for (int j = 0; j < _objects[i].Length; j++)
+                        {
+                            GridCoordinate cur = new GridCoordinate(i, j);
+                            if (i > 0)
+                            {
+                                Swap(new GridCoordinate(i-1, j), cur);
+                                found = DetectMatches();
+                                Swap(new GridCoordinate(i-1, j), cur);
+                                if (found)
+                                    break;
+                            }
+                            if (i < _objects.Count-1)
+                            {
+                                Swap(new GridCoordinate(i+1, j), cur);
+                                found = DetectMatches();
+                                Swap(new GridCoordinate(i+1, j), cur);
+                                if (found)
+                                    break;
+                            }
+                            if (j > 0)
+                            {
+                                Swap(new GridCoordinate(i, j-1), cur);
+                                found = DetectMatches();
+                                Swap(new GridCoordinate(i, j-1), cur);
+                                if (found)
+                                    break;
+                            }
+                            if (j < _objects[i].Length-1)
+                            {
+                                Swap(new GridCoordinate(i, j+1), cur);
+                                found = DetectMatches();
+                                Swap(new GridCoordinate(i, j+1), cur);
+                                if (found)
+                                    break;
+                            }
+                        }
+                        if(found)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    found = true;
+                }
+                if (found || DetectMatches())
+                {
+                    _removalQueue = new List<List<GridCoordinate>>();
+                    yield return new WaitForSeconds(0.6f);
+                }
+                else
+                {
+                    MatchUIManager.matchUIManager.EndGame("No matches remaining!");
                 }
             }
+        }
+
+        private IEnumerator CheckForRemoval()
+        {
+            while (true)
+            {
+                if (!_waitingOnMatchCheck && _removalQueue.Count == 0)
+                {
+                    if (DetectMatches())
+                    {
+                        StartCoroutine(Remove());
+                    }
+                }
+                yield return new WaitForSeconds(0);
+            }
+        }
+
+        private IEnumerator Remove()
+        {
+            _waitingOnMatchCheck = true;
+            int index = 0;
+            int[] missing = new int[_lines.Count];
+            while (index < _removalQueue.Count)
+            {
+                foreach (GridCoordinate coord in _removalQueue[index])
+                {
+                    _lines[coord.x].RemoveObject(coord.y);
+                    missing[coord.x] += 1;
+                }
+                ScoreTracker.scoreTracker.AddScore(_removalQueue[index].Count);
+                index++;
+                yield return new WaitForSeconds(0.4f);
+            }
+            int max = 0;
+            for (int i = 0; i < missing.Length; i++)
+            {
+                _lines[i].SetToSpawn(missing[i]);
+                if (missing[i] > max)
+                    max = missing[i];
+            }
+            yield return new WaitForSeconds(MatchLine.WaitTime * (max+1));
+            _waitingOnMatchCheck = false;
+            _removalQueue = new List<List<GridCoordinate>>();
+        }
+        
+        //after the passed time, swaps coordinates a and b in the grid
+        private IEnumerator WaitToSwapBack(float time, GridCoordinate a, GridCoordinate b)
+        {
+            _waitingOnMatchCheck = true;
+            yield return new WaitForSeconds(time);
+            _waitingOnMatchCheck = false;
+            Swap(a, b);
+        }
+
+        //registers that the user has clicked on a match object
+        public void RegisterActiveMatchObj(MatchObject obj)
+        {
+            if (_isPaused)
+                return;
+            _activeObject = obj;
+            _initialMousePos = mousePos.action.ReadValue<Vector2>();
+        }
+
+        private bool DetectMatches()
+        {
+            bool retval = false;
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                for (int j = 0; j < _objects[i].Length; j++)
+                {
+                    GridCoordinate cur = new GridCoordinate(i, j);
+                    if(CheckContains(cur))
+                        continue;
+                    List<GridCoordinate> matchMain = new List<GridCoordinate>();
+                    matchMain.Add(cur);
+                    int index = 0;
+                    while (index < matchMain.Count)
+                    {
+                        cur = matchMain[index];
+                        foreach (GridCoordinate[] hv in allDirs)
+                        {
+                            List<GridCoordinate> matchTemp = new List<GridCoordinate>();
+                            cur = FindFurthestInDir(cur, hv[0]);
+                            matchTemp.Add(cur);
+                            DetectMatchHelper(matchTemp, cur, hv[1]);
+                            if (matchTemp.Count >= 3)
+                            {
+                                foreach (GridCoordinate coord in matchTemp)
+                                {
+                                    AddIfNotExist(matchMain, coord);
+                                }
+                            }
+                        }
+                        index++;
+                    }
+                    if (matchMain.Count >= 3)
+                    {
+                        _removalQueue.Add(matchMain);
+                        retval = true;
+                    }
+                    
+                }
+            }
+            return retval;
+        }
+
+        private GridCoordinate FindFurthestInDir(GridCoordinate cur, GridCoordinate dir)
+        {
+            GridCoordinate nextCandidate = new GridCoordinate(cur.x + dir.x, cur.y + dir.y);
+            if (nextCandidate.x < 0 || nextCandidate.x >= _objects.Count || nextCandidate.y < 0 ||
+                nextCandidate.y >= _objects[nextCandidate.x].Length)
+                return cur;
+            if (GetByCoordinate(nextCandidate).CompareTo(GetByCoordinate(cur)) == 0)
+            {
+                return FindFurthestInDir(nextCandidate, dir);
+            }
+            return cur;
+        }
+
+        private void DetectMatchHelper(List<GridCoordinate> vals, GridCoordinate last, GridCoordinate dir)
+        {
+            GridCoordinate nextCandidate = new GridCoordinate(last.x + dir.x, last.y + dir.y);
+            if (nextCandidate.x < 0 || nextCandidate.x >= _objects.Count || nextCandidate.y < 0 ||
+                nextCandidate.y >= _objects[nextCandidate.x].Length)
+                return;
+            if (GetByCoordinate(nextCandidate).CompareTo(GetByCoordinate(last)) == 0)
+            {
+                AddIfNotExist(vals, nextCandidate);
+                DetectMatchHelper(vals, nextCandidate, dir);
+            }
+        }
+
+        private bool CheckContains(GridCoordinate check)
+        {
+            foreach (List<GridCoordinate> match in _removalQueue)
+            {
+                foreach (GridCoordinate coord in match)
+                {
+                    if (check.CompareTo(coord) == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void AddIfNotExist(List<GridCoordinate> coords, GridCoordinate coord)
+        {
+            foreach (GridCoordinate check in coords)
+            {
+                if (check.CompareTo(coord) == 0)
+                    return;
+            }
+            coords.Add(coord);
+        }
+
+        private MatchObject GetByCoordinate(GridCoordinate coord)
+        {
+            return _objects[coord.x][coord.y];
         }
 
         //initializes the grid
@@ -124,226 +362,30 @@ namespace Match3
             }
         }
 
-        //every 0.6 seconds, checks the game for a lock state and ends the game on lock
-        IEnumerator CheckForLock()
+        private void OnPause()
         {
-            while (true)
-            {
-                if (!_waitingOnMatchCheck)
-                {
-                    if (!DetectMatchesPossible())
-                    {
-                        MatchUIManager.matchUIManager.EndGame("No valid matches remaining!");
-                        break;
-                    }
-                }
-                yield return new WaitForSeconds(0.6f);
-            }
+            _isPaused = true;
         }
 
-        //coroutine to remove matched objects at 1 group per 0.4 seconds so the user can actually visibly see them being removed
-        IEnumerator RemoveObjs()
+        private void OnResume()
         {
-            while (true)
-            {
-                List<MatchObject> coords;
-                if (_removalQueue.TryDequeue(out coords))
-                {
-                    StartCoroutine(WaitToCheckMatch(0.4f));
-                    yield return new WaitForSeconds(0.4f);
-                    ScoreTracker.scoreTracker.AddScore(coords.Count);
-                    foreach(MatchObject coord in coords)
-                        coord.RemoveFromGrid();
-                }
-                else
-                {
-                    yield return new WaitForSeconds(0);
-                }
-            }
-        }
-
-        //pauses certain activities of the manager for the specified time, such as lock checks and moving match objects
-        private IEnumerator WaitToCheckMatch(float time)
-        {
-            _waitingOnMatchCheck = true;
-            yield return new WaitForSeconds(time);
-            _waitingOnMatchCheck = false;
+            _isPaused = false;
         }
         
-        //after the passed time, swaps coordinates a and b in the grid
-        private IEnumerator WaitToSwapBack(float time, GridCoordinate a, GridCoordinate b)
+        //swaps the positions of the match objects at a and b
+        private void Swap(GridCoordinate a, GridCoordinate b)
         {
-            StartCoroutine(WaitToCheckMatch(time));
-            yield return new WaitForSeconds(time);
-            Swap(a, b);
+            MatchObject vala = _objects[a.x][a.y];
+            MatchLine aParent = vala.parent;
+            MatchObject valb = _objects[b.x][b.y];
+            vala.parent = valb.parent;
+            vala.index = b.y;
+            valb.parent = aParent;
+            valb.index = a.y;
+            _objects[a.x][a.y] = valb;
+            _objects[b.x][b.y] = vala;
         }
-
-        //detects whether there are any valid matches to be made on the grid by brute force
-        //performance intensive.
-        private bool DetectMatchesPossible()
-        {
-            foreach (MatchObject[] line in _objects)
-            {
-                if (line.Contains(null))
-                    return true;
-            }
-            for (int i = 0; i < _objects.Count; i++)
-            {
-                for (int j = 0; j < _objects[i].Length; j++)
-                {
-                    if (i - 1 > 0 && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i-1, j)))
-                    {
-                        return true;
-                    }
-                    if (i + 1 < _objects.Count && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i+1, j)))
-                    {
-                        return true;
-                    }
-                    if (j - 1 > 0 && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j-1)))
-                    {
-                        return true;
-                    }
-                    if (j + 1 < _objects[i].Length && CheckSwapValid(new GridCoordinate(i,j), new GridCoordinate(i, j+1)))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        //checks the grid for the first valid match from top to bottom right to left. 
-        //on finding one, queues it for removal and returns.
-        private void CheckMatches()
-        {
-            for (int i = 0; i < _objects.Count; i++)
-            {
-                for (int j = 0; j < _objects[i].Length; j++)
-                {
-                    List<GridCoordinate> temp = DetectMatch(i, j);
-                    if (temp.Count >= 3)
-                    {
-                        List<MatchObject> temp2 = new List<MatchObject>();
-                        foreach(GridCoordinate coord in temp)
-                        {
-                            temp2.Add(_objects[coord.x][coord.y]);
-                        }
-                        _removalQueue.Enqueue(temp2);
-                        return;
-                    }
-                }
-            }
-        }
-
-        //detects if there is a match either down or to the right from the passed indices
-        private List<GridCoordinate> DetectMatch(int i, int j)
-        {
-            List<GridCoordinate> validCoords = new List<GridCoordinate>();
-            if (_objects[i][j] == null)
-                return validCoords;
-            validCoords.Add(new GridCoordinate(i, j));
-            if (DetectMatchHelper(i, j, 1, 0, 1, _objects[i][j], validCoords) >= 3)
-            {
-                return FindAltMatches(validCoords);
-            }
-            validCoords = new List<GridCoordinate>();
-            validCoords.Add(new GridCoordinate(i, j));
-            if (DetectMatchHelper(i, j, 0, 1, 1, _objects[i][j], validCoords) >= 3)
-            {
-                return FindAltMatches(validCoords);
-            }
-            return validCoords;
-        }
-
-        //finds if there any additional matches "hanging on" to another match, such as in an L or T pattern
-        private List<GridCoordinate> FindAltMatches(GridCoordinate coord)
-        {
-            List<GridCoordinate> coordActual = new List<GridCoordinate>();
-            coordActual.Add(coord);
-            return FindAltMatches(coordActual);
-        }
-
-        //helper overload for FindAltMatches
-        private List<GridCoordinate> FindAltMatches(List<GridCoordinate> coords)
-        {
-            HashSet<GridCoordinate> checkedCoords = new HashSet<GridCoordinate>();
-            MatchObject checkAgainst = _objects[coords[0].x][coords[0].y];
-            List<GridCoordinate> temp = new List<GridCoordinate>();
-            GridCoordinate temp2;
-            while (coords.Count > 0)
-            {
-                GridCoordinate toCheck = coords[^1];
-                coords.RemoveAt(coords.Count-1);
-                if(checkedCoords.Contains(toCheck))
-                    continue;
-                checkedCoords.Add(toCheck);
-                temp2 = FindNextInDir(toCheck, -1, 0);
-                temp.Add(temp2);
-                if(DetectMatchHelper(temp2.x, temp2.y, 1, 0, 1, checkAgainst, temp) >= 3)
-                    coords.AddRange(temp);
-                temp = new List<GridCoordinate>();
-                temp2 = FindNextInDir(toCheck, 0, -1);
-                temp.Add(temp2);
-                if(DetectMatchHelper(temp2.x, temp2.y, 0, 1, 1, checkAgainst, temp) >= 3)
-                    coords.AddRange(temp);
-                temp = new List<GridCoordinate>();
-            }
-            foreach(GridCoordinate coordinate in checkedCoords)
-            {
-                temp.Add(coordinate);
-            }
-            temp.Sort();
-            return temp;
-        }
-
-        //finds the furthest valid coordinate in the direction given by dirx and diry that is equal to the object
-        //at the passed coordinate. 
-        private GridCoordinate FindNextInDir(GridCoordinate coord, int dirx, int diry)
-        {
-            if (_objects[coord.x][coord.y] == null)
-                return coord;
-            while (true)
-            {
-                if (coord.x + dirx < 0)
-                    return coord;
-                if (coord.x + dirx > _objects.Count - 1)
-                    return coord;
-                if (coord.y + diry < 0)
-                    return coord;
-                if (coord.y + diry > _objects[coord.x + dirx].Length - 1)
-                    return coord;
-                if (_objects[coord.x + dirx][coord.y + diry] == null)
-                    return coord;
-                if (_objects[coord.x + dirx][coord.y + diry].CompareTo(_objects[coord.x][coord.y]) != 0)
-                    return coord;
-                coord = new GridCoordinate(coord.x + dirx, coord.y + diry);
-            }
-        }
-
-        //recursive helper function for match detection that checks if there is a match of 3 or more starting at
-        //coordinate i j and moving in the passed direction
-        private int DetectMatchHelper(int i, int j, int dirx, int diry, int numInRow, MatchObject checkAgainst, List<GridCoordinate> coords)
-        {
-            i += dirx;
-            j += diry;
-            if (i < _objects.Count && i >= 0 && j < _objects[i].Length && j >= 0 && _objects[i][j] != null && checkAgainst.CompareTo(_objects[i][j]) == 0)
-            {
-                coords.Add(new GridCoordinate(i, j));
-                return DetectMatchHelper(i, j, dirx, diry, numInRow + 1, checkAgainst, coords);
-            }
-            return numInRow;
-        }
-
-        //registers that the user has clicked on a match object
-        public void RegisterActiveMatchObj(MatchObject obj)
-        {
-            Debug.Log("attempting register, _ispaused="+_isPaused);
-            if (_isPaused)
-                return;
-            _activeObject = obj;
-            _initialMousePos = mousePos.action.ReadValue<Vector2>();
-        }
-
+        
         //swaps the active match object based on the direction the user moved the mouse
         private void MoveMatchObj(Vector2 change)
         {
@@ -375,11 +417,12 @@ namespace Match3
             }
             _activeObject = null;
         }
-
+        
         //swaps the objects at a and b. if that swap does not cause a match, swaps them back after 1 second
         private void SwapWithValidityDetection(GridCoordinate a, GridCoordinate b)
         {
-            if (!CheckSwapValid(a,b))
+            Swap(a, b);
+            if (!DetectMatches())
             {
                 matchSound.PlayAw();
                 StartCoroutine(WaitToSwapBack(1f, a, b));
@@ -388,47 +431,6 @@ namespace Match3
             {
                 matchSound.PlayYay();
             }
-            Swap(a, b);
-        }
-
-        //checks if swapping a and b creates a match
-        private bool CheckSwapValid(GridCoordinate a, GridCoordinate b)
-        {
-            if (_objects[a.x][a.y] == null || _objects[b.x][b.y] == null)
-                return false;
-            Swap(a,b);
-            if (FindAltMatches(a).Count >= 3 ||
-                FindAltMatches(b).Count >= 3)
-            {
-                Swap(a, b);
-                return true;
-            }
-            Swap(a,b);
-            return false;
-        }
-
-        //swaps the positions of the match objects at a and b
-        private void Swap(GridCoordinate a, GridCoordinate b)
-        {
-            MatchObject vala = _objects[a.x][a.y];
-            MatchLine aParent = vala.parent;
-            MatchObject valb = _objects[b.x][b.y];
-            vala.parent = valb.parent;
-            vala.index = b.y;
-            valb.parent = aParent;
-            valb.index = a.y;
-            _objects[a.x][a.y] = valb;
-            _objects[b.x][b.y] = vala;
-        }
-
-        private void OnPause()
-        {
-            _isPaused = true;
-        }
-
-        private void OnResume()
-        {
-            _isPaused = false;
         }
     }
 }
