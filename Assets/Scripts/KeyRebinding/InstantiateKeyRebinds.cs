@@ -58,10 +58,26 @@ namespace KeyRebinding
                     rebindKey.toRebind = action;
                     rebindKey.index = i;
                     rebindKey.keyText.text = action.bindings[i].ToDisplayString();
-                    rebindKey.mainText.text = action.name;
-                    if (action.bindings[i].isPartOfComposite || action.bindings[i].isComposite)
+                    if (map.name.Equals("Player"))
                     {
-                        rebindKey.mainText.text += action.bindings[i].GetNameOfComposite();
+                        rebindKey.mainText.text = action.bindings[i].path switch
+                        {
+                            "<Keyboard>/w" => "Move Forward",
+                            "<Keyboard>/s" => "Move Backward",
+                            "<Keyboard>/a" => "Strafe Left",
+                            "<Keyboard>/d" => "Strafe Right",
+                            "<Keyboard>/q" => "Turn Left",
+                            "<Keyboard>/e" => "Turn Right",
+                            "<Keyboard>/upArrow" => "Move Forward",
+                            "<Keyboard>/downArrow" => "Move Backward",
+                            "<Keyboard>/leftArrow" => "Strafe Left",
+                            "<Keyboard>/rightArrow" => "Strafe Right",
+                            _ => action.name
+                        };
+                    }
+                    else
+                    {
+                        rebindKey.mainText.text = action.name;
                     }
                 }
             }

@@ -62,6 +62,25 @@ namespace KeyRebinding
             File.WriteAllText("Saves/" + saveFileName + ".json", bindJson);
         }
 
+        public void ResetBinds()
+        {
+            foreach (InputActionMap map in maps)
+            {
+                foreach (InputAction action in map)
+                {
+                    for (int i = 0; i < action.bindings.Count; i++)
+                    {
+                        if (!string.IsNullOrEmpty(action.bindings[i].overridePath))
+                        {
+                            action.ApplyBindingOverride(i, action.bindings[i].path);
+                            binds[action.actionMap + action.name + i] = action.bindings[i].path;
+                        }
+                    }
+                }
+            }
+            bindChange.Invoke();
+        }
+
         public void SetBind(InputAction bind, int index)
         {
             if (binds.ContainsKey(bind.actionMap + bind.name + index))
@@ -79,33 +98,30 @@ namespace KeyRebinding
                 {
                     foreach (InputAction action in map)
                     {
-                        if (action != bind)
+                        for (int i = 0; i < action.bindings.Count; i++)
                         {
-                            for (int i = 0; i < action.bindings.Count; i++)
+                            if(action == bind && i == index)
+                                continue;
+                            if (!string.IsNullOrEmpty(action.bindings[i].overridePath))
                             {
-                                if (i >= bind.bindings.Count)
+                                if (action.bindings[i].overridePath.Equals(bind.bindings[index].overridePath))
                                 {
-                                    break;
+                                    action.ApplyBindingOverride(i, "None");
+                                    binds[action.actionMap + action.name + i] = action.bindings[i].overridePath;
                                 }
-                                if (!string.IsNullOrEmpty(action.bindings[i].overridePath))
+                            }
+                            else
+                            {
+                                if (action.bindings[i].path.Equals(bind.bindings[index].overridePath) &&
+                                    !string.IsNullOrEmpty(action.bindings[i].path))
                                 {
-                                    if (action.bindings[i].overridePath == bind.bindings[i].overridePath)
-                                    {
-                                        action.ApplyBindingOverride(i, String.Empty);
-                                        binds[action.actionMap + action.name + i] = action.bindings[i].overridePath;
-                                    }
-                                }
-                                else
-                                {
-                                    if (action.bindings[i].path == bind.bindings[i].overridePath &&
-                                        !string.IsNullOrEmpty(action.bindings[i].path))
-                                    {
-                                        action.ApplyBindingOverride(i, String.Empty);
+                                    action.ApplyBindingOverride(i, "None");
+                                    if(!binds.ContainsKey(action.actionMap+action.name+i))
                                         binds.Add(action.actionMap+action.name+i, action.bindings[i].overridePath);
-                                    }
                                 }
                             }
                         }
+                        
                     }
                     break;
                 }
