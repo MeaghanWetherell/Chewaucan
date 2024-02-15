@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -10,6 +11,8 @@ namespace Match3
     public class MatchLevelManager : MonoBehaviour
     {
         public static MatchLevelManager matchLevelManager;
+
+        [Tooltip("Match levels json file name")] public String fileName;
 
         [Tooltip("All match 3 levels")]public List<LevelData> levels;
 
@@ -29,11 +32,9 @@ namespace Match3
             DontDestroyOnLoad(this.gameObject);
             try
             {
-                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/match3levelscomplete.json"));
+                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/"+fileName+".json"));
             }
-#pragma warning disable 168
-            catch (IOException e){ levelsComplete = new List<bool>();}
-#pragma warning restore 168
+            catch (IOException){ levelsComplete = new List<bool>();}
             // ReSharper disable once PossibleNullReferenceException
             while(levelsComplete.Count < levels.Count)
                 levelsComplete.Add(false);
@@ -43,7 +44,7 @@ namespace Match3
         {
             string completedJson = JsonSerializer.Serialize(levelsComplete);
             Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/match3levelscomplete.json", completedJson);
+            File.WriteAllText("Saves/"+fileName+".json", completedJson);
         }
 
         //load the match 3 level at the passed index
@@ -53,9 +54,8 @@ namespace Match3
             MatchObject.compareByGroup = levels[index].matchType;
             MatchLine.shouldRotate = levels[index].rotate;
             _curIndex = index;
-            MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
-            SceneManager.LoadScene(2);
-            //UnityEngine.Random.InitState(170);
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Match3");
+            UnityEngine.Random.InitState(170);
         }
         
         //sets up the match object valid mesh list

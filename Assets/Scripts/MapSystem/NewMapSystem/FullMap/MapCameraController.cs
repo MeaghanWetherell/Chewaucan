@@ -17,6 +17,7 @@ public class MapCameraController : MonoBehaviour
     public InputActionReference switchToWorldRef;
 
     private Vector3 clickOrigin;
+    private bool isSlowing = false;
 
     private void OnEnable()
     {
@@ -44,11 +45,17 @@ public class MapCameraController : MonoBehaviour
         //map view is moved on either center or right mouse button click
         if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
         {
+            StopCoroutine(SmoothCameraStop());
+            isSlowing = false;
+
             clickOrigin = mapCamera.ScreenToWorldPoint(Input.mousePosition);
         }
 
         if (Input.GetMouseButton(2) || Input.GetMouseButton(1))
         {
+            StopCoroutine(SmoothCameraStop());
+            isSlowing = false;
+
             Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector3 targetPos = mapCameraObj.transform.position + posDifference;
 
@@ -57,24 +64,31 @@ public class MapCameraController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(2) || Input.GetMouseButtonUp(1))
         {
-            StartCoroutine(SmoothCameraStop());
+            if (!isSlowing)
+            {
+                StartCoroutine(SmoothCameraStop());
+            }
         }
     }
 
     //continues smoothly moving the camera for half a second after the mouse button is released
     IEnumerator SmoothCameraStop()
     {
+        isSlowing = true;
         int frameRate = (int) (1.0f / Time.deltaTime);
+        float dragRate = dragSpeed; //we want the drag speed to gradually slow down
 
         Vector3 posDifference = clickOrigin - mapCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPos = mapCameraObj.transform.position + posDifference;
 
         for (int i = 0; i < frameRate/2; i++)
         {
-            mapCameraObj.transform.position = Vector3.Lerp(mapCameraObj.transform.position, targetPos, Time.deltaTime * dragSpeed);
+            mapCameraObj.transform.position = Vector3.Lerp(mapCameraObj.transform.position, targetPos, Time.deltaTime * dragRate);
+            dragRate = dragRate - ( dragSpeed / (frameRate/2) );
             yield return new WaitForEndOfFrame();
         }
 
+        isSlowing = false;
         yield return null;
     }
 

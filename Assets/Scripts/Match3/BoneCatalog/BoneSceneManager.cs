@@ -30,8 +30,7 @@ namespace Match3
                 return;
             curObj = toLoad;
             wasLoaded = true;
-            MainSceneDataSaver.mainSceneDataSaver.PrepareForUnload();
-            SceneManager.LoadScene(4);
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("BoneViewer");
         }
     }
 }

@@ -14,7 +14,11 @@ public class TeleportWaypoint : MonoBehaviour
     private TeleportButton teleportButton;
 
     private Vector3 objPosition;
-    
+
+    private void Awake()
+    {
+        teleportUI = GameObject.Find("Teleport Info");
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,7 @@ public class TeleportWaypoint : MonoBehaviour
         teleportToPosition = new Vector3(objPosition.x, yValue, objPosition.y);
         animator = teleportUI.GetComponent<Animator>();
         teleportButton = FindAnyObjectByType<TeleportButton>();
+        teleportPositionLabel = teleportUI.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void OnMouseDown()

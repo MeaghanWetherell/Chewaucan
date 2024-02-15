@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Misc;
+using Audio;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,7 +18,7 @@ namespace Match3.Game
 
         private void Awake()
         {
-            BGMManager.bgmManager.SetBGM(bgm);
+            SoundManager.soundManager.SetBGM(bgm);
         }
 
         public void PlayAw()
@@ -35,7 +34,10 @@ namespace Match3.Game
         public void PlayFromList(List<AudioClip> audList)
         {
             AudioClip temp = audList[Random.Range(0, audList.Count)];
-            StartCoroutine(BGMManager.bgmManager.QuietBGMUntilDone(matchAud));
+            if (!SoundManager.soundManager.IsMuted(2))
+            {
+                StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(matchAud));
+            }
             matchAud.Stop();
             matchAud.clip = temp;
             matchAud.Play();

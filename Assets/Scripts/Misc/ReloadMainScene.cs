@@ -6,7 +6,7 @@ namespace Misc
     {
         public void OnClick()
         {
-            MainSceneDataSaver.mainSceneDataSaver.ReloadMainScene();
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
         }
     }
 }

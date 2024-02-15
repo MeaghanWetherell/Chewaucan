@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using UnityEngine;
+using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
-namespace Misc
+namespace Audio
 {
     //manages cycling through background music tracks and quieting them when other sounds need to play
-    public class BGMManager : MonoBehaviour
+    public class SoundManager : MonoBehaviour
     {
-        public static BGMManager bgmManager;
+        public static SoundManager soundManager;
 
         [Tooltip("Ref to BGM audio source")] public AudioSource bgm;
 
@@ -15,6 +20,17 @@ namespace Misc
         public float quietVol;
 
         [Tooltip("Standard volume of the BGM")] public float standVol;
+
+        [Tooltip("Reference to the master mixer")] public AudioMixer mainMixer;
+
+        [Tooltip("name of settings file to save to")] public String fileName;
+
+        [Tooltip("names of the sound parameters, in the order master volume, music volume, effect volume")]
+        public List<String> volParams;
+
+        //the slider values for the player's audio preferences
+        //In order: master, music, effects
+        private List<float> sliderVals;
 
         //list of audio clips to draw from when selecting a new track
         private List<AudioClip> BGMClips;
@@ -25,15 +41,41 @@ namespace Misc
         //set up singleton and start corountines
         private void Awake()
         {
-            if (bgmManager != null)
+            if (soundManager != null)
             {
                 Debug.LogError("Loaded persistent objects twice!");
-                Destroy(bgmManager.gameObject);
+                Destroy(soundManager.gameObject);
             }
-            bgmManager = this;
+            soundManager = this;
             DontDestroyOnLoad(this.gameObject);
             bgm.volume = standVol;
+            try
+            {
+                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("Saves/"+fileName+".json"));
+            }
+            catch (IOException){ }
+            sliderVals ??= new List<float>();
+            while (sliderVals.Count < volParams.Count)
+            {
+                sliderVals.Add(standVol);
+            }
             StartCoroutine(RunSongs());
+        }
+
+        private void Start()
+        {
+            for (int i = 0; i < volParams.Count; i++)
+            {
+                mainMixer.SetFloat(volParams[i], Mathf.Log10(sliderVals[i])*20);
+            }
+        }
+
+        //save sound settings
+        private void OnDisable()
+        {
+            string completedJson = JsonSerializer.Serialize(sliderVals);
+            Directory.CreateDirectory("Saves");
+            File.WriteAllText("Saves/"+fileName+".json", completedJson);
         }
 
         //check each frame if a new song should be started and start it if so
@@ -47,6 +89,24 @@ namespace Misc
                 }
                 yield return new WaitForSeconds(0);
             }
+        }
+        
+        //check if the audio from a particular source is muted
+        public bool IsMuted(int index)
+        {
+            return (sliderVals[index] < 0.01f || sliderVals[0] < 0.01f);
+        }
+        
+        //change the volume of the parameter at the passed index
+        public void SetVol(int index, float vol)
+        {
+            sliderVals[index] = vol;
+            mainMixer.SetFloat(volParams[index], Mathf.Log10(sliderVals[index])*20);
+        }
+
+        public float GetVol(int index)
+        {
+            return sliderVals[index];
         }
 
         //set the track list for the current areas background music

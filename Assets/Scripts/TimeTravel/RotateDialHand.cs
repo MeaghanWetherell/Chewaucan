@@ -6,17 +6,16 @@ using UnityEngine.EventSystems;
 public class RotateDialHand : MonoBehaviour
 {
     private RectTransform selectedHand;
-    [SerializeField] private float minRotation = 180f;
+    private DialProperties dialProperties;
+    [SerializeField] private float rotInterval = 10;
+    [SerializeField] private float minRotation = -180f;
     [SerializeField] private float maxRotation = 0f;
 
-    private void Start()
-    {
-        
-    }
 
     public void SelectHand(GameObject obj)
     {
         selectedHand = obj.GetComponent<RectTransform>();
+        dialProperties = obj.GetComponent<DialProperties>();
     }
 
     public void MoveHandLeft()
@@ -27,9 +26,10 @@ public class RotateDialHand : MonoBehaviour
             return;
         }
 
-        if (selectedHand.rotation.z < maxRotation)
+        if (dialProperties.getCurRotationAmount() < maxRotation)
         {
-            selectedHand.Rotate(Vector3.forward, 10);
+            selectedHand.Rotate(Vector3.forward, rotInterval);
+            dialProperties.changeCurRotationAmount(rotInterval);
         }
     }
 
@@ -41,10 +41,10 @@ public class RotateDialHand : MonoBehaviour
             return;
         }
 
-        Debug.Log(selectedHand.rotation.normalized);
-        if (selectedHand.rotation.z <= minRotation)
+        if (dialProperties.getCurRotationAmount() > minRotation)
         {
-            selectedHand.Rotate(Vector3.forward, -10);
+            selectedHand.Rotate(Vector3.forward, -rotInterval);
+            dialProperties.changeCurRotationAmount(-rotInterval);
         }
     }
 }

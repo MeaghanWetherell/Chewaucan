@@ -25,3 +25,5 @@ Known Issues:
 Edge case issue where if a double match is made at the top of the screen (e.g. 3 yellows across at the top and 3 reds down below) and another 
 red falls onto the 3 reds down after the yellows are removed, the new red will not be counted in the match and will not be removed.
 Can't figure out why this is.
+Potentially same root issue as the previous, sometimes when two matches of different colors are made at once, one won't be counted. this occurs when removing the previous match 
+makes the other match no longer together.

@@ -13,4 +13,13 @@ The Minimap
 The Full Map View
 	When in the game, the player presses M by default to open the FullMapView scene. They can use the mouse to
 	move, zoom in, and select teleport waypoints around the map. The map image is 1:1 scale with the Modern Map,
-	1 pixel = 1 unit. Teleport waypoint
+	1 pixel = 1 unit.
+	How to add new waypoints:
+		1. Check that these things are in the scene (they are in FullMapView)
+			- a gameobject named Teleport Info
+			- a gameobject named position label that is the first child of Teleport Info
+		2. Drag the WaypointObj prefab into the scene
+		3. Abide by these rules when determining where to place the object
+			- place the waypoint at the exact x and z coordinates that you want the waypoint to teleport to
+			- keep the y position at 5 so it can be seen by the camera
+			- set the desired y teleport value manually in the TeleportWaypoint component of that prefab instance.
