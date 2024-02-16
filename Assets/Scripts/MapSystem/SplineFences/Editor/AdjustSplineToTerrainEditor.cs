@@ -20,6 +20,7 @@ public class AdjustSplineToTerrainEditor : Editor
 
         if (GUILayout.Button("Align to Terrain"))
         {
+            adjustSpline = (AdjustSpineToTerrain)target;
             adjustSpline.AlignToTerrain();
         }
 
