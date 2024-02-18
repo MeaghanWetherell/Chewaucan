@@ -28,7 +28,7 @@ namespace Match3
         public List<Transform> snapPoints = new List<Transform>();
 
         //how long the line should wait between spawning new bones
-        public const float WaitTime = 0.25f;
+        public const float WaitTime = 0.2f;
 
         [Tooltip("Match object prefab")]public GameObject matchObjPrefab;
 
@@ -118,7 +118,7 @@ namespace Match3
         
         private void CleanUp()
         {
-            for (int i = 0; i < myObjects.Length - 1; i++)
+            for (int i = myObjects.Length - 1; i >= 0; i--)
             {
                 BubbleDown(i);
             }

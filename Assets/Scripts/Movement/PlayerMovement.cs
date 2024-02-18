@@ -60,15 +60,15 @@ public class PlayerMovement : MonoBehaviour
         staminaUI.maxValue = maxStamina;
         oxygenUI.minValue = 0f;
         oxygenUI.maxValue = maxStamina;
-        PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
     }
 
     //unsubscribe from event callbacks to prevent leaks
     private void OnDestroy()
     {
-        PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     private void OnEnable()

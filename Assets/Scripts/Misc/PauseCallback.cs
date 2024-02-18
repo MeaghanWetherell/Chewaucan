@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,9 +10,9 @@ namespace Misc
     {
         public static PauseCallback pauseManager;
     
-        [System.NonSerialized]public UnityEvent pauseCallback = new UnityEvent();
+        private UnityEvent pauseCallback = new UnityEvent();
 
-        [System.NonSerialized]public UnityEvent resumeCallback = new UnityEvent();
+        private UnityEvent resumeCallback = new UnityEvent();
 
         private void Awake()
         {
@@ -22,6 +23,30 @@ namespace Misc
             }
             pauseManager = this;
             DontDestroyOnLoad(this.gameObject);
+        }
+
+        //sub to pause event
+        public void SubscribeToPause(UnityAction func)
+        {
+            pauseCallback.AddListener(func);
+        }
+
+        //unsub to pause event
+        public void UnsubToPause(UnityAction func)
+        {
+            pauseCallback.RemoveListener(func);
+        }
+        
+        //sub to resume event
+        public void SubscribeToResume(UnityAction func)
+        {
+            resumeCallback.AddListener(func);
+        }
+
+        //unsub to resume event
+        public void UnsubToResume(UnityAction func)
+        {
+            resumeCallback.RemoveListener(func);
         }
 
         //wrapper around UnityEvent.Invoke

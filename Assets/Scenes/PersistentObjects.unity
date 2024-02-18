@@ -412,37 +412,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &790423109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 790423110}
-  m_Layer: 0
-  m_Name: PersistentGUILoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &790423110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790423109}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 532.3984, y: 372.20688, z: -7.968207}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1025364776
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,12 +576,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: match3levelscomplete
   levels:
-  - {fileID: 11400000, guid: 21841e172226a804b927ee7c0d66544c, type: 2}
   - {fileID: 11400000, guid: d814985bafe9a5444bb2cb5b693ce0a8, type: 2}
   - {fileID: 11400000, guid: cd284044ac6dc19478204e90ff76965e, type: 2}
   - {fileID: 11400000, guid: 14b5c5bdfe2806b489a721d17c65c521, type: 2}
   - {fileID: 11400000, guid: 604f5e27bd26f244ba820149bab54da0, type: 2}
-  - {fileID: 11400000, guid: 54d0ea605c266e8468afeca2ccc33e1b, type: 2}
+  - {fileID: 11400000, guid: 21841e172226a804b927ee7c0d66544c, type: 2}
 --- !u!1 &1195756257
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +725,7 @@ SceneRoots:
   - {fileID: 469110412}
   - {fileID: 1025364778}
   - {fileID: 1716912979}
-  - {fileID: 790423110}
   - {fileID: 114254599}
   - {fileID: 742744384}
   - {fileID: 1049979399}
+  - {fileID: 1195756259}

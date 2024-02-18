@@ -45,9 +45,9 @@ namespace Match3
         {
             List<LevelData> levels = MatchLevelManager.matchLevelManager.levels;
             bool shouldBeEnabled = true;
-            for (int i = 1; i < levels.Count; i++)
+            for (int i = 0; i < levels.Count-1; i++)
             {
-                if (i > 1)
+                if (i > 0)
                 {
                     shouldBeEnabled = MatchLevelManager.matchLevelManager.levelsComplete[i-1];
                 }
@@ -55,7 +55,12 @@ namespace Match3
             }
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Endless";
-            newButton.GetComponent<OpenLevel>().levelIndex = 0;
+            newButton.GetComponent<OpenLevel>().levelIndex = levels.Count-1;
+            shouldBeEnabled = MatchLevelManager.matchLevelManager.levelsComplete[levels.Count-2];
+            if (!shouldBeEnabled)
+            {
+                newButton.GetComponent<Button>().interactable = false;
+            }
         }
 
         //creates a button prefab with the details of the passed level

@@ -19,15 +19,15 @@ public class CameraLook : MonoBehaviour
     //subscribe to event functions
     private void Start()
     {
-        PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
     }
 
     //unsubscribe
     private void OnDestroy()
     {
-        PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
-        PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     private void OnEnable()

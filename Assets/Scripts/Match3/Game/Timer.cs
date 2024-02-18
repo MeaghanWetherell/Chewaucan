@@ -34,15 +34,15 @@ namespace Match3
         //subscribe to pause callbacks
         private void OnEnable()
         {
-            PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
-            PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+            PauseCallback.pauseManager.SubscribeToPause(OnPause);
+            PauseCallback.pauseManager.SubscribeToResume(OnResume);
         }
         
         //unsubscribe to prevent leaks
         private void OnDisable()
         {
-            PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
-            PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+            PauseCallback.pauseManager.UnsubToPause(OnPause);
+            PauseCallback.pauseManager.UnsubToResume(OnResume);
         }
 
         //increment time for endless mode

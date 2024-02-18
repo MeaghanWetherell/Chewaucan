@@ -51,7 +51,7 @@ namespace Match3
         private Vector2 _initialMousePos;
         
         //whether the game is paused
-        private bool _isPaused = false;
+        private bool _isPaused;
 
         //list containing grid coords representing each valid direction on the grid (horizontal/vertical both ways)
         private GridCoordinate[][] allDirs = new GridCoordinate[2][];
@@ -59,8 +59,8 @@ namespace Match3
         //subscribe to pause callbacks
         private void Awake()
         {
-            PauseCallback.pauseManager.pauseCallback.AddListener(OnPause);
-            PauseCallback.pauseManager.resumeCallback.AddListener(OnResume);
+            PauseCallback.pauseManager.SubscribeToPause(PauseGrid);
+            PauseCallback.pauseManager.SubscribeToResume(OnResume);
             matchGrid = this;
             allDirs[0] = new GridCoordinate[2];
             allDirs[0][0] = new GridCoordinate(1, 0);
@@ -92,8 +92,8 @@ namespace Match3
         //unsubscribe to prevent leaks
         private void OnDestroy()
         {
-            PauseCallback.pauseManager.pauseCallback.RemoveListener(OnPause);
-            PauseCallback.pauseManager.resumeCallback.RemoveListener(OnResume);
+            PauseCallback.pauseManager.UnsubToPause(PauseGrid);
+            PauseCallback.pauseManager.UnsubToResume(OnResume);
         }
 
         private void OnDisable()
@@ -122,8 +122,13 @@ namespace Match3
         {
             while (true)
             {
+                if (_waitingOnMatchCheck || DetectMatches())
+                {
+                    yield return new WaitForSeconds(0.6f);
+                    continue;
+                }
                 bool found = false;
-                if (!_waitingOnMatchCheck && _removalQueue.Count == 0)
+                if (_removalQueue.Count == 0)
                 {
                     for (int i = 0; i < _objects.Count; i++)
                     {
@@ -171,9 +176,10 @@ namespace Match3
                 }
                 else
                 {
-                    found = true;
+                    yield return new WaitForSeconds(0.6f);
+                    continue;
                 }
-                if (found || DetectMatches())
+                if (found)
                 {
                     _removalQueue = new List<List<GridCoordinate>>();
                     yield return new WaitForSeconds(0.6f);
@@ -181,6 +187,7 @@ namespace Match3
                 else
                 {
                     MatchUIManager.matchUIManager.EndGame("No matches remaining!");
+                    break;
                 }
             }
         }
@@ -189,12 +196,18 @@ namespace Match3
         {
             while (true)
             {
-                if (!_waitingOnMatchCheck && _removalQueue.Count == 0)
+                if (_waitingOnMatchCheck)
                 {
-                    if (DetectMatches())
-                    {
-                        StartCoroutine(Remove());
-                    }
+                    yield return new WaitForSeconds(0);
+                    continue;
+                }
+                if (_removalQueue.Count == 0)
+                {
+                    DetectMatches();
+                }
+                if (_removalQueue.Count > 0)
+                {
+                    StartCoroutine(Remove());
                 }
                 yield return new WaitForSeconds(0);
             }
@@ -223,7 +236,7 @@ namespace Match3
                 if (missing[i] > max)
                     max = missing[i];
             }
-            yield return new WaitForSeconds(MatchLine.WaitTime * (max+1));
+            yield return new WaitForSeconds(MatchLine.WaitTime * (max+0.5f));
             _waitingOnMatchCheck = false;
             _removalQueue = new List<List<GridCoordinate>>();
         }
@@ -261,9 +274,9 @@ namespace Match3
                     int index = 0;
                     while (index < matchMain.Count)
                     {
-                        cur = matchMain[index];
                         foreach (GridCoordinate[] hv in allDirs)
                         {
+                            cur = matchMain[index];
                             List<GridCoordinate> matchTemp = new List<GridCoordinate>();
                             cur = FindFurthestInDir(cur, hv[0]);
                             matchTemp.Add(cur);
@@ -362,7 +375,7 @@ namespace Match3
             }
         }
 
-        private void OnPause()
+        private void PauseGrid()
         {
             _isPaused = true;
         }
@@ -430,6 +443,7 @@ namespace Match3
             else
             {
                 matchSound.PlayYay();
+                StartCoroutine(WaitForMatchCheck(0.4f));
             }
         }
     }

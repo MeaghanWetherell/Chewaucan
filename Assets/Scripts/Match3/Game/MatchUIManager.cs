@@ -31,7 +31,7 @@ namespace Match3
         {
             uiObj.SetActive(true);
             Timer.timer.enabled = false;
-            MatchGrid.matchGrid.enabled = false;
+            MatchGrid.matchGrid.gameObject.SetActive(false);
             if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
             {
                 Lose(reason);
