@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEditor;
 
 
-[CustomEditor(typeof(AdjustSpineToTerrain))]
+[CustomEditor(typeof(SplineAlignToTerrain))]
 public class AdjustSplineToTerrainEditor : Editor
 {
-    private AdjustSpineToTerrain adjustSpline;
+    private SplineAlignToTerrain adjustSpline;
 
     private void OnEnable()
     {
-        adjustSpline = (AdjustSpineToTerrain)target;
+        adjustSpline = (SplineAlignToTerrain)target;
     }
 
     public override void OnInspectorGUI()
@@ -20,9 +20,8 @@ public class AdjustSplineToTerrainEditor : Editor
 
         if (GUILayout.Button("Align to Terrain"))
         {
-            adjustSpline = (AdjustSpineToTerrain)target;
+            adjustSpline = (SplineAlignToTerrain)target;
             adjustSpline.AlignToTerrain();
         }
-
     }
 }

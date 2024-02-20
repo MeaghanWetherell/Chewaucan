@@ -9,7 +9,7 @@ using System;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(SplineContainer))]
-public class AdjustSpineToTerrain : MonoBehaviour
+public class SplineAlignToTerrain : MonoBehaviour
 {
     private SplineContainer splineContainer;
     private Spline spline;
@@ -19,6 +19,9 @@ public class AdjustSpineToTerrain : MonoBehaviour
     [SerializeField] int knotInterval = 10;
 
     [SerializeField] int splineToAlign = 0;
+
+    [Range(0f, 1f)]
+    [SerializeField] float yAllowance = 0.1f;
     
     // Start is called before the first frame update
     void OnEnable()
@@ -26,15 +29,16 @@ public class AdjustSpineToTerrain : MonoBehaviour
         splineContainer = GetComponent<SplineContainer>();
         spline = splineContainer[splineToAlign];
         knotCount = spline.Count;
+        Debug.Log("START");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!Application.isPlaying)
+        if (Application.isEditor)
         {
-            spline = splineContainer[splineToAlign];
-            if (spline != null && spline.Count != knotCount)
+            //Debug.Log(spline + " " + knotCount + " " + spline.Count);
+            if (spline != null && spline.Count > knotCount)
             {
                 knotCount = spline.Count;
                 Vector3 knotPos = splineContainer.transform.position + (Vector3)spline.ToArray()[spline.Count-1].Position;
@@ -69,22 +73,34 @@ public class AdjustSpineToTerrain : MonoBehaviour
         Vector3 posStep = endPos - startPos;
 
         Vector3 position = startPos;
+
+        //set the first knot, then we keep adding from there
+        position = new Vector3(position.x + (posStep.x / knotsToAdd), position.y, position.z + (posStep.z / knotsToAdd));
+        float terrainHeight = terrain.SampleHeight(position);
+        position = new Vector3(position.x, terrainHeight, position.z);
+        Vector3 targetKnotPos = splineContainer.transform.InverseTransformPoint(position);
+        var lastKnot = spline[spline.Count - 1];
+        lastKnot.Position = targetKnotPos;
+        spline.SetKnot(spline.Count - 1, lastKnot);
+
         //repeatedly insert knots and move the last knot to the end
-        for (int i = 0; i < knotsToAdd; i++)
+        for (int i = 0; i < knotsToAdd - 1; i++)
         {
             //Debug.Log(position.ToString());
             position = new Vector3(position.x+(posStep.x/knotsToAdd), position.y, position.z+(posStep.z/knotsToAdd));
-            float terrainHeight = terrain.SampleHeight(position);
+            terrainHeight = terrain.SampleHeight(position);
             position = new Vector3(position.x, terrainHeight, position.z);
 
             //set the last knot to the proper value
-            Vector3 targetKnotPos = splineContainer.transform.InverseTransformPoint(position);
-            BezierKnot lastKnot = spline[spline.Count-1];
-            lastKnot.Position = targetKnotPos;
-            spline.SetKnot(spline.Count-1, lastKnot);
+            targetKnotPos = splineContainer.transform.InverseTransformPoint(position);
+            lastKnot = spline[spline.Count-1];
 
-            //add the end knot back at the end
-            spline.Add(end);
+            //only add the knot if the difference in terrain height is significant
+            if (Math.Abs(targetKnotPos.y - lastKnot.Position.y) > yAllowance)
+            {
+                lastKnot.Position = targetKnotPos;
+                spline.Add(lastKnot);
+            }
         }
     }
 
