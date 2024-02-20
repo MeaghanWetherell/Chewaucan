@@ -24,4 +24,13 @@ public class AdjustSplineToTerrainEditor : Editor
             adjustSpline.AlignToTerrain();
         }
     }
+
+    private void OnSceneGUI()
+    {
+        if (Event.current.type == EventType.Repaint)
+        {
+            EditorApplication.QueuePlayerLoopUpdate();
+            SceneView.RepaintAll();
+        }
+    }
 }

@@ -26,16 +26,19 @@ public class SplineAlignToTerrain : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        splineContainer = GetComponent<SplineContainer>();
-        spline = splineContainer[splineToAlign];
-        knotCount = spline.Count;
-        Debug.Log("START");
+        if (!Application.isPlaying)
+        {
+            splineContainer = GetComponent<SplineContainer>();
+            spline = splineContainer[splineToAlign];
+            knotCount = spline.Count;
+            Debug.Log("START");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Application.isEditor)
+        if (!Application.isPlaying)
         {
             //Debug.Log(spline + " " + knotCount + " " + spline.Count);
             if (spline != null && spline.Count > knotCount)
