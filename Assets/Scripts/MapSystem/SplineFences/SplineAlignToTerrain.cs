@@ -46,7 +46,7 @@ public class SplineAlignToTerrain : MonoBehaviour
                 knotCount = spline.Count;
                 Vector3 knotPos = splineContainer.transform.position + (Vector3)spline.ToArray()[spline.Count-1].Position;
                 Terrain terrain = getActualCurrentTerrain(knotPos);
-                Debug.Log("A new knot was added");
+                //Debug.Log("A new knot was added");
                 AlignKnots(terrain);
             }
         }
@@ -57,7 +57,7 @@ public class SplineAlignToTerrain : MonoBehaviour
      */
     private void AlignKnots(Terrain terrain)
     {
-        Debug.Log("ALIGN KNOTS CALLED");
+        //Debug.Log("ALIGN KNOTS CALLED");
         BezierKnot[] knots = spline.ToArray();
         BezierKnot start = knots[spline.Count-2];
         BezierKnot end = knots[spline.Count - 1];
@@ -118,7 +118,7 @@ public class SplineAlignToTerrain : MonoBehaviour
             Terrain terrain = hit.collider.gameObject.GetComponent<Terrain>();
             if (terrain != null)
             {
-                Debug.Log(terrain.name);
+                //Debug.Log(terrain.name);
                 return terrain;
             }
         }
@@ -126,8 +126,15 @@ public class SplineAlignToTerrain : MonoBehaviour
         return null;
     }
 
+    /**
+     * Used to realign all the knots to the terrain if you move one. You must press the button
+     * under the component to call it. It might be possible to do this automatically, but this
+     * will work for now
+     */
     public void AlignToTerrain()
     {
         Debug.Log("ALIGNING TERRAIN");
     }
+
+
 }
