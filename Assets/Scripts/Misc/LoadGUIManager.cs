@@ -97,7 +97,7 @@ namespace Misc
         
         public void Load(String toLoad)
         {
-            if (toLoad.Equals(openGUIs[0]) || toLoad.Equals(""))
+            if ((openGUIs.Count > 0 && toLoad.Equals(openGUIs[0])) || toLoad.Equals(""))
             {
                 CloseOpenGUI();
                 return;

@@ -23,10 +23,7 @@ namespace QuestSystem
 
         //long description of the quest
         public string longDescription;
-        
-        //initialization text
-        public string initText;
-        
+
         //completion text
         public string compText;
 
@@ -110,7 +107,6 @@ namespace QuestSystem
                 return;
             }
             ReadDescriptionFile(data.descriptionFile);
-            initText = data.initFile.ToString();
             compText = data.completeFile.ToString();
             objectives = data.objectives;
             requiredCounts = data.countsRequired;
