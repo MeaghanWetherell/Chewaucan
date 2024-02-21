@@ -16,6 +16,12 @@ namespace QuestSystem
         [Tooltip("File containing a description of the quest. see example.txt for format")]
         public TextAsset descriptionFile;
 
+        [Tooltip("File containing the message that should appear when the player first receives the quest. Raw text, no formatting requirements")]
+        public TextAsset initFile;
+        
+        [Tooltip("File containing the message that should appear when the player finishes the quest. Raw text, no formatting requirements")]
+        public TextAsset completeFile;
+
         [Tooltip("The name of the objectives as it should appear with a count in the quest log. see examples")]
         public List<string> objectives;
 
