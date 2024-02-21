@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEditor.Splines;
 using System;
+using UnityEngine.UIElements;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(SplineContainer))]
@@ -16,8 +17,10 @@ public class SplineAlignToTerrain : MonoBehaviour
     private int knotCount;
 
     [Tooltip("The space between knots. Lower number = more accurate")]
+    [Min(1)]
     [SerializeField] int knotInterval = 10;
 
+    [Min(0)]
     [SerializeField] int splineToAlign = 0;
 
     [Range(0f, 1f)]
@@ -129,11 +132,29 @@ public class SplineAlignToTerrain : MonoBehaviour
     /**
      * Used to realign all the knots to the terrain if you move one. You must press the button
      * under the component to call it. It might be possible to do this automatically, but this
-     * will work for now
+     * will work for now.
+     * This also only checks existing knots, it won't add knots to align to the terrain
      */
     public void AlignToTerrain()
     {
         Debug.Log("ALIGNING TERRAIN");
+        for (int i = 0; i < spline.Count; i++)
+        {
+            var currKnot = spline[i];
+            Vector3 worldPos = splineContainer.transform.position + (Vector3)currKnot.Position;
+            Terrain terrain = getActualCurrentTerrain(worldPos);
+            if (terrain != null)
+            {
+                float height = terrain.SampleHeight(worldPos);
+                if (Mathf.Abs(worldPos.y - height) > yAllowance)
+                {
+                    Vector3 position = new Vector3(worldPos.x, height, worldPos.z);
+                    Vector3 targetKnotPos = splineContainer.transform.InverseTransformPoint(position);
+                    currKnot.Position = targetKnotPos;
+                    spline.SetKnot(i, currKnot);
+                }
+            }
+        }
     }
 
 

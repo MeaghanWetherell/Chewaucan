@@ -5,7 +5,7 @@ using UnityEditor;
 
 
 [CustomEditor(typeof(SplineAlignToTerrain))]
-public class AdjustSplineToTerrainEditor : Editor
+public class SplineAlignToTerrainEditor : Editor
 {
     private SplineAlignToTerrain adjustSpline;
 
