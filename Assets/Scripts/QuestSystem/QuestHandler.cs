@@ -12,16 +12,14 @@ namespace QuestSystem
     {
         public QuestObj questData;
 
-        [SerializeField] private static GameObject popUpWindow;
-
         private QuestNode _quest;
 
         //initialize the quest associated with this handler
         public void StartQuest()
         {
             _quest = QuestManager.questManager.CreateQuestNode(questData);
-            GameObject window = Instantiate(popUpWindow);
-            window.GetComponent<PopUpTextManager>().SetText();
+            GameObject window = Instantiate(Resources.Load<GameObject>("PopUp"));
+            window.GetComponent<PopUpTextManager>().SetText(questData.questName, questData.initFile.ToString());
         }
 
         //progresses an objective on the quest associated with this handler passing it index and toAdd

@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 2113299345004511250}
   - component: {fileID: 7457878011672469947}
   - component: {fileID: 4443490748253645629}
+  - component: {fileID: 8462320481024917478}
   m_Layer: 5
   m_Name: PopUp
   m_TagString: Untagged
@@ -519,6 +520,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8462320481024917478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157121974107743101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b4edfbd88cc07498133fc2f3fe6b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleActual: {fileID: 1902317312161538405}
+  mainTextActual: {fileID: 4846717743938477625}
 --- !u!1 &7396480433594143826
 GameObject:
   m_ObjectHideFlags: 0
