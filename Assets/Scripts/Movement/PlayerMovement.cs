@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveRef.action.performed += OnMove;
         moveRef.action.canceled += (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
-        jumpRef.action.started += JumpOnce;
+        jumpRef.action.started += OnJump;
         sprintRef.action.performed += OnSprint;
     }
 
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveRef.action.performed -= OnMove;
         moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
-        jumpRef.action.started -= JumpOnce;
+        jumpRef.action.started -= OnJump;
         sprintRef.action.performed -= OnSprint;
     }
 
@@ -268,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    void JumpOnce(InputAction.CallbackContext context)
+    void OnJump(InputAction.CallbackContext context)
     {
         if (_grounded && !_isSwimming)
         {
