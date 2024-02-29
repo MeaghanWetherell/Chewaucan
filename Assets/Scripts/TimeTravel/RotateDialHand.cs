@@ -11,11 +11,27 @@ public class RotateDialHand : MonoBehaviour
     [SerializeField] private float minRotation = -180f;
     [SerializeField] private float maxRotation = 0f;
 
+    [SerializeField] private DialProperties.Dial currentDial;
 
     public void SelectHand(GameObject obj)
     {
         selectedHand = obj.GetComponent<RectTransform>();
-        dialProperties = obj.GetComponent<DialProperties>();
+        dialProperties = DialProperties.instance;
+        if (selectedHand != null)
+        {
+            if (selectedHand.name.Equals("ArcheologyDial"))
+            {
+                currentDial = DialProperties.Dial.ARCHEOLOGY;
+            }
+            else if (selectedHand.name.Equals("GeologyDial"))
+            {
+                currentDial = DialProperties.Dial.GEOLOGY;
+            }
+            else if (selectedHand.name.Equals("BiologyDial"))
+            {
+                currentDial = DialProperties.Dial.BIOLOGY;
+            }
+        }
     }
 
     public void MoveHandLeft()
@@ -26,10 +42,10 @@ public class RotateDialHand : MonoBehaviour
             return;
         }
 
-        if (dialProperties.getCurRotationAmount() < maxRotation)
+        if (dialProperties.getCurRotationAmount(currentDial) < maxRotation)
         {
             selectedHand.Rotate(Vector3.forward, rotInterval);
-            dialProperties.changeCurRotationAmount(rotInterval);
+            dialProperties.changeCurRotationAmount(rotInterval, currentDial);
         }
     }
 
@@ -41,10 +57,10 @@ public class RotateDialHand : MonoBehaviour
             return;
         }
 
-        if (dialProperties.getCurRotationAmount() > minRotation)
+        if (dialProperties.getCurRotationAmount(currentDial) > minRotation)
         {
             selectedHand.Rotate(Vector3.forward, -rotInterval);
-            dialProperties.changeCurRotationAmount(-rotInterval);
+            dialProperties.changeCurRotationAmount(-rotInterval, currentDial);
         }
     }
 }

@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &21227606
 RectTransform:
   m_ObjectHideFlags: 0
@@ -673,8 +673,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1416668969}
-  - {fileID: 1549012439}
   - {fileID: 960500842}
+  - {fileID: 1549012439}
   m_Father: {fileID: 1241174158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -731,7 +731,6 @@ GameObject:
   - component: {fileID: 960500842}
   - component: {fileID: 960500844}
   - component: {fileID: 960500843}
-  - component: {fileID: 960500845}
   m_Layer: 5
   m_Name: GeologyDial
   m_TagString: Untagged
@@ -755,9 +754,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16.6, y: -2.8}
+  m_AnchoredPosition: {x: 4.249979, y: -28.674992}
   m_SizeDelta: {x: 123.5, y: 75}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.9, y: 0.155}
 --- !u!114 &960500843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.92211103, b: 0.78867924, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -796,18 +795,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960500841}
   m_CullTransparentMesh: 1
---- !u!114 &960500845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960500841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92eb24a5ca78c0f4f8f89f40e672458f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1037182238
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1215805134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1143,7 +1130,7 @@ Canvas:
   m_GameObject: {fileID: 1241174154}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1152,10 +1139,10 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1241174158
 RectTransform:
@@ -1194,7 +1181,6 @@ GameObject:
   - component: {fileID: 1416668969}
   - component: {fileID: 1416668972}
   - component: {fileID: 1416668971}
-  - component: {fileID: 1416668973}
   m_Layer: 5
   m_Name: ArcheologyDial
   m_TagString: Untagged
@@ -1218,9 +1204,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.4, y: 22}
+  m_AnchoredPosition: {x: 4.5000153, y: -28.8}
   m_SizeDelta: {x: 69.5, y: 127}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.8, y: 0.1}
 --- !u!114 &1416668971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,7 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.76037735, b: 0.76037735, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1259,18 +1245,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1416668968}
   m_CullTransparentMesh: 1
---- !u!114 &1416668973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1416668968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92eb24a5ca78c0f4f8f89f40e672458f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1426346899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,7 +1388,6 @@ GameObject:
   - component: {fileID: 1549012439}
   - component: {fileID: 1549012442}
   - component: {fileID: 1549012441}
-  - component: {fileID: 1549012443}
   m_Layer: 5
   m_Name: BiologyDial
   m_TagString: Untagged
@@ -1438,9 +1411,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.5, y: -61.7}
+  m_AnchoredPosition: {x: 4.3600664, y: -28.099945}
   m_SizeDelta: {x: 109.5, y: 96}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.88, y: 0.85}
 --- !u!114 &1549012441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.76981133, g: 0.8655979, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1479,18 +1452,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549012438}
   m_CullTransparentMesh: 1
---- !u!114 &1549012443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1549012438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92eb24a5ca78c0f4f8f89f40e672458f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1555381437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1509,7 +1470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1555381438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1624,6 +1585,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555381437}
   m_CullTransparentMesh: 1
+--- !u!1 &1936532986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1936532988}
+  - component: {fileID: 1936532987}
+  m_Layer: 0
+  m_Name: DialPropertiesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1936532987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936532986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eb24a5ca78c0f4f8f89f40e672458f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  archeoOffset: 154
+  geologyOffset: 118
+  biologyOffset: 48
+  archeoTransform: {fileID: 1416668969}
+  geologyTransform: {fileID: 960500842}
+  biologyTransform: {fileID: 1549012439}
+--- !u!4 &1936532988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936532986}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -349.2, y: 23.535, z: 115.384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944713347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1801,7 @@ MonoBehaviour:
   rotInterval: 10
   minRotation: -180
   maxRotation: 0
+  currentDial: 0
 --- !u!4 &2109211132
 Transform:
   m_ObjectHideFlags: 0
@@ -1811,3 +1823,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1241174158}
   - {fileID: 2109211132}
+  - {fileID: 1936532988}
