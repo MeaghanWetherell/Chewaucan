@@ -31,6 +31,15 @@ namespace QuestSystem
             if (node != null)
                 return node;
             node = new QuestNode(obj);
+            if (obj.initFile != null)
+            {
+                GameObject window = Instantiate(Resources.Load<GameObject>("PopUp"));
+                window.GetComponent<PopUpTextManager>().SetText(obj.questName, obj.initFile.ToString());
+            }
+            PauseCallback.pauseManager.Pause();
+            GameObject hud = GameObject.Find("HUD");
+            if(hud != null)
+                hud.SetActive(false);
             return node;
         }
 

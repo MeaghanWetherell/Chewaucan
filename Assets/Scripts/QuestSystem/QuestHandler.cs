@@ -18,15 +18,6 @@ namespace QuestSystem
         public void StartQuest()
         {
             _quest = QuestManager.questManager.CreateQuestNode(questData);
-            if (questData.initFile != null)
-            {
-                GameObject window = Instantiate(Resources.Load<GameObject>("PopUp"));
-                window.GetComponent<PopUpTextManager>().SetText(questData.questName, questData.initFile.ToString());
-            }
-            PauseCallback.pauseManager.Pause();
-            GameObject hud = GameObject.Find("HUD");
-            if(hud != null)
-                hud.SetActive(false);
         }
 
         //progresses an objective on the quest associated with this handler passing it index and toAdd
