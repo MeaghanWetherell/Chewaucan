@@ -33,13 +33,8 @@ namespace QuestSystem
             node = new QuestNode(obj);
             if (obj.initFile != null)
             {
-                GameObject window = Instantiate(Resources.Load<GameObject>("PopUp"));
-                window.GetComponent<PopUpTextManager>().SetText(obj.questName, obj.initFile.ToString());
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
             }
-            PauseCallback.pauseManager.Pause();
-            GameObject hud = GameObject.Find("HUD");
-            if(hud != null)
-                hud.SetActive(false);
             return node;
         }
 
@@ -53,7 +48,6 @@ namespace QuestSystem
                     return node;
                 }
             }
-
             return null;
         }
 
@@ -168,12 +162,13 @@ namespace QuestSystem
 
         //self report quest completion to the manager.
         //nodes handle this, shouldn't be called externally
-        public void ReportCompletion(bool wasPinned=false, QuestNode pinNode=null)
+        public void ReportCompletion(QuestNode node, bool wasPinned=false)
         {
             _quests.InsertionSort();
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
             if (wasPinned)
             {
-                RemovePin(pinNode);
+                RemovePin(node);
                 HUDManager.hudManager.ResetPins();
             }
         }

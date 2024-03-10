@@ -21,7 +21,7 @@ public class OpenTimeTravelUI : MonoBehaviour
     public void openTimeTravelUI(InputAction.CallbackContext context)
     {
         //load time travel scene on top of this scene
-        if (LoadGUIManager.loadGUIManager.isGUIOPen())
+        if (LoadGUIManager.loadGUIManager.isGUIOpen())
         {
             LoadGUIManager.loadGUIManager.CloseOpenGUI();
         }

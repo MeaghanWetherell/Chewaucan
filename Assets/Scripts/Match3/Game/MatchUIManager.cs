@@ -1,5 +1,6 @@
 using System;
 using Match3.Game;
+using QuestSystem.Quests.QScripts;
 using TMPro;
 using UnityEngine;
 
@@ -63,6 +64,7 @@ namespace Match3
         //wins the game and displays the passed win reason
         private void Win(String reason)
         {
+            MatchLvlComplete.matchLvlComplete.OnLvlComplete();
             matchSound.PlayYay();
             mainText.text = "You Win!";
             buttonText.text = "Next Level";

@@ -10,7 +10,7 @@ namespace QuestSystem
         [Tooltip("Quest name as it should appear in the quest log")]
         public string questName;
 
-        [Tooltip("It doesn't matter what this is, as long it's not the same for any quest")] 
+        [Tooltip("It doesn't matter what this is, as long it's not the same for any two quests")] 
         public string uniqueID;
         
         [Tooltip("File containing a description of the quest. see example.txt for format")]

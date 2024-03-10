@@ -10,13 +10,15 @@ namespace Misc
     {
         public static LoadGUIManager loadGUIManager;
         
-        private List<String> openGUIs = new List<string>();
+        private String GUIName;
+
+        private List<GameObject> popUps = new List<GameObject>();
         
         //store a ref to the HUD object
         private GameObject _hud;
 
-        private List<string> doNotUnload = new List<string>();
-
+        private GameObject popUp;
+        
         private void Awake()
         {
             if (loadGUIManager != null)
@@ -26,14 +28,15 @@ namespace Misc
             }
             loadGUIManager = this;
             DontDestroyOnLoad(this.gameObject);
+            popUp = Resources.Load<GameObject>("PopUp");
         }
         
-        private void OnEnable()
+        public void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoad;
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoad;
         }
@@ -42,111 +45,86 @@ namespace Misc
         {
             if (mode == LoadSceneMode.Single)
             {
-                openGUIs = new List<string>();
+                GUIName = null;
             }
-        }
-        
-        //scenes on this list can only be closed by passing their name to CloseOpenGUI
-        public void AddToUncloseable(string toAdd)
-        {
-            doNotUnload.Add(toAdd);
         }
 
-        public void CloseOpenGUI()
+        public void InstantiatePopUp(String title, String msg)
         {
-            if (openGUIs == null || openGUIs.Count == 0)
-                return;
-            PauseCallback.pauseManager.Resume();
-            foreach (string GUI in openGUIs)
+            GameObject window = Instantiate(popUp);
+            window.GetComponent<PopUpTextManager>().SetText(title, msg);
+            window.GetComponent<PopUpOnClick>().index = popUps.Count;
+            window.GetComponent<Canvas>().sortingOrder += popUps.Count;
+            popUps.Add(window);
+            PauseCallback.pauseManager.Pause();
+            GameObject hud = GameObject.Find("HUD");
+            if(hud != null)
+                hud.SetActive(false);
+        }
+
+        public void ClosePopUp()
+        {
+            Destroy(popUps.Last());
+            popUps.RemoveAt(popUps.Count-1);
+            if (!isGUIOpen() && popUps.Count == 0)
             {
-                if(!doNotUnload.Contains(GUI))
-                    SceneManager.UnloadSceneAsync(GUI);
+                PauseCallback.pauseManager.Resume();
             }
+        }
+
+        public void ClosePopUp(int index)
+        {
+            Destroy(popUps[index]);
+            popUps.RemoveAt(index);
+            if (!isGUIOpen() && popUps.Count == 0)
+            {
+                PauseCallback.pauseManager.Resume();
+            }
+        }
+
+        public bool CloseOpenGUI()
+        {
+            if (GUIName == null)
+                return true;
+            if (popUps.Count > 0)
+            {
+                ClosePopUp();
+                return false;
+            }
+            PauseCallback.pauseManager.Resume();
+            SceneManager.UnloadSceneAsync(GUIName);
             if(_hud == null)
                 _hud = GameObject.Find("HUD");
             if(_hud != null)
                 _hud.SetActive(true);
-            openGUIs = new List<string>();
+            GUIName = null;
+            return true;
         }
 
-        public bool CloseOpenGUI(string toClose)
+        public bool Load(String toLoad)
         {
-            if (openGUIs == null || openGUIs.Count == 0)
-                return false;
-            foreach (string GUI in openGUIs)
-            {
-                if (GUI.Equals(toClose))
-                {
-                    doNotUnload.Remove(toClose);
-                    SceneManager.UnloadSceneAsync(GUI);
-                    openGUIs.Remove(GUI);
-                    if (openGUIs.Count == 0)
-                    {
-                        PauseCallback.pauseManager.Resume();
-                        if(_hud == null)
-                            _hud = GameObject.Find("HUD");
-                        if(_hud != null)
-                            _hud.SetActive(true);
-                    }
-
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        public void Load(String toLoad)
-        {
-            if ((openGUIs.Count > 0 && toLoad.Equals(openGUIs[0])) || toLoad.Equals(""))
+            if (toLoad.Equals(GUIName) || toLoad.Equals(""))
             {
                 CloseOpenGUI();
-                return;
+                return false;
             }
-            CloseOpenGUI();
-            openGUIs = new List<string> {toLoad};
+            if (!CloseOpenGUI())
+            {
+                return false;
+            }
+            GUIName = toLoad;
             PauseCallback.pauseManager.Pause();
             if(_hud == null)
                 _hud = GameObject.Find("HUD");
             if(_hud != null)
                 _hud.SetActive(false);
-            SceneManager.LoadScene(openGUIs[0], LoadSceneMode.Additive);
+            SceneManager.LoadScene(GUIName, LoadSceneMode.Additive);
+            return true;
         }
 
-        public void Load(String toLoad, bool loadingMode)
+        public bool isGUIOpen()
         {
-            if (!loadingMode)
-            {
-                Load(toLoad);
-                return;
-            }
-            if (CloseOpenGUI(toLoad))
-                return;
-            if (openGUIs.Count == 0)
-            {
-                PauseCallback.pauseManager.Pause();
-                if(_hud == null)
-                    _hud = GameObject.Find("HUD");
-                if(_hud != null)
-                    _hud.SetActive(false);
-            }
-            openGUIs.Add(toLoad);
-            SceneManager.LoadScene(openGUIs[0], LoadSceneMode.Additive);
-            Scene scene = SceneManager.GetSceneByName(toLoad);
-            GameObject[] objs = scene.GetRootGameObjects();
-            foreach (GameObject obj in objs)
-            {
-                Canvas canvas = obj.GetComponent<Canvas>();
-                if (canvas != null)
-                {
-                    canvas.sortingOrder = openGUIs.Count;
-                    break;
-                }
-            }
-        }
-
-        public bool isGUIOPen()
-        {
-            return (openGUIs.Count > 0);
+            return (GUIName != null);
         }
     }
 }

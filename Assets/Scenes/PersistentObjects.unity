@@ -423,7 +423,6 @@ GameObject:
   - component: {fileID: 1025364778}
   - component: {fileID: 1025364777}
   - component: {fileID: 1025364779}
-  - component: {fileID: 1025364780}
   m_Layer: 0
   m_Name: PauseManager
   m_TagString: Untagged
@@ -443,6 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee393fdedf797db4f99e1fee435af350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
 --- !u!4 &1025364778
 Transform:
   m_ObjectHideFlags: 0
@@ -471,23 +471,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScene: PauseMenu
-  loadingMode: 0
-  setUnclosable: 0
---- !u!114 &1025364780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025364776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac6710af2766f143ba70ec5e4de431d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadScene: SoundSettings
-  loadingMode: 0
-  setUnclosable: 0
 --- !u!1 &1049979397
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,8 +598,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScene: TimeTravelGUI
-  loadingMode: 0
-  setUnclosable: 0
 --- !u!4 &1195756259
 Transform:
   m_ObjectHideFlags: 0

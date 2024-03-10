@@ -17,7 +17,7 @@ namespace Match3
         [Tooltip("All match 3 levels")]public List<LevelData> levels;
 
         //stores the index of the level data for the level currently being played
-        private int _curIndex;
+        public int curIndex;
 
         [System.NonSerialized]
         public List<bool> levelsComplete;
@@ -53,7 +53,7 @@ namespace Match3
             SetValidMeshes(levels[index].meshes);
             MatchObject.compareByGroup = levels[index].matchType;
             MatchLine.shouldRotate = levels[index].rotate;
-            _curIndex = index;
+            curIndex = index;
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Match3");
             //UnityEngine.Random.InitState(170);
         }
@@ -70,7 +70,7 @@ namespace Match3
 
         public LevelData GETCurLevel()
         {
-            return levels[_curIndex];
+            return levels[curIndex];
         }
     }
 }

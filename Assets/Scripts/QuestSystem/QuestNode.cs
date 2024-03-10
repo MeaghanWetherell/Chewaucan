@@ -43,7 +43,7 @@ namespace QuestSystem
         public bool isComplete = false;
 
         public bool isPinned = false;
-        
+
         //adds the passed count to the count for the objective at index
         //returns true if the quest is complete, false otherwise
         public bool AddCount(int index, float toAdd = 0.0f)
@@ -76,13 +76,13 @@ namespace QuestSystem
                 if (isPinned)
                 {
                     isPinned = false;
-                    QuestManager.questManager.ReportCompletion(true, this);
+                    QuestManager.questManager.ReportCompletion(this, true);
                 }
                 else
                 {
-                    QuestManager.questManager.ReportCompletion();
+                    QuestManager.questManager.ReportCompletion(this);
                 }
-
+                
                 return true;
             }
 
