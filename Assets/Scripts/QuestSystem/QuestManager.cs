@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Misc;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine.Events;
 
 
 namespace QuestSystem
@@ -31,6 +31,10 @@ namespace QuestSystem
             if (node != null)
                 return node;
             node = new QuestNode(obj);
+            if (obj.initFile != null)
+            {
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
+            }
             return node;
         }
 
@@ -44,8 +48,31 @@ namespace QuestSystem
                     return node;
                 }
             }
-
             return null;
+        }
+        
+        //use to subscribe to completion events for a quest
+        public bool SubToCompletion(string id, UnityAction<string> func)
+        {
+            QuestNode node = GETNode(id);
+            if (node != null)
+            {
+                node.OnComplete.AddListener(func);
+                return true;
+            }
+            return false;
+        }
+        
+        //use to unsubscribe to completion events for a quest
+        public bool UnsubToCompletion(string id, UnityAction<string> func)
+        {
+            QuestNode node = GETNode(id);
+            if (node != null)
+            {
+                node.OnComplete.RemoveListener(func);
+                return true;
+            }
+            return false;
         }
 
         private void Awake()
@@ -159,12 +186,13 @@ namespace QuestSystem
 
         //self report quest completion to the manager.
         //nodes handle this, shouldn't be called externally
-        public void ReportCompletion(bool wasPinned=false, QuestNode pinNode=null)
+        public void ReportCompletion(QuestNode node, bool wasPinned=false)
         {
             _quests.InsertionSort();
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
             if (wasPinned)
             {
-                RemovePin(pinNode);
+                RemovePin(node);
                 HUDManager.hudManager.ResetPins();
             }
         }

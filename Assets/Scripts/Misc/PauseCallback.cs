@@ -9,6 +9,8 @@ namespace Misc
     public class PauseCallback : MonoBehaviour
     {
         public static PauseCallback pauseManager;
+
+        public bool isPaused = false;
     
         private UnityEvent pauseCallback = new UnityEvent();
 
@@ -52,13 +54,23 @@ namespace Misc
         //wrapper around UnityEvent.Invoke
         public void Pause()
         {
-            pauseCallback.Invoke();
+            if (!isPaused)
+            {
+                pauseCallback.Invoke();
+                isPaused = true;
+            }
+            
         }
 
         //wrapper around UnityEvent.Invoke
         public void Resume()
         {
-            resumeCallback.Invoke();
+            if (isPaused)
+            {
+                resumeCallback.Invoke();
+                isPaused = false;
+            }
+            
         }
     }
 }

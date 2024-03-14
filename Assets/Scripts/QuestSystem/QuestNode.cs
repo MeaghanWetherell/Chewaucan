@@ -24,6 +24,9 @@ namespace QuestSystem
         //long description of the quest
         public string longDescription;
 
+        //completion text
+        public string compText;
+
         //list of the objectives to be completed
         public List<string> objectives;
 
@@ -37,10 +40,12 @@ namespace QuestSystem
         //initialized to 1 if a value is not received
         public List<float> countsPerAction;
 
+        public UnityEvent<string> OnComplete = new UnityEvent<string>();
+
         public bool isComplete = false;
 
         public bool isPinned = false;
-        
+
         //adds the passed count to the count for the objective at index
         //returns true if the quest is complete, false otherwise
         public bool AddCount(int index, float toAdd = 0.0f)
@@ -73,13 +78,13 @@ namespace QuestSystem
                 if (isPinned)
                 {
                     isPinned = false;
-                    QuestManager.questManager.ReportCompletion(true, this);
+                    QuestManager.questManager.ReportCompletion(this, true);
                 }
                 else
                 {
-                    QuestManager.questManager.ReportCompletion();
+                    QuestManager.questManager.ReportCompletion(this);
                 }
-
+                OnComplete.Invoke(id);
                 return true;
             }
 
@@ -104,6 +109,7 @@ namespace QuestSystem
                 return;
             }
             ReadDescriptionFile(data.descriptionFile);
+            compText = data.completeFile.ToString();
             objectives = data.objectives;
             requiredCounts = data.countsRequired;
             countsPerAction = data.countsAdded;

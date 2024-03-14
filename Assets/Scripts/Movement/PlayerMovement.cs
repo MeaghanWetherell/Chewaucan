@@ -62,6 +62,10 @@ public class PlayerMovement : MonoBehaviour
         oxygenUI.maxValue = maxStamina;
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
+        if (PauseCallback.pauseManager.isPaused)
+        {
+            OnPause();
+        }
     }
 
     //unsubscribe from event callbacks to prevent leaks

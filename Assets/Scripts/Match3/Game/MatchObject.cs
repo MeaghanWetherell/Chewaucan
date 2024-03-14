@@ -1,17 +1,24 @@
 using System;
 using System.Collections.Generic;
+using Match3.DataClasses;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
+// ReSharper disable StringCompareIsCultureSpecific.1
 
 namespace Match3
 {
     //Holds data related to a single bone on the match grid
     public class MatchObject : MonoBehaviour, IPointerDownHandler, IComparable<MatchObject>
     {
-        //whether match objects should check if they are in the same general group as another when being compared
-        //or check if they are of the same specific type
-        public static bool compareByGroup = false;
+        public enum MatchType
+        {
+            identical,
+            sameBone,
+            sameSpecies
+        }
+        //the type of comparison on the meshes
+        private static MatchType mtype = MatchType.identical;
         
         //a list containing all the possible bones that match object could be
         private static List<MeshDataObj> _meshes;
@@ -24,13 +31,15 @@ namespace Match3
 
         [NonSerialized]public int myType;
 
-        [NonSerialized]public String myGroup;
+        [NonSerialized]public String myAnimal;
+        
+        [NonSerialized]public String myBoneType;
 
         //index of the object in the match line
         [NonSerialized]public int index;
 
         [NonSerialized]public MatchLine parent;
-        
+
         //loads in the main mesh list if needed and initializes itself as a random valid bone
         private void Start()
         {
@@ -39,7 +48,8 @@ namespace Match3
             myType = validMeshes[temp];
             this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
             this.gameObject.GetComponent<MeshRenderer>().material = _meshes[myType].material;
-            myGroup = _meshes[myType].group.ToLower();
+            myAnimal = _meshes[myType].animal.ToLower();
+            myBoneType = _meshes[myType].boneType.ToLower();
         }
 
         //move toward a snap point
@@ -63,6 +73,11 @@ namespace Match3
         {
             parent.RemoveObject(index);
         }
+
+        public static void ChangeMatchType(MatchType change)
+        {
+            mtype = change;
+        }
         
         //when a match object is clicked, tells the grid that if the user tries to move a bone, it should be that one
         public void OnPointerDown(PointerEventData eventData)
@@ -70,13 +85,16 @@ namespace Match3
             MatchGrid.matchGrid.RegisterActiveMatchObj(this);
         }
 
-        //compares itself to another matchobject per IComparable, obeying compareByGroup
+        //compares itself to another matchobject per IComparable, obeying the matchtype specification
         public int CompareTo(MatchObject other)
         {
-            if (compareByGroup)
+            if (mtype == MatchType.sameBone)
             {
-                // ReSharper disable once StringCompareIsCultureSpecific.1
-                return String.Compare(myGroup, other.myGroup);
+                return String.Compare(myBoneType, other.myBoneType);
+            }
+            if (mtype == MatchType.sameSpecies)
+            {
+                return String.Compare(myAnimal, other.myAnimal);
             }
             if (myType == other.myType)
             {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Match3.DataClasses;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1525339944577995501}
   - component: {fileID: 1223034076145604584}
   - component: {fileID: 7348024915808343442}
+  - component: {fileID: -7485854115668354838}
   m_Layer: 0
   m_Name: MatchManGuy
   m_TagString: Untagged
@@ -147,3 +148,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadScene: LevelGUI
+  shouldLoadBone: 0
+--- !u!114 &-7485854115668354838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506156940082082018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddfdc2580c23fb43997282fadb90e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questData: {fileID: 11400000, guid: c5509ed46bed4b14f8ee9479495ddde9, type: 2}

@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16fd1777aece194fa4a91dcef9642d1, type: 3}
-  m_Name: Waypoint3
+  m_Name: Test2
   m_EditorClassIdentifier: 
-  questName: Waypoint 3
-  uniqueID: wp3
-  descriptionFile: {fileID: 4900000, guid: 93282bc6e64cb264e8f8578018e48192, type: 3}
+  questName: Test2
+  uniqueID: test2
+  descriptionFile: {fileID: 4900000, guid: 7bce5898c612d964d89e53e1daaf36e4, type: 3}
+  initFile: {fileID: 0}
+  completeFile: {fileID: 4900000, guid: 4ff466ae0e134ca4f931833f3802a714, type: 3}
   objectives:
-  - Reach waypoint 3
+  - Press B
   countsRequired:
+  - 10
+  countsAdded:
   - 1
-  countsAdded: []

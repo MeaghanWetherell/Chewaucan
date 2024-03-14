@@ -21,6 +21,8 @@ public class CameraLook : MonoBehaviour
     {
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
+        if(PauseCallback.pauseManager.isPaused)
+            OnPause();
     }
 
     //unsubscribe
