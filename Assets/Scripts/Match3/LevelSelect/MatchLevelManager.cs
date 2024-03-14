@@ -51,7 +51,7 @@ namespace Match3
         public void LoadLevel(int index)
         {
             SetValidMeshes(levels[index].meshes);
-            MatchObject.compareByGroup = levels[index].matchType;
+            MatchObject.ChangeMatchType(levels[index].matchType);
             MatchLine.shouldRotate = levels[index].rotate;
             curIndex = index;
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Match3");

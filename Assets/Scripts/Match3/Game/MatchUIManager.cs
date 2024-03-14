@@ -51,12 +51,13 @@ namespace Match3
             buttonText.text = "Retry";
             scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
             int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
-            if (num > 0)
+            if (num < MatchLevelManager.matchLevelManager.levels.Count)
             {
-                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num-1;
             }
             else
             {
+                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num-1;
                 buttonText.text = "Play Again!";
             }
         }
@@ -72,14 +73,13 @@ namespace Match3
             int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
             if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count-1)
             {
-                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num+1;
-                MatchLevelManager.matchLevelManager.levelsComplete[num] = true;
+                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+                MatchLevelManager.matchLevelManager.levelsComplete[num-1] = true;
             }
             else
             {
                 buttonText.text = "Play Again!";
-                if(num>0)
-                    buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
+                buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num-1;
             }
         }
     }

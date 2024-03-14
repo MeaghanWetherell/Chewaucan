@@ -29,12 +29,14 @@ namespace QuestSystem.Quests.QScripts
             int lvl = MatchLevelManager.matchLevelManager.curIndex;
             for (int i = 0; i < lvls.Count; i++)
             {
-                if (lvls[i] == lvl)
+                if (lvls[i] == lvl+1)
                 {
                     QuestNode target = QuestManager.questManager.GETNode(ids[i]);
+                    if(target.isComplete)
+                        return;
                     target.AddCount(0, 1);
                     QuestManager.questManager.CreateQuestNode(fishQuestObj);
-                    GameObject popUp = GameObject.Find("PopUp");
+                    GameObject popUp = GameObject.Find("PopUp(Clone)");
                     if (popUp != null)
                     {
                         popUp.GetComponentInChildren<Button>().onClick.AddListener(() => {
@@ -42,7 +44,8 @@ namespace QuestSystem.Quests.QScripts
                     }
                     if (ids[i] == fishQuestObj.uniqueID)
                     {
-                        if (QuestManager.questManager.GETNode(plateauQuestId).isComplete)
+                        QuestNode plateauNode = QuestManager.questManager.GETNode(plateauQuestId);
+                        if (plateauNode is {isComplete: true})
                         {
                             //TODO: narration trigger
                         }

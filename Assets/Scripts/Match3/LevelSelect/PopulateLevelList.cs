@@ -72,7 +72,7 @@ namespace Match3
             {
                 newButton.GetComponent<Button>().interactable = false;
             }
-            newButton.GetComponent<OpenLevel>().levelIndex = level.levelNum;
+            newButton.GetComponent<OpenLevel>().levelIndex = level.levelNum-1;
         }
     }
 }

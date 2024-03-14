@@ -40,6 +40,8 @@ namespace QuestSystem
         //initialized to 1 if a value is not received
         public List<float> countsPerAction;
 
+        public UnityEvent<string> OnComplete = new UnityEvent<string>();
+
         public bool isComplete = false;
 
         public bool isPinned = false;
@@ -82,7 +84,7 @@ namespace QuestSystem
                 {
                     QuestManager.questManager.ReportCompletion(this);
                 }
-                
+                OnComplete.Invoke(id);
                 return true;
             }
 

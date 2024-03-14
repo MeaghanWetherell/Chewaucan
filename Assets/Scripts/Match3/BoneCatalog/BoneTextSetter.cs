@@ -11,12 +11,16 @@ namespace Match3
 
         public TextMeshProUGUI mainText;
 
+        private static string lorem;
+
         private void Awake()
         {
             boneName.text = BoneSceneManager.boneSceneManager.curObj.boneName;
             if (BoneSceneManager.boneSceneManager.curObj.animalDesc == null)
             {
-                mainText.text = Resources.Load<DescObj>("LoremIpsum").description;
+                if(lorem == null)
+                    lorem = Resources.Load<DescObj>("LoremIpsum").description;
+                mainText.text = lorem;
             }
             else
             {

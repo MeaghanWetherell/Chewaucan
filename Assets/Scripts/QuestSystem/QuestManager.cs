@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using Misc;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.Events;
 
 
 namespace QuestSystem
@@ -49,6 +50,30 @@ namespace QuestSystem
                 }
             }
             return null;
+        }
+        
+        //use to subscribe to completion events for a quest
+        public bool SubToCompletion(string id, UnityAction<string> func)
+        {
+            QuestNode node = GETNode(id);
+            if (node != null)
+            {
+                node.OnComplete.AddListener(func);
+                return true;
+            }
+            return false;
+        }
+        
+        //use to unsubscribe to completion events for a quest
+        public bool UnsubToCompletion(string id, UnityAction<string> func)
+        {
+            QuestNode node = GETNode(id);
+            if (node != null)
+            {
+                node.OnComplete.RemoveListener(func);
+                return true;
+            }
+            return false;
         }
 
         private void Awake()

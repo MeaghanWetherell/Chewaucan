@@ -1,3 +1,4 @@
+using ScriptTags;
 using UnityEngine;
 
 namespace QuestSystem.Quests.QScripts
@@ -6,7 +7,8 @@ namespace QuestSystem.Quests.QScripts
     {
         private void OnTriggerEnter(Collider other)
         {
-            StartQuest();
+            if(other.GetComponent<Player>() != null)
+                StartQuest();
         }
     }
 }
