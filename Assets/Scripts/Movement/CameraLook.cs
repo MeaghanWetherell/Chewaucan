@@ -59,7 +59,7 @@ public class CameraLook : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (!(this.GetComponent<PlayerMovement>().DiveOngoing()))
+        if (!(this.GetComponent<SwimmingMovement>().DiveOngoing()))
         {
             _lookInput = context.ReadValue<Vector2>();
         }

@@ -16,7 +16,9 @@ GameObject:
   - component: {fileID: 7076084884391332371}
   - component: {fileID: 7590622668026624178}
   - component: {fileID: 9024828064115020624}
-  - component: {fileID: 5122460959738869530}
+  - component: {fileID: 30061512974992736}
+  - component: {fileID: 3190979845072674039}
+  - component: {fileID: 3004082312838410803}
   - component: {fileID: 753812688764451313}
   - component: {fileID: 2186890376376113972}
   - component: {fileID: 4607294004319653680}
@@ -25,6 +27,7 @@ GameObject:
   - component: {fileID: 3433592331129633358}
   - component: {fileID: 6822227926822906029}
   - component: {fileID: 7712161477581211517}
+  - component: {fileID: 6769626399634015360}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -206,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadScene: QuestGUI
   openGUI: {fileID: 4710351890966612040, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
---- !u!114 &5122460959738869530
+--- !u!114 &30061512974992736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,26 +218,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 2176073402916056196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc41b18d5eff5f843b40b3e2a1a84709, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d1fb6bc4de25db47ad7bbbaae328cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3190979845072674039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c813e6bb52a66040aaff9c5f9875949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  maxDistToGround: 1.15
-  rotationSpeed: 1.5
-  gravity: -2
-  jumpHeight: 0.3
+  rotationSpeed: 4
   maxStamina: 100
   currStamina: 100
   staminaDepletionRate: 10
   oxygenDepletionRate: 4
   currOxygen: 100
-  cameraObj: {fileID: 0}
+  cameraObj: {fileID: 8539058024222695338}
   minimapCamObj: {fileID: 5824499138386022900}
   staminaUI: {fileID: 0}
   oxygenUI: {fileID: 0}
-  moveRef: {fileID: 0}
-  jumpRef: {fileID: 0}
-  sprintRef: {fileID: 0}
+  moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+--- !u!114 &3004082312838410803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dc98e8e466f3c49ac394acdb5f1c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  maxDistToGround: 1.15
+  rotationSpeed: 4
+  gravity: -2
+  jumpHeight: 2
+  maxStamina: 100
+  currStamina: 100
+  staminaDepletionRate: 10
+  cameraObj: {fileID: 8539058024222695338}
+  minimapCamObj: {fileID: 5824499138386022900}
+  staminaUI: {fileID: 0}
+  moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &753812688764451313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +476,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   astrolabeRef: {fileID: -5942043207093793466, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+--- !u!114 &6769626399634015360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40050c3afca1224fa5fe2e64f61fa9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugCanvas: {fileID: 0}
 --- !u!1 &2787468417000385131
 GameObject:
   m_ObjectHideFlags: 0
