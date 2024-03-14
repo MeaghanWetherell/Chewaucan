@@ -20,7 +20,7 @@ namespace Match3
         [Tooltip("Whether meshes should be rotated")]
         public bool rotate;
 
-        [Tooltip("Whether matches should be by animal or by mesh (check the flag for by animal)")]
-        public bool matchType;
+        [Tooltip("The type of matching that should be performed in this level")]
+        public MatchObject.MatchType matchType;
     }
 }

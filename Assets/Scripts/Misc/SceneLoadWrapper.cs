@@ -30,6 +30,10 @@ namespace Misc
 
         public void LoadScene(String sceneName)
         {
+            if (PauseCallback.pauseManager.isPaused)
+            {
+                PauseCallback.pauseManager.Resume();
+            }
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {

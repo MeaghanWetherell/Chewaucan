@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Match3.DataClasses;
 using UnityEngine;
 
 namespace Match3
