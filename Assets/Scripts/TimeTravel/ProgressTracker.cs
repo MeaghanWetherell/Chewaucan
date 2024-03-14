@@ -52,7 +52,7 @@ public class ProgressTracker : MonoBehaviour
     }
 
     //only used for debug purposes
-    public void UncompleteQuest(int n)
+    public void DeleteProgress()
     {
         Debug.Log("Delete");
         SaveDialProgressData.DeleteDialProgress();

@@ -22,6 +22,10 @@ public static class SaveDialProgressData
 
     public static string saveDataPath = Application.persistentDataPath + "/DialProgess.json";
 
+    /* These ints represent the total number of quests of each type
+     * They are set to placeholder values for now, but when we do know how
+     * many quests of each type there are, we should change these numbers
+     */
     public static int archeologyQuestNum = 10;
     public static int geologyQuestNum = 8;
     public static int biologyQuestNum = 5;
@@ -37,15 +41,15 @@ public static class SaveDialProgressData
             currentProgress.B_progress = 0;
         }
 
-        if (dial == Dial.ARCHEOLOGY)
+        if (dial == Dial.ARCHEOLOGY && currentProgress.A_progress < archeologyQuestNum)
         {
             currentProgress.A_progress += 1;
         }
-        else if (dial == Dial.GEOLOGY)
+        else if (dial == Dial.GEOLOGY && currentProgress.G_progress < geologyQuestNum)
         {
             currentProgress.G_progress += 1;
         }
-        else if (dial == Dial.BIOLOGY)
+        else if (dial == Dial.BIOLOGY && currentProgress.B_progress < biologyQuestNum)
         {
             currentProgress.B_progress += 1;
         }
