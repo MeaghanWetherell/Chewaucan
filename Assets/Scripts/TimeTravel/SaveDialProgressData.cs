@@ -15,9 +15,10 @@ public static class SaveDialProgressData
 {
     public enum Dial
     {
+        NONE,
         ARCHEOLOGY,
-        GEOLOGY,
-        BIOLOGY
+        BIOLOGY,
+        GEOLOGY
     }
 
     public static string saveDataPath = Application.persistentDataPath + "/DialProgess.json";
@@ -25,6 +26,8 @@ public static class SaveDialProgressData
     /* These ints represent the total number of quests of each type
      * They are set to placeholder values for now, but when we do know how
      * many quests of each type there are, we should change these numbers
+     *
+     * EDIT: QuestManager now handles this. It'll set them automatically to the right number
      */
     public static int archeologyQuestNum = 10;
     public static int geologyQuestNum = 8;

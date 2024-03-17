@@ -12,26 +12,14 @@ namespace QuestSystem
     [Serializable]
     public class QuestNode : IComparable<QuestNode>
     {
-        //name of the quest, used as an identifier, should ensure unique names
-        public string name;
-
-        //unique id of the quest
-        public string id;
+        //Quest object containing the quest data corresponding to this node
+        public QuestObj MyObj;
 
         //short description of the quest
         public string shortDescription;
 
         //long description of the quest
         public string longDescription;
-
-        //completion text
-        public string compText;
-
-        //list of the objectives to be completed
-        public List<string> objectives;
-
-        //list of the required count per objective mapped by index
-        public List<float> requiredCounts;
 
         //current count per objective mapped by index
         public List<float> counts = new List<float>();
@@ -61,13 +49,13 @@ namespace QuestSystem
             }
 
             counts[index] += toAdd;
-            if (counts[index] >= requiredCounts[index])
+            if (counts[index] >= MyObj.countsRequired[index])
             {
-                counts[index] = requiredCounts[index];
-                for (int i = 0; i < requiredCounts.Count; i++)
+                counts[index] = MyObj.countsRequired[index];
+                for (int i = 0; i < MyObj.countsRequired.Count; i++)
                 {
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if (counts[i] != requiredCounts[i])
+                    if (counts[i] != MyObj.countsRequired[i])
                     {
                         HUDManager.hudManager.ResetPins();
                         return false;
@@ -84,7 +72,7 @@ namespace QuestSystem
                 {
                     QuestManager.questManager.ReportCompletion(this);
                 }
-                OnComplete.Invoke(id);
+                OnComplete.Invoke(MyObj.uniqueID);
                 return true;
             }
 
@@ -102,26 +90,22 @@ namespace QuestSystem
         //use QuestManager.questManager.getNode([name]) to save references to node objects
         public QuestNode(QuestObj data)
         {
-            name = data.questName;
-            id = data.uniqueID;
+            MyObj = data;
             if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;
             }
             ReadDescriptionFile(data.descriptionFile);
-            compText = data.completeFile.ToString();
-            objectives = data.objectives;
-            requiredCounts = data.countsRequired;
             countsPerAction = data.countsAdded;
             if (countsPerAction == null)
             {
                 countsPerAction = new List<float>();
             }
-            while (countsPerAction.Count < requiredCounts.Count)
+            while (countsPerAction.Count < MyObj.countsRequired.Count)
             {
                 countsPerAction.Add(1);
             }
-            for (int i = 0; i < requiredCounts.Count; i++)
+            for (int i = 0; i < MyObj.countsRequired.Count; i++)
             {
                 counts.Add(0);
             }
@@ -133,15 +117,12 @@ namespace QuestSystem
             {
                 return;
             }
-            if (countsPerAction == null)
-            {
-                countsPerAction = new List<float>();
-            }
-            while (countsPerAction.Count < requiredCounts.Count)
+            countsPerAction ??= new List<float>();
+            while (countsPerAction.Count < MyObj.countsRequired.Count)
             {
                 countsPerAction.Add(1);
             }
-            for (int i = 0; i < requiredCounts.Count; i++)
+            for (int i = 0; i < MyObj.countsRequired.Count; i++)
             {
                 counts.Add(0);
             }
@@ -202,7 +183,7 @@ namespace QuestSystem
         //use of string compare is a possible issue if game is made multi-language.
         public int CompareTo(QuestNode other)
         {
-            if (name.Equals(other.name))
+            if (MyObj.questName.Equals(other.MyObj.questName))
             {
                 return 0;
             }
@@ -222,7 +203,8 @@ namespace QuestSystem
             {
                 return 1;
             }
-            return String.Compare(name, other.name);
+            // ReSharper disable once StringCompareIsCultureSpecific.1
+            return String.Compare(MyObj.questName, other.MyObj.questName);
         }
         
     }

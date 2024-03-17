@@ -12,6 +12,9 @@ namespace QuestSystem
 
         [Tooltip("It doesn't matter what this is, as long it's not the same for any two quests")] 
         public string uniqueID;
+
+        [Tooltip("Quest type")] 
+        public SaveDialProgressData.Dial type;
         
         [Tooltip("File containing a description of the quest. see example.txt for format")]
         public TextAsset descriptionFile;

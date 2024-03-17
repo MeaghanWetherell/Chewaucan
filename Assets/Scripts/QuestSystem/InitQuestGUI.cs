@@ -27,13 +27,13 @@ namespace QuestSystem
         private void CreateButtonPrefab(QuestNode node)
         {
             GameObject newButton = Instantiate(questButton, scrollContent, false);
-            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = node.name;
+            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = node.MyObj.questName;
             newButton.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = node.shortDescription;
             TextMeshProUGUI text = newButton.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
-            text.text = node.counts[0] + "/" + node.requiredCounts[0] + " " + node.objectives[0];
-            for (int i = 1; i < node.objectives.Count; i++)
+            text.text = node.counts[0] + "/" + node.MyObj.countsRequired[0] + " " + node.MyObj.objectives[0];
+            for (int i = 1; i < node.MyObj.objectives.Count; i++)
             {
-                text.text += ", "+node.counts[i] + "/" + node.requiredCounts[i] + " " + node.objectives[i];
+                text.text += ", "+node.counts[i] + "/" + node.MyObj.countsRequired[i] + " " + node.MyObj.objectives[i];
             }
             if (node.isComplete)
             {
