@@ -20,6 +20,18 @@ namespace Misc
             hudManager = this;
         }
 
+        private void Start()
+        {
+            PauseCallback.pauseManager.SubscribeToPause(DeActivate);
+            PauseCallback.pauseManager.SubscribeToResume(Activate);
+        }
+
+        private void OnDestroy()
+        {
+            PauseCallback.pauseManager.UnsubToPause(DeActivate);
+            PauseCallback.pauseManager.UnsubToResume(Activate);
+        }
+
         private void OnEnable()
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(false);
@@ -81,6 +93,16 @@ namespace Misc
                     }
                 }
             }
+        }
+
+        private void Activate()
+        {
+            gameObject.SetActive(true);
+        }
+
+        private void DeActivate()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

@@ -82,6 +82,7 @@ namespace Misc
             }
         }
 
+        //returns true if there are no open guis after close, false otherwise
         public bool CloseOpenGUI()
         {
             if (GUIName == null)

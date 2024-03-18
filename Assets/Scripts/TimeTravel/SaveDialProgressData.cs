@@ -15,10 +15,10 @@ public static class SaveDialProgressData
 {
     public enum Dial
     {
-        NONE,
         ARCHEOLOGY,
         BIOLOGY,
-        GEOLOGY
+        GEOLOGY,
+        NONE
     }
 
     public static string saveDataPath = Application.persistentDataPath + "/DialProgess.json";

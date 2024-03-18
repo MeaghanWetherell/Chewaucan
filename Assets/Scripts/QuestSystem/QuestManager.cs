@@ -16,6 +16,12 @@ namespace QuestSystem
         [Tooltip("Testing flag. Enable this to disable loading saved quest data.")]
         public bool resetQuests;
         
+        [Tooltip("List of all quests")] 
+        public List<QuestObj> AllQuests;
+
+        //order is archaeology, geology, biology
+        private int[] CountsPerQuestType = new int[3];
+        
         //quests the player has received
         private List<QuestNode> _quests = new List<QuestNode>();
 
@@ -88,6 +94,19 @@ namespace QuestSystem
             {
                 LoadFromFile();
             }
+            else
+            {
+                SaveDialProgressData.DeleteDialProgress();
+            }
+            foreach (QuestObj quest in AllQuests)
+            {
+                if(quest.type != SaveDialProgressData.Dial.NONE)
+                    CountsPerQuestType[(int) quest.type]++;
+            }
+
+            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
+            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
+            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
         }
 
         public List<QuestNode> GETQuests()
@@ -190,10 +209,12 @@ namespace QuestSystem
         {
             _quests.InsertionSort();
             LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
+            SaveDialProgressData.CompleteOneQuest(node.type);
             if (wasPinned)
             {
                 RemovePin(node);
-                HUDManager.hudManager.ResetPins();
+                if(HUDManager.hudManager != null)
+                    HUDManager.hudManager.ResetPins();
             }
         }
 
