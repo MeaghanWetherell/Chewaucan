@@ -70,14 +70,14 @@ namespace Misc
                 }
                 else
                 {
-                    pin.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cur.MyObj.questName;
+                    pin.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cur.name;
                     //removed so objectives don't get compressed
                     //pin.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = cur.shortDescription;
                     TextMeshProUGUI text = pin.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
                     text.text = "";
-                    for (int j = 0; j < cur.MyObj.objectives.Count; j++)
+                    for (int j = 0; j < cur.objectives.Count; j++)
                     {
-                        text.text += +cur.counts[j] + "/" + cur.MyObj.countsRequired[j] + " " + cur.MyObj.objectives[j]+"\n";
+                        text.text += +cur.counts[j] + "/" + cur.requiredCounts[j] + " " + cur.objectives[j]+"\n";
                     }
                 }
             }

@@ -28,7 +28,7 @@ namespace QuestSystem
         public void SendNewNode(QuestNode newNode)
         {
             _cur = newNode;
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.MyObj.questName;
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.name;
             if (_cur.longDescription.Equals(""))
             {
                 transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _cur.shortDescription;
@@ -39,9 +39,9 @@ namespace QuestSystem
             }
             TextMeshProUGUI text = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
             text.text = "";
-            for (int i = 0; i < newNode.MyObj.objectives.Count; i++)
+            for (int i = 0; i < newNode.objectives.Count; i++)
             {
-                text.text += +newNode.counts[i] + "/" + newNode.MyObj.countsRequired[i] + " " + newNode.MyObj.objectives[i]+"\n";
+                text.text += +newNode.counts[i] + "/" + newNode.requiredCounts[i] + " " + newNode.objectives[i]+"\n";
             }
             GameObject pinObj = transform.GetChild(4).gameObject;
             if (_cur.isComplete)
@@ -65,7 +65,7 @@ namespace QuestSystem
                 pin.GetComponent<PinButton>().node = _cur;
             }
             TextMeshProUGUI temp = transform.GetChild(5).GetComponent<TextMeshProUGUI>();
-            switch (newNode.MyObj.type)
+            switch (newNode.type)
             {
                 case SaveDialProgressData.Dial.NONE:
                     break;

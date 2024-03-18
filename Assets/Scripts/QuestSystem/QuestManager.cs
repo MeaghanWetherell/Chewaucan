@@ -15,13 +15,7 @@ namespace QuestSystem
 
         [Tooltip("Testing flag. Enable this to disable loading saved quest data.")]
         public bool resetQuests;
-
-        [Tooltip("List of all quests")] 
-        public List<QuestObj> AllQuests;
-
-        //order is archaeology, geology, biology
-        private int[] CountsPerQuestType = new int[3];
-
+        
         //quests the player has received
         private List<QuestNode> _quests = new List<QuestNode>();
 
@@ -39,7 +33,7 @@ namespace QuestSystem
             node = new QuestNode(obj);
             if (obj.initFile != null)
             {
-                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.MyObj.questName, obj.initFile.text);
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
             }
             return node;
         }
@@ -49,7 +43,7 @@ namespace QuestSystem
         {
             foreach(QuestNode node in _quests)
             {
-                if (node.MyObj.uniqueID.Equals(id))
+                if (node.id.Equals(id))
                 {
                     return node;
                 }
@@ -94,15 +88,6 @@ namespace QuestSystem
             {
                 LoadFromFile();
             }
-            foreach (QuestObj quest in AllQuests)
-            {
-                if(quest.type != SaveDialProgressData.Dial.NONE)
-                    CountsPerQuestType[(int) quest.type-1]++;
-            }
-
-            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
-            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
-            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
         }
 
         public List<QuestNode> GETQuests()
@@ -170,10 +155,10 @@ namespace QuestSystem
             foreach (QuestNode quest in _quests)
             {
                 string questJson = JsonUtility.ToJson(quest);
-                File.WriteAllText("Saves/"+quest.MyObj.uniqueID+".json", questJson);
+                File.WriteAllText("Saves/"+quest.id+".json", questJson);
                 if (!allSavedQuests.Equals(""))
                     allSavedQuests += " ";
-                allSavedQuests += quest.MyObj.uniqueID + ".json";
+                allSavedQuests += quest.id + ".json";
             }
             File.WriteAllText("Saves/SavedQuests.txt", allSavedQuests);
         }
@@ -185,9 +170,13 @@ namespace QuestSystem
         {
             foreach(QuestNode quest in _quests)
             {
-                if (quest.MyObj.uniqueID.Equals(toRegister.MyObj.uniqueID))
+                if (quest.name.Equals(toRegister.name))
                 {
                     return false;
+                }
+                if (quest.id.Equals(toRegister.id))
+                {
+                    Debug.LogError("Quests "+quest.name+" and "+toRegister.name+" have same ID!");
                 }
             }
             _quests.Add(toRegister);
@@ -200,8 +189,7 @@ namespace QuestSystem
         public void ReportCompletion(QuestNode node, bool wasPinned=false)
         {
             _quests.InsertionSort();
-            LoadGUIManager.loadGUIManager.InstantiatePopUp(node.MyObj.uniqueID, node.MyObj.completeFile.ToString());
-            SaveDialProgressData.CompleteOneQuest(node.MyObj.type);
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
             if (wasPinned)
             {
                 RemovePin(node);
