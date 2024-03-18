@@ -40,6 +40,9 @@ namespace QuestSystem
         //initialized to 1 if a value is not received
         public List<float> countsPerAction;
 
+        //quest type: Archaeology, Biology, or Geology
+        public SaveDialProgressData.Dial type;
+
         public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
         public bool isComplete = false;
@@ -98,8 +101,9 @@ namespace QuestSystem
 
         //builds a quest node from the passed data object
         //registers itself with the quest manager
-        //warning: the quest manager will not accept nodes with duplicate names, therefore,
-        //use QuestManager.questManager.getNode([name]) to save references to node objects
+        //warning: the quest manager will not accept nodes with duplicate ids, therefore,
+        //use QuestManager.questManager.getNode([name]) to save references to node objects, 
+        //even when you instantiate one
         public QuestNode(QuestObj data)
         {
             name = data.questName;
@@ -125,6 +129,7 @@ namespace QuestSystem
             {
                 counts.Add(0);
             }
+            type = data.type;
         }
 
         public void callOnceInitialized()

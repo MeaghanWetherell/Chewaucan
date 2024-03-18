@@ -64,6 +64,21 @@ namespace QuestSystem
                 }
                 pin.GetComponent<PinButton>().node = _cur;
             }
+            TextMeshProUGUI temp = transform.GetChild(5).GetComponent<TextMeshProUGUI>();
+            switch (newNode.type)
+            {
+                case SaveDialProgressData.Dial.NONE:
+                    break;
+                case SaveDialProgressData.Dial.ARCHEOLOGY:
+                    temp.text = "Type: Archaeology";
+                    break;
+                case SaveDialProgressData.Dial.BIOLOGY:
+                    temp.text = "Type: Biology";
+                    break;
+                case SaveDialProgressData.Dial.GEOLOGY:
+                    temp.text = "Type: Geology";
+                    break;
+            }
         }
     }
 }

@@ -22,7 +22,14 @@ namespace Misc
 
         private void OpenPause(InputAction.CallbackContext context)
         {
-            PauseMenu.pauseMenu.ONOpenTrigger();
+            if (LoadGUIManager.loadGUIManager.isGUIOpen())
+            {
+                LoadGUIManager.loadGUIManager.CloseOpenGUI();
+            }
+            else
+            {
+                PauseMenu.pauseMenu.ONOpenTrigger();
+            }
         }
     }
 }
