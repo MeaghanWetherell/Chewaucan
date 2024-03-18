@@ -26,7 +26,6 @@ public class SplineAlignToTerrain : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] float yAllowance = 0.1f;
     
-    // Start is called before the first frame update
     void OnEnable()
     {
         if (!Application.isPlaying)
@@ -34,7 +33,6 @@ public class SplineAlignToTerrain : MonoBehaviour
             splineContainer = GetComponent<SplineContainer>();
             spline = splineContainer[splineToAlign];
             knotCount = spline.Count;
-            Debug.Log("START");
         }
     }
 
@@ -89,7 +87,7 @@ public class SplineAlignToTerrain : MonoBehaviour
         lastKnot.Position = targetKnotPos;
         spline.SetKnot(spline.Count - 1, lastKnot);
 
-        //repeatedly insert knots and move the last knot to the end
+        //repeatedly add knots at the appropriate height
         for (int i = 0; i < knotsToAdd - 1; i++)
         {
             //Debug.Log(position.ToString());
