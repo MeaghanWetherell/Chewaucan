@@ -9,8 +9,6 @@ namespace QuestSystem.Quests.QScripts
 {
     public class MatchLvlComplete : MonoBehaviour
     {
-        public static MatchLvlComplete matchLvlComplete;
-        
         [Tooltip("Levels that trigger quest completion")]public List<int> lvls;
 
         [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> ids;
@@ -19,14 +17,18 @@ namespace QuestSystem.Quests.QScripts
 
         public string plateauQuestId;
 
-        public void Awake()
+        public void OnEnable()
         {
-            matchLvlComplete = this;
+            MatchLevelManager.matchLevelManager.OnComplete.AddListener(OnLvlComplete);
         }
 
-        public void OnLvlComplete()
+        public void OnDisable()
         {
-            int lvl = MatchLevelManager.matchLevelManager.curIndex;
+            MatchLevelManager.matchLevelManager.OnComplete.RemoveListener(OnLvlComplete);
+        }
+
+        public void OnLvlComplete(int lvl)
+        {
             for (int i = 0; i < lvls.Count; i++)
             {
                 if (lvls[i] == lvl+1)

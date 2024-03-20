@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Audio;
 using ScriptTags;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Misc
@@ -16,6 +17,8 @@ namespace Misc
         [Tooltip("List of scenes in modern map")] public List<String> modernMapScenes;
 
         [Tooltip("List of scenes in pleistocene map")] public List<String> pleistoceneMapScenes;
+
+        public readonly UnityEvent OnLoadScene = new UnityEvent();
 
         public void Awake()
         {
@@ -34,6 +37,7 @@ namespace Misc
             {
                 PauseCallback.pauseManager.Resume();
             }
+            OnLoadScene.Invoke();
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {

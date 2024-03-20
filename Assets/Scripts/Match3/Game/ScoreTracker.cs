@@ -29,10 +29,10 @@ namespace Match3
             if (scoreRequired < 1)
             {
                 _isReq = true;
-                text.text = "Score: 0";
+                text.text = "Score: 0"+"\n"+GetHighScoreText();
                 return;
             }
-            text.text = "Score: 0"+"/"+scoreRequired;
+            text.text = "Score: 0"+"/"+scoreRequired+"\n"+GetHighScoreText();
             _isReq = false;
         }
 
@@ -50,10 +50,15 @@ namespace Match3
             }
             if (_isReq)
             {
-                text.text = "Score: " + score;
+                text.text = "Score: " + score+"\n"+GetHighScoreText();
                 return;
             }
-            text.text = "Score: " + score +"/"+scoreRequired;
+            text.text = "Score: " + score +"/"+scoreRequired+"\n"+GetHighScoreText();
+        }
+
+        private string GetHighScoreText()
+        {
+            return "High Score: " + MatchLevelManager.matchLevelManager.GetHighscore();
         }
     }
 }

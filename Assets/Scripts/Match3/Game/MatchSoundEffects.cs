@@ -16,6 +16,8 @@ namespace Match3.Game
 
         [Tooltip("BGM to play during match 3")] public List<AudioClip> bgm;
 
+        [Tooltip("Degree to quiet BGM")] public float BGMattenuation;
+
         private void Awake()
         {
             SoundManager.soundManager.SetBGM(bgm);
@@ -36,7 +38,7 @@ namespace Match3.Game
             AudioClip temp = audList[Random.Range(0, audList.Count)];
             if (!SoundManager.soundManager.IsMuted(2))
             {
-                StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(matchAud));
+                StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(matchAud, BGMattenuation));
             }
             matchAud.Stop();
             matchAud.clip = temp;

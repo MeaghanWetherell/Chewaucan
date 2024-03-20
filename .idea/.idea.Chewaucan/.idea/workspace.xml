@@ -6,15 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Levels/Level3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Levels/Level3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/OpenPauseMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/OpenPauseMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TimeTravel/SaveDialProgressData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TimeTravel/SaveDialProgressData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchSoundEffects.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchSoundEffects.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchUIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchUIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/ScoreTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/ScoreTracker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/Timer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/Timer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/PopulateLevelList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/PopulateLevelList.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/PauseCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/PauseCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/ReloadMainScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/ReloadMainScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +49,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/IListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/42/System.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/DisplayHighScores.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/SnapshotCreator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/TimeScaler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/SortExtension.cs" root0="FORCE_HIGHLIGHTING" />
@@ -200,6 +206,9 @@
       <workItem from="1710713057297" duration="331000" />
       <workItem from="1710721795984" duration="1259000" />
       <workItem from="1710736459601" duration="864000" />
+      <workItem from="1710797056192" duration="1343000" />
+      <workItem from="1710798793114" duration="3198000" />
+      <workItem from="1710899209192" duration="1108000" />
     </task>
     <servers />
   </component>
@@ -246,10 +255,10 @@
           <line>384</line>
           <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\Game\MatchGrid.cs" initialLine="384" containingFunctionPresentation="method 'OnResume'">
             <startOffsets>
-              <option value="14028" />
+              <option value="14034" />
             </startOffsets>
             <endOffsets>
-              <option value="14046" />
+              <option value="14052" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="95" />
@@ -259,26 +268,13 @@
           <line>379</line>
           <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Match3\Game\MatchGrid.cs" initialLine="379" containingFunctionPresentation="method 'OnPause'">
             <startOffsets>
-              <option value="13945" />
+              <option value="13951" />
             </startOffsets>
             <endOffsets>
-              <option value="13962" />
+              <option value="13968" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs</url>
-          <line>28</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\Quests\QScripts\MatchLvlComplete.cs" initialLine="28" containingFunctionPresentation="method 'OnLvlComplete'">
-            <startOffsets>
-              <option value="714" />
-            </startOffsets>
-            <endOffsets>
-              <option value="769" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/LoadGUIManager.cs</url>

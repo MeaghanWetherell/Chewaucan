@@ -186,7 +186,7 @@ namespace Match3
                 }
                 else
                 {
-                    MatchUIManager.matchUIManager.EndGame("No matches remaining!");
+                    MatchLevelManager.matchLevelManager.EndGame("No matches remaining!");
                     break;
                 }
             }

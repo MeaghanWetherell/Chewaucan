@@ -57,9 +57,9 @@ namespace Misc
             if (!isPaused)
             {
                 pauseCallback.Invoke();
+                AudioListener.pause = true;
                 isPaused = true;
             }
-            
         }
 
         //wrapper around UnityEvent.Invoke
@@ -68,9 +68,21 @@ namespace Misc
             if (isPaused)
             {
                 resumeCallback.Invoke();
+                AudioListener.pause = false;
                 isPaused = false;
             }
-            
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
         }
     }
 }

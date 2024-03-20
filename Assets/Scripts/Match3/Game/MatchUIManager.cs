@@ -1,6 +1,5 @@
 using System;
 using Match3.Game;
-using QuestSystem.Quests.QScripts;
 using TMPro;
 using UnityEngine;
 
@@ -27,25 +26,10 @@ namespace Match3
             uiObj.SetActive(false);
         }
 
-        //ends the match 3 game and displays results, including the passed reason for game end
-        public void EndGame(String reason)
+        //loses the game and displays the passed loss reason
+        public void Lose(String reason)
         {
             uiObj.SetActive(true);
-            Timer.timer.enabled = false;
-            MatchGrid.matchGrid.gameObject.SetActive(false);
-            if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
-            {
-                Lose(reason);
-            }
-            else
-            {
-                Win(reason);
-            }
-        }
-
-        //loses the game and displays the passed loss reason
-        private void Lose(String reason)
-        {
             matchSound.PlayAw();
             mainText.text = "You Lose!";
             buttonText.text = "Retry";
@@ -63,9 +47,9 @@ namespace Match3
         }
 
         //wins the game and displays the passed win reason
-        private void Win(String reason)
+        public void Win(String reason)
         {
-            MatchLvlComplete.matchLvlComplete.OnLvlComplete();
+            uiObj.SetActive(true);
             matchSound.PlayYay();
             mainText.text = "You Win!";
             buttonText.text = "Next Level";

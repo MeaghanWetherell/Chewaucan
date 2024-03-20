@@ -16,10 +16,7 @@ namespace Audio
 
         [Tooltip("Ref to BGM audio source")] public AudioSource bgm;
 
-        [Tooltip("The volume to reduce the BGM to when quieted. must be from 0 to 1")]
-        public float quietVol;
-
-        [Tooltip("Standard volume of the BGM")] public float standVol;
+        [Tooltip("Standard volume of sounds")] public float standVol;
 
         [Tooltip("Reference to the master mixer")] public AudioMixer mainMixer;
 
@@ -38,6 +35,9 @@ namespace Audio
         //whether the bgm manager should wait to play a new song
         private bool waiting = false;
         
+        //default value to quiet to when quieting bgm
+        private const float quietVol = 0.2f;
+        
         //set up singleton and start corountines
         private void Awake()
         {
@@ -48,6 +48,7 @@ namespace Audio
             }
             soundManager = this;
             DontDestroyOnLoad(this.gameObject);
+            //set relative volume of the bgm. is not on log scale
             bgm.volume = standVol;
             try
             {
@@ -66,8 +67,13 @@ namespace Audio
         {
             for (int i = 0; i < volParams.Count; i++)
             {
-                mainMixer.SetFloat(volParams[i], Mathf.Log10(sliderVals[i])*20);
+                mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
             }
+        }
+
+        private void OnEnable()
+        {
+            
         }
 
         //save sound settings
@@ -83,7 +89,7 @@ namespace Audio
         {
             while (true)
             {
-                if (!bgm.isPlaying && !waiting && BGMClips is {Count: > 0})
+                if (!bgm.isPlaying && !AudioListener.pause && !waiting && BGMClips is {Count: > 0})
                 {
                     PlayNewSong();
                 }
@@ -97,11 +103,11 @@ namespace Audio
             return (sliderVals[index] < 0.01f || sliderVals[0] < 0.01f);
         }
         
-        //change the volume of the parameter at the passed index
+        //change the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects)
         public void SetVol(int index, float vol)
         {
             sliderVals[index] = vol;
-            mainMixer.SetFloat(volParams[index], Mathf.Log10(sliderVals[index])*20);
+            mainMixer.SetFloat(volParams[index], ConvertToLogScale(sliderVals[index]));
         }
 
         public float GetVol(int index)
@@ -157,13 +163,13 @@ namespace Audio
         }
 
         //quiets the bgm by the set factor for the passed time
-        public IEnumerator QuietBGMForTime(float time)
+        public IEnumerator QuietBGMForTime(float time, float attenuationFactor = quietVol)
         {
-            bgm.volume = quietVol;
+            bgm.volume *= attenuationFactor;
             waiting = true;
             yield return new WaitForSeconds(time);
             waiting = false;
-            bgm.volume = standVol;
+            bgm.volume = bgm.volume/attenuationFactor;
         }
 
         //stops the bgm until the passed audio source stops playing
@@ -183,9 +189,9 @@ namespace Audio
         }
         
         //quiets the bgm by the set factor until the passed audio source stops playing
-        public IEnumerator QuietBGMUntilDone(AudioSource running)
+        public IEnumerator QuietBGMUntilDone(AudioSource running, float attenuationFactor = quietVol)
         {
-            bgm.volume = quietVol;
+            bgm.volume *= attenuationFactor;
             waiting = true;
             yield return new WaitForSeconds(0);
             while (true)
@@ -195,7 +201,12 @@ namespace Audio
                 yield return new WaitForSeconds(0);
             }
             waiting = false;
-            bgm.volume = standVol;
+            bgm.volume = bgm.volume/attenuationFactor;
+        }
+
+        private float ConvertToLogScale(float input)
+        {
+            return Mathf.Log10(input) * 20;
         }
     }
 }

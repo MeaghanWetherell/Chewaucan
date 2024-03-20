@@ -18,6 +18,9 @@ namespace Match3
         [Tooltip("Bone Collection Button")] 
         public Button boneButton;
 
+        [Tooltip("Ref to the high score display")]
+        public DisplayHighScores highScores;
+
         private void Awake()
         {
             if (!OpenLevelSelect.openLevelSelect.shouldLoadBone)
@@ -43,6 +46,7 @@ namespace Match3
         //add buttons to the GUI
         private void PopulateGUI()
         {
+            highScores.gameObject.SetActive(true);
             List<LevelData> levels = MatchLevelManager.matchLevelManager.levels;
             bool shouldBeEnabled = true;
             for (int i = 0; i < levels.Count-1; i++)

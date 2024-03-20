@@ -294,8 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 469110410}
-  quietVol: 0.075
-  standVol: 0.3
+  standVol: 0.5
   mainMixer: {fileID: 24100000, guid: 86bdd75e97db8014aab393229faa7c55, type: 2}
   fileName: soundsettings
   volParams:
@@ -561,7 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0061ac193cec7c40936bcfaf7697125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileName: match3levelscomplete
+  levelsCompleteFileName: match3levelscomplete
+  highScoreFileName: matchHS
   levels:
   - {fileID: 11400000, guid: d814985bafe9a5444bb2cb5b693ce0a8, type: 2}
   - {fileID: 11400000, guid: cd284044ac6dc19478204e90ff76965e, type: 2}
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad5d8acfa31dde4db025515d70131f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetQuests: 1
+  resetQuests: 0
   AllQuests:
   - {fileID: 11400000, guid: e344133731649b14992748b7b544eb91, type: 2}
   - {fileID: 11400000, guid: c5509ed46bed4b14f8ee9479495ddde9, type: 2}

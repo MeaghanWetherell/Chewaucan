@@ -67,7 +67,7 @@ namespace Match3
                 timeLeft -= 0.1f;
                 text.text = "Time Remaining: " + ((int) timeLeft) + "s";
             }
-            MatchUIManager.matchUIManager.EndGame("Time up!");
+            MatchLevelManager.matchLevelManager.EndGame("Time up!");
         }
 
         private void OnPause()
