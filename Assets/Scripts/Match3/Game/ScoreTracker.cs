@@ -36,7 +36,7 @@ namespace Match3
             _isReq = false;
         }
 
-        //computes score for a certain counts, adds it, and displays it
+        //computes score for a certain count, adds it, and displays it
         public void AddScore(int boneCount)
         {
             score += 3 * scorePerBone;
@@ -48,6 +48,18 @@ namespace Match3
                 score += scorePerBone * (1 + curMult);
                 curMult += scoreMult;
             }
+            if (_isReq)
+            {
+                text.text = "Score: " + score+"\n"+GetHighScoreText();
+                return;
+            }
+            text.text = "Score: " + score +"/"+scoreRequired+"\n"+GetHighScoreText();
+        }
+        
+        //Overload to add a specific score amount
+        public void AddScore(float addScore)
+        {
+            score += addScore;
             if (_isReq)
             {
                 text.text = "Score: " + score+"\n"+GetHighScoreText();

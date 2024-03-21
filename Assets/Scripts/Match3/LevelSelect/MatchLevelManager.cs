@@ -83,9 +83,13 @@ namespace Match3
             else
             {
                 MatchUIManager.matchUIManager.Win(reason);
-                if (ScoreTracker.scoreTracker.score > highScores[curIndex])
+                if (curIndex < highScores.Count-1 && ScoreTracker.scoreTracker.score > highScores[curIndex])
                 {
                     highScores[curIndex] = ScoreTracker.scoreTracker.score;
+                }
+                else
+                {
+                    highScores[curIndex] += ScoreTracker.scoreTracker.score;
                 }
             }
         }
@@ -131,10 +135,7 @@ namespace Match3
         {
             if (ScoreTracker.scoreTracker != null && curIndex == levels.Count - 1)
             {
-                if (ScoreTracker.scoreTracker.score > highScores[curIndex])
-                {
-                    highScores[curIndex] = ScoreTracker.scoreTracker.score;
-                }
+                highScores[curIndex] += ScoreTracker.scoreTracker.score;
             }
         }
     }

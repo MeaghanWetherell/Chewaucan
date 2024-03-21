@@ -64,6 +64,7 @@ namespace Match3
             _scaleFactor = temp2.width;
             if (temp2.height < _scaleFactor)
                 _scaleFactor = temp2.height;
+            _scaleFactor *= 3;
         }
 
         //checks every frame for whether objects remain to be spawned. if any do, spawns it and sleeps for _waitTime

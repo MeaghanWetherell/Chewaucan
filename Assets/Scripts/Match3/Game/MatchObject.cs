@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using Match3.DataClasses;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,6 +41,23 @@ namespace Match3
         [NonSerialized]public int index;
 
         [NonSerialized]public MatchLine parent;
+
+        public static void LoadMatchCounts()
+        {
+            
+        }
+
+        public static void SaveMatchCounts()
+        {
+            Dictionary<String, int> counts = new Dictionary<string, int>();
+            foreach (MeshDataObj data in _meshes)
+            {
+                counts.Add(data.boneName, data.GetMatchCount());
+            }
+            string temp = JsonSerializer.Serialize(counts);
+            Directory.CreateDirectory("Saves");
+            File.WriteAllText("Saves/MatchCounts.json", temp);
+        }
 
         //loads in the main mesh list if needed and initializes itself as a random valid bone
         private void Start()
@@ -105,6 +124,12 @@ namespace Match3
                 return 1;
             }
             return -1;
+        }
+
+        //returns the group data associated with this bone instance
+        public MeshDataObj GetMyType()
+        {
+            return _meshes[myType];
         }
     }
 }

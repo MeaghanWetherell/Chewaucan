@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c16fd1777aece194fa4a91dcef9642d1, type: 3}
-  m_Name: Match32
+  m_Name: Small
   m_EditorClassIdentifier: 
-  questName: Bonus! Identify the fish bones!
-  uniqueID: match32
-  type: 1
-  descriptionFile: {fileID: 4900000, guid: 790893e1634601b4b8f00811721a1d55, type: 3}
-  initFile: {fileID: 4900000, guid: f775f354a57ca6b408d61826ed17c2b1, type: 3}
-  completeFile: {fileID: 4900000, guid: 51b3bd71ec85306438330353f5d7b3ec, type: 3}
+  questName: Small Skulls Endless
+  uniqueID: smallendless
+  type: 3
+  descriptionFile: {fileID: 4900000, guid: 5348d428a6c2bfe45b1704d06a796017, type: 3}
+  initFile: {fileID: 0}
+  completeFile: {fileID: 4900000, guid: 1362ee9eb7031da4e9f0e914a406588c, type: 3}
   objectives:
-  - Complete Sifter Level 4
+  - Small White Skull
+  - Small Red Skull
+  - Small Green Skull
   countsRequired:
-  - 1
-  countsAdded:
-  - 1
+  - 5
+  - 5
+  - 5
+  countsAdded: []

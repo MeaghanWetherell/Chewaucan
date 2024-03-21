@@ -68,6 +68,7 @@ namespace QuestSystem
             switch (newNode.type)
             {
                 case SaveDialProgressData.Dial.NONE:
+                    temp.text = "";
                     break;
                 case SaveDialProgressData.Dial.ARCHEOLOGY:
                     temp.text = "Type: Archaeology";

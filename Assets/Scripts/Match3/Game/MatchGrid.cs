@@ -1,9 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Match3.DataClasses;
 using Match3.Game;
 using Misc;
+using QuestSystem.Quests.QScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -17,7 +17,7 @@ namespace Match3
     {
         public static MatchGrid matchGrid;
 
-        [FormerlySerializedAs("sound")] [Tooltip("Ref to the sound effect maker")] public MatchSoundEffects matchSound;
+        [Tooltip("Ref to the sound effect maker")] public MatchSoundEffects matchSound;
 
         [Tooltip("The desired height of the grid. Grid will autoscale based on this")]public int height;
 
@@ -31,6 +31,9 @@ namespace Match3
 
         [Tooltip("The minimum required amount of mouse movement for the system to register the user trying to move a bone")]
         public float minMovementMagnitude;
+
+        [Tooltip("The amount of point bonus the player should receive for matching new bones")]
+        public float bonusPoints;
         
         //All match objects in the grid. Each matchobject array is a line DOWNWARDS
         private List<MatchObject[]> _objects = new List<MatchObject[]>();
@@ -192,6 +195,7 @@ namespace Match3
             }
         }
 
+        //check each frame if there are any matches that have been made
         private IEnumerator CheckForRemoval()
         {
             while (true)
@@ -213,6 +217,7 @@ namespace Match3
             }
         }
 
+        //while there are matches waiting for removal, remove them
         private IEnumerator Remove()
         {
             _waitingOnMatchCheck = true;
@@ -222,6 +227,13 @@ namespace Match3
             {
                 foreach (GridCoordinate coord in _removalQueue[index])
                 {
+                    if (MatchLevelManager.matchLevelManager.curIndex ==
+                        MatchLevelManager.matchLevelManager.levels.Count - 1)
+                    {
+                        MeshDataObj type = _lines[coord.x].myObjects[coord.y].GetMyType();
+                        if(type.AddToMatchCount() <= EndlessModeQuestHandler.GetCountRequired(type))
+                            ScoreTracker.scoreTracker.AddScore(bonusPoints);
+                    }
                     _lines[coord.x].RemoveObject(coord.y);
                     missing[coord.x] += 1;
                 }
@@ -437,12 +449,12 @@ namespace Match3
             Swap(a, b);
             if (!DetectMatches())
             {
-                matchSound.PlayAw();
+                //matchSound.PlayAw();
                 StartCoroutine(WaitToSwapBack(1f, a, b));
             }
             else
             {
-                matchSound.PlayYay();
+                //matchSound.PlayYay();
                 StartCoroutine(WaitForMatchCheck(0.4f));
             }
         }
