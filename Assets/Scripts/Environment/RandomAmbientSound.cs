@@ -34,6 +34,7 @@ public class RandomAmbientSound : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         playing = false;
+        StartCoroutine(PlayAmbientSound(null));
 
         List<List<RandomAmbientSoundObject>> soundLists = new()
         {
@@ -69,12 +70,15 @@ public class RandomAmbientSound : MonoBehaviour
 
         float cooldown = Random.Range(minCooldown, maxCooldown);
 
-        Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
+        if (clip != null)
+        {
+            Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
 
-        audioSource.clip = clip;
-        audioSource.Play();
+            audioSource.clip = clip;
+            audioSource.Play();
 
-        yield return new WaitForSeconds(clip.length);
+            yield return new WaitForSeconds(clip.length);
+        }
 
         yield return new WaitForSeconds(cooldown);
         playing = false;
