@@ -18,13 +18,20 @@ namespace Match3
             boneName.text = BoneSceneManager.boneSceneManager.curObj.boneName;
             if (BoneSceneManager.boneSceneManager.curObj.animalDesc == null)
             {
-                if(lorem == null)
-                    lorem = Resources.Load<DescObj>("LoremIpsum").description;
+                if (lorem == null)
+                {
+                    TextAsset text = Resources.Load("meshes/descriptions/LoremIpsum") as TextAsset;
+                    lorem = text.ToString();
+                }
                 mainText.text = lorem;
             }
             else
             {
-                mainText.text = BoneSceneManager.boneSceneManager.curObj.animalDesc.description;
+                mainText.text = BoneSceneManager.boneSceneManager.curObj.animalDesc.ToString();
+            }
+            if (BoneSceneManager.boneSceneManager.curObj.GetMatchCount() > 0)
+            {
+                mainText.text += "\n# Matched in Endless: " + BoneSceneManager.boneSceneManager.curObj.GetMatchCount();
             }
         }
     }

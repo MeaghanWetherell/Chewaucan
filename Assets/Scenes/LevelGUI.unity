@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 290525476}
   - component: {fileID: 290525475}
   - component: {fileID: 290525478}
+  - component: {fileID: 290525479}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -407,6 +408,21 @@ MonoBehaviour:
   scrollContent: {fileID: 309230898}
   boneButton: {fileID: 620891610}
   highScores: {fileID: 516935467}
+--- !u!114 &290525479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290525473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf721552e1498b745a48e639f6b62331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quests:
+  - {fileID: 11400000, guid: dc6011ff74cfdc24cad49c338bd3a954, type: 2}
+  - {fileID: 11400000, guid: 32995a43452708d44b5c0ca6f202dfcd, type: 2}
 --- !u!1 &309230897
 GameObject:
   m_ObjectHideFlags: 0

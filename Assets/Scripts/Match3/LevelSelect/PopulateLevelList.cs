@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using QuestSystem.Quests.QScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,6 +61,7 @@ namespace Match3
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
             newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Endless";
             newButton.GetComponent<OpenLevel>().levelIndex = levels.Count-1;
+            newButton.GetComponent<Button>().onClick.AddListener(GetComponent<EndlessModeQuestHandler>().OnClick);
             shouldBeEnabled = MatchLevelManager.matchLevelManager.levelsComplete[levels.Count-2];
             if (!shouldBeEnabled)
             {

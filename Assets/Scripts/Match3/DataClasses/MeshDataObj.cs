@@ -1,12 +1,15 @@
 using System;
+using QuestSystem.Quests.QScripts;
 using UnityEngine;
+// ReSharper disable StringCompareIsCultureSpecific.1
 
 namespace Match3.DataClasses
 {
     [CreateAssetMenu]
     public class MeshDataObj : ScriptableObject, IComparable<MeshDataObj>
     {
-        [Tooltip("Mesh for this model")] public Mesh mesh;
+        [Tooltip("Mesh for this model")] 
+        public Mesh mesh;
 
         [Tooltip("Material that should be applied to this model")]
         public Material material;
@@ -21,13 +24,29 @@ namespace Match3.DataClasses
         public string boneName;
 
         [Tooltip("Description of the animal this bone is from")]
-        public DescObj animalDesc;
+        public TextAsset animalDesc;
 
         [Tooltip("The 2D sprite representing the model (take snapshot in snapshot scene and convert)")]
         public Sprite flatImage;
 
+        private int numberMatched;
+
+        public int AddToMatchCount(int num=1)
+        {
+            numberMatched += num;
+            EndlessModeQuestHandler.Progress(this);
+            return numberMatched;
+        }
+
+        public int GetMatchCount()
+        {
+            return numberMatched;
+        }
+
         public int CompareTo(MeshDataObj other)
         {
+            if (!animal.Equals(other.animal))
+                return String.Compare(animal, other.animal);
             return String.Compare(boneName, other.boneName);
         }
     }
