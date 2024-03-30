@@ -63,7 +63,10 @@ public class SwimmingMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        oxygenUI.gameObject.SetActive(false);
+        if (!oxygenUI.IsDestroyed())
+        {
+            oxygenUI.gameObject.SetActive(false);
+        }
 
         moveRef.action.performed -= OnMove;
         moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
