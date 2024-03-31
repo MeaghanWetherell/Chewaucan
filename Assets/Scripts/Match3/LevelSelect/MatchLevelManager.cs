@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Match3.DataClasses;
 using Misc;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,6 +38,11 @@ namespace Match3
             }
             matchLevelManager = this;
             DontDestroyOnLoad(this.gameObject);
+            //MeshDataList allMeshes = Resources.Load<MeshDataList>("meshes/Match3Meshes");
+            //foreach (MeshDataObj obj in allMeshes.meshes)
+            //{
+                //obj.Load();
+            //}
             try
             {
                 levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/"+levelsCompleteFileName+".json"));

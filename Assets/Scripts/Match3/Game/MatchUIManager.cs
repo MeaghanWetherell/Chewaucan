@@ -55,7 +55,7 @@ namespace Match3
             buttonText.text = "Next Level";
             scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
             int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
-            if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count-1)
+            if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count)
             {
                 buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
                 MatchLevelManager.matchLevelManager.levelsComplete[num-1] = true;
