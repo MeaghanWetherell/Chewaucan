@@ -1,3 +1,4 @@
+using Misc;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,10 +31,12 @@ public class RandomAmbientSound : MonoBehaviour
     private List<int> frequencyList = new List<int>();
 
     private bool playing;
+    private bool paused;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         playing = false;
+        paused = false;
         StartCoroutine(PlayAmbientSound(null));
 
         List<List<RandomAmbientSoundObject>> soundLists = new()
@@ -43,11 +46,20 @@ public class RandomAmbientSound : MonoBehaviour
         };
 
         currentSoundList = GetAllPlayableSounds(soundLists);
+
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
+    }
+
+    private void OnDestroy()
+    {
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     private void Update()
     {
-        if (!playing)
+        if (!playing && !audioSource.isPlaying && !paused)
         {
             ChooseRandomSound();
         }
@@ -77,10 +89,11 @@ public class RandomAmbientSound : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
 
-            yield return new WaitForSeconds(clip.length);
+            yield return new WaitUntil(() => (!audioSource.isPlaying && !paused));
         }
 
         yield return new WaitForSeconds(cooldown);
+
         playing = false;
     }
 
@@ -125,6 +138,18 @@ public class RandomAmbientSound : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnPause()
+    {
+        audioSource.Pause();
+        paused = true;
+    }
+
+    private void OnResume()
+    {
+        audioSource.UnPause();
+        paused = false;
     }
 
 }

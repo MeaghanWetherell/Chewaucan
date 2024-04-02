@@ -43,10 +43,13 @@ public class SwimmingMovement : MonoBehaviour
     public InputActionReference jumpRef;
     public InputActionReference sprintRef;
 
+    private ActiveSoundManager ambientSoundManager;
+
     // Start is called before the first frame update
     void Start()
     {
         InitializeValues();
+        ambientSoundManager = GameObject.FindFirstObjectByType<ActiveSoundManager>();
     }
 
     private void OnEnable()
@@ -90,6 +93,7 @@ public class SwimmingMovement : MonoBehaviour
         if (this.transform.position.y >= waterSurface && _isDiving && !_dive)
         {
             _waterAudio.Stop();
+            ambientSoundManager.EnableAmbientSounds();
             _isDiving = false;
         }
 
@@ -186,6 +190,10 @@ public class SwimmingMovement : MonoBehaviour
         {
             _waterAudio.Play();
             _isDiving = true;
+            if (ambientSoundManager != null)
+            {
+                ambientSoundManager.DisableAmbientSounds();
+            }
             StartCoroutine(Dive());
         }
     }
@@ -210,7 +218,7 @@ public class SwimmingMovement : MonoBehaviour
         _dive = true;
         Vector3 rot = new Vector3(0f, transform.rotation.eulerAngles.y, 0f);
         transform.rotation = Quaternion.Euler(rot);
-        //yield return new WaitForSeconds(3f);
+        
         for (int i = 0; i < 15; i++)
         {
             this.transform.Rotate(2f, 0f, 0f);
