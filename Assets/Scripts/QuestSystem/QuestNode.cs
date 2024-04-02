@@ -70,11 +70,13 @@ namespace QuestSystem
                 for (int i = 0; i < requiredCounts.Count; i++)
                 {
                     // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if (counts[i] != requiredCounts[i])
+                    if (counts[i] != requiredCounts[i] )
                     {
-                        HUDManager.hudManager.ResetPins();
+                        if(HUDManager.hudManager != null)
+                            HUDManager.hudManager.ResetPins();
                         return false;
                     }
+                    
                 }
 
                 isComplete = true;
@@ -107,7 +109,7 @@ namespace QuestSystem
         public QuestNode(QuestObj data)
         {
             name = data.questName;
-            id = data.uniqueID;
+            id = data.uniqueID.ToLower();
             if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;

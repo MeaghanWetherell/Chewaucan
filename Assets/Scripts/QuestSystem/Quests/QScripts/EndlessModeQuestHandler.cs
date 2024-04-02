@@ -28,16 +28,7 @@ namespace QuestSystem.Quests.QScripts
             QuestNode node = QuestManager.questManager.GETNode(data.animal+"endless");
             if (node == null || node.isComplete)
                 return;
-            int index = 0;
-            while (!node.objectives[index].Equals(data.boneName))
-            {
-                index++;
-                if (index == node.objectives.Count)
-                {
-                    Debug.LogError("ERR: bone not included in animal's quest");
-                    return;
-                }
-            }
+            int index = data.endlessIndex;
             node.AddCount(index);
         }
 

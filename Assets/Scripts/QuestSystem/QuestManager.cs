@@ -33,7 +33,7 @@ namespace QuestSystem
         //otherwise return a reference to the existing quest
         public QuestNode CreateQuestNode(QuestObj obj)
         {
-            QuestNode node = GETNode(obj.uniqueID);
+            QuestNode node = GETNode(obj.uniqueID.ToLower());
             if (node != null)
                 return node;
             node = new QuestNode(obj);
@@ -47,6 +47,7 @@ namespace QuestSystem
         //use to get specific nodes from the manager. 
         public QuestNode GETNode(string id)
         {
+            id = id.ToLower();
             foreach(QuestNode node in _quests)
             {
                 if (node.id.Equals(id))
@@ -60,6 +61,7 @@ namespace QuestSystem
         //use to subscribe to completion events for a quest
         public bool SubToCompletion(string id, UnityAction<string> func)
         {
+            id = id.ToLower();
             QuestNode node = GETNode(id);
             if (node != null)
             {

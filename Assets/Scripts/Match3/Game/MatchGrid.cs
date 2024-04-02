@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Match3.DataClasses;
 using Match3.Game;
 using Misc;
+using QuestSystem;
 using QuestSystem.Quests.QScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -231,8 +232,10 @@ namespace Match3
                         MatchLevelManager.matchLevelManager.levels.Count - 1)
                     {
                         MeshDataObj type = _lines[coord.x].myObjects[coord.y].GetMyType();
-                        if(type.AddToMatchCount() <= EndlessModeQuestHandler.GetCountRequired(type))
+                        if (type.AddToMatchCount() <= EndlessModeQuestHandler.GetCountRequired(type))
+                        {
                             ScoreTracker.scoreTracker.AddScore(bonusPoints);
+                        }
                     }
                     _lines[coord.x].RemoveObject(coord.y);
                     missing[coord.x] += 1;

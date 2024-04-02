@@ -1,5 +1,7 @@
+using QuestSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Match3
 {
@@ -10,6 +12,8 @@ namespace Match3
         public TextMeshProUGUI boneName;
 
         public TextMeshProUGUI mainText;
+
+        public Button fullAnimalView;
 
         private static string lorem;
 
@@ -32,6 +36,11 @@ namespace Match3
             if (BoneSceneManager.boneSceneManager.curObj.GetMatchCount() > 0)
             {
                 mainText.text += "\n# Matched in Endless: " + BoneSceneManager.boneSceneManager.curObj.GetMatchCount();
+                if (QuestManager.questManager.GETNode(BoneSceneManager.boneSceneManager.curObj.animal + "endless")
+                    .isComplete)
+                {
+                    fullAnimalView.interactable = true;
+                }
             }
         }
     }
