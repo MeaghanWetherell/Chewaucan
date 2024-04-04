@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Match3.DataClasses;
+using Match3.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -41,23 +42,6 @@ namespace Match3
         [NonSerialized]public int index;
 
         [NonSerialized]public MatchLine parent;
-
-        public static void LoadMatchCounts()
-        {
-            
-        }
-
-        public static void SaveMatchCounts()
-        {
-            Dictionary<String, int> counts = new Dictionary<string, int>();
-            foreach (MeshDataObj data in _meshes)
-            {
-                counts.Add(data.boneName, data.GetMatchCount());
-            }
-            string temp = JsonSerializer.Serialize(counts);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/MatchCounts.json", temp);
-        }
 
         //loads in the main mesh list if needed and initializes itself as a random valid bone
         private void Start()
@@ -101,7 +85,12 @@ namespace Match3
         //when a match object is clicked, tells the grid that if the user tries to move a bone, it should be that one
         public void OnPointerDown(PointerEventData eventData)
         {
-            MatchGrid.matchGrid.RegisterActiveMatchObj(this);
+            if(eventData.button == PointerEventData.InputButton.Left)
+                MatchGrid.matchGrid.RegisterActiveMatchObj(this);
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                SecondaryViewManager.secondaryViewManager.SetView(_meshes[myType]);
+            }
         }
 
         //compares itself to another matchobject per IComparable, obeying the matchtype specification

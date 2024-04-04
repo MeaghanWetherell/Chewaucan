@@ -6,20 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BoneViewer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BoneViewer.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneTextSetter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneTextSetter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/SetupBone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/SetupBone.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/DataClasses/MeshDataObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/DataClasses/MeshDataObj.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/MatchLevelManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing8.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing8.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing9.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/Testing9.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/EndlessModeQuestHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/EndlessModeQuestHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Game/MatchObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/FullAnimalMeshes/FullAnimalMeshes.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Meshes/FullAnimalMeshes/FullAnimalMeshes.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +60,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/PopUpTextManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/PauseCallback.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.7.0/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/Game/SecondaryViewManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad4852b4f5ee4ca4850dcbbbd79c23693600/1f/810e952c/JsonUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScriptTags/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/PauseMenu.cs" root0="FORCE_HIGHLIGHTING" />
@@ -118,10 +109,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="42140">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="42140" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -211,7 +202,8 @@
       <workItem from="1710899209192" duration="1108000" />
       <workItem from="1710969122190" duration="9072000" />
       <workItem from="1711912684051" duration="3712000" />
-      <workItem from="1711922257654" duration="1095000" />
+      <workItem from="1711922257654" duration="2451000" />
+      <workItem from="1712184164904" duration="3437000" />
     </task>
     <servers />
   </component>
