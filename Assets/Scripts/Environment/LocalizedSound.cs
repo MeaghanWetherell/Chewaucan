@@ -1,3 +1,4 @@
+using Misc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,12 +18,22 @@ public class LocalizedSound : MonoBehaviour
 
     private AudioSource audioSource;
     private bool isPlaying;
+    private bool paused;
 
     private void Start()
     {
         isPlaying = false;
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = looping;
+
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
+    }
+
+    private void OnDestroy()
+    {
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     IEnumerator PlayLocalizedSound(AudioClip clip)
@@ -36,7 +47,7 @@ public class LocalizedSound : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
 
-            yield return new WaitForSeconds(clip.length);
+            yield return new WaitUntil(() => (!audioSource.isPlaying && !paused));
         }
 
         yield return new WaitForSeconds(cooldown);
@@ -72,5 +83,19 @@ public class LocalizedSound : MonoBehaviour
                 audioSource.Stop();
             }
         }
+    }
+
+    // pauses audio clip and sets boolean so the coroutine does not continue
+    private void OnPause()
+    {
+        audioSource.Pause();
+        paused = true;
+    }
+
+    // unpauses and set boolean so coroutine can continue
+    private void OnResume()
+    {
+        audioSource.UnPause();
+        paused = false;
     }
 }

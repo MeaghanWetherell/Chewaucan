@@ -7,7 +7,7 @@ public class RandomAmbientSoundObject : ScriptableObject
 {
     public AudioClip audioClip;
 
-    [Tooltip("How often this sound will play")]
+    [Tooltip("What percent of the time this sound will play")]
     [Range(0f, 1f)]
     public float frequency;
 }

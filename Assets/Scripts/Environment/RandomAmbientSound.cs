@@ -5,6 +5,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// script for ambient sound effects that play at random intervals while exploring the map
+// this script is attached to an empty game object which is a child of the Player prefab
+
 public class RandomAmbientSound : MonoBehaviour
 {
     [Tooltip("Audio clips to play in both maps")]
@@ -45,7 +48,7 @@ public class RandomAmbientSound : MonoBehaviour
             generalAmbientSounds
         };
 
-        currentSoundList = GetAllPlayableSounds(soundLists);
+        GetAllPlayableSounds(soundLists); // set currentSoundList to contain all playable sounds in this scene
 
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
@@ -89,6 +92,7 @@ public class RandomAmbientSound : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
 
+            // wait until the audio is no longer playing and the game is unpaused
             yield return new WaitUntil(() => (!audioSource.isPlaying && !paused));
         }
 
@@ -113,16 +117,14 @@ public class RandomAmbientSound : MonoBehaviour
         }
     }
 
-    private List<RandomAmbientSoundObject> GetAllPlayableSounds(List<List<RandomAmbientSoundObject>> sounds)
+    private void GetAllPlayableSounds(List<List<RandomAmbientSoundObject>> sounds)
     {
-        List<RandomAmbientSoundObject> allSounds = new List<RandomAmbientSoundObject>();
+        currentSoundList.Clear();
 
         foreach (List<RandomAmbientSoundObject> l in sounds)
         {
-            allSounds.AddRange(l);
+            currentSoundList.AddRange(l);
         }
-
-        return allSounds;
     }
 
     private void MakeFrequencyAccurateList(List<RandomAmbientSoundObject> sounds)
@@ -140,12 +142,14 @@ public class RandomAmbientSound : MonoBehaviour
         }
     }
 
+    // pauses audio clip and sets boolean so the coroutine does not continue
     private void OnPause()
     {
         audioSource.Pause();
         paused = true;
     }
 
+    // unpauses and set boolean so coroutine can continue
     private void OnResume()
     {
         audioSource.UnPause();
