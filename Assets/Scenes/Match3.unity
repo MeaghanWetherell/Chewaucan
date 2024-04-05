@@ -1631,12 +1631,16 @@ MonoBehaviour:
   mousePos: {fileID: -6635178460345597740, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   scroll: {fileID: 1462681341172485341, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   clicked: {fileID: -3526408144436368610, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  move: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   bone: {fileID: 1288365882}
   view: {fileID: 1248397002}
   xFudge: 140
-  distScalar: 5
-  maxDist: 10
-  minDist: 0.8
+  distScalar: 0.2
+  maxSize: 0.8
+  minSize: 0.2
+  maxX: 0.3
+  maxY: 0.3
+  moveScalar: 4
 --- !u!114 &1621938988
 MonoBehaviour:
   m_ObjectHideFlags: 0

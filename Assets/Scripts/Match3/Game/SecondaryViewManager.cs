@@ -14,6 +14,8 @@ namespace Match3.Game
         [Tooltip("Scroll delta from input sys")]public InputActionReference scroll;
 
         [Tooltip("Right click button from input sys")]public InputActionReference clicked;
+
+        [Tooltip("Move controls from the input sys")] public InputActionReference move;
         
         [Tooltip("The bone object that the render texture camera points to")]public GameObject bone;
 
@@ -23,9 +25,22 @@ namespace Match3.Game
 
         [Tooltip("Scalar for the distance scrolled")] public float distScalar;
 
-        [Tooltip("Max distance from the camera")] public float maxDist;
+        [Tooltip("Max size of the camera")] public float maxSize;
 
-        [Tooltip("Min distance from the camera")] public float minDist;
+        [Tooltip("Min size of the camera")] public float minSize;
+
+        [Tooltip("Max x movement of the camera from start point")]
+        public float maxX;
+        
+        [Tooltip("Max y movement of the camera from start point")]
+        public float maxY;
+
+        [Tooltip("Scalar on panning movement")]
+        public float moveScalar;
+
+        private float originX;
+
+        private float originY;
 
         private bool _mouseDown;
 
@@ -35,10 +50,16 @@ namespace Match3.Game
 
         private bool isEnabled = false;
 
+        private Camera cam;
+
         private void Awake()
         {
             secondaryViewManager = this;
             _lastMousePos = mousePos.action.ReadValue<Vector2>();
+            cam = GetComponent<Camera>();
+            Vector3 pos = transform.position;
+            originX = pos.x;
+            originY = pos.y;
         }
         
         private void OnEnable()
@@ -84,14 +105,28 @@ namespace Match3.Game
                         bone.transform.Rotate(Vector3.up, yRot);
                     }
                 }
+                Vector2 movement = move.action.ReadValue<Vector2>();
+                var orthographicSize = cam.orthographicSize;
+                transform.Translate(movement.x*Time.deltaTime*moveScalar*orthographicSize, movement.y*Time.deltaTime*moveScalar*orthographicSize, 0, Space.World);
+                Vector3 pos = transform.position;
+                if (pos.x < originX-maxX)
+                    transform.position = new Vector3(originX-maxX, pos.y, pos.z);
+                else if (pos.x > originX + maxX)
+                {
+                    transform.position = new Vector3(originX + maxX, pos.y, pos.z);
+                }
+                pos = transform.position;
+                if (pos.y < originY - maxY)
+                    transform.position = new Vector3(pos.x, originY - maxY, pos.z);
+                else if (pos.y > originY + maxY)
+                    transform.position = new Vector3(pos.x, originY + maxY, pos.z);
                 _lastMousePos = mousePos.action.ReadValue<Vector2>();
                 float delta = scroll.action.ReadValue<Vector2>().y;
-                bone.transform.Translate(new Vector3(0,0,delta*distScalar*Time.deltaTime));
-                Vector3 pos = bone.transform.position;
-                if (pos.z < minDist)
-                    bone.transform.position = new Vector3(pos.x, pos.y, minDist);
-                else if (pos.z > maxDist)
-                    bone.transform.position = new Vector3(pos.x, pos.y, maxDist);
+                cam.orthographicSize -= delta*Time.deltaTime*distScalar;
+                if (cam.orthographicSize > maxSize)
+                    cam.orthographicSize = maxSize;
+                else if (cam.orthographicSize < minSize)
+                    cam.orthographicSize = minSize;
             }
             
         }
