@@ -20,10 +20,10 @@ TO ADD A NEW AMBIENT SOUND
 		it where you want the sound to be triggered. In the objects Localized Sound component, add audio clips to the
 		clip list. You should add at least 1, just any sounds you want to have possibly play at this location. If you
 		want only 1 sound to ever play, only add 1, and add more if you want it to pick from multiple possible clips.
-		By default, the selected audio clip will play a single time when triggered and can be immediately retriggered,
-		but you may change this behavior based on your needs.
+		By default, the selected audio clip will play a single time when triggered and can be immediately retriggered
+		by walking out and back into the collider, but you may change this behavior based on your needs.
 		If you want there to be some time before the sound can be triggered again, set the cooldown variable to the number
-		of seconds until it can be triggered again. 
+		of seconds until it can be triggered again after leaving the area. 
 		If you want the sound to repeat playing while in the collider, check the looping boolean to true.
 
 	IF THE SOUND SHOULD GROW GRADUALLY LOUDER AS YOU APPROACH AN AREA

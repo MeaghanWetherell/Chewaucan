@@ -19,10 +19,12 @@ public class LocalizedSound : MonoBehaviour
     private AudioSource audioSource;
     private bool isPlaying;
     private bool paused;
+    private bool exited;
 
     private void Start()
     {
         isPlaying = false;
+        exited = true;
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = looping;
 
@@ -50,6 +52,7 @@ public class LocalizedSound : MonoBehaviour
             yield return new WaitUntil(() => (!audioSource.isPlaying && !paused));
         }
 
+        yield return new WaitUntil(() => (exited));
         yield return new WaitForSeconds(cooldown);
         isPlaying = false;
     }
@@ -62,6 +65,7 @@ public class LocalizedSound : MonoBehaviour
             {
                 int n = Random.Range(0, clipList.Count);
                 AudioClip clip = clipList[n];
+                exited = false;
                 StartCoroutine(PlayLocalizedSound(clip));
             }
             else if (looping)
@@ -78,6 +82,7 @@ public class LocalizedSound : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            exited = true;
             if (looping)
             {
                 audioSource.Stop();
