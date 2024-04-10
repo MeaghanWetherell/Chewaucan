@@ -17,8 +17,8 @@ public class PlayerPositionManager : MonoBehaviour
     
     void Start()
     {
-        nextPlayerPosition.Add(Vector3.zero);
-        nextPlayerPosition.Add(Vector3.zero);
+        nextPlayerPosition.Add(Vector3.negativeInfinity);
+        nextPlayerPosition.Add(Vector3.negativeInfinity);
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
         playerPositionManager = this;
@@ -38,7 +38,7 @@ public class PlayerPositionManager : MonoBehaviour
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        if (player != null && !float.IsNegativeInfinity(nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType].x))
         {
             player.transform.position = nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
         }
