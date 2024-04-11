@@ -72,8 +72,6 @@ public class SplineAlignToTerrain : MonoBehaviour
         float distance = Vector3.Distance(startPos, endPos);
         int knotsToAdd = Mathf.Abs(Mathf.FloorToInt(distance/knotInterval));
 
-        //Debug.Log(distance + " " + knotsToAdd);
-
         Vector3 posStep = endPos - startPos;
 
         Vector3 position = startPos;
@@ -135,7 +133,7 @@ public class SplineAlignToTerrain : MonoBehaviour
      */
     public void AlignToTerrain()
     {
-        Debug.Log("ALIGNING TERRAIN");
+        Debug.Log("REALIGNING SPLINE TO TERRAIN");
         for (int i = 0; i < spline.Count; i++)
         {
             var currKnot = spline[i];

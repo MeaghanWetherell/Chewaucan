@@ -16,7 +16,7 @@ TO ADD A NEW AMBIENT SOUND
 		modern and pleistocene map, place the object into the general ambient sounds list. Otherwise, place it in 
 
 	IF THE SOUND SHOULD BE PLAYED WHEN WALKING NEAR/INTO SOMETHING
-		Use the prefab LocalizedSound found in the Prefab/Environment folder. Simply drag it into the scene and place
+		Use the prefab LocalizedSound found in the Assets/Prefab/Environment folder. Simply drag it into the scene and place
 		it where you want the sound to be triggered. In the objects Localized Sound component, add audio clips to the
 		clip list. You should add at least 1, just any sounds you want to have possibly play at this location. If you
 		want only 1 sound to ever play, only add 1, and add more if you want it to pick from multiple possible clips.
@@ -27,7 +27,7 @@ TO ADD A NEW AMBIENT SOUND
 		If you want the sound to repeat playing while in the collider, check the looping boolean to true.
 
 	IF THE SOUND SHOULD GROW GRADUALLY LOUDER AS YOU APPROACH AN AREA
-		Use the prefab DistancedBasedSound also found in the Prefab/Environment folder. Drag it into the scene and
+		Use the prefab DistancedBasedSound also found in the Assets/Prefab/Environment folder. Drag it into the scene and
 		place it where you want the sound to be loudest. The prefab only has an audio source component, which is
 		set to use 3D sound settings, and you will modify those to your liking. Click the drop down arrow in the 
 		audio source component by "3D Sound Settings" to see the settings.
