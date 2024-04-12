@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 /**
  * To be used in the ModernMap scene. Attached to the canvas minimap.
- * Controls the UI of the minimap in the top left corner
+ * Controls toggling minimap on and off and switching to the full map view scene
  */
 public class MapUIController : MonoBehaviour
 {

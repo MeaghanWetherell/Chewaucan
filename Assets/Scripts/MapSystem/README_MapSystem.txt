@@ -1,21 +1,50 @@
 HOW TO USE THE MAP SYSTEM
 
-The Minimap
-	The minimap is an object in the ModernMap scene. There is a prefab of it in the prefab/environment folder.
-	The UI itself requires no code at all. It uses a render texture from a camera parented to the player. The
-	camera only renders the minimap layer, which is only the player icon and minimap image, so performace 
-	should not be a major issue. The main camera does not render the minimap layer.
+Creation Information:
+	This tool was created by Ellie Martin in Spring 2024 for the game Finding Lake Chewaucan.
+	part of the broader impacts for NSF Award # 2228632, "The Small Mammals of the Paisley and Connley Caves: 
+	Disentangling Drivers of Diversity in Pleistocene Extinction Survivors"
+	https://www.nsf.gov/awardsearch/showAward?AWD_ID=2228632
 
-	The minimap image itself is a 1m:1px scale representation of the world, where 1 pixel in the image is equal
-	to 1 meter (or 1 unit) in the game world. Please keep to this scaling when drawing a new map image. This 
-	same image is also used in the full map view scene.
+Version Information:
+	This tool was prepared using Unity version 2022.3.10f1
+	This tool uses the TextMeshPro package (Unity Registry, Version 3.0.6)
+	The TextMeshPro (aka TMPro) package also has dependencies. Their version information is as follows:
+		Unity UI 1.0.0
+
+General Description
+	The map system is a user interface that tracks player movement within a scene and 
+	allows fast travel in between locations (called Waypoints here).  It ties into the quest system and astrolabe.
+	It consists of several prefab game objects with attached scripts, Minimap and Fullmap.
+
+In-Game Mechanics
+	The minimap initializes in the upper left-hand corner of the screen when the game starts. 
+	To access the full map view (which is a bigger version of the minimap), the player presses M (by default). 
+	They can then use the mouse to move, zoom in, and select teleport waypoints around the map.
+
+
+The Minimap
+	The minimap is a game object in the ModernMap scene. There is a prefab of it in the assets/prefab/environment/ 
+	folder. The prefab has the Map UI Controller Script, a canvas, canvas  scaler, and graphic raycaster component attached.
+	The only code associated with the minimap is MapUIController, which enabled/disables the minimap then the 0 key (by default) 
+	is pressed and also controls switching to the full map view described above. There is also one line of code (the first line 
+	of the update function) in both SwimmingMovement and LandMovement attached to the Player prefab, which keeps the rotation of 
+	the minimap camera (a child of the gameobject Player named MinimapCamera) static.
+	To save performance space, instead of using a 1:1 representation of the world, the construction of the Minimap 
+	UI uses a pre-made render texture from a camera parented to the player called "Modern_Map_Detailed.png" 
+	This image can be found in the folder Assets/Scripts/MapSystem/NewMapSystem
+	The MinimapCamera customizes its culling mask such that it will only render gameobject on the layer named Minimap.
+	The layer Minimap only contains the following objects:
+		PlayerArrow, a child of the player
+		PlayerViewCone, a child of the player
+		MapImage, a gameobject in the ModernMap scene containing the png image.
+	The MainCamera's culling mask is set to render all layers except Minimap. For more information on layers, refer
+	to the documentation: https://docs.unity3d.com/Manual/use-layers.html
 
 The Full Map View
-	When in the game, the player presses M by default to open the FullMapView scene. They can use the mouse to
-	move, zoom in, and select teleport waypoints around the map. The map image is 1:1 scale with the Modern Map,
-	1 pixel = 1 unit.
+	FullMapView is a separate unity scene, located in the folder Assets/Scenes
 	How to add new waypoints:
-		1. Check that these things are in the scene (they are in FullMapView)
+		1. Check that these things are in the scene (they should already be present)
 			- a gameobject named Teleport Info
 			- a gameobject named position label that is the first child of Teleport Info
 		2. Drag the WaypointObj prefab into the scene
@@ -23,3 +52,8 @@ The Full Map View
 			- place the waypoint at the exact x and z coordinates that you want the waypoint to teleport to
 			- keep the y position at 5 so it can be seen by the camera
 			- set the desired y teleport value manually in the TeleportWaypoint component of that prefab instance.
+
+Drawing a new Map Image
+	The minimap image itself is a 1m:1px scale representation of the world, where 1 pixel in the image is equal
+	to 1 meter (or 1 unit) in the game world. Please keep to this scaling when drawing a new map image . This 
+	same image is also used in the full map view scene.

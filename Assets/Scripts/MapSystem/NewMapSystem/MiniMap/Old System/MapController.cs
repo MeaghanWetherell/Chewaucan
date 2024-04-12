@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
+/**
+ * THIS IS PART OF AN OLD VERSION OF THE MAP SYSTEM
+ * IT IS NO LONGER USED.
+ */
+
 public class MapController : MonoBehaviour
 {
     public InputActionReference mapRef;
