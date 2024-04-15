@@ -88,8 +88,12 @@ public class SplineAlignToTerrain : MonoBehaviour
         //repeatedly add knots at the appropriate height
         for (int i = 0; i < knotsToAdd - 1; i++)
         {
-            //Debug.Log(position.ToString());
+            //get next position
             position = new Vector3(position.x+(posStep.x/knotsToAdd), position.y, position.z+(posStep.z/knotsToAdd));
+
+            //find terrain again, just in case the spline will span multiple terrain objects
+            terrain = getActualCurrentTerrain(position);
+
             terrainHeight = terrain.SampleHeight(position);
             position = new Vector3(position.x, terrainHeight, position.z);
 

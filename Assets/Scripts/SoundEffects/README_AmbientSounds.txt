@@ -4,8 +4,8 @@ TO ADD A NEW AMBIENT SOUND
 
 	IF THE SOUND PLAYS ANYWHERE AT RANDOM TIMES
 		Create a new instance of Random Ambient Sound Object by right clicking in any folder in assets, and going
-		create->Random Ambient Sound Object and name is anything you want (I'd name it similar to the audio clip 
-		you plan to use).
+		create->Random Ambient Sound Object and name is anything you want (We recommend naming it similar to the 
+		audio clip you plan to use).
 		Then click on the newly created object to view it in the inspector. Drag the desired audio clip into the
 		inspector variable, and set the frequency based on how often you want this sound to play.
 		The frequency variable describes the chance of this audio clip playing anytime a sound is to be played. it
@@ -13,11 +13,12 @@ TO ADD A NEW AMBIENT SOUND
 		Under the player prefab, find the RandomAmbientSoundManager object. This object contains the RandomAmbientSound
 		component which you will put your newly created object into. This component has 3 lists, and you will place the
 		object in one of these lists based on what map the sound should play in. If the sound should play in both the
-		modern and pleistocene map, place the object into the general ambient sounds list. Otherwise, place it in 
+		modern and pleistocene map, place the object into the general ambient sounds list. Otherwise, place it in either
+		the Modern Map or Past (Pleistocene) Map Ambient Sounds list.
 
 	IF THE SOUND SHOULD BE PLAYED WHEN WALKING NEAR/INTO SOMETHING
 		Use the prefab LocalizedSound found in the Assets/Prefab/Environment folder. Simply drag it into the scene and place
-		it where you want the sound to be triggered. In the objects Localized Sound component, add audio clips to the
+		it where you want the sound to be triggered. In the object's Localized Sound component, add audio clips to the
 		clip list. You should add at least 1, just any sounds you want to have possibly play at this location. If you
 		want only 1 sound to ever play, only add 1, and add more if you want it to pick from multiple possible clips.
 		By default, the selected audio clip will play a single time when triggered and can be immediately retriggered

@@ -45,15 +45,26 @@ The Full Map View
 	FullMapView is a separate unity scene, located in the folder Assets/Scenes
 	How to add new waypoints:
 		1. Check that these things are in the scene (they should already be present)
-			- a gameobject named Teleport Info
+			- a gameobject named Teleport Info (it's a child of the canvas)
 			- a gameobject named position label that is the first child of Teleport Info
 		2. Drag the WaypointObj prefab into the scene
 		3. Abide by these rules when determining where to place the object
 			- place the waypoint at the exact x and z coordinates that you want the waypoint to teleport to
 			- keep the y position at 5 so it can be seen by the camera
 			- set the desired y teleport value manually in the TeleportWaypoint component of that prefab instance.
+		4. Decide which map (Modern or Pleistocene) the new waypoint should teleport to, then do this:
+			- in the hierarchy, drag the new waypoint object so that is is a child of the [Map Name] Map Waypoints object,
+			  where [Map Name] is either Modern or Pleistocene. So if you want a new waypoint to teleport to the modern map,
+			  drag the waypoint so that it is a child of the Modern Map Waypoints object. This makes it so it gets disabled
+			  when switching the map view.
+	To update the map image
+		If a new map is drawn according to the instructions in "Drawing a new Map Image" below, then you can set that image
+		as the new one in the object [Map Name] Map Image, which is a child of the object [Map Name] Map View, with
+		[Map Name] being either Modern or Pleistocene. Simply change the sprite in the sprite renderer to the desired image.
 
 Drawing a new Map Image
 	The minimap image itself is a 1m:1px scale representation of the world, where 1 pixel in the image is equal
 	to 1 meter (or 1 unit) in the game world. Please keep to this scaling when drawing a new map image . This 
 	same image is also used in the full map view scene.
+	When the new image is put into unity (preferably as a png), ensure that the png is set a a sprite and that the 
+	pixels per unit is set to 1 and also that the pivot is set to the bottom left. All other settings remain default.
