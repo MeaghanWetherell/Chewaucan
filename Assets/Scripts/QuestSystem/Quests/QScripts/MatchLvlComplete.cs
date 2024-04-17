@@ -37,12 +37,15 @@ namespace QuestSystem.Quests.QScripts
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
-                    QuestManager.questManager.CreateQuestNode(fishQuestObj);
-                    GameObject popUp = GameObject.Find("PopUp(Clone)");
-                    if (popUp != null)
+                    if (lvl == 3)
                     {
-                        popUp.GetComponentInChildren<Button>().onClick.AddListener(() => {
-                            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");});
+                        QuestManager.questManager.CreateQuestNode(fishQuestObj);
+                        GameObject popUp = GameObject.Find("PopUp(Clone)");
+                        if (popUp != null)
+                        {
+                            popUp.GetComponentInChildren<Button>().onClick.AddListener(() => {
+                                SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");});
+                        }
                     }
                     if (ids[i] == fishQuestObj.uniqueID)
                     {

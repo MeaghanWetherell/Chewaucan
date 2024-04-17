@@ -30,11 +30,11 @@ namespace Match3
                         addStr = "match bones from the same species!";
                         break;
                 }
-                maintext.text += "Currently: " + addStr;
+                maintext.text += "\nCurrently: " + addStr;
             }
             PlayerInput playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
-            addStr = "";
-            Regex r = new Regex("(<*>)/");
+            addStr = "\n";
+            bool first = true;
             foreach (InputActionMap map in BindingManager.bindingManager.maps)
             {
                 if (map.name.Equals("Player"))
@@ -47,13 +47,18 @@ namespace Match3
                                 continue;
                             if (action.name.Equals("Move"))
                             {
+                                if (!first)
+                                {
+                                    addStr += ", ";
+                                }
+                                else {first = false;}
                                 if (action.bindings[i].hasOverrides)
                                 {
-                                    addStr += r.Replace(action.bindings[i].overridePath, "")+",";
+                                    addStr += action.bindings[i].overridePath.Split("/")[1];
                                 }
                                 else
                                 {
-                                    addStr += r.Replace(action.bindings[i].path, "")+",";
+                                    addStr += action.bindings[i].path.Split("/")[1];
                                 }
                             }
                         }

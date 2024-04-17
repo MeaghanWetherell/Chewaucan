@@ -47,7 +47,8 @@ namespace Match3
             {
                 levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/"+levelsCompleteFileName+".json"));
             }
-            catch (IOException){ levelsComplete = new List<bool>();}
+            catch (IOException){ }
+            levelsComplete ??= new List<bool>();
             // ReSharper disable once PossibleNullReferenceException
             while(levelsComplete.Count < levels.Count)
                 levelsComplete.Add(false);
