@@ -113,7 +113,7 @@ public class SplineAlignToTerrain : MonoBehaviour
     private Terrain getActualCurrentTerrain(Vector3 pos)
     {
         RaycastHit[] hits;
-        Vector3 raycastPos = new Vector3(pos.x, Mathf.Infinity, pos.z);
+        Vector3 raycastPos = new Vector3(pos.x, 1000f, pos.z);
         hits = Physics.RaycastAll(raycastPos, Vector3.down, Mathf.Infinity);
 
         foreach (RaycastHit hit in hits)
