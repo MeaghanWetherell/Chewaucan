@@ -13,6 +13,7 @@ public class CloseUI : MonoBehaviour
         animator = sidebarUI.GetComponent<Animator>();
     }
 
+    // animates the UI out when the X is pressed
     public void CloseSideMenu()
     {
         animator.SetBool("active", false);
