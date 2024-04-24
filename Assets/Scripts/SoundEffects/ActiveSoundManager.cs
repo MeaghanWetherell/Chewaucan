@@ -9,22 +9,16 @@ using UnityEngine.Events;
  */
 public class ActiveSoundManager : MonoBehaviour
 {
-
+    // game object handing random ambient sounds
     [SerializeField] RandomAmbientSound ambientSoundManager;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /*
+     * Disables random ambient sounds when called. For example, when the player
+     * is underwater (we don't want bird noises playing when underwater)
+     * This should be called from other scripts when entering a place where you don't
+     * want these sounds to play
+     */
     public void DisableAmbientSounds()
     {
         if (ambientSoundManager != null)
@@ -33,6 +27,9 @@ public class ActiveSoundManager : MonoBehaviour
         }
     }
 
+    /*
+     * Enables the random ambient sounds
+     */
     public void EnableAmbientSounds()
     {
         if (ambientSoundManager != null)

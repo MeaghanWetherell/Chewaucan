@@ -1,7 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+
+/*
+ * This method of finding the terrain texture was made with the help of this tutorial:
+ * https://johnleonardfrench.com/terrain-footsteps-in-unity-how-to-detect-different-textures/
+ */
+
+/*
+ * You can find the relevant terrain palette in the folder Assests/GroundTextures/TerrainPalette
+ */
 
 public class CheckGroundTexture : MonoBehaviour
 {
@@ -39,7 +45,6 @@ public class CheckGroundTexture : MonoBehaviour
         float zCoord = mapPos.z * _terrain.terrainData.alphamapHeight;
         _xPos = (int)xCoord;
         _zPos = (int)zCoord;
-        FindTextureValue();
     }
 
     void FindTextureValue()
@@ -57,6 +62,7 @@ public class CheckGroundTexture : MonoBehaviour
         return textureVals;
     }
 
+    // find the terrain the player is currently standing on
     bool SetTerrain()
     {
         RaycastHit hit;

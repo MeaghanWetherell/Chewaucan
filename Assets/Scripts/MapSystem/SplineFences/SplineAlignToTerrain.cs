@@ -110,6 +110,10 @@ public class SplineAlignToTerrain : MonoBehaviour
         }
     }
 
+    /**
+     * Uses raycasting to find the terrain gameobject directly beneath the spline knot
+     * position
+     */
     private Terrain getActualCurrentTerrain(Vector3 pos)
     {
         RaycastHit[] hits;

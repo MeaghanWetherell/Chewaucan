@@ -1,7 +1,6 @@
 using Misc;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +17,7 @@ public class RandomAmbientSound : MonoBehaviour
 
     // not using the pleistocene map much yet, but might need it in the future
     [Tooltip("Audio clips to play only in the pleistocene map")]
-    public List<RandomAmbientSoundObject> pastMapAmbientSounds = new List<RandomAmbientSoundObject>();
+    public List<RandomAmbientSoundObject> pleistoceneMapAmbientSounds = new List<RandomAmbientSoundObject>();
 
     [Tooltip("Shortest time between sound effects (in seconds)")]
     [Min(0.1f)]
@@ -109,7 +108,7 @@ public class RandomAmbientSound : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "PleistoceneMap")
         {
-            return pastMapAmbientSounds;
+            return pleistoceneMapAmbientSounds;
         }
         else
         {

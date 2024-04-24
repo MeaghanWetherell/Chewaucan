@@ -8,6 +8,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
 
+/**
+ * OLD SCRIPT FOR PLAYER MOVEMENT. NO LONGER USED
+ * Refer to PlayerMovementController, LandMovement, and SwimmingMovement
+ */
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;

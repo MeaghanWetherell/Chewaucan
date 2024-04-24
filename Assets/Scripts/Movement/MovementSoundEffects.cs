@@ -99,17 +99,7 @@ public class MovementSoundEffects : MonoBehaviour
 
     AudioClip GetClip(List<AudioClip> clipArray)
     {
-        int attempts = 3;
-        AudioClip selectedClip = clipArray[Random.Range(0, clipArray.Count - 1)];
-        while (selectedClip == _previousClip && attempts > 0)
-        {
-            selectedClip =
-            clipArray[Random.Range(0, clipArray.Count - 1)];
-
-            attempts--;
-        }
-
-        _previousClip = selectedClip;
+        AudioClip selectedClip = clipArray[Random.Range(0, clipArray.Count)];
         return selectedClip;
     }
 
@@ -118,6 +108,11 @@ public class MovementSoundEffects : MonoBehaviour
         _playSpeed = s;
     }
 
+    /*
+     * Returns the proper array of audio clips for walking, jumping, and landing
+     * depending on the texture of the terrain. If more textures are added to the groung, this may
+     * have to be changed
+     */
     void SetSoundList(float[] textureVals)
     {
         if (textureVals[0] > 0.5f)

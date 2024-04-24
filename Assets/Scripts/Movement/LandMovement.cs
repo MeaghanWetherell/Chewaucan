@@ -70,15 +70,18 @@ public class LandMovement : MonoBehaviour
 
     private void Move()
     {
-        _terrainTexture.GetGroundTexture();
+        _terrainTexture.GetGroundTexture(); // get texture on the ground to know what sound type to play
+
         _prevGrounded = _grounded;
         _grounded = _controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
+        // play a landing sound if we have just landed
         if (!_prevGrounded && _grounded)
         {
             _soundEffects.PlayLandSound();
         }
 
+        // keeps the player on the ground when not jumping
         if (_grounded && _verticalMovement.y < gravity)
         {
             _verticalMovement.y = gravity;
@@ -129,13 +132,15 @@ public class LandMovement : MonoBehaviour
         staminaUI.value = currStamina;
     }
 
+    // calculates our distance to the ground as an extra check along with controller.isGrounded in line 76
+    // ensures that the player cannot jump up steep slopes
     private bool RaycastToGround()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _controller.height))
         {
             GameObject objectHit = hit.collider.gameObject;
-            //Debug.Log("Distance: " + hit.distance + " Raycast points towards ground");
+
             //<1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
             if (hit.distance <= maxDistToGround)
             {
@@ -176,18 +181,6 @@ public class LandMovement : MonoBehaviour
             moveSpeed = _moveSpeedDefault;
             _soundEffects.SetPlaySpeed(0.9f);
         }
-    }
-
-    //disable movement when paused
-    private void OnPause()
-    {
-        this.enabled = false;
-    }
-
-    //reenable movement on resume
-    private void OnResume()
-    {
-        this.enabled = true;
     }
 
     private void InitializeValues()

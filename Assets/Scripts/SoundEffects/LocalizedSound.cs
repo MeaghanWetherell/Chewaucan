@@ -68,12 +68,12 @@ public class LocalizedSound : MonoBehaviour
                 exited = false;
                 StartCoroutine(PlayLocalizedSound(clip));
             }
-            else if (looping)
+            else if (!isPlaying & looping)
             {
                 int n = Random.Range(0, clipList.Count);
                 AudioClip clip = clipList[n];
-                audioSource.clip = clip;
-                audioSource.Play();
+                exited = false;
+                StartCoroutine(PlayLocalizedSound(clip));
             }
         }
     }

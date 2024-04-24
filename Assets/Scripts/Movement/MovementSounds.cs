@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Scriptable objects that stores the different types of movement based sounds
+ * (walking, jumping, landing). 
+ */
 [CreateAssetMenu]
 public class MovementSounds : ScriptableObject
 {

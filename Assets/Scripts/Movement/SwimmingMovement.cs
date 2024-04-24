@@ -49,7 +49,7 @@ public class SwimmingMovement : MonoBehaviour
     void Start()
     {
         InitializeValues();
-        ambientSoundManager = GameObject.FindFirstObjectByType<ActiveSoundManager>();
+        ambientSoundManager = FindFirstObjectByType<ActiveSoundManager>();
     }
 
     private void OnEnable()
@@ -153,9 +153,11 @@ public class SwimmingMovement : MonoBehaviour
         staminaUI.value = currStamina;
     }
 
+    // updates the UI of the blue oxygen bar
+    // decreases constantly if underwater, recovers if above water
     private void UpdateOxygen()
     {
-        if (currOxygen < 0)
+        if (currOxygen < 0) //brings player to the water surface when oxygen if out
         {
             currOxygen = 0;
             this.transform.rotation.eulerAngles.Set(0f, transform.rotation.eulerAngles.y, 0f);
@@ -213,6 +215,12 @@ public class SwimmingMovement : MonoBehaviour
         }
     }
 
+    /**
+     * Coroutine that similates the act of diving below the water.
+     * The player cannot move while this is running. This coroutine
+     * rotates the player downward, uses the CharacterController to 
+     * move them into the water, then rotates them forward again.
+     */
     IEnumerator Dive()
     {
         _dive = true;
@@ -234,11 +242,12 @@ public class SwimmingMovement : MonoBehaviour
             this.transform.Rotate(-2f, 0f, 0f);
             yield return new WaitForEndOfFrame();
         }
-        transform.rotation = Quaternion.Euler(rot);
+        transform.rotation = Quaternion.Euler(rot); //sets rotation back to default
         _dive = false;
         yield return null;
     }
 
+    // checks if the Dive coroutine is currently running
     public bool DiveOngoing()
     {
         return _dive;
@@ -266,15 +275,4 @@ public class SwimmingMovement : MonoBehaviour
         _waterPosition = waterLevel;
     }
 
-    //disable movement when paused
-    private void OnPause()
-    {
-        this.enabled = false;
-    }
-
-    //reenable movement on resume
-    private void OnResume()
-    {
-        this.enabled = true;
-    }
 }
