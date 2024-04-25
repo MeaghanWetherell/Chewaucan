@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/* This script is rather hardcoded for 
+ */
+
 public class MovementSoundEffects : MonoBehaviour
 {
     float _playSpeed = 0.9f;
     List<AudioClip> _clipListStep;
     List<AudioClip> _clipListJump;
     List<AudioClip> _clipListLand;
-    AudioClip _previousClip;
     AudioSource _playerAudio;
 
     CheckGroundTexture _groundTexture;
@@ -76,7 +78,7 @@ public class MovementSoundEffects : MonoBehaviour
         _playerAudio.clip = swimSounds;
         _playerAudio.Play();
 
-        yield return new WaitForSeconds(_playerAudio.clip.length);
+        yield return new WaitUntil(() => (!_playerAudio.isPlaying));
 
         _isPlaying = false;
     }
@@ -123,7 +125,7 @@ public class MovementSoundEffects : MonoBehaviour
             return;
         }
 
-        if (textureVals[1] > 0.5f)
+        if (textureVals[1] > 0.5f || textureVals[8] > 0.5f)
         {
             _clipListStep = soilSounds.stepSounds;
             _clipListJump = soilSounds.jumpSounds;

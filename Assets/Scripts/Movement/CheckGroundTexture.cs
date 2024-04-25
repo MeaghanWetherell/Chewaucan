@@ -25,6 +25,7 @@ public class CheckGroundTexture : MonoBehaviour
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        textureVals = new float[numOfTextures];
     }
 
     public void GetGroundTexture()
