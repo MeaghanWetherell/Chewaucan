@@ -44,7 +44,7 @@ public class LocalizedSound : MonoBehaviour
 
         if (clip != null)
         {
-            Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
+            //Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
 
             audioSource.clip = clip;
             audioSource.Play();

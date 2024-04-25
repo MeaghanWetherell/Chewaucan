@@ -3,6 +3,9 @@ using UnityEngine;
 /*
  * This method of finding the terrain texture was made with the help of this tutorial:
  * https://johnleonardfrench.com/terrain-footsteps-in-unity-how-to-detect-different-textures/
+ * 
+ * As well as assitance from this reddit thread:
+ * https://www.reddit.com/r/Unity3D/comments/yf02lz/footstep_system_detect_the_layer_name_on_the/
  */
 
 /*
@@ -16,16 +19,14 @@ public class CheckGroundTexture : MonoBehaviour
     Terrain _terrain;
     int _xPos;
     int _zPos;
-    public float[] textureVals;
+    float[] textureVals;
 
     [Tooltip("The number of textures in the terrain layer palette asset")]
-    public int numOfTextures = 8;
     
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<CharacterController>();
-        textureVals = new float[numOfTextures];
     }
 
     public void GetGroundTexture()
@@ -52,10 +53,33 @@ public class CheckGroundTexture : MonoBehaviour
     {
         float[,,] alphaMap = _terrain.terrainData.GetAlphamaps(_xPos, _zPos, 1, 1);
 
-        for (int i = 0; i < numOfTextures; i++)
+        float[] mapLayers = new float[alphaMap.GetUpperBound(2) + 1];
+
+        for (int n = 0; n < mapLayers.Length; n++)
         {
-            textureVals[i] = alphaMap[0, 0, i];
+            mapLayers[n] = alphaMap[0, 0, n];
         }
+
+        textureVals = mapLayers;
+    }
+
+    public string GetCurrentLayerName()
+    {
+        float highest = 0f;
+        int maxIndex = 0;
+        for (var i = 0; i < textureVals.Length; i++)
+        {
+            if (!(textureVals[i] > highest)) continue;
+
+            maxIndex = i;
+            highest = textureVals[i];
+        }
+
+        if (SetTerrain())
+        {
+            return _terrain.terrainData.terrainLayers[maxIndex].name;
+        }
+        return "rock";
     }
 
     public float[] GetValues()

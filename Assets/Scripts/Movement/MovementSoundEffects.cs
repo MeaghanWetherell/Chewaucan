@@ -2,11 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* This script is rather hardcoded for 
- */
 
 public class MovementSoundEffects : MonoBehaviour
 {
+    [System.Serializable]
+    public class MovementSoundInfo
+    {
+        public MovementSounds sounds;
+
+        [Tooltip("keywords in the names of the related layers to identify these sounds")]
+        [SerializeField] List<string> keywords = new List<string>();
+
+        public List<string> getKeywords() { return keywords; }
+    }
+
+    [SerializeField] List<MovementSoundInfo> movementSoundInfo = new();
+
     float _playSpeed = 0.9f;
     List<AudioClip> _clipListStep;
     List<AudioClip> _clipListJump;
@@ -17,11 +28,8 @@ public class MovementSoundEffects : MonoBehaviour
 
     private bool _isPlaying;
 
-    public MovementSounds rockSounds;
-    public MovementSounds grassSounds;
-    public MovementSounds leafSounds;
-    public MovementSounds soilSounds;
-    public MovementSounds gravelSounds;
+    public MovementSounds defaultSounds;
+
     public AudioClip swimSounds;
 
     private void Start()
@@ -37,7 +45,6 @@ public class MovementSoundEffects : MonoBehaviour
         if (!_isPlaying)
         {
             float[] values = _groundTexture.GetValues();
-            //Debug.Log(values[0]+" "+ values[1] + " " + values[2] + " " + values[3] + " " + values[4] + " " + values[5] + " " + values[6] + " " + values[7]);
             SetSoundList(values);
             StartCoroutine(PlaySound(_clipListStep));
         }
@@ -94,6 +101,9 @@ public class MovementSoundEffects : MonoBehaviour
 
         _playerAudio.clip = clip;
         _playerAudio.Play();
+
+        Debug.Log("     Playing " + clip.name);
+
         yield return new WaitForSeconds(_playerAudio.clip.length * _playSpeed);
 
         _isPlaying = false;
@@ -112,39 +122,32 @@ public class MovementSoundEffects : MonoBehaviour
 
     /*
      * Returns the proper array of audio clips for walking, jumping, and landing
-     * depending on the texture of the terrain. If more textures are added to the groung, this may
-     * have to be changed
+     * depending on the layer name of the texture on the terrain
      */
     void SetSoundList(float[] textureVals)
     {
-        if (textureVals[0] > 0.5f)
+        string layerName = _groundTexture.GetCurrentLayerName();
+        Debug.Log(layerName);
+
+        foreach (MovementSoundInfo info in movementSoundInfo)
         {
-            _clipListStep = gravelSounds.stepSounds;
-            _clipListJump = gravelSounds.jumpSounds;
-            _clipListLand = gravelSounds.landSounds;
-            return;
+            foreach(string keyword in info.getKeywords())
+            {
+                layerName = layerName.ToLower();
+                if (layerName.Contains(keyword.ToLower()))
+                {
+                    _clipListStep = info.sounds.stepSounds;
+                    _clipListJump = info.sounds.jumpSounds;
+                    _clipListLand = info.sounds.landSounds;
+                    return;
+                }
+            }
         }
 
-        if (textureVals[1] > 0.5f || textureVals[8] > 0.5f)
-        {
-            _clipListStep = soilSounds.stepSounds;
-            _clipListJump = soilSounds.jumpSounds;
-            _clipListLand = soilSounds.landSounds;
-            return;
-        }
+        // default if no match is found
+        _clipListStep = defaultSounds.stepSounds;
+        _clipListJump = defaultSounds.jumpSounds;
+        _clipListLand = defaultSounds.landSounds;
 
-        if (textureVals[7] > 0.5f)
-        {
-            _clipListStep = grassSounds.stepSounds;
-            _clipListJump = grassSounds.jumpSounds;
-            _clipListLand = grassSounds.landSounds;
-            return;
-        }
-
-        //indexes 2-6 are rock textures, so it is treated as the default sounds to play
-        //if none of the above if statements are true
-        _clipListStep = rockSounds.stepSounds;
-        _clipListJump = rockSounds.jumpSounds;
-        _clipListLand = rockSounds.landSounds;
     }
 }
