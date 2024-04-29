@@ -69,10 +69,11 @@ public class CheckGroundTexture : MonoBehaviour
         int maxIndex = 0;
         for (var i = 0; i < textureVals.Length; i++)
         {
-            if (!(textureVals[i] > highest)) continue;
-
-            maxIndex = i;
-            highest = textureVals[i];
+            if (textureVals[i] > highest)
+            {
+                maxIndex = i;
+                highest = textureVals[i];
+            }
         }
 
         if (SetTerrain())
