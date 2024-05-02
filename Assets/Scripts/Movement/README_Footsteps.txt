@@ -46,28 +46,31 @@ MovementSoundEffects.cs
 	To edit which sound group is intended to play on different terrain groups:
 		Select the player object and navigate to the Movement Sound Effects component
 		Look for the Movement Sounds Info variable
-			This is a list of class objects, and each class object contains a MovementSounds object, 
+		Press the drop-down arrow to see a list of class objects (called number Elements).
+			Each class object contains a MovementSounds object, 
 			and a list of strings (called Keywords).
-			To add a new sound group, click the plus sign to add a new class object
+			The sound object contains all possible played sounds, and the keywords are in the terrain layer names associated.
+			To add a new sound group, click the plus sign under Movement Sound Info
 				Drag the desired Movement Sounds object into the field labeled Sounds
-				The list of keywords may be already populated with default values, to change it.
+				The list of keywords may be already populated with default values; to change it:
 					Click on Keywords to view the list. If an element already exists, change it to a keyword relevant
 					to the terrain sound. Refer to "How to choose keywords" below for how to select a proper keyword.
 
 	How to choose keywords
-		keywords are what the script uses to identify what sounds should play for the current texture layer name, so 
-		the keywords should be substrings of the texture names that would trigger the related sound. Do not worry
-		about case matching.
-		(For example: many rock sound textures are named "Crack1", etc, so the keywords list contains the work crack)
+		Keywords are what the script uses to identify what sounds should play for the current texture layer name.
+		You define the keywords that detemine which sounds play for each terrain layer by adding elements to the 
+		list named Keywords and editing the strings in each element.
+		They need to match portions of the filename of the Terrain Layer, but are not case sensitive.
+		So sand3 and 3_sandy would both be names detected by the keyword "sand".
+
+		In the event that you use two keywords in a terrain layer name (e.g., SandandGrass1), it will default to whichever is listed first
+		in the movement sounds object. To ensure reliability, make sure names are unique between sound types.
+
+		If you do not define a keyword in the Movement Sounds object, the first sound on the list (currently, Rocks) will play.
+
 
 	This script also creates a public modifiable variable for what sounds will play when swimming. 
 	Currently, this only accepts one movement sound and not a selection of randomly drawn sounds.
-
-	If you happen to have the Player object selected when going into play mode, you may come across this error after
-	going back to edit mode: “NullReferenceException: SerializedObject of SerializedProperty has been Disposed…”
-		This is just an error with the inspector ui display and is not dangerous to the gameplay
-		Select any other object to stop the message from appearing.
-		This error only appears when the Player is selected when entering play mode, not under any other circumstances
 
 
 MovementSounds.cs
@@ -76,8 +79,8 @@ MovementSounds.cs
 		Navigate to the folder where you want to place sound objects
 		In the project window, right click
 			Select
-				Create->Movement Sounds
-				Name it anything you want (We recommend naming it like the type of terrain it sounds like).
+				Create, then Movement Sounds
+				Name it anything you want (We recommend using similar naming conventions to your terrain palette).
 				Click on the newly created object to view it in the inspector.
 
 	Each MovementSounds object allows you to include sounds for footsteps, jumping, and landing sounds that should be customized 
@@ -90,7 +93,15 @@ MovementSounds.cs
 	Currently, MovementSound objects and their associated sound files are stored under Assets/Sounds with 
 	subfolders for sound types.
 
+Troubleshooting and Errors
+	If you happen to have the Player object selected when going into play mode, you may come across this error after
+	going back to edit mode: “NullReferenceException: SerializedObject of SerializedProperty has been Disposed…”
+		This is just an error with the inspector UI display and is not dangerous to the gameplay
+		Select any other object when going into game mode to stop the message from appearing.
+
 Suggestions and Hints
 	If you are filming sounds for your own footsteps, make sure to keep those steps short! It's very easy to fall into the trap of walking
-	slowly and then the audio files are too long
+	slowly and then the audio files are too long. This is especially obvious when the player is running. An ideal footstep sound should be
+	between ___ and ___ seconds long.  
+
 
