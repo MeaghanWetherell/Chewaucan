@@ -13,26 +13,33 @@ Version Information:
 
 General Description
 	This system ensures that the player will hear footsteps as they move (or swimming sounds when swimming) and that these will 
-	update to reflect the type of texture the player is walking across.
+	update to reflect the type of terrain the player is walking across. The general workflow is that the scripts will check for keywords
+	in the terrain layer name in the active terrain texture palette, and use that to correspond to specific sound sampling.
+
+	Terrain layers are what Unity uses to stitch together different JPG files into a texture (e.g., base color and normal map). These are used
+	in the 'paint texture' option for terrains. Because you can paint different terrain layer textures on top of one another with different degrees 
+	of transparency, this system evaluates and calls out the texture with the strongest expression at each spot, 
+	using the texture's alpha values (or degree of transparency)
+
 	
-	There are several scripts that are directly associated with this system which are called out by other scripts.
+	There are several scripts that are directly associated with this system which are called out by other scripts. Both 
+	MovementSoundEffects and CheckGroundTexture are also attached directly to the player object. 
 		MovementSoundEffects.cs [in SwimmingMovement.cs, LandMovement.cs]
 		CheckGroundTexture.cs [in LandMovement.cs, MovementSoundEffects.cs]
 		MovementSounds.cs
 
 CheckGroundTexture.cs
-	This script is attached to the Player object. It looks for and finds the texture type the player is standing on. 
-	It does this by returning the alpha map values of each terrain texture the player is standing on 
-	(essentially, the relative degree of transparency for each possible texture) and then returning the name of the 
-	texture layer with the largest alpha value.
+	This script is attached to the Player object. It looks for and finds the terrain type the player is standing on. 
+	It does this by returning the alpha map values of each terrain layer the player is standing on 
+	(essentially, the relative degree of transparency for each possible terrain layer) and then returning the name of the 
+	terrain layer with the largest alpha value.
 
-	It looks for textures in the currently active terrain palette. The script will automatically get the upper bound of
-	the alpha map values array from the terrain, so any changes to the terrain palette may be automotically detected.
-	Depending on how terrain works, the terrain may only get alpha values for textures that exist underneath it.
-	Overall, to avoid potential problems, ensure that every terrain uses the same terrain palette.
+	It looks for terrain layers in the currently active terrain palette. The script will automatically get the upper bound of
+	the alpha map values array from the terrain, so any changes to the terrain palette may be automatically detected. 
+	To avoid potential problems, ensure that every terrain uses the same terrain palette.
 
 MovementSoundEffects.cs
-	This script is attached to the Player object. It plays certain sounds according to the layer name of the texture
+	This script is attached to the Player object. It plays different sounds according to keywords in the layer name of the texture
 	with the greatest alpha value. Which sound to play based on the layer name is defined by a MovementSounds object
 	and a list of keywords that pertain to the particular sound type.
 
