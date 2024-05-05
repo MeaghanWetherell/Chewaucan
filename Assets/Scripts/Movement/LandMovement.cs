@@ -118,7 +118,7 @@ public class LandMovement : MonoBehaviour
         else
         {
             if (currStamina < 0) { currStamina = 0; }
-            _soundEffects.SetPlaySpeed(0.9f);
+            _soundEffects.SetIsSprinting(false);
             moveSpeed = _moveSpeedDefault;
             if (currStamina < maxStamina)
             {
@@ -174,12 +174,12 @@ public class LandMovement : MonoBehaviour
         if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
-            _soundEffects.SetPlaySpeed(0.5f);
+            _soundEffects.SetIsSprinting(true);
         }
         else
         {
             moveSpeed = _moveSpeedDefault;
-            _soundEffects.SetPlaySpeed(0.9f);
+            _soundEffects.SetIsSprinting(false);
         }
     }
 
