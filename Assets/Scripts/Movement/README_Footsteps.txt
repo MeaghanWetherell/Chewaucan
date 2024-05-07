@@ -69,8 +69,9 @@ MovementSoundEffects.cs
 		If you do not define a keyword in the Movement Sounds object, the first sound on the list (currently, Rocks) will play.
 
 
-	This script also creates a public modifiable variable for what sounds will play when swimming. 
-	Currently, this only accepts one movement sound and not a selection of randomly drawn sounds.
+	This script also contains two lists that pertain to sounds played when swimming. Swim Sounds are the sound effects played
+	when swimming at normal speed, and Swim Sprint Sounds are the sound effects played when sprinting while swimming. You may
+	add as many audio clips as you like to each list, and the script will select a random one to play each time.
 
 
 MovementSounds.cs
@@ -85,7 +86,8 @@ MovementSounds.cs
 
 	Each MovementSounds object allows you to include sounds for footsteps, jumping, and landing sounds that should be customized 
 	to a particular terrain. You can add a new sound step, jump, or land sound for the object by clicking the plus sign under
-	any array and dragging the desired AudioClip into it.
+	any array and dragging the desired AudioClip into it. There is also a list of audio clips to be used when the player is 
+	sprinting.
 	
 	Each object's variable can have multiple sounds that are randomly played, to make the soundscape more varied. 
 	For example, you could have 3 different possible landing sounds when you land on rocks.  
