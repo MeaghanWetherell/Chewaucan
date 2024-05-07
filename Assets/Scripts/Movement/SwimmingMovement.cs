@@ -45,6 +45,18 @@ public class SwimmingMovement : MonoBehaviour
 
     private ActiveSoundManager ambientSoundManager;
 
+    private void InitializeValues()
+    {
+        _controller = GetComponent<CharacterController>();
+        _soundEffects = GetComponent<MovementSoundEffects>();
+        _moveInput = Vector2.zero;
+        _moveSpeedDefault = moveSpeed;
+        staminaUI.minValue = 0f;
+        staminaUI.maxValue = maxStamina;
+        oxygenUI.minValue = 0f;
+        oxygenUI.maxValue = maxStamina;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -251,18 +263,6 @@ public class SwimmingMovement : MonoBehaviour
     public bool DiveOngoing()
     {
         return _dive;
-    }
-
-    private void InitializeValues()
-    {
-        _controller = GetComponent<CharacterController>();
-        _soundEffects = GetComponent<MovementSoundEffects>();
-        _moveInput = Vector2.zero;
-        _moveSpeedDefault = moveSpeed;
-        staminaUI.minValue = 0f;
-        staminaUI.maxValue = maxStamina;
-        oxygenUI.minValue = 0f;
-        oxygenUI.maxValue = maxStamina;
     }
 
     public void SetWaterSoundSource(AudioSource audioSource)

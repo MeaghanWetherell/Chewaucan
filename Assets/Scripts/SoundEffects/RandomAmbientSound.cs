@@ -15,7 +15,6 @@ public class RandomAmbientSound : MonoBehaviour
     [Tooltip("Audio clips to play only in the modern map")]
     public List<RandomAmbientSoundObject> modernMapAmbientSounds = new List<RandomAmbientSoundObject>();
 
-    // not using the pleistocene map much yet, but might need it in the future
     [Tooltip("Audio clips to play only in the pleistocene map")]
     public List<RandomAmbientSoundObject> pleistoceneMapAmbientSounds = new List<RandomAmbientSoundObject>();
 

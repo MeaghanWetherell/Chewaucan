@@ -135,8 +135,7 @@ public class SplineAlignToTerrain : MonoBehaviour
 
     /**
      * Used to realign all the knots to the terrain if you move one. You must press the button
-     * under the component to call it. It might be possible to do this automatically, but this
-     * will work for now.
+     * under the component to call it.
      * This also only checks existing knots, it won't add knots to align to the terrain
      */
     public void AlignToTerrain()

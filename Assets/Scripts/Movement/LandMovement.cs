@@ -35,6 +35,18 @@ public class LandMovement : MonoBehaviour
     public InputActionReference jumpRef;
     public InputActionReference sprintRef;
 
+    private void InitializeValues()
+    {
+        _controller = GetComponent<CharacterController>();
+        _soundEffects = GetComponent<MovementSoundEffects>();
+        _terrainTexture = GetComponent<CheckGroundTexture>();
+        _verticalMovement = new Vector3(0f, gravity, 0f);
+        _moveInput = Vector2.zero;
+        _moveSpeedDefault = moveSpeed;
+        staminaUI.minValue = 0f;
+        staminaUI.maxValue = maxStamina;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -181,17 +193,5 @@ public class LandMovement : MonoBehaviour
             moveSpeed = _moveSpeedDefault;
             _soundEffects.SetIsSprinting(false);
         }
-    }
-
-    private void InitializeValues()
-    {
-        _controller = GetComponent<CharacterController>();
-        _soundEffects = GetComponent<MovementSoundEffects>();
-        _terrainTexture = GetComponent<CheckGroundTexture>();
-        _verticalMovement = new Vector3(0f, gravity, 0f);
-        _moveInput = Vector2.zero;
-        _moveSpeedDefault = moveSpeed;
-        staminaUI.minValue = 0f;
-        staminaUI.maxValue = maxStamina;
     }
 }

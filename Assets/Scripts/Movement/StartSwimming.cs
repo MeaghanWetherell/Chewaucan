@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This should be attached to the global volume of any body
+ * of water that the player can swim in.
+ * The
+ */
+[RequireComponent(typeof(AudioSource))]
 public class StartSwimming : MonoBehaviour
 {
+    [Tooltip("The WaterUp prefab game object (the actual water not the global volume)")]
     public Transform waterBlock;
 
     private void OnTriggerEnter(Collider other)

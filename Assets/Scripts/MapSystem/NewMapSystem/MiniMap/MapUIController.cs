@@ -29,12 +29,14 @@ public class MapUIController : MonoBehaviour
     }
 
     //toggles the minimap on or off when the HideMap action is performed
+    //default button to press if 0
     void ToggleMap(InputAction.CallbackContext context)
     {
         minimapObj.SetActive(!minimapObj.activeSelf);
     }
 
     //switches to the scene FullMapView, where the full world map can be observed
+    //default button to press is M
     void SwitchToFullMapView(InputAction.CallbackContext context)
     {
         SceneManager.LoadScene("FullMapView");

@@ -49,6 +49,10 @@ public class CheckGroundTexture : MonoBehaviour
         _zPos = (int)zCoord;
     }
 
+    /*
+     * Finds the alpha (transparency) values of the terrain layers on the current terrain
+     * and puts them into a single float array.
+     */
     void FindTextureValue()
     {
         float[,,] alphaMap = _terrain.terrainData.GetAlphamaps(_xPos, _zPos, 1, 1);
@@ -63,6 +67,10 @@ public class CheckGroundTexture : MonoBehaviour
         textureVals = mapLayers;
     }
 
+    /*
+     * finds the layer name of the layer with the greatest alpha value on the terrain,
+     * or returns default "rock" if something cannot be found
+     */
     public string GetCurrentLayerName()
     {
         float highest = 0f;
