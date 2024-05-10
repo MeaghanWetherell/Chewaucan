@@ -49,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
     public void SwitchToSwimming(Vector3 waterLevel)
     {
         landMovement.enabled = false;
-        swimmingMovement.SetSwimming(true, waterLevel);
+        swimmingMovement.SetSwimming(waterLevel);
         swimmingMovement.enabled = true;
         walking = false;
         swimming = true;

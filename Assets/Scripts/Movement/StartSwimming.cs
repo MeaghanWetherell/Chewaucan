@@ -33,7 +33,7 @@ public class StartSwimming : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             SwimmingMovement swimmingMovement = other.gameObject.GetComponent<SwimmingMovement>();
-            swimmingMovement.SetSwimming(true, waterBlock.position);
+            swimmingMovement.SetSwimming(waterBlock.position);
         }
     }
 

@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/**
- * idea of what to do instead
- * float rotation amount = 360
- *      how much counterclockwise the dials start in
- *      in the future, astrolabe will only be unlockable after completing at least 1 quest
- * increase progress by interval according to number of quests
- * only able to move right, no reason to revert progress directly
- *      that would only be done by loading a previous save
- */
-
 public class RotateDialHand : MonoBehaviour
 {
  
@@ -32,13 +22,17 @@ public class RotateDialHand : MonoBehaviour
         SetHandsToRotations();
     }
 
+    // loads quest save data and sets the astrolabe dial hands to appropriate rotations
+    // based on how many have been completed
     private void SetHandsToRotations()
     {
-        DialProgress dp = SaveDialProgressData.LoadDialProgress();
+        DialProgress dp = SaveDialProgressData.LoadDialProgress(); //get quest save data
         float[] defaults = { archeologyRotationDefault, geologyRotationDefault, biologyRotationDefault };
+
         if (dp != null)
         {
             int[] progresses = { dp.A_progress, dp.G_progress, dp.B_progress };
+
             for (int i = 0; i < dialHandTransforms.Count; i++)
             {
                 SaveDialProgressData.Dial dial = (SaveDialProgressData.Dial)i;
@@ -47,14 +41,17 @@ public class RotateDialHand : MonoBehaviour
                 RectTransform hand = dialHandTransforms[i];
 
                 float interval = CalculateRotInterval(dial);
+
+                // total rotation = interval * (number of quests completed)
                 float rotationAmount = interval * progresses[i];
+
                 float finalRotation = defaults[i] - rotationAmount;
 
                 Vector3 dialRot = SetDialRotation(hand, finalRotation);
                 hand.rotation = Quaternion.Euler(dialRot);
             }
         }
-        else
+        else //sets dial hands to default rotations if there is no save data
         {
             for (int i = 0; i < dialHandTransforms.Count; i++)
             {
@@ -73,6 +70,9 @@ public class RotateDialHand : MonoBehaviour
         return q;
     }
     
+    /* Calculates how much to rotate the dial hand based on the number of quests
+     * in a category and the min rotation.
+     */
     private float CalculateRotInterval(SaveDialProgressData.Dial dial)
     {
         int questNum = 0;

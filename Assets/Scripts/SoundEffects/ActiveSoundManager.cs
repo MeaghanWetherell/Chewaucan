@@ -28,7 +28,8 @@ public class ActiveSoundManager : MonoBehaviour
     }
 
     /*
-     * Enables the random ambient sounds
+     * Enables the random ambient sounds.
+     * This should be called from other scripts where you want ambient sounds to play
      */
     public void EnableAmbientSounds()
     {
