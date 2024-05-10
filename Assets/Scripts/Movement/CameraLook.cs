@@ -48,7 +48,6 @@ public class CameraLook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //This code could be altered to only allow camera rotation in the vertical direction, since AD already rotates horizontal
         float mouseX = _lookInput.x * mouseSensitivity * Time.deltaTime;
         float mouseY = _lookInput.y * mouseSensitivity * Time.deltaTime;
 
@@ -59,6 +58,7 @@ public class CameraLook : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
+    //on any mouse movement
     public void OnLook(InputAction.CallbackContext context)
     {
         if (!(this.GetComponent<SwimmingMovement>().DiveOngoing()))

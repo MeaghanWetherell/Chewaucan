@@ -228,7 +228,7 @@ public class SwimmingMovement : MonoBehaviour
     }
 
     /**
-     * Coroutine that similates the act of diving below the water.
+     * Coroutine that simulates the act of diving below the water.
      * The player cannot move while this is running. This coroutine
      * rotates the player downward, uses the CharacterController to 
      * move them into the water, then rotates them forward again.
@@ -270,7 +270,8 @@ public class SwimmingMovement : MonoBehaviour
         _waterAudio = audioSource;
     }
 
-    public void SetSwimming(bool swim, Vector3 waterLevel)
+    // sets the position of the water's surface
+    public void SetSwimming(Vector3 waterLevel)
     {
         _waterPosition = waterLevel;
     }

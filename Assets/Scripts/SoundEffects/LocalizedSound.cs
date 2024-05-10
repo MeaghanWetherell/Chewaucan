@@ -38,13 +38,14 @@ public class LocalizedSound : MonoBehaviour
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
+    //plays a localized sound, waits until the player exits the collider, and then waits for the cooldown
     IEnumerator PlayLocalizedSound(AudioClip clip)
     {
         isPlaying = true;
 
         if (clip != null)
         {
-            //Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
+            Debug.Log("Playing " + clip.name + " with " + cooldown + " second cooldown");
 
             audioSource.clip = clip;
             audioSource.Play();
@@ -57,18 +58,12 @@ public class LocalizedSound : MonoBehaviour
         isPlaying = false;
     }
 
+    //plays a random clip from the list when the player enters the collider
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!isPlaying && !looping)
-            {
-                int n = Random.Range(0, clipList.Count);
-                AudioClip clip = clipList[n];
-                exited = false;
-                StartCoroutine(PlayLocalizedSound(clip));
-            }
-            else if (!isPlaying & looping)
+            if (!isPlaying)
             {
                 int n = Random.Range(0, clipList.Count);
                 AudioClip clip = clipList[n];
@@ -78,6 +73,7 @@ public class LocalizedSound : MonoBehaviour
         }
     }
 
+    // sets exited bool to true and stops looping audio when the player exits the collider
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

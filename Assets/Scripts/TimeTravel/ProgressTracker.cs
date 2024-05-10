@@ -10,6 +10,9 @@ using UnityEngine.InputSystem;
 public class ProgressTracker : MonoBehaviour
 {
     public GameObject debugCanvas;
+
+    // change this to true if you want the debug canvas to show up
+    private const bool DEBUG_CANVAS_ENABLED = false;
     
     // Start is called before the first frame update
     void Start()
@@ -20,19 +23,24 @@ public class ProgressTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        #pragma warning disable 0162 //diable unreachable code warning
+        if (DEBUG_CANVAS_ENABLED)
         {
-            debugCanvas.SetActive(!debugCanvas.activeSelf);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                debugCanvas.SetActive(!debugCanvas.activeSelf);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
+        #pragma warning restore 0162
     }
 
     /**
      * 0 = Archeology
      * 1 = Geology
      * 2 = Biology
-     * Completes a single quest. That is, it moves the 
+     * Completes a single quest. The astrolobe UI will update accordingly.
      */
     public void CompleteQuest(int n)
     {

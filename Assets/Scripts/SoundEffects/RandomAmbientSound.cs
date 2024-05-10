@@ -125,13 +125,19 @@ public class RandomAmbientSound : MonoBehaviour
         }
     }
 
+    /* makes a list of integers, where each different integer corresponds to the index
+     * of a sound in the currentSoundList. The integer list is constructed so that each 
+     * integer occurs the same amount of times as the sounds frequency.
+    */
     private void MakeFrequencyAccurateList(List<RandomAmbientSoundObject> sounds)
     {
         frequencyList.Clear();
 
         for (int i = 0; i < sounds.Count; i++)
         {
+            //number of times to include this index in the array
             float f = Mathf.Floor(sounds[i].frequency * 100f);
+
             for (int j = 1; j <= (int)f ; j++)
             {
                 frequencyList.Add(i);
