@@ -23,6 +23,7 @@ public class ProgressTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #pragma warning disable 0162 //diable unreachable code warning
         if (DEBUG_CANVAS_ENABLED)
         {
             if (Input.GetKeyDown(KeyCode.P))
@@ -32,6 +33,7 @@ public class ProgressTracker : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
             }
         }
+        #pragma warning restore 0162
     }
 
     /**
