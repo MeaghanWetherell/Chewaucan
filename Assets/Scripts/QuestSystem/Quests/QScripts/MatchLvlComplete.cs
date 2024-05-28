@@ -27,7 +27,7 @@ namespace QuestSystem.Quests.QScripts
             MatchLevelManager.matchLevelManager.OnComplete.RemoveListener(OnLvlComplete);
         }
 
-        public void OnLvlComplete(int lvl)
+        private void OnLvlComplete(int lvl)
         {
             for (int i = 0; i < lvls.Count; i++)
             {
@@ -37,6 +37,8 @@ namespace QuestSystem.Quests.QScripts
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
+                    if(lvl == 0)
+                        WPUnlockSerializer.wpUnlockSerializer.Unlock("PLLake");
                     if (lvl == 3)
                     {
                         QuestManager.questManager.CreateQuestNode(fishQuestObj);

@@ -90,9 +90,10 @@ namespace Match3
             else
             {
                 MatchUIManager.matchUIManager.Win(reason);
-                if (curIndex < highScores.Count-1 && ScoreTracker.scoreTracker.score > highScores[curIndex])
+                if (curIndex < highScores.Count-1)
                 {
-                    highScores[curIndex] = ScoreTracker.scoreTracker.score;
+                    if(ScoreTracker.scoreTracker.score > highScores[curIndex])
+                        highScores[curIndex] = ScoreTracker.scoreTracker.score;
                 }
                 else
                 {

@@ -1,27 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TeleportButton : MonoBehaviour
 {
-    private Vector3 teleportTo;
-    [SerializeField] Vector3 defaultTeleportTo = new Vector3(129f, 4f, 108f);
+    private TeleportWaypoint teleportTo;
+    //[SerializeField] Vector3 defaultTeleportTo = new Vector3(129f, 4f, 108f);
 
     // Start is called before the first frame update
     void Start()
     {
-        teleportTo = defaultTeleportTo;
+        teleportTo = null;
     }
 
     public void Teleport()
     {
-        PlayerPositionManager.playerPositionManager.setPlayerPosition(teleportTo, 0);
-        SceneManager.LoadScene("Modern Map");
+        if (teleportTo == null)
+            return;
+        PlayerPositionManager.playerPositionManager.setPlayerPosition(teleportTo.teleportToPosition, 0);
+        if(teleportTo.mapType == TeleportWaypoint.MapType.modern)
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        else
+        {
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("PleistoceneMap");
+        }
     }
 
-    public void setTeleportTo(Vector3 postition)
+    public void setTeleportTo(TeleportWaypoint newWP)
     {
-        teleportTo = postition;
+        teleportTo = newWP;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.Users;
 
 namespace KeyRebinding
 {
+    //script is attached to main scroll > viewport > content in keyrebinding scene
     public class InstantiateKeyRebinds : MonoBehaviour
     {
         public GameObject keyRebindGroupPrefab;
@@ -14,7 +15,7 @@ namespace KeyRebinding
 
         public Transform mapButtonParent;
 
-        public List<String> invalidForRebinding;
+        [Tooltip("Anything that has a default binding that is on this list will be ineligble for rebinding.")]public List<String> invalidForRebinding;
 
         private List<InputActionMap> maps;
 

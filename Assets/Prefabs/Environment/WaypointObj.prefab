@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5337732631556640435}
   m_Layer: 0
   m_Name: WaypointObj
-  m_TagString: Untagged
+  m_TagString: WP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yValue: 30
-  teleportToPosition: {x: 0, y: 0, z: 0}
-  teleportUI: {fileID: 7643417520400079133, guid: b1e4643a62ea08e468e10ed6d0541e50, type: 3}
-  teleportPositionLabel: {fileID: 0}
+  mapType: 0
+  unlocked: 0
+  wpName: 
 --- !u!212 &1480454881908502830
 SpriteRenderer:
   m_ObjectHideFlags: 0

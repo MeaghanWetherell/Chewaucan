@@ -26,7 +26,7 @@ In-Game Mechanics
 The Minimap
 	The minimap is a game object in the ModernMap scene. There is a prefab of it in the assets/prefab/environment/ 
 	folder. The prefab has the Map UI Controller Script, a canvas, canvas  scaler, and graphic raycaster component attached.
-	The only code associated with the minimap is MapUIController, which enabled/disables the minimap then the 0 key (by default) 
+	The only code associated with the minimap is MapUIController, which enabled/disables the minimap when the 0 key (by default) 
 	is pressed and also controls switching to the full map view described above. There is also one line of code (the first line 
 	of the update function) in both SwimmingMovement and LandMovement attached to the Player prefab, which keeps the rotation of 
 	the minimap camera (a child of the gameobject Player named MinimapCamera) static.
