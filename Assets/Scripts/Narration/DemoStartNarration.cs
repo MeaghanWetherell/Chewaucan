@@ -1,25 +1,47 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Audio;
+using Misc;
 using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DemoStartNarration : MonoBehaviour
+namespace Narration
 {
-    public AudioClip startNarration;
-
-    private void Start()
+    public class DemoStartNarration : Narration
     {
-        Player.player.GetComponent<LandMovement>().enabled = false;
-        List<UnityAction> onComplete = new List<UnityAction>();
-        onComplete.Add(OnComplete);
-        SoundManager.soundManager.PlayNarration(startNarration, onComplete);
-    }
+        public AudioClip startNarration;
+        public FadeFromBlack fader;
+        private bool beStopped = true;
 
-    private void OnComplete()
-    {
-        Player.player.GetComponent<LandMovement>().enabled = true;
+        public override void Begin()
+        {
+            Stop();
+            fader.FadeIn(-1);
+            StartCoroutine(StayStopped());
+            List<UnityAction> onComplete = new List<UnityAction>();
+            onComplete.Add(OnComplete);
+            SoundManager.soundManager.PlayNarration(startNarration, onComplete);
+        }
+
+        private void OnComplete()
+        {
+            beStopped = false;
+            Player.player.GetComponent<LandMovement>().enabled = true;
+        }
+
+        private IEnumerator StayStopped()
+        {
+            while (beStopped)
+            {
+                Stop();
+                yield return new WaitForSeconds(0);
+            }
+        }
+
+        private void Stop()
+        {
+            Player.player.GetComponent<LandMovement>().enabled = false;
+        }
     }
 }

@@ -57,9 +57,6 @@ namespace Misc
             window.GetComponent<Canvas>().sortingOrder += popUps.Count;
             popUps.Add(window);
             PauseCallback.pauseManager.Pause();
-            GameObject hud = GameObject.Find("HUD");
-            if(hud != null)
-                hud.SetActive(false);
         }
 
         public void ClosePopUp()
@@ -94,10 +91,6 @@ namespace Misc
             }
             PauseCallback.pauseManager.Resume();
             SceneManager.UnloadSceneAsync(GUIName);
-            if(_hud == null)
-                _hud = GameObject.Find("HUD");
-            if(_hud != null)
-                _hud.SetActive(true);
             GUIName = null;
             return true;
         }
@@ -115,10 +108,6 @@ namespace Misc
             }
             GUIName = toLoad;
             PauseCallback.pauseManager.Pause();
-            if(_hud == null)
-                _hud = GameObject.Find("HUD");
-            if(_hud != null)
-                _hud.SetActive(false);
             SceneManager.LoadScene(GUIName, LoadSceneMode.Additive);
             return true;
         }

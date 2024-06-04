@@ -467,12 +467,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184647484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e2a087b5c99234fa67c00f4d8dce86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: c639e0c643427324682eb389dae6cbe5, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   waypointNumber: 4
 --- !u!65 &184647486
 BoxCollider:
@@ -4079,6 +4081,17 @@ LODGroup:
     - renderer: {fileID: 0}
     - renderer: {fileID: 0}
   m_Enabled: 0
+--- !u!114 &639796836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7542202602610651690, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
+  m_PrefabInstance: {fileID: 5150600527030011554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee35edb4b1fa1e4dab35179e87ca584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &656015073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4106,12 +4119,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656015073}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e2a087b5c99234fa67c00f4d8dce86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: e073a53b561dfe8469d9c8b291957037, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   waypointNumber: 1
 --- !u!65 &656015075
 BoxCollider:
@@ -4855,12 +4870,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903709995}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5429e587a7da2d44f86f30d9c8b2e826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: e0c15d73cb1d94f4dbfddb31eafb9dc4, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   key: 98
 --- !u!114 &903710000
 MonoBehaviour:
@@ -4869,12 +4886,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903709995}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5429e587a7da2d44f86f30d9c8b2e826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: af57ad0705881f446a5b86c1befd633e, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   key: 119
 --- !u!114 &903710001
 MonoBehaviour:
@@ -4883,12 +4902,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903709995}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5429e587a7da2d44f86f30d9c8b2e826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: e344133731649b14992748b7b544eb91, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   key: 0
 --- !u!1 &934534082
 GameObject:
@@ -4917,12 +4938,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934534082}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e2a087b5c99234fa67c00f4d8dce86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: 3b554e3a6729442448560eae3e8aae02, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   waypointNumber: 3
 --- !u!65 &934534084
 BoxCollider:
@@ -5339,11 +5362,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1 &1307763334 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2176073402916056196, guid: 537d322d564bf6447abce987637ce08e, type: 3}
-  m_PrefabInstance: {fileID: 2558412121980778280}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1343391724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5655,12 +5673,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442486657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e2a087b5c99234fa67c00f4d8dce86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   questData: {fileID: 11400000, guid: 6c9704dfe11c5fc4bb699af2f1f12854, type: 2}
+  narration: {fileID: 0}
+  narrationActual: {fileID: 0}
   waypointNumber: 2
 --- !u!65 &1442486659
 BoxCollider:
@@ -9360,6 +9380,10 @@ PrefabInstance:
       propertyPath: staminaUI
       value: 
       objectReference: {fileID: 539066329}
+    - target: {fileID: 3367949023941669678, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: fader
+      value: 
+      objectReference: {fileID: 639796836}
     - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: swimSounds.Array.size
       value: 1
@@ -9387,35 +9411,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2176073402916056196, guid: 537d322d564bf6447abce987637ce08e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2558412121980778282}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 537d322d564bf6447abce987637ce08e, type: 3}
 --- !u!114 &2558412121980778281 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6769626399634015360, guid: 537d322d564bf6447abce987637ce08e, type: 3}
   m_PrefabInstance: {fileID: 2558412121980778280}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307763334}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a40050c3afca1224fa5fe2e64f61fa9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2558412121980778282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1307763334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d8c8e874eda0a2449a4db21499734cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startNarration: {fileID: 8300000, guid: de5ce5553f22ba2449dda0a68eb9ceeb, type: 3}
 --- !u!1001 &2609379706321119362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9560,6 +9568,10 @@ PrefabInstance:
     - target: {fileID: 2086186347050925831, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2890910944878003030, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2890910944878003030, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

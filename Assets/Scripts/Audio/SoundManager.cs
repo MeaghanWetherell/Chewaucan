@@ -49,9 +49,9 @@ namespace Audio
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
+            narrator.Play();
             StopCoroutine(WaitForNarrationComplete());
             StartCoroutine(WaitForNarrationComplete());
-            narrator.Play();
         }
 
         public void PlayNarration()
@@ -70,7 +70,7 @@ namespace Audio
         {
             while (true)
             {
-                if (!narrator.isPlaying && !AudioListener.pause && !waiting)
+                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting)
                 {
                     foreach(UnityAction action in onNarrationComplete)
                         action.Invoke();
@@ -108,8 +108,6 @@ namespace Audio
 
         private void Start()
         {
-            PauseCallback.pauseManager.SubscribeToPause(PauseNarration);
-            PauseCallback.pauseManager.SubscribeToResume(PlayNarration);
             for (int i = 0; i < volParams.Count; i++)
             {
                 mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
@@ -119,8 +117,6 @@ namespace Audio
         //save sound settings
         private void OnDisable()
         {
-            PauseCallback.pauseManager.UnsubToPause(PauseNarration);
-            PauseCallback.pauseManager.UnsubToPause(PlayNarration);
             string completedJson = JsonSerializer.Serialize(sliderVals);
             Directory.CreateDirectory("Saves");
             File.WriteAllText("Saves/"+fileName+".json", completedJson);

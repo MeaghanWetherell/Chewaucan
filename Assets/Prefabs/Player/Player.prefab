@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 6822227926822906029}
   - component: {fileID: 7712161477581211517}
   - component: {fileID: 6769626399634015360}
+  - component: {fileID: 6300039596721370276}
+  - component: {fileID: 3367949023941669678}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -642,6 +644,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugCanvas: {fileID: 0}
+--- !u!114 &6300039596721370276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85bbdfe42196c745bd0ae8cc0fffa61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questData: {fileID: 11400000, guid: 6c3ba110af31bcc4eb3d4091f8778612, type: 2}
+  narration: {fileID: 3367949023941669678}
+  narrationActual: {fileID: 0}
+--- !u!114 &3367949023941669678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8c8e874eda0a2449a4db21499734cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startNarration: {fileID: 8300000, guid: de5ce5553f22ba2449dda0a68eb9ceeb, type: 3}
 --- !u!1 &2229137810595459482
 GameObject:
   m_ObjectHideFlags: 0

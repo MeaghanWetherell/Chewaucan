@@ -97,12 +97,12 @@ namespace Misc
 
         private void Activate()
         {
-            gameObject.SetActive(true);
+            gameObject.GetComponent<Canvas>().enabled = true;
         }
 
         private void DeActivate()
         {
-            gameObject.SetActive(false);
+            gameObject.GetComponent<Canvas>().enabled = false;
         }
     }
 }
