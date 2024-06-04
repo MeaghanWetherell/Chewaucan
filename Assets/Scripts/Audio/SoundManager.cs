@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Misc;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Audio
@@ -16,17 +18,19 @@ namespace Audio
 
         [Tooltip("Ref to BGM audio source")] public AudioSource bgm;
 
+        [Tooltip("Ref to narration audio source")] public AudioSource narrator;
+
         [Tooltip("Standard volume of sounds")] public float standVol;
 
         [Tooltip("Reference to the master mixer")] public AudioMixer mainMixer;
 
         [Tooltip("name of settings file to save to")] public String fileName;
 
-        [Tooltip("names of the sound parameters, in the order master volume, music volume, effect volume")]
+        [Tooltip("names of the sound parameters, in the order master volume, narration volume, music volume, effect volume. Must match names of exposed parameters in master mixer")]
         public List<String> volParams;
 
         //the slider values for the player's audio preferences
-        //In order: master, music, effects
+        //In order: master, narration, music, effects
         private List<float> sliderVals;
 
         //list of audio clips to draw from when selecting a new track
@@ -37,6 +41,44 @@ namespace Audio
         
         //default value to quiet to when quieting bgm
         private const float quietVol = 0.2f;
+
+        private List<UnityAction> onNarrationComplete;
+
+        public void PlayNarration(AudioClip clip, List<UnityAction> onComplete)
+        {
+            narrator.Stop();
+            narrator.clip = clip;
+            onNarrationComplete = onComplete;
+            StopCoroutine(WaitForNarrationComplete());
+            StartCoroutine(WaitForNarrationComplete());
+            narrator.Play();
+        }
+
+        public void PlayNarration()
+        {
+            narrator.Play();
+            waiting = false;
+        }
+
+        public void PauseNarration()
+        {
+            narrator.Pause();
+            waiting = true;
+        }
+
+        private IEnumerator WaitForNarrationComplete()
+        {
+            while (true)
+            {
+                if (!narrator.isPlaying && !AudioListener.pause && !waiting)
+                {
+                    foreach(UnityAction action in onNarrationComplete)
+                        action.Invoke();
+                    break;
+                }
+                yield return new WaitForSeconds(0);
+            }
+        }
         
         //set up singleton and start corountines
         private void Awake()
@@ -48,8 +90,9 @@ namespace Audio
             }
             soundManager = this;
             DontDestroyOnLoad(this.gameObject);
-            //set relative volume of the bgm. is not on log scale
+            //set relative volume of the bgm and narrator. is not on log scale
             bgm.volume = standVol;
+            narrator.volume = standVol;
             try
             {
                 sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("Saves/"+fileName+".json"));
@@ -65,20 +108,19 @@ namespace Audio
 
         private void Start()
         {
+            PauseCallback.pauseManager.SubscribeToPause(PauseNarration);
+            PauseCallback.pauseManager.SubscribeToResume(PlayNarration);
             for (int i = 0; i < volParams.Count; i++)
             {
                 mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
             }
         }
 
-        private void OnEnable()
-        {
-            
-        }
-
         //save sound settings
         private void OnDisable()
         {
+            PauseCallback.pauseManager.UnsubToPause(PauseNarration);
+            PauseCallback.pauseManager.UnsubToPause(PlayNarration);
             string completedJson = JsonSerializer.Serialize(sliderVals);
             Directory.CreateDirectory("Saves");
             File.WriteAllText("Saves/"+fileName+".json", completedJson);
