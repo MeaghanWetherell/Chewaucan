@@ -18,6 +18,7 @@ namespace Misc
         private void Awake()
         {
             hudManager = this;
+            StartCoroutine(WaitForQuestLoad());
         }
 
         private void Start()
@@ -35,7 +36,6 @@ namespace Misc
         private void OnEnable()
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(false);
-            StartCoroutine(WaitForQuestLoad());
         }
 
         public void DisplayMessageToHUD(String message)
@@ -98,6 +98,7 @@ namespace Misc
         private void Activate()
         {
             gameObject.GetComponent<Canvas>().enabled = true;
+            StartCoroutine(WaitForQuestLoad());
         }
 
         private void DeActivate()

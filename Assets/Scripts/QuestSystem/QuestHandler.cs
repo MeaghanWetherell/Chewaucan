@@ -14,29 +14,11 @@ namespace QuestSystem
     {
         public QuestObj questData;
 
-        [Tooltip(
-            "Insert a reference to a narration script here to play narration when the quest is received for the first time")]
-        public Narration.Narration narration;
-        
-        [Tooltip("If not using a narration script, insert an audio clip here to play it when the quest is received")]
-        public AudioClip narrationActual;
-
         private QuestNode _quest;
 
         //initialize the quest associated with this handler
         public void StartQuest()
         {
-            if (QuestManager.questManager.GETNode(questData.uniqueID) == null)
-            {
-                if (narration != null)
-                {
-                    narration.Begin();
-                }
-                else if (narrationActual != null)
-                {
-                    SoundManager.soundManager.PlayNarration(narrationActual, new List<UnityAction>());
-                }
-            }
             _quest = QuestManager.questManager.CreateQuestNode(questData);
         }
 

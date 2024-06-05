@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Misc;
+using QuestSystem;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -49,7 +50,7 @@ namespace Audio
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
-            narrator.Play();
+            PlayNarration();
             StopCoroutine(WaitForNarrationComplete());
             StartCoroutine(WaitForNarrationComplete());
         }
@@ -58,6 +59,7 @@ namespace Audio
         {
             narrator.Play();
             waiting = false;
+            StartCoroutine(QuietBGMUntilDone(narrator));
         }
 
         public void PauseNarration()

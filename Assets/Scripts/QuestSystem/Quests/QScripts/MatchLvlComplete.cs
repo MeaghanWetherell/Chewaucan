@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Audio;
 using Match3;
 using Misc;
+using Narration;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace QuestSystem.Quests.QScripts
@@ -37,8 +40,11 @@ namespace QuestSystem.Quests.QScripts
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
-                    if(lvl == 0)
+                    if (lvl == 0)
+                    {
                         WPUnlockSerializer.wpUnlockSerializer.Unlock("PLLake");
+                        NarrationManager.narrationManager.SetPlayability("astronarrdemo", true);
+                    }
                     if (lvl == 3)
                     {
                         QuestManager.questManager.CreateQuestNode(fishQuestObj);

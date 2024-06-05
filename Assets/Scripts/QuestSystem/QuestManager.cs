@@ -37,6 +37,8 @@ namespace QuestSystem
             if (node != null)
                 return node;
             node = new QuestNode(obj);
+            if(node.startNarration != null)
+                node.startNarration.Begin();
             if (obj.initFile != null)
             {
                 LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
@@ -209,6 +211,8 @@ namespace QuestSystem
         //nodes handle this, shouldn't be called externally
         public void ReportCompletion(QuestNode node, bool wasPinned=false)
         {
+            if(node.completionNarration != null)
+                node.completionNarration.Begin();
             _quests.InsertionSort();
             LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
             SaveDialProgressData.CompleteOneQuest(node.type);

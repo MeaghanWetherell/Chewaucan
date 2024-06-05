@@ -33,5 +33,11 @@ namespace QuestSystem
 
         [Tooltip("OPTIONAL Default amount of progress to add every time the objective is performed, each entry must correspond by index to objectives")]
         public List<float> countsAdded;
+
+        [Tooltip("OPTIONAL narration to play on quest received")]
+        public Narration.Narration receivedNarration;
+
+        [Tooltip("OPTIONAL narration to play on quest complete")]
+        public Narration.Narration completeNarration;
     }
 }

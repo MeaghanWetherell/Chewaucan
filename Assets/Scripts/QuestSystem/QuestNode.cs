@@ -12,11 +12,20 @@ namespace QuestSystem
     [Serializable]
     public class QuestNode : IComparable<QuestNode>
     {
+        //SO that this comes from
+        private QuestObj myObj;
+        
+        //initialization narration
+        public Narration.Narration startNarration => myObj.receivedNarration;
+        
+        //completion narration
+        public Narration.Narration completionNarration => myObj.completeNarration;
+        
         //name of the quest, used as an identifier, should ensure unique names
-        public string name;
+        public string name => myObj.name;
 
         //unique id of the quest
-        public string id;
+        public string id => myObj.uniqueID.ToLower();
 
         //short description of the quest
         public string shortDescription;
@@ -28,10 +37,10 @@ namespace QuestSystem
         public string compText;
 
         //list of the objectives to be completed
-        public List<string> objectives;
+        public List<string> objectives => myObj.objectives;
 
         //list of the required count per objective mapped by index
-        public List<float> requiredCounts;
+        public List<float> requiredCounts => myObj.countsRequired;
 
         //current count per objective mapped by index
         public List<float> counts = new List<float>();
@@ -41,7 +50,7 @@ namespace QuestSystem
         public List<float> countsPerAction;
 
         //quest type: Archaeology, Biology, or Geology
-        public SaveDialProgressData.Dial type;
+        public SaveDialProgressData.Dial type => myObj.type;
 
         public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
@@ -108,16 +117,13 @@ namespace QuestSystem
         //even when you instantiate one
         public QuestNode(QuestObj data)
         {
-            name = data.questName;
-            id = data.uniqueID.ToLower();
+            myObj = data;
             if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;
             }
             ReadDescriptionFile(data.descriptionFile);
             compText = data.completeFile.ToString();
-            objectives = data.objectives;
-            requiredCounts = data.countsRequired;
             countsPerAction = data.countsAdded;
             if (countsPerAction == null)
             {
@@ -131,7 +137,6 @@ namespace QuestSystem
             {
                 counts.Add(0);
             }
-            type = data.type;
         }
 
         public void callOnceInitialized()
