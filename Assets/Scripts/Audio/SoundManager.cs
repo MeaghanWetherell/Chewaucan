@@ -41,11 +41,11 @@ namespace Audio
         private bool waiting = false;
         
         //default value to quiet to when quieting bgm
-        private const float quietVol = 0.2f;
+        private const float quietVol = 0.1f;
 
-        private List<UnityAction> onNarrationComplete;
+        private List<UnityAction<string>> onNarrationComplete;
 
-        public void PlayNarration(AudioClip clip, List<UnityAction> onComplete)
+        public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete)
         {
             narrator.Stop();
             narrator.clip = clip;
@@ -60,6 +60,7 @@ namespace Audio
             narrator.Play();
             waiting = false;
             StartCoroutine(QuietBGMUntilDone(narrator));
+            StartCoroutine(QuietSEUntilDone(narrator));
         }
 
         public void PauseNarration()
@@ -74,8 +75,8 @@ namespace Audio
             {
                 if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting)
                 {
-                    foreach(UnityAction action in onNarrationComplete)
-                        action.Invoke();
+                    foreach(UnityAction<string> action in onNarrationComplete)
+                        action.Invoke(narrator.clip.name);
                     break;
                 }
                 yield return new WaitForSeconds(0);
@@ -220,7 +221,7 @@ namespace Audio
             yield return new WaitForSeconds(0);
             while (true)
             {
-                if (!running.isPlaying)
+                if (!running.isPlaying && !AudioListener.pause)
                     break;
                 yield return new WaitForSeconds(0);
             }
@@ -236,12 +237,36 @@ namespace Audio
             yield return new WaitForSeconds(0);
             while (true)
             {
-                if (!running.isPlaying)
+                if (!running.isPlaying && !AudioListener.pause)
                     break;
                 yield return new WaitForSeconds(0);
             }
             waiting = false;
             bgm.volume = bgm.volume/attenuationFactor;
+        }
+        
+        //quiets SE by the set factor until the passed audio source stops playing
+        public IEnumerator QuietSEUntilDone(AudioSource running, float attenuationFactor = quietVol)
+        {
+            float curVol;
+            mainMixer.GetFloat("EffectVol", out curVol);
+            float changeVol = InverseLogScale(curVol) * attenuationFactor;
+            mainMixer.SetFloat("EffectVol", ConvertToLogScale(changeVol));
+            waiting = true;
+            yield return new WaitForSeconds(0);
+            while (true)
+            {
+                if (!running.isPlaying && !AudioListener.pause)
+                    break;
+                yield return new WaitForSeconds(0);
+            }
+            waiting = false;
+            mainMixer.SetFloat("EffectVol", curVol);
+        }
+
+        private float InverseLogScale(float input)
+        {
+            return Mathf.Pow(10, (input / 20));
         }
 
         private float ConvertToLogScale(float input)

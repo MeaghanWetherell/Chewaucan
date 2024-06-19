@@ -80,7 +80,6 @@ namespace Match3
         //ends the match 3 game and displays results, including the passed reason for game end
         public void EndGame(string reason)
         {
-            OnComplete.Invoke(curIndex);
             Timer.timer.enabled = false;
             MatchGrid.matchGrid.gameObject.SetActive(false);
             if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
@@ -89,6 +88,7 @@ namespace Match3
             }
             else
             {
+                OnComplete.Invoke(curIndex);
                 MatchUIManager.matchUIManager.Win(reason);
                 if (curIndex < highScores.Count-1)
                 {

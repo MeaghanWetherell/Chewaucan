@@ -14,10 +14,12 @@ namespace Narration
         public Narration FQ2;
         
         private FadeFromBlack fader;
-        private bool beStopped = true;
+        
+        private bool beStopped;
 
         public override void Begin()
         {
+            beStopped = true;
             GameObject temp = GameObject.Find("Fader");
             if (temp == null) return;
             fader = temp.GetComponent<FadeFromBlack>();
@@ -25,11 +27,11 @@ namespace Narration
             fader.FadeIn(-1);
             fader.StartCoroutine(StayStopped());
             Stop();
-            List<UnityAction> onComplete = new List<UnityAction> {OnComplete};
+            List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};
             base.Begin(onComplete);
         }
 
-        private void OnComplete()
+        private void OnComplete(string title)
         {
             beStopped = false;
             FQ2.SetPlayability(true);
@@ -43,6 +45,7 @@ namespace Narration
                 Stop();
                 yield return new WaitForSeconds(0);
             }
+            
         }
 
         private void Stop()

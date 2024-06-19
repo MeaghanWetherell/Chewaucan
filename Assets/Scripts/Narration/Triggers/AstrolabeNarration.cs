@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using Misc;
@@ -36,8 +37,18 @@ namespace Narration
         {
             if (!astroClip.GetPlayability()) return;
             astroClip.SetPlayability(false);
+            StartCoroutine(OverrideAudioPause());
             astroClip.Begin();
             pleistoClip.SetPlayability(true);
+        }
+
+        private IEnumerator OverrideAudioPause()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                AudioListener.pause = false;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
     }
 }

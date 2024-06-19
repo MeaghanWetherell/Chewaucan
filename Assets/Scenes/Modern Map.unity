@@ -9963,9 +9963,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952301695}
-  - component: {fileID: 1952301697}
   - component: {fileID: 1952301699}
   - component: {fileID: 1952301700}
+  - component: {fileID: 1952301701}
   m_Layer: 0
   m_Name: Narration Empty
   m_TagString: Untagged
@@ -9988,19 +9988,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1952301697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952301694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85bbdfe42196c745bd0ae8cc0fffa61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questData: {fileID: 11400000, guid: 6c3ba110af31bcc4eb3d4091f8778612, type: 2}
 --- !u!114 &1952301699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10029,6 +10016,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 11400000, guid: d0418dfa3eb45e346819c2dfba5d2682, type: 2}
+--- !u!114 &1952301701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952301694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e10d18eac8cb14ea8325f8545a3983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questData: {fileID: 11400000, guid: 6c3ba110af31bcc4eb3d4091f8778612, type: 2}
+  initTitle: 
+  initMsg: WASD to move, shift to sprint!
+  compTitle: 
+  compMsg: 
 --- !u!1 &1952500329
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Audio;
 using UnityEngine;
@@ -12,16 +13,35 @@ namespace Narration
 
         [Tooltip("IDs must be unique")]public string clipID;
 
+        private List<UnityAction<string>> defaultOnComplete;
+
         public virtual void Begin()
         {
-            SoundManager.soundManager.PlayNarration(narrationClip, new List<UnityAction>());
+            defaultOnComplete ??= new List<UnityAction<string>>();
+            SoundManager.soundManager.PlayNarration(narrationClip, defaultOnComplete);
             NarrationManager.narrationManager.Played(clipID);
         }
 
-        public virtual void Begin(List<UnityAction> onComplete)
+        public virtual void Begin(List<UnityAction<string>> onComplete)
         {
-            SoundManager.soundManager.PlayNarration(narrationClip, onComplete);
+            addToOnComplete(onComplete);
+            SoundManager.soundManager.PlayNarration(narrationClip, defaultOnComplete);
             NarrationManager.narrationManager.Played(clipID);
+        }
+
+        public void addToOnComplete(List<UnityAction<string>> onComplete)
+        {
+            defaultOnComplete ??= new List<UnityAction<string>>();
+            foreach (UnityAction<string> action in onComplete)
+            {
+                if(!defaultOnComplete.Contains(action))
+                    defaultOnComplete.Add(action);
+            }
+        }
+
+        public void ResetOnComplete()
+        {
+            defaultOnComplete = new List<UnityAction<string>>();
         }
 
         public bool GetPlayability()

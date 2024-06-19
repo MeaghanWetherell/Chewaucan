@@ -6,24 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sandbags and Modern Human Stuff/Materials/Wire.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sandbags and Modern Human Stuff/Materials/Wire.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PersistentObjects.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PleistoceneMap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PleistoceneMap.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/DemoStartNarration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/DemoStartNarration.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Narration.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Narration.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/DemoStartNarration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/DemoStartNarration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/Narration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/Narration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match3Demo.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match3Demo.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,10 +123,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1308">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="1308" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -238,6 +228,8 @@
       <workItem from="1717458577500" duration="3554000" />
       <workItem from="1717538536427" duration="2887000" />
       <workItem from="1717616424750" duration="8320000" />
+      <workItem from="1718319868485" duration="4491000" />
+      <workItem from="1718835500215" duration="3335000" />
     </task>
     <servers />
   </component>
@@ -306,30 +298,17 @@
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs</url>
-          <line>34</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\Quests\QScripts\MatchLvlComplete.cs" initialLine="31" containingFunctionPresentation="method 'OnLvlComplete'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs</url>
+          <line>37</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\Triggers\AstrolabeNarration.cs" initialLine="36" containingFunctionPresentation="method 'Play'">
             <startOffsets>
-              <option value="908" />
+              <option value="898" />
             </startOffsets>
             <endOffsets>
-              <option value="944" />
+              <option value="930" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="114" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs</url>
-          <line>99</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\HUDManager.cs" initialLine="99" containingFunctionPresentation="method 'Activate'">
-            <startOffsets>
-              <option value="3273" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3322" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="118" />
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

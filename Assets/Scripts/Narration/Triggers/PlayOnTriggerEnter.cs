@@ -1,6 +1,7 @@
 using System;
 using Audio;
 using QuestSystem;
+using ScriptTags;
 using UnityEngine;
 
 namespace Narration.Triggers
@@ -10,7 +11,7 @@ namespace Narration.Triggers
         public Narration clip;
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (clip.GetPlayability())
+            if (other.GetComponent<Player>() != null && clip.GetPlayability())
             {
                 clip.Begin();
                 clip.SetPlayability(false);
