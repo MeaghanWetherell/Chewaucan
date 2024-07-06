@@ -1,3 +1,4 @@
+using LoadGUIFolder;
 using UnityEngine;
 
 namespace Misc
@@ -7,7 +8,7 @@ namespace Misc
     {
         public void OnClick()
         {
-            PauseMenu.pauseMenu.ONOpenTrigger();
+            GameObject.Find("PauseManager").GetComponent<LoadGUI>().ONOpenTrigger();
         }
     }
 }

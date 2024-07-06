@@ -1,11 +1,8 @@
 using System;
-using ScriptTags;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 //handles GUI additive loading
-namespace Misc
+namespace LoadGUIFolder
 {
     public class LoadGUI : MonoBehaviour
     {

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Misc;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace Misc
+namespace LoadGUIFolder
 {
     public class LoadGUIManager : MonoBehaviour
     {
@@ -18,6 +20,30 @@ namespace Misc
         private GameObject _hud;
 
         private GameObject popUp;
+
+        private UnityEvent<string> OnGUIUnload = new UnityEvent<string>();
+        
+        private UnityEvent<string> OnGUILoad = new UnityEvent<string>();
+
+        public void SubtoLoad(UnityAction<String> action)
+        {
+            OnGUILoad.AddListener(action);
+        }
+
+        public void UnsubtoLoad(UnityAction<String> action)
+        {
+            OnGUILoad.RemoveListener(action);
+        }
+        
+        public void SubtoUnload(UnityAction<String> action)
+        {
+            OnGUIUnload.AddListener(action);
+        }
+
+        public void UnsubtoUnload(UnityAction<String> action)
+        {
+            OnGUIUnload.RemoveListener(action);
+        }
         
         private void Awake()
         {
@@ -56,12 +82,14 @@ namespace Misc
             window.GetComponent<PopUpOnClick>().index = popUps.Count;
             window.GetComponent<Canvas>().sortingOrder += popUps.Count;
             popUps.Add(window);
+            OnGUILoad.Invoke(title);
             PauseCallback.pauseManager.Pause();
         }
 
         public void ClosePopUp()
         {
             Destroy(popUps.Last());
+            OnGUIUnload.Invoke(popUps[popUps.Count-1].GetComponent<PopUpTextManager>().titleActual.text);
             popUps.RemoveAt(popUps.Count-1);
             if (!isGUIOpen() && popUps.Count == 0)
             {
@@ -72,6 +100,7 @@ namespace Misc
         public void ClosePopUp(int index)
         {
             Destroy(popUps[index]);
+            OnGUIUnload.Invoke(popUps[index].GetComponent<PopUpTextManager>().titleActual.text);
             popUps.RemoveAt(index);
             if (!isGUIOpen() && popUps.Count == 0)
             {
@@ -90,6 +119,7 @@ namespace Misc
                 return false;
             }
             PauseCallback.pauseManager.Resume();
+            OnGUIUnload.Invoke(GUIName);
             SceneManager.UnloadSceneAsync(GUIName);
             GUIName = null;
             return true;
@@ -109,6 +139,7 @@ namespace Misc
             GUIName = toLoad;
             PauseCallback.pauseManager.Pause();
             SceneManager.LoadScene(GUIName, LoadSceneMode.Additive);
+            OnGUILoad.Invoke(GUIName);
             return true;
         }
 
