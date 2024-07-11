@@ -45,6 +45,8 @@ namespace Audio
 
         private List<UnityAction<string>> onNarrationComplete;
 
+        private bool narrFinished = true;
+
         public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete)
         {
             narrator.Stop();
@@ -57,12 +59,20 @@ namespace Audio
 
         public void PlayNarration()
         {
+            if(!narrFinished)
+                foreach(UnityAction<string> action in onNarrationComplete)
+                    action.Invoke(narrator.clip.name);
+            narrFinished = false;
             narrator.Play();
             waiting = false;
             StartCoroutine(QuietBGMUntilDone(narrator));
             StartCoroutine(QuietSEUntilDone(narrator));
         }
 
+        public void StopNarration()
+        {
+            narrator.Stop();
+        }
         public void PauseNarration()
         {
             narrator.Pause();
@@ -77,6 +87,7 @@ namespace Audio
                 {
                     foreach(UnityAction<string> action in onNarrationComplete)
                         action.Invoke(narrator.clip.name);
+                    narrFinished = true;
                     break;
                 }
                 yield return new WaitForSeconds(0);

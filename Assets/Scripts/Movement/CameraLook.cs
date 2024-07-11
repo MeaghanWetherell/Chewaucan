@@ -12,6 +12,7 @@ public class CameraLook : MonoBehaviour
 
     public Transform mainCamera;
     public InputActionReference lookRef;
+    public Vector2 lookDecel;
 
     Vector2 _lookInput;
     float _xRotation;
@@ -19,6 +20,7 @@ public class CameraLook : MonoBehaviour
     //subscribe to event functions
     private void Start()
     {
+        _lookInput = Vector3.zero;
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
         if(PauseCallback.pauseManager.isPaused)
@@ -56,6 +58,31 @@ public class CameraLook : MonoBehaviour
 
         mainCamera.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
+
+        if (_lookInput.x > 0)
+        {
+            _lookInput.x -= lookDecel.x*Time.deltaTime;
+            if (_lookInput.x < 0)
+                _lookInput.x = 0;
+        }
+        else
+        {
+            _lookInput.x += lookDecel.x*Time.deltaTime;
+            if (_lookInput.x > 0)
+                _lookInput.x = 0;
+        }
+        if (_lookInput.y > 0)
+        {
+            _lookInput.y -= lookDecel.y*Time.deltaTime;
+            if (_lookInput.y < 0)
+                _lookInput.y = 0;
+        }
+        else
+        {
+            _lookInput.y += lookDecel.y*Time.deltaTime;
+            if (_lookInput.y > 0)
+                _lookInput.y = 0;
+        }
     }
 
     //on any mouse movement

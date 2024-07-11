@@ -14,12 +14,7 @@ namespace Narration
 
         private Dictionary<string, bool> shouldRun;
 
-        private List<string> hasRun;
-
-        public bool ShouldPlay(Narration narration)
-        {
-            return ShouldPlay(narration.clipID);
-        }
+        public List<string> hasRun;
 
         public bool ShouldPlay(string id)
         {
@@ -28,19 +23,15 @@ namespace Narration
 
         public void Played(string id)
         {
-            hasRun.Add(id);
-        }
-
-        public void SetPlayability(Narration narration, bool set)
-        {
-            SetPlayability(narration.clipID, set);
+            if(!hasRun.Contains(id))
+                hasRun.Add(id);
         }
 
         public void SetPlayability(string id, bool set)
         {
             shouldRun[id] = set;
         }
-        
+
         private void Awake()
         {
             if (narrationManager != null)
