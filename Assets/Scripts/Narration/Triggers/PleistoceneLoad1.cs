@@ -11,7 +11,7 @@ namespace Narration.Triggers
         {
             if (!clip.GetPlayability()) return;
             wallHit.SetPlayability(true);
-            NarrationManager.narrationManager.SetPlayability("fq7", true);
+            NarrationManager.narrationManager.SetPlayability("FQ7", true);
             base.Start();
         }
     }

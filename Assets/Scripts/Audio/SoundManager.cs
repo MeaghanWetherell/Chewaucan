@@ -71,6 +71,7 @@ namespace Audio
 
         public void StopNarration()
         {
+            InvokeNarrComplete();
             narrator.Stop();
         }
         public void PauseNarration()
@@ -79,16 +80,21 @@ namespace Audio
             waiting = true;
         }
 
+        private void InvokeNarrComplete()
+        {
+            foreach(UnityAction<string> action in onNarrationComplete)
+                action.Invoke(narrator.clip.name);
+            narrFinished = true;
+            StopCoroutine(WaitForNarrationComplete());
+        }
+
         private IEnumerator WaitForNarrationComplete()
         {
             while (true)
             {
-                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting)
+                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting && !narrFinished)
                 {
-                    foreach(UnityAction<string> action in onNarrationComplete)
-                        action.Invoke(narrator.clip.name);
-                    narrFinished = true;
-                    break;
+                    InvokeNarrComplete();
                 }
                 yield return new WaitForSeconds(0);
             }

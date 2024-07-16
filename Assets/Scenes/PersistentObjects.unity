@@ -177,6 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146949639}
   - component: {fileID: 146949638}
+  - component: {fileID: 146949640}
   m_Layer: 0
   m_Name: NarrationManager
   m_TagString: Untagged
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reset: 1
+  hasRun: []
 --- !u!4 &146949639
 Transform:
   m_ObjectHideFlags: 0
@@ -212,6 +214,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &146949640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146949637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6bbb94fb944c84d81c02e29fe8fb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: {fileID: 8968111513108783742, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &469110409
 GameObject:
   m_ObjectHideFlags: 0

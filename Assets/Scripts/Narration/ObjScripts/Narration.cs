@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Audio;
+using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,23 +14,24 @@ namespace Narration
 
         private List<UnityAction<string>> defaultOnComplete;
 
+        private static GameObject narrSkipButton;
+
         public virtual void Begin()
         {
-            defaultOnComplete ??= new List<UnityAction<string>>();
-            SoundManager.soundManager.PlayNarration(narrationClip, defaultOnComplete);
-            NarrationManager.narrationManager.Played(name);
+            Begin(new List<UnityAction<string>>());
         }
 
         public virtual void Begin(List<UnityAction<string>> onComplete)
         {
             addToOnComplete(onComplete);
+            InstantiateSkipNarr();
             SoundManager.soundManager.PlayNarration(narrationClip, defaultOnComplete);
             NarrationManager.narrationManager.Played(name);
         }
 
         public void addToOnComplete(List<UnityAction<string>> onComplete)
         {
-            defaultOnComplete ??= new List<UnityAction<string>>();
+            defaultOnComplete ??= new List<UnityAction<string>>(){DestroySkip};
             foreach (UnityAction<string> action in onComplete)
             {
                 if(!defaultOnComplete.Contains(action))
@@ -50,6 +52,17 @@ namespace Narration
         public void SetPlayability(bool set)
         {
             NarrationManager.narrationManager.SetPlayability(name, set);
+        }
+
+        private static void DestroySkip(string doesntmatter)
+        {
+            Destroy(GameObject.Find("SkipNarr(Clone)"));
+        }
+
+        private static void InstantiateSkipNarr()
+        {
+            narrSkipButton ??= Resources.Load<GameObject>("SkipNarr");
+            Instantiate(narrSkipButton);
         }
     }
 }
