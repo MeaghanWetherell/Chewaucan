@@ -6,32 +6,40 @@ using UnityEngine;
 
 namespace Narration
 {
+    //manages which narration clips are able to be run based on the player's progress
     public class NarrationManager : MonoBehaviour
     {
+        //singleton
         public static NarrationManager narrationManager;
 
-        public bool reset;
+        [Tooltip("Reset flag. Check to reset which narrations can play")]public bool reset;
 
+        //maps the name of a Narration scriptable object with whether it is allowed to run
         private Dictionary<string, bool> shouldRun;
 
+        //stores narration clips that have already played
         public List<string> hasRun;
 
+        //whether the Narration with the passed name is valid to play
         public bool ShouldPlay(string id)
         {
             return shouldRun.ContainsKey(id) && shouldRun[id];
         }
 
+        //whether the Narration with the passed name has been played
         public void Played(string id)
         {
             if(!hasRun.Contains(id))
                 hasRun.Add(id);
         }
 
+        //set whether Narration with the passed name should play
         public void SetPlayability(string id, bool set)
         {
             shouldRun[id] = set;
         }
 
+        //initialize singleton and load save
         private void Awake()
         {
             if (narrationManager != null)
@@ -50,6 +58,7 @@ namespace Narration
             }
         }
 
+        //read in save from disk
         private void ReadFromJson()
         {
             try
@@ -64,11 +73,13 @@ namespace Narration
             hasRun ??= new List<string>();
         }
 
+        //serialize on exit
         private void OnDisable()
         {
             SerializeToJSON();
         }
 
+        //save the narrations that should and have run
         private void SerializeToJSON()
         {
             string shouldRunSave = JsonSerializer.Serialize(shouldRun);

@@ -19,8 +19,11 @@ namespace KeyRebinding
 
         private List<InputActionMap> maps;
 
+        private PlayerInput playerInput;
+
         private void Awake()
         {
+            playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
             maps = BindingManager.bindingManager.maps;
             GameObject mapButton = null;
             foreach (InputActionMap map in maps)
@@ -39,7 +42,6 @@ namespace KeyRebinding
 
         public void InstantiateRebinds(InputActionMap map)
         {
-            PlayerInput playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
             foreach (Transform child in transform)
             {
                 Destroy(child.gameObject);

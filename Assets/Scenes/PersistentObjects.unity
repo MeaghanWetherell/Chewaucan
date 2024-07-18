@@ -177,7 +177,6 @@ GameObject:
   m_Component:
   - component: {fileID: 146949639}
   - component: {fileID: 146949638}
-  - component: {fileID: 146949640}
   m_Layer: 0
   m_Name: NarrationManager
   m_TagString: Untagged
@@ -214,19 +213,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &146949640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146949637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6bbb94fb944c84d81c02e29fe8fb0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactKey: {fileID: 8968111513108783742, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &469110409
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +760,51 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 604f5e27bd26f244ba820149bab54da0, type: 2}
   - {fileID: 11400000, guid: 21841e172226a804b927ee7c0d66544c, type: 2}
   curIndex: 0
+--- !u!1 &1114361255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114361257}
+  - component: {fileID: 1114361256}
+  m_Layer: 0
+  m_Name: PleistoceneWalls
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1114361256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114361255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726e9f0679ebe184e9eab9cd13234c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveFileName: walls
+--- !u!4 &1114361257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114361255}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.209774, y: 12.926788, z: 248.85295}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716912977
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,3 +919,4 @@ SceneRoots:
   - {fileID: 1049979399}
   - {fileID: 914267597}
   - {fileID: 146949639}
+  - {fileID: 1114361257}

@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 namespace Audio
 {
-    //manages cycling through background music tracks and quieting them when other sounds need to play
+    //manages all audio
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager soundManager;
@@ -43,10 +43,15 @@ namespace Audio
         //default value to quiet to when quieting bgm
         private const float quietVol = 0.1f;
 
+        //actions to run after narration finishes
         private List<UnityAction<string>> onNarrationComplete;
 
+        //whether the most recent narration finished
         private bool narrFinished = true;
 
+        //plays a clip through the narration source
+        //will run any actions in onComplete after the narration finishes
+        //including if the narration was interrupted by skipping
         public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete)
         {
             narrator.Stop();
@@ -57,6 +62,7 @@ namespace Audio
             StartCoroutine(WaitForNarrationComplete());
         }
 
+        //plays the currently set narration
         public void PlayNarration()
         {
             if(!narrFinished)
@@ -68,18 +74,22 @@ namespace Audio
             StartCoroutine(QuietBGMUntilDone(narrator));
             StartCoroutine(QuietSEUntilDone(narrator));
         }
-
+        
+        //stop the active narration
         public void StopNarration()
         {
             InvokeNarrComplete();
             narrator.Stop();
         }
+        
+        //pause the active narration
         public void PauseNarration()
         {
             narrator.Pause();
             waiting = true;
         }
 
+        //invoke all actions that need to be invoked on narration complete
         private void InvokeNarrComplete()
         {
             foreach(UnityAction<string> action in onNarrationComplete)
@@ -88,6 +98,7 @@ namespace Audio
             StopCoroutine(WaitForNarrationComplete());
         }
 
+        //checks every frame to see if narration has finished
         private IEnumerator WaitForNarrationComplete()
         {
             while (true)
@@ -126,6 +137,7 @@ namespace Audio
             StartCoroutine(RunSongs());
         }
 
+        //set the mixer values. I can't remember *why* this needs to be in start instead of awake, but it does
         private void Start()
         {
             for (int i = 0; i < volParams.Count; i++)
@@ -161,19 +173,20 @@ namespace Audio
             return (sliderVals[index] < 0.01f || sliderVals[0] < 0.01f);
         }
         
-        //change the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects)
+        //change the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects, 3 for narration)
         public void SetVol(int index, float vol)
         {
             sliderVals[index] = vol;
             mainMixer.SetFloat(volParams[index], ConvertToLogScale(sliderVals[index]));
         }
 
+        //get the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects, 3 for narration)
         public float GetVol(int index)
         {
             return sliderVals[index];
         }
 
-        //set the track list for the current areas background music
+        //set the track list for the current area's background music
         public void SetBGM(List<AudioClip> clips)
         {
             BGMClips = clips;
@@ -281,11 +294,14 @@ namespace Audio
             mainMixer.SetFloat("EffectVol", curVol);
         }
 
+        //reverses conversion to log scale, returning to linear
         private float InverseLogScale(float input)
         {
             return Mathf.Pow(10, (input / 20));
         }
 
+        //audio mixer volumes are in decibels, which are on a logarithmic scale rather than a linear one
+        //this converts a linear percentage volume into one that works for a log scale
         private float ConvertToLogScale(float input)
         {
             return Mathf.Log10(input) * 20;
