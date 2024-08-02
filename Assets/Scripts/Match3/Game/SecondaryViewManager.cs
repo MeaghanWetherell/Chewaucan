@@ -77,8 +77,12 @@ namespace Match3.Game
         public void SetView(MeshDataObj target)
         {
             view.SetActive(true);
-            bone.GetComponent<MeshRenderer>().material = target.material;
-            bone.GetComponent<MeshFilter>().mesh = target.mesh;
+            for (int i = 0; i < bone.transform.childCount; i++)
+            {
+                Destroy(bone.transform.GetChild(i));
+            }
+
+            Instantiate(target.meshPrefab, bone.transform);
             isEnabled = true;
         }
         

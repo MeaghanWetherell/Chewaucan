@@ -12,13 +12,11 @@ namespace Match3.BoneCatalog
             if (!isOpen)
             {
                 MeshDataObj target = FindFullMesh(BoneSceneManager.boneSceneManager.curObj);
-                SetupBone.boneRenderer.material = target.material;
-                SetupBone.boneFilter.mesh = target.mesh;
+                SetupBone.bonePrefab = target.meshPrefab;
             }
             else
             {
-                SetupBone.boneRenderer.material = BoneSceneManager.boneSceneManager.curObj.material;
-                SetupBone.boneFilter.mesh = BoneSceneManager.boneSceneManager.curObj.mesh;
+                SetupBone.bonePrefab = BoneSceneManager.boneSceneManager.curObj.meshPrefab;
             }
             isOpen = !isOpen;
         }

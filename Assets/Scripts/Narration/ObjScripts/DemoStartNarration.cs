@@ -24,7 +24,7 @@ namespace Narration
             if (temp == null) return;
             fader = temp.GetComponent<FadeFromBlack>();
             if (fader == null) return;
-            fader.FadeIn(-1);
+            fader.FadeIn(2000f);
             fader.StartCoroutine(StayStopped());
             Stop();
             List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};

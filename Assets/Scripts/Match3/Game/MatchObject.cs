@@ -49,8 +49,7 @@ namespace Match3
             _meshes ??= Resources.Load<MeshDataList>("Meshes/Match3Meshes").meshes;
             int temp = Random.Range((int) 0, (int) validMeshes.Count);
             myType = validMeshes[temp];
-            this.gameObject.GetComponent<MeshFilter>().mesh = _meshes[myType].mesh;
-            this.gameObject.GetComponent<MeshRenderer>().material = _meshes[myType].material;
+            Instantiate(_meshes[myType].meshPrefab, transform);
             myAnimal = _meshes[myType].animal.ToLower();
             myBoneType = _meshes[myType].boneType.ToLower();
         }

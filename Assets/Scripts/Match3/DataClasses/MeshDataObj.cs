@@ -10,11 +10,7 @@ namespace Match3.DataClasses
     [CreateAssetMenu]
     public class MeshDataObj : ScriptableObject, IComparable<MeshDataObj>
     {
-        [Tooltip("Mesh for this model")] 
-        public Mesh mesh;
-
-        [Tooltip("Material that should be applied to this model")]
-        public Material material;
+        [Tooltip("Prefab of the Mesh")] public GameObject meshPrefab;
 
         [Tooltip("Name of the animal this bone is from")]
         public string animal;
