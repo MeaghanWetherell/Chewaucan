@@ -44,10 +44,15 @@ namespace Match3
         {
             GameObject.Find("HighScoresBG").SetActive(false);
             List<MeshDataObj> bones = Resources.Load<MeshDataList>("Meshes/Match3Meshes").meshes;
-            bones.Sort();
-            for (int i = 0; i < bones.Count; i++)
+            List<MeshDataObj> bonesActual = new List<MeshDataObj>();
+            foreach(MeshDataObj mesh in bones)
             {
-                CreateButtonPrefab(bones[i]);
+                bonesActual.Add(mesh);
+            }
+            bonesActual.Sort();
+            for (int i = 0; i < bonesActual.Count; i++)
+            {
+                CreateButtonPrefab(bonesActual[i]);
             }
         }
 

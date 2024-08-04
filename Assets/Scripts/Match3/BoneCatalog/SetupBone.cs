@@ -5,11 +5,11 @@ namespace Match3
     //When the bone catalog scene is loaded, sets up the bone model from data in the bone scene manager
     public class SetupBone : MonoBehaviour
     {
-        public static GameObject bonePrefab;
+        public GameObject bonePrefab;
         
         private void Awake()
         {
-            bonePrefab ??= BoneSceneManager.boneSceneManager.curObj.meshPrefab;
+            bonePrefab = BoneSceneManager.boneSceneManager.curObj.meshPrefab;
             Instantiate(bonePrefab, transform);
         }
     }

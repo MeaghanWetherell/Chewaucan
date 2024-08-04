@@ -7,16 +7,19 @@ namespace Match3.BoneCatalog
     {
         private bool isOpen = false;
 
+        private static MeshDataObj lastBone;
+
         public void OnClick()
         {
             if (!isOpen)
             {
+                lastBone = BoneSceneManager.boneSceneManager.curObj;
                 MeshDataObj target = FindFullMesh(BoneSceneManager.boneSceneManager.curObj);
-                SetupBone.bonePrefab = target.meshPrefab;
+                BoneSceneManager.boneSceneManager.LoadBoneScene(target);
             }
             else
             {
-                SetupBone.bonePrefab = BoneSceneManager.boneSceneManager.curObj.meshPrefab;
+                BoneSceneManager.boneSceneManager.LoadBoneScene(lastBone);
             }
             isOpen = !isOpen;
         }
