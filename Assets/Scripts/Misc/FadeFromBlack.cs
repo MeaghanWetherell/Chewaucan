@@ -6,9 +6,10 @@ namespace Misc
 {
     public class FadeFromBlack : MonoBehaviour
     {
+        //fades will look shorter than expected because low alpha is barely noticeable. a slightly non-linear fade partially accounts for this
         public Image fader;
 
-        //fade from black over the specified time period. will end up somewhat shorter than specified
+        //fade from black over the specified time period. 
         public void FadeIn(float duration)
         {
             if (duration <= 0) duration = 2;
@@ -17,7 +18,7 @@ namespace Misc
             StartCoroutine(Fade(duration, 1));
         }
         
-        //fade to black over the specified time period. will end up somewhat shorter than specified
+        //fade to black over the specified time period. 
         public void FadeOut(float duration)
         {
             if (duration <= 0) duration = 2;
@@ -30,9 +31,10 @@ namespace Misc
         //performs fading over time. fademod != 0, positive for fade in, negative for fade out
         private IEnumerator Fade(float duration, float fadeMod)
         {
-            float inc = (1 / duration) * 0.1f*fadeMod;
+            float targ = duration;
+            float inc;
             float cur = 0;
-            switch (inc)
+            switch (fadeMod)
             {
                 case < 0:
                     cur = 0;
@@ -43,16 +45,44 @@ namespace Misc
                     break;
                 }
             }
+            Color color;
             while (duration > 0)
             {
-                yield return new WaitForSeconds(0.1f);
-                duration -= 0.1f;
-                Color color = Color.black;
-                cur -= inc;
+                yield return new WaitForSeconds(0.05f);
+                duration -= 0.05f;
+                if (duration < targ/5f)
+                {
+                    targ = targ / 5f;
+                }
+                color = Color.black;
+                inc = (fadeMod*0.01f*5f)/(targ);
+                cur -= inc*0.05f;
+                switch (cur)
+                {
+                  case > 1:
+                      cur = 1;
+                      break;
+                  case < 0:
+                      cur = 0;
+                      break;
+                }
                 color.a = cur;
                 fader.color = color;
-                inc *= 1.1f;
             }
+            switch (fadeMod)
+            {
+                case < 0:
+                    cur = 1;
+                    break;
+                case > 0:
+                {
+                    cur = 0;
+                    break;
+                }
+            }
+            color = Color.black;
+            color.a = cur;
+            fader.color = color;
         }
     }
 }
