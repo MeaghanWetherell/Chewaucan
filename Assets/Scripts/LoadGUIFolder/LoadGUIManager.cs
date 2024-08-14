@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Misc;
+using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,8 @@ namespace LoadGUIFolder
         private UnityEvent<string> OnGUIUnload = new UnityEvent<string>();
         
         private UnityEvent<string> OnGUILoad = new UnityEvent<string>();
+
+        private CameraLook cacheCamLook;
 
         public void SubtoLoad(UnityAction<String> action)
         {
@@ -83,7 +86,12 @@ namespace LoadGUIFolder
             window.GetComponent<Canvas>().sortingOrder += popUps.Count;
             popUps.Add(window);
             OnGUILoad.Invoke(title);
-            PauseCallback.pauseManager.Pause();
+            if (Player.player != null)
+            {
+                cacheCamLook = Player.player.gameObject.GetComponent<CameraLook>();
+                if(cacheCamLook!= null)
+                    cacheCamLook.OnPause();
+            }
         }
 
         public void ClosePopUp()
@@ -93,6 +101,8 @@ namespace LoadGUIFolder
             popUps.RemoveAt(popUps.Count-1);
             if (!isGUIOpen() && popUps.Count == 0)
             {
+                if(cacheCamLook != null)
+                    cacheCamLook.OnResume();
                 PauseCallback.pauseManager.Resume();
             }
         }
@@ -104,6 +114,8 @@ namespace LoadGUIFolder
             popUps.RemoveAt(index);
             if (!isGUIOpen() && popUps.Count == 0)
             {
+                if(cacheCamLook != null)
+                    cacheCamLook.OnResume();
                 PauseCallback.pauseManager.Resume();
             }
         }

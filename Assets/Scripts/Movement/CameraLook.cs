@@ -104,13 +104,13 @@ public class CameraLook : MonoBehaviour
     }
 
     //disable look on pause
-    private void OnPause()
+    public void OnPause()
     {
         this.enabled = false;
     }
 
     //reenable on resume
-    private void OnResume()
+    public void OnResume()
     {
         this.enabled = true;
     }

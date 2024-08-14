@@ -30,6 +30,8 @@ namespace Misc
                 validWallIds = JsonSerializer.Deserialize<List<String>>(
                     File.ReadAllText("Saves/" + saveFileName + ".json"));
             } catch(IOException){}
+
+            validWallIds ??= new List<string>();
         }
         
         private void OnDisable()

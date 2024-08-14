@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Audio;
 using ScriptTags;
@@ -20,7 +21,7 @@ namespace Misc
 
         public readonly UnityEvent OnLoadScene = new UnityEvent();
 
-        public void Awake()
+        private void Awake()
         {
             if (sceneLoadWrapper != null)
             {
@@ -29,6 +30,32 @@ namespace Misc
             }
             sceneLoadWrapper = this;
             DontDestroyOnLoad(this.gameObject);
+            StartCoroutine(fadeInOnStart());
+        }
+
+        private IEnumerator fadeInOnStart()
+        {
+            while (GameObject.Find("Fader") == null) yield return new WaitForSeconds(0);
+            GameObject fader = GameObject.Find("Fader");
+            FadeFromBlack fadeActual;
+            if (fader != null)
+            {
+                fadeActual = fader.GetComponent<FadeFromBlack>();
+                if (fadeActual != null)
+                {
+                    fadeActual.FadeIn(20);
+                }
+            }
+        }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += FadeOnSceneLoad;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= FadeOnSceneLoad;
         }
 
         public void LoadScene(String sceneName)
@@ -60,6 +87,21 @@ namespace Misc
                 currentSceneType = 1;
             }
             SceneManager.LoadScene(sceneName);
+        }
+
+        private void FadeOnSceneLoad(Scene scene, LoadSceneMode mode)
+        {
+            if (mode != LoadSceneMode.Single) return;
+            GameObject fader = GameObject.Find("Fader");
+            FadeFromBlack fadeActual;
+            if (fader != null)
+            {
+                fadeActual = fader.GetComponent<FadeFromBlack>();
+                if (fadeActual != null)
+                {
+                    fadeActual.FadeIn(20);
+                }
+            }
         }
     }
 }

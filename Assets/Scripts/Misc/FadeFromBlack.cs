@@ -31,7 +31,6 @@ namespace Misc
         //performs fading over time. fademod != 0, positive for fade in, negative for fade out
         private IEnumerator Fade(float duration, float fadeMod)
         {
-            float targ = duration;
             float inc;
             float cur = 0;
             switch (fadeMod)
@@ -46,24 +45,18 @@ namespace Misc
                 }
             }
             Color color;
+            inc = (fadeMod)/duration;
             while (duration > 0)
             {
                 yield return new WaitForSeconds(0.05f);
                 duration -= 0.05f;
-                if (duration < targ/5f)
-                {
-                    targ = targ / 5f;
-                }
                 color = Color.black;
-                inc = (fadeMod*0.01f*5f)/(targ);
                 cur -= inc*0.05f;
                 switch (cur)
                 {
                   case > 1:
-                      cur = 1;
                       break;
                   case < 0:
-                      cur = 0;
                       break;
                 }
                 color.a = cur;
