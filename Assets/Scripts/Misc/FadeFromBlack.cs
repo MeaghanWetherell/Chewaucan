@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using DigitalRuby.Tween;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,7 +8,6 @@ namespace Misc
 {
     public class FadeFromBlack : MonoBehaviour
     {
-        //fades will look shorter than expected because low alpha is barely noticeable. a slightly non-linear fade partially accounts for this
         public Image fader;
 
         //fade from black over the specified time period. 
@@ -15,7 +16,7 @@ namespace Misc
             if (duration <= 0) duration = 2;
             Color color = Color.black;
             fader.color = color;
-            StartCoroutine(Fade(duration, 1));
+            Fade(duration, true);
         }
         
         //fade to black over the specified time period. 
@@ -25,57 +26,28 @@ namespace Misc
             Color color = Color.black;
             color.a = 0;
             fader.color = color;
-            StartCoroutine(Fade(duration, -1));
+            Fade(duration, false);
         }
         
-        //performs fading over time. fademod != 0, positive for fade in, negative for fade out
-        private IEnumerator Fade(float duration, float fadeMod)
+        //performs fading over time.
+        private void Fade(float duration, bool fadeIn)
         {
-            float inc;
-            float cur = 0;
-            switch (fadeMod)
+            System.Action<ITween<Color>> updateColor = (t) =>
             {
-                case < 0:
-                    cur = 0;
-                    break;
-                case > 0:
-                {
-                    cur = 1;
-                    break;
-                }
-            }
-            Color color;
-            inc = (fadeMod)/duration;
-            while (duration > 0)
+                fader.color = t.CurrentValue;
+            };
+            Color initial = Color.black;
+            Color final = Color.black;
+            if (fadeIn)
             {
-                yield return new WaitForSeconds(0.05f);
-                duration -= 0.05f;
-                color = Color.black;
-                cur -= inc*0.05f;
-                switch (cur)
-                {
-                  case > 1:
-                      break;
-                  case < 0:
-                      break;
-                }
-                color.a = cur;
-                fader.color = color;
+                final.a = 0;
+                gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseIn, updateColor);
             }
-            switch (fadeMod)
+            else
             {
-                case < 0:
-                    cur = 1;
-                    break;
-                case > 0:
-                {
-                    cur = 0;
-                    break;
-                }
+                initial.a = 0;
+                gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseOut, updateColor);
             }
-            color = Color.black;
-            color.a = cur;
-            fader.color = color;
         }
     }
 }

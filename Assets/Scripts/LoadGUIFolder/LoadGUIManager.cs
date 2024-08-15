@@ -59,7 +59,7 @@ namespace LoadGUIFolder
             DontDestroyOnLoad(this.gameObject);
             popUp = Resources.Load<GameObject>("PopUp");
         }
-        
+
         public void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoad;
@@ -75,6 +75,7 @@ namespace LoadGUIFolder
             if (mode == LoadSceneMode.Single)
             {
                 GUIName = null;
+                popUps = new List<GameObject>();
             }
         }
 

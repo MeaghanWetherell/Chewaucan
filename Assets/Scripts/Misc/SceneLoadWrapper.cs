@@ -43,7 +43,7 @@ namespace Misc
                 fadeActual = fader.GetComponent<FadeFromBlack>();
                 if (fadeActual != null)
                 {
-                    fadeActual.FadeIn(20);
+                    fadeActual.FadeIn(6);
                 }
             }
         }
@@ -99,7 +99,7 @@ namespace Misc
                 fadeActual = fader.GetComponent<FadeFromBlack>();
                 if (fadeActual != null)
                 {
-                    fadeActual.FadeIn(20);
+                    fadeActual.FadeIn(6);
                 }
             }
         }
