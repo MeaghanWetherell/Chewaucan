@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5930827, g: 0.62354165, b: 0.6789092, a: 1}
+  m_IndirectSpecularColor: {r: 0.5930504, g: 0.62353605, b: 0.67881054, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14127,12 +14127,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 6b9fc89bf746be649a5fdbcd24acaefe, type: 2}
     - target: {fileID: 1877002437418951490, guid: 92b46138443b2f44bbb0310584906964, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877002437418951490, guid: 92b46138443b2f44bbb0310584906964, type: 3}
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877002437418951490, guid: 92b46138443b2f44bbb0310584906964, type: 3}
       propertyPath: m_Materials.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252126547471020407, guid: 92b46138443b2f44bbb0310584906964, type: 3}
+      propertyPath: myId
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5146765015548567377, guid: 92b46138443b2f44bbb0310584906964, type: 3}
       propertyPath: m_LocalScale.z
@@ -14191,6 +14199,107 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92b46138443b2f44bbb0310584906964, type: 3}
+--- !u!1001 &4822215803083752971
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 935538705734183411, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3726138934125464209, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_Name
+      value: SubCanv
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054006676191850491, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1f7bb549f75356d45aab61e141aec4a9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -14206,3 +14315,4 @@ SceneRoots:
   - {fileID: 1168971307}
   - {fileID: 292524300}
   - {fileID: 1212086699}
+  - {fileID: 4822215803083752971}

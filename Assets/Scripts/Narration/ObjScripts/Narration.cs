@@ -17,6 +17,9 @@ namespace Narration
     {
         //clip associated with this narration
         public AudioClip narrationClip;
+        
+        //the subtitle doc for this narration
+        public TextAsset subtitles;
 
         //the onComplete list that actually gets passed to the sound manager
         private List<UnityAction<string>> actualOnComplete;
@@ -35,7 +38,12 @@ namespace Narration
         {
             addToOnComplete(onComplete);
             InstantiateSkipNarr();
-            SoundManager.soundManager.PlayNarration(narrationClip, actualOnComplete);
+            if (subtitles != null)
+            {
+                (List<float>, List<string>) subs = parseSubtitles();
+                SoundManager.soundManager.PlayNarration(narrationClip, actualOnComplete, subs.Item1, subs.Item2);
+            }
+            else SoundManager.soundManager.PlayNarration(narrationClip, actualOnComplete);
             NarrationManager.narrationManager.Played(name);
         }
 
@@ -79,6 +87,38 @@ namespace Narration
         {
             narrSkipPrompt ??= Resources.Load<GameObject>("SkipNarr");
             Instantiate(narrSkipPrompt);
+        }
+
+        private (List<float>, List<string>) parseSubtitles()
+        {
+            List<float> times = new List<float>();
+            List<string> lines = new List<string>();
+            string fileText = subtitles.ToString();
+            string[] textByLine = fileText.Split('\n');
+            for (int i = 0; i < textByLine.Length; i++)
+            {
+                textByLine[i] = textByLine[i].Trim(new Char[] {'\r'});
+            }
+            for (int i = 0; i < textByLine.Length; i++)
+            {
+                string[] cur = textByLine[i].Split('|');
+                if (cur[0][0] != '#')
+                {
+                    float time = stringTimeToFloat(cur[0]);
+                    times.Add(time);
+                    lines.Add(cur[1]);
+                }
+            }
+            return (times, lines);
+        }
+
+        private float stringTimeToFloat(string conv)
+        {
+            string[] cur = conv.Split(':');
+            float ret = 0;
+            ret += float.Parse(cur[0]) * 60;
+            ret += float.Parse(cur[1]);
+            return ret;
         }
     }
 }

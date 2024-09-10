@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.Json;
 using Misc;
 using QuestSystem;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -16,6 +17,8 @@ namespace Audio
     public class SoundManager : MonoBehaviour
     {
         public static SoundManager soundManager;
+
+        [Tooltip("Prefab reference to the subtitle shower")] public GameObject subtitlePrefab;
 
         [Tooltip("Ref to BGM audio source")] public AudioSource bgm;
 
@@ -46,20 +49,43 @@ namespace Audio
         //actions to run after narration finishes
         private List<UnityAction<string>> onNarrationComplete;
 
+        private List<float> currentSubTimes;
+
+        private List<string> currentSubLines;
+
+        private TextMeshProUGUI subtitleViewer;
+
         //whether the most recent narration finished
         private bool narrFinished = true;
+
+        private Coroutine waitforcomp;
+
+        private Coroutine runSubs;
 
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
         //including if the narration was interrupted by skipping
-        public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete)
+        public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete, List<float> times = null, List<string> lines = null)
         {
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
+            if (times != null && lines != null)
+            {
+                currentSubLines = lines;
+                currentSubTimes = times;
+                GameObject temp = GameObject.Find("Subtitler");
+                if (temp == null)
+                {
+                    Instantiate(subtitlePrefab);
+                    temp = GameObject.Find("Subtitler");
+                }
+                subtitleViewer = temp.GetComponent<TextMeshProUGUI>();
+                runSubs = StartCoroutine(RunSubtitles());
+            }
             PlayNarration();
-            StopCoroutine(WaitForNarrationComplete());
-            StartCoroutine(WaitForNarrationComplete());
+            if(waitforcomp != null) StopCoroutine(waitforcomp);
+            waitforcomp = StartCoroutine(WaitForNarrationComplete());
         }
 
         //plays the currently set narration
@@ -95,11 +121,42 @@ namespace Audio
             foreach(UnityAction<string> action in onNarrationComplete)
                 action.Invoke(narrator.clip.name);
             narrFinished = true;
-            StopCoroutine(WaitForNarrationComplete());
+            StopCoroutine(waitforcomp);
+            if(runSubs != null)StopCoroutine(runSubs);
+            if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
+            currentSubLines = null;
+            currentSubTimes = null;
+        }
+
+        private IEnumerator RunSubtitles()
+        {
+            subtitleViewer.text = currentSubLines[0];
+            yield return new WaitForSeconds(currentSubTimes[0]);
+            int i = 1;
+            while (currentSubLines != null && currentSubTimes != null && i < currentSubLines.Count && subtitleViewer != null)
+            {
+                subtitleViewer.text = currentSubLines[i];
+                yield return new WaitForSeconds(currentSubTimes[i] - currentSubTimes[i - 1]);
+                i++;
+            }
+            subtitleViewer.text = "";
         }
 
         //checks every frame to see if narration has finished
         private IEnumerator WaitForNarrationComplete()
+        {
+            while (true)
+            {
+                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting && !narrFinished)
+                {
+                    InvokeNarrComplete();
+                }
+                yield return new WaitForSeconds(0);
+            }
+        }
+        
+        //checks every frame to see if narration has finished
+        private IEnumerator WaitForNarrationComplete(List<float> times, List<string> lines, TextMeshProUGUI text)
         {
             while (true)
             {
