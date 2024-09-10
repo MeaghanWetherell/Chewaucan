@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/FadeFromBlack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/FadeFromBlack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Match3.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TimeTravelGUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TimeTravelGUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Levels/Level1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Match3/Resources/Levels/Level1.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +29,16 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/PinButton.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37b6f84449ed4515b4c34ceae07893f48b4a0/D0/JsonSerializer.Write.String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TestCode/AllWP.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37b6f84449ed4515b4c34ceae07893f48b4a0/C1/JsonConverterOfT.WriteCore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3b24cc7fa9794ed8ab04312c53e6dedd172c00/b3/81968262/SetupCoroutine.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/PopulateLevelList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/OpenLevelSelect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/ReloadMainScene.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/InteractListenerManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/v3Wrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/IListener.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/SceneLoadWrapper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/DisplayHighScores.cs" root0="FORCE_HIGHLIGHTING" />
@@ -74,6 +79,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneTextSetter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayOnTriggerEnter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TestCode/WaypointTester.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/Narration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/BoneCatalog/BoneSceneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PleistoceneLoad1.cs" root0="FORCE_HIGHLIGHTING" />
@@ -90,6 +96,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Match3/LevelSelect/OpenLevel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37b6f84449ed4515b4c34ceae07893f48b4a0/102/ThrowHelper.Serialization.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2W8Ekx2tykQHd6S2LrLpHSaHTG4" />
   <component name="ProjectViewState">
@@ -125,10 +132,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="64836">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="64836" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -246,7 +253,9 @@
       <workItem from="1723592358249" duration="721000" />
       <workItem from="1723593270277" duration="630000" />
       <workItem from="1723680436259" duration="1894000" />
-      <workItem from="1723682993425" duration="1012000" />
+      <workItem from="1723682993425" duration="1270000" />
+      <workItem from="1725326119923" duration="1584000" />
+      <workItem from="1725928128174" duration="3654000" />
     </task>
     <servers />
   </component>
@@ -294,12 +303,6 @@
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs</url>
-          <line>38</line>
-          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\Triggers\AstrolabeNarration.cs" initialLine="36" containingFunctionPresentation="method 'Play'" />
-          <option name="timeStamp" value="121" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/Journal/LoadClips.cs</url>
           <line>14</line>
           <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\Journal\LoadClips.cs" initialLine="14" containingFunctionPresentation="method 'Start'" />
@@ -333,16 +336,42 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/LoadGUIFolder/LoadGUIManager.cs</url>
-          <line>98</line>
+          <line>99</line>
           <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\LoadGUIFolder\LoadGUIManager.cs" initialLine="98" containingFunctionPresentation="method 'ClosePopUp'">
             <startOffsets>
-              <option value="2768" />
+              <option value="2809" />
             </startOffsets>
             <endOffsets>
-              <option value="2791" />
+              <option value="2832" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs</url>
+          <line>19</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\Quests\QScripts\SubAstrolabeTeleport.cs" initialLine="18" containingFunctionPresentation="lambda expression inside method 'Start'">
+            <startOffsets>
+              <option value="588" />
+            </startOffsets>
+            <endOffsets>
+              <option value="640" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/AstrolabeDestinationManager.cs</url>
+          <line>33</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\TimeTravel\AstrolabeDestinationManager.cs" initialLine="33" containingFunctionPresentation="method 'OnClick'">
+            <startOffsets>
+              <option value="987" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1066" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="138" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
