@@ -33,21 +33,29 @@ namespace Misc
         private void Fade(float duration, bool fadeIn)
         {
             System.Action<ITween<Color>> updateColor = (t) =>
-            {
-                fader.color = t.CurrentValue;
-            };
-            Color initial = Color.black;
-            Color final = Color.black;
-            if (fadeIn)
-            {
-                final.a = 0;
-                gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseIn, updateColor);
-            }
-            else
-            {
-                initial.a = 0;
-                gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseOut, updateColor);
-            }
+                {
+                    try
+                    {
+                        fader.color = t.CurrentValue;
+                    }
+                    catch (Exception)
+                    {
+                        Debug.Log("Suppressing Tween err");
+                    }
+                };
+                Color initial = Color.black;
+                Color final = Color.black;
+                if (fadeIn)
+                {
+                    final.a = 0;
+                    gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseIn, updateColor);
+                }
+                else
+                {
+                    initial.a = 0;
+                    gameObject.Tween("Fade", initial, final, duration, TweenScaleFunctions.CubicEaseOut, updateColor);
+                }
+
         }
     }
 }

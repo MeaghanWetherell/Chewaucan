@@ -35,7 +35,7 @@ namespace Misc
             _gen = new ObjectIDGenerator();
         }
 
-        public bool ChangeListener(IListener toChange, int priority = 0, int indexToCall = 0)
+        public bool ChangeListener(IListener toChange, int priority = 0, int indexToCall = 0, string msg = "")
         {
             bool temp = true;
             if (_currentListener == null || priority >= _listenerPriority)
@@ -46,16 +46,28 @@ namespace Misc
                 _listenerIndexToCall = indexToCall;
                 _gen.GetId(toChange, out temp);
                 String key = interact.action.bindings[0].ToDisplayString();
-                HUDManager.hudManager.DisplayMessageToHUD("Press "+key+" to interact");
+                if (msg.Equals(""))
+                {
+                    msg = "Press " + key + " to interact";
+                }
+                HUDManager.hudManager.DisplayMessageToHUD(msg);
                 return true;
             }
             return false;
+        }
+
+        public void DeRegister()
+        {
+            _currentListener?.ListenerRemoved();
+            _currentListener = null;
+            HUDManager.hudManager.CloseMessage();
         }
 
         public void DeRegister(IListener toDeregister)
         {
             if (_currentListener == null)
                 return;
+            _currentListener.ListenerRemoved();
             bool temp = true;
             if (_gen.GetId(_currentListener, out temp) == _gen.GetId(toDeregister, out temp))
             {

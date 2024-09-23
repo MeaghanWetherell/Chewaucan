@@ -11,6 +11,7 @@ namespace Narration.Triggers
         public Narration clip;
         protected virtual void OnTriggerEnter(Collider other)
         {
+            Debug.Log(clip.GetPlayability());
             if (other.GetComponent<Player>() != null && clip.GetPlayability())
             {
                 clip.Begin();

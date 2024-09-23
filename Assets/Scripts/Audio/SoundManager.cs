@@ -354,14 +354,14 @@ namespace Audio
         //reverses conversion to log scale, returning to linear
         private float InverseLogScale(float input)
         {
-            return Mathf.Pow(10, (input / 20));
+            return Mathf.Pow(10, ((input-10) / 20));
         }
 
         //audio mixer volumes are in decibels, which are on a logarithmic scale rather than a linear one
         //this converts a linear percentage volume into one that works for a log scale
         private float ConvertToLogScale(float input)
         {
-            return Mathf.Log10(input) * 20;
+            return Mathf.Log10(input) * 20+10;
         }
     }
 }
