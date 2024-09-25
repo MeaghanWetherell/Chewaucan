@@ -2,7 +2,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
-
+#if UNITY_EDITOR
 namespace Misc
 {
     public class SnapshotCreator : EditorWindow
@@ -83,3 +83,4 @@ namespace Misc
         }
     }
 }
+#endif

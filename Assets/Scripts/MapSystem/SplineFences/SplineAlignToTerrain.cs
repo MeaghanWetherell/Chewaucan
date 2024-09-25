@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using Unity.VisualScripting;
 using UnityEditor.Splines;
 using System;
 using UnityEngine.UIElements;
+
+
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(SplineContainer))]
@@ -162,3 +165,5 @@ public class SplineAlignToTerrain : MonoBehaviour
 
 
 }
+
+#endif
