@@ -12,20 +12,23 @@ namespace QuestSystem
     [Serializable]
     public class QuestNode : IComparable<QuestNode>
     {
-        //SO that this comes from
-        private QuestObj myObj;
-        
         //initialization narration
-        public Narration.Narration startNarration => myObj.receivedNarration;
+        public Narration.Narration startNarration;
+        
+        //name of the init narration obj
+        private string startNarrName;
         
         //completion narration
-        public Narration.Narration completionNarration => myObj.completeNarration;
+        public Narration.Narration completionNarration;
+        
+        //name of the comp narration obj
+        private string compNarrName;
         
         //name of the quest, used as an identifier, should ensure unique names
-        public string name => myObj.name;
+        public string name;
 
         //unique id of the quest
-        public string id => myObj.uniqueID.ToLower();
+        public string id;
 
         //short description of the quest
         public string shortDescription;
@@ -37,10 +40,10 @@ namespace QuestSystem
         public string compText;
 
         //list of the objectives to be completed
-        public List<string> objectives => myObj.objectives;
+        public List<string> objectives;
 
         //list of the required count per objective mapped by index
-        public List<float> requiredCounts => myObj.countsRequired;
+        public List<float> requiredCounts;
 
         //current count per objective mapped by index
         public List<float> counts = new List<float>();
@@ -50,7 +53,7 @@ namespace QuestSystem
         public List<float> countsPerAction;
 
         //quest type: Archaeology, Biology, or Geology
-        public SaveDialProgressData.Dial type => myObj.type;
+        public SaveDialProgressData.Dial type;
 
         public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
@@ -117,13 +120,25 @@ namespace QuestSystem
         //even when you instantiate one
         public QuestNode(QuestObj data)
         {
-            myObj = data;
             if (!QuestManager.questManager.RegisterNode(this))
             {
                 return;
             }
+            name = data.name;
+            id = data.uniqueID.ToLower();
+            type = data.type;
+            objectives = data.objectives;
             ReadDescriptionFile(data.descriptionFile);
             compText = data.completeFile.ToString();
+            requiredCounts = data.countsRequired;
+            if (requiredCounts == null)
+            {
+                requiredCounts = new List<float>();
+            }
+            while (requiredCounts.Count < objectives.Count)
+            {
+                requiredCounts.Add(1);
+            }
             countsPerAction = data.countsAdded;
             if (countsPerAction == null)
             {
@@ -137,6 +152,12 @@ namespace QuestSystem
             {
                 counts.Add(0);
             }
+
+            startNarration = data.receivedNarration;
+            startNarrName = startNarration.name;
+
+            completionNarration = data.completeNarration;
+            compNarrName = completionNarration.name;
         }
 
         public void callOnceInitialized()
@@ -145,6 +166,9 @@ namespace QuestSystem
             {
                 return;
             }
+
+            startNarration = Resources.Load<Narration.Narration>(startNarrName);
+            completionNarration = Resources.Load<Narration.Narration>(compNarrName);
             if (countsPerAction == null)
             {
                 countsPerAction = new List<float>();

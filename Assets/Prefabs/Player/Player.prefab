@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 1001902334302032865}
   - component: {fileID: 1729389765353843074}
   - component: {fileID: -8828086554326269734}
+  - component: {fileID: 7514719063666619591}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -605,6 +606,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadScene: NarrJournal
   openGUI: {fileID: 8928833404017071127, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+--- !u!114 &7514719063666619591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d1ccb252e63e1459cf2e3d25b5e5cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2229137810595459482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,7 +1184,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 639
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

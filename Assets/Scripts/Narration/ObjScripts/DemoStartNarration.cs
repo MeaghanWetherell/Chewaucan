@@ -20,12 +20,6 @@ namespace Narration
         public override void Begin()
         {
             beStopped = true;
-            //GameObject temp = GameObject.Find("Fader");
-            //if (temp == null) return;
-            //fader = temp.GetComponent<FadeFromBlack>();
-            //if (fader == null) return;
-            //fader.FadeIn(12f);
-            //fader.StartCoroutine(StayStopped());
             Stop();
             List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};
             base.Begin(onComplete);

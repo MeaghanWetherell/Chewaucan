@@ -15,9 +15,7 @@ namespace Misc
 
         private int _listenerPriority;
 
-        private int _listenerIndexToCall;
-
-        private ObjectIDGenerator _gen;
+        private int _listenerCallCode;
 
         private void OnEnable()
         {
@@ -32,19 +30,16 @@ namespace Misc
         private void Awake()
         {
             interactListenerManager = this;
-            _gen = new ObjectIDGenerator();
         }
 
-        public bool ChangeListener(IListener toChange, int priority = 0, int indexToCall = 0, string msg = "")
+        public bool ChangeListener(IListener toChange, int priority = 0, int callCode = 0, string msg = "")
         {
-            bool temp = true;
             if (_currentListener == null || priority >= _listenerPriority)
             {
                 _currentListener?.ListenerRemoved();
                 _currentListener = toChange;
                 _listenerPriority = priority;
-                _listenerIndexToCall = indexToCall;
-                _gen.GetId(toChange, out temp);
+                _listenerCallCode = callCode;
                 String key = interact.action.bindings[0].ToDisplayString();
                 if (msg.Equals(""))
                 {
@@ -68,8 +63,7 @@ namespace Misc
             if (_currentListener == null)
                 return;
             _currentListener.ListenerRemoved();
-            bool temp = true;
-            if (_gen.GetId(_currentListener, out temp) == _gen.GetId(toDeregister, out temp))
+            if (ReferenceEquals(toDeregister, _currentListener))
             {
                 _currentListener = null;
                 HUDManager.hudManager.CloseMessage();
@@ -78,7 +72,7 @@ namespace Misc
 
         private void UpdateListener(InputAction.CallbackContext callbackContext)
         {
-            _currentListener?.Listen(_listenerIndexToCall);
+            _currentListener?.Listen(_listenerCallCode);
         }
     }
 }
