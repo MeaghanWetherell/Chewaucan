@@ -154,10 +154,12 @@ namespace QuestSystem
             }
 
             startNarration = data.receivedNarration;
-            startNarrName = startNarration.name;
+            if(startNarration != null)
+                startNarrName = startNarration.name;
 
             completionNarration = data.completeNarration;
-            compNarrName = completionNarration.name;
+            if(completionNarration != null)
+                compNarrName = completionNarration.name;
         }
 
         public void callOnceInitialized()
