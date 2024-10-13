@@ -80,6 +80,7 @@ namespace Match3
         //ends the match 3 game and displays results, including the passed reason for game end
         public void EndGame(string reason)
         {
+            Timer.timer.StopAllCoroutines();
             Timer.timer.enabled = false;
             MatchGrid.matchGrid.gameObject.SetActive(false);
             if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)

@@ -37,7 +37,6 @@ namespace Narration
         public virtual void Begin(List<UnityAction<string>> onComplete)
         {
             addToOnComplete(onComplete);
-            InstantiateSkipNarr();
             if (subtitles != null)
             {
                 (List<float>, List<string>) subs = parseSubtitles();
@@ -50,7 +49,7 @@ namespace Narration
         //adds an item to this narration's onComplete list
         public void addToOnComplete(List<UnityAction<string>> onComplete)
         {
-            actualOnComplete ??= new List<UnityAction<string>>(){DestroySkip};
+            actualOnComplete ??= new List<UnityAction<string>>();
             foreach (UnityAction<string> action in onComplete)
             {
                 if(!actualOnComplete.Contains(action))
@@ -74,19 +73,6 @@ namespace Narration
         public void SetPlayability(bool set)
         {
             NarrationManager.narrationManager.SetPlayability(name, set);
-        }
-
-        //after narration has finished playing, destroy the skip prompt
-        private static void DestroySkip(string doesntmatter)
-        {
-            Destroy(GameObject.Find("SkipNarr(Clone)"));
-        }
-
-        //when narration starts, instantiate the prompt to skip it
-        private static void InstantiateSkipNarr()
-        {
-            narrSkipPrompt ??= Resources.Load<GameObject>("SkipNarr");
-            Instantiate(narrSkipPrompt);
         }
 
         private (List<float>, List<string>) parseSubtitles()

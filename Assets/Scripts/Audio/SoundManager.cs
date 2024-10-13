@@ -115,6 +115,22 @@ namespace Audio
             waiting = true;
         }
 
+        //pause/resume subtitles
+        private void SubtitlePause()
+        {
+            if (subtitleViewer != null)
+            {
+                subtitleViewer.transform.parent.parent.gameObject.SetActive(false);
+            }
+        }
+        private void SubtitleResume()
+        {
+            if (subtitleViewer != null)
+            {
+                subtitleViewer.transform.parent.parent.gameObject.SetActive(true);
+            }
+        }
+
         //invoke all actions that need to be invoked on narration complete
         private void InvokeNarrComplete()
         {
@@ -135,6 +151,7 @@ namespace Audio
             int i = 1;
             while (currentSubLines != null && currentSubTimes != null && i < currentSubLines.Count && subtitleViewer != null)
             {
+                while (AudioListener.pause || !subtitleViewer.transform.parent.gameObject.activeSelf) yield return new WaitForSeconds(0);
                 subtitleViewer.text = currentSubLines[i];
                 yield return new WaitForSeconds(currentSubTimes[i] - currentSubTimes[i - 1]);
                 i++;
@@ -201,6 +218,8 @@ namespace Audio
             {
                 mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
             }
+            PauseCallback.pauseManager.SubscribeToPause(SubtitlePause);
+            PauseCallback.pauseManager.SubscribeToResume(SubtitleResume);
         }
 
         //save sound settings
@@ -209,6 +228,8 @@ namespace Audio
             string completedJson = JsonSerializer.Serialize(sliderVals);
             Directory.CreateDirectory("Saves");
             File.WriteAllText("Saves/"+fileName+".json", completedJson);
+            PauseCallback.pauseManager.UnsubToPause(SubtitlePause);
+            PauseCallback.pauseManager.UnsubToResume(SubtitleResume);
         }
 
         //check each frame if a new song should be started and start it if so

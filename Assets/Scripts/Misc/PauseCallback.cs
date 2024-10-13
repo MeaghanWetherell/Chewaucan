@@ -56,6 +56,7 @@ namespace Misc
         {
             if (!isPaused)
             {
+                Time.timeScale = 0;
                 pauseCallback.Invoke();
                 AudioListener.pause = true;
                 isPaused = true;
@@ -67,6 +68,7 @@ namespace Misc
         {
             if (isPaused)
             {
+                Time.timeScale = 1;
                 resumeCallback.Invoke();
                 AudioListener.pause = false;
                 isPaused = false;
