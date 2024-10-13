@@ -13,16 +13,16 @@ namespace QuestSystem
     public class QuestNode : IComparable<QuestNode>
     {
         //initialization narration
-        public Narration.Narration startNarration;
+        [NonSerialized]public Narration.Narration startNarration;
         
         //name of the init narration obj
-        private string startNarrName;
+        public string startNarrName;
         
         //completion narration
-        public Narration.Narration completionNarration;
+        [NonSerialized]public Narration.Narration completionNarration;
         
         //name of the comp narration obj
-        private string compNarrName;
+        public string compNarrName;
         
         //name of the quest, used as an identifier, should ensure unique names
         public string name;
@@ -55,7 +55,7 @@ namespace QuestSystem
         //quest type: Archaeology, Biology, or Geology
         public SaveDialProgressData.Dial type;
 
-        public UnityEvent<string> OnComplete = new UnityEvent<string>();
+        [NonSerialized]public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
         public bool isComplete = false;
 
@@ -164,13 +164,9 @@ namespace QuestSystem
 
         public void callOnceInitialized()
         {
-            if (!QuestManager.questManager.RegisterNode(this))
-            {
-                return;
-            }
-
-            startNarration = Resources.Load<Narration.Narration>(startNarrName);
-            completionNarration = Resources.Load<Narration.Narration>(compNarrName);
+            OnComplete = new UnityEvent<string>();
+            startNarration = Resources.Load<Narration.Narration>("Objs/"+startNarrName);
+            completionNarration = Resources.Load<Narration.Narration>("Objs/"+compNarrName);
             if (countsPerAction == null)
             {
                 countsPerAction = new List<float>();
@@ -183,6 +179,7 @@ namespace QuestSystem
             {
                 counts.Add(0);
             }
+            QuestManager.questManager.RegisterNode(this);
         }
 
         //change the pinned status of this node

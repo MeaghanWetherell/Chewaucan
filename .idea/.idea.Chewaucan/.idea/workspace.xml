@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SpeedTrees/Wide Sagebrush2_Billboard_Extra.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpeedTrees/Wide Sagebrush2_Billboard_Extra.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SpeedTrees/Wide Sagebrush2_Billboard_Normal.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SpeedTrees/Wide Sagebrush2_Billboard_Normal.png.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +119,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="$PROJECT_DIR$/../../Build\CultivarGreyBox.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -141,20 +144,20 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="101636">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="31112">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="101636" />
+      <option name="pid" value="31112" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="101636">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="101636" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -271,7 +274,8 @@
       <workItem from="1727058457694" duration="3149000" />
       <workItem from="1727304602267" duration="1000" />
       <workItem from="1727304684510" duration="1446000" />
-      <workItem from="1728252371234" duration="6142000" />
+      <workItem from="1728252371234" duration="6735000" />
+      <workItem from="1728855678189" duration="1206000" />
     </task>
     <servers />
   </component>
@@ -388,6 +392,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs</url>
+          <line>214</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\QuestManager.cs" initialLine="214" containingFunctionPresentation="method 'ReportCompletion'">
+            <startOffsets>
+              <option value="7036" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7072" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs</url>
+          <line>166</line>
+          <properties documentPath="C:\Users\Chonkles Scoot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\QuestNode.cs" initialLine="166" containingFunctionPresentation="method 'callOnceInitialized'">
+            <startOffsets>
+              <option value="5272" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5310" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="139" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
