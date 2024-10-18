@@ -18,5 +18,5 @@ To add a new level:
 Programmers:
 There shouldn't be anything here that an artist/designer can't hook up themselves, so you should only be needed if the system needs a refactor.
 Any performance problems are almost certainly due to inefficiencies of the design of MatchGrid that I'm not worrying about because I don't expect performance to be a problem.
-If the system needs major refactoring, it's probably best to mostly just rip out MatchGrid and redesign it from scratch. 
+If the system needs major refactoring, it's probably best to just rip out MatchGrid and redesign it from scratch. 
 Match grid mostly contains match detection functionality, as well as swapping bones. All the data is in MatchObject and MatchLine. 
