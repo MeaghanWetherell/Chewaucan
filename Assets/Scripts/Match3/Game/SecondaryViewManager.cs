@@ -79,8 +79,8 @@ namespace Match3.Game
             view.SetActive(true);
             for (int i = 0; i < bone.transform.childCount; i++)
             {
-                Destroy(bone.transform.GetChild(i));
-            }
+                Destroy(bone.transform.GetChild(i).gameObject); //On10-18-24 Meaghan modified this line to include .gameObject so it would work
+             }
 
             Instantiate(target.meshPrefab, bone.transform);
             isEnabled = true;
