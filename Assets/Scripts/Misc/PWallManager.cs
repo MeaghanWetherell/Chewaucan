@@ -18,13 +18,6 @@ namespace Misc
         
         private void Awake()
         {
-            if (wallManager != null)
-            {
-                Debug.LogError("Loaded persistent object "+gameObject.name+" twice!");
-                Destroy(wallManager.gameObject);
-            }
-            wallManager = this;
-            DontDestroyOnLoad(this.gameObject);
             try
             {
                 validWallIds = JsonSerializer.Deserialize<List<String>>(
@@ -32,6 +25,12 @@ namespace Misc
             } catch(IOException){}
 
             validWallIds ??= new List<string>();
+            if (wallManager != null)
+            {
+                Destroy(wallManager.gameObject);
+            }
+            wallManager = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         
         private void OnDisable()

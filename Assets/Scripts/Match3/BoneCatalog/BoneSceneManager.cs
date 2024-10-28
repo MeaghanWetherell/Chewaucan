@@ -18,7 +18,6 @@ namespace Match3
         {
             if (boneSceneManager != null)
             {
-                Debug.LogError("Loaded persistent objects twice!");
                 Destroy(boneSceneManager.gameObject);
             }
             boneSceneManager = this;

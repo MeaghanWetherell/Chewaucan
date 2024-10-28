@@ -23,13 +23,6 @@ namespace KeyRebinding
         private Dictionary<String, String> binds = new Dictionary<string, string>();
         private void Awake()
         {
-            if (bindingManager != null)
-            {
-                Debug.LogError("Loaded persistent object "+gameObject.name+" twice!");
-                Destroy(bindingManager.gameObject);
-            }
-            bindingManager = this;
-            DontDestroyOnLoad(this.gameObject);
             foreach (InputActionMap map in asset.actionMaps)
             {
                 maps.Add(map);
@@ -37,7 +30,7 @@ namespace KeyRebinding
             try
             {
                 binds = JsonSerializer.Deserialize<Dictionary<String, String>>(
-                    File.ReadAllText("Saves/" + saveFileName + ".json"));
+                    File.ReadAllText("SettingSaves/" + saveFileName + ".json"));
             } catch(IOException){}
             foreach (InputActionMap map in maps)
             {
@@ -53,13 +46,19 @@ namespace KeyRebinding
                     }
                 }
             }
+            if (bindingManager != null)
+            {
+                Destroy(bindingManager.gameObject);
+            }
+            bindingManager = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         private void OnDisable()
         {
             string bindJson = JsonSerializer.Serialize(binds);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/" + saveFileName + ".json", bindJson);
+            Directory.CreateDirectory("SettingSaves");
+            File.WriteAllText("SettingSaves/" + saveFileName + ".json", bindJson);
         }
 
         public void ResetBinds()

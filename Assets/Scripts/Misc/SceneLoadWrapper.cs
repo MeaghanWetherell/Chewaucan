@@ -23,14 +23,13 @@ namespace Misc
 
         private void Awake()
         {
+            StartCoroutine(fadeInOnStart());
             if (sceneLoadWrapper != null)
             {
-                Debug.LogError("Loaded persistent objects twice!");
                 Destroy(sceneLoadWrapper.gameObject);
             }
             sceneLoadWrapper = this;
             DontDestroyOnLoad(this.gameObject);
-            StartCoroutine(fadeInOnStart());
         }
 
         private IEnumerator fadeInOnStart()

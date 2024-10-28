@@ -31,13 +31,6 @@ namespace Match3
 
         private void Awake()
         {
-            if (matchLevelManager != null)
-            {
-                Debug.LogError("Loaded persistent objects twice!");
-                Destroy(matchLevelManager.gameObject);
-            }
-            matchLevelManager = this;
-            DontDestroyOnLoad(this.gameObject);
             //MeshDataList allMeshes = Resources.Load<MeshDataList>("meshes/Match3Meshes");
             //foreach (MeshDataObj obj in allMeshes.meshes)
             //{
@@ -60,6 +53,12 @@ namespace Match3
             // ReSharper disable once PossibleNullReferenceException
             while(highScores.Count < levels.Count)
                 highScores.Add(0);
+            if (matchLevelManager != null)
+            {
+                Destroy(matchLevelManager.gameObject);
+            }
+            matchLevelManager = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         private void OnEnable()

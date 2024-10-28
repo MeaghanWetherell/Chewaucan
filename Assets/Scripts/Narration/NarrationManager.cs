@@ -42,13 +42,6 @@ namespace Narration
         //initialize singleton and load save
         private void Awake()
         {
-            if (narrationManager != null)
-            {
-                Debug.LogError("Loaded persistent objects twice!");
-                Destroy(narrationManager.gameObject);
-            }
-            narrationManager = this;
-            DontDestroyOnLoad(transform.gameObject);
             if(!reset)
                 ReadFromJson();
             else
@@ -56,6 +49,12 @@ namespace Narration
                 shouldRun = new Dictionary<string, bool>();
                 hasRun = new List<string>();
             }
+            if (narrationManager != null)
+            {
+                Destroy(narrationManager.gameObject);
+            }
+            narrationManager = this;
+            DontDestroyOnLoad(transform.gameObject);
         }
 
         //read in save from disk

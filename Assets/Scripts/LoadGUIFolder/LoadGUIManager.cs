@@ -50,14 +50,13 @@ namespace LoadGUIFolder
         
         private void Awake()
         {
+            popUp = Resources.Load<GameObject>("PopUp");
             if (loadGUIManager != null)
             {
-                Debug.LogError("Loaded persistent objects twice!");
                 Destroy(loadGUIManager.gameObject);
             }
             loadGUIManager = this;
             DontDestroyOnLoad(this.gameObject);
-            popUp = Resources.Load<GameObject>("PopUp");
         }
 
         public void OnEnable()

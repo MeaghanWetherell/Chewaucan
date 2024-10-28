@@ -188,19 +188,12 @@ namespace Audio
         //set up singleton and start corountines
         private void Awake()
         {
-            if (soundManager != null)
-            {
-                Debug.LogError("Loaded persistent objects twice!");
-                Destroy(soundManager.gameObject);
-            }
-            soundManager = this;
-            DontDestroyOnLoad(this.gameObject);
             //set relative volume of the bgm and narrator. is not on log scale
             bgm.volume = standVol;
             narrator.volume = standVol;
             try
             {
-                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("Saves/"+fileName+".json"));
+                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("SettingSaves/"+fileName+".json"));
             }
             catch (IOException){ }
             sliderVals ??= new List<float>();
@@ -209,6 +202,12 @@ namespace Audio
                 sliderVals.Add(standVol);
             }
             StartCoroutine(RunSongs());
+            if (soundManager != null)
+            {
+                Destroy(soundManager.gameObject);
+            }
+            soundManager = this;
+            DontDestroyOnLoad(this.gameObject);
         }
 
         //set the mixer values. I can't remember *why* this needs to be in start instead of awake, but it does
@@ -226,8 +225,8 @@ namespace Audio
         private void OnDisable()
         {
             string completedJson = JsonSerializer.Serialize(sliderVals);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/"+fileName+".json", completedJson);
+            Directory.CreateDirectory("SettingSaves");
+            File.WriteAllText("SettingSaves/"+fileName+".json", completedJson);
             PauseCallback.pauseManager.UnsubToPause(SubtitlePause);
             PauseCallback.pauseManager.UnsubToResume(SubtitleResume);
         }

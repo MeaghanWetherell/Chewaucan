@@ -28,7 +28,7 @@ public class BoneRotater : MonoBehaviour
 
         private Vector3 _orbitAngle;
 
-        private bool isEnabled = false;
+        public bool isEnabled = false;
 
         private Camera cam;
 
@@ -69,13 +69,13 @@ public class BoneRotater : MonoBehaviour
                     Vector2 diff = mousePos.action.ReadValue<Vector2>()-_lastMousePos;
                     if (diff.x > 0.75f)
                     {
-                        float yRot = xFudge * diff.x * Time.deltaTime;
+                        float yRot = xFudge * diff.x * Time.deltaTime * 1000;
                         bone.transform.Rotate(Vector3.up, yRot);
                     }
                 }
                 _lastMousePos = mousePos.action.ReadValue<Vector2>();
                 float delta = scroll.action.ReadValue<Vector2>().y;
-                cam.orthographicSize -= delta*Time.deltaTime*distScalar;
+                cam.orthographicSize -= delta*Time.deltaTime*distScalar*1000;
                 if (cam.orthographicSize > maxSize)
                     cam.orthographicSize = maxSize;
                 else if (cam.orthographicSize < minSize)

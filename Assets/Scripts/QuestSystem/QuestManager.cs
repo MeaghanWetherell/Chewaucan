@@ -13,9 +13,8 @@ namespace QuestSystem
     public class QuestManager : MonoBehaviour
     {
         public static QuestManager questManager;
-
-        [Tooltip("Testing flag. Enable this to disable loading saved quest data.")]
-        public bool resetQuests;
+        
+        public static bool resetQuests = false;
         
         [Tooltip("List of all quests")] 
         public List<QuestObj> AllQuests;
@@ -90,7 +89,6 @@ namespace QuestSystem
         {
             if (questManager != null)
             {
-                Debug.LogError("Loaded persistent objects twice!");
                 Destroy(questManager.gameObject);
             }
             questManager = this;

@@ -30,15 +30,14 @@ public class WPUnlockSerializer : MonoBehaviour
 
     private void Awake()
     {
+        SceneManager.sceneLoaded += OnMapLoad;
+        DeSerialize();
         if (wpUnlockSerializer != null)
         {
-            Debug.LogError("Loaded persistent objects twice!");
             Destroy(wpUnlockSerializer.gameObject);
         }
         wpUnlockSerializer = this;
         DontDestroyOnLoad(this.gameObject);
-        SceneManager.sceneLoaded += OnMapLoad;
-        DeSerialize();
     }
 
     private void OnDisable()

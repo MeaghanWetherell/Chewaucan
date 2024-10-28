@@ -13,4 +13,9 @@ public class LoadPersistentObjects : MonoBehaviour
             SceneManager.LoadScene("PersistentObjects", LoadSceneMode.Additive);
         }
     }
+
+    public static void LoadObjs()
+    {
+        SceneManager.LoadScene("PersistentObjects", LoadSceneMode.Additive);
+    }
 }

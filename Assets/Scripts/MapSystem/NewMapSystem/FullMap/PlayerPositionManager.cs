@@ -21,6 +21,10 @@ public class PlayerPositionManager : MonoBehaviour
         nextPlayerPosition.Add(Vector3.negativeInfinity);
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
+        if (playerPositionManager != null)
+        {
+            Destroy(playerPositionManager.gameObject);
+        }
         playerPositionManager = this;
         DontDestroyOnLoad(transform.gameObject);
     }
