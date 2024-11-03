@@ -81,8 +81,7 @@ namespace QuestSystem
                 counts[index] = requiredCounts[index];
                 for (int i = 0; i < requiredCounts.Count; i++)
                 {
-                    // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if (counts[i] != requiredCounts[i] )
+                    if (counts[i] < requiredCounts[i] )
                     {
                         if(HUDManager.hudManager != null)
                             HUDManager.hudManager.ResetPins();

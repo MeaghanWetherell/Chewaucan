@@ -10,9 +10,9 @@ public class BoneChecker : MonoBehaviour
 {
     [NonSerialized]public bool isCorrect = false;
 
-    public Vector3 targRot;
-
     public GameObject viewer;
+    
+    public GameObject mBoneViewer;
     
     public TextMeshProUGUI text;
 
@@ -24,7 +24,7 @@ public class BoneChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCorrect && (viewer.transform.rotation.eulerAngles - targRot).magnitude < 10f)
+        if (isCorrect && (viewer.transform.rotation.eulerAngles - mBoneViewer.transform.rotation.eulerAngles).magnitude < 10f)
         {
             text.text = "It's a little off, but this looks about right.";
             QuestManager.questManager.GETNode("bonepile").AddCount(0);

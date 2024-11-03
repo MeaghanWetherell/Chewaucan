@@ -13,8 +13,6 @@ namespace Match3.Game
         
         [Tooltip("Scroll delta from input sys")]public InputActionReference scroll;
 
-        [Tooltip("Right click button from input sys")]public InputActionReference clicked;
-
         [Tooltip("Move controls from the input sys")] public InputActionReference move;
         
         [Tooltip("The bone object that the render texture camera points to")]public GameObject bone;
@@ -37,14 +35,14 @@ namespace Match3.Game
 
         [Tooltip("Scalar on panning movement")]
         public float moveScalar;
+        
+        [Tooltip("Bone rotator ref")] public BoneRotater boneRotater;
 
         private float originX;
 
         private float originY;
 
         private bool _mouseDown;
-
-        private Vector2 _lastMousePos;
 
         private Vector3 _orbitAngle;
 
@@ -55,23 +53,10 @@ namespace Match3.Game
         private void Awake()
         {
             secondaryViewManager = this;
-            _lastMousePos = mousePos.action.ReadValue<Vector2>();
             cam = GetComponent<Camera>();
             Vector3 pos = transform.position;
             originX = pos.x;
             originY = pos.y;
-        }
-        
-        private void OnEnable()
-        {
-            clicked.action.started += ONClickDown;
-            clicked.action.canceled += ONClickUp;
-        }
-
-        private void OnDisable()
-        {
-            clicked.action.started -= ONClickDown;
-            clicked.action.canceled -= ONClickUp;
         }
 
         public void SetView(MeshDataObj target)
@@ -79,36 +64,18 @@ namespace Match3.Game
             view.SetActive(true);
             for (int i = 0; i < bone.transform.childCount; i++)
             {
-                Destroy(bone.transform.GetChild(i).gameObject); //On10-18-24 Meaghan modified this line to include .gameObject so it would work
-             }
+                Destroy(bone.transform.GetChild(i).gameObject); 
+            }
 
             Instantiate(target.meshPrefab, bone.transform);
+            boneRotater.enabled = true;
             isEnabled = true;
-        }
-        
-        private void ONClickDown(InputAction.CallbackContext callbackContext)
-        {
-            _mouseDown = true;
-        }
-
-        private void ONClickUp(InputAction.CallbackContext callbackContext)
-        {
-            _mouseDown = false;
         }
         
         private void Update()
         {
             if (isEnabled)
             {
-                if (_mouseDown)
-                {
-                    Vector2 diff = mousePos.action.ReadValue<Vector2>()-_lastMousePos;
-                    if (diff.x > 0.75f)
-                    {
-                        float yRot = xFudge * diff.x * Time.deltaTime;
-                        bone.transform.Rotate(Vector3.up, yRot);
-                    }
-                }
                 Vector2 movement = move.action.ReadValue<Vector2>();
                 var orthographicSize = cam.orthographicSize;
                 transform.Translate(movement.x*Time.deltaTime*moveScalar*orthographicSize, movement.y*Time.deltaTime*moveScalar*orthographicSize, 0, Space.World);
@@ -124,7 +91,6 @@ namespace Match3.Game
                     transform.position = new Vector3(pos.x, originY - maxY, pos.z);
                 else if (pos.y > originY + maxY)
                     transform.position = new Vector3(pos.x, originY + maxY, pos.z);
-                _lastMousePos = mousePos.action.ReadValue<Vector2>();
                 float delta = scroll.action.ReadValue<Vector2>().y;
                 cam.orthographicSize -= delta*Time.deltaTime*distScalar;
                 if (cam.orthographicSize > maxSize)

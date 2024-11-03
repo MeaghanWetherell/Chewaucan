@@ -10,7 +10,9 @@ public class BoneRotater : MonoBehaviour
         
         [Tooltip("Scroll delta from input sys")]public InputActionReference scroll;
 
-        [Tooltip("Right click button from input sys")]public InputActionReference clicked;
+        [Tooltip("Appropriate click button from input sys")]public InputActionReference clicked;
+        
+        [Tooltip("Flip button from input sys")]public InputActionReference flip;
 
         [Tooltip("The bone object that the render texture camera points to")]public GameObject bone;
 
@@ -32,6 +34,12 @@ public class BoneRotater : MonoBehaviour
 
         private Camera cam;
 
+        public void StartUp()
+        {
+            _mouseDown = true;
+            _lastMousePos = mousePos.action.ReadValue<Vector2>();
+        }
+
         private void Awake()
         {
             _lastMousePos = mousePos.action.ReadValue<Vector2>();
@@ -42,12 +50,14 @@ public class BoneRotater : MonoBehaviour
         {
             clicked.action.started += ONClickDown;
             clicked.action.canceled += ONClickUp;
+            flip.action.started += Flip;
         }
 
         private void OnDisable()
         {
             clicked.action.started -= ONClickDown;
             clicked.action.canceled -= ONClickUp;
+            flip.action.started -= Flip;
         }
 
         private void ONClickDown(InputAction.CallbackContext callbackContext)
@@ -58,6 +68,11 @@ public class BoneRotater : MonoBehaviour
         private void ONClickUp(InputAction.CallbackContext callbackContext)
         {
             _mouseDown = false;
+        }
+
+        private void Flip(InputAction.CallbackContext callbackContext)
+        {
+            bone.transform.Rotate(Vector3.right, 180);
         }
         
         private void Update()
