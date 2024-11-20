@@ -14,6 +14,8 @@ public class BoneInteractable : Interactable
 
     public bool isCorrect;
 
+    public AudioSource pickupAudio;
+
     private bool isLoader = false;
     public override void OnInteractEnable()
     {
@@ -31,8 +33,12 @@ public class BoneInteractable : Interactable
 
     public override void Listen(int index)
     {
-        if(LoadGUIManager.loadGUIManager.Load("BoneComparison"))
+        if (LoadGUIManager.loadGUIManager.Load("BoneComparison"))
+        {
             isLoader = true;
+            pickupAudio.ignoreListenerPause = true;
+            pickupAudio?.Play();
+        }
         else
         {
             isLoader = false;
