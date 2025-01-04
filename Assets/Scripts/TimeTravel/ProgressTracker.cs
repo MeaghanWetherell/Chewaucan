@@ -17,7 +17,8 @@ public class ProgressTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        debugCanvas.SetActive(false);
+        if(debugCanvas != null)
+            debugCanvas.SetActive(false);
     }
 
     // Update is called once per frame

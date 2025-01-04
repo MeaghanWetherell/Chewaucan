@@ -73,7 +73,7 @@ namespace Match3
             allDirs[1][0] = new GridCoordinate(0, 1);
             allDirs[1][1] = new GridCoordinate(0, -1);
             FillGrid();
-            StartCoroutine(WaitForMatchCheck(MatchLine.WaitTime * (height + 1)));
+            StartCoroutine(WaitForSpawnComplete());
             StartCoroutine(CheckForRemoval());
             StartCoroutine(CheckForLock());
         }
@@ -113,6 +113,23 @@ namespace Match3
         private void OnEnable()
         {
             click.action.canceled += ClickAction;
+        }
+
+        private IEnumerator WaitForSpawnComplete()
+        {
+            _waitingOnMatchCheck = true;
+            bool continueToWait = true;
+            while (continueToWait)
+            {
+                continueToWait = false;
+                foreach (MatchLine line in _lines)
+                {
+                    if (line.GetToSpawn() > 0)
+                        continueToWait = true;
+                }
+                yield return new WaitForSeconds(0);
+            }
+            _waitingOnMatchCheck = false;
         }
 
         private IEnumerator WaitForMatchCheck(float time)
@@ -251,8 +268,7 @@ namespace Match3
                 if (missing[i] > max)
                     max = missing[i];
             }
-            yield return new WaitForSeconds(MatchLine.WaitTime * (max+0.5f));
-            _waitingOnMatchCheck = false;
+            StartCoroutine(WaitForSpawnComplete());
             _removalQueue = new List<List<GridCoordinate>>();
         }
         
@@ -323,6 +339,8 @@ namespace Match3
             if (nextCandidate.x < 0 || nextCandidate.x >= _objects.Count || nextCandidate.y < 0 ||
                 nextCandidate.y >= _objects[nextCandidate.x].Length)
                 return cur;
+            //null ref at below line possible. unsure of source but it seems very rare.
+            //update: possibly fixed. should now be impossible for this to run if match lines haven't finished spawning, regardless of coroutine execution order
             if (GetByCoordinate(nextCandidate).CompareTo(GetByCoordinate(cur)) == 0)
             {
                 return FindFurthestInDir(nextCandidate, dir);

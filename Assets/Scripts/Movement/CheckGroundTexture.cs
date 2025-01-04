@@ -73,6 +73,7 @@ public class CheckGroundTexture : MonoBehaviour
      */
     public string GetCurrentLayerName()
     {
+        if (!SetTerrain()) return "rock";
         float highest = 0f;
         int maxIndex = 0;
         for (var i = 0; i < textureVals.Length; i++)

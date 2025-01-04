@@ -116,6 +116,11 @@ namespace Match3
             CleanUp();
             _toSpawn = toSet;
         }
+
+        public int GetToSpawn()
+        {
+            return _toSpawn;
+        }
         
         private void CleanUp()
         {
