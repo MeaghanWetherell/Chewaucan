@@ -35,7 +35,7 @@ public class CourseWall : MonoBehaviour
     {
         if (other.GetComponent<Player>() != null)
         {
-            manager.Reset();
+            manager.Reset("You went out of bounds!");
         }
     }
 }

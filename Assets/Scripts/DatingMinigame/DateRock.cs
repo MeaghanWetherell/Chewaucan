@@ -13,13 +13,26 @@ public class DateRock : MonoBehaviour
 
     public CourseManager manager;
 
+    public float scaleMinX;
+
+    public float scaleMaxX;
+
+    public float scaleMinY;
+
+    public float scaleMaxY;
+
+    public float scaleMinZ;
+
+    public float scaleMaxZ;
+
     private void Awake()
     {
-        float scaleX = Random.Range(0.5f, 2);
-        float scaleY = Random.Range(0.5f, 2);
-        float scaleZ = Random.Range(0.5f, 2);
-        Vector3 scale = transform.localScale;
-        transform.localScale = new Vector3(scale.x * scaleX, scale.y * scaleY, scale.z * scaleZ);
+        float scaleX = Random.Range(scaleMinX, scaleMaxX);
+        float scaleY = Random.Range(scaleMinY, scaleMaxY);
+        float scaleZ = Random.Range(scaleMinZ, scaleMaxZ);
+        Vector3 scale = transform.parent.localScale;
+        transform.parent.localScale = new Vector3(scale.x * scaleX, scale.y * scaleY, scale.z * scaleZ);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,13 +41,14 @@ public class DateRock : MonoBehaviour
         {
             manager.AddPoints(myPoints);
             mySE.Play();
-            StartCoroutine(DestroyAfterTime(1));
+            StartCoroutine(DestroyAfterTime(0.5f));
+            GetComponent<BoxCollider>().enabled = false;
         }
     }
 
     private IEnumerator DestroyAfterTime(float secs)
     {
         yield return new WaitForSeconds(secs);
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

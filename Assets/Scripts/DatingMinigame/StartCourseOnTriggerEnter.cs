@@ -14,7 +14,7 @@ public class StartCourseOnTriggerEnter : MonoBehaviour
         {
             if (manager.active)
             {
-                manager.Reset();
+                manager.Reset("You went out of bounds!");
             }
             else
             {

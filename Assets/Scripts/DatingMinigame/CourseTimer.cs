@@ -62,7 +62,7 @@ public class CourseTimer : MonoBehaviour
         if (QuestManager.questManager != null) 
         {
             PauseCallback.pauseManager.SubscribeToPause(OnPause);
-            PauseCallback.pauseManager.SubscribeToPause(OnResume);
+            PauseCallback.pauseManager.SubscribeToResume(OnResume);
             return;
         }
         int count = SceneManager.sceneCount;
@@ -71,7 +71,7 @@ public class CourseTimer : MonoBehaviour
             if (SceneManager.GetSceneAt(i).name.Equals("PersistentObjects"))
             {
                 PauseCallback.pauseManager.SubscribeToPause(OnPause);
-                PauseCallback.pauseManager.SubscribeToPause(OnResume);
+                PauseCallback.pauseManager.SubscribeToResume(OnResume);
                 return;
             }
         }
@@ -83,7 +83,7 @@ public class CourseTimer : MonoBehaviour
     {
         if (!scene.name.Equals("PersistentObjects")) return;
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
-        PauseCallback.pauseManager.SubscribeToPause(OnResume);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
         
