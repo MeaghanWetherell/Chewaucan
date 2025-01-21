@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 1729389765353843074}
   - component: {fileID: -8828086554326269734}
   - component: {fileID: 7514719063666619591}
+  - component: {fileID: -6780453510386105629}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -216,6 +217,7 @@ MonoBehaviour:
   cameraObj: {fileID: 8539058024222695338}
   minimapCamObj: {fileID: 5824499138386022900}
   staminaUI: {fileID: 0}
+  moveSpeedDefault: 0
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
@@ -574,6 +576,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b6acfdbb-2155-4674-8928-849a95d1ea43
     m_ActionName: Player/Skip[/Keyboard/period]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03aec262-bfe4-4162-863a-f4f77e0cf3f4
+    m_ActionName: Player/FlipBone[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5a9752d-1c80-41ea-b093-9a254325e338
+    m_ActionName: Player/MousePosition[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -605,6 +615,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d1ccb252e63e1459cf2e3d25b5e5cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6780453510386105629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cf3de6a13f50b4daec86d54afb9fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotSpeed: 90
+  landMovement: {fileID: 3004082312838410803}
+  controller: {fileID: 7743231800493862508}
+  moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &2229137810595459482
 GameObject:
   m_ObjectHideFlags: 0

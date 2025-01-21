@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LandMovement : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float maxDistToGround = 1.15f;
+    //a lot of this should really be in PlayerMovementController, but I don't want to refactor Ellie's stuff
+    public float moveSpeed = 5f;
+    public float maxDistToGround = 1.15f;
     [SerializeField] float rotationSpeed = 4f;
     [SerializeField] float gravity = -2f; //this constanly move the player down, so isGrounded works correctly.
     [SerializeField] float jumpHeight = 2;
-    [SerializeField] float maxStamina = 100f;
-    [SerializeField] float currStamina = 100f;
-    [SerializeField] float staminaDepletionRate = 10f;
+    public float maxStamina = 100f;
+    public float currStamina = 100f;
+    public float staminaDepletionRate = 10f;
     public GameObject cameraObj;
     public GameObject minimapCamObj;
     public Slider staminaUI;
@@ -24,11 +26,11 @@ public class LandMovement : MonoBehaviour
     Vector2 _moveInput;
     Vector3 _verticalMovement;
     private const float Gravity = -9.18f;
-    float _moveSpeedDefault;
+    public float moveSpeedDefault;
     bool _grounded;
     bool _prevGrounded;
 
-    MovementSoundEffects _soundEffects;
+    public MovementSoundEffects soundEffects;
     CheckGroundTexture _terrainTexture;
 
     public InputActionReference moveRef;
@@ -38,11 +40,11 @@ public class LandMovement : MonoBehaviour
     private void InitializeValues()
     {
         _controller = GetComponent<CharacterController>();
-        _soundEffects = GetComponent<MovementSoundEffects>();
+        soundEffects = GetComponent<MovementSoundEffects>();
         _terrainTexture = GetComponent<CheckGroundTexture>();
         _verticalMovement = new Vector3(0f, gravity, 0f);
         _moveInput = Vector2.zero;
-        _moveSpeedDefault = moveSpeed;
+        moveSpeedDefault = moveSpeed;
         staminaUI.minValue = 0f;
         staminaUI.maxValue = maxStamina;
     }
@@ -90,7 +92,7 @@ public class LandMovement : MonoBehaviour
         // play a landing sound if we have just landed
         if (!_prevGrounded && _grounded)
         {
-            _soundEffects.PlayLandSound();
+            soundEffects.PlayLandSound();
         }
 
         // keeps the player on the ground when not jumping
@@ -115,7 +117,7 @@ public class LandMovement : MonoBehaviour
 
         if (_moveInput.y != 0 && _grounded)
         {
-            _soundEffects.PlayWalkingSound();
+            soundEffects.PlayWalkingSound();
         }
         UpdateStamina();
     }
@@ -123,15 +125,15 @@ public class LandMovement : MonoBehaviour
     private void UpdateStamina()
     {
         //determining when the player is sprinting and stopping sprinting when out of stamina
-        if (moveSpeed != _moveSpeedDefault && currStamina > 0 && _moveInput != Vector2.zero)
+        if (!Mathf.Approximately(moveSpeed, moveSpeedDefault) && currStamina > 0 && _moveInput != Vector2.zero)
         {
             currStamina -= staminaDepletionRate * Time.deltaTime; //depletes stamina when sprinting
         }
         else
         {
             if (currStamina < 0) { currStamina = 0; }
-            _soundEffects.SetIsSprinting(false);
-            moveSpeed = _moveSpeedDefault;
+            soundEffects.SetIsSprinting(false);
+            moveSpeed = moveSpeedDefault;
             if (currStamina < maxStamina)
             {
                 currStamina += staminaDepletionRate * Time.deltaTime; //restores stamina when not sprinting, up to maxStamina
@@ -176,7 +178,7 @@ public class LandMovement : MonoBehaviour
         if (_grounded)
         {
             _verticalMovement.y += Mathf.Sqrt(jumpHeight * -3.0f * Gravity);
-            _soundEffects.PlayJumpSound();
+            soundEffects.PlayJumpSound();
         }
     }
 
@@ -186,12 +188,12 @@ public class LandMovement : MonoBehaviour
         if (sprint && currStamina > 0)
         {
             moveSpeed = moveSpeed * 1.5f;
-            _soundEffects.SetIsSprinting(true);
+            soundEffects.SetIsSprinting(true);
         }
         else
         {
-            moveSpeed = _moveSpeedDefault;
-            _soundEffects.SetIsSprinting(false);
+            moveSpeed = moveSpeedDefault;
+            soundEffects.SetIsSprinting(false);
         }
     }
 }

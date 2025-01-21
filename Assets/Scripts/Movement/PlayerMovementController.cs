@@ -15,20 +15,27 @@ public class PlayerMovementController : MonoBehaviour
 {
     private LandMovement landMovement;
     private SwimmingMovement swimmingMovement;
+    private ClimbingMovement climbingMovement;
 
     private bool walking;
     private bool swimming;
+    private bool climbing;
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
         landMovement = GetComponent<LandMovement>();
         swimmingMovement = GetComponent<SwimmingMovement>();
+        climbingMovement = GetComponent<ClimbingMovement>();
 
         landMovement.enabled = true;
         swimmingMovement.enabled = false;
+        climbingMovement.enabled = false;
         walking = true;
         swimming = false;
+        climbing = false;
 
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
@@ -40,27 +47,83 @@ public class PlayerMovementController : MonoBehaviour
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SwitchToClimbing(Quaternion targRot, Collider curCollider)
     {
-        
+        climbingMovement.targRot = targRot;
+        climbingMovement.curCollider = curCollider;
+        walking = false;
+        swimming = false;
+        climbing = true;
+        SetScripts();
+    }
+
+    private IEnumerator ClimbingDisabled()
+    {
+        float rotSpeed = climbingMovement.rotSpeed;
+        float x = transform.eulerAngles.x;
+        float z = transform.eulerAngles.z;
+        while (Mathf.Abs(x)+Mathf.Abs(z)>6f)
+        {
+            if (x > 3f)
+            {
+                transform.Rotate(Vector3.left, rotSpeed*0.05f);
+            }
+
+            else if (x < -3f)
+            {
+                transform.Rotate(Vector3.right, rotSpeed*0.05f);
+            }
+
+            if (z > 3f)
+            {
+                transform.Rotate(Vector3.forward, rotSpeed*0.05f);
+            }
+            else if (z < -3f)
+            {
+                transform.Rotate(Vector3.back, rotSpeed*0.05f);
+            }
+            
+            x = transform.eulerAngles.x;
+            z = transform.eulerAngles.z;
+            yield return new WaitForSeconds(0.05f);
+        }
+        SetScripts();
     }
 
     public void SwitchToSwimming(Vector3 waterLevel)
     {
-        landMovement.enabled = false;
-        swimmingMovement.SetSwimming(waterLevel);
-        swimmingMovement.enabled = true;
         walking = false;
         swimming = true;
+        climbing = false;
+        SetScripts();
+        swimmingMovement.SetSwimming(waterLevel);
+        
+        
     }
 
     public void SwitchToWalking()
     {
-        swimmingMovement.enabled = false;
-        landMovement.enabled = true;
-        walking = true;
-        swimming = false;
+        if (climbing)
+        {
+            walking = true;
+            swimming = false;
+            climbing = false;
+            StartCoroutine(ClimbingDisabled());
+        }
+        else
+        {
+            walking = true;
+            swimming = false;
+            climbing = false;
+            SetScripts();
+        }
+    }
+
+    private void SetScripts()
+    {
+        swimmingMovement.enabled = swimming;
+        landMovement.enabled = walking;
+        climbingMovement.enabled = climbing;
     }
 
     //disable movement when paused
@@ -68,14 +131,14 @@ public class PlayerMovementController : MonoBehaviour
     {
         swimmingMovement.enabled = false;
         landMovement.enabled = false;
+        climbingMovement.enabled = false;
         this.enabled = false;
     }
 
     //reenable movement on resume
     private void OnResume()
     {
-        swimmingMovement.enabled = swimming;
-        landMovement.enabled = walking;
+        SetScripts();
         this.enabled = true;
     }
 
