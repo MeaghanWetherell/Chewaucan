@@ -24,6 +24,7 @@ public class LandMovement : MonoBehaviour
 
     CharacterController _controller;
     Vector2 _moveInput;
+    private float _rotateInput;
     Vector3 _verticalMovement;
     private const float Gravity = -9.18f;
     public float moveSpeedDefault;
@@ -36,6 +37,7 @@ public class LandMovement : MonoBehaviour
     public InputActionReference moveRef;
     public InputActionReference jumpRef;
     public InputActionReference sprintRef;
+    public InputActionReference turnRef;
 
     private void InitializeValues()
     {
@@ -60,7 +62,9 @@ public class LandMovement : MonoBehaviour
         InitializeValues();
 
         moveRef.action.performed += OnMove;
-        moveRef.action.canceled += (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
+        turnRef.action.performed += OnRot;
+        turnRef.action.canceled += ZeroRot;
+        moveRef.action.canceled += ZeroMove;
         jumpRef.action.started += OnJump;
         sprintRef.action.performed += OnSprint;
         sprintRef.action.canceled += OnSprint;
@@ -69,10 +73,22 @@ public class LandMovement : MonoBehaviour
     private void OnDisable()
     {
         moveRef.action.performed -= OnMove;
-        moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
+        moveRef.action.canceled -= ZeroMove;
+        turnRef.action.performed -= OnRot;
+        turnRef.action.canceled -= ZeroRot;
         jumpRef.action.started -= OnJump;
         sprintRef.action.performed -= OnSprint;
         sprintRef.action.canceled -= OnSprint;
+    }
+
+    private void ZeroMove(InputAction.CallbackContext context)
+    {
+        _moveInput = Vector2.zero;
+    }
+    
+    private void ZeroRot(InputAction.CallbackContext context)
+    {
+        _rotateInput = 0;
     }
 
     // Update is called once per frame
@@ -101,13 +117,13 @@ public class LandMovement : MonoBehaviour
             _verticalMovement.y = gravity;
         }
 
-        float rotateMovement = _moveInput.x * rotationSpeed; //AD rotation uses x value of the vector from OnMove
+        float rotateMovement = _rotateInput * rotationSpeed; 
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
-        Vector3 forwardDir = this.transform.TransformDirection(Vector3.forward);
-        float moveAmount = _moveInput.y * moveSpeed;
-        Vector3 movement = forwardDir * moveAmount;
+        Vector3 movement = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
+        movement *= (moveSpeed / movement.magnitude);
+        
 
         _controller.Move(movement * Time.deltaTime); //forward movement
 
@@ -165,12 +181,17 @@ public class LandMovement : MonoBehaviour
         return false;
     }
 
-    /* The following 3 functions are called as part of the action map. The PlayerInput component on the player sends 
+    /* The following 4 functions are called as part of the action map. The PlayerInput component on the player sends 
      * messages to these function when the corresponding input actions are used (WASD, Space, left shift).
      */
     void OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
+    }
+    
+    void OnRot(InputAction.CallbackContext context)
+    {
+        _rotateInput = context.ReadValue<float>();
     }
 
     void OnJump(InputAction.CallbackContext context)

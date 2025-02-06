@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c813e6bb52a66040aaff9c5f9875949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 25
   rotationSpeed: 4
   maxStamina: 100
   currStamina: 100
@@ -218,9 +218,11 @@ MonoBehaviour:
   minimapCamObj: {fileID: 5824499138386022900}
   staminaUI: {fileID: 0}
   moveSpeedDefault: 0
+  soundEffects: {fileID: 0}
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  turnRef: {fileID: -388395604683751076, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &753812688764451313
 MonoBehaviour:
   m_ObjectHideFlags: 0
