@@ -6,8 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/LandMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/LandMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dating/MovingSnake Variant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dating/MovingSnake Variant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Dating/StationarySnake.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Dating/StationarySnake.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype/NavMesh-NavMesh Surface.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype/NavMesh-NavMesh Surface.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype/NavMesh-NavMesh Surface.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DateMinigamePrototype/NavMesh-NavMesh Surface.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DatingMinigame/CourseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DatingMinigame/CourseManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DatingMinigame/Snake.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DatingMinigame/Snake.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/SnakeMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/SnakeMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SettingSaves/soundsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/SettingSaves/soundsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,14 +38,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/3b24cc7fa9794ed8ab04312c53e6dedd172c00/0a/dd92d9fd/Transform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/ba/f8d070f1/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/ChangeVol.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/CourseWall.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/DateRock.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/ScaleRandomizer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/Snake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/SnakeKill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/SnakeRotate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/BoneInteractable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/InteractListenerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
@@ -161,10 +169,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="16360">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="16360" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -306,7 +314,11 @@
       <workItem from="1735698533370" duration="12000" />
       <workItem from="1736709058059" duration="11273000" />
       <workItem from="1737401213130" duration="8240000" />
-      <workItem from="1738813138554" duration="753000" />
+      <workItem from="1738813138554" duration="768000" />
+      <workItem from="1739407210453" duration="710000" />
+      <workItem from="1739407938832" duration="50000" />
+      <workItem from="1739408017501" duration="290000" />
+      <workItem from="1739408354217" duration="4810000" />
     </task>
     <servers />
   </component>
@@ -483,19 +495,6 @@
           <option name="timeStamp" value="142" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/CourseManager.cs</url>
-          <line>166</line>
-          <properties documentPath="C:\Users\charlesscott\Documents\GitHub\Chewaucan\Assets\Scripts\DatingMinigame\CourseManager.cs" containingFunctionPresentation="Method 'Reset'">
-            <startOffsets>
-              <option value="5705" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5763" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="144" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/StartCourseOnTriggerEnter.cs</url>
           <line>16</line>
           <properties documentPath="C:\Users\charlesscott\Documents\GitHub\Chewaucan\Assets\Scripts\DatingMinigame\StartCourseOnTriggerEnter.cs" containingFunctionPresentation="Method 'OnTriggerEnter'">
@@ -565,6 +564,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="151" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/SnakeMove.cs</url>
+          <line>49</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\SnakeMove.cs" containingFunctionPresentation="Method 'RandomPoint'">
+            <startOffsets>
+              <option value="1291" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1313" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="152" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

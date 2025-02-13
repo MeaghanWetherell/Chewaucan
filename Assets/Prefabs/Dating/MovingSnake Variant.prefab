@@ -9,34 +9,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.7614946
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.6490345
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061611304472838228, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
@@ -52,7 +24,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingSnake Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4243499725232148843, guid: f5545c878eda06f4687934ebcc6d7bd2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -87,7 +60,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6022012166051768741

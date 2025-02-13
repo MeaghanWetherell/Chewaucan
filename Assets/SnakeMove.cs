@@ -16,6 +16,8 @@ public class SnakeMove : MonoBehaviour
     
     private float speed;
 
+    private Vector3 oldTarget;
+
     private void Awake()
     {
         speed = myAgent.speed;
@@ -60,20 +62,31 @@ public class SnakeMove : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
-            Vector3 point;
-            RandomPoint(transform.position, range, out point);
-            myAgent.SetDestination(point);
+            if (!PauseCallback.pauseManager.isPaused)
+            {
+                SetNewDirection();
+            }
         }
+    }
+
+    public void SetNewDirection()
+    {
+        Vector3 point;
+        RandomPoint(transform.position, range, out point);
+        myAgent.SetDestination(point);
     }
 
     
     private void OnPause()
     {
         myAgent.speed = 0;
+        myAgent.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        myAgent.SetDestination(transform.position);
     }
 
     private void OnResume()
     {
         myAgent.speed = speed;
+        myAgent.SetDestination(oldTarget);
     }
 }

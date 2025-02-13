@@ -98,7 +98,7 @@ public class CourseManager : MonoBehaviour
         Started.Invoke();
     }
 
-    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab)
+    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab, float ymod=0)
     {
         int rand;
         List<Transform> childList = new List<Transform>();
@@ -107,7 +107,7 @@ public class CourseManager : MonoBehaviour
         while (numToSpawn > 0 && childList.Count > 0)
         {
             rand = Random.Range(0, childList.Count);
-            GameObject obj = Instantiate(spawnPrefab, childList[rand].position, Quaternion.identity);
+            GameObject obj = Instantiate(spawnPrefab, childList[rand].position+new Vector3(0,ymod,0), Quaternion.identity);
             ret.Add(obj.transform);
             spawnedObjects.Add(obj);
             childList.RemoveAt(rand);
@@ -117,7 +117,7 @@ public class CourseManager : MonoBehaviour
         return ret;
     }
     
-    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab, List<Transform> blackListedLocations)
+    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab, List<Transform> blackListedLocations, float ymod=0)
     {
         int rand;
         List<Transform> childList = new List<Transform>();
@@ -138,7 +138,7 @@ public class CourseManager : MonoBehaviour
         while (numToSpawn > 0 && childList.Count > 0)
         {
             rand = Random.Range(0, childList.Count);
-            GameObject obj = Instantiate(spawnPrefab, childList[rand].position, Quaternion.identity);
+            GameObject obj = Instantiate(spawnPrefab, childList[rand].position+new Vector3(0,ymod,0), Quaternion.identity);
             ret.Add(obj.transform);
             spawnedObjects.Add(obj);
             childList.RemoveAt(rand);
