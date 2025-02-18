@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class TerrainContourOverlay : EditorWindow
 {
+
+    //This script creates an editor tool that turns your terrain into contour lines.
+    //Sometimes it fails to turn your material back to the default, which is TerrainLit.
     private static Material overlayMaterial;
     private static bool isOverlayActive = false;
     private static Dictionary<Terrain, Material> originalMaterials = new Dictionary<Terrain, Material>();
