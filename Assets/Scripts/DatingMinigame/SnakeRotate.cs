@@ -10,10 +10,16 @@ public class SnakeRotate : MonoBehaviour
     [Tooltip("Angular speed, in radians per second")]
     public float rotSpeed;
 
+    /*
+    [Tooltip("The max distance at which the snake should look for the player for rotation")]
+    public float dist;
+    */
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)
         {
+            transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", true);
             StartCoroutine(rotateTowards());
         }
     }
@@ -22,6 +28,7 @@ public class SnakeRotate : MonoBehaviour
     {
         if (other.GetComponent<Player>())
         {
+            transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", false);
             StopAllCoroutines();
         }
     }
@@ -36,13 +43,12 @@ public class SnakeRotate : MonoBehaviour
             {
                 RaycastHit hit;
                 Physics.Raycast(rotTarg.position, rotTarg.forward, out hit);
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow); 
                 //if this becomes a performance problem use a layer mask instead
                 if (hit.collider == null || hit.collider.GetComponent<Player>() == null)
                 {
                     Vector3 dir = player.position - rotTarg.position;
                     dir = Vector3.RotateTowards(rotTarg.forward, dir, rotSpeed * 0.02f, 0);
-                    rotTarg.rotation = Quaternion.LookRotation(dir);
+                    rotTarg.rotation = Quaternion.LookRotation(new Vector3(dir.x, 0, dir.z));
                     
                 }
                 

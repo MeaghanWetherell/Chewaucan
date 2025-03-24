@@ -30,6 +30,7 @@ public class LandMovement : MonoBehaviour
     public float moveSpeedDefault;
     bool _grounded;
     bool _prevGrounded;
+    private float moveSpeedMult;
 
     public MovementSoundEffects soundEffects;
     CheckGroundTexture _terrainTexture;
@@ -91,6 +92,19 @@ public class LandMovement : MonoBehaviour
         _rotateInput = 0;
     }
 
+    //multiplies the movement speed multiplier by mult for the passed number of seconds
+    public void ChangeMoveSpeedMultForTime(float mult, float time)
+    {
+        StartCoroutine(_ChangeMoveSpeedMultForTime(mult, time));
+    }
+
+    private IEnumerator _ChangeMoveSpeedMultForTime(float mult, float time)
+    {
+        moveSpeedMult *= mult;
+        yield return new WaitForSeconds(time);
+        moveSpeedMult *= 1/mult;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -117,12 +131,13 @@ public class LandMovement : MonoBehaviour
             _verticalMovement.y = gravity;
         }
 
-        float rotateMovement = _rotateInput * rotationSpeed; 
+        float rotateMovement = _rotateInput * rotationSpeed * moveSpeedMult; 
         this.transform.Rotate(0f, rotateMovement, 0f);
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
         Vector3 movement = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
         movement *= (moveSpeed / movement.magnitude);
+        movement *= moveSpeedMult;
         
 
         _controller.Move(movement * Time.deltaTime); //forward movement

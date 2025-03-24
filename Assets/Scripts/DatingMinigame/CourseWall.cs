@@ -2,11 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ScriptTags;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CourseWall : MonoBehaviour
 {
     public CourseManager manager;
+
+    public GameObject tumbleweedPrefab;
+
+    [Tooltip("Spawn positions should be along Z forward")]
+    public List<Transform> spawnPositions;
+
+    [Tooltip("Average time in seconds to spawn a tumbleweed")]
+    public float averageTimeToSpawn;
 
     private bool inited = false;
 
@@ -24,11 +34,29 @@ public class CourseWall : MonoBehaviour
     private void OnStart()
     {
         transform.parent.gameObject.SetActive(true);
+        StartCoroutine(spawnTumbleweeds());
     }
 
     private void OnStop()
     {
+        StopAllCoroutines();
         transform.parent.gameObject.SetActive(false);
+    }
+
+    private IEnumerator spawnTumbleweeds()
+    {
+        while (true)
+        {
+            float randSecs = Random.Range(averageTimeToSpawn * 0.5f, averageTimeToSpawn * 1.5f);
+            yield return new WaitForSeconds(randSecs);
+            SpawnTumbleweed();
+        }
+    }
+
+    private void SpawnTumbleweed()
+    {
+        int randPos = Random.Range(0, spawnPositions.Count);
+        Instantiate(tumbleweedPrefab, spawnPositions[randPos].position, spawnPositions[randPos].rotation);
     }
 
     private void OnTriggerEnter(Collider other)
