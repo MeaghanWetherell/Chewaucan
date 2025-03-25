@@ -18,26 +18,32 @@ namespace Misc
         
         private void Awake()
         {
+            if (wallManager != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            validWallIds ??= new List<string>();
+            wallManager = this;
+            DontDestroyOnLoad(this.gameObject);
+            SaveHandler.saveHandler.subToSave(Save);
+            SaveHandler.saveHandler.subToLoad(Load);
+        }
+
+        private void Load(string path)
+        {
             try
             {
                 validWallIds = JsonSerializer.Deserialize<List<String>>(
-                    File.ReadAllText("Saves/" + saveFileName + ".json"));
+                    File.ReadAllText(path+"/" + saveFileName + ".json"));
             } catch(IOException){}
-
             validWallIds ??= new List<string>();
-            if (wallManager != null)
-            {
-                Destroy(wallManager.gameObject);
-            }
-            wallManager = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         
-        private void OnDisable()
+        private void Save(string path)
         {
             string bindJson = JsonSerializer.Serialize(validWallIds);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/" + saveFileName + ".json", bindJson);
+            File.WriteAllText(path+"/" + saveFileName + ".json", bindJson);
         }
 
         public bool checkID(string id)

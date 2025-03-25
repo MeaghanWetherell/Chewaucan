@@ -4,8 +4,7 @@ using UnityEngine.Events;
 
 namespace Misc
 {
-    //define public callbacks for pause and resume
-    //subscribe via public UnityEvent members, call by invoking them or using wrapper methods
+    //define callbacks for pause and resume
     public class PauseCallback : MonoBehaviour
     {
         public static PauseCallback pauseManager;
@@ -20,7 +19,8 @@ namespace Misc
         {
             if (pauseManager != null)
             {
-                Destroy(pauseManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
             pauseManager = this;
             DontDestroyOnLoad(this.gameObject);

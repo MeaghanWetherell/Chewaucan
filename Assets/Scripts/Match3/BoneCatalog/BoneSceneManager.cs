@@ -18,7 +18,8 @@ namespace Match3
         {
             if (boneSceneManager != null)
             {
-                Destroy(boneSceneManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
             boneSceneManager = this;
             DontDestroyOnLoad(this.gameObject);

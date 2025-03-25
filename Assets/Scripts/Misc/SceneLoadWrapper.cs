@@ -23,11 +23,12 @@ namespace Misc
 
         private void Awake()
         {
-            StartCoroutine(fadeInOnStart());
             if (sceneLoadWrapper != null)
             {
-                Destroy(sceneLoadWrapper.gameObject);
+                Destroy(gameObject);
+                return;
             }
+            StartCoroutine(fadeInOnStart());
             sceneLoadWrapper = this;
             DontDestroyOnLoad(this.gameObject);
         }

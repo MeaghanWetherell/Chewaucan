@@ -21,7 +21,7 @@ public static class SaveDialProgressData
         NONE
     }
 
-    public static string saveDataPath = Application.persistentDataPath + "/DialProgess.json";
+    public static string saveDataPath;
 
     /* These ints represent the total number of quests of each type
      * They are set to placeholder values for now, but when we do know how
@@ -62,6 +62,10 @@ public static class SaveDialProgressData
 
     public static void SaveDialProgress(DialProgress dp)
     {
+        if (saveDataPath == null || saveDataPath.Equals(""))
+        {
+            saveDataPath = SaveHandler.saveHandler.getSavePath() + "/DialProgess.json";
+        }
         string saveDialProgress = JsonUtility.ToJson(dp);
         File.WriteAllText(saveDataPath, saveDialProgress);
     }

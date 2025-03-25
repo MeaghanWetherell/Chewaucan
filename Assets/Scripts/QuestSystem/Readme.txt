@@ -8,5 +8,5 @@ If you just need to interface with it to get a quest hooked up you have two opti
 1. Write a class that extends QuestHandler, assign the appropriate quest object in the inspector, and call this.startQuest to initialize the quest and this.progressQuest to progress it.
 2. Instantiate a QuestNode using QuestManager.questManager.createQuestNode(), then call addCount on it to progress it. createQuestNode will return an existing quest with the same ID if there is one or create one for you if there isn't.
 or, do some combination of these. QuestHandler is basically just a simple wrapper over the second. 
-The only methods outside the QuestHandler from the quest system you should ever call externally are QuestManager.createQuestNode(), QuestManager.getNode(), and QuestNode.addCount()
-You can access instance variables on QuestNode if you'd like as well, but treat them as readonly.
+The only methods outside the QuestHandler from the quest system you should ever call externally are the functions above awake
+You can access instance variables on QuestNode if you'd like, but treat them as readonly.

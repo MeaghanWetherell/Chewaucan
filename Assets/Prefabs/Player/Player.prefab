@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: -8828086554326269734}
   - component: {fileID: 7514719063666619591}
   - component: {fileID: -6780453510386105629}
+  - component: {fileID: 883103496534089414}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -206,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dc98e8e466f3c49ac394acdb5f1c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   maxDistToGround: 1.15
   rotationSpeed: 4
   gravity: -2
@@ -217,7 +218,6 @@ MonoBehaviour:
   cameraObj: {fileID: 8539058024222695338}
   minimapCamObj: {fileID: 5824499138386022900}
   staminaUI: {fileID: 0}
-  moveSpeedDefault: 0
   soundEffects: {fileID: 0}
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
@@ -634,6 +634,18 @@ MonoBehaviour:
   controller: {fileID: 7743231800493862508}
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+--- !u!114 &883103496534089414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4dd0eb383d7d24eabfc4ba8ee61d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2229137810595459482
 GameObject:
   m_ObjectHideFlags: 0

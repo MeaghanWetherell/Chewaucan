@@ -46,6 +46,42 @@ namespace QuestSystem
             return node;
         }
 
+        //get the quest object corresponding to the passed id
+        //or null if it does not exist
+        public QuestObj getQuest(string qid)
+        {
+            foreach (QuestObj quest in AllQuests)
+            {
+                if (quest.uniqueID.Equals(qid))
+                {
+                    return quest;
+                }
+            }
+
+            return null;
+        }
+        
+        //gets the quest scriptable object with the passed id
+        //if there isn't one, return null. then,
+        //if the passed quest is new, create it and return it,
+        //otherwise return a reference to the existing quest
+        public QuestNode CreateQuestNode(string qid)
+        {
+            QuestObj obj = getQuest(qid);
+            if (obj == null) return null;
+            QuestNode node = GETNode(obj.uniqueID.ToLower());
+            if (node != null)
+                return node;
+            node = new QuestNode(obj);
+            if(node.startNarration != null)
+                node.startNarration.Begin();
+            if (obj.initFile != null)
+            {
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
+            }
+            return node;
+        }
+
         //use to get specific nodes from the manager. 
         public QuestNode GETNode(string id)
         {
@@ -89,27 +125,14 @@ namespace QuestSystem
         {
             if (questManager != null)
             {
-                Destroy(questManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
             questManager = this;
             DontDestroyOnLoad(transform.gameObject);
-            if (!resetQuests)
-            {
-                LoadFromFile();
-            }
-            else
-            {
-                SaveDialProgressData.DeleteDialProgress();
-            }
-            foreach (QuestObj quest in AllQuests)
-            {
-                if(quest.type != SaveDialProgressData.Dial.NONE)
-                    CountsPerQuestType[(int) quest.type]++;
-            }
-
-            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
-            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
-            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
+            
+            SaveHandler.saveHandler.subToLoad(LoadFromFile);
+            SaveHandler.saveHandler.subToSave(SerializeToJson);
         }
 
         public List<QuestNode> GETQuests()
@@ -117,72 +140,80 @@ namespace QuestSystem
             return _quests;
         }
 
-        private void LoadFromFile()
+        private void LoadFromFile(string path)
         {
-            string allQuestFiles = "";
-            string line = "";
-            StreamReader streamReader;
-            try
+            _quests = new List<QuestNode>();
+            _pins = new QuestNode[3];
+            if(!resetQuests)
             {
-                streamReader = new StreamReader("Saves/SavedQuests.txt");
-                line = streamReader.ReadLine();
-                if (line != null)
-                {
-                    allQuestFiles += line;
-                }
-
-                line = streamReader.ReadLine();
-                while (line != null)
-                {
-                    allQuestFiles += " " + line;
-                    line = streamReader.ReadLine();
-                }
-
-                streamReader.Close();
-            }
-            catch (Exception)
-            { return; }
-            if (allQuestFiles.Equals(""))
-                return;
-            string[] files = allQuestFiles.Split(" ");
-            foreach (string fileName in files)
-            {
+                string allQuestFiles = "";
+                string line = "";
+                StreamReader streamReader;
                 try
                 {
-                    streamReader = new StreamReader("Saves/"+fileName);
+                    streamReader = new StreamReader(path+"/SavedQuests.txt");
                     line = streamReader.ReadLine();
+                    if (line != null)
+                    {
+                        allQuestFiles += line;
+                    }
+
+                    line = streamReader.ReadLine();
+                    while (line != null)
+                    {
+                        allQuestFiles += " " + line;
+                        line = streamReader.ReadLine();
+                    }
+
                     streamReader.Close();
                 }
                 catch (Exception)
-                { Debug.LogError("Error in quest json deserializer");}
-                QuestNode quest = JsonUtility.FromJson<QuestNode>(line);
-                quest.callOnceInitialized();
-                if (quest.isPinned)
+                { return; }
+                if (allQuestFiles.Equals(""))
+                    return;
+                string[] files = allQuestFiles.Split(" ");
+                foreach (string fileName in files)
                 {
-                    AddPin(quest);
+                    try
+                    {
+                        streamReader = new StreamReader(path+"/"+fileName);
+                        line = streamReader.ReadLine();
+                        streamReader.Close();
+                    }
+                    catch (Exception)
+                    { Debug.LogError("Error in quest json deserializer");}
+                    QuestNode quest = JsonUtility.FromJson<QuestNode>(line);
+                    quest.callOnceInitialized();
+                    if (quest.isPinned)
+                    {
+                        AddPin(quest);
+                    }
                 }
             }
-        }
-
-        private void OnDisable()
-        {
-            SerializeToJson();
+            foreach (QuestObj quest in AllQuests)
+            {
+                if(quest.type != SaveDialProgressData.Dial.NONE)
+                    CountsPerQuestType[(int) quest.type]++;
+            }
+            SaveDialProgressData.saveDataPath = path + "/DialProgess.json";
+            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
+            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
+            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
         }
 
         //save the quest data
-        private void SerializeToJson()
+        private void SerializeToJson(string path)
         {
             string allSavedQuests = "";
-            Directory.CreateDirectory("Saves");
             foreach (QuestNode quest in _quests)
             {
                 string questJson = JsonUtility.ToJson(quest);
-                File.WriteAllText("Saves/"+quest.id+".json", questJson);
+                File.WriteAllText(path+"/"+quest.id+".json", questJson);
                 if (!allSavedQuests.Equals(""))
                     allSavedQuests += " ";
                 allSavedQuests += quest.id + ".json";
             }
-            File.WriteAllText("Saves/SavedQuests.txt", allSavedQuests);
+            File.WriteAllText(path+"/SavedQuests.txt", allSavedQuests);
         }
 
         //register a new quest node with the manager. automatically called by new nodes

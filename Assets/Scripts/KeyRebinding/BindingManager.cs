@@ -23,15 +23,24 @@ namespace KeyRebinding
         private Dictionary<String, String> binds = new Dictionary<string, string>();
         private void Awake()
         {
+            if (bindingManager != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
             foreach (InputActionMap map in asset.actionMaps)
             {
                 maps.Add(map);
             }
-            try
-            {
-                binds = JsonSerializer.Deserialize<Dictionary<String, String>>(
-                    File.ReadAllText("SettingSaves/" + saveFileName + ".json"));
-            } catch(IOException){}
+            setBinds();
+            bindingManager = this;
+            DontDestroyOnLoad(this.gameObject);
+            SaveHandler.saveHandler.subSettingToSave(Save);
+            SaveHandler.saveHandler.subSettingToLoad(Load);
+        }
+
+        private void setBinds()
+        {
             foreach (InputActionMap map in maps)
             {
                 foreach (InputAction action in map)
@@ -46,19 +55,22 @@ namespace KeyRebinding
                     }
                 }
             }
-            if (bindingManager != null)
-            {
-                Destroy(bindingManager.gameObject);
-            }
-            bindingManager = this;
-            DontDestroyOnLoad(this.gameObject);
         }
 
-        private void OnDisable()
+        private void Load(string path)
+        {
+            try
+            {
+                binds = JsonSerializer.Deserialize<Dictionary<String, String>>(
+                    File.ReadAllText(path+"/" + saveFileName + ".json"));
+            } catch(IOException){}
+            setBinds();
+        }
+
+        private void Save(string path)
         {
             string bindJson = JsonSerializer.Serialize(binds);
-            Directory.CreateDirectory("SettingSaves");
-            File.WriteAllText("SettingSaves/" + saveFileName + ".json", bindJson);
+            File.WriteAllText(path+"/" + saveFileName + ".json", bindJson);
         }
 
         public void ResetBinds()

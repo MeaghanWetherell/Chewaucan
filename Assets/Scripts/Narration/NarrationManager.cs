@@ -42,50 +42,42 @@ namespace Narration
         //initialize singleton and load save
         private void Awake()
         {
-            if(!reset)
-                ReadFromJson();
-            else
-            {
-                shouldRun = new Dictionary<string, bool>();
-                hasRun = new List<string>();
-            }
             if (narrationManager != null)
             {
-                Destroy(narrationManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
+            shouldRun = new Dictionary<string, bool>();
+            hasRun = new List<string>();
             narrationManager = this;
             DontDestroyOnLoad(transform.gameObject);
+            SaveHandler.saveHandler.subToLoad(ReadFromJson);
+            SaveHandler.saveHandler.subToSave(SerializeToJson);
         }
 
         //read in save from disk
-        private void ReadFromJson()
+        private void ReadFromJson(string path)
         {
+            if (reset) return;
             try
             {
-                shouldRun = JsonSerializer.Deserialize<Dictionary<string, bool>>(File.ReadAllText("Saves/shouldRun.json"));
+                shouldRun = JsonSerializer.Deserialize<Dictionary<string, bool>>(File.ReadAllText(path+"/shouldRun.json"));
             } catch(IOException){}
             shouldRun ??= new Dictionary<string, bool>();
             try
             {
-                hasRun = JsonSerializer.Deserialize<List<string>>(File.ReadAllText("Saves/hasRun.json"));
+                hasRun = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(path+"/hasRun.json"));
             } catch(IOException){}
             hasRun ??= new List<string>();
         }
 
-        //serialize on exit
-        private void OnDisable()
-        {
-            SerializeToJSON();
-        }
-
         //save the narrations that should and have run
-        private void SerializeToJSON()
+        private void SerializeToJson(string path)
         {
             string shouldRunSave = JsonSerializer.Serialize(shouldRun);
             string hasRunSave = JsonSerializer.Serialize(hasRun);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/shouldRun.json", shouldRunSave);
-            File.WriteAllText("Saves/hasRun.json", hasRunSave);
+            File.WriteAllText(path+"/shouldRun.json", shouldRunSave);
+            File.WriteAllText(path+"/hasRun.json", hasRunSave);
         }
     }
 }

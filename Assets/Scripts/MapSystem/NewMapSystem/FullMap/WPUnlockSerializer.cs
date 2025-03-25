@@ -20,37 +20,32 @@ public class WPUnlockSerializer : MonoBehaviour
 
     public void Unlock(String name)
     {
-        if (wpUnlocks.ContainsKey(name))
-            wpUnlocks[name] = true;
-        else
-        {
-            wpUnlocks.Add(name, true);
-        }
+        wpUnlocks[name] = true;
     }
 
     private void Awake()
     {
-        SceneManager.sceneLoaded += OnMapLoad;
-        DeSerialize();
         if (wpUnlockSerializer != null)
         {
-            Destroy(wpUnlockSerializer.gameObject);
+            Destroy(gameObject);
+            return;
         }
+        SceneManager.sceneLoaded += OnMapLoad;
         wpUnlockSerializer = this;
         DontDestroyOnLoad(this.gameObject);
+        SaveHandler.saveHandler.subToSave(Serialize);
+        SaveHandler.saveHandler.subToLoad(DeSerialize);
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnMapLoad;
-        Serialize();
     }
 
-    private void Serialize()
+    private void Serialize(string path)
     {
         string completedJson = JsonSerializer.Serialize(wpUnlocks);
-        Directory.CreateDirectory("Saves");
-        File.WriteAllText("Saves/"+fileName+".json", completedJson);
+        File.WriteAllText(path+"/"+fileName+".json", completedJson);
     }
 
     private void OnMapLoad(Scene scene, LoadSceneMode mode)
@@ -89,19 +84,19 @@ public class WPUnlockSerializer : MonoBehaviour
             GameObject.Find("PleistoceneMapView").SetActive(false);
     }
 
-    private void DeSerialize()
+    private void DeSerialize(string path)
     {
-        
         try
         {
-            wpUnlocks = 
-                JsonSerializer.Deserialize<Dictionary<String, bool>>(File.ReadAllText("Saves/" + fileName + ".json"));
+            wpUnlocks =
+                JsonSerializer.Deserialize<Dictionary<String, bool>>(File.ReadAllText(path + "/" + fileName + ".json"));
             if (wpUnlocks == null) wpUnlocks = new Dictionary<string, bool>();
-            
+
         }
         catch (IOException)
         {
-            return;
+            wpUnlocks = new Dictionary<string, bool>();
         }
+
     }
 }

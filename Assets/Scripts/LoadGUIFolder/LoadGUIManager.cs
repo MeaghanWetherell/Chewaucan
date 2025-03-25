@@ -50,11 +50,12 @@ namespace LoadGUIFolder
         
         private void Awake()
         {
-            popUp = Resources.Load<GameObject>("PopUp");
             if (loadGUIManager != null)
             {
-                Destroy(loadGUIManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
+            popUp = Resources.Load<GameObject>("PopUp");
             loadGUIManager = this;
             DontDestroyOnLoad(this.gameObject);
         }

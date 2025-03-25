@@ -33,6 +33,8 @@ namespace Audio
         [Tooltip("names of the sound parameters, in the order master volume, narration volume, music volume, effect volume. Must match names of exposed parameters in master mixer")]
         public List<String> volParams;
 
+        [NonSerialized] public bool subtitlesOn;
+
         //the slider values for the player's audio preferences
         //In order: master, narration, music, effects
         private List<float> sliderVals;
@@ -70,7 +72,7 @@ namespace Audio
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
-            if (times != null && lines != null)
+            if (subtitlesOn && times != null && lines != null)
             {
                 currentSubLines = lines;
                 currentSubTimes = times;
@@ -104,8 +106,11 @@ namespace Audio
         //stop the active narration
         public void StopNarration()
         {
-            InvokeNarrComplete();
-            narrator.Stop();
+            if (narrator.isPlaying)
+            {
+                InvokeNarrComplete();
+                narrator.Stop();
+            }
         }
         
         //pause the active narration
@@ -191,11 +196,6 @@ namespace Audio
             //set relative volume of the bgm and narrator. is not on log scale
             bgm.volume = standVol;
             narrator.volume = standVol;
-            try
-            {
-                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("SettingSaves/"+fileName+".json"));
-            }
-            catch (IOException){ }
             sliderVals ??= new List<float>();
             while (sliderVals.Count < volParams.Count)
             {
@@ -204,10 +204,13 @@ namespace Audio
             StartCoroutine(RunSongs());
             if (soundManager != null)
             {
-                Destroy(soundManager.gameObject);
+                Destroy(gameObject);
+                return;
             }
             soundManager = this;
             DontDestroyOnLoad(this.gameObject);
+            SaveHandler.saveHandler.subSettingToSave(Save);
+            SaveHandler.saveHandler.subSettingToLoad(Load);
         }
 
         //set the mixer values. I can't remember *why* this needs to be in start instead of awake, but it does
@@ -221,12 +224,42 @@ namespace Audio
             PauseCallback.pauseManager.SubscribeToResume(SubtitleResume);
         }
 
+        private void Load(string path)
+        {
+            StopAllCoroutines();
+            narrator.clip = null;
+            StartCoroutine(RunSongs());
+            try
+            {
+                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path+"/"+fileName+".json"));
+                subtitlesOn = JsonSerializer.Deserialize<bool>(File.ReadAllText(path+"/subtitlesOn.json"));
+            }
+            catch (IOException){ }
+            sliderVals ??= new List<float>();
+            while (sliderVals.Count < volParams.Count)
+            {
+                sliderVals.Add(standVol);
+            }
+            for (int i = 0; i < volParams.Count; i++)
+            {
+                mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
+            }
+        }
+
+        private void Save(string path)
+        {
+            StopAllCoroutines();
+            narrator.clip = null;
+            StartCoroutine(RunSongs());
+            string completedJson = JsonSerializer.Serialize(sliderVals);
+            File.WriteAllText(path+"/"+fileName+".json", completedJson);
+            string subsOn = JsonSerializer.Serialize(subtitlesOn);
+            File.WriteAllText(path + "/subtitlesOn.json", subsOn);
+        }
+
         //save sound settings
         private void OnDisable()
         {
-            string completedJson = JsonSerializer.Serialize(sliderVals);
-            Directory.CreateDirectory("SettingSaves");
-            File.WriteAllText("SettingSaves/"+fileName+".json", completedJson);
             PauseCallback.pauseManager.UnsubToPause(SubtitlePause);
             PauseCallback.pauseManager.UnsubToResume(SubtitleResume);
         }

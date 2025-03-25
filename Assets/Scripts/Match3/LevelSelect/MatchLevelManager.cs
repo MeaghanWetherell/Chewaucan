@@ -31,14 +31,22 @@ namespace Match3
 
         private void Awake()
         {
-            //MeshDataList allMeshes = Resources.Load<MeshDataList>("meshes/Match3Meshes");
-            //foreach (MeshDataObj obj in allMeshes.meshes)
-            //{
-                //obj.Load();
-            //}
+            if (matchLevelManager != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            matchLevelManager = this;
+            DontDestroyOnLoad(this.gameObject);
+            SaveHandler.saveHandler.subToLoad(Load);
+            SaveHandler.saveHandler.subToSave(Save);
+        }
+
+        private void Load(string path)
+        {
             try
             {
-                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText("Saves/"+levelsCompleteFileName+".json"));
+                levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText(path+"/"+levelsCompleteFileName+".json"));
             }
             catch (IOException){ }
             levelsComplete ??= new List<bool>();
@@ -47,18 +55,13 @@ namespace Match3
                 levelsComplete.Add(false);
             try
             {
-                highScores = JsonSerializer.Deserialize<List<float>>(File.ReadAllText("Saves/"+highScoreFileName+".json"));
+                highScores = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path+"/"+highScoreFileName+".json"));
             }
-            catch (IOException){ highScores = new List<float>();}
+            catch (IOException){ }
+            highScores ??= new List<float>();
             // ReSharper disable once PossibleNullReferenceException
             while(highScores.Count < levels.Count)
                 highScores.Add(0);
-            if (matchLevelManager != null)
-            {
-                Destroy(matchLevelManager.gameObject);
-            }
-            matchLevelManager = this;
-            DontDestroyOnLoad(this.gameObject);
         }
 
         private void OnEnable()
@@ -69,11 +72,14 @@ namespace Match3
         private void OnDisable()
         {
             SceneLoadWrapper.sceneLoadWrapper.OnLoadScene.RemoveListener(SetEndlessHighScore);
+        }
+
+        private void Save(string path)
+        {
             string completedJson = JsonSerializer.Serialize(levelsComplete);
-            Directory.CreateDirectory("Saves");
-            File.WriteAllText("Saves/"+levelsCompleteFileName+".json", completedJson);
+            File.WriteAllText(path+"/"+levelsCompleteFileName+".json", completedJson);
             string scoresJson = JsonSerializer.Serialize(highScores);
-            File.WriteAllText("Saves/"+highScoreFileName+".json", scoresJson);
+            File.WriteAllText(path+"/"+highScoreFileName+".json", scoresJson);
         }
 
         //ends the match 3 game and displays results, including the passed reason for game end

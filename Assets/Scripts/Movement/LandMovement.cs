@@ -1,3 +1,4 @@
+using System;
 using Misc;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,10 +28,10 @@ public class LandMovement : MonoBehaviour
     private float _rotateInput;
     Vector3 _verticalMovement;
     private const float Gravity = -9.18f;
-    public float moveSpeedDefault;
+    [NonSerialized]public float moveSpeedDefault;
     bool _grounded;
     bool _prevGrounded;
-    private float moveSpeedMult;
+    private float moveSpeedMult = 1;
 
     public MovementSoundEffects soundEffects;
     CheckGroundTexture _terrainTexture;
@@ -138,6 +139,7 @@ public class LandMovement : MonoBehaviour
         Vector3 movement = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
         movement *= (moveSpeed / movement.magnitude);
         movement *= moveSpeedMult;
+        
         
 
         _controller.Move(movement * Time.deltaTime); //forward movement

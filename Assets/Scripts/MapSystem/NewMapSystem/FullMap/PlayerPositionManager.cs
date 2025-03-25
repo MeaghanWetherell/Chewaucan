@@ -17,14 +17,15 @@ public class PlayerPositionManager : MonoBehaviour
     
     void Start()
     {
+        if (playerPositionManager != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         nextPlayerPosition.Add(Vector3.negativeInfinity);
         nextPlayerPosition.Add(Vector3.negativeInfinity);
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
-        if (playerPositionManager != null)
-        {
-            Destroy(playerPositionManager.gameObject);
-        }
         playerPositionManager = this;
         DontDestroyOnLoad(transform.gameObject);
     }
