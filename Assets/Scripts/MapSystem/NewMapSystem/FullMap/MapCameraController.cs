@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -104,6 +105,6 @@ public class MapCameraController : MonoBehaviour
 
     private void SwitchToWorldScene(InputAction.CallbackContext context)
     {
-        SceneManager.LoadScene("Modern Map");
+        SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
     }
 }

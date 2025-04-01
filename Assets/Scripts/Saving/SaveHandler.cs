@@ -28,6 +28,8 @@ public class SaveHandler : MonoBehaviour
 
     private UnityEvent<string> saveSettings = new UnityEvent<string>();
 
+    private bool loadImmediately;
+
     private Coroutine timeTracker;
 
     private void Awake()
@@ -51,6 +53,10 @@ public class SaveHandler : MonoBehaviour
         }
         catch (FileNotFoundException)
         { }
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals(""))
+        {
+            loadImmediately = true;
+        }
     }
 
     private void Start()
@@ -90,6 +96,7 @@ public class SaveHandler : MonoBehaviour
 
     public void subToLoad(UnityAction<string> load)
     {
+        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+savePath);
         loadRegular.AddListener(load);
     }
 
@@ -100,6 +107,7 @@ public class SaveHandler : MonoBehaviour
     
     public void subSettingToLoad(UnityAction<string> load)
     {
+        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
         loadSettings.AddListener(load);
     }
 

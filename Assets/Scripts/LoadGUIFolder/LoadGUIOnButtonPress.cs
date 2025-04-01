@@ -18,7 +18,7 @@ namespace LoadGUIFolder
         }
 
         //if the gui is open, reenable player movement and close it, otherwise do the opposite
-        private void OnButtonPressed(InputAction.CallbackContext callbackContext)
+        protected virtual void OnButtonPressed(InputAction.CallbackContext callbackContext)
         {
             ONOpenTrigger();
         }

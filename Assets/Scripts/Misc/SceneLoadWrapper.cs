@@ -14,6 +14,10 @@ namespace Misc
         public static SceneLoadWrapper sceneLoadWrapper;
 
         public int currentSceneType = 0;
+
+        public bool isLoading = false;
+
+        private string loadScene = "";
         
         [Tooltip("List of scenes in modern map")] public List<String> modernMapScenes;
 
@@ -51,11 +55,28 @@ namespace Misc
         private void OnEnable()
         {
             SceneManager.sceneLoaded += FadeOnSceneLoad;
+            SceneManager.sceneLoaded += registerLoad;
         }
 
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= FadeOnSceneLoad;
+            SceneManager.sceneLoaded -= registerLoad;
+        }
+
+        private void registerLoad(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name.Equals(loadScene))
+            {
+                StartCoroutine(regLoadActual());
+            }
+        }
+
+        private IEnumerator regLoadActual()
+        {
+            yield return new WaitForSeconds(0);
+            isLoading = false;
+            loadScene = "";
         }
 
         public void LoadScene(String sceneName)
@@ -86,6 +107,8 @@ namespace Misc
             {
                 currentSceneType = 1;
             }
+            isLoading = true;
+            loadScene = sceneName;
             SceneManager.LoadScene(sceneName);
         }
 
