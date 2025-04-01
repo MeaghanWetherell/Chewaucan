@@ -137,12 +137,20 @@ public class LandMovement : MonoBehaviour
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
         Vector3 movement = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
-        movement *= (moveSpeed / movement.magnitude);
-        movement *= moveSpeedMult;
-        
+        if (movement.magnitude > 0)
+        {
+            movement *= (moveSpeed / movement.magnitude);
+            movement *= moveSpeedMult;
+        }
         
 
         _controller.Move(movement * Time.deltaTime); //forward movement
+        
+        if (float.IsNaN(_verticalMovement.x) || float.IsNaN(_verticalMovement.y) || float.IsNaN(_verticalMovement.z))
+        {
+            Debug.Log("NaN detected in movement vector. Zeroing out.");
+            _verticalMovement = Vector3.zero;
+        }
 
         //moves the player downward to ensure isGrounded returns correctly
         _verticalMovement.y += Gravity * Time.deltaTime;
