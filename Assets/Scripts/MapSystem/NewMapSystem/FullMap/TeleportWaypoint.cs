@@ -31,7 +31,7 @@ public class TeleportWaypoint : MonoBehaviour
     // gameobjects and components pertaining to the canvas. All are automatically set
     private GameObject teleportUI;
     private TextMeshProUGUI teleportPositionLabel;
-    private TextMeshProUGUI teleportWaypointTitle;//Meaghan added this
+    private TextMeshProUGUI teleportWaypointTitle;
     private Animator animator;
     private TeleportButton teleportButton;
     private Vector3 objPosition;
