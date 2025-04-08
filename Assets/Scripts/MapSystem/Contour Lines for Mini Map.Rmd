@@ -1,0 +1,95 @@
+---
+title: "Topographic Maps from .Raw Heightmap Files"
+output: html_document
+---
+
+This file pulls in .raw files exported from Unity Terrains and turns them into a topographic map with filled contour lines. 
+
+In order to export all of the .raw files from your terrains, we have created a tool called "Export All Terrain Maps." This tool is located in Assets/Editor; the script is called TerrainHeightmapExporter.cs
+
+To use it, load your scene then go to tools > Export All Terrain Maps. It automatically exports them to the Assets/Heightmap folder. Make sure all terrains between scenes have unique names if you want them to have different .raw exports.
+
+```{r}
+library(terra)
+library(ggplot2)
+library(tidyterra)
+
+setwd(this.path::here("../..")) #Note - to get this to run, install the package 'this.path' from CRAN first. 
+
+height.location = paste(getwd(), "/Heightmap/", sep="")
+
+wh <- c(1025, 1025) #dimensions of the raw files
+prod(wh) #this should match the raw file size
+
+#this function imports the raw files and reverses their direction so they're read in the same order that ggplot will expect them in later.
+import.raw <- function(x){
+  raw.1 <- readBin(paste(height.location, x, sep = ""), "integer", n = prod(wh), size = 2, signed = TRUE, endian = "little")
+  raw.2 <- t(matrix(data = raw.1, nrow = wh[1], ncol = wh[2])) #transpose and make matrix
+  raw.3 <- apply(raw.2, 2, rev) #reverse vertical so it all meshes
+  return(raw.3)
+}
+
+du <- import.raw("Dunes.raw")
+ss  <- import.raw("Sandy_Shores.raw")
+fo  <- import.raw("Forestlands.raw")
+
+sh <- import.raw("Shrublands.raw")
+ca <- import.raw("Cave_A.raw")
+bp  <- import.raw("Bone_pile.raw")
+
+is <- import.raw("Island.raw")
+cb <- import.raw("Cave_B.raw")
+gs <- import.raw("Grasslands.raw")
+
+
+#This binds together the terrain into a single raster image
+row1 <- do.call(cbind, list(du, ss, fo))
+row2 <- do.call(cbind, list(sh, ca, bp))
+row3 <- do.call(cbind, list(is, cb, gs))
+together <- do.call(rbind, list(row1, row2, row3))
+together.1 <- rast(together)
+```
+
+
+
+# The Modern Map
+Because the modern map has no latke, it has a higher number of elevation breaks.
+```{r}
+mybreaks = c(-Inf, 330, seq(2000, 22000, by = 2000))
+
+mycol = c("cadetblue", "#ffedd8", "#f3d5b5", "#e7bc91", "#bc8a5f", "#a47148", "#8b5e34", "#6f4518", "#414833", "#656d4a", "#a4ac86", "#a4ac86")
+
+ggplot()+
+  geom_spatraster_contour_filled(data=together.1, breaks = mybreaks) +
+  scale_fill_manual(values = mycol)+
+  theme_void() +
+  theme(legend.position = "none")
+
+ggsave("/Scripts/MapSystem/NewMapSystem/Modern_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
+```
+
+
+# The Pleistocene
+Most of it is underwater so we make that the cadet blue color.
+```{r}
+mybreaks2 = c(-Inf, seq(4000, 22000, by = 2000))
+
+mycol2 = c("cadetblue", "#ffedd8", "#f3d5b5", "#e7bc91", "#bc8a5f", "#a47148", "#414833", "#656d4a", "#a4ac86", "#a4ac86")
+
+ggplot()+
+  geom_spatraster_contour_filled(data=together.1, breaks = mybreaks2) +
+  scale_fill_manual(values = mycol2)+
+  theme_void() +
+  theme(legend.position = "none")
+
+ggsave("/Scripts/MapSystem/NewMapSystem/Pleistocene_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
+```
+
+
+
+# Resources Used
+
+https://stackoverflow.com/questions/50361059/import-raw-image-in-r
+https://forum.posit.co/t/solution-to-reading-raw-images-into-r/45435/8
+https://dieghernan.github.io/tidyterra/reference/geom_spat_contour.html
+https://rdrr.io/cran/raster/man/rasterToContour.html

@@ -64,7 +64,12 @@ The Full Map View
 
 Drawing a new Map Image
 	The minimap image itself is a 1m:1px scale representation of the world, where 1 pixel in the image is equal
-	to 1 meter (or 1 unit) in the game world. Please keep to this scaling when drawing a new map image . This 
+	to 1 meter (or 1 unit) in the game world. Please keep to this scaling when drawing a new map image. This 
 	same image is also used in the full map view scene.
+
 	When the new image is put into unity (preferably as a png), ensure that the png is set a a sprite and that the 
 	pixels per unit is set to 1 and also that the pivot is set to the bottom left. All other settings remain default.
+
+	There is a option to create a topographic map using the current heightmap raw files in the "Contour Lines for Mini Map.Rmd" file.
+	This imports the raw files from the Heightmap folder and creates and exports a topographic map version in R. 
+	To export all of the raw files, use the "Export All Terrain Maps" tool, coded as TerrainHeightmapExporter.cs in the Assets/Editor folder.
