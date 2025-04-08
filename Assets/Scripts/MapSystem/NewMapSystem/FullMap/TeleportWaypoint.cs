@@ -21,6 +21,7 @@ public class TeleportWaypoint : MonoBehaviour
 
     [Tooltip("Unique name for the waypoint")]
     public String wpName;
+    public String wpNameNice;//the name that is tidy and will be displayed
 
     // the world position this waypoint teleports to. Will be automatically set
     [NonSerialized] public Vector3 teleportToPosition;
@@ -30,9 +31,9 @@ public class TeleportWaypoint : MonoBehaviour
     // gameobjects and components pertaining to the canvas. All are automatically set
     private GameObject teleportUI;
     private TextMeshProUGUI teleportPositionLabel;
+    private TextMeshProUGUI teleportWaypointTitle;//Meaghan added this
     private Animator animator;
     private TeleportButton teleportButton;
-
     private Vector3 objPosition;
 
     // Start is called before the first frame update
@@ -46,7 +47,10 @@ public class TeleportWaypoint : MonoBehaviour
         teleportUI = GameObject.Find("Teleport Info");
         animator = teleportUI.GetComponent<Animator>();
         teleportButton = FindAnyObjectByType<TeleportButton>();
-        teleportPositionLabel = teleportUI.GetComponentInChildren<TextMeshProUGUI>();
+
+        // teleportPositionLabel = teleportUI.GetComponentInChildren<TextMeshProUGUI>();
+        teleportPositionLabel = teleportUI.transform.Find("position label").GetComponentInChildren<TextMeshProUGUI>();
+        teleportWaypointTitle = teleportUI.transform.Find("Waypoint Title").GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // When this waypoint is clicked, the UI animates in to show the coordinates and 
@@ -57,6 +61,7 @@ public class TeleportWaypoint : MonoBehaviour
         //Debug.Log("Teleport to "+teleportToPosition);
         animator.SetBool("active", true);
         teleportPositionLabel.text = teleportToPosition.ToString();
+        teleportWaypointTitle.text = wpNameNice;
         teleportButton.setTeleportTo(this);
     }
 
