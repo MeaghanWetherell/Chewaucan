@@ -57,8 +57,9 @@ public class TeleportWaypoint : MonoBehaviour
     // button to teleport. The button's coordinates are set to this object's teleportToPosition
     private void OnMouseDown()
     {
+        Debug.Log("clicked WP");
         if (!unlocked) return;
-        //Debug.Log("Teleport to "+teleportToPosition);
+        Debug.Log("Teleport to "+teleportToPosition);
         animator.SetBool("active", true);
         teleportPositionLabel.text = teleportToPosition.ToString();
         teleportWaypointTitle.text = wpNameNice;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,6 +40,7 @@ public class MapUIController : MonoBehaviour
     //default button to press is M
     void SwitchToFullMapView(InputAction.CallbackContext context)
     {
-        SceneManager.LoadScene("FullMapView");
+        
+        SceneLoadWrapper.sceneLoadWrapper.LoadScene("FullMapView");
     }
 }

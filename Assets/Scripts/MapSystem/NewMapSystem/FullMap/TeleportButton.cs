@@ -17,8 +17,10 @@ public class TeleportButton : MonoBehaviour
 
     public void Teleport()
     {
+        Debug.Log("teleport");
         if (teleportTo == null)
             return;
+        Debug.Log("teleport2");
         PlayerPositionManager.playerPositionManager.setPlayerPosition(teleportTo.teleportToPosition, 0);
         if(teleportTo.mapType == TeleportWaypoint.MapType.modern)
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");

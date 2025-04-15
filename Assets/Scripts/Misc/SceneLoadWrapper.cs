@@ -103,7 +103,7 @@ namespace Misc
             {
                 currentSceneType = 0;
             }
-            else
+            else if(pleistoceneMapScenes.Contains(sceneName))
             {
                 currentSceneType = 1;
             }
