@@ -7,7 +7,7 @@ namespace Audio
 {
     public class ChangeVol : MonoBehaviour
     {
-        [Tooltip("The index in the vol list this slider should change. In order: master, music, effects")]
+        [Tooltip("The index in the vol list this slider should change. In order: master, narration, music, effects")]
         public int index;
 
         private void OnEnable()
