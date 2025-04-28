@@ -36,8 +36,12 @@ namespace KeyRebinding
         public void StartRebind()
         {
             toRebind.Disable();
-            
-            rebindOp = toRebind.PerformInteractiveRebinding(index).WithControlsExcluding("<Mouse>/position").WithControlsExcluding("<Mouse>/delta").WithControlsExcluding("<Gamepad>/Start").WithControlsExcluding("<Keyboard>/escape").OnMatchWaitForAnother(0.1f).OnComplete(operation => RebindComplete());
+
+            rebindOp = toRebind.PerformInteractiveRebinding(index).WithControlsExcluding("<Mouse>/position")
+                .WithControlsExcluding("<Mouse>/delta").WithControlsExcluding("<Gamepad>/Start")
+                .WithControlsExcluding("<Keyboard>/escape").OnMatchWaitForAnother(0.1f)
+                .OnComplete(
+                    operation => { RebindComplete(); operation.Dispose();});  
 
             keyText.text = "Listening for input";
             
