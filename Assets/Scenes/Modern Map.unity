@@ -16329,6 +16329,10 @@ PrefabInstance:
       propertyPath: fader
       value: 
       objectReference: {fileID: 639796836}
+    - target: {fileID: 4607294004319653680, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ce25b9ed594759d4791066dc333bc124, type: 3}
     - target: {fileID: 5896669271322049450, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: far clip plane
       value: 2000
@@ -16352,15 +16356,63 @@ PrefabInstance:
     - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: swimSounds.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 743cd046930ab7b46ab95c0e32438b36, type: 3}
+      objectReference: {fileID: 8300000, guid: cb87fd698c0cc4845a54eb9d6326d40a, type: 3}
     - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: swimSprintSounds.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: swimSprintSounds.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 743cd046930ab7b46ab95c0e32438b36, type: 3}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[2].sounds
+      value: 
+      objectReference: {fileID: 11400000, guid: 07b8495d48f8fbf418c38433948e30e2, type: 2}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[5].sounds
+      value: 
+      objectReference: {fileID: 11400000, guid: 5db2c016f97690647acfdd74020a62c1, type: 2}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[0].keywords.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[2].keywords.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[3].keywords.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[5].keywords.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[0].keywords.Array.data[0]
+      value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[2].keywords.Array.data[0]
+      value: Leaf
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[2].keywords.Array.data[1]
+      value: Leaves
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[3].keywords.Array.data[2]
+      value: Crack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701135232965166305, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: movementSoundInfo.Array.data[5].keywords.Array.data[0]
+      value: Sand
+      objectReference: {fileID: 0}
     - target: {fileID: 6769626399634015360, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: debugCanvas
       value: 
