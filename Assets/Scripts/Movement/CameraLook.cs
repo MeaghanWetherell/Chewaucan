@@ -16,6 +16,10 @@ public class CameraLook : MonoBehaviour
 
     Vector2 _lookInput;
     float _xRotation;
+    private float _yRotation;
+
+    [NonSerialized] public bool clampY;
+    [NonSerialized] public float clampYCenter;
 
     //subscribe to event functions
     private void Start()
@@ -56,8 +60,18 @@ public class CameraLook : MonoBehaviour
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -90f, minViewDist);
 
-        mainCamera.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        transform.Rotate(Vector3.up * mouseX);
+        if (clampY)
+        {
+            _yRotation += mouseX;
+            _yRotation = Mathf.Clamp(_yRotation, clampYCenter-90, clampYCenter+90);
+            
+            mainCamera.transform.localRotation = Quaternion.Euler(_xRotation, _yRotation, 0f);
+        }
+        else
+        {
+            mainCamera.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            transform.Rotate(Vector3.up * mouseX);
+        }
 
         if (_lookInput.x > 0)
         {

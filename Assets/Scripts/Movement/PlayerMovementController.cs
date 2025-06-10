@@ -47,46 +47,13 @@ public class PlayerMovementController : MonoBehaviour
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
-    public void SwitchToClimbing(Quaternion targRot, Collider curCollider)
+    public void SwitchToClimbing(Collider curCollider)
     {
-        climbingMovement.targRot = targRot;
         climbingMovement.curCollider = curCollider;
+        climbingMovement.moveInput = landMovement.moveInput;
         walking = false;
         swimming = false;
         climbing = true;
-        SetScripts();
-    }
-
-    private IEnumerator ClimbingDisabled()
-    {
-        float rotSpeed = climbingMovement.rotSpeed;
-        float x = transform.eulerAngles.x;
-        float z = transform.eulerAngles.z;
-        while (Mathf.Abs(x)+Mathf.Abs(z)>6f)
-        {
-            if (x > 3f)
-            {
-                transform.Rotate(Vector3.left, rotSpeed*0.05f);
-            }
-
-            else if (x < -3f)
-            {
-                transform.Rotate(Vector3.right, rotSpeed*0.05f);
-            }
-
-            if (z > 3f)
-            {
-                transform.Rotate(Vector3.forward, rotSpeed*0.05f);
-            }
-            else if (z < -3f)
-            {
-                transform.Rotate(Vector3.back, rotSpeed*0.05f);
-            }
-            
-            x = transform.eulerAngles.x;
-            z = transform.eulerAngles.z;
-            yield return new WaitForSeconds(0.05f);
-        }
         SetScripts();
     }
 
@@ -103,20 +70,10 @@ public class PlayerMovementController : MonoBehaviour
 
     public void SwitchToWalking()
     {
-        if (climbing)
-        {
-            walking = true;
-            swimming = false;
-            climbing = false;
-            StartCoroutine(ClimbingDisabled());
-        }
-        else
-        {
             walking = true;
             swimming = false;
             climbing = false;
             SetScripts();
-        }
     }
 
     private void SetScripts()

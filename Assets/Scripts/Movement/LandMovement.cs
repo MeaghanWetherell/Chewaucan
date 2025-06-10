@@ -2,6 +2,7 @@ using System;
 using Misc;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,9 +23,12 @@ public class LandMovement : MonoBehaviour
     public GameObject cameraObj;
     public GameObject minimapCamObj;
     public Slider staminaUI;
+    public float standRotSpeed;
 
     CharacterController _controller;
-    Vector2 _moveInput;
+    private Vector2 _moveInput;
+
+    public Vector2 moveInput => _moveInput;
     private float _rotateInput;
     Vector3 _verticalMovement;
     private const float Gravity = -9.18f;
@@ -70,6 +74,8 @@ public class LandMovement : MonoBehaviour
         jumpRef.action.started += OnJump;
         sprintRef.action.performed += OnSprint;
         sprintRef.action.canceled += OnSprint;
+
+        StartCoroutine(RotateToStand());
     }
 
     private void OnDisable()
@@ -81,6 +87,59 @@ public class LandMovement : MonoBehaviour
         jumpRef.action.started -= OnJump;
         sprintRef.action.performed -= OnSprint;
         sprintRef.action.canceled -= OnSprint;
+        
+        StopAllCoroutines();
+    }
+
+    private IEnumerator RotateToStand()
+    {
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0,transform.rotation.eulerAngles.y,0));
+        float saveSpeed = rotationSpeed;
+        float saveSpeed2 = moveSpeed;
+        moveSpeed = 0;
+        rotationSpeed = 0;
+        _controller.enabled = false;
+        while (!rotApproximatelyZero())
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.05f * standRotSpeed);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        moveSpeed = saveSpeed2;
+        rotationSpeed = saveSpeed;
+        _controller.enabled = true;
+    }
+
+    private bool rotApproximatelyZero()
+    {
+        float tolerance = 0.5f;
+        Vector3 rot = transform.rotation.eulerAngles;
+        float x = normalRot(rot.x);
+        float z = normalRot(rot.z);
+        if (x > -tolerance && x < tolerance)
+        {
+            if (z > -tolerance && z < tolerance)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private float normalRot(float rot)
+    {
+        while (rot > 360)
+        {
+            rot -= 360;
+        }
+
+        while (rot < -360)
+        {
+            rot += 360;
+        }
+
+        return rot;
     }
 
     private void ZeroMove(InputAction.CallbackContext context)
@@ -110,7 +169,8 @@ public class LandMovement : MonoBehaviour
     void Update()
     {
         minimapCamObj.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        Move();
+        if(_controller.enabled)
+            Move();
     }
 
     private void Move()

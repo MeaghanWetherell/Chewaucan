@@ -11,8 +11,6 @@ using Vector2 = UnityEngine.Vector2;
 
 public class ClimbingMovement : MonoBehaviour
 {
-    [NonSerialized]public Quaternion targRot;
-
     [NonSerialized] public Collider curCollider;
 
     public float rotSpeed;
@@ -20,65 +18,119 @@ public class ClimbingMovement : MonoBehaviour
     public LandMovement landMovement;
 
     public CharacterController controller;
-    Vector2 _moveInput;
+    public Vector2 moveInput;
 
     public InputActionReference moveRef;
     public InputActionReference sprintRef;
-    
+
+    private Vector3 targetNormal;
     
     private void OnEnable()
     {
-        StartCoroutine(RotateToSurface());
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3, LayerMask.GetMask("Climbable")))
+        {
+            targetNormal = -hit.normal;
+            CameraLook look = GetComponentInChildren<CameraLook>();
+            look.clampY = true;
+            look.clampYCenter = targetNormal.y;
+        }
+
+        StartCoroutine(rotate());
+        moveRef.action.performed += OnMove;
+        moveRef.action.canceled += ZeroMove;
+        sprintRef.action.performed += OnSprint;
+        sprintRef.action.canceled += OnSprint;
     }
 
     private void OnDisable()
     {
+        StopAllCoroutines();
+        GetComponentInChildren<CameraLook>().clampY = false;
+        
         moveRef.action.performed -= OnMove;
-        moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
+        moveRef.action.canceled -= ZeroMove;
         sprintRef.action.performed -= OnSprint;
         sprintRef.action.canceled -= OnSprint;
     }
 
+    private IEnumerator rotate()
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(targetNormal, Vector3.up);
+        while (!rotApproximatelyEqual(targetRotation, transform.rotation))
+        {
+            targetRotation = Quaternion.LookRotation(targetNormal, Vector3.up);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.05f * rotSpeed);
+            yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    private bool rotApproximatelyEqual(Quaternion q1, Quaternion q2)
+    {
+        float tolerance = 0.5f;
+        
+        Vector3 v1 = q1.eulerAngles;
+        Vector3 v2 = q2.eulerAngles;
+
+        if (Mathf.Abs(v1.x - v2.x) < tolerance &&
+            Mathf.Abs(v1.y - v2.y) < tolerance &&
+            Mathf.Abs(v1.z - v2.z) < tolerance)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private void Update()
     {
-        Vector3 movement = transform.right*_moveInput.x;
+        Vector3 movement = transform.right*moveInput.x;
         bool grounded = controller.isGrounded && RaycastToGround(); //checks if the player if standing on the ground
 
         if (transform.position.y > curCollider.bounds.max.y)
         {
-            if (_moveInput.y > 0)
+            if (moveInput.y > 0)
             {
-                movement += transform.forward * _moveInput.y;
+                movement += transform.forward * moveInput.y;
             }
             else
             {
-                movement += transform.up * _moveInput.y;
+                movement += transform.up * moveInput.y;
             }
         }
         else if (grounded)
         {
-            if (_moveInput.y > 0)
+            if (moveInput.y > 0)
             {
-                movement += transform.up * _moveInput.y;
+                movement += transform.up * moveInput.y;
             }
             else
             {
-                movement += transform.forward * _moveInput.y;
+                movement += transform.forward * moveInput.y;
             }
                 
         }
         else
         {
-            movement += transform.up * _moveInput.y;
+            
+            movement += transform.up * moveInput.y;
         }
+        
+        
 
         controller.Move(movement * Time.deltaTime); //forward movement
 
-        if (_moveInput.y != 0)
+        if (moveInput.y != 0)
         {
             landMovement.soundEffects.PlayWalkingSound();
         }
         UpdateStamina();
+    }
+    
+    private void ZeroMove(InputAction.CallbackContext context)
+    {
+        moveInput = Vector2.zero;
     }
 
     // calculates our distance to the ground as an extra check along with controller.isGrounded in line 76
@@ -102,7 +154,7 @@ public class ClimbingMovement : MonoBehaviour
     private void UpdateStamina()
     {
         //determining when the player is sprinting and stopping sprinting when out of stamina
-        if (!Mathf.Approximately(landMovement.moveSpeed, landMovement.moveSpeedDefault) && landMovement.currStamina > 0 && _moveInput != Vector2.zero)
+        if (!Mathf.Approximately(landMovement.moveSpeed, landMovement.moveSpeedDefault) && landMovement.currStamina > 0 && moveInput != Vector2.zero)
         {
             landMovement.currStamina -= landMovement.staminaDepletionRate * Time.deltaTime; //depletes stamina when sprinting
         }
@@ -128,7 +180,7 @@ public class ClimbingMovement : MonoBehaviour
      */
     void OnMove(InputAction.CallbackContext context)
     {
-        _moveInput = context.ReadValue<Vector2>();
+        moveInput = context.ReadValue<Vector2>();
     }
 
     void OnSprint(InputAction.CallbackContext context)
@@ -144,41 +196,5 @@ public class ClimbingMovement : MonoBehaviour
             landMovement.moveSpeed = landMovement.moveSpeedDefault;
             landMovement.soundEffects.SetIsSprinting(false);
         }
-    }
-
-    private IEnumerator RotateToSurface()
-    {
-        float x = targRot.eulerAngles.x - transform.eulerAngles.x;
-        float z = targRot.eulerAngles.z - transform.eulerAngles.z;
-        while (Mathf.Abs(x)+Mathf.Abs(z)>6f)
-        {
-            if (x > 3f)
-            {
-                transform.Rotate(Vector3.left, rotSpeed*0.05f);
-            }
-
-            else if (x < -3f)
-            {
-                transform.Rotate(Vector3.right, rotSpeed*0.05f);
-            }
-
-            if (z > 3f)
-            {
-                transform.Rotate(Vector3.forward, rotSpeed*0.05f);
-            }
-            else if (z < -3f)
-            {
-                transform.Rotate(Vector3.back, rotSpeed*0.05f);
-            }
-            
-            x = targRot.eulerAngles.x - transform.eulerAngles.x;
-            z = targRot.eulerAngles.z - transform.eulerAngles.z;
-            yield return new WaitForSeconds(0.05f);
-        }
-
-        moveRef.action.performed += OnMove;
-        moveRef.action.canceled += (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
-        sprintRef.action.performed += OnSprint;
-        sprintRef.action.canceled += OnSprint;
     }
 }

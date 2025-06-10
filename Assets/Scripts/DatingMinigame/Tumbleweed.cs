@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using ScriptTags;
 using UnityEngine;
 
@@ -12,9 +13,17 @@ public class Tumbleweed : MonoBehaviour
     public float multDuration;
 
     public Animator controller;
-    private void Update()
+
+    private void OnEnable()
     {
-        
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
+    }
+
+    private void OnDisable()
+    {
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     private void OnPause()
