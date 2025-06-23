@@ -19,7 +19,7 @@ public class BoneInteractable : Interactable
     private bool isLoader = false;
     public override void OnInteractEnable()
     {
-        original.SetActive(false);
+        //original.SetActive(false);
         outlined.SetActive(true);
         base.OnInteractEnable();
     }
@@ -27,7 +27,7 @@ public class BoneInteractable : Interactable
     public override void OnInteractDisable()
     {
         outlined.SetActive(false);
-        original.SetActive(true);
+        //original.SetActive(true);
         base.OnInteractDisable();
     }
 
