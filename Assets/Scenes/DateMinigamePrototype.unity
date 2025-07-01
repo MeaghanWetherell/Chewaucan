@@ -6126,6 +6126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3774506460098675769}
   - component: {fileID: 4551570271955918468}
+  - component: {fileID: 4551570271955918469}
   m_Layer: 0
   m_Name: tumbleweed1.1
   m_TagString: Untagged
@@ -6145,9 +6146,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf1e07ba501e7e47aeddd7495f5eec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedMult: 0
-  multDuration: 0
-  controller: {fileID: 0}
+  moveSpeedMult: 0.5
+  multDuration: 5
+  controller: {fileID: 4551570271955918469}
+--- !u!95 &4551570271955918469
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551570271955918467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: affc7b572ddefbf43aa81818cb92b84b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5109131853597259087
 PrefabInstance:
   m_ObjectHideFlags: 0
