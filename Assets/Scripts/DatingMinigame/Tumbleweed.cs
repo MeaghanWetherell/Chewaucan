@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Misc;
 using ScriptTags;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tumbleweed : MonoBehaviour
@@ -35,10 +36,11 @@ public class Tumbleweed : MonoBehaviour
     {
         controller.speed = 1;
     }
+    
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.collider.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null)
         {
             other.gameObject.GetComponent<LandMovement>().ChangeMoveSpeedMultForTime(moveSpeedMult, multDuration);
         }
