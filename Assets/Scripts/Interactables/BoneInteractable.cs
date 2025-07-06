@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class BoneInteractable : Interactable
 {
-    public GameObject original;
+    public GameObject defaultBone; //this is the bone the player sees in the modern map scene
 
-    public GameObject outlined;
+    public GameObject outlinedBone; //set this objects layer to outlinedBone
 
-    public GameObject myPrefab;
+    public GameObject answerBone; //this is the answer key bone
 
     public bool isCorrect;
 
@@ -19,15 +19,15 @@ public class BoneInteractable : Interactable
     private bool isLoader = false;
     public override void OnInteractEnable()
     {
-        //original.SetActive(false);
-        outlined.SetActive(true);
+        //defaultBone.SetActive(false);
+        outlinedBone.SetActive(true);
         base.OnInteractEnable();
     }
 
     public override void OnInteractDisable()
     {
-        outlined.SetActive(false);
-        //original.SetActive(true);
+        outlinedBone.SetActive(false);
+        //defaultBone.SetActive(true);
         base.OnInteractDisable();
     }
 
@@ -62,7 +62,7 @@ public class BoneInteractable : Interactable
         if (isLoader && loaded.name.Equals("BoneComparison"))
         {
             GameObject viewer = GameObject.Find("ViewBone");
-            Instantiate(myPrefab, viewer.transform);
+            Instantiate(answerBone, viewer.transform);
             viewer.GetComponent<BoneChecker>().isCorrect = isCorrect;
             isLoader = false;
         }
