@@ -10,9 +10,9 @@ public class BoneChecker : MonoBehaviour
 {
     [NonSerialized]public bool isCorrect = false;
 
-    public GameObject viewer;
+    public GameObject viewer; //The comparison bone from the Bone Pile Quest
     
-    public GameObject mBoneViewer;
+    public GameObject mBoneViewer; //the mastodon bone
     
     public TextMeshProUGUI text;
 
@@ -21,7 +21,7 @@ public class BoneChecker : MonoBehaviour
     private void Start()
     {
         viewer.transform.eulerAngles = new Vector3(0, Random.Range(0,360), 0);
-
+        viewer.GetComponent<BoneChecker>().SetBoneScale(viewer.transform.localScale);
         // Save the initial rotation
         initialRotation = viewer.transform.rotation;
     }
@@ -74,4 +74,10 @@ public class BoneChecker : MonoBehaviour
         }
 
     }
+
+    public void SetBoneScale(Vector3 newScale)
+    {
+        transform.localScale = newScale;
+    }
+
 }

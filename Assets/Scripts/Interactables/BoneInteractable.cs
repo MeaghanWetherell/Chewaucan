@@ -62,7 +62,11 @@ public class BoneInteractable : Interactable
         if (isLoader && loaded.name.Equals("BoneComparison"))
         {
             GameObject viewer = GameObject.Find("ViewBone");
-            Instantiate(answerBone, viewer.transform);
+            //Instantiate(answerBone, viewer.transform);
+
+            GameObject spawnedBone = Instantiate(answerBone, viewer.transform);
+            spawnedBone.transform.localScale = answerBone.transform.localScale; // copy scale
+
             viewer.GetComponent<BoneChecker>().isCorrect = isCorrect;
             isLoader = false;
         }
