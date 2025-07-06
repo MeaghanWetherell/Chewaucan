@@ -20,7 +20,7 @@ public class BoneChecker : MonoBehaviour
 
     private void Start()
     {
-        viewer.transform.eulerAngles = new Vector3(0, Random.Range(0,360), 0);
+        viewer.GetComponent<BoneChecker>().SetBoneRotation(viewer.transform.localEulerAngles);
         viewer.GetComponent<BoneChecker>().SetBoneScale(viewer.transform.localScale);
         // Save the initial rotation
         initialRotation = viewer.transform.rotation;
@@ -79,5 +79,10 @@ public class BoneChecker : MonoBehaviour
     {
         transform.localScale = newScale;
     }
+    public void SetBoneRotation(Vector3 newRotation)
+    {
+        transform.localEulerAngles = newRotation;
+    }
+
 
 }
