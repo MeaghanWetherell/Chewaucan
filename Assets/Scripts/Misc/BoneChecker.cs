@@ -24,14 +24,23 @@ public class BoneChecker : MonoBehaviour
         viewer.GetComponent<BoneChecker>().SetBoneScale(viewer.transform.localScale);
         // Save the initial rotation
         initialRotation = viewer.transform.rotation;
+        Quaternion offsetRotation = initialRotation * Quaternion.Euler(0f, 90f, 0f); //rotate it 90 degrees
+        viewer.transform.rotation = offsetRotation;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        var rotationDifference = (viewer.transform.rotation.eulerAngles - mBoneViewer.transform.rotation.eulerAngles).magnitude;
+        // Calculate Y rotation difference
+        float yDiff = GetYawDifference(viewer.transform.rotation, mBoneViewer.transform.rotation);
+
+        // Check if flip on x or z is matching
+        bool FlipMatches = IsFlipCorrect(viewer.transform.rotation, mBoneViewer.transform.rotation);
+
+        // Track how much the player has rotated relative to starting point, so we know they've played a bit
         float playerRotationAmount = Quaternion.Angle(initialRotation, viewer.transform.rotation);
+
 
         //If it is correct
         if (isCorrect) {
@@ -39,8 +48,8 @@ public class BoneChecker : MonoBehaviour
             //player rotated it at all
             if (playerRotationAmount >1f) 
             {
-                //and the rotation is right
-                if (rotationDifference < 10f)
+                //and the rotation is off by 5 degrees or less
+                if (yDiff < 5f && FlipMatches)
                 {
                     text.text = "That's it! Your bone is the distal end of a femur.";
                     QuestManager.questManager.GETNode("bonepile").AddCount(0);
@@ -84,5 +93,28 @@ public class BoneChecker : MonoBehaviour
         transform.localEulerAngles = newRotation;
     }
 
+    // Get shortest angular difference in Y (yaw)
+    private float GetYawDifference(Quaternion a, Quaternion b)
+    {
+        Vector3 eulerA = a.eulerAngles;
+        Vector3 eulerB = b.eulerAngles;
 
+        float yDiff = Mathf.Abs(Mathf.DeltaAngle(eulerA.y, eulerB.y));
+        return yDiff;
+    }
+
+    //Checks to see if the two are flipped in the same direction
+    private bool IsFlipCorrect(Quaternion playerRotation, Quaternion targetRotation)
+    {
+        // Get "up" vectors for both bones in world space
+        Vector3 playerUp = playerRotation * Vector3.up;
+        Vector3 targetUp = targetRotation * Vector3.up;
+
+        // Dot product measures alignment
+        float dot = Vector3.Dot(playerUp, targetUp);
+
+        // dot = +1 means perfectly aligned
+        // dot = -1 means perfectly upside-down
+        return dot > 0f; // True if not upside-down relative to target
+    }
 }
