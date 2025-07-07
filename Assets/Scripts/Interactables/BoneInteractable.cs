@@ -17,6 +17,7 @@ public class BoneInteractable : Interactable
     public AudioSource pickupAudio;
 
     private bool isLoader = false;
+    private Light mainDirectionalLight;
     public override void OnInteractEnable()
     {
         //defaultBone.SetActive(false);
@@ -36,6 +37,19 @@ public class BoneInteractable : Interactable
         if (LoadGUIManager.loadGUIManager.Load("BoneComparison"))
         {
             isLoader = true;
+
+            // Find and disable the directional light
+            if (mainDirectionalLight == null)
+            {
+                mainDirectionalLight = GameObject.FindGameObjectWithTag("MainLight")?.GetComponent<Light>();
+            }
+
+            if (mainDirectionalLight != null)
+            {
+                mainDirectionalLight.enabled = false;
+            }
+
+
             pickupAudio.ignoreListenerPause = true;
             pickupAudio?.Play();
         }
@@ -50,11 +64,13 @@ public class BoneInteractable : Interactable
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoad;
+        SceneManager.sceneUnloaded += OnSceneUnload;
     }
     
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoad;
+        SceneManager.sceneUnloaded -= OnSceneUnload;
     }
     
     private void OnSceneLoad(Scene loaded, LoadSceneMode mode)
@@ -62,13 +78,24 @@ public class BoneInteractable : Interactable
         if (isLoader && loaded.name.Equals("BoneComparison"))
         {
             GameObject viewer = GameObject.Find("ViewBone");
-            //Instantiate(answerBone, viewer.transform);
-
+        
             GameObject spawnedBone = Instantiate(answerBone, viewer.transform);
             spawnedBone.transform.localScale = answerBone.transform.localScale; // copy scale
             spawnedBone.transform.rotation = answerBone.transform.rotation; //copy rotation of the answer bone
             viewer.GetComponent<BoneChecker>().isCorrect = isCorrect;
             isLoader = false;
+        }
+    }
+
+    // To turn the main light back on when you unload the scene.
+    private void OnSceneUnload(Scene unloaded)
+    {
+        if (unloaded.name.Equals("BoneComparison"))
+        {
+            if (mainDirectionalLight != null)
+            {
+                mainDirectionalLight.enabled = true;
+            }
         }
     }
 }
