@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using QuestSystem;
+using QuestSystem; //Required to run the questmanager function
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
