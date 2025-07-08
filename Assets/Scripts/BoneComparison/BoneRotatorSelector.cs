@@ -30,7 +30,6 @@ public class BoneRotatorSelector : MonoBehaviour
     private void OnClick(InputAction.CallbackContext context)
     {
         Vector2 clickPos = mousePos.action.ReadValue<Vector2>();
-        Debug.Log(clickPos);
         if (RectTransformUtility.RectangleContainsScreenPoint(img1, clickPos))
         {
             rot2.enabled = false; 
