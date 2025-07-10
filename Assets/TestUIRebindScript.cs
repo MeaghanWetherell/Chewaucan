@@ -1,62 +1,123 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using KeyRebinding;
+using System.Collections.Generic;
+using System.Linq;
+
+// No need to change the KeyGlyphMap struct if it's in its own file.
+// If it was inside the old script, move it to the GlyphLibrary.cs file.
 
 public class TestUIRebindScript : MonoBehaviour
 {
+    [Header("Action to Rebind")]
     public InputAction actionToRebind;
+    [Header("Fallback")]
+    public string defaultKeyName = "w";
+
+    [Header("UI References")]
     public Image glyphImage;
 
-    // Dictionary to store sliced sprites for each key (You could also use an array or List)
-    public Sprite[] keyGlyphs;  // Store the sliced glyph sprites here, in order (A, B, C, etc.)
+    [Header("Shared Data")]
+    // Instead of a list, we now just need a reference to our central library.
+    public GlyphLibrary glyphLibrary;
 
-    private InputActionRebindingExtensions.RebindingOperation rebindOp;
+    private Dictionary<string, Sprite> _glyphDictionary;
+    private InputActionRebindingExtensions.RebindingOperation _rebindOp;
+
+    private void Awake()
+    {
+        if (glyphLibrary == null)
+        {
+            Debug.LogError("Glyph Library is not assigned!", this);
+            return;
+        }
+        // Get the dictionary from the central library.
+        _glyphDictionary = glyphLibrary.GetGlyphDictionary();
+    }
+
+    // The rest of the script (Start, StartListening, UpdateGlyph) remains exactly the same.
+    // ...
+    private void Start()
+    {
+        Debug.Log($"Executing Start() for action: '{actionToRebind.name}'.", this);
+
+        if (actionToRebind.controls.Count == 0)
+        {
+            Debug.LogWarning($"On Start, the action '{actionToRebind.name}' has NO controls. This is why the glyph isn't showing up.", this);
+        }
+
+        UpdateGlyph();
+    }
 
     public void StartListening()
     {
         actionToRebind.Disable();
 
-        rebindOp = actionToRebind.PerformInteractiveRebinding(0)
+        // Save the current binding path
+        string previousBindingPath = actionToRebind.bindings[0].effectivePath;
+
+        _rebindOp = actionToRebind.PerformInteractiveRebinding()
             .WithControlsExcluding("<Mouse>/position")
             .WithControlsExcluding("<Mouse>/delta")
-            .WithControlsExcluding("<Gamepad>/Start")
             .WithControlsExcluding("<Keyboard>/escape")
+            .WithControlsExcluding("<Gamepad>/start")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(op =>
             {
+                string newBindingPath = actionToRebind.bindings[0].effectivePath;
+                string controlName = actionToRebind.controls.Count > 0 ? actionToRebind.controls[0].name : "";
+
+                bool isInvalid = newBindingPath == "<Mouse>/leftButton"
+                                 || string.IsNullOrEmpty(controlName)
+                                 || !_glyphDictionary.ContainsKey(controlName);
+
+                if (isInvalid)
+                {
+                    Debug.LogWarning($"Rejected binding: '{newBindingPath}' (Invalid or no glyph). Restoring previous binding.", this);
+                    actionToRebind.ApplyBindingOverride(0, previousBindingPath);
+                }
+
                 actionToRebind.Enable();
-
-                // Save and apply binding using your existing manager
-                BindingManager.bindingManager.SetBind(actionToRebind, 0);
-
-                // Get the key pressed and map it to the correct glyph index
-                string keyName = actionToRebind.bindings[0].ToDisplayString().Replace(" ", "");
-                int keyIndex = GetGlyphIndexForKey(keyName);  // You need to implement this method
-
-                // Set the correct glyph
-                if (keyIndex >= 0 && keyIndex < keyGlyphs.Length)
-                    glyphImage.sprite = keyGlyphs[keyIndex];
-                else
-                    Debug.LogWarning($"Glyph not found for key: {keyName}");
-
+                op.Dispose();
+                UpdateGlyph();
+            })
+            .OnCancel(op =>
+            {
+                actionToRebind.Enable();
                 op.Dispose();
             });
 
-        rebindOp.Start();
+        _rebindOp.Start();
     }
 
-    // Example method to map key names (or codes) to the correct index in the sprite array
-    private int GetGlyphIndexForKey(string keyName)
+
+
+    
+    private void UpdateGlyph()
     {
-        // This is just a simple example. Adjust it according to how your keys are named or mapped.
-        switch (keyName)
+        string keyName = actionToRebind.controls.Count > 0
+            ? actionToRebind.controls[0].name
+            : defaultKeyName;
+
+        Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);
+
+        if (_glyphDictionary.TryGetValue(keyName, out Sprite glyph))
         {
-            case "A": return 0;
-            case "B": return 1;
-            case "C": return 2;
-            // Add cases for other keys...
-            default: return -1;  // Return -1 if no matching key is found
+            glyphImage.sprite = glyph;
+            glyphImage.enabled = true;
+        }
+        else if (!string.IsNullOrEmpty(defaultKeyName) && _glyphDictionary.TryGetValue(defaultKeyName, out Sprite fallbackGlyph))
+        {
+            Debug.LogWarning($"No glyph found for key: '{keyName}'. Falling back to default key: '{defaultKeyName}'.", this);
+            glyphImage.sprite = fallbackGlyph;
+            glyphImage.enabled = true;
+        }
+        else
+        {
+            Debug.LogWarning($"No valid glyph found for either '{keyName}' or default '{defaultKeyName}'. Hiding glyph.");
+            glyphImage.enabled = false;
         }
     }
+
+
 }
