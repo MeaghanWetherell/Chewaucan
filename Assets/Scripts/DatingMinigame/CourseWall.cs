@@ -20,6 +20,8 @@ public class CourseWall : MonoBehaviour
 
     private bool inited = false;
 
+    private List<GameObject> weeds = new List<GameObject>();
+
     private void Start()
     {
         if (!inited)
@@ -41,6 +43,13 @@ public class CourseWall : MonoBehaviour
     {
         StopAllCoroutines();
         transform.parent.gameObject.SetActive(false);
+        foreach (GameObject weed in weeds)
+        {
+            if (weed != null)
+            {
+                Destroy(weed);
+            }
+        }
     }
 
     private IEnumerator spawnTumbleweeds()
@@ -56,7 +65,7 @@ public class CourseWall : MonoBehaviour
     private void SpawnTumbleweed()
     {
         int randPos = Random.Range(0, spawnPositions.Count);
-        Instantiate(tumbleweedPrefab, spawnPositions[randPos].position, spawnPositions[randPos].rotation);
+        weeds.Add(Instantiate(tumbleweedPrefab, spawnPositions[randPos].position, spawnPositions[randPos].rotation));
     }
 
     private void OnTriggerEnter(Collider other)

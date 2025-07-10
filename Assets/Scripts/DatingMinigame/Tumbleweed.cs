@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using ScriptTags;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tumbleweed : MonoBehaviour
@@ -12,9 +14,17 @@ public class Tumbleweed : MonoBehaviour
     public float multDuration;
 
     public Animator controller;
-    private void Update()
+
+    private void OnEnable()
     {
-        
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
+        PauseCallback.pauseManager.SubscribeToResume(OnResume);
+    }
+
+    private void OnDisable()
+    {
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
+        PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
 
     private void OnPause()
@@ -26,10 +36,11 @@ public class Tumbleweed : MonoBehaviour
     {
         controller.speed = 1;
     }
+    
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.collider.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null)
         {
             other.gameObject.GetComponent<LandMovement>().ChangeMoveSpeedMultForTime(moveSpeedMult, multDuration);
         }
