@@ -24,10 +24,7 @@ namespace KeyRebinding
         private void Awake()
         {
             playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
-            if (playerInput == null)
-            {
-                playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
-            }
+
             maps = BindingManager.bindingManager.maps;
             GameObject mapButton = null;
             foreach (InputActionMap map in maps)

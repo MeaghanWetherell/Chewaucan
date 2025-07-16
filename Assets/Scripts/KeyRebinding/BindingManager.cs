@@ -94,10 +94,12 @@ namespace KeyRebinding
 
         public void SetBind(InputAction bind, int index)
         {
+            //if a bind for this action has already been saved in the manager, change it in the manager to the current binding
             if (binds.ContainsKey(bind.actionMap + bind.name + index))
             {
                 binds[bind.actionMap + bind.name + index] = bind.bindings[index].overridePath;
             }
+            //otherwise, save it to the manager
             else
             {
                 binds.Add(bind.actionMap+bind.name+index, bind.bindings[index].overridePath);
@@ -111,8 +113,10 @@ namespace KeyRebinding
                     {
                         for (int i = 0; i < action.bindings.Count; i++)
                         {
+                            //if this map+action+index combination is the one we rebound, do nothing
                             if(action == bind && i == index)
                                 continue;
+                            //if it has been overridden to the same key as the new binding, overwrite it to none
                             if (!string.IsNullOrEmpty(action.bindings[i].overridePath))
                             {
                                 if (action.bindings[i].overridePath.Equals(bind.bindings[index].overridePath))
@@ -121,6 +125,7 @@ namespace KeyRebinding
                                     binds[action.actionMap + action.name + i] = action.bindings[i].overridePath;
                                 }
                             }
+                            //if it has not been overridden and its default key is the same as the new binding, overwrite it to none
                             else
                             {
                                 if (action.bindings[i].path.Equals(bind.bindings[index].overridePath) &&

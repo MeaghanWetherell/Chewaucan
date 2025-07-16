@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using KeyRebinding;
 
 // No need to change the KeyGlyphMap struct if it's in its own file.
 // If it was inside the old script, move it to the GlyphLibrary.cs file.
@@ -11,35 +12,34 @@ public class TestUIRebindScript : MonoBehaviour
 {
     [Header("Action to Rebind")]
     public InputAction actionToRebind;
-    [Header("Fallback")]
+
+    [Tooltip("index of that action to rebind")]
+    public int index;
+    [Header("Default Key")]
     public string defaultKeyName = "w";
 
     [Header("UI References")]
     public Image glyphImage;
-
-    [Header("Shared Data")]
-    // Instead of a list, we now just need a reference to our central library.
-    public GlyphLibrary glyphLibrary;
+    
+    private static GlyphLibrary glyphLibrary;
 
     private Dictionary<string, Sprite> _glyphDictionary;
     private InputActionRebindingExtensions.RebindingOperation _rebindOp;
 
     private void Awake()
     {
+        glyphLibrary = Resources.Load<GlyphLibrary>("MasterGlyphLibrary");
+        
         if (glyphLibrary == null)
         {
             Debug.LogError("Glyph Library is not assigned!", this);
             return;
         }
-        // Get the dictionary from the central library.
         _glyphDictionary = glyphLibrary.GetGlyphDictionary();
     }
-
-    // The rest of the script (Start, StartListening, UpdateGlyph) remains exactly the same.
-    // ...
+    
     private void Start()
     {
-        Debug.Log($"Executing Start() for action: '{actionToRebind.name}'.", this);
 
         if (actionToRebind.controls.Count == 0)
         {
@@ -47,59 +47,38 @@ public class TestUIRebindScript : MonoBehaviour
         }
 
         UpdateGlyph();
+        
+        BindingManager.bindingManager.bindChange.AddListener(UpdateGlyph);
     }
 
     public void StartListening()
     {
         actionToRebind.Disable();
 
-        // Save the current binding path
-        string previousBindingPath = actionToRebind.bindings[0].effectivePath;
-
-        _rebindOp = actionToRebind.PerformInteractiveRebinding()
-            .WithControlsExcluding("<Mouse>/position")
-            .WithControlsExcluding("<Mouse>/delta")
-            .WithControlsExcluding("<Keyboard>/escape")
-            .WithControlsExcluding("<Gamepad>/start")
-            .OnMatchWaitForAnother(0.1f)
-            .OnComplete(op =>
-            {
-                string newBindingPath = actionToRebind.bindings[0].effectivePath;
-                string controlName = actionToRebind.controls.Count > 0 ? actionToRebind.controls[0].name : "";
-
-                bool isInvalid = newBindingPath == "<Mouse>/leftButton"
-                                 || string.IsNullOrEmpty(controlName)
-                                 || !_glyphDictionary.ContainsKey(controlName);
-
-                if (isInvalid)
-                {
-                    Debug.LogWarning($"Rejected binding: '{newBindingPath}' (Invalid or no glyph). Restoring previous binding.", this);
-                    actionToRebind.ApplyBindingOverride(0, previousBindingPath);
-                }
-
-                actionToRebind.Enable();
-                op.Dispose();
-                UpdateGlyph();
-            })
-            .OnCancel(op =>
-            {
-                actionToRebind.Enable();
-                op.Dispose();
-            });
+        _rebindOp = actionToRebind.PerformInteractiveRebinding(index).WithControlsExcluding("<Mouse>/position")
+            .WithControlsExcluding("<Mouse>/delta").WithControlsExcluding("<Gamepad>/Start")
+            .WithControlsExcluding("<Keyboard>/escape").WithControlsExcluding("<Mouse>/leftButton").OnMatchWaitForAnother(0.1f)
+            .OnComplete(
+                operation => { RebindComplete(); operation.Dispose();}).OnCancel(operation => {operation.Dispose();});
 
         _rebindOp.Start();
     }
 
-
+    private void RebindComplete()
+    {
+        BindingManager.bindingManager.SetBind(actionToRebind, index);
+            
+        actionToRebind.Enable();
+    }
 
     
     private void UpdateGlyph()
     {
-        string keyName = actionToRebind.controls.Count > 0
-            ? actionToRebind.controls[0].name
-            : defaultKeyName;
+        if (actionToRebind.controls.Count == 0) return;
+        string keyName = actionToRebind.controls[index].name;
 
-        Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);
+
+        //Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);
 
         if (_glyphDictionary.TryGetValue(keyName, out Sprite glyph))
         {
