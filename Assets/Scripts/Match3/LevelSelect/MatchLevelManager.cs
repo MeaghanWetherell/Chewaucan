@@ -20,7 +20,7 @@ namespace Match3
         [Tooltip("All match 3 levels")]public List<LevelData> levels;
 
         //stores the index of the level data for the level currently being played
-        public int curIndex;
+        public int curIndex = 0;
         
         private List<float> highScores;
 
@@ -127,7 +127,15 @@ namespace Match3
             MatchLine.shouldRotate = levels[index].rotate;
             curIndex = index;
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Match3");
-            
+        }
+
+        //Testing only load level
+        public void LoadLevelTesting(int index)
+        {
+            SetValidMeshes(levels[index].meshes);
+            MatchObject.ChangeMatchType(levels[index].matchType);
+            MatchLine.shouldRotate = levels[index].rotate;
+            curIndex = index;
         }
         
         //sets up the match object valid mesh list
