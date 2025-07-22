@@ -4,11 +4,12 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using KeyRebinding;
+using TMPro;
 
 // No need to change the KeyGlyphMap struct if it's in its own file.
 // If it was inside the old script, move it to the GlyphLibrary.cs file.
 
-public class TestUIRebindScript : MonoBehaviour
+public class RebindWithGlyphs : MonoBehaviour
 {
     [Header("Action to Rebind")]
     public InputAction actionToRebind;
@@ -20,6 +21,8 @@ public class TestUIRebindScript : MonoBehaviour
 
     [Header("UI References")]
     public Image glyphImage;
+
+    [Tooltip("Text component ref")] public TextMeshProUGUI mainText;
     
     private static GlyphLibrary glyphLibrary;
 
@@ -72,10 +75,13 @@ public class TestUIRebindScript : MonoBehaviour
     }
 
     
-    private void UpdateGlyph()
+    public void UpdateGlyph()
     {
         if (actionToRebind.controls.Count == 0) return;
-        string keyName = actionToRebind.controls[index].name;
+        string keyName = actionToRebind.bindings[index].effectivePath;
+
+        if(keyName.Split("/").Length == 2)
+            keyName = keyName.Split("/")[1];
 
 
         //Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);

@@ -58,10 +58,10 @@ namespace KeyRebinding
                         continue;
                     }
                     GameObject rebindGroup = Instantiate(keyRebindGroupPrefab, transform);
-                    RebindKey rebindKey = rebindGroup.GetComponent<RebindKey>();
-                    rebindKey.toRebind = action;
+                    RebindWithGlyphs rebindKey = rebindGroup.GetComponent<RebindWithGlyphs>();
+                    rebindKey.actionToRebind = action;
                     rebindKey.index = i;
-                    rebindKey.keyText.text = action.bindings[i].ToDisplayString();
+                    rebindKey.UpdateGlyph();
                     if (map.name.Equals("Player"))
                     {
                         rebindKey.mainText.text = action.bindings[i].path switch
