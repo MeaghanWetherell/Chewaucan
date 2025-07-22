@@ -20,7 +20,7 @@ namespace QuestSystem
         public List<QuestObj> AllQuests;
 
         //order is archaeology, geology, biology
-        private int[] CountsPerQuestType = new int[3];
+        public int[] CountsPerQuestType = new int[3];
         
         //quests the player has received
         private List<QuestNode> _quests = new List<QuestNode>();

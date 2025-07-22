@@ -78,8 +78,11 @@ public static class SaveDialProgressData
             DialProgress dp = JsonUtility.FromJson<DialProgress>(loadDialProgress);
             return dp;
         }
-
-        return null;
+        DialProgress currentProgress = new DialProgress();
+        currentProgress.A_progress = 0;
+        currentProgress.G_progress = 0;
+        currentProgress.B_progress = 0;
+        return currentProgress;
     }
 
     //used mostly for debugging if needed

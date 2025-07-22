@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="74a0c51a-e499-4ceb-bc31-ef4e9ba02f09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenuUITest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuUITest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/RebindMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/RebindMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/InstantiateKeyRebinds.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/KeyRebinding/InstantiateKeyRebinds.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TestUIRebindScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TestUIRebindScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/QuestGUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/QuestGUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TimeTravel/SaveDialProgressData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TimeTravel/SaveDialProgressData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/Snake.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/SnakeKill.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DatingMinigame/SnakeRotate.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/BoneInteractable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/InteractListenerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactables/Interactable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyRebinding/BindingManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -62,6 +60,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/BoneRotater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/FadeInOnStart.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/FullSettingsHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/GameEndPlaceholder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/GridCoordinate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/LoadPersistentObjects.cs" root0="FORCE_HIGHLIGHTING" />
@@ -382,7 +381,7 @@
       <workItem from="1751400498377" duration="4822000" />
       <workItem from="1751987342419" duration="696000" />
       <workItem from="1752630896379" duration="4655000" />
-      <workItem from="1753203617235" duration="1006000" />
+      <workItem from="1753203617235" duration="3869000" />
     </task>
     <servers />
   </component>
@@ -589,10 +588,10 @@
           <line>39</line>
           <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\QuestManager.cs" containingFunctionPresentation="Method 'CreateQuestNode'">
             <startOffsets>
-              <option value="1268" />
+              <option value="1267" />
             </startOffsets>
             <endOffsets>
-              <option value="1299" />
+              <option value="1298" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="156" />
@@ -661,6 +660,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/GameEndPlaceholder.cs</url>
+          <line>21</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\GameEndPlaceholder.cs" containingFunctionPresentation="Method 'Awake'">
+            <startOffsets>
+              <option value="423" />
+            </startOffsets>
+            <endOffsets>
+              <option value="483" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="170" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
