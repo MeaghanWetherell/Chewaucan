@@ -26,6 +26,7 @@ public class BoneChecker : MonoBehaviour
         initialRotation = viewer.transform.rotation;
         Quaternion offsetRotation = initialRotation * Quaternion.Euler(0f, 90f, 0f); //rotate it 90 degrees
         viewer.transform.rotation = offsetRotation;
+        initialRotation = offsetRotation;
     }
 
     // Update is called once per frame
@@ -70,9 +71,10 @@ public class BoneChecker : MonoBehaviour
           
 
             //incorrect bone, but the player has rotated it sufficiently
-            if (playerRotationAmount > 30f)
+            if (playerRotationAmount > 120f)
             {
                 text.text = "Hmm, this doesn't seem to be the right bone. ";
+                this.enabled = false;
             }
             else
             {

@@ -79,9 +79,7 @@ public class BoneInteractable : Interactable
         {
             GameObject viewer = GameObject.Find("ViewBone");
         
-            GameObject spawnedBone = Instantiate(answerBone, viewer.transform);
-            spawnedBone.transform.localScale = answerBone.transform.localScale; // copy scale
-            spawnedBone.transform.rotation = answerBone.transform.rotation; //copy rotation of the answer bone
+            Instantiate(answerBone, viewer.transform);
             viewer.GetComponent<BoneChecker>().isCorrect = isCorrect;
             isLoader = false;
         }
