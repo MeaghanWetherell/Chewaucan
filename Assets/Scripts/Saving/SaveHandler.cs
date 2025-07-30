@@ -96,7 +96,7 @@ public class SaveHandler : MonoBehaviour
 
     public void subToLoad(UnityAction<string> load)
     {
-        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+savePath);
+        //if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+savePath);
         loadRegular.AddListener(load);
     }
 
@@ -107,7 +107,7 @@ public class SaveHandler : MonoBehaviour
     
     public void subSettingToLoad(UnityAction<string> load)
     {
-        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
+        //if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
         loadSettings.AddListener(load);
     }
 

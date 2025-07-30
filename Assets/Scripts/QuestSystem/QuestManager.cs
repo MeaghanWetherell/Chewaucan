@@ -142,6 +142,15 @@ namespace QuestSystem
 
         private void LoadFromFile(string path)
         {
+            foreach (QuestObj quest in AllQuests)
+            {
+                if(quest.type != SaveDialProgressData.Dial.NONE)
+                    CountsPerQuestType[(int) quest.type]++;
+            }
+            SaveDialProgressData.saveDataPath = path + "/DialProgess.json";
+            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
+            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
+            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
             _quests = new List<QuestNode>();
             _pins = new QuestNode[3];
             if(!resetQuests)
@@ -190,15 +199,6 @@ namespace QuestSystem
                     }
                 }
             }
-            foreach (QuestObj quest in AllQuests)
-            {
-                if(quest.type != SaveDialProgressData.Dial.NONE)
-                    CountsPerQuestType[(int) quest.type]++;
-            }
-            SaveDialProgressData.saveDataPath = path + "/DialProgess.json";
-            SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];
-            SaveDialProgressData.biologyQuestNum = CountsPerQuestType[1];
-            SaveDialProgressData.geologyQuestNum = CountsPerQuestType[2];
         }
 
         //save the quest data
