@@ -61,8 +61,9 @@ public class SaveHandler : MonoBehaviour
 
     private void Start()
     {
-        loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals(""))
+        if(!loadImmediately)
+            loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals("") && !loadImmediately)
         {
             Load();
         }
@@ -96,7 +97,7 @@ public class SaveHandler : MonoBehaviour
 
     public void subToLoad(UnityAction<string> load)
     {
-        //if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+savePath);
+        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+savePath);
         loadRegular.AddListener(load);
     }
 
@@ -107,7 +108,7 @@ public class SaveHandler : MonoBehaviour
     
     public void subSettingToLoad(UnityAction<string> load)
     {
-        //if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
+        if(loadImmediately) load.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
         loadSettings.AddListener(load);
     }
 
