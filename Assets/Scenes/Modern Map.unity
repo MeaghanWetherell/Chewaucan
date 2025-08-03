@@ -6305,17 +6305,6 @@ LODGroup:
     - renderer: {fileID: 0}
     - renderer: {fileID: 0}
   m_Enabled: 0
---- !u!114 &639796836 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7542202602610651690, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-  m_PrefabInstance: {fileID: 5150600527030011554}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fee35edb4b1fa1e4dab35179e87ca584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &644854758
 GameObject:
   m_ObjectHideFlags: 0
@@ -18621,11 +18610,11 @@ PrefabInstance:
       objectReference: {fileID: 539066329}
     - target: {fileID: 3190979845072674039, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: maxStamina
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3190979845072674039, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: currStamina
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3190979845072674039, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: staminaDepletionRate
@@ -18634,7 +18623,7 @@ PrefabInstance:
     - target: {fileID: 3367949023941669678, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: fader
       value: 
-      objectReference: {fileID: 639796836}
+      objectReference: {fileID: 0}
     - target: {fileID: 4607294004319653680, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_audioClip
       value: 
