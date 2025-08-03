@@ -17,7 +17,8 @@ namespace TimeTravel
         {
             try
             {
-                v3Wrapper temp = JsonSerializer.Deserialize<v3Wrapper>(File.ReadAllText("Saves/astrolabeteleposition.json"));
+                string savePath = SaveHandler.saveHandler.getSavePath();
+                v3Wrapper temp = JsonSerializer.Deserialize<v3Wrapper>(File.ReadAllText(savePath+"/astrolabeteleposition.json"));
                 Teleposition = temp.getVector();
             }
             catch (IOException){ }

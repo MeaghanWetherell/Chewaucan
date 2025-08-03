@@ -26,19 +26,17 @@ public class RebindWithGlyphs : MonoBehaviour
     
     private static GlyphLibrary glyphLibrary;
 
-    private Dictionary<string, Sprite> _glyphDictionary;
+    private static Dictionary<string, Sprite> _glyphDictionary;
     private InputActionRebindingExtensions.RebindingOperation _rebindOp;
 
     private void Awake()
     {
-        glyphLibrary = Resources.Load<GlyphLibrary>("MasterGlyphLibrary");
-        
         if (glyphLibrary == null)
         {
-            Debug.LogError("Glyph Library is not assigned!", this);
-            return;
+            glyphLibrary = Resources.Load<GlyphLibrary>("MasterGlyphLibrary");
         }
-        _glyphDictionary = glyphLibrary.GetGlyphDictionary();
+        if(_glyphDictionary == null)
+            _glyphDictionary = glyphLibrary.GetGlyphDictionary();
     }
     
     private void Start()
@@ -70,6 +68,14 @@ public class RebindWithGlyphs : MonoBehaviour
     private void RebindComplete()
     {
         BindingManager.bindingManager.SetBind(actionToRebind, index);
+
+        if (GetGlyph.listenerGlyphs != null)
+        {
+            foreach (GetGlyph glyph in GetGlyph.listenerGlyphs)
+            {
+                glyph.UpdateGlyph();
+            }
+        }
             
         actionToRebind.Enable();
     }

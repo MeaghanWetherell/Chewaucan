@@ -89,6 +89,8 @@ public class RotateDialHand : MonoBehaviour
             questNum = SaveDialProgressData.biologyQuestNum;
         }
 
+        if (questNum == 0) return 0;
+        
         float interval = Mathf.Abs(minRotation/questNum);
         return interval;
     }

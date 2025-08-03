@@ -200,7 +200,7 @@ public class SaveHandler : MonoBehaviour
     
     public string getSavePath()
     {
-        return savePath;
+        return Application.persistentDataPath+"/"+savePath;
     }
 
     public void NewGame(string path)

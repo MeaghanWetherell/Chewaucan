@@ -18,8 +18,8 @@ namespace QuestSystem.Quests.QScripts
             {
                 v3Wrapper toSerialize = new v3Wrapper(playerPosition);
                 string json = JsonSerializer.Serialize(toSerialize);
-                Directory.CreateDirectory("Saves");
-                File.WriteAllText("Saves/astrolabeteleposition.json", json);
+                string savePath = SaveHandler.saveHandler.getSavePath();
+                File.WriteAllText(savePath+"/astrolabeteleposition.json", json);
             });
         }
     }

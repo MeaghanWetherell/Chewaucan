@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using QuestSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeTravelUIActivator : MonoBehaviour
 {
-    private void OnEnable()
+    private void Start()
     {
         StartCoroutine(waitForQuestLoad());
     }
@@ -15,10 +16,15 @@ public class TimeTravelUIActivator : MonoBehaviour
     {
         while (QuestManager.questManager == null)
             yield return new WaitForSeconds(0);
-        QuestNode demoQ = QuestManager.questManager.GETNode("matchdemo");
-        if (demoQ == null || !demoQ.isComplete)
+        QuestNode unlockQuest = QuestManager.questManager.GETNode("bonepile");
+        if (unlockQuest == null || !unlockQuest.isComplete)
         {
+            if (unlockQuest != null)
+            {
+                QuestManager.questManager.SubToCompletion("bonepile", toSub => { gameObject.SetActive(true); });
+            }
             gameObject.SetActive(false);
         }
+        
     }
 }
