@@ -20,6 +20,12 @@ namespace Narration
         //stores narration clips that have already played
         public List<string> hasRun;
 
+        //return whether the manager has registered if the passed narration should be playable or not
+        public bool HasDataOnNarr(string id)
+        {
+            return shouldRun.ContainsKey(id);
+        }
+
         //whether the Narration with the passed name is valid to play
         public bool ShouldPlay(string id)
         {

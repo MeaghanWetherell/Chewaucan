@@ -21,6 +21,11 @@ namespace Narration
         //the subtitle doc for this narration
         public TextAsset subtitles;
 
+        //whether this narration should be playable by default
+        //disable this is if it should be unavailable until a certain action has been performed,
+        //otherwise enable.
+        public bool defaultPlayability;
+
         //the onComplete list that actually gets passed to the sound manager
         private List<UnityAction<string>> actualOnComplete;
 
@@ -66,7 +71,9 @@ namespace Narration
         //determine whether this narration should be played
         public bool GetPlayability()
         {
-            return NarrationManager.narrationManager.ShouldPlay(name);
+            if(NarrationManager.narrationManager.HasDataOnNarr(name))
+                return NarrationManager.narrationManager.ShouldPlay(name);
+            return defaultPlayability;
         }
 
         //set whether this Narration should play
