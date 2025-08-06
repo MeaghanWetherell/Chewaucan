@@ -13,6 +13,7 @@ public class LandMovement : MonoBehaviour
 {
     //a lot of this should really be in PlayerMovementController, but I don't want to refactor Ellie's stuff
     public float moveSpeed = 5f;
+    public float sprintSpeedMultiplier = 1.5f;
     public float maxDistToGround = 1.15f;
     [SerializeField] float rotationSpeed = 4f;
     [SerializeField] float gravity = -2f; //this constanly move the player down, so isGrounded works correctly.
@@ -293,7 +294,7 @@ public class LandMovement : MonoBehaviour
         bool sprint = context.performed;
         if (sprint && currStamina > 0)
         {
-            moveSpeed = moveSpeed * 1.5f;
+            moveSpeed = moveSpeed * sprintSpeedMultiplier;
             soundEffects.SetIsSprinting(true);
         }
         else
