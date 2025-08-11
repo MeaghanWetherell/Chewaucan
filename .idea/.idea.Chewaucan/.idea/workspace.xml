@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="" />
+    <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/BoneComparison.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/BoneComparison.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenuUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenuUI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SnapshotScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SnapshotScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/SnapshotRender.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/SnapshotRender.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/NarrationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/NarrationManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +33,10 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/19/624558c9/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/cf/b4a82975/StreamWriter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/cf/c8c61d47/List`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyRebinding/GetGlyph.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/MoveStopNartration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Slider/SliderTests.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -71,10 +88,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="32116">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="32116" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -103,6 +120,7 @@
       <workItem from="1754160155820" duration="3165000" />
       <workItem from="1754246445499" duration="6291000" />
       <workItem from="1754352008084" duration="977000" />
+      <workItem from="1754863414081" duration="6016000" />
     </task>
     <servers />
   </component>
@@ -123,30 +141,30 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/TimeTravelUIActivator.cs</url>
-          <line>23</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\TimeTravel\TimeTravelUIActivator.cs" containingFunctionPresentation="Method 'waitForQuestLoad'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs</url>
+          <line>44</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\BonePileScript\BonepileScript.cs" containingFunctionPresentation="Method 'StartBP3'">
             <startOffsets>
-              <option value="637" />
+              <option value="1112" />
             </startOffsets>
             <endOffsets>
-              <option value="733" />
+              <option value="1157" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/TimeTravelUIActivator.cs</url>
-          <line>18</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\TimeTravel\TimeTravelUIActivator.cs" containingFunctionPresentation="Method 'waitForQuestLoad'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs</url>
+          <line>34</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\BonePileScript\BonepileScript.cs" containingFunctionPresentation="Method 'StartBP2'">
             <startOffsets>
-              <option value="429" />
+              <option value="780" />
             </startOffsets>
             <endOffsets>
-              <option value="499" />
+              <option value="805" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="16" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

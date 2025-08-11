@@ -32,7 +32,7 @@ namespace Narration
             return shouldRun.ContainsKey(id) && shouldRun[id];
         }
 
-        //whether the Narration with the passed name has been played
+        //registers the passed narration as played
         public void Played(string id)
         {
             if(!hasRun.Contains(id))
@@ -68,13 +68,13 @@ namespace Narration
             try
             {
                 shouldRun = JsonSerializer.Deserialize<Dictionary<string, bool>>(File.ReadAllText(path+"/shouldRun.json"));
-            } catch(IOException){}
-            shouldRun ??= new Dictionary<string, bool>();
+            } catch(IOException){shouldRun = new Dictionary<string, bool>();}
+            
             try
             {
                 hasRun = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(path+"/hasRun.json"));
-            } catch(IOException){}
-            hasRun ??= new List<string>();
+            } catch(IOException){hasRun = new List<string>();}
+            
         }
 
         //save the narrations that should and have run

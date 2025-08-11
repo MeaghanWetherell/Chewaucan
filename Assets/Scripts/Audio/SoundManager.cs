@@ -139,14 +139,14 @@ namespace Audio
         //invoke all actions that need to be invoked on narration complete
         private void InvokeNarrComplete()
         {
-            foreach(UnityAction<string> action in onNarrationComplete)
-                action.Invoke(narrator.clip.name);
-            narrFinished = true;
             StopCoroutine(waitforcomp);
+            narrFinished = true;
             if(runSubs != null)StopCoroutine(runSubs);
             if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
             currentSubLines = null;
             currentSubTimes = null;
+            foreach(UnityAction<string> action in onNarrationComplete)
+                action.Invoke(narrator.clip.name);
         }
 
         private IEnumerator RunSubtitles()
@@ -169,7 +169,11 @@ namespace Audio
         {
             while (true)
             {
-                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting && !narrFinished)
+                //Debug.Log(narrator.isPlaying);
+                //Debug.Log(AudioListener.pause);
+                //Debug.Log(waiting);
+                //Debug.Log(narrFinished);
+                if (!narrator.isPlaying && !AudioListener.pause && !waiting && !narrFinished)
                 {
                     InvokeNarrComplete();
                 }

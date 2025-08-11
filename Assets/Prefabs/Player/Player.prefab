@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 7514719063666619591}
   - component: {fileID: -6780453510386105629}
   - component: {fileID: 883103496534089414}
+  - component: {fileID: 6447806723315223637}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -592,6 +593,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f5a9752d-1c80-41ea-b093-9a254325e338
     m_ActionName: Player/MousePosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a18f7bd2-1e12-4224-a956-c91cf5505cc0
+    m_ActionName: Player/OpenMastoBone[/Keyboard/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -653,6 +658,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4dd0eb383d7d24eabfc4ba8ee61d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6447806723315223637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176073402916056196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e04e5e8f68ec474dbd908780e5e0a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadScene: MastodonBoneViewer
+  openGUI: {fileID: 8284366497915566907, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!1 &2229137810595459482
 GameObject:
   m_ObjectHideFlags: 0

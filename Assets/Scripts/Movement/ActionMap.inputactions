@@ -166,6 +166,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "OpenMastoBone",
+                    "type": "Button",
+                    "id": "a18f7bd2-1e12-4224-a956-c91cf5505cc0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -661,6 +670,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "26aca46f-33fc-478a-9be1-b1dfe0ea263a",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OpenMastoBone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
