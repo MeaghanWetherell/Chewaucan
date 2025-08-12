@@ -8,6 +8,6 @@ public class ReturnToMainMenu : MonoBehaviour
     public void OnClick()
     {
         SaveHandler.saveHandler.Save();
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(0);
     }
 }
