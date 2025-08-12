@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using QuestSystem; //Required to run the questmanager function
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,10 @@ public class BoneChecker : MonoBehaviour
     public GameObject mBoneViewer; //the mastodon bone
     
     public TextMeshProUGUI text;
+
+    public List<Narration.Narration> incorrectBarks;
+
+    public List<Narration.Narration> correctBarks;
 
     private Quaternion initialRotation; // store the starting rotation
 
@@ -45,7 +50,11 @@ public class BoneChecker : MonoBehaviour
 
         //If it is correct
         if (isCorrect) {
-
+            if (!SoundManager.soundManager.narrator.isPlaying)
+            {
+                AudioListener.pause = false;
+                correctBarks[Random.Range(0, correctBarks.Count)].Begin();
+            }
             //player rotated it at all
             if (playerRotationAmount >1f) 
             {
@@ -68,8 +77,12 @@ public class BoneChecker : MonoBehaviour
             }
 
         } else {
-          
 
+            if (!SoundManager.soundManager.narrator.isPlaying)
+            {
+                AudioListener.pause = false;
+                incorrectBarks[Random.Range(0, incorrectBarks.Count)].Begin();
+            }
             //incorrect bone, but the player has rotated it sufficiently
             if (playerRotationAmount > 120f)
             {

@@ -252,11 +252,12 @@ public class LandMovement : MonoBehaviour
     // ensures that the player cannot jump up steep slopes
     private bool RaycastToGround()
     {
+        //Debug.Log("Casting ray");
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _controller.height))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _controller.height+0.5f))
         {
             GameObject objectHit = hit.collider.gameObject;
-
+            //Debug.Log(hit.distance);
             //<1.1 is the distance if the player is standing on flat ground so any distance larger is likely standing on a slope
             if (hit.distance <= maxDistToGround)
             {
