@@ -23,7 +23,8 @@ namespace Narration
 
         //whether this narration should be playable by default
         //disable this is if it should be unavailable until a certain action has been performed,
-        //otherwise enable.
+        //otherwise enable. playability is not automatically used by the narration,
+        //but may be checked in code to determine if narration should play
         public bool defaultPlayability;
 
         //the onComplete list that actually gets passed to the sound manager

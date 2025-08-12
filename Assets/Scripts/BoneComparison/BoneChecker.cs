@@ -23,6 +23,10 @@ public class BoneChecker : MonoBehaviour
 
     private Quaternion initialRotation; // store the starting rotation
 
+    private bool waitToStartNarr = false;
+
+    private bool suffRot = false;
+
     private void Start()
     {
         viewer.GetComponent<BoneChecker>().SetBoneRotation(viewer.transform.localEulerAngles);
@@ -32,6 +36,13 @@ public class BoneChecker : MonoBehaviour
         Quaternion offsetRotation = initialRotation * Quaternion.Euler(0f, 90f, 0f); //rotate it 90 degrees
         viewer.transform.rotation = offsetRotation;
         initialRotation = offsetRotation;
+    }
+
+    private IEnumerator PlayAfterTime(Narration.Narration narr, float time)
+    {
+        yield return new WaitForSeconds(time);
+        waitToStartNarr = false;
+        narr.Begin();
     }
 
     // Update is called once per frame
@@ -50,10 +61,11 @@ public class BoneChecker : MonoBehaviour
 
         //If it is correct
         if (isCorrect) {
-            if (!SoundManager.soundManager.narrator.isPlaying)
+            if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
             {
                 AudioListener.pause = false;
-                correctBarks[Random.Range(0, correctBarks.Count)].Begin();
+                waitToStartNarr = true;
+                StartCoroutine(PlayAfterTime(correctBarks[Random.Range(0, correctBarks.Count)], 2));
             }
             //player rotated it at all
             if (playerRotationAmount >1f) 
@@ -63,6 +75,7 @@ public class BoneChecker : MonoBehaviour
                 {
                     text.text = "That's it! Your bone is the distal end of a femur.";
                     QuestManager.questManager.GETNode("bonepile").AddCount(0);
+                    StopAllCoroutines();
                     this.enabled = false;
 
                 } else
@@ -77,17 +90,17 @@ public class BoneChecker : MonoBehaviour
             }
 
         } else {
-
-            if (!SoundManager.soundManager.narrator.isPlaying)
+            if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
             {
                 AudioListener.pause = false;
-                incorrectBarks[Random.Range(0, incorrectBarks.Count)].Begin();
+                waitToStartNarr = true;
+                StartCoroutine(PlayAfterTime(incorrectBarks[Random.Range(0, incorrectBarks.Count)], 2));
             }
             //incorrect bone, but the player has rotated it sufficiently
-            if (playerRotationAmount > 120f)
+            if (playerRotationAmount > 120f || suffRot)
             {
                 text.text = "Hmm, this doesn't seem to be the right bone. ";
-                this.enabled = false;
+                suffRot = true;
             }
             else
             {

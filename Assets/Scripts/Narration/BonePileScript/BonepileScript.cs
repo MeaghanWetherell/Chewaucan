@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using LoadGUIFolder;
 using Narration;
+using QuestSystem;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BonepileScript : MonoBehaviour
@@ -17,9 +21,21 @@ public class BonepileScript : MonoBehaviour
 
     public Narration.Narration BP4;
 
+    public Narration.Narration BP10;
+
+    public Narration.Narration BP11;
+
+    public Narration.Narration BP12;
+
+    public Narration.Narration BP51;
+
+    public Narration.Narration BP52;
+
     public Image mastoBoneUIImage;
 
     public List<BoneInteractable> allBoneInteractables;
+
+    public Vector3 BPilePlayerPosition;
     
     private void Start()
     {
@@ -28,6 +44,28 @@ public class BonepileScript : MonoBehaviour
         {
             mastoBoneUIImage.gameObject.SetActive(false);
         }
+
+        if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
+            {
+                //Debug.Log("Setting BP10 Playable");
+                BP10.SetPlayability(true);
+            }))
+        {
+            Debug.Log("sub failed");
+        }
+        BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
+                //Debug.Log("Ran BP10 OnComp");
+                BP11.SetPlayability(true);}});
+        BP11.addToOnComplete(new List<UnityAction<string>>{
+            str =>
+            {
+                LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
+                v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
+                string json = JsonSerializer.Serialize(toSerialize);
+                string savePath = SaveHandler.saveHandler.getSavePath();
+                File.WriteAllText(savePath+"/astrolabeteleposition.json", json);
+                BP12.SetPlayability(true);
+            }});
     }
 
     public void StartBP2(string none)
@@ -59,6 +97,8 @@ public class BonepileScript : MonoBehaviour
 
     public void ShowPopUp(string none)
     {
+        BP51.SetPlayability(true);
+        BP52.SetPlayability(true);
         LoadGUIManager.loadGUIManager.InstantiatePopUp("The Bone Pile", "Interact with bones with Tab. Find the bone that matches yours!");
     }
 
