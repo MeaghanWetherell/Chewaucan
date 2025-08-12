@@ -23,7 +23,7 @@ namespace TimeTravel
             }
             catch (IOException){ }
 
-            if (Teleposition.Equals(Vector3.negativeInfinity) || SceneLoadWrapper.sceneLoadWrapper.currentSceneType == 1)
+            if (Teleposition.Equals(Vector3.negativeInfinity))
             {
                 PastTeleportButton.interactable = false;
             }
@@ -31,8 +31,17 @@ namespace TimeTravel
 
         public void OnClick()
         {
-            PlayerPositionManager.playerPositionManager.setPlayerPosition(Teleposition, 1);
-            SceneLoadWrapper.sceneLoadWrapper.LoadScene("PleistoceneMap");
+            int curScene = SceneLoadWrapper.sceneLoadWrapper.currentSceneType;
+            if (curScene == 0)
+            {
+                PlayerPositionManager.playerPositionManager.setPlayerPosition(Teleposition, 1);
+                SceneLoadWrapper.sceneLoadWrapper.LoadScene("PleistoceneMap");
+            }
+            else
+            {
+                PlayerPositionManager.playerPositionManager.setPlayerPosition(Teleposition, 0);
+                SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+            }
         }
     }
 }
