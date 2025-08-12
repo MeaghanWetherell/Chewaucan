@@ -18,6 +18,10 @@ namespace QuestSystem.Quests.QScripts
 
         public QuestObj fishQuestObj;
 
+        public Narration.Narration J3;
+
+        public Narration.Narration J2;
+
         public string plateauQuestId;
 
         public void OnEnable()
@@ -32,6 +36,14 @@ namespace QuestSystem.Quests.QScripts
 
         private void OnLvlComplete(int lvl)
         {
+            if (lvl == 0)
+            {
+                if (J2.GetPlayability())
+                {
+                    J2.Begin();
+                    J2.SetPlayability(false);
+                }
+            }
             for (int i = 0; i < lvls.Count; i++)
             {
                 if (lvls[i] == lvl+1)
@@ -40,10 +52,14 @@ namespace QuestSystem.Quests.QScripts
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
-                    if (lvl == 0)
+                    
+                    if (lvl == 1)
                     {
-                        WPUnlockSerializer.wpUnlockSerializer.Unlock("PLLake");
-                        NarrationManager.narrationManager.SetPlayability("astronarrdemo", true);
+                        if (J3.GetPlayability())
+                        {
+                            J3.Begin();
+                            J3.SetPlayability(false);
+                        }
                     }
                     if (lvl == 3)
                     {

@@ -67,6 +67,10 @@ public class BonepileScript : MonoBehaviour
                 File.WriteAllText(savePath+"/astrolabeteleposition.json", json);
                 BP12.SetPlayability(true);
             }});
+        BP12.addToOnComplete(new List<UnityAction<string>>
+        {
+            str => QuestManager.questManager.CreateQuestNode("match31")
+        });
     }
 
     public void StartBP2(string none)

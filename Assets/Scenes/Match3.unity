@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &143059201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &167880185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,8 +660,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ece503f00e1ac54589e6087e7be7d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPosition: {x: -178.7, y: 34.8, z: -55.1}
-  subToId: matchdemo
+  playerPosition: {x: 851.5, y: 81.36, z: -325}
+  subToId: match31
+  playOnAstrolabeOpen: {fileID: 0}
+  openAstrolabe: {fileID: 0}
 --- !u!4 &486142094
 Transform:
   m_ObjectHideFlags: 0
@@ -815,7 +817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &572028116
 Transform:
   m_ObjectHideFlags: 0
@@ -1072,12 +1074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971ba44b58d6c9742b9e0787a794941e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lvls: 010000000300000004000000
+  lvls: 0200000004000000
   ids:
-  - matchdemo
   - match31
   - match32
   fishQuestObj: {fileID: 11400000, guid: 54ede45416e3160429eb613e52086816, type: 2}
+  J3: {fileID: 11400000, guid: 0228aba55e3b28945ae3b6a3ccfef5ee, type: 2}
+  J2: {fileID: 11400000, guid: 0153047e8ab11d64c897db0be59cb9cb, type: 2}
   plateauQuestId: 
 --- !u!4 &744288260
 Transform:
@@ -1240,6 +1243,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b6acfdbb-2155-4674-8928-849a95d1ea43
     m_ActionName: Player/Skip[/Keyboard/period]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03aec262-bfe4-4162-863a-f4f77e0cf3f4
+    m_ActionName: Player/FlipBone[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5a9752d-1c80-41ea-b093-9a254325e338
+    m_ActionName: Player/MousePosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a18f7bd2-1e12-4224-a956-c91cf5505cc0
+    m_ActionName: Player/OpenMastoBone[/Keyboard/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -1408,7 +1423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1189405385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1592,7 +1607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1242983822
 Transform:
   m_ObjectHideFlags: 0
@@ -1832,7 +1847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1262140738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2647,7 +2662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1491077947
 Transform:
   m_ObjectHideFlags: 0
@@ -2881,7 +2896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1668327893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3114,7 +3129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1819702109
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3515,7 +3530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1964095977
 Transform:
   m_ObjectHideFlags: 0
