@@ -7,6 +7,7 @@ namespace Narration.Triggers
         public Narration clip;
         public void OnCollisionEnter(Collision other)
         {
+            Debug.Log("Collided with "+other.gameObject.name);
             if (!other.gameObject.CompareTag("Player"))
                 return;
             if (clip.GetPlayability())
