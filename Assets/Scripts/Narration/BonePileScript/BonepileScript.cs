@@ -31,18 +31,31 @@ public class BonepileScript : MonoBehaviour
 
     public Narration.Narration BP52;
 
-    public Image mastoBoneUIImage;
+    private Image mastoBoneUIImage;
 
     public List<BoneInteractable> allBoneInteractables;
 
     public Vector3 BPilePlayerPosition;
+
+    private static BonepileScript scriptSingleton;
     
     private void Start()
     {
+        QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
+        if ((bpile != null && bpile.isComplete) || scriptSingleton != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        scriptSingleton = this;
+        DontDestroyOnLoad(gameObject);
         BP1.addToOnComplete(new List<UnityAction<string>>{StartBP2});
         if (!NarrationManager.narrationManager.hasRun.Contains("BP2"))
         {
-            mastoBoneUIImage.gameObject.SetActive(false);
+            if (mastoBoneUIImage == null)
+                mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();
+            if(mastoBoneUIImage != null)
+                mastoBoneUIImage.gameObject.SetActive(false);
         }
 
         if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
@@ -64,7 +77,7 @@ public class BonepileScript : MonoBehaviour
                 v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
                 string json = JsonSerializer.Serialize(toSerialize);
                 string savePath = SaveHandler.saveHandler.getSavePath();
-                File.WriteAllText(savePath+"/astrolabeteleposition.json", json);
+                File.WriteAllText(savePath+"/astrolabeteleposition1.json", json);
                 BP12.SetPlayability(true);
             }});
         BP12.addToOnComplete(new List<UnityAction<string>>
@@ -80,7 +93,10 @@ public class BonepileScript : MonoBehaviour
         LoadGUIManager.loadGUIManager.Load("MastodonBoneViewer");
         AudioListener.pause = false;
         BP2.addToOnComplete(new List<UnityAction<string>>{StartBP3});
-        mastoBoneUIImage.gameObject.SetActive(true);
+        if (mastoBoneUIImage == null)
+            mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();
+        if(mastoBoneUIImage != null)
+            mastoBoneUIImage.gameObject.SetActive(true);
     }
 
     public void StartBP3(string none)
@@ -111,12 +127,14 @@ public class BonepileScript : MonoBehaviour
     {
         foreach (BoneInteractable bint in allBoneInteractables)
         {
-            bint.outlinedBone.SetActive(true);
+            if (bint != null)
+                bint.outlinedBone.SetActive(true);
         }
         yield return new WaitForSeconds(5);
         foreach (BoneInteractable bint in allBoneInteractables)
         {
-            bint.outlinedBone.SetActive(false);
+            if (bint != null)
+                bint.outlinedBone.SetActive(false);
         }
     }
 }

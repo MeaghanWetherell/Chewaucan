@@ -70,6 +70,7 @@ public class RandomAmbientSound : MonoBehaviour
     {
         MakeFrequencyAccurateList(currentSoundList);
         int n = Random.Range(0, frequencyList.Count);
+        if (frequencyList.Count == 0) return;
         int soundIndex = frequencyList[n];
         RandomAmbientSoundObject sound = currentSoundList[soundIndex];
 

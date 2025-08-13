@@ -48,8 +48,7 @@ namespace Match3
             {
                 levelsComplete = JsonSerializer.Deserialize<List<bool>>(File.ReadAllText(path+"/"+levelsCompleteFileName+".json"));
             }
-            catch (IOException){ }
-            levelsComplete ??= new List<bool>();
+            catch (IOException){ levelsComplete = new List<bool>(); }
             // ReSharper disable once PossibleNullReferenceException
             while(levelsComplete.Count < levels.Count)
                 levelsComplete.Add(false);
@@ -57,8 +56,8 @@ namespace Match3
             {
                 highScores = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path+"/"+highScoreFileName+".json"));
             }
-            catch (IOException){ }
-            highScores ??= new List<float>();
+            catch (IOException){ highScores = new List<float>(); }
+            
             // ReSharper disable once PossibleNullReferenceException
             while(highScores.Count < levels.Count)
                 highScores.Add(0);
