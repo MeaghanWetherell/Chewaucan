@@ -17,6 +17,9 @@ public class MovementSoundEffects : MonoBehaviour
     }
 
     [SerializeField] List<MovementSoundInfo> movementSoundInfo = new();
+    [SerializeField] private float walkDelay = .1f;
+    [SerializeField] private float sprintDelay = 0f;
+    private float currentDelay = 0f;
 
     List<AudioClip> _clipListStep;
     List<AudioClip> _clipListJump;
@@ -51,10 +54,12 @@ public class MovementSoundEffects : MonoBehaviour
             SetSoundList(values);
             if (!isSprinting)
             {
+                currentDelay = walkDelay;
                 StartCoroutine(PlaySound(_clipListStep));
             }
             else
             {
+                currentDelay = sprintDelay;
                 StartCoroutine(PlaySound(_clipListSprint));
             }
         }
@@ -66,6 +71,7 @@ public class MovementSoundEffects : MonoBehaviour
         _isPlaying = false;
         float[] values = _groundTexture.GetValues();
         SetSoundList(values);
+        currentDelay = 0f;
         StartCoroutine(PlaySound(_clipListJump));
         
     }
@@ -76,6 +82,7 @@ public class MovementSoundEffects : MonoBehaviour
         {
             float[] values = _groundTexture.GetValues();
             SetSoundList(values);
+            currentDelay = 0f;
             StartCoroutine(PlaySound(_clipListLand));
         }
     }
@@ -121,7 +128,8 @@ public class MovementSoundEffects : MonoBehaviour
 
         //Debug.Log("     Playing " + clip.name);
 
-        yield return new WaitForSeconds(_playerAudio.clip.length);
+        //this is currently also delaying you if you are jumping or falling.
+        yield return new WaitForSeconds(_playerAudio.clip.length + currentDelay);
 
         _isPlaying = false;
     }
