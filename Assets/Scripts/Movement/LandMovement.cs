@@ -128,6 +128,19 @@ public class LandMovement : MonoBehaviour
         return false;
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit != null)
+        {
+            if (hit.gameObject != null)
+            {
+                IControllerCollisionEnter script = hit.gameObject.GetComponent<IControllerCollisionEnter>();
+                script?.OnControllerCollisionEnter(gameObject);
+            }
+        }
+        
+    }
+
     private float normalRot(float rot)
     {
         while (rot > 360)
