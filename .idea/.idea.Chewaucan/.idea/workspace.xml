@@ -6,10 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FullMapView.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FullMapView.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MastodonBoneViewer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MastodonBoneViewer.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/LandMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Movement/LandMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayOnCollisionEnter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayOnCollisionEnter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayRandomlyOnCollisionEnter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayRandomlyOnCollisionEnter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/WPUnlockSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/WPUnlockSerializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match31.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match31.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +35,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/cf/b4a82975/StreamWriter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/787acc3c9a4c471ba7d971300105af2446ac00/cf/c8c61d47/List`1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/KeyRebinding/GetGlyph.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/ICollisionEnter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/MoveStopNartration.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/PlayRandomlyOnCollisionEnter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -82,10 +90,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25364">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="25364" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -120,7 +128,8 @@
       <workItem from="1754966016678" duration="4034000" />
       <workItem from="1755029382616" duration="6036000" />
       <workItem from="1755040058316" duration="275000" />
-      <workItem from="1755110989311" duration="3601000" />
+      <workItem from="1755110989311" duration="3919000" />
+      <workItem from="1756060805041" duration="4779000" />
     </task>
     <servers />
   </component>
@@ -140,19 +149,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/LoadGUIFolder/LoadGUIManager.cs</url>
-          <line>142</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\LoadGUIFolder\LoadGUIManager.cs" containingFunctionPresentation="Method 'Load'">
-            <startOffsets>
-              <option value="4179" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4227" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/MatchLvlComplete.cs</url>
           <line>46</line>
@@ -191,6 +187,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs</url>
+          <line>38</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\TextUpdateWithRebinds.cs" containingFunctionPresentation="Method 'UpdateText'">
+            <startOffsets>
+              <option value="953" />
+            </startOffsets>
+            <endOffsets>
+              <option value="972" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

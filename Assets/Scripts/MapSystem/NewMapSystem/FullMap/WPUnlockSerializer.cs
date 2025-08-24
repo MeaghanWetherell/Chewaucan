@@ -20,7 +20,7 @@ public class WPUnlockSerializer : MonoBehaviour
 
     public void Unlock(String name)
     {
-        wpUnlocks[name] = true;
+        wpUnlocks[name.ToLower()] = true;
     }
 
     private void Awake()
@@ -62,11 +62,11 @@ public class WPUnlockSerializer : MonoBehaviour
             TeleportWaypoint wp = obj.GetComponent<TeleportWaypoint>();
             if (wp != null)
             {
-                if(wpUnlocks.ContainsKey(wp.wpName))
-                    wp.unlocked = wpUnlocks[wp.wpName];
+                if(wpUnlocks.ContainsKey(wp.wpName.ToLower()))
+                    wp.unlocked = wpUnlocks[wp.wpName.ToLower()];
                 else
                 {
-                    wpUnlocks.Add(wp.wpName, wp.unlocked);
+                    wpUnlocks.Add(wp.wpName.ToLower(), wp.unlocked);
                 }
                 if (wp.unlocked)
                 {

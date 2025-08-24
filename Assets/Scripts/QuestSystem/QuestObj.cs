@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace QuestSystem
 {
@@ -39,5 +40,11 @@ namespace QuestSystem
 
         [Tooltip("OPTIONAL narration to play on quest complete")]
         public Narration.Narration completeNarration;
+
+        [Tooltip("OPTIONAL ids of waypoints to unlock on completion")]
+        public List<string> OnCompleteWPIDs;
+        
+        [Tooltip("OPTIONAL ids of waypoints to unlock on start")]
+        public List<string> OnStartWPIDs;
     }
 }

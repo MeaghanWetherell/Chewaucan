@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 539271500}
   - component: {fileID: 539271502}
   - component: {fileID: 539271501}
+  - component: {fileID: 539271503}
   m_Layer: 5
   m_Name: Instructions
   m_TagString: Untagged
@@ -408,7 +409,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ' Click and drag bone to rotate, press X to flip. Press Y to exit.'
+  m_text: ' Click and drag bone to rotate, press <flipbone> to flip. Press <openmastobone>
+    to exit.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8620c72cb0e25314bac05cf5d32990d5, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8620c72cb0e25314bac05cf5d32990d5, type: 2}
@@ -435,7 +437,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 20.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -485,6 +487,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539271499}
   m_CullTransparentMesh: 1
+--- !u!114 &539271503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539271499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0353e89799cc1f54ca449ba63e52d99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 539271501}
 --- !u!1 &567667594
 GameObject:
   m_ObjectHideFlags: 0

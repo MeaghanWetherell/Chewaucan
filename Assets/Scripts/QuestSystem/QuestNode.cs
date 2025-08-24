@@ -57,6 +57,8 @@ namespace QuestSystem
 
         [NonSerialized]public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
+        public List<string> WPUnlockIDs = new List<string>();
+
         public bool isComplete = false;
 
         public bool isPinned = false;
@@ -159,6 +161,16 @@ namespace QuestSystem
             completionNarration = data.completeNarration;
             if(completionNarration != null)
                 compNarrName = completionNarration.name;
+            List<string> ids = data.OnCompleteWPIDs;
+            while (WPUnlockIDs.Count < ids.Count)
+            {
+                WPUnlockIDs.Add(ids[WPUnlockIDs.Count]);
+            }
+
+            foreach (string wp in data.OnStartWPIDs)
+            {
+                WPUnlockSerializer.wpUnlockSerializer.Unlock(wp);
+            }
         }
 
         public void callOnceInitialized()

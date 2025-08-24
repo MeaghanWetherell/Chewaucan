@@ -246,6 +246,10 @@ namespace QuestSystem
             _quests.InsertionSort();
             LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
             SaveDialProgressData.CompleteOneQuest(node.type);
+            foreach (string wp in node.WPUnlockIDs)
+            {
+                WPUnlockSerializer.wpUnlockSerializer.Unlock(wp);
+            }
             if (wasPinned)
             {
                 RemovePin(node);
