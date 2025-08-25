@@ -15,6 +15,10 @@ namespace Misc
 
         public TextMeshProUGUI messageText;
 
+        public GameObject subtitleBG;
+
+        public GameObject skipBG;
+
         private void Awake()
         {
             hudManager = this;

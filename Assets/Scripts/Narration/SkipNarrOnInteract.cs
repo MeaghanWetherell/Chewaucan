@@ -21,12 +21,12 @@ namespace Narration
 
         private void OnEnable()
         {
-            interactKey.action.performed += StopNarr;
+            interactKey.action.started += StopNarr;
         }
 
         private void OnDisable()
         {
-            interactKey.action.performed -= StopNarr;
+            interactKey.action.started -= StopNarr;
         }
 
         private void StopNarr(InputAction.CallbackContext context)

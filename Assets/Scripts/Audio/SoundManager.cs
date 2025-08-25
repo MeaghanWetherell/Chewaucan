@@ -72,18 +72,19 @@ namespace Audio
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
-            if (subtitlesOn && times != null && lines != null)
+            GameObject temp = GameObject.Find("Subtitler");
+            HUDManager.hudManager?.skipBG?.SetActive(true);
+            if (subtitlesOn && times != null && lines != null && temp != null)
             {
                 currentSubLines = lines;
                 currentSubTimes = times;
-                GameObject temp = GameObject.Find("Subtitler");
-                if (temp == null)
-                {
-                    Instantiate(subtitlePrefab);
-                    temp = GameObject.Find("Subtitler");
-                }
+                HUDManager.hudManager?.subtitleBG?.SetActive(true);
                 subtitleViewer = temp.GetComponent<TextMeshProUGUI>();
                 runSubs = StartCoroutine(RunSubtitles());
+            }
+            else
+            {
+                HUDManager.hudManager?.subtitleBG?.SetActive(false);
             }
             PlayNarration();
             if(waitforcomp != null) StopCoroutine(waitforcomp);
@@ -140,6 +141,7 @@ namespace Audio
         private void InvokeNarrComplete()
         {
             StopCoroutine(waitforcomp);
+            HUDManager.hudManager?.skipBG?.SetActive(false);
             narrFinished = true;
             if(runSubs != null)StopCoroutine(runSubs);
             if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);

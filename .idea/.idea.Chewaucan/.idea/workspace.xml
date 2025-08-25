@@ -6,18 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Match3/MatchManGuy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FullMapView.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FullMapView.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MastodonBoneViewer.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MastodonBoneViewer.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Modern Map.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/WPUnlockSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/WPUnlockSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Movement/ActionMap.inputactions.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestObj.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/BonePileQ.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match31.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QObjects/Match31.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Misc/SubCanv.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Misc/SubCanv.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/SkipNarrOnInteract.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/SkipNarrOnInteract.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,10 +83,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="25364">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="25364" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -129,7 +122,8 @@
       <workItem from="1755029382616" duration="6036000" />
       <workItem from="1755040058316" duration="275000" />
       <workItem from="1755110989311" duration="3919000" />
-      <workItem from="1756060805041" duration="4779000" />
+      <workItem from="1756060805041" duration="5606000" />
+      <workItem from="1756146121396" duration="1324000" />
     </task>
     <servers />
   </component>
@@ -190,16 +184,29 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs</url>
-          <line>38</line>
+          <line>37</line>
           <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\TextUpdateWithRebinds.cs" containingFunctionPresentation="Method 'UpdateText'">
             <startOffsets>
-              <option value="953" />
+              <option value="916" />
             </startOffsets>
             <endOffsets>
-              <option value="972" />
+              <option value="940" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="41" />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs</url>
+          <line>79</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\TextUpdateWithRebinds.cs" containingFunctionPresentation="Method 'GetActionText'">
+            <startOffsets>
+              <option value="2145" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2183" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
