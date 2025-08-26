@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 using UnityEngine;
@@ -32,6 +33,12 @@ namespace QuestSystem.Quests.QScripts
                 File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
                 playOnAstrolabeOpen?.SetPlayability(true);
             });
+        }
+
+        private void OnDisable()
+        {
+            if(openAstrolabe != null)
+                openAstrolabe.action.performed -= OnAstrolabeOpen;
         }
 
         private void OnAstrolabeOpen(InputAction.CallbackContext context)

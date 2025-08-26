@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/PlayerPositionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/PlayerPositionManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/ReturnToMainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/ReturnToMainMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/NarrationManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/NarrationManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/Narration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/ObjScripts/Narration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,10 +82,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12744">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="33964">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="12744" />
+      <option name="pid" value="33964" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -123,7 +123,9 @@
       <workItem from="1755110989311" duration="3919000" />
       <workItem from="1756060805041" duration="5606000" />
       <workItem from="1756146121396" duration="2078000" />
-      <workItem from="1756231806035" duration="1205000" />
+      <workItem from="1756231806035" duration="1589000" />
+      <workItem from="1756233618828" duration="41000" />
+      <workItem from="1756233883151" duration="1275000" />
     </task>
     <servers />
   </component>
@@ -157,19 +159,6 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/AstrolabeDestinationManager.cs</url>
-          <line>46</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\TimeTravel\AstrolabeDestinationManager.cs" containingFunctionPresentation="Method 'OnClick'">
-            <startOffsets>
-              <option value="1630" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1696" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs</url>
           <line>38</line>
           <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\Triggers\AstrolabeNarration.cs" containingFunctionPresentation="Method 'Play'">
@@ -183,17 +172,69 @@
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs</url>
-          <line>38</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\Quests\QScripts\SubAstrolabeTeleport.cs" containingFunctionPresentation="Method 'OnAstrolabeOpen'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs</url>
+          <line>60</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\BonePileScript\BonepileScript.cs" containingFunctionPresentation="Method 'Start'">
             <startOffsets>
-              <option value="1339" />
+              <option value="1579" />
             </startOffsets>
             <endOffsets>
-              <option value="1380" />
+              <option value="1771" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="46" />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestManager.cs</url>
+          <line>243</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\QuestManager.cs" containingFunctionPresentation="Method 'ReportCompletion'">
+            <startOffsets>
+              <option value="8353" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8389" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/QuestNode.cs</url>
+          <line>69</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\QuestNode.cs" containingFunctionPresentation="Method 'AddCount'">
+            <startOffsets>
+              <option value="2119" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2134" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\BonePileScript\BonepileScript.cs" containingFunctionPresentation="Method 'Start'">
+            <startOffsets>
+              <option value="887" />
+            </startOffsets>
+            <endOffsets>
+              <option value="951" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/BonePileScript/BonepileScript.cs</url>
+          <line>112</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\BonePileScript\BonepileScript.cs" containingFunctionPresentation="Method 'StartBP4'">
+            <startOffsets>
+              <option value="3657" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3682" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

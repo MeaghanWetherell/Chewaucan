@@ -48,7 +48,7 @@ public class BonepileScript : MonoBehaviour
             return;
         }
         scriptSingleton = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         BP1.addToOnComplete(new List<UnityAction<string>>{StartBP2});
         if (!NarrationManager.narrationManager.hasRun.Contains("BP2"))
         {
@@ -60,7 +60,7 @@ public class BonepileScript : MonoBehaviour
 
         if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
             {
-                //Debug.Log("Setting BP10 Playable");
+                Debug.Log("Setting BP10 Playable");
                 BP10.SetPlayability(true);
             }))
         {

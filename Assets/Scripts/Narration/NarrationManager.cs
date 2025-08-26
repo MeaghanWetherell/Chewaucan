@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Narration
 {
@@ -19,6 +20,8 @@ namespace Narration
 
         //stores narration clips that have already played
         public List<string> hasRun;
+
+        [Tooltip("Scriptable object holding all narration that should have their on complete lists reset on load")] public FullNarrList resetNarrList;
 
         //return whether the manager has registered if the passed narration should be playable or not
         public bool HasDataOnNarr(string id)
@@ -65,6 +68,7 @@ namespace Narration
         private void ReadFromJson(string path)
         {
             if (reset) return;
+            resetNarrList.Clear();
             try
             {
                 shouldRun = JsonSerializer.Deserialize<Dictionary<string, bool>>(File.ReadAllText(path+"/shouldRun.json"));

@@ -32,7 +32,7 @@ namespace Narration
 
         //the prefab prompt allowing the player to skip narration
         private static GameObject narrSkipPrompt;
-
+        
         //start the narration
         public virtual void Begin()
         {
