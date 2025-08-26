@@ -6,11 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0d264151-fe3d-4533-85b6-655eacb64f3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Chewaucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player/HUD.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/Misc/SubCanv.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/Misc/SubCanv.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/SoundManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/HUDManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/SkipNarrOnInteract.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/SkipNarrOnInteract.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/PlayerPositionManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MapSystem/NewMapSystem/FullMap/PlayerPositionManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Misc/ReturnToMainMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Misc/ReturnToMainMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,10 +82,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="12744">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="12744" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -123,7 +122,8 @@
       <workItem from="1755040058316" duration="275000" />
       <workItem from="1755110989311" duration="3919000" />
       <workItem from="1756060805041" duration="5606000" />
-      <workItem from="1756146121396" duration="1324000" />
+      <workItem from="1756146121396" duration="2078000" />
+      <workItem from="1756231806035" duration="1205000" />
     </task>
     <servers />
   </component>
@@ -170,43 +170,30 @@
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/TimeTravel/AstrolabeDestinationManager.cs</url>
-          <line>21</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\TimeTravel\AstrolabeDestinationManager.cs" containingFunctionPresentation="Method 'Awake'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Narration/Triggers/AstrolabeNarration.cs</url>
+          <line>38</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Narration\Triggers\AstrolabeNarration.cs" containingFunctionPresentation="Method 'Play'">
             <startOffsets>
-              <option value="531" />
+              <option value="919" />
             </startOffsets>
             <endOffsets>
-              <option value="587" />
+              <option value="951" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="37" />
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs</url>
-          <line>37</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\TextUpdateWithRebinds.cs" containingFunctionPresentation="Method 'UpdateText'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/QuestSystem/Quests/QScripts/SubAstrolabeTeleport.cs</url>
+          <line>38</line>
+          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\QuestSystem\Quests\QScripts\SubAstrolabeTeleport.cs" containingFunctionPresentation="Method 'OnAstrolabeOpen'">
             <startOffsets>
-              <option value="916" />
+              <option value="1339" />
             </startOffsets>
             <endOffsets>
-              <option value="940" />
+              <option value="1380" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Misc/TextUpdateWithRebinds.cs</url>
-          <line>79</line>
-          <properties documentPath="C:\Users\cscot\Documents\GitHub\Chewaucan\Assets\Scripts\Misc\TextUpdateWithRebinds.cs" containingFunctionPresentation="Method 'GetActionText'">
-            <startOffsets>
-              <option value="2145" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2183" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="43" />
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

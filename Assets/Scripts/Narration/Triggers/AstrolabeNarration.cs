@@ -38,6 +38,7 @@ namespace Narration
         {
             if (!astroClip.GetPlayability()) return;
             astroClip.SetPlayability(false);
+            AudioListener.pause = false;
             StartCoroutine(OverrideAudioPause());
             astroClip.Begin();
             pleistoClip.SetPlayability(true);

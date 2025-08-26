@@ -14,6 +14,13 @@ public class PlayerPositionManager : MonoBehaviour
     private List<Vector3> nextPlayerPosition = new List<Vector3>();
     
     private GameObject player;
+
+    public void Reset()
+    {
+        nextPlayerPosition = new List<Vector3>();
+        nextPlayerPosition.Add(Vector3.negativeInfinity);
+        nextPlayerPosition.Add(Vector3.negativeInfinity);
+    }
     
     void Start()
     {
@@ -22,8 +29,7 @@ public class PlayerPositionManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        nextPlayerPosition.Add(Vector3.negativeInfinity);
-        nextPlayerPosition.Add(Vector3.negativeInfinity);
+        Reset();
         player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
         playerPositionManager = this;

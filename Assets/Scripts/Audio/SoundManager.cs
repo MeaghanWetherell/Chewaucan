@@ -64,6 +64,17 @@ namespace Audio
 
         private Coroutine runSubs;
 
+        public void ClearSoundManager()
+        {
+            if(waitforcomp != null) StopCoroutine(waitforcomp);
+            if(runSubs != null)StopCoroutine(runSubs);
+            narrator.Stop();
+            narrFinished = true;
+            onNarrationComplete = null;
+            currentSubTimes = null;
+            currentSubLines = null;
+        }
+
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
         //including if the narration was interrupted by skipping
