@@ -17,7 +17,6 @@ namespace Narration
 
         public override void Begin()
         {
-            beStopped = true;
             Stop();
             List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};
             base.Begin(onComplete);
@@ -25,18 +24,7 @@ namespace Narration
 
         private void OnComplete(string title)
         {
-            beStopped = false;
             Player.player.GetComponent<LandMovement>().enabled = true;
-        }
-
-        private IEnumerator StayStopped()
-        {
-            while (beStopped)
-            {
-                Stop();
-                yield return new WaitForSeconds(0);
-            }
-            
         }
 
         private void Stop()

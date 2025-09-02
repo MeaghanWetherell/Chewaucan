@@ -70,10 +70,10 @@ public class PlayerMovementController : MonoBehaviour
 
     public void SwitchToWalking()
     {
-            walking = true;
-            swimming = false;
-            climbing = false;
-            SetScripts();
+        walking = true;
+        swimming = false;
+        climbing = false;
+        SetScripts();
     }
 
     private void SetScripts()
