@@ -88,26 +88,22 @@ namespace Audio
             {
                 if (HUDManager.hudManager.skipBG != null)
                 {
-                    HUDManager.hudManager?.skipBG?.SetActive(false);
+                    HUDManager.hudManager.skipBG.SetActive(true);
                 }
             }
             if (subtitlesOn && times != null && lines != null && temp != null)
             {
                 currentSubLines = lines;
                 currentSubTimes = times;
-                HUDManager.hudManager?.subtitleBG?.SetActive(true);
-                subtitleViewer = temp.GetComponent<TextMeshProUGUI>();
-                runSubs = StartCoroutine(RunSubtitles());
-            }
-            else
-            {
                 if (HUDManager.hudManager != null)
                 {
-                    if (HUDManager.hudManager.skipBG != null)
+                    if (HUDManager.hudManager.subtitleBG != null)
                     {
-                        HUDManager.hudManager?.skipBG?.SetActive(false);
+                        HUDManager.hudManager.subtitleBG.SetActive(true);
                     }
                 }
+                subtitleViewer = temp.GetComponent<TextMeshProUGUI>();
+                runSubs = StartCoroutine(RunSubtitles());
             }
             PlayNarration();
             if(waitforcomp != null) StopCoroutine(waitforcomp);
@@ -168,7 +164,7 @@ namespace Audio
             {
                 if (HUDManager.hudManager.skipBG != null)
                 {
-                    HUDManager.hudManager?.skipBG?.SetActive(false);
+                    HUDManager.hudManager.skipBG.SetActive(false);
                 }
             }
             narrFinished = true;
