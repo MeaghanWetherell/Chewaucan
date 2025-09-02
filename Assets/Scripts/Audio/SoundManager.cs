@@ -84,7 +84,13 @@ namespace Audio
             narrator.clip = clip;
             onNarrationComplete = onComplete;
             GameObject temp = GameObject.Find("Subtitler");
-            HUDManager.hudManager?.skipBG?.SetActive(true);
+            if (HUDManager.hudManager != null)
+            {
+                if (HUDManager.hudManager.skipBG != null)
+                {
+                    HUDManager.hudManager?.skipBG?.SetActive(false);
+                }
+            }
             if (subtitlesOn && times != null && lines != null && temp != null)
             {
                 currentSubLines = lines;
@@ -95,7 +101,13 @@ namespace Audio
             }
             else
             {
-                HUDManager.hudManager?.subtitleBG?.SetActive(false);
+                if (HUDManager.hudManager != null)
+                {
+                    if (HUDManager.hudManager.skipBG != null)
+                    {
+                        HUDManager.hudManager?.skipBG?.SetActive(false);
+                    }
+                }
             }
             PlayNarration();
             if(waitforcomp != null) StopCoroutine(waitforcomp);
@@ -152,7 +164,13 @@ namespace Audio
         private void InvokeNarrComplete()
         {
             StopCoroutine(waitforcomp);
-            HUDManager.hudManager?.skipBG?.SetActive(false);
+            if (HUDManager.hudManager != null)
+            {
+                if (HUDManager.hudManager.skipBG != null)
+                {
+                    HUDManager.hudManager?.skipBG?.SetActive(false);
+                }
+            }
             narrFinished = true;
             if(runSubs != null)StopCoroutine(runSubs);
             if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
