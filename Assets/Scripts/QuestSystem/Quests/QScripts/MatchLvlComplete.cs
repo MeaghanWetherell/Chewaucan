@@ -65,7 +65,7 @@ namespace QuestSystem.Quests.QScripts
                             J3.Begin();
                             J3.SetPlayability(false);
                             J4.SetPlayability(true);
-                            v3Wrapper toSerialize = new v3Wrapper(new Vector3(814,15,-304));
+                            v3Wrapper toSerialize = new v3Wrapper(new Vector3(814,79,-340));
                             string json = JsonSerializer.Serialize(toSerialize);
                             string savePath = SaveHandler.saveHandler.getSavePath();
                             File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
