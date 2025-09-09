@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using Audio;
 using Match3;
 using Misc;
 using Narration;
+using TimeTravel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,6 +20,8 @@ namespace QuestSystem.Quests.QScripts
         [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> ids;
 
         public QuestObj fishQuestObj;
+
+        public Narration.Narration J4;
 
         public Narration.Narration J3;
 
@@ -59,6 +64,12 @@ namespace QuestSystem.Quests.QScripts
                         {
                             J3.Begin();
                             J3.SetPlayability(false);
+                            J4.SetPlayability(true);
+                            v3Wrapper toSerialize = new v3Wrapper(new Vector3(814,15,-304));
+                            string json = JsonSerializer.Serialize(toSerialize);
+                            string savePath = SaveHandler.saveHandler.getSavePath();
+                            File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
+                            WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                         }
                     }
                     if (lvl == 3)
