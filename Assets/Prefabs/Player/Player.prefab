@@ -384,6 +384,8 @@ MonoBehaviour:
   - sounds: {fileID: 11400000, guid: 5db2c016f97690647acfdd74020a62c1, type: 2}
     keywords:
     - Sand
+  walkDelay: 0.1
+  sprintDelay: 0
   defaultSounds: {fileID: 11400000, guid: a8e9f2102b6c61d49854926ba29d2c9d, type: 2}
   swimSounds:
   - {fileID: 8300000, guid: cb87fd698c0cc4845a54eb9d6326d40a, type: 3}
@@ -1356,7 +1358,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 639
+    m_Bits: 30335
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
