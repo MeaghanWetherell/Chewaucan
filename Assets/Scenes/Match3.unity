@@ -662,6 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPosition: {x: 851.5, y: 81.36, z: -325}
   subToId: match31
+  sceneToTeleport: 1
   playOnAstrolabeOpen: {fileID: 0}
   openAstrolabe: {fileID: 0}
 --- !u!4 &486142094
@@ -1079,6 +1080,7 @@ MonoBehaviour:
   - match31
   - match32
   fishQuestObj: {fileID: 11400000, guid: 54ede45416e3160429eb613e52086816, type: 2}
+  J4: {fileID: 11400000, guid: 396ef42cbed9ba34ea58dd0cc6cc8dd4, type: 2}
   J3: {fileID: 11400000, guid: 0228aba55e3b28945ae3b6a3ccfef5ee, type: 2}
   J2: {fileID: 11400000, guid: 0153047e8ab11d64c897db0be59cb9cb, type: 2}
   plateauQuestId: 
@@ -2880,6 +2882,51 @@ MonoBehaviour:
   rotateSound: {fileID: 962136215}
   flipSound: {fileID: 252516331}
   isEnabled: 1
+--- !u!1 &1622112927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1622112929}
+  - component: {fileID: 1622112928}
+  m_Layer: 0
+  m_Name: MatchTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1622112928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622112927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d8f0c5bec76f34a9f3660eee5d991e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+--- !u!4 &1622112929
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622112927}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 843.28564, y: 92.01902, z: -344.17963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1668327892
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,7 +3570,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964095977}
-  - component: {fileID: 1964095978}
   m_Layer: 0
   m_Name: TESTINGONLYBELOWTHIS
   m_TagString: Untagged
@@ -3546,19 +3592,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964095978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964095976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17d8f0c5bec76f34a9f3660eee5d991e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
 --- !u!1 &1968512391
 GameObject:
   m_ObjectHideFlags: 0
@@ -3945,6 +3978,7 @@ SceneRoots:
   - {fileID: 777704255}
   - {fileID: 486142094}
   - {fileID: 1964095977}
+  - {fileID: 1622112929}
   - {fileID: 1491077947}
   - {fileID: 572028116}
   - {fileID: 1242983822}
