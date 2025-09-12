@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 492413d00132d31479e2d7c79256f8e1, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1428,7 +1428,7 @@ GameObject:
   - component: {fileID: 197508243}
   - component: {fileID: 197508242}
   - component: {fileID: 197508244}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MammothRunRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1463,6 +1463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 11400000, guid: 4fa89640407d70a42a49076c1f51abee, type: 2}
+  disablePlayability: 0
 --- !u!135 &197508243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1612,7 +1613,7 @@ GameObject:
   - component: {fileID: 249426510}
   - component: {fileID: 249426512}
   - component: {fileID: 249426511}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Grasslands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4205,7 +4206,7 @@ GameObject:
   - component: {fileID: 1124729466}
   - component: {fileID: 1124729468}
   - component: {fileID: 1124729467}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: J5Radius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4240,6 +4241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 11400000, guid: 1af438fbd85fc7649973bcee15fbfcb1, type: 2}
+  disablePlayability: 0
 --- !u!135 &1124729468
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -71,7 +71,7 @@ public class BonepileScript : MonoBehaviour
         BP11.addToOnComplete(new List<UnityAction<string>>{
             str =>
             {
-                Debug.Log("Ran BP11 OnComp");
+                //Debug.Log("Ran BP11 OnComp");
                 LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
                 v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
                 string json = JsonSerializer.Serialize(toSerialize);
