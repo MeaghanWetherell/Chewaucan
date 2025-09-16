@@ -18,6 +18,6 @@ public class MammothRunOnTriggerEnter : MonoBehaviour
 
     private void Run()
     {
-        mammothBody.velocity = new Vector3(50, 0, 0);
+        mammothBody.velocity = new Vector3(5000, 0, 0);
     }
 }

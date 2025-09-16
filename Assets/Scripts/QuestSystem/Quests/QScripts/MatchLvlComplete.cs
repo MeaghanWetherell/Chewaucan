@@ -21,6 +21,8 @@ namespace QuestSystem.Quests.QScripts
 
         public QuestObj fishQuestObj;
 
+        public Narration.Narration J6;
+
         public Narration.Narration J4;
 
         public Narration.Narration J3;
@@ -74,6 +76,7 @@ namespace QuestSystem.Quests.QScripts
                     }
                     if (lvl == 3)
                     {
+                        J6.Begin();
                         QuestManager.questManager.CreateQuestNode(fishQuestObj);
                         GameObject popUp = GameObject.Find("PopUp(Clone)");
                         if (popUp != null)
