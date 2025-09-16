@@ -17,6 +17,7 @@ namespace Narration.Triggers
             {
                 clip.Begin();
                 clip.SetPlayability(!disablePlayability);
+                this.enabled = false;
             }
         }
     }
