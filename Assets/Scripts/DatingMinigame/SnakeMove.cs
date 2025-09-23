@@ -13,6 +13,8 @@ public class SnakeMove : MonoBehaviour
     public float range = 10.0f;
 
     public float averageTimeBetweenMoveChange;
+
+    public Animator anim;
     
     private float speed;
 
@@ -37,6 +39,14 @@ public class SnakeMove : MonoBehaviour
     {
         PauseCallback.pauseManager.UnsubToPause(OnPause);
         PauseCallback.pauseManager.UnsubToResume(OnResume);
+    }
+
+    private void Update()
+    {
+        if (myAgent.remainingDistance <= 0.1f)
+        {
+            anim.SetBool("Moving", false);
+        }
     }
 
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
@@ -71,6 +81,7 @@ public class SnakeMove : MonoBehaviour
 
     public void SetNewDirection()
     {
+        anim.SetBool("Moving", true);
         Vector3 point;
         RandomPoint(transform.position, range, out point);
         myAgent.SetDestination(point);
