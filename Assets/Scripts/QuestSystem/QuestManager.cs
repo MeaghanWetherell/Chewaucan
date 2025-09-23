@@ -142,6 +142,7 @@ namespace QuestSystem
 
         private void LoadFromFile(string path)
         {
+            CountsPerQuestType = new int[3];
             foreach (QuestObj quest in AllQuests)
             {
                 if(quest.type != SaveDialProgressData.Dial.NONE)

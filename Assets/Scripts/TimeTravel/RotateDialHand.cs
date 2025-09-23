@@ -18,7 +18,7 @@ public class RotateDialHand : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("SETTING ROTATIONS");
+        //Debug.Log("SETTING ROTATIONS");
         SetHandsToRotations();
     }
 
@@ -36,7 +36,7 @@ public class RotateDialHand : MonoBehaviour
             for (int i = 0; i < dialHandTransforms.Count; i++)
             {
                 SaveDialProgressData.Dial dial = (SaveDialProgressData.Dial)i;
-                Debug.Log(dial.ToString());
+                //Debug.Log(dial.ToString());
 
                 RectTransform hand = dialHandTransforms[i];
 
@@ -56,7 +56,7 @@ public class RotateDialHand : MonoBehaviour
             for (int i = 0; i < dialHandTransforms.Count; i++)
             {
                 RectTransform hand = dialHandTransforms[i];
-                Debug.Log("DEFAULT");
+                //Debug.Log("DEFAULT");
                 Vector3 dialRot = SetDialRotation(hand, defaults[i]);
                 hand.rotation = Quaternion.Euler(dialRot);
             }
