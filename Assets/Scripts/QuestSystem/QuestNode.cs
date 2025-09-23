@@ -35,6 +35,11 @@ namespace QuestSystem
 
         //long description of the quest
         public string longDescription;
+        
+        //quest updates
+        public List<string> qUpdates;
+
+        public List<bool> updateUnlocks;
 
         //completion text
         public string compText;
@@ -114,6 +119,30 @@ namespace QuestSystem
             return false;
         }
 
+        //Unlocks the update at the passed position in the order
+        public void UnlockUpdate(int updateNum)
+        {
+            if (updateNum >= updateUnlocks.Count)
+            {
+                Debug.Log("Got invalid unlock number");
+                return;
+            }
+            updateUnlocks[updateNum] = true;
+        }
+        
+        //Unlocks the next update
+        public void UnlockUpdate()
+        {
+            for (int i = 0; i < updateUnlocks.Count; i++)
+            {
+                if (!updateUnlocks[i])
+                {
+                    updateUnlocks[i] = true;
+                    return;
+                }
+            }
+        }
+
         //builds a quest node from the passed data object
         //registers itself with the quest manager
         //warning: the quest manager will not accept nodes with duplicate ids, therefore,
@@ -130,6 +159,7 @@ namespace QuestSystem
             type = data.type;
             objectives = data.objectives;
             ReadDescriptionFile(data.descriptionFile);
+            ReadUpdatesFile(data.questUpdatesFile);
             compText = data.completeFile.ToString();
             requiredCounts = data.countsRequired;
             if (requiredCounts == null)
@@ -207,8 +237,8 @@ namespace QuestSystem
             }
         }
 
-        //reads in description data from text file
-        private void ReadDescriptionFile(TextAsset file)
+        //read text asset into a string[]
+        private string[] FileToStringArr(TextAsset file)
         {
             string fileText = file.ToString();
             string[] fileSplit = fileText.Split('\n');
@@ -216,6 +246,37 @@ namespace QuestSystem
             {
                 fileSplit[i] = fileSplit[i].Trim(new Char[] {'\r'});
             }
+
+            return fileSplit;
+        }
+        
+        //reads in quest updates
+        private void ReadUpdatesFile(TextAsset file)
+        {
+            qUpdates = new List<string>();
+            updateUnlocks = new List<bool>();
+            if (file == null) return;
+            string[] fileSplit = FileToStringArr(file);
+            string update = "";
+            for (int i = 0; i < fileSplit.Length; i++)
+            {
+                if (fileSplit[i].Equals("--break--"))
+                {
+                    qUpdates.Add(update);
+                    updateUnlocks.Add(false);
+                    update = "";
+                }
+                else if (fileSplit[i][0] != '#')
+                {
+                    update += fileSplit[i] + "\n";
+                }
+            }
+        }
+
+        //reads in description data from text file
+        private void ReadDescriptionFile(TextAsset file)
+        {
+            string[] fileSplit = FileToStringArr(file);
             string desc = "";
             for (int i = 0; i < fileSplit.Length; i++)
             {

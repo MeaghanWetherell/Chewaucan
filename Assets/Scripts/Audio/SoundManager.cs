@@ -121,7 +121,12 @@ namespace Audio
             StartCoroutine(QuietBGMUntilDone(narrator));
             StartCoroutine(QuietSEUntilDone(narrator));
         }
-        
+
+        private void OnApplicationQuit()
+        {
+            StopNarration();
+        }
+
         //stop the active narration
         public void StopNarration()
         {
