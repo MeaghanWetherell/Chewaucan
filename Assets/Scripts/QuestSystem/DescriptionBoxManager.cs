@@ -29,13 +29,22 @@ namespace QuestSystem
         {
             _cur = newNode;
             transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.name;
+            TextMeshProUGUI longDescTMP = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
             if (_cur.longDescription.Equals(""))
             {
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _cur.shortDescription;
+                longDescTMP.text = _cur.shortDescription;
             }
             else
             {
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = _cur.longDescription;
+                longDescTMP.text = _cur.longDescription;
+            }
+
+            for (int i = 0; i < newNode.updateUnlocks.Count; i++)
+            {
+                if (newNode.updateUnlocks[i])
+                {
+                    longDescTMP.text += newNode.qUpdates[i];
+                }
             }
             TextMeshProUGUI text = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
             text.text = "";
