@@ -27,8 +27,8 @@ namespace Narration
         //but may be checked in code to determine if narration should play
         public bool defaultPlayability;
 
-        //the onComplete list that actually gets passed to the sound manager
-        private List<UnityAction<string>> actualOnComplete;
+        //runs when narration finishes
+        private UnityEvent<string> narrCompleted;
 
         //the prefab prompt allowing the player to skip narration
         private static GameObject narrSkipPrompt;
@@ -46,27 +46,41 @@ namespace Narration
             if (subtitles != null)
             {
                 (List<float>, List<string>) subs = parseSubtitles();
-                SoundManager.soundManager.PlayNarration(narrationClip, actualOnComplete, subs.Item1, subs.Item2);
+                SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, subs.Item1, subs.Item2);
             }
-            else SoundManager.soundManager.PlayNarration(narrationClip, actualOnComplete);
+            else SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted);
             NarrationManager.narrationManager.Played(name);
         }
 
         //adds an item to this narration's onComplete list
         public void addToOnComplete(List<UnityAction<string>> onComplete)
         {
-            actualOnComplete ??= new List<UnityAction<string>>();
+            narrCompleted ??= new UnityEvent<string>();
             foreach (UnityAction<string> action in onComplete)
             {
-                if(!actualOnComplete.Contains(action))
-                    actualOnComplete.Add(action);
+                narrCompleted.AddListener(action);
+            }
+        }
+
+        //remove functions from the oncomplete callback
+        public void RemoveFromOnComplete(List<UnityAction<string>> onComplete)
+        {
+            foreach (UnityAction<string> action in onComplete)
+            {
+                narrCompleted.RemoveListener(action);
             }
         }
 
         //resets this Narration's onComplete list
         public void ResetOnComplete()
         {
-            actualOnComplete = new List<UnityAction<string>>();
+            narrCompleted = new UnityEvent<string>();
+        }
+
+        //return whether this narration has been played or not
+        public bool HasPlayed()
+        {
+            return NarrationManager.narrationManager.HasPlayed(name);
         }
 
         //determine whether this narration should be played

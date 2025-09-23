@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 9029176712713730837}
   - component: {fileID: 6533283971560050655}
   - component: {fileID: 2236623246030327831}
-  - component: {fileID: 3553649043506530603}
   - component: {fileID: -2708770496626669808}
   - component: {fileID: -4823584915716742354}
+  - component: {fileID: -382781565806970728}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -108,19 +108,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3553649043506530603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4731628823256804874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d1c50f00a6088448752168dcebe242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questID: bonepile
 --- !u!54 &-2708770496626669808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,3 +150,16 @@ MonoBehaviour:
   clips:
   - {fileID: 11400000, guid: bc152641e09947e46a9c9b0a8b40a96a, type: 2}
   - {fileID: 11400000, guid: 56d08b3053a09534aadc3ceb8eea6537, type: 2}
+--- !u!114 &-382781565806970728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4731628823256804874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97eaa36dfe0ec1f42875a9f013ab908d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitForNarr: {fileID: 11400000, guid: f028fcc86e1f5924b84d8a80877f3d48, type: 2}

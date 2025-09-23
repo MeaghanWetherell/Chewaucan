@@ -34,6 +34,12 @@ namespace Narration
         {
             return shouldRun.ContainsKey(id) && shouldRun[id];
         }
+        
+        //returns whether the passed narration has been played
+        public bool HasPlayed(string id)
+        {
+            return hasRun.Contains(id);
+        }
 
         //registers the passed narration as played
         public void Played(string id)

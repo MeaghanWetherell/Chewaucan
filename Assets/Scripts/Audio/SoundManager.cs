@@ -49,7 +49,7 @@ namespace Audio
         private const float quietVol = 0.1f;
 
         //actions to run after narration finishes
-        private List<UnityAction<string>> onNarrationComplete;
+        private UnityEvent<string> onNarrationComplete;
 
         private List<float> currentSubTimes;
 
@@ -78,7 +78,7 @@ namespace Audio
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
         //including if the narration was interrupted by skipping
-        public void PlayNarration(AudioClip clip, List<UnityAction<string>> onComplete, List<float> times = null, List<string> lines = null)
+        public void PlayNarration(AudioClip clip, UnityEvent<string> onComplete, List<float> times = null, List<string> lines = null)
         {
             narrator.Stop();
             narrator.clip = clip;
@@ -114,8 +114,7 @@ namespace Audio
         public void PlayNarration()
         {
             if(!narrFinished)
-                foreach(UnityAction<string> action in onNarrationComplete)
-                    action.Invoke(narrator.clip.name);
+                onNarrationComplete.Invoke(narrator.clip.name);
             narrFinished = false;
             narrator.Play();
             waiting = false;
@@ -172,8 +171,7 @@ namespace Audio
             if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
             currentSubLines = null;
             currentSubTimes = null;
-            foreach(UnityAction<string> action in onNarrationComplete)
-                action.Invoke(narrator.clip.name);
+            onNarrationComplete.Invoke(narrator.clip.name);
         }
 
         private IEnumerator RunSubtitles()
