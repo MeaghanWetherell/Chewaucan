@@ -73,8 +73,8 @@ namespace Narration
         //read in save from disk
         private void ReadFromJson(string path)
         {
-            if (reset) return;
             resetNarrList.Clear();
+            if (reset) return;
             try
             {
                 shouldRun = JsonSerializer.Deserialize<Dictionary<string, bool>>(File.ReadAllText(path+"/shouldRun.json"));
