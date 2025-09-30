@@ -73,6 +73,7 @@ namespace QuestSystem.Quests.QScripts
                             File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                         }
+                        QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
                     }
                     if (lvl == 3)
                     {

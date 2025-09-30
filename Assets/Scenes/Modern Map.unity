@@ -15782,6 +15782,7 @@ GameObject:
   - component: {fileID: 1804527968}
   - component: {fileID: 1804527970}
   - component: {fileID: 1804527969}
+  - component: {fileID: 1804527971}
   m_Layer: 0
   m_Name: SifterNarrTrigger
   m_TagString: Untagged
@@ -15839,6 +15840,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 24.029888, y: 5.2448845, z: 46.909943}
   m_Center: {x: 0.7791214, y: 2.1224422, z: 16.15477}
+--- !u!114 &1804527971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804527967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef944149fbf9949970f7bbfefe536e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  qid: match31
+  updateNum: 0
 --- !u!1 &1818916716
 GameObject:
   m_ObjectHideFlags: 0
