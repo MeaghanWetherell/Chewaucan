@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class CourseWall : MonoBehaviour
 {
-    public CourseManager manager;
+    private CourseManager manager;
 
     public GameObject tumbleweedPrefab;
 
@@ -24,6 +24,8 @@ public class CourseWall : MonoBehaviour
 
     private void Start()
     {
+        manager = transform.parent.GetComponent<CourseManager>();
+        
         if (!inited)
         {
             manager.Started.AddListener(OnStart);
