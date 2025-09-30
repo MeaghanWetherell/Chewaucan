@@ -122,6 +122,11 @@ namespace QuestSystem
         //Unlocks the update at the passed position in the order
         public void UnlockUpdate(int updateNum)
         {
+            if (updateNum < 0)
+            {
+                UnlockUpdate();
+                return;
+            }
             if (updateNum >= updateUnlocks.Count)
             {
                 Debug.Log("Got invalid unlock number");
