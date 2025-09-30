@@ -50,6 +50,7 @@ namespace QuestSystem.Quests.QScripts
                     J2.Begin();
                     J2.SetPlayability(false);
                 }
+                QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
             }
             for (int i = 0; i < lvls.Count; i++)
             {
@@ -73,7 +74,7 @@ namespace QuestSystem.Quests.QScripts
                             File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                         }
-                        QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
+                        
                     }
                     if (lvl == 3)
                     {
