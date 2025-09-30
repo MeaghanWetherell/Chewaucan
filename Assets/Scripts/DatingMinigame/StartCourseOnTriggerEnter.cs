@@ -6,8 +6,13 @@ using UnityEngine;
 
 public class StartCourseOnTriggerEnter : MonoBehaviour
 {
-    public CourseManager manager;
-    
+    private CourseManager manager;
+
+    private void Awake()
+    {
+        manager = transform.parent.GetComponent<CourseManager>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)

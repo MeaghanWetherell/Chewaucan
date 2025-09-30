@@ -67,7 +67,27 @@ public class CourseManager : MonoBehaviour
     [NonSerialized]public UnityEvent Started = new UnityEvent();
 
     [NonSerialized]public UnityEvent Stopped = new UnityEvent();
-    
+
+    private void Start()
+    {
+        foreach (Transform child in dateRockSpawnLocations)
+        {
+            child.gameObject.SetActive(false);
+        }
+
+        if (rockSpawnLocations != null)
+        {
+            foreach (Transform child in rockSpawnLocations)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        foreach (Transform child in snakeSpawnLocations)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
     public void StartCourse()
     {
         courseUI.gameObject.SetActive(true);
@@ -84,7 +104,8 @@ public class CourseManager : MonoBehaviour
         {
             rock.GetComponentInChildren<DateRock>().manager = this;
         }
-        SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);
+        if(rockSpawnLocations != null)
+            SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);
         List<Transform> snakes = SpawnItems(snakeSpawnLocations, stationarySnakeCount, stationarySnakePrefab);
         foreach (Transform snake in snakes)
         {
@@ -113,7 +134,6 @@ public class CourseManager : MonoBehaviour
             childList.RemoveAt(rand);
             numToSpawn--;
         }
-
         return ret;
     }
     

@@ -42,10 +42,15 @@ public class BonepileScript : MonoBehaviour
     private void Start()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
-        if ((bpile != null && bpile.isComplete) || scriptSingleton != null)
+        if ((bpile != null && bpile.isComplete))
         {
             Destroy(gameObject);
             return;
+        }
+
+        if (scriptSingleton != null)
+        {
+            Destroy(scriptSingleton.gameObject);
         }
         DontDestroyOnLoad(gameObject);
         scriptSingleton = this;
