@@ -276,6 +276,11 @@ namespace QuestSystem
                     update += fileSplit[i] + "\n";
                 }
             }
+            if (update != "")
+            {
+                qUpdates.Add(update);
+                updateUnlocks.Add(false);
+            }
         }
 
         //reads in description data from text file
