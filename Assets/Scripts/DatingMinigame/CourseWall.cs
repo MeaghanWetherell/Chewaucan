@@ -24,7 +24,7 @@ public class CourseWall : MonoBehaviour
 
     private void Start()
     {
-        manager = transform.parent.GetComponent<CourseManager>();
+        manager = gameObject.GetComponentInParent<CourseManager>();
         
         if (!inited)
         {

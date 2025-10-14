@@ -23,9 +23,7 @@ public class SnakeMove : MonoBehaviour
     private void Awake()
     {
         speed = myAgent.speed;
-        Vector3 point;
-        RandomPoint(transform.position, range, out point);
-        myAgent.SetDestination(point);
+        SetNewDirection();
         StartCoroutine(SelectNewDirection());
     }
 

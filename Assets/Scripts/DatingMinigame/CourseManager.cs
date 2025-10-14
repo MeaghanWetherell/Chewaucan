@@ -48,15 +48,15 @@ public class CourseManager : MonoBehaviour
     [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for snakes")]
     public Transform snakeSpawnLocations;
 
-    public GameObject tuffaPrefab;
+    public List<GameObject> tuffaPrefab;
 
-    public GameObject carboPrefab;
+    public List<GameObject> carboPrefab;
 
-    public GameObject rockPrefab;
+    public List<GameObject> rockPrefab;
 
-    public GameObject stationarySnakePrefab;
+    public List<GameObject> stationarySnakePrefab;
 
-    public GameObject movingSnakePrefab;
+    public List<GameObject> movingSnakePrefab;
 
     private List<GameObject> spawnedObjects = new List<GameObject>();
     
@@ -119,7 +119,7 @@ public class CourseManager : MonoBehaviour
         Started.Invoke();
     }
 
-    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab, float ymod=0)
+    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, List<GameObject> spawnPrefabs, float ymod=0)
     {
         int rand;
         List<Transform> childList = new List<Transform>();
@@ -127,6 +127,8 @@ public class CourseManager : MonoBehaviour
         List<Transform> ret = new List<Transform>();
         while (numToSpawn > 0 && childList.Count > 0)
         {
+            rand = Random.Range(0, spawnPrefabs.Count);
+            GameObject spawnPrefab = spawnPrefabs[rand];
             rand = Random.Range(0, childList.Count);
             GameObject obj = Instantiate(spawnPrefab, childList[rand].position+new Vector3(0,ymod,0), Quaternion.identity);
             ret.Add(obj.transform);
@@ -137,7 +139,7 @@ public class CourseManager : MonoBehaviour
         return ret;
     }
     
-    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, GameObject spawnPrefab, List<Transform> blackListedLocations, float ymod=0)
+    public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, List<GameObject> spawnPrefabs, List<Transform> blackListedLocations, float ymod=0)
     {
         int rand;
         List<Transform> childList = new List<Transform>();
@@ -157,6 +159,8 @@ public class CourseManager : MonoBehaviour
         List<Transform> ret = new List<Transform>();
         while (numToSpawn > 0 && childList.Count > 0)
         {
+            rand = Random.Range(0, spawnPrefabs.Count);
+            GameObject spawnPrefab = spawnPrefabs[rand];
             rand = Random.Range(0, childList.Count);
             GameObject obj = Instantiate(spawnPrefab, childList[rand].position+new Vector3(0,ymod,0), Quaternion.identity);
             ret.Add(obj.transform);

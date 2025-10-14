@@ -31,8 +31,8 @@ public class DateRock : MonoBehaviour
         float scaleY = Random.Range(scaleMinY, scaleMaxY);
         float scaleZ = Random.Range(scaleMinZ, scaleMaxZ);
         Vector3 scale = transform.parent.localScale;
-        transform.parent.localScale = new Vector3(scale.x * scaleX, scale.y * scaleY, scale.z * scaleZ);
-
+        Vector3 newScale = new Vector3(scale.x * scaleX, scale.y * scaleY, scale.z * scaleZ);
+        transform.parent.localScale = newScale;
     }
 
     private void OnTriggerEnter(Collider other)
