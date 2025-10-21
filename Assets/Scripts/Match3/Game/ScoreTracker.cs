@@ -26,14 +26,17 @@ namespace Match3
         {
             scoreTracker = this;
             scoreRequired = MatchLevelManager.matchLevelManager.GETCurLevel().scoreReq;
-            if (scoreRequired < 1)
+            if (scoreRequired < 1 || MatchLevelManager.matchLevelManager.HasCurLevelBeenCompleted())
             {
                 _isReq = true;
                 text.text = "Score: 0"+"\n"+GetHighScoreText();
-                return;
             }
-            text.text = "Score: 0"+"/"+scoreRequired+"\n"+GetHighScoreText();
-            _isReq = false;
+            else
+            {
+                text.text = "Score: 0" + "/" + scoreRequired;
+                _isReq = false;
+            }
+            
         }
 
         //computes score for a certain count, adds it, and displays it
@@ -53,7 +56,11 @@ namespace Match3
                 text.text = "Score: " + score+"\n"+GetHighScoreText();
                 return;
             }
-            text.text = "Score: " + score +"/"+scoreRequired+"\n"+GetHighScoreText();
+            text.text = "Score: " + score +"/"+scoreRequired;
+            if (score >= scoreRequired)
+            {
+                MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
+            }
         }
         
         //Overload to add a specific score amount
@@ -65,7 +72,11 @@ namespace Match3
                 text.text = "Score: " + score+"\n"+GetHighScoreText();
                 return;
             }
-            text.text = "Score: " + score +"/"+scoreRequired+"\n"+GetHighScoreText();
+            text.text = "Score: " + score + "/" + scoreRequired;
+            if (score >= scoreRequired)
+            {
+                MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
+            }
         }
 
         private string GetHighScoreText()

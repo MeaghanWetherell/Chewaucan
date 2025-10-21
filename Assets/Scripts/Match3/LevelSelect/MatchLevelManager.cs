@@ -29,6 +29,11 @@ namespace Match3
         
         public readonly UnityEvent<int> OnComplete = new UnityEvent<int>();
 
+        public bool HasCurLevelBeenCompleted()
+        {
+            return levelsComplete[curIndex];
+        }
+
         private void Awake()
         {
             if (matchLevelManager != null)
@@ -84,10 +89,13 @@ namespace Match3
         //ends the match 3 game and displays results, including the passed reason for game end
         public void EndGame(string reason)
         {
-            Timer.timer.StopAllCoroutines();
-            Timer.timer.enabled = false;
+            if (Timer.timer != null)
+            {
+                Timer.timer.StopAllCoroutines();
+                Timer.timer.enabled = false;
+            }
             MatchGrid.matchGrid.gameObject.SetActive(false);
-            if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired)
+            if (ScoreTracker.scoreTracker.score < ScoreTracker.scoreTracker.scoreRequired && !HasCurLevelBeenCompleted())
             {
                 MatchUIManager.matchUIManager.Lose(reason);
             }

@@ -6,6 +6,7 @@ using System.Text.Json;
 using LoadGUIFolder;
 using Narration;
 using QuestSystem;
+using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -42,10 +43,10 @@ public class BonepileScript : MonoBehaviour
     private void Start()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
-        if ((bpile != null && bpile.isComplete))
+        if (bpile.isComplete)
         {
-            Destroy(gameObject);
-            return;
+            BP10.SetPlayability(true);
+            //Player.player.GetComponent<LandMovement>().enabled = true;
         }
 
         if (scriptSingleton != null)

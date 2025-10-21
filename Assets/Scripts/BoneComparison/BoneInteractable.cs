@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using LoadGUIFolder;
+using QuestSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,9 +21,13 @@ public class BoneInteractable : Interactable
     private Light mainDirectionalLight;
     public override void OnInteractEnable()
     {
+        QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
         //defaultBone.SetActive(false);
-        outlinedBone.SetActive(true);
-        base.OnInteractEnable();
+        if (bpile is { isComplete: false })
+        {
+            outlinedBone.SetActive(true);
+            base.OnInteractEnable();
+        }
     }
 
     public override void OnInteractDisable()

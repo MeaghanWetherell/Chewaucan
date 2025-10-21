@@ -20,6 +20,11 @@ namespace Match3
 
         private void Awake()
         {
+            if (!MatchLevelManager.matchLevelManager.HasCurLevelBeenCompleted())
+            {
+                Destroy(this.gameObject);
+                return;
+            }
             timeLeft = MatchLevelManager.matchLevelManager.GETCurLevel().time;
             Timer.timer = this;
             if (timeLeft > 100000)

@@ -75,6 +75,7 @@ public class LandMovement : MonoBehaviour
         jumpRef.action.started += OnJump;
         sprintRef.action.performed += OnSprint;
         sprintRef.action.canceled += OnSprint;
+        PauseCallback.pauseManager.SubscribeToPause(OnPause);
 
         StartCoroutine(RotateToStand());
     }
@@ -88,8 +89,15 @@ public class LandMovement : MonoBehaviour
         jumpRef.action.started -= OnJump;
         sprintRef.action.performed -= OnSprint;
         sprintRef.action.canceled -= OnSprint;
+        PauseCallback.pauseManager.UnsubToPause(OnPause);
         
         StopAllCoroutines();
+    }
+
+    private void OnPause()
+    {
+        moveSpeed = moveSpeedDefault;
+        soundEffects.SetIsSprinting(false);
     }
 
     private IEnumerator RotateToStand()
