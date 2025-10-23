@@ -64,7 +64,7 @@ namespace Match3
             _scaleFactor = temp2.width;
             if (temp2.height < _scaleFactor)
                 _scaleFactor = temp2.height;
-            _scaleFactor *= 3;
+            _scaleFactor *= 2.5f;
         }
 
         //checks every frame for whether objects remain to be spawned. if any do, spawns it and sleeps for _waitTime
@@ -91,7 +91,7 @@ namespace Match3
         {
             if(_scaleFactor <= 0)
                 UpdateScale();
-            GameObject newObj = Instantiate(matchObjPrefab, new Vector3(this.transform.position.x, 3.5f, -2), Quaternion.identity);
+            GameObject newObj = Instantiate(matchObjPrefab, new Vector3(this.transform.position.x, 100f, -2), Quaternion.identity);
             newObj.transform.localScale = new Vector3(_scaleFactor, _scaleFactor, _scaleFactor);
             if (shouldRotate)
             {

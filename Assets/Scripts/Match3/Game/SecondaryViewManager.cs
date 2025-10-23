@@ -92,7 +92,14 @@ namespace Match3.Game
                 else if (pos.y > originY + maxY)
                     transform.position = new Vector3(pos.x, originY + maxY, pos.z);
                 float delta = scroll.action.ReadValue<Vector2>().y;
-                cam.orthographicSize -= delta*Time.deltaTime*distScalar;
+                float scrollChange = delta * Time.deltaTime * distScalar;
+                if (delta > 0)
+                {
+                    Debug.Log("Change: "+scrollChange);
+                    Debug.Log("Size:"+cam.orthographicSize);
+                }
+                orthographicSize -= scrollChange;
+                cam.orthographicSize = orthographicSize;
                 if (cam.orthographicSize > maxSize)
                     cam.orthographicSize = maxSize;
                 else if (cam.orthographicSize < minSize)

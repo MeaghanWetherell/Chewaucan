@@ -23,6 +23,9 @@ public class BoneRotater : MonoBehaviour
         [Tooltip("Max size of the camera")] public float maxSize;
 
         [Tooltip("Min size of the camera")] public float minSize;
+
+        [Tooltip("Whether this script should control scrolling")]
+        public bool canScroll = true;
         
         public AudioSource rotateSound;
 
@@ -111,12 +114,15 @@ public class BoneRotater : MonoBehaviour
                     rotateSound?.Stop();
                 }
                 _lastMousePos = mousePos.action.ReadValue<Vector2>();
-                float delta = scroll.action.ReadValue<Vector2>().y;
-                cam.orthographicSize -= delta*Time.deltaTime*distScalar*1000;
-                if (cam.orthographicSize > maxSize)
-                    cam.orthographicSize = maxSize;
-                else if (cam.orthographicSize < minSize)
-                    cam.orthographicSize = minSize;
+                if (canScroll)
+                {
+                    float delta = scroll.action.ReadValue<Vector2>().y;
+                    cam.orthographicSize -= delta*Time.deltaTime*distScalar*1000;
+                    if (cam.orthographicSize > maxSize)
+                        cam.orthographicSize = maxSize;
+                    else if (cam.orthographicSize < minSize)
+                        cam.orthographicSize = minSize;
+                }
             }
             
         }

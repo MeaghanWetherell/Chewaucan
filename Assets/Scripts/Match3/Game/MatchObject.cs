@@ -27,7 +27,7 @@ namespace Match3
         private static List<MeshDataObj> _meshes;
 
         //constant gravity scalar for manually moving bones into position
-        private const float _gravity = 25;
+        private const float _gravity = 250;
 
         //a list containing indices in the main list of the possible bones a match object may become when initialized
         public static List<int> validMeshes;
