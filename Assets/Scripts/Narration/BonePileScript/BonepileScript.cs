@@ -6,13 +6,19 @@ using System.Text.Json;
 using LoadGUIFolder;
 using Narration;
 using QuestSystem;
+using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BonepileScript : MonoBehaviour
 {
+    public GameObject bpileWalls;
+    
+    public GameObject cutscene1;
+    
     public Narration.Narration BP1;
 
     public Narration.Narration BP2;
@@ -48,13 +54,25 @@ public class BonepileScript : MonoBehaviour
             return;
         }
 
+        if (!BP2.HasPlayed())
+        {
+            cutscene1.SetActive(true);
+            foreach (Transform wall in bpileWalls.transform)
+            {
+                wall.gameObject.SetActive(false);
+            }
+        }
+            
+
         if (scriptSingleton != null)
         {
             Destroy(scriptSingleton.gameObject);
         }
         DontDestroyOnLoad(gameObject);
         scriptSingleton = this;
-        BP1.addToOnComplete(new List<UnityAction<string>>{StartBP2});
+        
+        BP1.addToOnComplete(new List<UnityAction<string>>{BP1OnComp});
+        
         if (!NarrationManager.narrationManager.hasRun.Contains("BP2"))
         {
             if (mastoBoneUIImage == null)
@@ -90,9 +108,28 @@ public class BonepileScript : MonoBehaviour
             str => QuestManager.questManager.CreateQuestNode("match31")
         });
     }
-
-    public void StartBP2(string none)
+    
+    //I hate this but it's the best solution I got right now
+    public void BP1OnComp(string none)
     {
+        StartCoroutine(WaitForPlayerActive());
+    }
+
+    private IEnumerator WaitForPlayerActive()
+    {
+        while (Player.player == null || !Player.player.activeInHierarchy)
+        {
+            yield return new WaitForSeconds(0.01f);
+        }
+        StartBP2();
+    }
+    
+    public void StartBP2()
+    {
+        foreach (Transform wall in bpileWalls.transform)
+        {
+            wall.gameObject.SetActive(true);
+        }
         BP2.SetPlayability(true);
         BP2.Begin();
         LoadGUIManager.loadGUIManager.Load("MastodonBoneViewer");
@@ -107,6 +144,7 @@ public class BonepileScript : MonoBehaviour
     public void StartBP3(string none)
     {
         LoadGUIManager.loadGUIManager.CloseOpenGUI();
+        BP2.SetPlayability(false);
         BP3.SetPlayability(true);
         BP3.Begin();
         LoadGUIManager.loadGUIManager.InstantiatePopUp("Movement", "Use WASD to move");
