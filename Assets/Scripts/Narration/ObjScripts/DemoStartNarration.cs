@@ -17,10 +17,10 @@ namespace Narration
         
         private bool beStopped;
 
-        public override void Begin()
+        public override void Begin(bool skippable = true)
         {
             beStopped = true;
-            Stop();
+            MoveStop();
             List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};
             base.Begin(onComplete);
         }
@@ -36,13 +36,13 @@ namespace Narration
         {
             while (beStopped)
             {
-                Stop();
+                MoveStop();
                 yield return new WaitForSeconds(0);
             }
             
         }
 
-        private void Stop()
+        private void MoveStop()
         {
             Player.player.GetComponent<LandMovement>().enabled = false;
         }

@@ -219,6 +219,7 @@ public class LandMovement : MonoBehaviour
 
         //Gets forward direction of the player, calculates distance to move, and moves the player accordingly.
         Vector3 movement = (transform.forward * _moveInput.y) + (transform.right * _moveInput.x);
+        //Debug.Log(movement);
         if (movement.magnitude > 0)
         {
             movement *= (moveSpeed / movement.magnitude);

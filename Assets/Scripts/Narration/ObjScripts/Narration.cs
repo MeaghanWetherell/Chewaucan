@@ -34,21 +34,32 @@ namespace Narration
         private static GameObject narrSkipPrompt;
         
         //start the narration
-        public virtual void Begin()
+        public virtual void Begin(bool skippable = true)
         {
-            Begin(new List<UnityAction<string>>());
+            Begin(new List<UnityAction<string>>(), skippable);
+        }
+
+        public virtual void Stop()
+        {
+            if (SoundManager.soundManager != null && SoundManager.soundManager.narrator.clip != null)
+            {
+                if (SoundManager.soundManager.narrator.clip.Equals(narrationClip))
+                {
+                    SoundManager.soundManager.StopNarration();
+                }
+            }
         }
         
         //start the narration, running any actions in the passed list when the narration finishes
-        public virtual void Begin(List<UnityAction<string>> onComplete)
+        public virtual void Begin(List<UnityAction<string>> onComplete, bool skippable = true)
         {
             addToOnComplete(onComplete);
             if (subtitles != null)
             {
                 (List<float>, List<string>) subs = parseSubtitles();
-                SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, subs.Item1, subs.Item2);
+                SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, skippable, subs.Item1, subs.Item2);
             }
-            else SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted);
+            else SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, skippable);
             NarrationManager.narrationManager.Played(name);
         }
 

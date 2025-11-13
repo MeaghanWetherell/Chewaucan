@@ -25,7 +25,7 @@ public class ClimbingMovement : MonoBehaviour
 
     private Vector3 targetNormal;
     
-    private void OnEnable()
+    public void OnEnable()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 3, LayerMask.GetMask("Climbable")))

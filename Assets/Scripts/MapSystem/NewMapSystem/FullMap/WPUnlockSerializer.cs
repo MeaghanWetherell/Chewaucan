@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class WPUnlockSerializer : MonoBehaviour
 {
     public static WPUnlockSerializer wpUnlockSerializer;
+
+    public bool unlockAllModern = false;
     
     private Dictionary<String, bool> wpUnlocks = new Dictionary<string, bool>();
 
@@ -46,6 +48,8 @@ public class WPUnlockSerializer : MonoBehaviour
     {
         string completedJson = JsonSerializer.Serialize(wpUnlocks);
         File.WriteAllText(path+"/"+fileName+".json", completedJson);
+        string modernUnlocked = JsonSerializer.Serialize(unlockAllModern);
+        File.WriteAllText(path+"/"+fileName+"ModernUnlock.json", modernUnlocked);
     }
 
     private void OnMapLoad(Scene scene, LoadSceneMode mode)
@@ -62,7 +66,11 @@ public class WPUnlockSerializer : MonoBehaviour
             TeleportWaypoint wp = obj.GetComponent<TeleportWaypoint>();
             if (wp != null)
             {
-                if(wpUnlocks.ContainsKey(wp.wpName.ToLower()))
+                if (wp.mapType == TeleportWaypoint.MapType.modern)
+                {
+                    wp.unlocked = unlockAllModern;
+                }
+                else if(wpUnlocks.ContainsKey(wp.wpName.ToLower()))
                     wp.unlocked = wpUnlocks[wp.wpName.ToLower()];
                 else
                 {
@@ -91,11 +99,21 @@ public class WPUnlockSerializer : MonoBehaviour
             wpUnlocks =
                 JsonSerializer.Deserialize<Dictionary<String, bool>>(File.ReadAllText(path + "/" + fileName + ".json"));
             if (wpUnlocks == null) wpUnlocks = new Dictionary<string, bool>();
-
+            
         }
         catch (IOException)
         {
             wpUnlocks = new Dictionary<string, bool>();
+            
+        }
+        try
+        {
+            unlockAllModern =
+                JsonSerializer.Deserialize<bool>(File.ReadAllText(path + "/" + fileName + "ModernUnlock.json"));
+        }
+        catch (IOException)
+        {
+            unlockAllModern = false;
         }
 
     }

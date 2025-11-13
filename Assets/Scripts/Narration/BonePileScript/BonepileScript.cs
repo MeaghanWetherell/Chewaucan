@@ -91,7 +91,9 @@ public class BonepileScript : MonoBehaviour
         }
         BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
                 //Debug.Log("Ran BP10 OnComp");
-                BP11.SetPlayability(true);}});
+                BP11.SetPlayability(true);},
+            str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}
+        });
         BP11.addToOnComplete(new List<UnityAction<string>>{
             str =>
             {

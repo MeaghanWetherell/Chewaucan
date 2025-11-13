@@ -80,7 +80,13 @@ public class PlayerMovementController : MonoBehaviour
     {
         swimmingMovement.enabled = swimming;
         landMovement.enabled = walking;
-        climbingMovement.enabled = climbing;
+        if(climbing && climbingMovement.enabled)
+            climbingMovement.OnEnable();
+        else
+        {
+            climbingMovement.enabled = climbing;
+        }
+        
     }
 
     //disable movement when paused

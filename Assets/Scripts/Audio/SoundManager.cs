@@ -78,7 +78,7 @@ namespace Audio
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
         //including if the narration was interrupted by skipping
-        public void PlayNarration(AudioClip clip, UnityEvent<string> onComplete, List<float> times = null, List<string> lines = null)
+        public void PlayNarration(AudioClip clip, UnityEvent<string> onComplete, bool skippable = true, List<float> times = null, List<string> lines = null)
         {
             narrator.Stop();
             narrator.clip = clip;
@@ -88,7 +88,7 @@ namespace Audio
             {
                 if (HUDManager.hudManager.skipBG != null)
                 {
-                    HUDManager.hudManager.skipBG.SetActive(true);
+                    HUDManager.hudManager.skipBG.SetActive(skippable);
                 }
             }
             if (subtitlesOn && times != null && lines != null && temp != null)

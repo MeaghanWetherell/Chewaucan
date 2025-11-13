@@ -17,3 +17,9 @@ optionally, use cubes instead of empty objects; they will be disabled automatica
 is the center of the cube)
 6. add any other desired obstacles
 7. bake nav mesh
+
+Climbing:
+To make an object climbable, create an empty object as its child and add a collider (box should work best) set as a trigger and a "ClimbableEnter" script.
+Assign the collider to the exit collider field of the script and set the collider dimensions. The player will be able to climb while
+within the bounds of the collider and stop climbing on exit. As such, the collider should extend just above the lip of the climbable surface
+so that the player can exit by moving forward.

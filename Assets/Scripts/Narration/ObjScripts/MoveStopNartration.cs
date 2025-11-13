@@ -15,9 +15,9 @@ namespace Narration
         
         private bool beStopped;
 
-        public override void Begin()
+        public override void Begin(bool skippable = true)
         {
-            Stop();
+            MoveStop();
             List<UnityAction<string>> onComplete = new List<UnityAction<string>> {OnComplete};
             base.Begin(onComplete);
         }
@@ -27,7 +27,7 @@ namespace Narration
             Player.player.GetComponent<LandMovement>().enabled = true;
         }
 
-        private void Stop()
+        private void MoveStop()
         {
             Player.player.GetComponent<LandMovement>().enabled = false;
         }
