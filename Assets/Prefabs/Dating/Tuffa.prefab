@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7889122664745121330}
   m_Father: {fileID: 0}
@@ -230,8 +230,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5071752, y: 2.4423327, z: 3.071505}
-  m_Center: {x: -0.16108453, y: 0.7211669, z: 0.10536432}
+  m_Size: {x: 3, y: 4, z: 3}
+  m_Center: {x: 0.09396404, y: 0.72116685, z: 0.23279987}
 --- !u!208 &3134562167022413340
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -242,7 +242,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1.5, y: 0.5, z: 1.5}
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -300,8 +300,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.4850297, y: 0.5910344, z: 1.8430426}
-  m_Center: {x: 0.12216705, y: 1.9810176, z: -0.13717866}
+  m_Size: {x: 2.6925733, y: 1.154453, z: 2.254785}
+  m_Center: {x: 0.018396527, y: 2.2627287, z: -0.3430494}
 --- !u!114 &8471053766013696668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,9 +317,9 @@ MonoBehaviour:
   myPoints: 10
   mySE: {fileID: 2207507626649636082}
   manager: {fileID: 0}
-  scaleMinX: 2
-  scaleMaxX: 4
-  scaleMinY: 2
-  scaleMaxY: 4
-  scaleMinZ: 2
-  scaleMaxZ: 4
+  scaleMinX: 1
+  scaleMaxX: 2
+  scaleMinY: 1
+  scaleMaxY: 2
+  scaleMinZ: 1
+  scaleMaxZ: 2
