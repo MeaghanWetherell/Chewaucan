@@ -83,7 +83,7 @@ namespace Audio
             narrator.Stop();
             narrator.clip = clip;
             onNarrationComplete = onComplete;
-            GameObject temp = GameObject.Find("Subtitler");
+            GameObject temp = Subtitler.subtitler;
             if (HUDManager.hudManager != null)
             {
                 if (HUDManager.hudManager.skipBG != null)

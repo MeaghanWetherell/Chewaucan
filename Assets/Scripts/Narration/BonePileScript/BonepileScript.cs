@@ -71,8 +71,6 @@ public class BonepileScript : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         scriptSingleton = this;
         
-        BP1.addToOnComplete(new List<UnityAction<string>>{BP1OnComp});
-        
         if (!NarrationManager.narrationManager.hasRun.Contains("BP2"))
         {
             if (mastoBoneUIImage == null)
@@ -109,21 +107,6 @@ public class BonepileScript : MonoBehaviour
         {
             str => QuestManager.questManager.CreateQuestNode("match31")
         });
-    }
-    
-    //I hate this but it's the best solution I got right now
-    public void BP1OnComp(string none)
-    {
-        StartCoroutine(WaitForPlayerActive());
-    }
-
-    private IEnumerator WaitForPlayerActive()
-    {
-        while (Player.player == null || !Player.player.activeInHierarchy)
-        {
-            yield return new WaitForSeconds(0.01f);
-        }
-        StartBP2();
     }
     
     public void StartBP2()
