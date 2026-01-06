@@ -17,6 +17,8 @@ namespace KeyRebinding
 
         [Tooltip("Anything that has a default binding that is on this list will be ineligble for rebinding.")]public List<String> invalidForRebinding;
 
+        public bool useAltMaps;
+
         private List<InputActionMap> maps;
 
         private PlayerInput playerInput;
@@ -24,20 +26,29 @@ namespace KeyRebinding
         private void Awake()
         {
             playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
+            if (playerInput == null)
+                playerInput = GameObject.Find("SecondaryPInput").GetComponent<PlayerInput>();
 
             maps = BindingManager.bindingManager.maps;
-            GameObject mapButton = null;
-            foreach (InputActionMap map in maps)
+            if (useAltMaps)
             {
-                mapButton = Instantiate(mapButtonPrefab, mapButtonParent);
-                ChangeActionMapButton clickScript = mapButton.GetComponent<ChangeActionMapButton>();
-                clickScript.parent = this;
-                clickScript.text.text = map.name;
-                clickScript.map = map;
+                GameObject mapButton = null;
+                foreach (InputActionMap map in maps)
+                {
+                    mapButton = Instantiate(mapButtonPrefab, mapButtonParent);
+                    ChangeActionMapButton clickScript = mapButton.GetComponent<ChangeActionMapButton>();
+                    clickScript.parent = this;
+                    clickScript.text.text = map.name;
+                    clickScript.map = map;
+                }
+                if (mapButton != null)
+                {
+                    mapButton.GetComponent<ChangeActionMapButton>().OnClick();
+                }
             }
-            if (mapButton != null)
+            else
             {
-                mapButton.GetComponent<ChangeActionMapButton>().OnClick();
+                InstantiateRebinds(maps[0]);
             }
         }
 

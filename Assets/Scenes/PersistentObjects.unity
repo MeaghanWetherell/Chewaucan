@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -197,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentVersion: 0.1.0
-  lastPathSaveLoc: Chewaucan/LastPath
+  metadataSaveLoc: Chewaucan/Metadata
   settingsSavePath: Chewaucan/SavedSettings
 --- !u!4 &145865363
 Transform:
@@ -635,6 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3e396a69d82044c901e7a7c56ea8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unlockAllModern: 0
   fileName: WPUnlocks
 --- !u!4 &914267597
 Transform:

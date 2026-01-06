@@ -321,6 +321,7 @@ namespace Audio
         public void SetVol(int index, float vol)
         {
             sliderVals[index] = vol;
+            Debug.Log(vol);
             mainMixer.SetFloat(volParams[index], ConvertToLogScale(sliderVals[index]));
         }
 

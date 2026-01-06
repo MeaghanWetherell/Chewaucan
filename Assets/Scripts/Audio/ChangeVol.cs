@@ -12,7 +12,9 @@ namespace Audio
 
         private void OnEnable()
         {
-            GetComponent<Slider>().value = SoundManager.soundManager.GetVol(index);
+            float vol = SoundManager.soundManager.GetVol(index);
+            Slider slider = GetComponent<Slider>();
+            slider.value = vol;
         }
 
         public void SetLevel(float sliderVal)

@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using Misc;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class SaveHandler : MonoBehaviour
 {
@@ -12,9 +15,11 @@ public class SaveHandler : MonoBehaviour
     
     public string currentVersion;
 
-    public string lastPathSaveLoc;
+    public string metadataSaveLoc;
 
     public string settingsSavePath;
+
+    [NonSerialized]public List<String> saveSlots;
 
     private string savePath;
 
@@ -41,11 +46,11 @@ public class SaveHandler : MonoBehaviour
         }
         saveHandler = this;
         DontDestroyOnLoad(gameObject);
-        Directory.CreateDirectory(Application.persistentDataPath+"/"+lastPathSaveLoc);
+        Directory.CreateDirectory(Application.persistentDataPath+"/"+metadataSaveLoc);
         Directory.CreateDirectory(Application.persistentDataPath+"/"+settingsSavePath);
         try
         {
-            StreamReader streamReader = new StreamReader(Application.persistentDataPath+"/"+lastPathSaveLoc + "/lastPath");
+            StreamReader streamReader = new StreamReader(Application.persistentDataPath+"/"+metadataSaveLoc + "/lastPath");
             string line = streamReader.ReadLine();
             line = line.Trim();
             streamReader.Close();
@@ -53,6 +58,20 @@ public class SaveHandler : MonoBehaviour
         }
         catch (FileNotFoundException)
         { }
+
+        if (File.Exists(Application.persistentDataPath + "/" +
+                        metadataSaveLoc + "/saveSlots"))
+        {
+            saveSlots = JsonSerializer.Deserialize<List<String>>(File.ReadAllText(Application.persistentDataPath + "/" +
+                metadataSaveLoc + "/saveSlots.json"));
+        }
+        else
+        {
+            saveSlots = new List<string>();
+            saveSlots.Add("Chewaucan/Save 1");
+            saveSlots.Add("Chewaucan/Save 2");
+            saveSlots.Add("Chewaucan/Save 3");
+        }
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals(""))
         {
             loadImmediately = true;
@@ -136,7 +155,7 @@ public class SaveHandler : MonoBehaviour
                 VersionConversion(tup.Item1);
             timePlayed = tup.Item2;
         }
-        File.WriteAllText(Application.persistentDataPath+"/"+lastPathSaveLoc+"/lastPath", path);
+        File.WriteAllText(Application.persistentDataPath+"/"+metadataSaveLoc+"/lastPath", path);
     }
 
     private void writeMetaFile(string path, string version, float time)
@@ -156,7 +175,7 @@ public class SaveHandler : MonoBehaviour
             line = line.Trim();
             ret.Item2 = float.Parse(line);
             streamReader.Close();
-            File.WriteAllText(Application.persistentDataPath + "/" + lastPathSaveLoc + "/lastPath", path);
+            File.WriteAllText(Application.persistentDataPath + "/" + metadataSaveLoc + "/lastPath", path);
             return ret;
         }
         catch (FileNotFoundException)
@@ -232,8 +251,12 @@ public class SaveHandler : MonoBehaviour
         if (savePath != null && !savePath.Equals(""))
         {
             saveRegular.Invoke(Application.persistentDataPath+"/"+savePath);
-            File.WriteAllText(Application.persistentDataPath+"/"+lastPathSaveLoc + "/lastPath", savePath);
+            File.WriteAllText(Application.persistentDataPath+"/"+metadataSaveLoc + "/lastPath", savePath);
         }
+
+        string saveSlotsJson = JsonSerializer.Serialize(saveSlots);
+        File.WriteAllText(Application.persistentDataPath + "/" +
+                          metadataSaveLoc + "/saveSlots.json", saveSlotsJson);
         saveSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
     }
 }

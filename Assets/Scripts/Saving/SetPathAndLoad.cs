@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Misc;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
@@ -12,17 +13,21 @@ public class SetPathAndLoad : MonoBehaviour
     {
         myPath,
         lastUsed,
-        newGame
+        newGame,
+        continueIfPossible
     }
     
     public Button myButton;
 
     public loadType lt;
+
+    public TextMeshProUGUI text;
     
-    public string myPath;
+    public int pathNumber;
 
     private void Start()
     {
+        string myPath = SaveHandler.saveHandler.saveSlots[pathNumber];
         switch (lt)
         {
             case loadType.myPath:
@@ -38,13 +43,30 @@ public class SetPathAndLoad : MonoBehaviour
             case loadType.newGame:
                 myButton.onClick.AddListener(NewGame);
                 break;
+            case loadType.continueIfPossible:
+                if (!SaveHandler.saveHandler.checkPath(myPath))
+                {
+                    myButton.onClick.AddListener(NewGame);
+                    text.text = "New Game";
+                }
+                else
+                {
+                    myButton.onClick.AddListener(LoadMyPath);
+                    text.text = "Load " + myPath.Split("/")[^1];
+                }
+                break;
         }
         
     }
 
+    public void SetPath(int pathNo)
+    {
+        pathNumber = pathNo;
+    }
+
     private void LoadMyPath()
     {
-        SaveHandler.saveHandler.setSavePath(myPath);
+        SaveHandler.saveHandler.setSavePath(SaveHandler.saveHandler.saveSlots[pathNumber]);
         SaveHandler.saveHandler.Load();
         SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
     }
@@ -57,7 +79,7 @@ public class SetPathAndLoad : MonoBehaviour
 
     private void NewGame()
     {
-        SaveHandler.saveHandler.NewGame(myPath);
+        SaveHandler.saveHandler.NewGame(SaveHandler.saveHandler.saveSlots[pathNumber]);
         SaveHandler.saveHandler.Load();
         SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
     }
