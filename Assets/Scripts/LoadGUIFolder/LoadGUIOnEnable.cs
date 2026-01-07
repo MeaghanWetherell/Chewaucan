@@ -11,19 +11,24 @@ public class LoadGUIOnEnable : LoadGUI
     private PlayerInput playerInput;
 
     public bool disablePlayerInput;
+
+    public bool enableAudio;
     
     private void OnEnable()
     {
-        playerInput = Player.player.GetComponent<PlayerInput>();
-        if (disablePlayerInput)
+        if(Player.player != null)
+            playerInput = Player.player.GetComponent<PlayerInput>();
+        if (disablePlayerInput && playerInput != null) 
             playerInput.enabled = false;
         ONOpenTrigger();
+        if (enableAudio)
+            AudioListener.pause = false;
     }
 
     private void OnDisable()
     {
         if (disablePlayerInput)
             playerInput.enabled = true;
-        ONOpenTrigger();
+        LoadGUIManager.loadGUIManager.CloseOpenGUI(loadScene);
     }
 }

@@ -25,7 +25,7 @@ public class StartSwimming : MonoBehaviour
                 waterBlock.position.y, other.gameObject.transform.position.z);
             swimmingMovement.SetWaterSoundSource(this.GetComponent<AudioSource>());
             mvmtController.SwitchToSwimming(waterBlock.position);
-            Debug.Log("Debug message: you have entered the swim arena");
+            //Debug.Log("Debug message: you have entered the swim arena");
         }
     }
 

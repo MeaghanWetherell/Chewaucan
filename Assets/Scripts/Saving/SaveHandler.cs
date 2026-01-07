@@ -143,19 +143,6 @@ public class SaveHandler : MonoBehaviour
             Save();
         }
         savePath = path;
-        (string, float) tup = readMetaFile(path);
-        if (tup.Item1.Equals("err"))
-        {
-            Directory.CreateDirectory(Application.persistentDataPath+"/"+path);
-            writeMetaFile(path, currentVersion, 0.0f);
-        }
-        else
-        {
-            if(!tup.Item1.Equals(currentVersion))
-                VersionConversion(tup.Item1);
-            timePlayed = tup.Item2;
-        }
-        File.WriteAllText(Application.persistentDataPath+"/"+metadataSaveLoc+"/lastPath", path);
     }
 
     private void writeMetaFile(string path, string version, float time)
@@ -230,6 +217,8 @@ public class SaveHandler : MonoBehaviour
         }
         catch(DirectoryNotFoundException) {}
         setSavePath(path);
+        timePlayed = 0;
+        StartTimer();
     }
 
     public void VersionConversion(string fileVersion)
@@ -239,6 +228,18 @@ public class SaveHandler : MonoBehaviour
 
     public void Load()
     {
+        (string, float) tup = readMetaFile(savePath);
+        if (tup.Item1.Equals("err"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath+"/"+savePath);
+            writeMetaFile(savePath, currentVersion, 0.0f);
+        }
+        else
+        {
+            if(!tup.Item1.Equals(currentVersion))
+                VersionConversion(tup.Item1);
+            timePlayed = tup.Item2;
+        }
         StartTimer();
         loadRegular.Invoke(Application.persistentDataPath+"/"+savePath);
         loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);

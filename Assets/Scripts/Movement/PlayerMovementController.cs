@@ -1,3 +1,4 @@
+using System;
 using Misc;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,10 +22,8 @@ public class PlayerMovementController : MonoBehaviour
     private bool swimming;
     private bool climbing;
     
-    
-    
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         landMovement = GetComponent<LandMovement>();
         swimmingMovement = GetComponent<SwimmingMovement>();
@@ -39,6 +38,11 @@ public class PlayerMovementController : MonoBehaviour
 
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
+    }
+
+    private void OnEnable()
+    {
+        SetScripts();
     }
 
     private void OnDestroy()
@@ -68,6 +72,11 @@ public class PlayerMovementController : MonoBehaviour
         
     }
 
+    public bool isWalkingOrClimbing()
+    {
+        return walking || climbing;
+    }
+
     public void SwitchToWalking()
     {
         walking = true;
@@ -95,14 +104,12 @@ public class PlayerMovementController : MonoBehaviour
         swimmingMovement.enabled = false;
         landMovement.enabled = false;
         climbingMovement.enabled = false;
-        this.enabled = false;
     }
 
     //reenable movement on resume
     private void OnResume()
     {
         SetScripts();
-        this.enabled = true;
     }
 
 }

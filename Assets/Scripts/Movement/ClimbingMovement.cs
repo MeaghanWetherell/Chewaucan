@@ -37,6 +37,7 @@ public class ClimbingMovement : MonoBehaviour
         }
 
         StartCoroutine(rotate());
+        StartCoroutine(rotate());
         moveRef.action.performed += OnMove;
         moveRef.action.canceled += ZeroMove;
         sprintRef.action.performed += OnSprint;

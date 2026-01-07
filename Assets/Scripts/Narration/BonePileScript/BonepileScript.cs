@@ -48,7 +48,7 @@ public class BonepileScript : MonoBehaviour
     private void Start()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
-        if (bpile.isComplete)
+        if (bpile.isComplete && !BP10.HasPlayed())
         {
             BP10.SetPlayability(true);
             //Player.player.GetComponent<LandMovement>().enabled = true;
@@ -92,17 +92,20 @@ public class BonepileScript : MonoBehaviour
                 BP11.SetPlayability(true);},
             str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}
         });
-        BP11.addToOnComplete(new List<UnityAction<string>>{
-            str =>
-            {
-                //Debug.Log("Ran BP11 OnComp");
-                LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
-                v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
-                string json = JsonSerializer.Serialize(toSerialize);
-                string savePath = SaveHandler.saveHandler.getSavePath();
-                File.WriteAllText(savePath+"/astrolabeteleposition1.json", json);
-                BP12.SetPlayability(true);
-            }});
+        if (!BP11.HasPlayed())
+        {
+            BP11.addToOnComplete(new List<UnityAction<string>>{
+                str =>
+                {
+                    //Debug.Log("Ran BP11 OnComp");
+                    LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
+                    v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
+                    string json = JsonSerializer.Serialize(toSerialize);
+                    string savePath = SaveHandler.saveHandler.getSavePath();
+                    File.WriteAllText(savePath+"/astrolabeteleposition1.json", json);
+                    BP12.SetPlayability(true);
+                }});
+        }
         BP12.addToOnComplete(new List<UnityAction<string>>
         {
             str => QuestManager.questManager.CreateQuestNode("match31")

@@ -86,18 +86,6 @@ namespace Misc
                 PauseCallback.pauseManager.Resume();
             }
             OnLoadScene.Invoke();
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
-            {
-                if (modernMapScenes.Contains(SceneManager.GetActiveScene().name))
-                {
-                    PlayerPositionManager.playerPositionManager.setPlayerPosition(player.transform.position, 0);
-                }
-                else
-                {
-                    PlayerPositionManager.playerPositionManager.setPlayerPosition(player.transform.position, 1);
-                }
-            }
             SoundManager.soundManager.StopBGM();
             if (modernMapScenes.Contains(sceneName))
             {

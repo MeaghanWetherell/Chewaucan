@@ -40,8 +40,6 @@ public class ChangePlayerMoveVisOnEnable : MonoBehaviour
         {
             if(_movementController!=null)
                 _movementController.enabled = !movementEnabled;
-            if(_landMovement != null)
-                _landMovement.enabled = !_landMovement.enabled;
             if(mainCamera != null)
                 mainCamera.SetActive(!playerCameraEnabled);
             if(meshRenderer != null)

@@ -138,6 +138,22 @@ namespace LoadGUIFolder
             return true;
         }
 
+        public bool CloseOpenGUI(String gui)
+        {
+            if (GUIName == null)
+                return false;
+            if (GUIName.Equals(gui))
+            {
+                PauseCallback.pauseManager.Resume();
+                OnGUIUnload.Invoke(GUIName);
+                SceneManager.UnloadSceneAsync(GUIName);
+                GUIName = null;
+                return true;
+            }
+
+            return false;
+        }
+
         public bool Load(String toLoad)
         {
             if (toLoad.Equals(GUIName) || toLoad.Equals(""))

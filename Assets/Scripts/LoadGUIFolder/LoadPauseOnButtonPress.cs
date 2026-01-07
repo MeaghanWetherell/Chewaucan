@@ -11,7 +11,14 @@ public class LoadPauseOnButtonPress : LoadGUIOnButtonPress
     {
         if (!SceneLoadWrapper.sceneLoadWrapper.isLoading)
         {
-            base.OnButtonPressed(callbackContext);
+            if (LoadGUIManager.loadGUIManager.isGUIOpen())
+            {
+                LoadGUIManager.loadGUIManager.CloseOpenGUI();
+            }
+            else
+            {
+                base.OnButtonPressed(callbackContext);
+            }
         }
             
     }

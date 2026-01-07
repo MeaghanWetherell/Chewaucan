@@ -1,12 +1,19 @@
+using ScriptTags;
 using UnityEngine;
 
 namespace Interactables
 {
     public class InteractRaycaster : MonoBehaviour
     {
+        public PlayerMovementController moveContoller;
+        
         private Interactable lastInter;
         private void FixedUpdate()
         {
+            if (!moveContoller.isActiveAndEnabled)
+            {
+                return;
+            }
             var transform1 = transform;
             Physics.Raycast(transform1.position, transform1.forward, out var hit, 5);
             if (hit.collider == null)

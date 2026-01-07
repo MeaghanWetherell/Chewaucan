@@ -68,13 +68,23 @@ public class SetPathAndLoad : MonoBehaviour
     {
         SaveHandler.saveHandler.setSavePath(SaveHandler.saveHandler.saveSlots[pathNumber]);
         SaveHandler.saveHandler.Load();
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        if(PlayerPositionManager.playerPositionManager.loadModernMap)
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        else
+        {
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("PleistoceneMap");
+        }
     }
 
     private void LoadLastUsed()
     {
         SaveHandler.saveHandler.Load();
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        if(PlayerPositionManager.playerPositionManager.loadModernMap)
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        else
+        {
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("PleistoceneMap");
+        }
     }
 
     private void NewGame()
