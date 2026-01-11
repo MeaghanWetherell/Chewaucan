@@ -64,6 +64,14 @@ public class BonepileScript : MonoBehaviour
                 wall.gameObject.SetActive(false);
             }
         }
+        BP1.addToOnComplete(new List<UnityAction<string>>{
+            s =>
+            {
+                if (mastoBoneUIImage == null)
+                    mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();
+                if(mastoBoneUIImage != null)
+                    mastoBoneUIImage.gameObject.SetActive(true);
+            }});
         BP3.addToOnComplete(new List<UnityAction<string>> {
             s =>
             {
@@ -124,6 +132,7 @@ public class BonepileScript : MonoBehaviour
         });
     }
     
+    //deprecated
     public void StartBP2()
     {
         foreach (Transform wall in bpileWalls.transform)

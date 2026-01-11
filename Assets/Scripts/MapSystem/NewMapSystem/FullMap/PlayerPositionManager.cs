@@ -152,8 +152,12 @@ public class PlayerPositionManager : MonoBehaviour
         }
         if (player != null && !float.IsNegativeInfinity(nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType].x))
         {
-            player.transform.position = nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
-            player.GetComponent<LandMovement>().enabled = nextPlayerMoveType[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
+            LandMovement move = player.GetComponent<LandMovement>();
+            if (move != null)
+            {
+                player.transform.position = nextPlayerPosition[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
+                move.enabled = nextPlayerMoveType[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
+            }
         }
     }
 }

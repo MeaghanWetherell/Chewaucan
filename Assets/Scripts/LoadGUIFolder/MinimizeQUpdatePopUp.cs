@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using LoadGUIFolder;
 using Misc;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,16 @@ public class MinimizeQUpdatePopUp : PopUpOnClick
 
     public float timeToMinimize;
 
+    private bool clicked = false;
+
     public override void OnClick()
     {
-        StartCoroutine(Minimize());
+        if (!clicked)
+        {
+            StartCoroutine(Minimize());
+            clicked = true;
+            LoadGUIManager.loadGUIManager.RegisterPopUpClose(index);
+        }
     }
 
     private IEnumerator Minimize()
@@ -31,6 +39,7 @@ public class MinimizeQUpdatePopUp : PopUpOnClick
             Vector2 originalPos = mainImgRectTransform.anchoredPosition;
             Vector2 originalSize = mainImgRectTransform.rect.size;
             Vector2 targetPos = target.anchoredPosition;
+            Debug.Log(targetPos);
             Vector2 targetSize = target.rect.size;
             
             float time = 0;
@@ -56,6 +65,6 @@ public class MinimizeQUpdatePopUp : PopUpOnClick
                 yield return new WaitForSeconds(0);
             }
         }
-        base.OnClick();
+        Destroy(gameObject);
     }
 }

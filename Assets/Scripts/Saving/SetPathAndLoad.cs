@@ -36,7 +36,7 @@ public class SetPathAndLoad : MonoBehaviour
                 myButton.onClick.AddListener(LoadMyPath);
                 break;
             case loadType.lastUsed:
-                if (!SaveHandler.saveHandler.checkPath())
+                if (!SaveHandler.saveHandler.checkPath(SaveHandler.saveHandler.getLastSavePath()))
                     myButton.interactable = false;
                 myButton.onClick.AddListener(LoadLastUsed);
                 break;
@@ -78,6 +78,7 @@ public class SetPathAndLoad : MonoBehaviour
 
     private void LoadLastUsed()
     {
+        SaveHandler.saveHandler.setSavePath(SaveHandler.saveHandler.getLastSavePath());
         SaveHandler.saveHandler.Load();
         if(PlayerPositionManager.playerPositionManager.loadModernMap)
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");

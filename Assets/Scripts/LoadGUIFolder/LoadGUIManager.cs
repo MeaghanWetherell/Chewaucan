@@ -124,9 +124,8 @@ namespace LoadGUIFolder
             }
         }
 
-        public void ClosePopUp()
+        public void RegisterPopUpClose()
         {
-            Destroy(popUps.Last());
             string title = popUps[popUps.Count - 1].GetComponent<PopUpTextManager>().title;
             OnGUIUnload.Invoke(title);
             popUps.RemoveAt(popUps.Count-1);
@@ -142,9 +141,16 @@ namespace LoadGUIFolder
             }
         }
 
-        public void ClosePopUp(int index)
+        public void ClosePopUp()
         {
-            Destroy(popUps[index]);
+            if (popUps.Count == 0)
+                return;
+            Destroy(popUps.Last());
+            RegisterPopUpClose();
+        }
+
+        public void RegisterPopUpClose(int index)
+        {
             string title = popUps[index].GetComponent<PopUpTextManager>().title;
             OnGUIUnload.Invoke(title);
             popUps.RemoveAt(index);
@@ -158,6 +164,14 @@ namespace LoadGUIFolder
                     cacheCamLook.OnResume();
                 PauseCallback.pauseManager.Resume();
             }
+        }
+
+        public void ClosePopUp(int index)
+        {
+            if (popUps.Count <= index)
+                return;
+            Destroy(popUps[index]);
+            RegisterPopUpClose(index);
         }
 
         //returns true if there are no open guis after close, false otherwise

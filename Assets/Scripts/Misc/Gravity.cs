@@ -11,7 +11,7 @@ public class Gravity : MonoBehaviour
 
     private Vector2 vel;
 
-    private void Start()
+    private void OnEnable()
     {
         vel = initVel;
     }

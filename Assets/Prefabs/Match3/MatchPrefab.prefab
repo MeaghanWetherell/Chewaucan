@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4975511531910621711}
   - component: {fileID: 2180548930423269039}
   - component: {fileID: 4752554547210633542}
+  - component: {fileID: 3376480285730453194}
+  - component: {fileID: 2128287183580585551}
   m_Layer: 3
   m_Name: MatchPrefab
   m_TagString: Untagged
@@ -47,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbd1ee2be5ef0164b9aaff2a7dad03a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grav: {fileID: 3376480285730453194}
+  spin: {fileID: 2128287183580585551}
 --- !u!33 &4975511531910621711
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -142,3 +146,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28800693, y: 0.28771734}
   m_EdgeRadius: 0
+--- !u!114 &3376480285730453194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067775779282331531}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5b5c802a29c3f49999d04d542bcb62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accel: 120
+  drag: 10
+  initVel: {x: 15, y: 32.5}
+--- !u!114 &2128287183580585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067775779282331531}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d98f24ad2131d4b95b1ab43e7152fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initVel: {x: 0, y: 0, z: 0}
+  accel: {x: 120, y: 20, z: 20}
+  maxVel: 120

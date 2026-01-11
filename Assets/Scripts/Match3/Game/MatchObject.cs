@@ -32,6 +32,10 @@ namespace Match3
         //a list containing indices in the main list of the possible bones a match object may become when initialized
         public static List<int> validMeshes;
 
+        public Gravity grav;
+
+        public Spin spin;
+
         [NonSerialized]public int myType;
 
         [NonSerialized]public String myAnimal;
@@ -68,7 +72,9 @@ namespace Match3
 
         public void Remove()
         {
-            Destroy(this.gameObject);
+            grav.enabled = true;
+            spin.enabled = true;
+            this.enabled = false;
         }
 
         public void RemoveFromGrid()

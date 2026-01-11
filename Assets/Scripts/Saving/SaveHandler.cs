@@ -48,16 +48,6 @@ public class SaveHandler : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Directory.CreateDirectory(Application.persistentDataPath+"/"+metadataSaveLoc);
         Directory.CreateDirectory(Application.persistentDataPath+"/"+settingsSavePath);
-        try
-        {
-            StreamReader streamReader = new StreamReader(Application.persistentDataPath+"/"+metadataSaveLoc + "/lastPath");
-            string line = streamReader.ReadLine();
-            line = line.Trim();
-            streamReader.Close();
-            setSavePath(line);
-        }
-        catch (FileNotFoundException)
-        { }
 
         if (File.Exists(Application.persistentDataPath + "/" +
                         metadataSaveLoc + "/saveSlots"))
@@ -78,12 +68,36 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
+    public string getLastSavePath()
+    {
+        try
+        {
+            StreamReader streamReader =
+                new StreamReader(Application.persistentDataPath + "/" + metadataSaveLoc + "/lastPath");
+            string line = streamReader.ReadLine();
+            line = line.Trim();
+            streamReader.Close();
+            return line;
+        }
+        catch (FileNotFoundException)
+        {
+            return "";
+        }
+        return "";
+    }
+
     private void Start()
     {
         if(!loadImmediately)
             loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals("") && !loadImmediately)
         {
+            string lastPath = getLastSavePath();
+            if (!checkPath(lastPath))
+            {
+                Debug.LogError("Last Path Not Found!");
+            }
+            setSavePath(lastPath);
             Load();
         }
     }

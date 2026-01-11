@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace QuestSystem.Quests.QScripts
 {
@@ -20,19 +23,39 @@ namespace QuestSystem.Quests.QScripts
         public Narration.Narration playOnAstrolabeOpen;
 
         public InputActionReference openAstrolabe;
+        
+        [Tooltip("Narration that must be played first")]public Narration.Narration narration;
 
         private void Start()
         {
             if (openAstrolabe != null)
                 openAstrolabe.action.performed += OnAstrolabeOpen;
-            QuestManager.questManager.SubToCompletion(subToId, toSub =>
+            if (narration == null)
             {
-                v3Wrapper toSerialize = new v3Wrapper(playerPosition);
-                string json = JsonSerializer.Serialize(toSerialize);
-                string savePath = SaveHandler.saveHandler.getSavePath();
-                File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
-                playOnAstrolabeOpen?.SetPlayability(true);
-            });
+                QuestManager.questManager.SubToCompletion(subToId, toSub =>
+                {
+                    v3Wrapper toSerialize = new v3Wrapper(playerPosition);
+                    string json = JsonSerializer.Serialize(toSerialize);
+                    string savePath = SaveHandler.saveHandler.getSavePath();
+                    File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
+                    playOnAstrolabeOpen?.SetPlayability(true);
+                });
+            }
+            else if (!narration.HasPlayed())
+            {
+                narration.addToOnComplete(new List<UnityAction<string>>{
+                    s =>
+                    {
+                        QuestManager.questManager.SubToCompletion(subToId, toSub =>
+                        {
+                            v3Wrapper toSerialize = new v3Wrapper(playerPosition);
+                            string json = JsonSerializer.Serialize(toSerialize);
+                            string savePath = SaveHandler.saveHandler.getSavePath();
+                            File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
+                            playOnAstrolabeOpen?.SetPlayability(true);
+                        });
+                    }});
+            }
         }
 
         private void OnDisable()

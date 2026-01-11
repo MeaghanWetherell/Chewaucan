@@ -5,6 +5,7 @@ using Match3.Game;
 using Misc;
 using QuestSystem;
 using QuestSystem.Quests.QScripts;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -35,6 +36,10 @@ namespace Match3
 
         [Tooltip("The amount of point bonus the player should receive for matching new bones")]
         public float bonusPoints;
+
+        public Canvas matchCanvas;
+
+        public GameObject flyingTextPrefab;
         
         //All match objects in the grid. Each matchobject array is a line DOWNWARDS
         private List<MatchObject[]> _objects = new List<MatchObject[]>();
@@ -243,6 +248,16 @@ namespace Match3
             int[] missing = new int[_lines.Count];
             while (index < _removalQueue.Count)
             {
+                GameObject flyingText = Instantiate(flyingTextPrefab, matchCanvas.transform);
+                RectTransform flyingTextTransform = flyingText.GetComponent<RectTransform>();
+                MatchObject targ = _lines[_removalQueue[index][0].x]
+                    .myObjects[_removalQueue[index][0].y];
+                flyingTextTransform.anchoredPosition = targ.parent.snapPoints[targ.index].position;
+                flyingText.transform.position =
+                    new Vector3(flyingText.transform.position.x, flyingText.transform.position.y, -3);
+                flyingTextTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 30);
+                flyingTextTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 12);
+                flyingText.GetComponent<TextMeshProUGUI>().text = targ.myAnimal+" "+targ.myBoneType;
                 foreach (GridCoordinate coord in _removalQueue[index])
                 {
                     if (MatchLevelManager.matchLevelManager.curIndex ==

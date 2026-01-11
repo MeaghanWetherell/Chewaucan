@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using LoadGUIFolder;
+using Misc;
 using ScriptTags;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,6 +14,8 @@ public class LoadGUIOnEnable : LoadGUI
     public bool disablePlayerInput;
 
     public bool enableAudio;
+
+    public bool pause;
     
     private void OnEnable()
     {
@@ -23,6 +26,8 @@ public class LoadGUIOnEnable : LoadGUI
         ONOpenTrigger();
         if (enableAudio)
             AudioListener.pause = false;
+        if(!pause)
+            PauseCallback.pauseManager.Resume();
     }
 
     private void OnDisable()

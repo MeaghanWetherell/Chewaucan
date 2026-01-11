@@ -257,7 +257,8 @@ namespace QuestSystem
             if(node.completionNarration != null)
                 node.completionNarration.Begin();
             _quests.InsertionSort();
-            LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, node.compText);
+            GameObject qNode = Instantiate(questUpdatePopUp);
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(qNode, node.name, node.compText);
             SaveDialProgressData.CompleteOneQuest(node.type);
             foreach (string wp in node.WPUnlockIDs)
             {
