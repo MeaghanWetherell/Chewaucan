@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using LoadGUIFolder;
 using Misc;
 using UnityEngine;
 using UnityEngine.Events;
@@ -36,6 +37,9 @@ namespace QuestSystem
         //long description of the quest
         public string longDescription;
         
+        //title for each update
+        public List<string> qUpdateTitles;
+        
         //quest updates
         public List<string> qUpdates;
 
@@ -67,6 +71,8 @@ namespace QuestSystem
         public bool isComplete = false;
 
         public bool isPinned = false;
+
+        public static GameObject qUpdatePopUp;
 
         //adds the passed count to the count for the objective at index
         //returns true if the quest is complete, false otherwise
@@ -118,34 +124,59 @@ namespace QuestSystem
 
             return false;
         }
+        
+        //Create a popup for a quest update
+        private void CreateUpdatePopUP(int index)
+        {
+            if (qUpdatePopUp == null)
+                qUpdatePopUp = Resources.Load<GameObject>("QuestUpdatePopUp");
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(qUpdatePopUp, qUpdateTitles[index], qUpdates[index], null, true);
+        }
+        
+        //Unlocks the update with the passed title
+        public bool UnlockUpdate(string title)
+        {
+            for (int i = 0; i < qUpdateTitles.Count; i++)
+            {
+                if (qUpdateTitles[i].Trim().Equals(title))
+                {
+                    return UnlockUpdate(i);
+                }
+            }
+            return false;
+        }
 
         //Unlocks the update at the passed position in the order
-        public void UnlockUpdate(int updateNum)
+        public bool UnlockUpdate(int updateNum)
         {
             if (updateNum < 0)
             {
-                UnlockUpdate();
-                return;
+                return UnlockUpdate();
             }
             if (updateNum >= updateUnlocks.Count)
             {
                 Debug.Log("Got invalid unlock number");
-                return;
+                return false;
             }
+            if(!updateUnlocks[updateNum])
+                CreateUpdatePopUP(updateNum);
             updateUnlocks[updateNum] = true;
+            return true;
         }
         
-        //Unlocks the next update
-        public void UnlockUpdate()
+        //Unlocks the next locked update
+        public bool UnlockUpdate()
         {
             for (int i = 0; i < updateUnlocks.Count; i++)
             {
                 if (!updateUnlocks[i])
                 {
+                    CreateUpdatePopUP(i);
                     updateUnlocks[i] = true;
-                    return;
+                    return true;
                 }
             }
+            return false;
         }
 
         //builds a quest node from the passed data object
@@ -259,25 +290,43 @@ namespace QuestSystem
         private void ReadUpdatesFile(TextAsset file)
         {
             qUpdates = new List<string>();
+            qUpdateTitles = new List<string>();
             updateUnlocks = new List<bool>();
             if (file == null) return;
             string[] fileSplit = FileToStringArr(file);
+            string updateTitle = "";
             string update = "";
+            bool titling = true;
             for (int i = 0; i < fileSplit.Length; i++)
             {
                 if (fileSplit[i].Equals("--break--"))
                 {
                     qUpdates.Add(update);
+                    qUpdateTitles.Add(updateTitle);
                     updateUnlocks.Add(false);
                     update = "";
+                    updateTitle = "";
+                    titling = true;
+                }
+                else if(fileSplit[i].Equals("--title--"))
+                {
+                    titling = false;
                 }
                 else if (fileSplit[i][0] != '#')
                 {
-                    update += fileSplit[i] + "\n";
+                    if (titling)
+                    {
+                        updateTitle += fileSplit[i]+"\n";
+                    }
+                    else
+                    {
+                        update += fileSplit[i] + "\n";
+                    }
                 }
             }
-            if (update != "")
+            if (updateTitle != "")
             {
+                qUpdateTitles.Add(updateTitle);
                 qUpdates.Add(update);
                 updateUnlocks.Add(false);
             }

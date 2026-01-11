@@ -16,6 +16,8 @@ using UnityEngine.UI;
 public class BonepileScript : MonoBehaviour
 {
     public GameObject bpileWalls;
+
+    public QuestObj bpileQ;
     
     public GameObject cutscene1;
     
@@ -48,7 +50,7 @@ public class BonepileScript : MonoBehaviour
     private void Start()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
-        if (bpile.isComplete && !BP10.HasPlayed())
+        if (bpile != null && bpile.isComplete && !BP10.HasPlayed())
         {
             BP10.SetPlayability(true);
             //Player.player.GetComponent<LandMovement>().enabled = true;
@@ -62,6 +64,25 @@ public class BonepileScript : MonoBehaviour
                 wall.gameObject.SetActive(false);
             }
         }
+        BP3.addToOnComplete(new List<UnityAction<string>> {
+            s =>
+            {
+                foreach (Transform wall in bpileWalls.transform)
+                {
+                    wall.gameObject.SetActive(true);
+                }
+            }});
+        BP4.addToOnComplete(new List<UnityAction<string>> { s => { 
+            
+            QuestManager.questManager.CreateQuestNode(bpileQ); 
+            if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
+            {
+                //Debug.Log("Setting BP10 Playable");
+                BP10.SetPlayability(true);
+            }))
+            {
+                Debug.Log("sub failed");
+            }} });
             
 
         if (scriptSingleton != null)
@@ -77,15 +98,6 @@ public class BonepileScript : MonoBehaviour
                 mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();
             if(mastoBoneUIImage != null)
                 mastoBoneUIImage.gameObject.SetActive(false);
-        }
-
-        if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
-            {
-                //Debug.Log("Setting BP10 Playable");
-                BP10.SetPlayability(true);
-            }))
-        {
-            Debug.Log("sub failed");
         }
         BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
                 //Debug.Log("Ran BP10 OnComp");

@@ -58,6 +58,14 @@ public class CourseManager : MonoBehaviour
 
     public List<GameObject> movingSnakePrefab;
 
+    public int dateMax;
+
+    public int dateMin;
+
+    [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]public string goodRockTextColor;
+
+    [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]public string badRockTextColor;
+
     private List<GameObject> spawnedObjects = new List<GameObject>();
     
     [NonSerialized]public float curPoints;
@@ -97,12 +105,18 @@ public class CourseManager : MonoBehaviour
         List<Transform> rocks = SpawnItems(dateRockSpawnLocations, tuffaToSpawn, tuffaPrefab);
         foreach (Transform rock in rocks)
         {
-            rock.GetComponentInChildren<DateRock>().manager = this;
+            DateRock dr = rock.GetComponentInChildren<DateRock>();
+            dr.manager = this;
+            dr.date = Random.Range(dateMin, dateMax).ToString();
+            dr.dateTextColor = goodRockTextColor;
         }
         rocks = SpawnItems(dateRockSpawnLocations, carbonateToSpawn, carboPrefab, rocks);
         foreach (Transform rock in rocks)
         {
-            rock.GetComponentInChildren<DateRock>().manager = this;
+            DateRock dr = rock.GetComponentInChildren<DateRock>();
+            dr.manager = this;
+            dr.date = Random.Range(0, Int32.MaxValue).ToString();
+            dr.dateTextColor = badRockTextColor;
         }
         if(rockSpawnLocations != null)
             SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);

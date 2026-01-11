@@ -18,10 +18,17 @@ namespace Misc
         public GameObject subtitleBG;
 
         public GameObject skipBG;
+        public RectTransform minimap;
+
+        public RectTransform questJournalIcon;
+
+        public RectTransform mastoBoneRect;
 
         private void Awake()
         {
             hudManager = this;
+            //minimap.anchoredPosition = new Vector2(150, -150);
+            //mastoBoneRect.anchoredPosition = new Vector2(-694, -48);
             StartCoroutine(WaitForQuestLoad());
         }
 
@@ -61,6 +68,17 @@ namespace Misc
                 yield return new WaitForSeconds(0);
             }
             ResetPins();
+            if (!QuestManager.questManager.hasQuests())
+            {
+                questJournalIcon.gameObject.SetActive(false);
+                QuestManager.questManager.onQuestCreated.AddListener(ShowQJIcon);
+            }
+        }
+
+        private void ShowQJIcon(QuestNode n)
+        {
+            questJournalIcon.gameObject.SetActive(true);
+            QuestManager.questManager.onQuestCreated.RemoveListener(ShowQJIcon);
         }
 
         public void ResetPins()

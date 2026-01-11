@@ -10,7 +10,7 @@ public class ChangePlayerMoveVisOnEnable : MonoBehaviour
 
     public bool playerCameraEnabled;
 
-    public bool rendererEnabled;
+    //public bool rendererEnabled;
 
     private PlayerMovementController _movementController;
 
@@ -18,7 +18,7 @@ public class ChangePlayerMoveVisOnEnable : MonoBehaviour
 
     private GameObject mainCamera;
 
-    private MeshRenderer meshRenderer;
+    //private MeshRenderer meshRenderer;
 
     public bool resetOnDisable = true;
 
@@ -30,8 +30,15 @@ public class ChangePlayerMoveVisOnEnable : MonoBehaviour
         _landMovement.enabled = movementEnabled;
         mainCamera = GameObject.FindGameObjectWithTag("PlayerFollow");
         mainCamera.SetActive(playerCameraEnabled);
-        meshRenderer = Player.player.GetComponent<MeshRenderer>();
-        meshRenderer.enabled = rendererEnabled;
+        //meshRenderer = Player.player.GetComponent<MeshRenderer>();
+        //meshRenderer.enabled = rendererEnabled;
+    }
+
+    private void Update()
+    {
+        _movementController.enabled = movementEnabled;
+        _landMovement.enabled = movementEnabled;
+        mainCamera.SetActive(playerCameraEnabled);
     }
 
     private void OnDisable()
@@ -42,8 +49,8 @@ public class ChangePlayerMoveVisOnEnable : MonoBehaviour
                 _movementController.enabled = !movementEnabled;
             if(mainCamera != null)
                 mainCamera.SetActive(!playerCameraEnabled);
-            if(meshRenderer != null)
-                meshRenderer.enabled = !rendererEnabled;
+            //if(meshRenderer != null)
+                //meshRenderer.enabled = !rendererEnabled;
         }
     }
 }

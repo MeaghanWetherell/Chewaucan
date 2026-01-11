@@ -8,7 +8,7 @@ namespace Misc
     public class PopUpOnClick : MonoBehaviour
     {
         [NonSerialized] public int index;
-        public void OnClick()
+        public virtual void OnClick()
         {
             LoadGUIManager.loadGUIManager.ClosePopUp(index);
         }

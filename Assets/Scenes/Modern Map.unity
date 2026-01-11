@@ -1100,43 +1100,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.82
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.49
+      value: -2.73
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.16
+      value: -8.72
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.052564893
+      value: -0.06754862
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.8877331
+      value: 0.8602275
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.08029806
+      value: -0.28689653
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.45024332
+      value: 0.41609648
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 9.534
+      value: 7.039
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 126.676
+      value: 130.504
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 185.541
+      value: 213.641
       objectReference: {fileID: 0}
     - target: {fileID: 8548022880485420864, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalScale.x
@@ -1177,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 8634373014781665204, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Skull
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -2865,6 +2869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpileWalls: {fileID: 1701693216}
+  bpileQ: {fileID: 11400000, guid: ff2fa54c257a73d4e8d0092fa2444f1b, type: 2}
   cutscene1: {fileID: 327529264}
   BP1: {fileID: 11400000, guid: d9f07ffaf04f21d47a37ed1d90f549f0, type: 2}
   BP2: {fileID: 11400000, guid: 30b3f8eb058d5f148b04c155287889ef, type: 2}
@@ -3443,6 +3448,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Spine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
       value: 
       objectReference: {fileID: 0}
@@ -3887,6 +3896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327529266}
   - component: {fileID: 327529265}
+  - component: {fileID: 327529267}
   m_Layer: 0
   m_Name: CutScene1
   m_TagString: Untagged
@@ -3959,6 +3969,19 @@ Transform:
   - {fileID: 1000931121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &327529267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327529264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ba3e062e9ce8a4e99a17e1a4f53f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscene: {fileID: 327529265}
 --- !u!1 &331695017
 GameObject:
   m_ObjectHideFlags: 0
@@ -6363,6 +6386,10 @@ PrefabInstance:
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 92.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Femur
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -8940,51 +8967,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 630772101}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &644854758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 644854760}
-  - component: {fileID: 644854759}
-  m_Layer: 0
-  m_Name: QStarter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &644854759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644854758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85bbdfe42196c745bd0ae8cc0fffa61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questData: {fileID: 11400000, guid: ff2fa54c257a73d4e8d0092fa2444f1b, type: 2}
---- !u!4 &644854760
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644854758}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 275.25, y: 342.075, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &647774739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1716129129943773628, guid: 75eb8f801b7041941b08158b247c4b88, type: 3}
@@ -10150,43 +10132,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.02
+      value: 8.64
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: -2.79
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.6
+      value: 2.64
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.052564893
+      value: -0.07845344
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.8877331
+      value: 0.4526878
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.08029806
+      value: -0.07856924
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.45024332
+      value: 0.88472915
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 9.534
+      value: 3.899
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 126.676
+      value: 54.61
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 185.541
+      value: 192.148
       objectReference: {fileID: 0}
     - target: {fileID: 8548022880485420864, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalScale.x
@@ -10227,6 +10209,10 @@ PrefabInstance:
     - target: {fileID: 8634373014781665204, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Skull
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -14510,6 +14496,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Pelvis
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
       value: 
       objectReference: {fileID: 0}
@@ -14728,6 +14718,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Tibia
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
       value: 
       objectReference: {fileID: 0}
@@ -14823,15 +14817,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.81
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.371
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15176,15 +15170,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0d3c45fe8ccf34b4683424d4acace72c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -15426,6 +15420,10 @@ PrefabInstance:
     - target: {fileID: 8634373014781665204, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Scapula
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -15972,6 +15970,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Jaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
       value: 
       objectReference: {fileID: 0}
@@ -16144,6 +16146,10 @@ PrefabInstance:
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 97.682
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Ulna
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -16747,7 +16753,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementEnabled: 0
   playerCameraEnabled: 0
-  rendererEnabled: 0
   resetOnDisable: 1
 --- !u!4 &1266665314
 Transform:
@@ -20731,6 +20736,10 @@ PrefabInstance:
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 85.622
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Calcaneum
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -25648,6 +25657,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Spine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
       value: 
       objectReference: {fileID: 0}
@@ -26268,6 +26281,10 @@ PrefabInstance:
     - target: {fileID: 8634373014781665204, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
+      propertyPath: boneName
+      value: Cow Humerus
       objectReference: {fileID: 0}
     - target: {fileID: 8749551758341415129, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: myPrefab
@@ -27043,10 +27060,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7253705930891792293, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 175.7
-      objectReference: {fileID: 0}
     - target: {fileID: 7887563650297604325, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -27062,22 +27075,6 @@ PrefabInstance:
     - target: {fileID: 8438860051811369493, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460754038407293508, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.358884
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460754038407293508, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.358884
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460754038407293508, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.358884
-      objectReference: {fileID: 0}
-    - target: {fileID: 8460754038407293508, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -27268,7 +27265,6 @@ SceneRoots:
   - {fileID: 2097673920}
   - {fileID: 41966336}
   - {fileID: 1692405586}
-  - {fileID: 644854760}
   - {fileID: 609718568}
   - {fileID: 1978583506}
   - {fileID: 165305068}

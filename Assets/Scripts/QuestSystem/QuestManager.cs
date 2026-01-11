@@ -4,6 +4,7 @@ using System.IO;
 using LoadGUIFolder;
 using UnityEngine;
 using Misc;
+using ScriptTags;
 using UnityEngine.Events;
 
 
@@ -13,8 +14,12 @@ namespace QuestSystem
     public class QuestManager : MonoBehaviour
     {
         public static QuestManager questManager;
+
+        public GameObject questUpdatePopUp;
         
         public static bool resetQuests = false;
+
+        public UnityEvent<QuestNode> onQuestCreated;
         
         [Tooltip("List of all quests")] 
         public List<QuestObj> AllQuests;
@@ -41,9 +46,16 @@ namespace QuestSystem
                 node.startNarration.Begin();
             if (obj.initFile != null)
             {
-                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
+                GameObject qNode = Instantiate(questUpdatePopUp);
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(qNode, node.name, obj.initFile.text);
             }
+            onQuestCreated.Invoke(node);
             return node;
+        }
+
+        public bool hasQuests()
+        {
+            return _quests.Count > 0;
         }
 
         //get the quest object corresponding to the passed id
@@ -61,8 +73,6 @@ namespace QuestSystem
             return null;
         }
         
-        //gets the quest scriptable object with the passed id
-        //if there isn't one, return null. then,
         //if the passed quest is new, create it and return it,
         //otherwise return a reference to the existing quest
         public QuestNode CreateQuestNode(string qid)
@@ -77,8 +87,10 @@ namespace QuestSystem
                 node.startNarration.Begin();
             if (obj.initFile != null)
             {
-                LoadGUIManager.loadGUIManager.InstantiatePopUp(node.name, obj.initFile.text);
+                GameObject qNode = Instantiate(questUpdatePopUp);
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(qNode, node.name, obj.initFile.text);
             }
+            onQuestCreated.Invoke(node);
             return node;
         }
 

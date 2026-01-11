@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Audio;
+using LoadGUIFolder;
 using QuestSystem; //Required to run the questmanager function
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class BoneChecker : MonoBehaviour
@@ -21,14 +23,22 @@ public class BoneChecker : MonoBehaviour
 
     public List<Narration.Narration> correctBarks;
 
+    public TextMeshProUGUI boneNameTMP;
+
     private Quaternion initialRotation; // store the starting rotation
 
     private bool waitToStartNarr = false;
 
     private bool suffRot = false;
 
+    private string boneTitle;
+
     private void Start()
     {
+        Instantiate(BoneInteractable.currBone.answerBone, viewer.transform);
+        viewer.GetComponent<BoneChecker>().isCorrect = BoneInteractable.currBone.isCorrect;
+        boneTitle = BoneInteractable.currBone.boneName;
+        boneNameTMP.text = "<color=\"white\">" + BoneInteractable.currBone.boneName + "</color>";
         viewer.GetComponent<BoneChecker>().SetBoneRotation(viewer.transform.localEulerAngles);
         viewer.GetComponent<BoneChecker>().SetBoneScale(viewer.transform.localScale);
         // Save the initial rotation
@@ -36,6 +46,7 @@ public class BoneChecker : MonoBehaviour
         Quaternion offsetRotation = initialRotation * Quaternion.Euler(0f, 90f, 0f); //rotate it 90 degrees
         viewer.transform.rotation = offsetRotation;
         initialRotation = offsetRotation;
+        LoadGUIManager.loadGUIManager.SubtoUnload(BoneInteractable.currBone.UpdateQuest);
     }
 
     private IEnumerator PlayAfterTime(Narration.Narration narr, float time)
@@ -100,6 +111,8 @@ public class BoneChecker : MonoBehaviour
             if (playerRotationAmount > 120f || suffRot)
             {
                 text.text = "Hmm, this doesn't seem to be the right bone. ";
+                if(BoneInteractable.currBone != null)
+                    BoneInteractable.currBone.sendUpdate = true;
                 suffRot = true;
             }
             else

@@ -9,16 +9,34 @@ public class BoneInteractable : Interactable
 {
     public GameObject defaultBone; //this is the bone the player sees in the modern map scene
 
-    public GameObject outlinedBone; //set this objects layer to outlinedBone
+    public GameObject outlinedBone; //set this object's layer to outlinedBone
 
     public GameObject answerBone; //this is the answer key bone
 
     public bool isCorrect;
 
+    public string boneName;
+
     public AudioSource pickupAudio;
 
-    private bool isLoader = false;
+    public static BoneInteractable currBone;
+
+    public bool sendUpdate = false;
+
+    private bool subbed = false;
     private Light mainDirectionalLight;
+    
+    public void UpdateQuest(string guiName)
+    {
+        if (guiName.Equals("BoneComparison"))
+        {
+            if(sendUpdate)
+                QuestManager.questManager.GETNode("bonepile").UnlockUpdate(boneName);
+            LoadGUIManager.loadGUIManager.UnsubtoUnload(UpdateQuest);
+            BoneInteractable.currBone = null;
+        }
+    }
+    
     public override void OnInteractEnable()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
@@ -41,7 +59,7 @@ public class BoneInteractable : Interactable
     {
         if (LoadGUIManager.loadGUIManager.Load("BoneComparison"))
         {
-            isLoader = true;
+            BoneInteractable.currBone = this;
 
             // Find and disable the directional light
             if (mainDirectionalLight == null)
@@ -54,40 +72,23 @@ public class BoneInteractable : Interactable
                 mainDirectionalLight.enabled = false;
             }
 
-
+            subbed = true;
+            SceneManager.sceneUnloaded += OnSceneUnload;
             pickupAudio.ignoreListenerPause = true;
             pickupAudio?.Play();
         }
         else
         {
-            isLoader = false;
+            BoneInteractable.currBone = null;
         }
     }
 
     public override void ListenerRemoved() { }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoad;
-        SceneManager.sceneUnloaded += OnSceneUnload;
-    }
     
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoad;
-        SceneManager.sceneUnloaded -= OnSceneUnload;
-    }
-    
-    private void OnSceneLoad(Scene loaded, LoadSceneMode mode)
-    {
-        if (isLoader && loaded.name.Equals("BoneComparison"))
-        {
-            GameObject viewer = GameObject.Find("ViewBone");
-        
-            Instantiate(answerBone, viewer.transform);
-            viewer.GetComponent<BoneChecker>().isCorrect = isCorrect;
-            isLoader = false;
-        }
+        if(subbed)
+            SceneManager.sceneUnloaded -= OnSceneUnload;
     }
 
     // To turn the main light back on when you unload the scene.
@@ -99,6 +100,8 @@ public class BoneInteractable : Interactable
             {
                 mainDirectionalLight.enabled = true;
             }
+
+            SceneManager.sceneUnloaded -= OnSceneUnload;
         }
     }
 }

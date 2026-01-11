@@ -10,10 +10,15 @@ namespace Misc
 
         public TextMeshProUGUI mainTextActual;
 
-        public void SetText(string title, string mainText)
+        [NonSerialized]public string title;
+
+        public void SetText(string inTitle, string mainText)
         {
-            titleActual.text = title;
-            mainTextActual.text = mainText;
+            title = inTitle;
+            if(titleActual != null)
+                titleActual.text = title;
+            if(mainTextActual != null)
+                mainTextActual.text = mainText;
         }
     }
 }
