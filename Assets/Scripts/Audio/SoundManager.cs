@@ -48,8 +48,8 @@ namespace Audio
         //default value to quiet to when quieting bgm
         private const float quietVol = 0.1f;
 
-        //actions to run after narration finishes
-        private UnityEvent<string> onNarrationComplete;
+        //currently running narr
+        private Narration.Narration currNarr;
 
         private List<float> currentSubTimes;
 
@@ -70,7 +70,7 @@ namespace Audio
             if(runSubs != null)StopCoroutine(runSubs);
             narrator.Stop();
             narrFinished = true;
-            onNarrationComplete = null;
+            currNarr = null;
             currentSubTimes = null;
             currentSubLines = null;
         }
@@ -78,11 +78,11 @@ namespace Audio
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
         //including if the narration was interrupted by skipping
-        public void PlayNarration(AudioClip clip, UnityEvent<string> onComplete, bool skippable = true, List<float> times = null, List<string> lines = null)
+        public void PlayNarration(Narration.Narration narr, bool skippable = true, List<float> times = null, List<string> lines = null)
         {
             narrator.Stop();
-            narrator.clip = clip;
-            onNarrationComplete = onComplete;
+            narrator.clip = narr.narrationClip;
+            currNarr = narr;
             GameObject temp = Subtitler.subtitler;
             if (HUDManager.hudManager != null)
             {
@@ -114,7 +114,7 @@ namespace Audio
         public void PlayNarration()
         {
             if(!narrFinished)
-                onNarrationComplete.Invoke(narrator.clip.name);
+                currNarr.InvokeOnComplete();
             narrFinished = false;
             narrator.Play();
             waiting = false;
@@ -176,7 +176,7 @@ namespace Audio
             if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
             currentSubLines = null;
             currentSubTimes = null;
-            onNarrationComplete.Invoke(narrator.clip.name);
+            currNarr.InvokeOnComplete();
         }
 
         private IEnumerator RunSubtitles()

@@ -126,6 +126,7 @@ namespace LoadGUIFolder
 
         public void RegisterPopUpClose()
         {
+            if (popUps.Count == 0) return;
             string title = popUps[popUps.Count - 1].GetComponent<PopUpTextManager>().title;
             OnGUIUnload.Invoke(title);
             popUps.RemoveAt(popUps.Count-1);

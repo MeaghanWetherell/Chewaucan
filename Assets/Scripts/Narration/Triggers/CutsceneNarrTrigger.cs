@@ -9,15 +9,17 @@ public class CutsceneNarrTrigger : MonoBehaviour
 {
     public Narration.Narration narrToPlay;
 
-    public GameObject nextNarr;
+    public CutsceneNarrTrigger nextNarr;
     
-    private void OnEnable()
+    public void StartNarr()
     {
-        narrToPlay.Begin(new List<UnityAction<string>>{OnNarrEnd},false);
+            //Debug.Log("Starting narr "+narrToPlay.name);
+            narrToPlay.Begin(new List<UnityAction<string>>{OnNarrEnd},false);
     }
 
-    private void OnDisable()
+    public void StopNarr()
     {
+        //Debug.Log("Stopping "+narrToPlay.name);
         narrToPlay.Stop();
     }
 
@@ -29,7 +31,9 @@ public class CutsceneNarrTrigger : MonoBehaviour
 
     private IEnumerator EnableNextNarr()
     {
+        //Debug.Log("Waiting to enable narr "+nextNarr.name);
         yield return new WaitForSeconds(0.2f);
-        nextNarr.SetActive(true);
+        //Debug.Log("Enabling "+nextNarr.name);
+        nextNarr.StartNarr();
     }
 }

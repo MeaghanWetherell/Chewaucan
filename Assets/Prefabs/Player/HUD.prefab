@@ -1061,9 +1061,6 @@ GameObject:
   - component: {fileID: 6901230805485499398}
   - component: {fileID: 199548050714864472}
   - component: {fileID: 2552586939542056018}
-  - component: {fileID: 8151945284411092780}
-  - component: {fileID: 1687330451455863632}
-  - component: {fileID: 364873981767664356}
   m_Layer: 5
   m_Name: Dial
   m_TagString: Untagged
@@ -1130,87 +1127,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8151945284411092780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4998317582249542077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 2552586939542056018}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1687330451455863632}
-        m_TargetAssemblyTypeName: LoadGUIFolder.LoadGUI, Assembly-CSharp
-        m_MethodName: ONOpenTrigger
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1687330451455863632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4998317582249542077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac6710af2766f143ba70ec5e4de431d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadScene: TimeTravelGUI
---- !u!114 &364873981767664356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4998317582249542077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e7c72ba0df5e54e804e31b9e2fb6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5019539664114459555
 GameObject:
   m_ObjectHideFlags: 0
@@ -2015,6 +1931,7 @@ MonoBehaviour:
   subtitleBG: {fileID: 8924747411759609863}
   skipBG: {fileID: 1370754886155274348}
   minimap: {fileID: 8460754038407293508}
+  astrolabeUI: {fileID: 6901230805485499398}
   questJournalIcon: {fileID: 6617523304533768675}
   mastoBoneRect: {fileID: 7253705930891792293}
 --- !u!114 &-4794266998472063617

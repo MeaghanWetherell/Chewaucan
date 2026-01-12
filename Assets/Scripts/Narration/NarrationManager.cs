@@ -94,6 +94,7 @@ namespace Narration
             string hasRunSave = JsonSerializer.Serialize(hasRun);
             File.WriteAllText(path+"/shouldRun.json", shouldRunSave);
             File.WriteAllText(path+"/hasRun.json", hasRunSave);
+            resetNarrList.Clear();
         }
     }
 }

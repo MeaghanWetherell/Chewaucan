@@ -20,6 +20,8 @@ namespace Misc
         public GameObject skipBG;
         public RectTransform minimap;
 
+        public RectTransform astrolabeUI;
+
         public RectTransform questJournalIcon;
 
         public RectTransform mastoBoneRect;
@@ -67,11 +69,21 @@ namespace Misc
             {
                 yield return new WaitForSeconds(0);
             }
+            CheckAstrolabeOn();
             ResetPins();
             if (!QuestManager.questManager.hasQuests())
             {
                 questJournalIcon.gameObject.SetActive(false);
                 QuestManager.questManager.onQuestCreated.AddListener(ShowQJIcon);
+            }
+        }
+
+        private void CheckAstrolabeOn()
+        {
+            QuestNode unlockQuest = QuestManager.questManager.GETNode("bonepile");
+            if (unlockQuest == null || !unlockQuest.isComplete)
+            {
+                astrolabeUI.gameObject.SetActive(false);
             }
         }
 

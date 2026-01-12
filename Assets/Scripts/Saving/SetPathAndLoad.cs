@@ -25,6 +25,8 @@ public class SetPathAndLoad : MonoBehaviour
     
     public int pathNumber;
 
+    public GameObject newGameNameObj;
+
     private void Start()
     {
         string myPath = SaveHandler.saveHandler.saveSlots[pathNumber];
@@ -33,11 +35,20 @@ public class SetPathAndLoad : MonoBehaviour
             case loadType.myPath:
                 if (!SaveHandler.saveHandler.checkPath(myPath))
                     myButton.interactable = false;
+                else
+                {
+                    text.text = "Load " + myPath.Split("/")[^1];
+                }
                 myButton.onClick.AddListener(LoadMyPath);
                 break;
             case loadType.lastUsed:
-                if (!SaveHandler.saveHandler.checkPath(SaveHandler.saveHandler.getLastSavePath()))
+                myPath = SaveHandler.saveHandler.getLastSavePath();
+                if (!SaveHandler.saveHandler.checkPath(myPath))
                     myButton.interactable = false;
+                else
+                {
+                    text.text = "Continue with " + myPath.Split("/")[^1];
+                }
                 myButton.onClick.AddListener(LoadLastUsed);
                 break;
             case loadType.newGame:
@@ -90,8 +101,8 @@ public class SetPathAndLoad : MonoBehaviour
 
     private void NewGame()
     {
-        SaveHandler.saveHandler.NewGame(SaveHandler.saveHandler.saveSlots[pathNumber]);
-        SaveHandler.saveHandler.Load();
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        //Debug.Log(pathNumber);
+        newGameNameObj.SetActive(true);
+        newGameNameObj.GetComponent<NameNewGame>().Initialize(pathNumber);
     }
 }

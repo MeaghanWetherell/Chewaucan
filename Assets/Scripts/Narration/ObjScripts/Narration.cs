@@ -39,6 +39,11 @@ namespace Narration
             Begin(new List<UnityAction<string>>(), skippable);
         }
 
+        public void InvokeOnComplete()
+        {
+            narrCompleted.Invoke(narrationClip.name);
+        }
+
         public virtual void Stop()
         {
             if (SoundManager.soundManager != null && SoundManager.soundManager.narrator.clip != null)
@@ -57,9 +62,9 @@ namespace Narration
             if (subtitles != null)
             {
                 (List<float>, List<string>) subs = parseSubtitles();
-                SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, skippable, subs.Item1, subs.Item2);
+                SoundManager.soundManager.PlayNarration(this, skippable, subs.Item1, subs.Item2);
             }
-            else SoundManager.soundManager.PlayNarration(narrationClip, narrCompleted, skippable);
+            else SoundManager.soundManager.PlayNarration(this, skippable);
             NarrationManager.narrationManager.Played(name);
         }
 

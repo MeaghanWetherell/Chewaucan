@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Misc;
+using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -30,32 +32,41 @@ namespace QuestSystem.Quests.QScripts
         {
             if (openAstrolabe != null)
                 openAstrolabe.action.performed += OnAstrolabeOpen;
+            QuestNode subbedNode = QuestManager.questManager.GETNode(subToId);
+            
             if (narration == null)
             {
-                QuestManager.questManager.SubToCompletion(subToId, toSub =>
+                if (!playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
                 {
-                    v3Wrapper toSerialize = new v3Wrapper(playerPosition);
-                    string json = JsonSerializer.Serialize(toSerialize);
-                    string savePath = SaveHandler.saveHandler.getSavePath();
-                    File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
                     playOnAstrolabeOpen?.SetPlayability(true);
-                });
+                }
+                else
+                {
+                    QuestManager.questManager.SubToCompletion(subToId, OnComp);
+                }
             }
-            else if (!narration.HasPlayed())
+            else if(!narration.HasPlayed())
             {
                 narration.addToOnComplete(new List<UnityAction<string>>{
-                    s =>
-                    {
-                        QuestManager.questManager.SubToCompletion(subToId, toSub =>
-                        {
-                            v3Wrapper toSerialize = new v3Wrapper(playerPosition);
-                            string json = JsonSerializer.Serialize(toSerialize);
-                            string savePath = SaveHandler.saveHandler.getSavePath();
-                            File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
-                            playOnAstrolabeOpen?.SetPlayability(true);
-                        });
-                    }});
+                    OnComp});
             }
+            else
+            {
+                if (!playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
+                {
+                    playOnAstrolabeOpen?.SetPlayability(true);
+                }
+            }
+        }
+
+        private void OnComp(string n)
+        {
+            HUDManager.hudManager.astrolabeUI.gameObject.SetActive(true);
+            v3Wrapper toSerialize = new v3Wrapper(playerPosition);
+            string json = JsonSerializer.Serialize(toSerialize);
+            string savePath = SaveHandler.saveHandler.getSavePath();
+            File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
+            playOnAstrolabeOpen?.SetPlayability(true);
         }
 
         private void OnDisable()

@@ -52,6 +52,7 @@ MonoBehaviour:
   lt: 3
   text: {fileID: 6088009816341871136}
   pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &3854543163577648728
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +345,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 3082778127848029837}
+        m_TargetAssemblyTypeName: TrashSave, Assembly-CSharp
+        m_MethodName: SetToTrash
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -352,6 +365,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -368,6 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659a1da09250a4f4cba56cacd0eba0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myButton: {fileID: 2245560398488105452}
+  mySlot: 0
   trashButton: {fileID: 0}
 --- !u!1 &8711630008669844233
 GameObject:

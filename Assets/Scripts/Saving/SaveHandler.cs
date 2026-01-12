@@ -50,7 +50,7 @@ public class SaveHandler : MonoBehaviour
         Directory.CreateDirectory(Application.persistentDataPath+"/"+settingsSavePath);
 
         if (File.Exists(Application.persistentDataPath + "/" +
-                        metadataSaveLoc + "/saveSlots"))
+                        metadataSaveLoc + "/saveSlots.json"))
         {
             saveSlots = JsonSerializer.Deserialize<List<String>>(File.ReadAllText(Application.persistentDataPath + "/" +
                 metadataSaveLoc + "/saveSlots.json"));
@@ -83,7 +83,6 @@ public class SaveHandler : MonoBehaviour
         {
             return "";
         }
-        return "";
     }
 
     private void Start()
@@ -106,6 +105,9 @@ public class SaveHandler : MonoBehaviour
     {
         try
         {
+            string saveSlotsJson = JsonSerializer.Serialize(saveSlots);
+            File.WriteAllText(Application.persistentDataPath + "/" +
+                              metadataSaveLoc + "/saveSlots.json", saveSlotsJson);
             Save();
         }
         catch(Exception e)
@@ -161,6 +163,7 @@ public class SaveHandler : MonoBehaviour
 
     private void writeMetaFile(string path, string version, float time)
     {
+        //Debug.Log("Writing Meta File to "+path);
         File.WriteAllText(Application.persistentDataPath+"/"+path+"/meta", version+"\n"+time);
     }
 
@@ -176,7 +179,6 @@ public class SaveHandler : MonoBehaviour
             line = line.Trim();
             ret.Item2 = float.Parse(line);
             streamReader.Close();
-            File.WriteAllText(Application.persistentDataPath + "/" + metadataSaveLoc + "/lastPath", path);
             return ret;
         }
         catch (FileNotFoundException)
@@ -262,16 +264,12 @@ public class SaveHandler : MonoBehaviour
     public void Save()
     {
         StopTimer();
-        writeMetaFile(savePath, currentVersion, timePlayed);
         if (savePath != null && !savePath.Equals(""))
         {
+            writeMetaFile(savePath, currentVersion, timePlayed);
             saveRegular.Invoke(Application.persistentDataPath+"/"+savePath);
             File.WriteAllText(Application.persistentDataPath+"/"+metadataSaveLoc + "/lastPath", savePath);
         }
-
-        string saveSlotsJson = JsonSerializer.Serialize(saveSlots);
-        File.WriteAllText(Application.persistentDataPath + "/" +
-                          metadataSaveLoc + "/saveSlots.json", saveSlotsJson);
         saveSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
     }
 }

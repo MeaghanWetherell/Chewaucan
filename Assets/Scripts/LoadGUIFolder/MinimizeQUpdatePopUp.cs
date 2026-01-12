@@ -26,7 +26,7 @@ public class MinimizeQUpdatePopUp : PopUpOnClick
     private IEnumerator Minimize()
     {
         RectTransform target = HUDManager.hudManager.questJournalIcon;
-        if (target != null)
+        if (target != null && target.gameObject.activeSelf && !LoadGUIManager.loadGUIManager.isGUIOpen())
         {
             List<Vector2> scaleFactors = new List<Vector2>();
             List<Vector2> originalPositions = new List<Vector2>();
@@ -39,7 +39,7 @@ public class MinimizeQUpdatePopUp : PopUpOnClick
             Vector2 originalPos = mainImgRectTransform.anchoredPosition;
             Vector2 originalSize = mainImgRectTransform.rect.size;
             Vector2 targetPos = target.anchoredPosition;
-            Debug.Log(targetPos);
+            //Debug.Log(targetPos);
             Vector2 targetSize = target.rect.size;
             
             float time = 0;
