@@ -133,7 +133,7 @@ namespace LoadGUIFolder
             List<UnityAction<string>> events = popUpEvents[^1];
             foreach(UnityAction<string> pEvent in events)
                 pEvent.Invoke(title);
-            popUpEvents.RemoveAt(popUps.Count - 1);
+            popUpEvents.RemoveAt(popUpEvents.Count - 1);
             if (!isGUIOpen() && popUps.Count == 0)
             {
                 if(cacheCamLook != null)

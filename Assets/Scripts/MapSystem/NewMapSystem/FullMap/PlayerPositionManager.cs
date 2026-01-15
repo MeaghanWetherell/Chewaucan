@@ -19,8 +19,6 @@ public class PlayerPositionManager : MonoBehaviour
     //index 0 is modern, index 1 is pleistocene
     private List<Vector3> nextPlayerPosition = new List<Vector3>();
     
-    private GameObject player;
-    
     [NonSerialized]public bool loadModernMap = true;
 
     public string playerPosFileName;
@@ -50,7 +48,6 @@ public class PlayerPositionManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        player = GameObject.FindGameObjectWithTag("Player");
         SceneManager.activeSceneChanged += FindPlayerWhenSceneChanged;
         playerPositionManager = this;
         DontDestroyOnLoad(transform.gameObject);
@@ -124,8 +121,9 @@ public class PlayerPositionManager : MonoBehaviour
     {
         if (Player.player != null)
         {
+            GameObject player = Player.player;
             if (_movementController == null)
-                _movementController = Player.player.GetComponent<PlayerMovementController>();
+                _movementController = player.GetComponent<PlayerMovementController>();
             if (SceneLoadWrapper.sceneLoadWrapper.modernMapScenes.Contains(SceneManager.GetActiveScene().name))
             {
                 setPlayerPosition(player.transform.position, 0);
@@ -141,7 +139,7 @@ public class PlayerPositionManager : MonoBehaviour
 
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (next.name.Equals("Modern Map"))
         {
             loadModernMap = true;

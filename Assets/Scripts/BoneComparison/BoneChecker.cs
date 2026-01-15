@@ -111,8 +111,10 @@ public class BoneChecker : MonoBehaviour
             if (playerRotationAmount > 120f || suffRot)
             {
                 text.text = "Hmm, this doesn't seem to be the right bone. ";
-                if(BoneInteractable.currBone != null)
+                if (BoneInteractable.currBone != null)
+                {
                     BoneInteractable.currBone.sendUpdate = true;
+                }
                 suffRot = true;
             }
             else

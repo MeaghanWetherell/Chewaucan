@@ -62,8 +62,14 @@ public class SaveHandler : MonoBehaviour
             saveSlots.Add("Chewaucan/Save 2");
             saveSlots.Add("Chewaucan/Save 3");
         }
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals(""))
+        if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
         {
+            string lastPath = getLastSavePath();
+            if (!checkPath(lastPath))
+            {
+                Debug.LogError("Last Path Not Found!");
+            }
+            setSavePath(lastPath);
             loadImmediately = true;
         }
     }
@@ -89,16 +95,6 @@ public class SaveHandler : MonoBehaviour
     {
         if(!loadImmediately)
             loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
-        if (!SceneManager.GetActiveScene().name.Equals("MainMenu") && savePath != null && !savePath.Equals("") && !loadImmediately)
-        {
-            string lastPath = getLastSavePath();
-            if (!checkPath(lastPath))
-            {
-                Debug.LogError("Last Path Not Found!");
-            }
-            setSavePath(lastPath);
-            Load();
-        }
     }
 
     private void OnApplicationQuit()

@@ -100,7 +100,7 @@ public class BonepileScript : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         scriptSingleton = this;
         
-        if (!NarrationManager.narrationManager.hasRun.Contains("BP2"))
+        if (!BP2.HasPlayed())
         {
             if (mastoBoneUIImage == null)
                 mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();

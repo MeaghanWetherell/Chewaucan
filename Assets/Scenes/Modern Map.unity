@@ -2893,7 +2893,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: c610394fd1ed1504ea1c1d81c3b6890f, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -20609,7 +20609,8 @@ PrefabInstance:
       propertyPath: m_ProvidesContacts
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 883103496534089414, guid: 537d322d564bf6447abce987637ce08e, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8539058024222695338, guid: 537d322d564bf6447abce987637ce08e, type: 3}
     m_AddedGameObjects:
