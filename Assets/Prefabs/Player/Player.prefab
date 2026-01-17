@@ -30,7 +30,7 @@ GameObject:
   - component: {fileID: -6780453510386105629}
   - component: {fileID: 883103496534089414}
   - component: {fileID: 6447806723315223637}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1fb6bc4de25db47ad7bbbaae328cef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endClimb: {fileID: 6644580821195962128, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &3190979845072674039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,6 +599,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a18f7bd2-1e12-4224-a956-c91cf5505cc0
     m_ActionName: Player/OpenMastoBone[/Keyboard/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8993ff3-bce9-4d60-b871-1ae3977ef9e5
+    m_ActionName: Player/EndClimb[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -630,9 +635,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotSpeed: 90
+  climbSpeed: 3
   landMovement: {fileID: 3004082312838410803}
   controller: {fileID: 7743231800493862508}
-  moveInput: {x: 0, y: 0}
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &883103496534089414
@@ -671,7 +676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5068528152347691467}
   - component: {fileID: 2687947257374097149}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ActiveSoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2114981581161468975}
   - component: {fileID: 428023961047202209}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: PlayerViewCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3434137371529989159}
   - component: {fileID: 6586249892766067457}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: PlayerArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +890,7 @@ GameObject:
   - component: {fileID: 4445663135598017246}
   - component: {fileID: 113569903458954135}
   - component: {fileID: 1485894576730404345}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Dist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1019,7 @@ GameObject:
   - component: {fileID: 1405705892735415045}
   - component: {fileID: 4606230588266111898}
   - component: {fileID: 6465812610447683664}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: RandomAmbientSoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1166,7 +1171,7 @@ GameObject:
   - component: {fileID: 3101968694822936493}
   - component: {fileID: 4131900104784813423}
   - component: {fileID: 5498483446389578611}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MinimapCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1301,7 @@ GameObject:
   - component: {fileID: 2652554150413990592}
   - component: {fileID: 5922168009271600233}
   - component: {fileID: 7986301866636303896}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

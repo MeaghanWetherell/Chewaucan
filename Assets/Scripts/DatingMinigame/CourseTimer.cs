@@ -41,7 +41,7 @@ public class CourseTimer : MonoBehaviour
 
     private void Update()
     {
-        if(!paused)
+        if(!paused && !PauseCallback.pauseManager.isPaused)
             currentTime -= Time.deltaTime;
         if (currentTime <= 0)
             StopTimer(true);
@@ -55,52 +55,5 @@ public class CourseTimer : MonoBehaviour
             text.text = "" + ((int)currentTime / 60)+":0"+((int)currentTime % 60);
         else
             text.text = "" + ((int)currentTime / 60)+":"+((int)currentTime % 60);
-    }
-
-    private void Awake()
-    {
-        if (QuestManager.questManager != null) 
-        {
-            PauseCallback.pauseManager.SubscribeToPause(OnPause);
-            PauseCallback.pauseManager.SubscribeToResume(OnResume);
-            return;
-        }
-        int count = SceneManager.sceneCount;
-        for (int i = 0; i < count; i++)
-        {
-            if (SceneManager.GetSceneAt(i).name.Equals("PersistentObjects"))
-            {
-                PauseCallback.pauseManager.SubscribeToPause(OnPause);
-                PauseCallback.pauseManager.SubscribeToResume(OnResume);
-                return;
-            }
-        }
-        LoadPersistentObjects.LoadObjs();
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (!scene.name.Equals("PersistentObjects")) return;
-        PauseCallback.pauseManager.SubscribeToPause(OnPause);
-        PauseCallback.pauseManager.SubscribeToResume(OnResume);
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-        
-    //unsubscribe to prevent leaks
-    private void OnDisable()
-    {
-        PauseCallback.pauseManager.UnsubToPause(OnPause);
-        PauseCallback.pauseManager.UnsubToResume(OnResume);
-    }
-    
-    private void OnPause()
-    {
-        paused = true;
-    }
-
-    private void OnResume()
-    {
-        paused = false;
     }
 }

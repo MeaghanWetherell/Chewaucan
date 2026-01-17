@@ -3,6 +3,7 @@ using Misc;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /**
  * Controller for switching between land and water movement,
@@ -14,6 +15,8 @@ using UnityEngine;
  */
 public class PlayerMovementController : MonoBehaviour
 {
+    public InputActionReference endClimb;
+    
     private LandMovement landMovement;
     private SwimmingMovement swimmingMovement;
     private ClimbingMovement climbingMovement;
@@ -40,9 +43,23 @@ public class PlayerMovementController : MonoBehaviour
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
     }
 
+    private void EndClimb(InputAction.CallbackContext context)
+    {
+        if (climbing)
+        {
+            SwitchToWalking();
+        }
+    }
+
     private void OnEnable()
     {
+        endClimb.action.started += EndClimb;
         SetScripts();
+    }
+
+    private void OnDisable()
+    {
+        endClimb.action.started -= EndClimb;
     }
 
     private void OnDestroy()
@@ -58,6 +75,7 @@ public class PlayerMovementController : MonoBehaviour
         walking = false;
         swimming = false;
         climbing = true;
+        HUDManager.hudManager.DisplayMessageToHUD("Press C to stop climbing");
         SetScripts();
     }
 
@@ -82,6 +100,7 @@ public class PlayerMovementController : MonoBehaviour
         walking = true;
         swimming = false;
         climbing = false;
+        HUDManager.hudManager.CloseMessage();
         SetScripts();
     }
 

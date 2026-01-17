@@ -176,6 +176,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EndClimb",
+                    "type": "Button",
+                    "id": "d8993ff3-bce9-4d60-b871-1ae3977ef9e5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -682,6 +691,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "OpenMastoBone",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5bd44f7-d14d-4d41-85a1-f08eef12a809",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "EndClimb",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

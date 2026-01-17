@@ -26,9 +26,13 @@ public class DateRock : MonoBehaviour
 
     public float scaleMaxZ;
 
-    [Tooltip("Course manger will set this automatically")]public string dateTextColor;
+    public string dateTextColor = "white";
 
-    [Tooltip("Course manger will set this automatically")]public string date;
+    [NonSerialized]public string date;
+
+    [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMin;
+
+    [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMax;
 
     private static GameObject dateText;
 
@@ -55,16 +59,17 @@ public class DateRock : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null && manager != null && manager.active)
         {
-            manager.AddPoints(myPoints);
             mySE.Play();
-            StartCoroutine(DestroyAfterTime(0.5f));
+            StartCoroutine(DisableAfterTime(0.5f));
             GetComponent<BoxCollider>().enabled = false;
             FillStatics();
             GameObject text = Instantiate(dateText, HUD.transform);
+            Gravity grav = text.GetComponent<Gravity>();
+            grav.accel = grav.accel * 2 / 3;
             RectTransform rect = text.GetComponent<RectTransform>();
-            //rect.sizeDelta = new Vector2(150, 40);
+            rect.sizeDelta = new Vector2(200, 80);
             rect.anchoredPosition = new Vector3(0, 88, 0);
             string dateTextA = "<color=";
             if (dateTextColor[0].Equals('#'))
@@ -79,6 +84,14 @@ public class DateRock : MonoBehaviour
             if (myPoints < 0)
             {
                 dateTextA += "! Bad date!";
+                
+            }
+            else if (transform.position.y >= manager.yMax ||
+                transform.position.y <= manager.yMin)
+            {
+                myPoints *= -1;
+                rect.sizeDelta = new Vector2(400, 160);
+                dateTextA += "! Bad date! This rock is from the wrong level!";
             }
             else
             {
@@ -86,12 +99,21 @@ public class DateRock : MonoBehaviour
             }
             dateTextA += "</color>";
             text.GetComponent<TextMeshProUGUI>().text = dateTextA;
+            manager.AddPoints(myPoints);
         }
     }
 
-    private IEnumerator DestroyAfterTime(float secs)
+    private void ReenableOnFinish()
+    {
+        transform.parent.gameObject.SetActive(true);
+        manager.Stopped.RemoveListener(ReenableOnFinish);
+        GetComponent<BoxCollider>().enabled = true;
+    }
+
+    private IEnumerator DisableAfterTime(float secs)
     {
         yield return new WaitForSeconds(secs);
-        Destroy(transform.parent.gameObject);
+        manager.Stopped.AddListener(ReenableOnFinish);
+        transform.parent.gameObject.SetActive(false);
     }
 }

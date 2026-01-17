@@ -15,10 +15,12 @@ public class ClimbingMovement : MonoBehaviour
 
     public float rotSpeed;
 
+    public float climbSpeed;
+
     public LandMovement landMovement;
 
     public CharacterController controller;
-    public Vector2 moveInput;
+    [NonSerialized]public Vector2 moveInput;
 
     public InputActionReference moveRef;
     public InputActionReference sprintRef;
@@ -118,9 +120,8 @@ public class ClimbingMovement : MonoBehaviour
             movement += transform.up * moveInput.y;
         }
         
-        
 
-        controller.Move(movement * Time.deltaTime); //forward movement
+        controller.Move(movement * Time.deltaTime*climbSpeed); //forward movement
 
         if (moveInput.y != 0)
         {

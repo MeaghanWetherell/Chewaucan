@@ -12,7 +12,10 @@ using Random = UnityEngine.Random;
 public class CourseManager : MonoBehaviour
 {
     public static UnityEvent<int> win = new UnityEvent<int>();
+
+    private static LakeLevelData data;
     
+    [Tooltip("Should match the index (0 is first index) of this course's data in the LakeLevelData object")]
     public int levelID;
     
     public CourseTimer timer;
@@ -35,12 +38,17 @@ public class CourseManager : MonoBehaviour
     
     [Tooltip("Number of rocks to spawn")]public int rocksToSpawn;
     
+    [Tooltip("Number of date rocks to spawn at incorrect height")]public int badDateRocksToSpawn;
+    
     [Tooltip("Number of stationary snakes to spawn")]public int stationarySnakeCount;
     
     [Tooltip("Number of moving snakes to spawn")]public int movingSnakeCount;
 
     [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for tuffa/carbonate")]
     public Transform dateRockSpawnLocations;
+    
+    [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations at incorrect height for tuffa/carbonate")]
+    public Transform badDateRockSpawnLocations;
 
     [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for rocks")]
     public Transform rockSpawnLocations;
@@ -58,9 +66,14 @@ public class CourseManager : MonoBehaviour
 
     public List<GameObject> movingSnakePrefab;
 
-    public int dateMax;
+    private int dateMax;
 
-    public int dateMin;
+    private int dateMin;
+
+    public float yMin;
+
+    public float yMax;
+    
 
     [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]public string goodRockTextColor;
 
@@ -76,9 +89,23 @@ public class CourseManager : MonoBehaviour
 
     [NonSerialized]public UnityEvent Stopped = new UnityEvent();
 
+    
+
     private void Start()
     {
+        if (data == null)
+        {
+            data = Resources.Load<LakeLevelData>("PlateauData");
+        }
+        dateMin = data.dateMin[levelID];
+        dateMax = data.dateMax[levelID];
+        yMin = data.yMin[levelID];
+        yMax = data.yMax[levelID];
         foreach (Transform child in dateRockSpawnLocations)
+        {
+            child.gameObject.SetActive(false);
+        }
+        foreach (Transform child in badDateRockSpawnLocations)
         {
             child.gameObject.SetActive(false);
         }
@@ -102,6 +129,14 @@ public class CourseManager : MonoBehaviour
         timer.SetTimer(courseTime);
         timer.timerStopped.AddListener(Reset);
         active = true;
+        GameObject[] allDrs = GameObject.FindGameObjectsWithTag("dateRock");
+        foreach (GameObject rockG in allDrs)
+        {
+            DateRock dr = rockG.GetComponentInChildren<DateRock>();
+            dr.manager = this;
+            Transform rock = dr.transform;
+            setDateAndColorByPosition(rock.position.y, dr);
+        }
         List<Transform> rocks = SpawnItems(dateRockSpawnLocations, tuffaToSpawn, tuffaPrefab);
         foreach (Transform rock in rocks)
         {
@@ -118,6 +153,25 @@ public class CourseManager : MonoBehaviour
             dr.date = Random.Range(0, Int32.MaxValue).ToString();
             dr.dateTextColor = badRockTextColor;
         }
+
+        List<GameObject> tuffaAndCarbo = new List<GameObject>();
+        foreach(GameObject tuffa in tuffaPrefab)
+            tuffaAndCarbo.Add(tuffa);
+        foreach (GameObject carbo in carboPrefab)
+        {
+            tuffaAndCarbo.Add(carbo);
+        }
+
+        if (badDateRockSpawnLocations != null)
+        {
+            rocks = SpawnItems(badDateRockSpawnLocations, badDateRocksToSpawn, tuffaAndCarbo);
+            foreach (Transform rock in rocks)
+            {
+                DateRock dr = rock.GetComponentInChildren<DateRock>();
+                dr.manager = this;
+                setDateAndColorByPosition(dr.transform.position.y, dr);
+            }
+        }
         if(rockSpawnLocations != null)
             SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);
         List<Transform> snakes = SpawnItems(snakeSpawnLocations, stationarySnakeCount, stationarySnakePrefab);
@@ -131,6 +185,47 @@ public class CourseManager : MonoBehaviour
             snake.GetComponentInChildren<SnakeKill>().manager = this;
         }
         Started.Invoke();
+    }
+
+    private void setDateAndColorByPosition(float yPos, DateRock dr)
+    {
+        if (dr.overrideDateMin > 0 && dr.overrideDateMax > 0)
+        {
+            dr.date = Random.Range(dr.overrideDateMin, dr.overrideDateMax).ToString();
+        }
+        if (inRange(yPos, yMin, yMax))
+        {
+            if (dr.myPoints > 0)
+            {
+                dr.dateTextColor = goodRockTextColor;
+                dr.date = Random.Range(dateMin, dateMax).ToString();
+                return;
+            }
+            dr.dateTextColor = badRockTextColor;
+            dr.date = Random.Range(0, Int32.MaxValue).ToString();
+            return;
+        }
+        dr.dateTextColor = badRockTextColor;
+        for (int i = 0; i < data.yMin.Count; i++)
+        {
+            if (inRange(yPos, data.yMin[i], data.yMax[i]))
+            {
+                if (dr.myPoints > 0)
+                {
+                    dr.date = Random.Range(data.dateMin[i], data.dateMax[i]).ToString();
+                    return;
+                }
+                dr.date = Random.Range(0, Int32.MaxValue).ToString();
+                return;
+            }
+        }
+        dr.date = Random.Range(0, Int32.MaxValue).ToString();
+        
+    }
+
+    private bool inRange(float targ, float min, float max)
+    {
+        return targ >= min && targ <= max;
     }
 
     public List<Transform> SpawnItems(Transform spawnLocs, int numToSpawn, List<GameObject> spawnPrefabs, float ymod=0)
@@ -196,6 +291,7 @@ public class CourseManager : MonoBehaviour
         {
             LoadGUIManager.loadGUIManager.InstantiatePopUp("You Lose!",loseMessage);
         }
+        Stopped.Invoke();
         foreach (GameObject obj in spawnedObjects)
         {
             if(obj != null)
@@ -210,7 +306,6 @@ public class CourseManager : MonoBehaviour
         active = false;
         timer.StopTimer();
         courseUI.gameObject.SetActive(false);
-        Stopped.Invoke();
     }
 
     private void Reset(bool val)

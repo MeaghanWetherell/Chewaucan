@@ -8,9 +8,12 @@ public class StartCourseOnTriggerEnter : MonoBehaviour
 {
     private CourseManager manager;
 
+    public Canvas canv;
+
     private void Awake()
     {
         manager = transform.parent.GetComponent<CourseManager>();
+        manager.Stopped.AddListener(Show);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,12 +22,18 @@ public class StartCourseOnTriggerEnter : MonoBehaviour
         {
             if (manager.active)
             {
-                manager.Reset("You went out of bounds!");
+                //manager.Reset("You went out of bounds!");
             }
             else
             {
+                canv.gameObject.SetActive(false);
                 manager.StartCourse();
             }
         }
+    }
+
+    private void Show()
+    {
+        canv.gameObject.SetActive(true);
     }
 }
