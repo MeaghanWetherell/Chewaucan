@@ -21,6 +21,7 @@ public static class PlayFromAnyScene
     {
         if (state == PlayModeStateChange.ExitingEditMode)
         {
+            SetActiveToPlayModeDefault();
             var active = SceneManager.GetActiveScene();
             if (active.path == BootScenePath || active.name.Equals("MainMenuUI"))
             {
@@ -57,17 +58,28 @@ public static class PlayFromAnyScene
         }
     }
 
+    private static void SetActiveToPlayModeDefault()
+    {
+        var activeAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
+        if (activeAsset == null)
+        {
+            Debug.Log("Something went wrong. Couldn't find current scene in assets.");
+            return;
+        }
+        EditorSceneManager.playModeStartScene = activeAsset;
+    }
+
     private static void RestorePrev()
     {
         var prevAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(PlayerPrefs.GetString(scenePath));
+        PlayerPrefs.SetString(namePath, "");
+        PlayerPrefs.SetString(scenePath, "");
         if (prevAsset == null)
         {
             Debug.Log("Couldn't find prev scene");
             return;
         }
         EditorSceneManager.playModeStartScene = prevAsset;
-        PlayerPrefs.SetString(namePath, "");
-        PlayerPrefs.SetString(scenePath, "");
     }
 
     private static void SetActiveScene(Scene scene, LoadSceneMode mode)

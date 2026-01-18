@@ -12,6 +12,8 @@ namespace LoadGUIFolder
     public class LoadGUIManager : MonoBehaviour
     {
         public static LoadGUIManager loadGUIManager;
+
+        public AudioSource menuCloseEffect;
         
         private String GUIName;
 
@@ -185,6 +187,7 @@ namespace LoadGUIFolder
                 ClosePopUp();
                 return false;
             }
+            menuCloseEffect.Play();
             PauseCallback.pauseManager.Resume();
             OnGUIUnload.Invoke(GUIName);
             SceneManager.UnloadSceneAsync(GUIName);

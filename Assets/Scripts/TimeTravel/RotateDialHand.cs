@@ -6,15 +6,15 @@ using UnityEngine.EventSystems;
 public class RotateDialHand : MonoBehaviour
 {
  
-    [SerializeField] private float minRotation = -360f;
+    [SerializeField] private float maxRotation = -410f;
 
-    public float archeologyRotationDefault = 335f;
-    public float geologyRotationDefault = 298f;
-    public float biologyRotationDefault = 228f;
+    private float archeologyRotationDefault = -60f;
+    private float geologyRotationDefault = -60f;
+    private float biologyRotationDefault = -60f;
 
-    [SerializeField] private List<RectTransform> dialHandTransforms = new List<RectTransform>();
+    public List<GameObject> textObjs;
 
-    [SerializeField] private SaveDialProgressData.Dial currentDial;
+    [SerializeField] private List<Transform> dialHandTransforms = new List<Transform>();
 
     private void Start()
     {
@@ -27,47 +27,31 @@ public class RotateDialHand : MonoBehaviour
     private void SetHandsToRotations()
     {
         DialProgress dp = SaveDialProgressData.LoadDialProgress(); //get quest save data
-        float[] defaults = { archeologyRotationDefault, geologyRotationDefault, biologyRotationDefault };
+        float[] defaults = { archeologyRotationDefault, biologyRotationDefault, geologyRotationDefault };
 
         if (dp != null)
         {
-            int[] progresses = { dp.A_progress, dp.G_progress, dp.B_progress };
+            int[] progresses = { dp.A_progress, dp.B_progress, dp.G_progress };
 
             for (int i = 0; i < dialHandTransforms.Count; i++)
             {
                 SaveDialProgressData.Dial dial = (SaveDialProgressData.Dial)i;
                 //Debug.Log(dial.ToString());
 
-                RectTransform hand = dialHandTransforms[i];
+                Transform hand = dialHandTransforms[i];
 
                 float interval = CalculateRotInterval(dial);
 
                 // total rotation = interval * (number of quests completed)
                 float rotationAmount = interval * progresses[i];
-
-                float finalRotation = defaults[i] - rotationAmount;
-
-                Vector3 dialRot = SetDialRotation(hand, finalRotation);
-                hand.rotation = Quaternion.Euler(dialRot);
+                
+                if(progresses[i] > 0)
+                    textObjs[i].SetActive(true);
+                
+                hand.Rotate(new Vector3(0,0,1), rotationAmount);
+                
             }
         }
-        else //sets dial hands to default rotations if there is no save data
-        {
-            for (int i = 0; i < dialHandTransforms.Count; i++)
-            {
-                RectTransform hand = dialHandTransforms[i];
-                //Debug.Log("DEFAULT");
-                Vector3 dialRot = SetDialRotation(hand, defaults[i]);
-                hand.rotation = Quaternion.Euler(dialRot);
-            }
-        }
-    }
-
-    private Vector3 SetDialRotation(RectTransform r, float z)
-    {
-        Vector3 q = Quaternion.Euler(r.rotation.x, r.rotation.y, z).eulerAngles;
-
-        return q;
     }
     
     /* Calculates how much to rotate the dial hand based on the number of quests
@@ -76,22 +60,26 @@ public class RotateDialHand : MonoBehaviour
     private float CalculateRotInterval(SaveDialProgressData.Dial dial)
     {
         int questNum = 0;
+        float add = 0;
         if (dial == SaveDialProgressData.Dial.ARCHEOLOGY)
         {
             questNum = SaveDialProgressData.archeologyQuestNum;
+            add = archeologyRotationDefault;
         }
         else if (dial == SaveDialProgressData.Dial.GEOLOGY)
         {
             questNum = SaveDialProgressData.geologyQuestNum;
+            add = geologyRotationDefault;
         }
         else if (dial == SaveDialProgressData.Dial.BIOLOGY)
         {
             questNum = SaveDialProgressData.biologyQuestNum;
+            add = biologyRotationDefault;
         }
 
         if (questNum == 0) return 0;
         
-        float interval = Mathf.Abs(minRotation/questNum);
+        float interval = (maxRotation-add)/questNum;
         return interval;
     }
 
