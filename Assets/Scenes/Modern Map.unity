@@ -19600,6 +19600,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5395822479363601584, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
   m_PrefabInstance: {fileID: 494028856}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2076698657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2076698658}
+  m_Layer: 0
+  m_Name: BadRockSpawnLocs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2076698658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076698657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1313976960214731076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076732131
 GameObject:
   m_ObjectHideFlags: 0
@@ -20376,6 +20407,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
+      propertyPath: badDateRockSpawnLocations
+      value: 
+      objectReference: {fileID: 2076698658}
+    - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: tuffaPrefab.Array.data[1]
       value: 
       objectReference: {fileID: 8398099307017148391, guid: 4bdb090b98a2ac641aca6bc7a29cc47f, type: 3}
@@ -20458,6 +20493,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1445337247}
+    - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2076698658}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
 --- !u!4 &1313976960214731076 stripped
