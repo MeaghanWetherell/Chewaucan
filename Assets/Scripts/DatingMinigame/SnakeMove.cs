@@ -20,21 +20,22 @@ public class SnakeMove : MonoBehaviour
 
     private Vector3 oldTarget;
 
-    private void Awake()
+    private void OnEnable()
     {
         speed = myAgent.speed;
         SetNewDirection();
         StartCoroutine(SelectNewDirection());
-    }
-
-    private void OnEnable()
-    {
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
     }
 
     private void OnDisable()
     {
+        //Debug.Log("Stopping snake move");
+        StopAllCoroutines();
+        if(myAgent.isActiveAndEnabled)
+            myAgent.SetDestination(transform.position);
+        anim.SetBool("Moving", false);
         PauseCallback.pauseManager.UnsubToPause(OnPause);
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
@@ -43,6 +44,7 @@ public class SnakeMove : MonoBehaviour
     {
         if (myAgent.remainingDistance <= 0.1f)
         {
+            //Debug.Log("Done moving");
             anim.SetBool("Moving", false);
         }
     }
@@ -82,6 +84,7 @@ public class SnakeMove : MonoBehaviour
         anim.SetBool("Moving", true);
         Vector3 point;
         RandomPoint(transform.position, range, out point);
+        //Debug.Log("Target: "+point);
         myAgent.SetDestination(point);
     }
 

@@ -175,15 +175,7 @@ public class CourseManager : MonoBehaviour
         if(rockSpawnLocations != null)
             SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);
         List<Transform> snakes = SpawnItems(snakeSpawnLocations, stationarySnakeCount, stationarySnakePrefab);
-        foreach (Transform snake in snakes)
-        {
-            snake.GetComponentInChildren<SnakeKill>().manager = this;
-        }
         snakes = SpawnItems(snakeSpawnLocations, movingSnakeCount, movingSnakePrefab, snakes);
-        foreach (Transform snake in snakes)
-        {
-            snake.GetComponentInChildren<SnakeKill>().manager = this;
-        }
         Started.Invoke();
     }
 

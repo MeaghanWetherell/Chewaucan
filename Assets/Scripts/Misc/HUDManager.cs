@@ -57,6 +57,18 @@ namespace Misc
             messageText.text = message;
         }
 
+        public void DisplayMessageToHUDForTime(String message, float time)
+        {
+            DisplayMessageToHUD(message);
+            StartCoroutine(CloseMessageAfterTime(time));
+        }
+
+        private IEnumerator CloseMessageAfterTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            CloseMessage();
+        }
+
         public void CloseMessage()
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(false);

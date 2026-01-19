@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class LandMovement : MonoBehaviour
 {
     //a lot of this should really be in PlayerMovementController, but I don't want to refactor Ellie's stuff
-    public float moveSpeed = 5f;
+    public float moveSpeedDefault;
     public float sprintSpeedMultiplier = 1.5f;
     public float maxDistToGround = 1.15f;
     [SerializeField] float rotationSpeed = 4f;
@@ -33,7 +33,7 @@ public class LandMovement : MonoBehaviour
     private float _rotateInput;
     Vector3 _verticalMovement;
     private const float Gravity = -9.18f;
-    [NonSerialized]public float moveSpeedDefault;
+    [NonSerialized]public float moveSpeed = 5f;
     bool _grounded;
     bool _prevGrounded;
     private float moveSpeedMult = 1;
@@ -53,7 +53,7 @@ public class LandMovement : MonoBehaviour
         _terrainTexture = GetComponent<CheckGroundTexture>();
         _verticalMovement = new Vector3(0f, gravity, 0f);
         _moveInput = Vector2.zero;
-        moveSpeedDefault = moveSpeed;
+        moveSpeed = moveSpeedDefault;
         staminaUI.minValue = 0f;
         staminaUI.maxValue = maxStamina;
     }
@@ -90,8 +90,6 @@ public class LandMovement : MonoBehaviour
         sprintRef.action.performed -= OnSprint;
         sprintRef.action.canceled -= OnSprint;
         PauseCallback.pauseManager.UnsubToPause(OnPause);
-        
-        StopAllCoroutines();
     }
 
     private void OnPause()
@@ -110,7 +108,8 @@ public class LandMovement : MonoBehaviour
         _controller.enabled = false;
         while (!rotApproximatelyZero())
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.05f * standRotSpeed);
+            if(!PauseCallback.pauseManager.isPaused)
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 0.05f * standRotSpeed);
             yield return new WaitForSeconds(0.05f);
         }
 
@@ -183,7 +182,12 @@ public class LandMovement : MonoBehaviour
     private IEnumerator _ChangeMoveSpeedMultForTime(float mult, float time)
     {
         moveSpeedMult *= mult;
-        yield return new WaitForSeconds(time);
+        while (time > 0)
+        {
+            if (!PauseCallback.pauseManager.isPaused)
+                time -= 0.05f;
+            yield return new WaitForSeconds(0.05f);
+        }
         moveSpeedMult *= 1/mult;
     }
 

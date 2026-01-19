@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 644001353596949250}
   - component: {fileID: 1245853252393835600}
-  - component: {fileID: 5779528017661904731}
   - component: {fileID: 2191732570604230440}
+  - component: {fileID: 8890457353580562568}
   m_Layer: 0
   m_Name: DeathTrigger
   m_TagString: Untagged
@@ -53,23 +53,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 4.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5779528017661904731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6727276070674139502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5fda93a9ec8fac4fab896cfb2c6e55d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  bite: {fileID: 2191732570604230440}
-  anim: {fileID: 1153079363552590472}
 --- !u!82 &2191732570604230440
 AudioSource:
   m_ObjectHideFlags: 0
@@ -166,6 +151,26 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8890457353580562568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727276070674139502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45d3c79eeca56e478463c2d05eb939b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeedMult: 0.4
+  multDuration: 60
+  bite: {fileID: 2191732570604230440}
+  anim: {fileID: 1153079363552590472}
+  move: {fileID: -3163190411376979405}
+  agent: {fileID: -1260925901074938600}
+  isStationary: 1
+  rot: {fileID: 4243499725232148843}
 --- !u!1 &8365577586091415949
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +181,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8302033305497972831}
   - component: {fileID: 1693432347280525939}
-  - component: {fileID: 2325481572659241140}
   - component: {fileID: 5456719486692290080}
   - component: {fileID: 4243499725232148843}
   m_Layer: 0
@@ -222,19 +226,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 14
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2325481572659241140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8365577586091415949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ee41d3390bd2841be14affe4b6199a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  src: {fileID: 5456719486692290080}
 --- !u!82 &5456719486692290080
 AudioSource:
   m_ObjectHideFlags: 0
@@ -344,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotSpeed: 2
+  move: {fileID: -3163190411376979405}
+  rattle: {fileID: 5456719486692290080}
 --- !u!1 &8967552409460863401
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +351,8 @@ GameObject:
   - component: {fileID: -8533603453956208570}
   - component: {fileID: 2759141236484612968}
   - component: {fileID: 2580679791261675032}
+  - component: {fileID: -1260925901074938600}
+  - component: {fileID: -3163190411376979405}
   m_Layer: 0
   m_Name: StationarySnake
   m_TagString: Untagged
@@ -493,6 +488,44 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!195 &-1260925901074938600
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8967552409460863401}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &-3163190411376979405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8967552409460863401}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d08c73aeadf4834eb8783275841c163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAgent: {fileID: -1260925901074938600}
+  range: 10
+  averageTimeBetweenMoveChange: 20
+  anim: {fileID: 1153079363552590472}
 --- !u!1001 &8274712224613317609
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,11 @@ public class SnakeRotate : MonoBehaviour
     [Tooltip("Angular speed, in radians per second")]
     public float rotSpeed;
 
+    public SnakeMove move;
+
+    public bool isMovingSnake;
+
+    public AudioSource rattle;
     /*
     [Tooltip("The max distance at which the snake should look for the player for rotation")]
     public float dist;
@@ -17,8 +22,10 @@ public class SnakeRotate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null && enabled)
         {
+            rattle.Play();
+            move.enabled = false;
             transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", true);
             StartCoroutine(rotateTowards());
         }
@@ -28,9 +35,18 @@ public class SnakeRotate : MonoBehaviour
     {
         if (other.GetComponent<Player>())
         {
+            rattle.Stop();
             transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", false);
+            move.enabled = isMovingSnake;
             StopAllCoroutines();
         }
+    }
+
+    private void OnDisable()
+    {
+        rattle.Stop();
+        transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", false);
+        StopAllCoroutines();
     }
 
     private IEnumerator rotateTowards()
