@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using QuestSystem;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Misc
 {
@@ -25,6 +26,10 @@ namespace Misc
         public RectTransform questJournalIcon;
 
         public RectTransform mastoBoneRect;
+
+        public GameObject hudOverlayPrefab;
+
+        public GameObject pinField;
 
         private void Awake()
         {
@@ -55,6 +60,64 @@ namespace Misc
         {
             messageText.gameObject.transform.parent.gameObject.SetActive(true);
             messageText.text = message;
+        }
+
+        public void CreateFadingOverlay(Sprite image, float timeOnScreen)
+        {
+            GameObject overlay = Instantiate(hudOverlayPrefab, transform);
+            overlay.transform.SetAsFirstSibling();
+            Image sp = overlay.GetComponent<Image>();
+            sp.sprite = image;
+            StartCoroutine(FadeOverlay(sp, timeOnScreen));
+        }
+
+        private IEnumerator FadeOverlay(Image img, float fadeTime)
+        {
+            float curTime = 0;
+            float alpha = SinInterpVal(curTime, fadeTime);
+            alpha = Mathf.Clamp(alpha, 0, 1);
+            img.color = new Color(img.color.r, img.color.g, img.color.b, alpha);
+            while (curTime < fadeTime)
+            {
+                if (!PauseCallback.pauseManager.isPaused)
+                {
+                    curTime += Time.deltaTime;
+                    alpha = SinInterpVal(curTime, fadeTime);
+                    alpha = Mathf.Clamp(alpha, 0, 1);
+                    img.color = new Color(img.color.r, img.color.g, img.color.b, alpha);
+                }
+                yield return new WaitForSeconds(0);
+            }
+            while (alpha > 0)
+            {
+                if (!PauseCallback.pauseManager.isPaused)
+                {
+                    curTime += Time.deltaTime;
+                    alpha = SinInterpVal(curTime, fadeTime);
+                    alpha = Mathf.Clamp(alpha, 0, 1);
+                    img.color = new Color(img.color.r, img.color.g, img.color.b, alpha);
+                }
+                yield return new WaitForSeconds(0);
+            }
+            Destroy(img.gameObject);
+        }
+
+        private float SinInterpVal(float curTime, float endTime)
+        {
+            float val = 2f / 3;
+            val *= Mathf.PI;
+            val *= curTime;
+            val+= Mathf.PI/2;
+            val = Mathf.Sin(val);
+            val *= 0.4f;
+            float val2 = -0.025f*curTime;
+            val2 = Mathf.Pow(System.MathF.E, val2);
+            val *= val2;
+            val += 0.4f;
+            val2 = 0.5f / (endTime*1.5f);
+            val2 *= curTime;
+            val -= val2;
+            return val;
         }
 
         public void DisplayMessageToHUDForTime(String message, float time)
@@ -109,7 +172,6 @@ namespace Misc
         {
             QuestNode[] pinNodes = QuestManager.questManager.GETPinNodes();
             pinNodes.InsertionSort();
-            GameObject pinField = transform.GetChild(0).gameObject;
             if (pinNodes[0] == null)
             {
                 pinField.SetActive(false);

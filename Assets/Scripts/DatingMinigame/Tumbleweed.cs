@@ -13,7 +13,11 @@ public class Tumbleweed : MonoBehaviour
 
     public float multDuration;
 
+    public Sprite overlay;
+
     public Animator controller;
+
+    public GameObject tumbleweedSoundObj;
 
     private void OnEnable()
     {
@@ -43,6 +47,10 @@ public class Tumbleweed : MonoBehaviour
         if (other.GetComponent<Player>() != null)
         {
             other.gameObject.GetComponent<LandMovement>().ChangeMoveSpeedMultForTime(moveSpeedMult, multDuration);
+            HUDManager.hudManager.DisplayMessageToHUDForTime("You got hit by a tumbleweed! Watch out!", 3);
+            HUDManager.hudManager.CreateFadingOverlay(overlay, multDuration);
+            Player.playerA.PlayAHHH();
+            Instantiate(tumbleweedSoundObj).transform.position = transform.position;
         }
         Destroy(gameObject);
     }

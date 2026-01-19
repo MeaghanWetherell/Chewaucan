@@ -25,6 +25,8 @@ public class SnakeSlow : MonoBehaviour
 
     public SnakeRotate rot;
 
+    public Sprite screenOverlay;
+
     private Vector3 oldPos = Vector3.zero;
 
     private bool canStrike = true;
@@ -51,7 +53,8 @@ public class SnakeSlow : MonoBehaviour
             playerLM = Player.player.GetComponent<LandMovement>();
         playerLM.ChangeMoveSpeedMultForTime(moveSpeedMult, multDuration);
         HUDManager.hudManager.DisplayMessageToHUDForTime("You were bitten by a rattlesnake! Watch out!", 3);
-        
+        HUDManager.hudManager.CreateFadingOverlay(screenOverlay, multDuration);
+        Player.playerA.PlayAHHH();
         if (!isStationary)
         {
             move.enabled = true;
