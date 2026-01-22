@@ -55,6 +55,7 @@ public class SnakeSlow : MonoBehaviour
         HUDManager.hudManager.DisplayMessageToHUDForTime("You were bitten by a rattlesnake! Watch out!", 3);
         HUDManager.hudManager.CreateFadingOverlay(screenOverlay, multDuration);
         Player.playerA.PlayAHHH();
+        SteamAPIManager.UnlockAch("SnakeBiteAchievement");
         if (!isStationary)
         {
             move.enabled = true;

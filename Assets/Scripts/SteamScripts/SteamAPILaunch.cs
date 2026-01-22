@@ -7,13 +7,6 @@ public class SteamAPILaunch : MonoBehaviour
 {
     void Start()
     {
-        try
-        {
-
-        }
-        catch (Exception)
-        {
-            
-        }
+        SteamAPIManager.init();
     }
 }
