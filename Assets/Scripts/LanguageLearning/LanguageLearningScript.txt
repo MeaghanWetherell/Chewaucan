@@ -1,0 +1,27 @@
+#lines starting with # are ignored
+#alt-language text should come first
+# <, |, and > are reserved characters. place a / before them to use as regular characters
+#newlines should not appear in the middle of sentences
+#use <[word]>[word]| to mark words to be translated
+#use <freewordid>[words]| to mark a part of a sentence as free
+Avez vous entendu parler de <mammoth>le mammouth| mort de l'autre cöté <lake>du lac|?
+
+<what>Qu'est-ce qui| l'a <hunt>chassé|? <wolf>Loups|?
+
+<one>Un| <cat>chat|, peut-être?
+
+Il n'en a <many>plus beaucoup|. Est-il <edible>comestible|?
+
+<yes>Oui|. Ils ont ramené <leg>une jambe|. Le reste a été <eat>mangé| par <cat>le chat| ou était trop puant.
+# --break-- indicates the change to english text
+--break--
+
+Did you hear about <mammoth>the dead mammoth| found on the other side <lake>of the lake|?
+
+<what>What| <hunted>hunted| it? <wolf>Wolves|?
+
+<one>A| <cat>cat,| maybe? 
+
+There aren't <many>many of those| left. Is it <edible>edible|?
+
+<yes>Yes|. They took <leg>a leg|. The rest was <eat>eaten| by <cat>a cat| or decomposed.

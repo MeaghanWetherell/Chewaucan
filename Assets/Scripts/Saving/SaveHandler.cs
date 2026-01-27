@@ -132,6 +132,16 @@ public class SaveHandler : MonoBehaviour
         loadRegular.AddListener(load);
     }
 
+    public void unsubToLoad(UnityAction<string> load)
+    {
+        loadRegular.RemoveListener(load);
+    }
+
+    public void unsubToSave(UnityAction<string> save)
+    {
+        saveRegular.RemoveListener(save);
+    }
+
     public void subToSave(UnityAction<string> save)
     {
         saveRegular.AddListener(save);
