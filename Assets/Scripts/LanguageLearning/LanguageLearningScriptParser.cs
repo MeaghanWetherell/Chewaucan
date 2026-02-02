@@ -19,7 +19,7 @@ public static class LanguageLearningScriptParser
         foreach (String rawLine in textS)
         {
             string rl = rawLine.Trim('\r');
-            if (rl.Length > 0 && rl[0].Equals('#'))
+            if ((rl.Length > 0 && rl[0].Equals('#'))||rl.Trim().Length == 0)
             {
                 continue;
             }
@@ -51,10 +51,14 @@ public static class LanguageLearningScriptParser
                     sent += chars[i];
                 }
             }
-            sent += "\n";
-            add = new Sentence();
-            add.ParseSentence(sent, isEnglish);
-            ret[ind].Add(add);
+
+            if (!sent.Trim().Equals(""))
+            {
+                sent += "\n";
+                add = new Sentence();
+                add.ParseSentence(sent, isEnglish);
+                ret[ind].Add(add);
+            }
         }
         return ret;
     }

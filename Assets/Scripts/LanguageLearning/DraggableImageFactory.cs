@@ -6,6 +6,7 @@ using System.Text.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
 {
@@ -19,20 +20,52 @@ public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
 
     public String wordEnglish;
 
-    public Sprite img;
+    public Image myImg;
 
     [NonSerialized]public bool unlockState;
 
     public TextMeshProUGUI altLangText;
 
+    public GameObject altLangAudio;
+
     public TextMeshProUGUI englishText;
 
+    public GameObject engAudio;
+
     public Canvas myCanvas;
+
+    public wordType myWordType;
+
+
+    public enum wordType
+    {
+        Noun,
+        Verb,
+        Adjective,
+        Interrogative,
+        Other
+    }
+
+    public void SetUp(bool unlocked, Canvas canv, DraggableImgData data)
+    {
+        unlockState = unlocked;
+        myCanvas = canv;
+        myImg.sprite = data.img;
+        wordClipAltLang = data.altLangClip;
+        altLangAudio.GetComponent<AudioSource>().clip = data.altLangClip;
+        wordClipEnglish = data.englishClip;
+        engAudio.GetComponent<AudioSource>().clip = data.englishClip;
+        wordAltLang = data.altLangWord;
+        wordEnglish = data.englishWord;
+        myWordType = data.myWordType;
+    }
     
     public void Start()
     {
         altLangText.text = GetAltLangText();
         englishText.text = GetEnglishText();
+        altLangAudio.SetActive(unlockState);
+        engAudio.SetActive(unlockState);
     }
 
     public string GetEnglishText()
@@ -41,10 +74,7 @@ public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
         {
             return "<style=\"LLUnlockedWord\">"+wordEnglish+"</style>";
         }
-        else
-        {
-            return "<style=\"LLLockedWord\">??????</style>";
-        }
+        return "<style=\"LLLockedWord\">??????</style>";
     }
 
     public string GetAltLangText()
@@ -53,10 +83,7 @@ public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
         {
             return "<style=\"LLUnlockedWord\">" + wordAltLang + "</style>";
         }
-        else
-        {
-            return "<style=\"LLLockedWord\">??????</style>";
-        }
+        return "<style=\"LLLockedWord\">??????</style>";
     }
 
     public void Unlock()
@@ -64,6 +91,8 @@ public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
         unlockState = true;
         altLangText.text = GetAltLangText();
         englishText.text = GetEnglishText();
+        altLangAudio.SetActive(true);
+        engAudio.SetActive(true);
     }
 
     public void OnClick()
@@ -72,7 +101,7 @@ public class DraggableImageFactory : MonoBehaviour, IPointerDownHandler
             return;
         GameObject newImg = Instantiate(draggableImagePrefab, myCanvas.transform);
         DraggableImage dImg = newImg.GetComponent<DraggableImage>();
-        dImg.myImg.sprite = img;
+        dImg.myImg.sprite = myImg.sprite;
         dImg.parent = this;
         dImg.myCanvas = myCanvas;
         newImg.transform.position = transform.position;

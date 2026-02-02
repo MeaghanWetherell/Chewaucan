@@ -8,14 +8,18 @@ public class Sentence
     private List<Phrase> sentence = new List<Phrase>();
 
     private static List<char> reservedChars = new List<char> { '<', '>', '|' };
+    
+    private static List<char> sentenceEndChars = new List<char> {'.','?','!'};
 
-    public String GetSentenceVal(List<String> unlockedIds)
+    private bool _isEnglish;
+
+    public (String,bool) GetSentenceVal(HashSet<String> unlockedIds)
     {
         String ret = "";
         bool allUnlocked = true;
         foreach (Phrase p in sentence)
         {
-            if (!unlockedIds.Contains(p.id))
+            if (!unlockedIds.Contains(p.id) && !p.id.Equals("freewordid") && !p.id.Equals(""))
             {
                 allUnlocked = false;
                 break;
@@ -25,15 +29,15 @@ public class Sentence
         {
             ret += p.GetVal(unlockedIds.Contains(p.id) || allUnlocked);
         }
-        return ret;
+        return (ret, allUnlocked || !_isEnglish);
     }
 
     public void ParseSentence(String sent, bool isEnglish)
     {
+        _isEnglish = isEnglish;
         int mode = 0;
         String phrase = "";
         String id = "";
-        bool isPunct = true;
         char[] sentenceSplit = sent.ToCharArray();
         for (int i = 0; i < sentenceSplit.Length; i++)
         {
@@ -50,29 +54,33 @@ public class Sentence
                     mode = 1;
                     if (!phrase.Equals(""))
                     {
-                        sentence.Add(new Phrase(id, phrase, isPunct, isEnglish));
+                        sentence.Add(new Phrase(id, phrase, false, isEnglish));
                         phrase = "";
                         id = "";
-                        isPunct = true;
                     }
                 }
                 else if (sentenceSplit[i].Equals('|'))
                 {
                     if (!phrase.Equals(""))
                     {
-                        sentence.Add(new Phrase(id, phrase, isPunct, isEnglish));
+                        sentence.Add(new Phrase(id, phrase, false, isEnglish));
                         phrase = "";
                         id = "";
-                        isPunct = true;
                     }
+                }
+                else if(sentenceEndChars.Contains(sentenceSplit[i]))
+                {
+                    if (!phrase.Equals(""))
+                    {
+                        sentence.Add(new Phrase(id, phrase, false, isEnglish));
+                        phrase = "";
+                        id = "";
+                    }
+                    sentence.Add(new Phrase(id, sentenceSplit[i].ToString(), true, isEnglish));
                 }
                 else
                 {
                     phrase += sentenceSplit[i];
-                    if (Char.IsLetterOrDigit(sentenceSplit[i]))
-                    {
-                        isPunct = false;
-                    }
                 }
             }
 
@@ -91,7 +99,7 @@ public class Sentence
 
         if (!phrase.Equals(""))
         {
-            sentence.Add(new Phrase(id, phrase, isPunct, isEnglish));
+            sentence.Add(new Phrase(id, phrase, false, isEnglish));
         }
     }
 }
