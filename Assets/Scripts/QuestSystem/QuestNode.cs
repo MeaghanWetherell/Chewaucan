@@ -190,7 +190,7 @@ namespace QuestSystem
             {
                 return;
             }
-            name = data.name;
+            name = data.questName;
             id = data.uniqueID.ToLower();
             type = data.type;
             objectives = data.objectives;
