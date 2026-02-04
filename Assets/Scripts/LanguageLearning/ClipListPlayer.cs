@@ -7,11 +7,29 @@ public class ClipListPlayer : MonoBehaviour
 {
     public AudioSource mySource;
 
+    private List<DragTarget> lastTargets = new List<DragTarget>();
+
+    private List<bool> lastEng;
+
     public void PlayClips(List<AudioClip> clips, List<DragTarget> targets, List<bool> isEnglish)
+    {
+        Stop();
+        lastTargets = targets;
+        lastEng = isEnglish;
+        StartCoroutine(PlayCoroutine(clips, targets, isEnglish));
+    }
+
+    public void Stop()
     {
         mySource.Stop();
         StopAllCoroutines();
-        StartCoroutine(PlayCoroutine(clips, targets, isEnglish));
+        int i = 0;
+        foreach (DragTarget targ in lastTargets)
+        {
+            targ.Dehighlight(lastEng[i]);
+            i++;
+        }
+        lastTargets = new List<DragTarget>();
     }
 
     private IEnumerator PlayCoroutine(List<AudioClip> clips, List<DragTarget> targets, List<bool> isEnglish)

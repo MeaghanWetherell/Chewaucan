@@ -18,6 +18,8 @@ public class DragTarget : MonoBehaviour
     public Image englishHighlight;
 
     public Image altLangHighlight;
+
+    public ClipListPlayer player;
     
     [NonSerialized]public DraggableImageFactory parent;
     
@@ -67,6 +69,7 @@ public class DragTarget : MonoBehaviour
 
     public void SetMyValue(DraggableImage img)
     {
+        player.Stop();
         parent = img.parent;
         mainImg.sprite = parent.myImg.sprite;
         SetText();

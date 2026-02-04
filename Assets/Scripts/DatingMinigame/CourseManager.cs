@@ -150,7 +150,7 @@ public class CourseManager : MonoBehaviour
         {
             DateRock dr = rock.GetComponentInChildren<DateRock>();
             dr.manager = this;
-            dr.date = Random.Range(0, Int32.MaxValue).ToString();
+            dr.date = Random.Range(20000, 50000).ToString();
             dr.dateTextColor = badRockTextColor;
         }
 
@@ -194,7 +194,7 @@ public class CourseManager : MonoBehaviour
                 return;
             }
             dr.dateTextColor = badRockTextColor;
-            dr.date = Random.Range(0, Int32.MaxValue).ToString();
+            dr.date = Random.Range(20000,50000).ToString();
             return;
         }
         dr.dateTextColor = badRockTextColor;
@@ -207,11 +207,11 @@ public class CourseManager : MonoBehaviour
                     dr.date = Random.Range(data.dateMin[i], data.dateMax[i]).ToString();
                     return;
                 }
-                dr.date = Random.Range(0, Int32.MaxValue).ToString();
+                dr.date = Random.Range(20000,50000).ToString();
                 return;
             }
         }
-        dr.date = Random.Range(0, Int32.MaxValue).ToString();
+        dr.date = Random.Range(20000,50000).ToString();
         
     }
 
