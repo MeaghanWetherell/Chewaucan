@@ -55,7 +55,7 @@ public class SaveHandler : MonoBehaviour
             saveSlots = JsonSerializer.Deserialize<List<String>>(File.ReadAllText(Application.persistentDataPath + "/" +
                 metadataSaveLoc + "/saveSlots.json"));
         }
-        else
+        if(saveSlots == null)
         {
             saveSlots = new List<string>();
             saveSlots.Add("Chewaucan/Save 1");
