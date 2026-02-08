@@ -29,6 +29,8 @@ public class BoneChecker : MonoBehaviour
 
     private Quaternion initialRotation; // store the starting rotation
 
+    private Quaternion initialMBoneRot;
+
     private bool waitToStartNarr = false;
 
     private bool suffRot = false;
@@ -45,6 +47,7 @@ public class BoneChecker : MonoBehaviour
         viewer.GetComponent<BoneChecker>().SetBoneScale(viewer.transform.localScale);
         // Save the initial rotation
         initialRotation = viewer.transform.rotation;
+        initialMBoneRot = mBoneViewer.transform.rotation;
         Quaternion offsetRotation = initialRotation * Quaternion.Euler(0f, 90f, 0f); //rotate it 90 degrees
         viewer.transform.rotation = offsetRotation;
         initialRotation = offsetRotation;
@@ -73,16 +76,12 @@ public class BoneChecker : MonoBehaviour
 
         // Track how much the player has rotated relative to starting point, so we know they've played a bit
         float playerRotationAmount = Quaternion.Angle(initialRotation, viewer.transform.rotation);
-
+        float playerRotationAmountMBone = Quaternion.Angle(initialMBoneRot, mBoneViewer.transform.rotation);
 
         //If it is correct
         if (isCorrect) {
-            if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
-            {
-                StartCoroutine(PlayAfterTime(correctBarks[Random.Range(0, correctBarks.Count)], 2));
-            }
             //player rotated it at all
-            if (playerRotationAmount >1f) 
+            if (playerRotationAmount >1f || playerRotationAmountMBone > 1f) 
             {
                 //and the rotation is off by 5 degrees or less
                 if (yDiff < 5f && FlipMatches)
@@ -94,6 +93,10 @@ public class BoneChecker : MonoBehaviour
 
                 } else
                 {
+                    if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
+                    {
+                        StartCoroutine(PlayAfterTime(correctBarks[Random.Range(0, correctBarks.Count)], 2));
+                    }
                     text.text = "This looks like the right bone, but not quite the right position.";
                 }
                    
@@ -104,14 +107,14 @@ public class BoneChecker : MonoBehaviour
             }
 
         } else {
-            if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
-            {
-                StartCoroutine(PlayAfterTime(incorrectBarks[Random.Range(0, incorrectBarks.Count)], 2));
-            }
             //incorrect bone, but the player has rotated it sufficiently
-            if (playerRotationAmount > 120f || suffRot)
+            if (playerRotationAmount > 120f || suffRot || playerRotationAmountMBone > 120f)
             {
                 text.text = "Hmm, this doesn't seem to be the right bone. ";
+                if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
+                {
+                    StartCoroutine(PlayAfterTime(incorrectBarks[Random.Range(0, incorrectBarks.Count)], 0));
+                }
                 if (BoneInteractable.currBone != null)
                 {
                     BoneInteractable.currBone.sendUpdate = true;
@@ -122,8 +125,6 @@ public class BoneChecker : MonoBehaviour
             {
                 text.text = "Rotate the bone to see if it matches yours.";
             }
-
-
         }
 
     }
