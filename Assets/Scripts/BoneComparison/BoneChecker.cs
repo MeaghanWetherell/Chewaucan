@@ -37,6 +37,8 @@ public class BoneChecker : MonoBehaviour
 
     private string boneTitle;
 
+    private QuestNode bpile;
+
     private void Start()
     {
         Instantiate(BoneInteractable.currBone.answerBone, viewer.transform);
@@ -52,6 +54,7 @@ public class BoneChecker : MonoBehaviour
         viewer.transform.rotation = offsetRotation;
         initialRotation = offsetRotation;
         LoadGUIManager.loadGUIManager.SubtoUnload(BoneInteractable.currBone.UpdateQuest);
+        bpile = QuestManager.questManager.GETNode("bonepile");
     }
 
     private IEnumerator PlayAfterTime(Narration.Narration narr, float time)
@@ -87,7 +90,7 @@ public class BoneChecker : MonoBehaviour
                 if (yDiff < 5f && FlipMatches)
                 {
                     text.text = "That's it! Your bone is the distal end of a femur.";
-                    QuestManager.questManager.GETNode("bonepile").AddCount(0);
+                    bpile.AddCount(0);
                     StopAllCoroutines();
                     this.enabled = false;
 
@@ -127,6 +130,10 @@ public class BoneChecker : MonoBehaviour
             }
         }
 
+        if (BoneInteractable.currBone != null && bpile.isUpdateUnlocked(BoneInteractable.currBone.boneName))
+        {
+            text.text = "You've already checked, your bone is not a " + BoneInteractable.currBone.boneName+"!";
+        }
     }
 
     public void SetBoneScale(Vector3 newScale)

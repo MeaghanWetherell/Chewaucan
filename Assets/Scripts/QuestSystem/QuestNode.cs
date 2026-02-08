@@ -142,6 +142,19 @@ namespace QuestSystem
             }
             return false;
         }
+        
+        //get whether the update with the passed title has been unlocked
+        public bool isUpdateUnlocked(string title)
+        {
+            for (int i = 0; i < qUpdateTitles.Count; i++)
+            {
+                if (qUpdateTitles[i].Trim().Equals(title))
+                {
+                    return updateUnlocks[i];
+                }
+            }
+            return false;
+        }
 
         //Unlocks the update at the passed position in the order
         public bool UnlockUpdate(int updateNum)
@@ -159,6 +172,21 @@ namespace QuestSystem
                 CreateUpdatePopUP(updateNum);
             updateUnlocks[updateNum] = true;
             return true;
+        }
+        
+        //get whether the update at the passed index has been unlocked
+        public bool isUpdateUnlocked(int updateNum)
+        {
+            if (updateNum < 0)
+            {
+                return false;
+            }
+            if (updateNum >= updateUnlocks.Count)
+            {
+                Debug.Log("Got invalid unlock number");
+                return false;
+            }
+            return updateUnlocks[updateNum];
         }
         
         //Unlocks the next locked update
