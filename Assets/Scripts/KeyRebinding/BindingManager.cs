@@ -73,6 +73,19 @@ namespace KeyRebinding
             File.WriteAllText(path+"/" + saveFileName + ".json", bindJson);
         }
 
+        public string GetBind(string controlName, int controlIndex = 0)
+        {
+            foreach (InputActionMap map in maps)
+            {
+                foreach (InputAction action in map)
+                {
+                    if (action.name.Equals(controlName))
+                        return action.bindings[0].ToDisplayString();
+                }
+            }
+            return null;
+        }
+
         public void ResetBinds()
         {
             foreach (InputActionMap map in maps)

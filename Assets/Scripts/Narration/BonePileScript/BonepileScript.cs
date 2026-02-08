@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using KeyRebinding;
 using LoadGUIFolder;
 using Narration;
 using QuestSystem;
 using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -102,10 +104,6 @@ public class BonepileScript : MonoBehaviour
                 BP10.SetPlayability(true);
             });
         }
-        
-        
-            
-
         if (scriptSingleton != null)
         {
             Destroy(scriptSingleton.gameObject);
@@ -139,9 +137,15 @@ public class BonepileScript : MonoBehaviour
                     BP12.SetPlayability(true);
                 }});
         }
+        string questKey = BindingManager.bindingManager.GetBind("Quest Menu");
+        string mapKey = BindingManager.bindingManager.GetBind("Open Map");
         BP12.addToOnComplete(new List<UnityAction<string>>
         {
-            str => QuestManager.questManager.CreateQuestNode("match31")
+            str =>
+            {
+                QuestManager.questManager.CreateQuestNode("match31");
+                LoadGUIManager.loadGUIManager.InstantiatePopUp("The tutorial is done!", "You can now explore the map for more clues. When you think you know enough, press "+questKey+" to open the quest menu where you can choose to tell that kid their birthday story and end the game. If you’d like to fast travel, press "+mapKey+" to open the map.");
+            }
         });
     }
     

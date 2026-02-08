@@ -61,7 +61,7 @@ namespace QuestSystem.Quests.QScripts
 
         private void OnComp(string n)
         {
-            HUDManager.hudManager.astrolabeUI.gameObject.SetActive(true);
+            HUDManager.hudManager?.astrolabeUI?.gameObject.SetActive(true);
             v3Wrapper toSerialize = new v3Wrapper(playerPosition);
             string json = JsonSerializer.Serialize(toSerialize);
             string savePath = SaveHandler.saveHandler.getSavePath();
