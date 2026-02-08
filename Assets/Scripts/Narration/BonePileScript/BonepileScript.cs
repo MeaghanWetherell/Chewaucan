@@ -80,17 +80,30 @@ public class BonepileScript : MonoBehaviour
                     wall.gameObject.SetActive(true);
                 }
             }});
-        BP4.addToOnComplete(new List<UnityAction<string>> { s => { 
+        if (!BP4.HasPlayed())
+        {
+            BP4.addToOnComplete(new List<UnityAction<string>> { s => { 
             
-            QuestManager.questManager.CreateQuestNode(bpileQ); 
-            if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
+                QuestManager.questManager.CreateQuestNode(bpileQ); 
+                if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>
+                    {
+                        //Debug.Log("Setting BP10 Playable");
+                        BP10.SetPlayability(true);
+                    }))
+                {
+                    Debug.Log("sub failed");
+                }} });
+        }
+        else if(bpile != null && !bpile.isComplete)
+        {
+            QuestManager.questManager.SubToCompletion("bonepile", toSub =>
             {
                 //Debug.Log("Setting BP10 Playable");
                 BP10.SetPlayability(true);
-            }))
-            {
-                Debug.Log("sub failed");
-            }} });
+            });
+        }
+        
+        
             
 
         if (scriptSingleton != null)

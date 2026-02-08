@@ -13,60 +13,57 @@ namespace QuestSystem
     [Serializable]
     public class QuestNode : IComparable<QuestNode>
     {
+        //Name of the associated quest object
+        public string QObjName;
+        
         //initialization narration
         [NonSerialized]public Narration.Narration startNarration;
-        
-        //name of the init narration obj
-        public string startNarrName;
         
         //completion narration
         [NonSerialized]public Narration.Narration completionNarration;
         
-        //name of the comp narration obj
-        public string compNarrName;
-        
         //name of the quest, used as an identifier, should ensure unique names
-        public string name;
+        [NonSerialized]public string name;
 
         //unique id of the quest
-        public string id;
+        [NonSerialized]public string id;
 
         //short description of the quest
-        public string shortDescription;
+        [NonSerialized]public string shortDescription;
 
         //long description of the quest
-        public string longDescription;
+        [NonSerialized]public string longDescription;
         
         //title for each update
-        public List<string> qUpdateTitles;
+        [NonSerialized]public List<string> qUpdateTitles;
         
         //quest updates
-        public List<string> qUpdates;
+        [NonSerialized]public List<string> qUpdates;
 
         public List<bool> updateUnlocks;
 
         //completion text
-        public string compText;
+        [NonSerialized]public string compText;
 
         //list of the objectives to be completed
-        public List<string> objectives;
+        [NonSerialized]public List<string> objectives;
 
         //list of the required count per objective mapped by index
-        public List<float> requiredCounts;
+        [NonSerialized]public List<float> requiredCounts;
 
         //current count per objective mapped by index
         public List<float> counts = new List<float>();
 
         //default count increment for each objective, mapped by index.
         //initialized to 1 if a value is not received
-        public List<float> countsPerAction;
+        [NonSerialized]public List<float> countsPerAction;
 
         //quest type: Archaeology, Biology, or Geology
-        public SaveDialProgressData.Dial type;
+        [NonSerialized]public SaveDialProgressData.Dial type;
 
         [NonSerialized]public UnityEvent<string> OnComplete = new UnityEvent<string>();
 
-        public List<string> WPUnlockIDs = new List<string>();
+        [NonSerialized]public List<string> WPUnlockIDs = new List<string>();
 
         public bool isComplete = false;
 
@@ -190,12 +187,28 @@ namespace QuestSystem
             {
                 return;
             }
+            QObjName = data.name;
+            updateUnlocks = new List<bool>();
+            InitDVs(data);
+            foreach (string wp in data.OnStartWPIDs)
+            {
+                WPUnlockSerializer.wpUnlockSerializer.Unlock(wp);
+            }
+        }
+
+        //initialize all fields that come from the QObj
+        private void InitDVs(QuestObj data)
+        {
             name = data.questName;
             id = data.uniqueID.ToLower();
             type = data.type;
             objectives = data.objectives;
             ReadDescriptionFile(data.descriptionFile);
             ReadUpdatesFile(data.questUpdatesFile);
+            while (updateUnlocks.Count < qUpdateTitles.Count)
+            {
+                updateUnlocks.Add(false);
+            }
             compText = data.completeFile.ToString();
             requiredCounts = data.countsRequired;
             if (requiredCounts == null)
@@ -215,47 +228,25 @@ namespace QuestSystem
             {
                 countsPerAction.Add(1);
             }
-            for (int i = 0; i < requiredCounts.Count; i++)
+            while (counts.Count < requiredCounts.Count)
             {
                 counts.Add(0);
             }
-
             startNarration = data.receivedNarration;
-            if(startNarration != null)
-                startNarrName = startNarration.name;
-
             completionNarration = data.completeNarration;
-            if(completionNarration != null)
-                compNarrName = completionNarration.name;
             List<string> ids = data.OnCompleteWPIDs;
+            WPUnlockIDs = new List<string>();
             while (WPUnlockIDs.Count < ids.Count)
             {
                 WPUnlockIDs.Add(ids[WPUnlockIDs.Count]);
-            }
-
-            foreach (string wp in data.OnStartWPIDs)
-            {
-                WPUnlockSerializer.wpUnlockSerializer.Unlock(wp);
             }
         }
 
         public void callOnceInitialized()
         {
             OnComplete = new UnityEvent<string>();
-            startNarration = Resources.Load<Narration.Narration>("Objs/"+startNarrName);
-            completionNarration = Resources.Load<Narration.Narration>("Objs/"+compNarrName);
-            if (countsPerAction == null)
-            {
-                countsPerAction = new List<float>();
-            }
-            while (countsPerAction.Count < requiredCounts.Count)
-            {
-                countsPerAction.Add(1);
-            }
-            for (int i = 0; i < requiredCounts.Count; i++)
-            {
-                counts.Add(0);
-            }
+            QuestObj data = Resources.Load<QuestObj>("QObjects/"+QObjName);
+            InitDVs(data);
             QuestManager.questManager.RegisterNode(this);
         }
 
@@ -291,7 +282,6 @@ namespace QuestSystem
         {
             qUpdates = new List<string>();
             qUpdateTitles = new List<string>();
-            updateUnlocks = new List<bool>();
             if (file == null) return;
             string[] fileSplit = FileToStringArr(file);
             string updateTitle = "";
@@ -303,7 +293,6 @@ namespace QuestSystem
                 {
                     qUpdates.Add(update);
                     qUpdateTitles.Add(updateTitle);
-                    updateUnlocks.Add(false);
                     update = "";
                     updateTitle = "";
                     titling = true;
@@ -328,7 +317,6 @@ namespace QuestSystem
             {
                 qUpdateTitles.Add(updateTitle);
                 qUpdates.Add(update);
-                updateUnlocks.Add(false);
             }
         }
 
