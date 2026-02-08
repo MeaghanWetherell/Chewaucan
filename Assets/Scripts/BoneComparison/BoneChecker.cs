@@ -16,6 +16,8 @@ public class BoneChecker : MonoBehaviour
     public GameObject viewer; //The comparison bone from the Bone Pile Quest
     
     public GameObject mBoneViewer; //the mastodon bone
+
+    public float timeBetweenBarks;
     
     public TextMeshProUGUI text;
 
@@ -51,9 +53,12 @@ public class BoneChecker : MonoBehaviour
 
     private IEnumerator PlayAfterTime(Narration.Narration narr, float time)
     {
+        AudioListener.pause = false;
+        waitToStartNarr = true;
         yield return new WaitForSeconds(time);
-        waitToStartNarr = false;
         narr.Begin();
+        yield return new WaitForSeconds(Mathf.Max(0, timeBetweenBarks - time));
+        waitToStartNarr = false;
     }
 
     // Update is called once per frame
@@ -74,8 +79,6 @@ public class BoneChecker : MonoBehaviour
         if (isCorrect) {
             if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
             {
-                AudioListener.pause = false;
-                waitToStartNarr = true;
                 StartCoroutine(PlayAfterTime(correctBarks[Random.Range(0, correctBarks.Count)], 2));
             }
             //player rotated it at all
@@ -103,8 +106,6 @@ public class BoneChecker : MonoBehaviour
         } else {
             if (!SoundManager.soundManager.narrator.isPlaying && !waitToStartNarr)
             {
-                AudioListener.pause = false;
-                waitToStartNarr = true;
                 StartCoroutine(PlayAfterTime(incorrectBarks[Random.Range(0, incorrectBarks.Count)], 2));
             }
             //incorrect bone, but the player has rotated it sufficiently
