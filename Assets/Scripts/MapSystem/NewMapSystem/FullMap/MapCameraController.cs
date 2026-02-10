@@ -16,6 +16,7 @@ public class MapCameraController : MonoBehaviour
 
     public InputActionReference mapZoomRef;
     public InputActionReference switchToWorldRef;
+    public InputActionReference esc;
 
     private Vector3 clickOrigin;
     private bool isSlowing = false;
@@ -24,12 +25,14 @@ public class MapCameraController : MonoBehaviour
     {
         mapZoomRef.action.performed += MapZoom;
         switchToWorldRef.action.performed += SwitchToWorldScene;
+        esc.action.performed += SwitchToWorldScene;
     }
 
     private void OnDisable()
     {
         mapZoomRef.action.performed -= MapZoom;
         switchToWorldRef.action.performed -= SwitchToWorldScene;
+        esc.action.performed -= SwitchToWorldScene;
     }
 
     // Start is called before the first frame update

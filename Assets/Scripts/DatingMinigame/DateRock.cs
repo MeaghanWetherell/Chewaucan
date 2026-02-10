@@ -26,7 +26,7 @@ public class DateRock : MonoBehaviour
 
     public float scaleMaxZ;
 
-    public string dateTextColor = "white";
+    [NonSerialized]public string dateTextColor = "white";
 
     [NonSerialized]public string date;
 

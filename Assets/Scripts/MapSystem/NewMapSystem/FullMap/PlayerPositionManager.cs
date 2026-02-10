@@ -32,6 +32,10 @@ public class PlayerPositionManager : MonoBehaviour
     private List<bool> nextPlayerMoveType = new List<bool>() {true, true};
 
     private PlayerMovementController _movementController;
+
+    //the purpose of this flag is to stop update from finding the player's position
+    //on the frame a load is triggered, which overwrites the position on a loaded save file
+    private bool sceneDirtyFlag = false;
     
     public void Reset()
     {
@@ -53,6 +57,12 @@ public class PlayerPositionManager : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         SaveHandler.saveHandler.subToSave(Save);
         SaveHandler.saveHandler.subToLoad(Load);
+        SaveHandler.saveHandler.subToNewGame(NG);
+    }
+
+    private void NG(string path)
+    {
+        sceneDirtyFlag = true;
     }
 
     private void Load(string path)
@@ -119,7 +129,7 @@ public class PlayerPositionManager : MonoBehaviour
 
     private void Update()
     {
-        if (Player.player != null)
+        if (Player.player != null && !sceneDirtyFlag)
         {
             GameObject player = Player.player;
             if (_movementController == null)
@@ -129,7 +139,7 @@ public class PlayerPositionManager : MonoBehaviour
                 setPlayerPosition(player.transform.position, 0);
                 nextPlayerMoveType[0] = _movementController.isWalkingOrClimbing();
             }
-            else
+            else if(SceneLoadWrapper.sceneLoadWrapper.pleistoceneMapScenes.Contains(SceneManager.GetActiveScene().name))
             {
                 setPlayerPosition(player.transform.position, 1);
                 nextPlayerMoveType[1] = _movementController.isWalkingOrClimbing();
@@ -157,5 +167,6 @@ public class PlayerPositionManager : MonoBehaviour
                 move.enabled = nextPlayerMoveType[SceneLoadWrapper.sceneLoadWrapper.currentSceneType];
             }
         }
+        sceneDirtyFlag = false;
     }
 }

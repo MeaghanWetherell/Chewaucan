@@ -33,6 +33,8 @@ public class SaveHandler : MonoBehaviour
 
     private UnityEvent<string> saveSettings = new UnityEvent<string>();
 
+    private UnityEvent<string> newGame = new UnityEvent<string>();
+
     private bool loadImmediately;
 
     private Coroutine timeTracker;
@@ -158,6 +160,16 @@ public class SaveHandler : MonoBehaviour
         saveSettings.AddListener(save);
     }
 
+    public void subToNewGame(UnityAction<string> ng)
+    {
+        newGame.AddListener(ng);
+    }
+
+    public void unsubToNewGame(UnityAction<string> ng)
+    {
+        newGame.RemoveListener(ng);
+    }
+
     public void setSavePath(string path)
     {
         if (checkPath())
@@ -241,6 +253,7 @@ public class SaveHandler : MonoBehaviour
         setSavePath(path);
         timePlayed = 0;
         StartTimer();
+        newGame.Invoke(path);
     }
 
     public void VersionConversion(string fileVersion)

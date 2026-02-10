@@ -46,6 +46,11 @@ namespace QuestSystem
                     longDescTMP.text += newNode.qUpdates[i];
                 }
             }
+
+            if (newNode.isComplete)
+            {
+                longDescTMP.text += newNode.compText;
+            }
             TextMeshProUGUI text = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
             text.text = "";
             for (int i = 0; i < newNode.objectives.Count; i++)

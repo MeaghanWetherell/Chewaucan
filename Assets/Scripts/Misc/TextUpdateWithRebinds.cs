@@ -52,6 +52,7 @@ public class TextUpdateWithRebinds : MonoBehaviour
                 }
                 if (ch2 != '>')
                 {
+                    newText += '>';
                     charNum = initCharNum;
                     continue;
                 }

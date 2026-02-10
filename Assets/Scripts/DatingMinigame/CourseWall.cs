@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Misc;
 using ScriptTags;
 using Unity.Mathematics;
 using UnityEngine;
@@ -60,7 +61,8 @@ public class CourseWall : MonoBehaviour
         {
             float randSecs = Random.Range(averageTimeToSpawn * 0.5f, averageTimeToSpawn * 1.5f);
             yield return new WaitForSeconds(randSecs);
-            SpawnTumbleweed();
+            if(!PauseCallback.pauseManager.isPaused)
+                SpawnTumbleweed();
         }
     }
 

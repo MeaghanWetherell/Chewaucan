@@ -70,9 +70,9 @@ public class CourseManager : MonoBehaviour
 
     private int dateMin;
 
-    public float yMin;
+    [NonSerialized]public float yMin;
 
-    public float yMax;
+    [NonSerialized]public float yMax;
     
 
     [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]public string goodRockTextColor;
