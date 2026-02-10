@@ -71,6 +71,8 @@ namespace QuestSystem
 
         public static GameObject qUpdatePopUp;
 
+        public bool isMainQuest = false;
+
         //adds the passed count to the count for the objective at index
         //returns true if the quest is complete, false otherwise
         public bool AddCount(int index, float toAdd = 0.0f)
@@ -387,6 +389,10 @@ namespace QuestSystem
             if (name.Equals(other.name))
             {
                 return 0;
+            }
+            if (isMainQuest && !other.isMainQuest)
+            {
+                return -1;
             }
             if (isPinned && !other.isPinned)
             {

@@ -173,7 +173,7 @@ namespace QuestSystem
                 StreamReader streamReader;
                 try
                 {
-                    streamReader = new StreamReader(path+"/SavedQuests.txt");
+                    streamReader = new StreamReader(path + "/SavedQuests.txt");
                     line = streamReader.ReadLine();
                     if (line != null)
                     {
@@ -188,9 +188,19 @@ namespace QuestSystem
                     }
 
                     streamReader.Close();
+                    if (GETNode("MainQuest") == null)
+                    {
+                        QuestObj obj = Resources.Load<QuestObj>("QObjects/MainQuest");
+                        QuestNode main = CreateQuestNode(obj);
+                        main.isMainQuest = true;
+                    }
                 }
                 catch (Exception)
-                { return; }
+                {
+                    QuestObj obj = Resources.Load<QuestObj>("QObjects/MainQuest");
+                    QuestNode main = CreateQuestNode(obj);
+                    main.isMainQuest = true;
+                }
                 if (allQuestFiles.Equals(""))
                     return;
                 string[] files = allQuestFiles.Split(" ");
@@ -211,6 +221,12 @@ namespace QuestSystem
                         AddPin(quest);
                     }
                 }
+            }
+            else
+            {
+                QuestObj obj = Resources.Load<QuestObj>("QObjects/MainQuest");
+                QuestNode main = CreateQuestNode(obj);
+                main.isMainQuest = true;
             }
         }
 

@@ -186,14 +186,14 @@ namespace Misc
                 {
                     pin.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "";
                     pin.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = "";
-                    pin.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "";
+                    //pin.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = "";
                 }
                 else
                 {
                     pin.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = cur.name;
                     //removed so objectives don't get compressed
                     //pin.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = cur.shortDescription;
-                    TextMeshProUGUI text = pin.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI text = pin.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
                     text.text = "";
                     for (int j = 0; j < cur.objectives.Count; j++)
                     {

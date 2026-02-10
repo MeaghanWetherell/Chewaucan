@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using QuestSystem;
 using ScriptTags;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ public class StartCourseOnTriggerEnter : MonoBehaviour
             {
                 canv.gameObject.SetActive(false);
                 manager.StartCourse();
+                QuestManager.questManager.GETNode("PlateauQuest").UnlockUpdate(0);
             }
         }
     }

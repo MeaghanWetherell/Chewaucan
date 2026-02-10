@@ -51,6 +51,7 @@ namespace QuestSystem.Quests.QScripts
                     J2.SetPlayability(false);
                 }
                 QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
+                QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
             }
             for (int i = 0; i < lvls.Count; i++)
             {
