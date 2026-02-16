@@ -28,9 +28,23 @@ public static class SteamAPIManager
     {
         if (!connected) return false;
         var ach = new Steamworks.Data.Achievement(id);
-        ach.Trigger();
-        return true;
+        return ach.Trigger();
     }
 
+    public static float GetProg(string id)
+    {
+        if (!connected) return -1;
+        var stat = new Steamworks.Data.Stat(id);
+        var ret = stat.GetFloat();
+        return ret;
+    }
 
+    public static bool SetProg(string id, float set)
+    {
+        if (!connected) return false;
+        var stat = new Steamworks.Data.Stat(id);
+        var ret = stat.Set(set);
+        stat.Store();
+        return ret;
+    }
 }

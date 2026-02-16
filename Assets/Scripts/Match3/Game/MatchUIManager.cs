@@ -58,7 +58,6 @@ namespace Match3
             if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count)
             {
                 buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num;
-                MatchLevelManager.matchLevelManager.levelsComplete[num-1] = true;
             }
             else
             {

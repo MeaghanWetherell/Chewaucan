@@ -8,7 +8,7 @@ namespace Match3.Game
 
         private void Awake()
         {
-            MatchLevelManager.matchLevelManager.LoadLevelTesting(level);
+            MatchLevelManager.matchLevelManager.LoadLevelTesting(level-1);
         }
     }
 }

@@ -1497,6 +1497,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mammothBody: {fileID: 524641937}
+--- !u!1 &222332574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 222332576}
+  - component: {fileID: 222332575}
+  m_Layer: 0
+  m_Name: FallOffAch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &222332575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222332574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d156873336f2ed146b6d2b0a779888dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &222332576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222332574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 546.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &224201397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1881,6 +1925,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8e0ec30792a1ef045bd52a3c24bc9af5, type: 3}
   m_PrefabInstance: {fileID: 324780754}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &334927093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 334927095}
+  - component: {fileID: 334927094}
+  m_Layer: 0
+  m_Name: DeerfliesAch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &334927094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334927093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47cbe4cc203a1074ab1db9796b39ff8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deerflyNarration: {fileID: 11400000, guid: ddb2a524bd3f7b54499f1f64902f804e, type: 2}
+--- !u!4 &334927095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334927093}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -307.87952, y: 12.365535, z: 345.83237}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &342296131
 GameObject:
   m_ObjectHideFlags: 0
@@ -4703,7 +4792,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1168971307}
   - component: {fileID: 1168971306}
-  - component: {fileID: 1168971308}
   - component: {fileID: 1168971309}
   - component: {fileID: 1168971310}
   m_Layer: 0
@@ -4742,21 +4830,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1168971308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168971305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 304898a751473a949a6c340358eebceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapObj: {fileID: 0}
-  hideMapRef: {fileID: 1234179045230633567, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
-  fullMapViewRef: {fileID: -4852545399476511214, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
 --- !u!114 &1168971309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6682,7 +6755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6759632794014674864, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7887563650297604325, guid: 9848c13778c09d54c86cbda85c8e98ee, type: 3}
       propertyPath: m_Name
@@ -7518,3 +7591,5 @@ SceneRoots:
   - {fileID: 1418835938}
   - {fileID: 1124729466}
   - {fileID: 521545097}
+  - {fileID: 334927095}
+  - {fileID: 222332576}

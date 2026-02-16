@@ -62,6 +62,15 @@ namespace Match3
                 highScores = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path+"/"+highScoreFileName+".json"));
             }
             catch (IOException){ highScores = new List<float>(); }
+
+            float highScore = SteamAPIManager.GetProg("MatchHighscore");
+            foreach (float score in highScores)
+            {
+                if (score > highScore)
+                {
+                    SteamAPIManager.SetProg("MatchHighscore", score);
+                }
+            }
             
             // ReSharper disable once PossibleNullReferenceException
             while(highScores.Count < levels.Count)
@@ -102,11 +111,19 @@ namespace Match3
             else
             {
                 OnComplete.Invoke(curIndex);
+                levelsComplete[curIndex] = true;
                 MatchUIManager.matchUIManager.Win(reason);
                 if (curIndex < highScores.Count-1)
                 {
-                    if(ScoreTracker.scoreTracker.score > highScores[curIndex])
+                    if (ScoreTracker.scoreTracker.score > highScores[curIndex])
+                    {
                         highScores[curIndex] = ScoreTracker.scoreTracker.score;
+                    }
+
+                    if (ScoreTracker.scoreTracker.score > SteamAPIManager.GetProg("MatchHighscore"))
+                    {
+                        SteamAPIManager.SetProg("MatchHighscore", ScoreTracker.scoreTracker.score);
+                    }
                 }
                 else
                 {
