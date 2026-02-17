@@ -25,18 +25,31 @@ namespace Match3
         private void Awake()
         {
             scoreTracker = this;
+            score = 0;
             scoreRequired = MatchLevelManager.matchLevelManager.GETCurLevel().scoreReq;
             if (scoreRequired < 1 || MatchLevelManager.matchLevelManager.HasCurLevelBeenCompleted())
             {
                 _isReq = true;
-                text.text = "Score: 0"+"\n"+GetHighScoreText();
+                SetScoreText(true);
             }
             else
             {
-                text.text = "Score: 0" + "/" + scoreRequired;
+                SetScoreText();
                 _isReq = false;
             }
-            
+        }
+
+        public void SetScoreText(bool hs=false)
+        {
+            text.text = "Score\n<style=\"Title\"><style=\"M3\">"+ score+"</style></style>\n";
+            if (hs)
+            {
+                text.text += GetHighScoreText();
+            }
+            else
+            {
+                text.text += "out of\n<style=\"H3\"><style=\"M3\">" + scoreRequired + "</style></style>";
+            }
         }
 
         //computes score for a certain count, adds it, and displays it
@@ -53,10 +66,10 @@ namespace Match3
             }
             if (_isReq)
             {
-                text.text = "Score: " + score+"\n"+GetHighScoreText();
+                SetScoreText(true);
                 return;
             }
-            text.text = "Score: " + score +"/"+scoreRequired;
+            SetScoreText();
             if (score >= scoreRequired)
             {
                 MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
@@ -69,10 +82,10 @@ namespace Match3
             score += addScore;
             if (_isReq)
             {
-                text.text = "Score: " + score+"\n"+GetHighScoreText();
+                SetScoreText(true);
                 return;
             }
-            text.text = "Score: " + score + "/" + scoreRequired;
+            SetScoreText();
             if (score >= scoreRequired)
             {
                 MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
@@ -81,7 +94,7 @@ namespace Match3
 
         private string GetHighScoreText()
         {
-            return "High Score: " + MatchLevelManager.matchLevelManager.GetHighscore();
+            return "High Score\n<style=\"H2\"><style=\"M3\">" + MatchLevelManager.matchLevelManager.GetHighscore()+"</style></style>";
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Match3
                 yield return new WaitForSeconds(0.1f);
                 if (paused) continue;
                 timeLeft += 0.1f;
-                text.text = "Time: " + ((int) timeLeft) + "s";
+                text.text = "Time:\n" + ((int) timeLeft) + "s";
             }
         }
         
