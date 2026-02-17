@@ -53,7 +53,7 @@ together.1 <- rast(together)
 
 
 # The Modern Map
-Because the modern map has no latke, it has a higher number of elevation breaks.
+Because the modern map has no lake, it has a higher number of elevation breaks.
 ```{r}
 mybreaks = c(-Inf, 330, seq(2000, 22000, by = 2000))
 
@@ -65,7 +65,7 @@ ggplot()+
   theme_void() +
   theme(legend.position = "none")
 
-ggsave("/Scripts/MapSystem/NewMapSystem/Modern_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
+ggsave("NewMapSystem/Modern_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
 ```
 
 
@@ -82,7 +82,7 @@ ggplot()+
   theme_void() +
   theme(legend.position = "none")
 
-ggsave("/Scripts/MapSystem/NewMapSystem/Pleistocene_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
+ggsave("NewMapSystem/Pleistocene_Map_Detailed_Update.png", dpi = 72, width = 1800, height = 1800, units = "px")
 ```
 
 
