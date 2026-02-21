@@ -5,7 +5,7 @@ using Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MinimizeQUpdatePopUp : PopUpOnClick
+public class MinimizeQUpdatePopUp : PopUpManager
 {
     public RectTransform mainImgRectTransform;
 

@@ -9,12 +9,6 @@ using UnityEngine.Events;
 
 public class GameEndScript : MonoBehaviour
 {
-    public TextMeshProUGUI archaeologyScore;
-
-    public TextMeshProUGUI biologyScore;
-
-    public TextMeshProUGUI geologyScore;
-
     public TextMeshProUGUI overallScore;
 
     public TextMeshProUGUI rating;
@@ -39,12 +33,6 @@ public class GameEndScript : MonoBehaviour
         
         DialProgress prog = SaveDialProgressData.LoadDialProgress();
         int[] countsPerType = QuestManager.questManager.CountsPerQuestType;
-
-        archaeologyScore.text = prog.A_progress + "/" + countsPerType[0];
-        
-        biologyScore.text = prog.B_progress + "/" + countsPerType[1];
-        
-        geologyScore.text = prog.G_progress + "/" + countsPerType[2];
 
         int overallCompletions = prog.A_progress + prog.B_progress + prog.G_progress;
         int overallCount = countsPerType[0] + countsPerType[1] + countsPerType[2];

@@ -33,8 +33,6 @@ public class BoneRotater : MonoBehaviour
 
         private bool _mouseDown;
 
-        private Vector2 _lastMousePos;
-
         private Vector3 _orbitAngle;
 
         public bool isEnabled = false;
@@ -43,15 +41,17 @@ public class BoneRotater : MonoBehaviour
         
         private bool playingRotateSound = false;
 
+        private Vector2 diff = Vector2.zero;
+
+        private float dt = 0;
+
         public void StartUp()
         {
             _mouseDown = true;
-            _lastMousePos = mousePos.action.ReadValue<Vector2>();
         }
 
         private void Awake()
         {
-            _lastMousePos = mousePos.action.ReadValue<Vector2>();
             cam = GetComponent<Camera>();
         }
         
@@ -77,6 +77,8 @@ public class BoneRotater : MonoBehaviour
         private void ONClickDown(InputAction.CallbackContext callbackContext)
         {
             _mouseDown = true;
+            diff = Vector2.zero;
+            dt = 0;
         }
 
         private void ONClickUp(InputAction.CallbackContext callbackContext)
@@ -101,11 +103,14 @@ public class BoneRotater : MonoBehaviour
                         playingRotateSound = true;
                         rotateSound?.Play();
                     }
-                    Vector2 diff = mousePos.action.ReadValue<Vector2>()-_lastMousePos;
-                    if (diff.x > 0.75f)
+                    diff += mousePos.action.ReadValue<Vector2>();
+                    dt += Time.deltaTime;
+                    if (Mathf.Abs(diff.x) > 1.5f)
                     {
-                        float yRot = xFudge * diff.x * Time.deltaTime * 1000;
+                        float yRot = xFudge * diff.x * dt * 1000;
                         bone.transform.Rotate(Vector3.up, yRot);
+                        diff = Vector2.zero;
+                        dt = 0;
                     }
                 }
                 else
@@ -113,7 +118,6 @@ public class BoneRotater : MonoBehaviour
                     playingRotateSound = false;
                     rotateSound?.Stop();
                 }
-                _lastMousePos = mousePos.action.ReadValue<Vector2>();
                 if (canScroll)
                 {
                     float delta = scroll.action.ReadValue<Vector2>().y;

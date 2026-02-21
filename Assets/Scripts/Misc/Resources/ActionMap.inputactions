@@ -185,6 +185,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EndGame",
+                    "type": "Value",
+                    "id": "e2fb77ab-1a77-41ff-9353-5b8e2152c823",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -702,6 +711,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "EndClimb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30602580-2db9-44e1-953d-503b883ba379",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "EndGame",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

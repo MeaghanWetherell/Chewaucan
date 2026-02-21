@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -270,7 +269,7 @@ GameObject:
   - component: {fileID: 67045767}
   - component: {fileID: 67045766}
   - component: {fileID: 67045765}
-  - component: {fileID: 67045764}
+  - component: {fileID: 67045768}
   m_Layer: 5
   m_Name: EndGame
   m_TagString: Untagged
@@ -298,19 +297,6 @@ RectTransform:
   m_AnchoredPosition: {x: -240.85, y: -148.92}
   m_SizeDelta: {x: 291.57, y: 60.747}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &67045764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67045762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab48e997d7f1af46adc5004db7d761d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toLoad: GameEnd
 --- !u!114 &67045765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,9 +341,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 67045764}
-        m_TargetAssemblyTypeName: LoadSceneOnClick, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 67045768}
+        m_TargetAssemblyTypeName: LoadGameEnd, Assembly-CSharp
+        m_MethodName: End
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -405,6 +391,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67045762}
   m_CullTransparentMesh: 1
+--- !u!114 &67045768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67045762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e0a1bc89d38eb48bd50909dc9dadbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eg: {fileID: 0}
 --- !u!1 &234894923
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,20 +923,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   node:
-    startNarrName: 
-    compNarrName: 
-    name: 
-    id: 
-    shortDescription: 
-    longDescription: 
-    compText: 
-    objectives: []
-    requiredCounts: []
+    QObjName: 
+    updateUnlocks: 
     counts: []
-    countsPerAction: []
-    type: 0
     isComplete: 0
     isPinned: 0
+    isMainQuest: 0
 --- !u!1 &992748704
 GameObject:
   m_ObjectHideFlags: 0

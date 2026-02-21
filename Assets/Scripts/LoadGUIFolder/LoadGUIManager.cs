@@ -18,13 +18,13 @@ namespace LoadGUIFolder
         private String GUIName;
 
         private List<GameObject> popUps = new List<GameObject>();
-
-        private List<List<UnityAction<string>>> popUpEvents = new List<List<UnityAction<string>>>();
         
         //store a ref to the HUD object
         private GameObject _hud;
 
         private GameObject popUp;
+
+        private GameObject YNPopUp;
 
         private UnityEvent<string> OnGUIUnload = new UnityEvent<string>();
         
@@ -60,6 +60,7 @@ namespace LoadGUIFolder
                 return;
             }
             popUp = Resources.Load<GameObject>("PopUp");
+            YNPopUp = Resources.Load<GameObject>("YNPopup");
             loadGUIManager = this;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -83,16 +84,48 @@ namespace LoadGUIFolder
             }
         }
 
+        public void InstantiateYNPopUp(string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
+            List<UnityAction<string>> onPopUpClosed = null)
+        {
+            GameObject window = Instantiate(YNPopUp);
+            if (onPopUpClosed == null)
+                onPopUpClosed = new List<UnityAction<string>>();
+            YNPopUpManager manager = window.GetComponent<YNPopUpManager>();
+            manager.SetText(title, msg, decText, confText);
+            manager.index = popUps.Count;
+            foreach (UnityAction<string> act in onPopUpClosed)
+            {
+                manager.onClose.AddListener(act);
+            }
+            foreach (UnityAction<string> conf in onConfirm)
+            {
+                manager.onConfirm.AddListener(conf);
+            }
+            window.GetComponent<Canvas>().sortingOrder += popUps.Count;
+            popUps.Add(window);
+            OnGUILoad.Invoke(title);
+            if (Player.player != null)
+            {
+                cacheCamLook = Player.player.gameObject.GetComponent<CameraLook>();
+                if(cacheCamLook!= null)
+                    cacheCamLook.OnPause();
+            }
+        }
+
         public void InstantiatePopUp(String title, String msg, List<UnityAction<string>> onPopUpClosed = null)
         {
             GameObject window = Instantiate(popUp);
             if (onPopUpClosed == null)
                 onPopUpClosed = new List<UnityAction<string>>();
-            window.GetComponent<PopUpTextManager>().SetText(title, msg);
-            window.GetComponent<PopUpOnClick>().index = popUps.Count;
+            PopUpManager manager = window.GetComponent<PopUpManager>();
+            manager.SetText(title, msg);
+            manager.index = popUps.Count;
+            foreach (UnityAction<string> act in onPopUpClosed)
+            {
+                manager.onClose.AddListener(act);
+            }
             window.GetComponent<Canvas>().sortingOrder += popUps.Count;
             popUps.Add(window);
-            popUpEvents.Add(onPopUpClosed);
             OnGUILoad.Invoke(title);
             if (Player.player != null)
             {
@@ -112,11 +145,15 @@ namespace LoadGUIFolder
             if (onPopUpClosed == null)
                 onPopUpClosed = new List<UnityAction<string>>();
             GameObject window = inPopUp;
-            window.GetComponent<PopUpTextManager>().SetText(popUpName, msg);
-            window.GetComponent<PopUpOnClick>().index = popUps.Count;
+            PopUpManager manager = window.GetComponent<PopUpManager>();
+            manager.SetText(popUpName, msg);
+            manager.index = popUps.Count;
+            foreach (UnityAction<string> act in onPopUpClosed)
+            {
+                manager.onClose.AddListener(act);
+            }
             window.GetComponent<Canvas>().sortingOrder += popUps.Count;
             popUps.Add(inPopUp);
-            popUpEvents.Add(onPopUpClosed);
             OnGUILoad.Invoke(popUpName);
             if (Player.player != null)
             {
@@ -129,13 +166,9 @@ namespace LoadGUIFolder
         public void RegisterPopUpClose()
         {
             if (popUps.Count == 0) return;
-            string title = popUps[popUps.Count - 1].GetComponent<PopUpTextManager>().title;
+            string title = popUps[popUps.Count - 1].GetComponent<PopUpManager>().title;
             OnGUIUnload.Invoke(title);
             popUps.RemoveAt(popUps.Count-1);
-            List<UnityAction<string>> events = popUpEvents[^1];
-            foreach(UnityAction<string> pEvent in events)
-                pEvent.Invoke(title);
-            popUpEvents.RemoveAt(popUpEvents.Count - 1);
             if (!isGUIOpen() && popUps.Count == 0)
             {
                 if(cacheCamLook != null)
@@ -154,13 +187,9 @@ namespace LoadGUIFolder
 
         public void RegisterPopUpClose(int index)
         {
-            string title = popUps[index].GetComponent<PopUpTextManager>().title;
+            string title = popUps[index].GetComponent<PopUpManager>().title;
             OnGUIUnload.Invoke(title);
             popUps.RemoveAt(index);
-            List<UnityAction<string>> events = popUpEvents[index];
-            foreach(UnityAction<string> pEvent in events)
-                pEvent.Invoke(title);
-            popUpEvents.RemoveAt(index);
             if (!isGUIOpen() && popUps.Count == 0)
             {
                 if(cacheCamLook != null)
