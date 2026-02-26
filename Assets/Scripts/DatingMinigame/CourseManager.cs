@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using LoadGUIFolder;
 using ScriptTags;
 using TMPro;
@@ -89,6 +90,8 @@ public class CourseManager : MonoBehaviour
 
     [NonSerialized]public UnityEvent Stopped = new UnityEvent();
 
+    [Tooltip("Background music to play during the game")]public List<AudioClip> bgm;
+
     
 
     private void Start()
@@ -129,6 +132,8 @@ public class CourseManager : MonoBehaviour
         timer.SetTimer(courseTime);
         timer.timerStopped.AddListener(Reset);
         active = true;
+        SoundManager.soundManager.SetBGM(bgm);
+        Player.player.GetComponentInChildren<RandomAmbientSound>().enabled = false;
         GameObject[] allDrs = GameObject.FindGameObjectsWithTag("dateRock");
         foreach (GameObject rockG in allDrs)
         {
@@ -289,10 +294,10 @@ public class CourseManager : MonoBehaviour
             if(obj != null)
                 Destroy(obj);
         }
-        Player.player.GetComponent<CharacterController>().enabled = false;
         Player.player.transform.position = startPosition.position;
         Player.player.transform.eulerAngles = startPosition.eulerAngles;
-        Player.player.GetComponent<CharacterController>().enabled = true;
+        Player.player.GetComponentInChildren<RandomAmbientSound>().enabled = true;
+        SoundManager.soundManager.StopBGM();
         curPoints = 0;
         AddPoints(0);
         active = false;

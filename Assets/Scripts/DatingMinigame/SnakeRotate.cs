@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using Misc;
 using ScriptTags;
 using UnityEngine;
@@ -15,16 +16,19 @@ public class SnakeRotate : MonoBehaviour
     public bool isMovingSnake;
 
     public AudioSource rattle;
-    /*
-    [Tooltip("The max distance at which the snake should look for the player for rotation")]
-    public float dist;
-    */
+
+    [Tooltip("The degree by which to quiet the BGM while the sound plays")]
+    public float BGMAttenuation;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null && enabled)
         {
             rattle.Play();
+            if (!SoundManager.soundManager.IsMuted(2))
+            {
+                SoundManager.soundManager.StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(rattle, BGMAttenuation));
+            }
             move.enabled = false;
             transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", true);
             StartCoroutine(rotateTowards());

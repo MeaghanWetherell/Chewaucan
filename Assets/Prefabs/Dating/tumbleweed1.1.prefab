@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1620068667855414808, guid: 2882879c7091645c18177965f1fc2016, type: 3}
+  - {fileID: 2100000, guid: d31c54cfee7cc7c49bc26e583aa9037e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,6 +157,9 @@ MonoBehaviour:
   overlay: {fileID: 21300000, guid: 2ad3da0b72ffa354888d84fb6597dddc, type: 3}
   controller: {fileID: 581454153997768871}
   tumbleweedSoundObj: {fileID: 1797475773855796227, guid: 78e9daf8159736943bccfb48d8e02b24, type: 3}
+  lifetime: 12
+  cullTime: 8
+  tumbleweedRenderer: {fileID: 3090150451029689504}
 --- !u!135 &176978180442007671
 SphereCollider:
   m_ObjectHideFlags: 0

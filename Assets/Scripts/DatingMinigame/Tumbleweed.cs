@@ -18,15 +18,26 @@ public class Tumbleweed : MonoBehaviour
     public Animator controller;
 
     public GameObject tumbleweedSoundObj;
+    
+    [Tooltip("Length of time before the tumbleweed fades out")]
+    public float lifetime;
+
+    [Tooltip("Time to fade out after lifetime expires")]
+    public float cullTime;
+
+    public MeshRenderer tumbleweedRenderer;
+
 
     private void OnEnable()
     {
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
+        StartCoroutine(Lifetime());
     }
 
     private void OnDisable()
     {
+        StopAllCoroutines();
         PauseCallback.pauseManager.UnsubToPause(OnPause);
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
@@ -39,6 +50,27 @@ public class Tumbleweed : MonoBehaviour
     private void OnResume()
     {
         controller.speed = 1;
+    }
+
+    private IEnumerator Lifetime()
+    {
+        while (lifetime > 0)
+        {
+            if (!PauseCallback.pauseManager.isPaused)
+                lifetime -= 0.05f;
+            yield return new WaitForSeconds(0.05f);
+        }
+        float curCullTime = 0;
+        while (curCullTime < cullTime)
+        {
+            curCullTime += 0.05f;
+            float val = Mathf.Lerp(255, 0, curCullTime / cullTime);
+            //Debug.Log(val);
+            Color temp = tumbleweedRenderer.material.color;
+            tumbleweedRenderer.material.color = new Color(temp.r, temp.g, temp.b, val);
+            yield return new WaitForSeconds(0.05f);
+        }
+        Destroy(gameObject);
     }
     
 

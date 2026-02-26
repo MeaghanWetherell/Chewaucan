@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using Misc;
 using ScriptTags;
 using UnityEditor;
@@ -27,6 +28,8 @@ public class SnakeSlow : MonoBehaviour
 
     public Sprite screenOverlay;
 
+    [Tooltip("Degree by which to quiet background music while playing sound")] public float BGMAttenuation;
+
     private Vector3 oldPos = Vector3.zero;
 
     private bool canStrike = true;
@@ -47,6 +50,10 @@ public class SnakeSlow : MonoBehaviour
         canStrike = false;
         anim.SetBool("Strike", true);
         bite.Play();
+        if (!SoundManager.soundManager.IsMuted(2))
+        {
+            StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(bite, BGMAttenuation));
+        }
         yield return new WaitForSeconds(0.2f);
         anim.SetBool("Strike", false);
         if (playerLM == null)

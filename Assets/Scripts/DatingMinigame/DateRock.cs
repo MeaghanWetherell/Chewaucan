@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Audio;
 using ScriptTags;
 using TMPro;
 using UnityEngine;
@@ -34,6 +35,8 @@ public class DateRock : MonoBehaviour
 
     [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMax;
 
+    [Tooltip("Degree to which to quiet the background music while the sound effect plays")]public float BGMAttenuation;
+
     private static GameObject dateText;
 
     private static GameObject HUD;
@@ -62,6 +65,10 @@ public class DateRock : MonoBehaviour
         if (other.GetComponent<Player>() != null && manager != null && manager.active)
         {
             mySE.Play();
+            if (!SoundManager.soundManager.IsMuted(2))
+            {
+                StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation));
+            }
             StartCoroutine(DisableAfterTime(0.5f));
             GetComponent<BoxCollider>().enabled = false;
             FillStatics();
