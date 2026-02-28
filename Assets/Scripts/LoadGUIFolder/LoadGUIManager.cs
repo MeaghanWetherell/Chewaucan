@@ -111,6 +111,34 @@ namespace LoadGUIFolder
                     cacheCamLook.OnPause();
             }
         }
+        
+        public void InstantiateYNPopUp(GameObject inPopUp, string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
+            List<UnityAction<string>> onPopUpClosed = null)
+        {
+            GameObject window = inPopUp;
+            if (onPopUpClosed == null)
+                onPopUpClosed = new List<UnityAction<string>>();
+            YNPopUpManager manager = window.GetComponent<YNPopUpManager>();
+            manager.SetText(title, msg, decText, confText);
+            manager.index = popUps.Count;
+            foreach (UnityAction<string> act in onPopUpClosed)
+            {
+                manager.onClose.AddListener(act);
+            }
+            foreach (UnityAction<string> conf in onConfirm)
+            {
+                manager.onConfirm.AddListener(conf);
+            }
+            window.GetComponent<Canvas>().sortingOrder += popUps.Count;
+            popUps.Add(window);
+            OnGUILoad.Invoke(title);
+            if (Player.player != null)
+            {
+                cacheCamLook = Player.player.gameObject.GetComponent<CameraLook>();
+                if(cacheCamLook!= null)
+                    cacheCamLook.OnPause();
+            }
+        }
 
         public void InstantiatePopUp(String title, String msg, List<UnityAction<string>> onPopUpClosed = null)
         {
