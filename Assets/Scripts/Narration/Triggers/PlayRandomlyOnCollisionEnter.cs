@@ -9,8 +9,8 @@ namespace Narration.Triggers
     public class PlayRandomlyOnCollisionEnter : MonoBehaviour, IControllerCollisionEnter
     {
         public List<Narration> clips;
-
-        private static float timeBetweenPlays = 10f;
+        
+        public float timeBetweenPlays = 10f;
 
         private static bool waitForNextPlay;
 
