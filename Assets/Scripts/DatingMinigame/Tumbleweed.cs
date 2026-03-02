@@ -26,6 +26,9 @@ public class Tumbleweed : MonoBehaviour
     public float cullTime;
 
     public MeshRenderer tumbleweedRenderer;
+    
+    public Material transMat;
+    
 
 
     private void OnEnable()
@@ -60,11 +63,13 @@ public class Tumbleweed : MonoBehaviour
                 lifetime -= 0.05f;
             yield return new WaitForSeconds(0.05f);
         }
+
+        tumbleweedRenderer.material = transMat;
         float curCullTime = 0;
         while (curCullTime < cullTime)
         {
             curCullTime += 0.05f;
-            float val = Mathf.Lerp(255, 0, curCullTime / cullTime);
+            float val = Mathf.Lerp(1, 0, curCullTime / cullTime);
             //Debug.Log(val);
             Color temp = tumbleweedRenderer.material.color;
             tumbleweedRenderer.material.color = new Color(temp.r, temp.g, temp.b, val);
