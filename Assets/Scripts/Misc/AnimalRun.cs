@@ -98,13 +98,13 @@ public class AnimalRun : MonoBehaviour
 
         animalRenderer.material = opaqueMat;
         myAgent.ResetPath();
-        transform.parent.gameObject.SetActive(false);
         transform.parent.position = pos;
-        yield return new WaitForSeconds(TimeToRespawn);
-        Respawn();
+        AmbientAnimalRespawner.respawner.StartCoroutine(
+            AmbientAnimalRespawner.respawner.Respawn(this, TimeToRespawn));
+        transform.parent.gameObject.SetActive(false);
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         trigger.enabled = true;
         transform.parent.gameObject.SetActive(true);
