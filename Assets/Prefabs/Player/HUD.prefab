@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 6746165886695721208}
   - component: {fileID: 5706348967436788690}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: KeyGlyph for End Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -694, y: -48.23999}
+  m_AnchoredPosition: {x: -504.00003, y: -59.23987}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &138470104126059173
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 5045292770309476030}
   - component: {fileID: 7595922264856051456}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Dial Key Glyph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 8541048069883859230}
   - component: {fileID: 59556602276856995}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: KeyGlyph for Quest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1077,6 +1077,43 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4438350892956169942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8080274770723493340}
+  m_Layer: 5
+  m_Name: Map UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8080274770723493340
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438350892956169942}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.57889193, y: 0.57889193, z: 0.57889193}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8460754038407293508}
+  - {fileID: 6565303413151853573}
+  m_Father: {fileID: 2086186347050925831}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -829, y: 421.00003}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4529186717481741675
 GameObject:
@@ -1349,7 +1386,7 @@ GameObject:
   - component: {fileID: 199548050714864472}
   - component: {fileID: 2552586939542056018}
   m_Layer: 5
-  m_Name: Dial
+  m_Name: Astrolabe Dial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1373,7 +1410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -588.0001, y: -48}
+  m_AnchoredPosition: {x: -371, y: -59}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.49999994, y: 0.5}
 --- !u!222 &199548050714864472
@@ -1404,7 +1441,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d5726f4fc8ab08641a6170382a1db8b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 527d466c987754cd197f0603a453f3e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1666,7 +1703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -800, y: -48.23999}
+  m_AnchoredPosition: {x: -230, y: -59.23987}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8172224708027041261
@@ -1697,7 +1734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 83ceb8f8b85c84713a78644cfc41e5d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1719,7 +1756,7 @@ GameObject:
   - component: {fileID: 4797806725664066174}
   - component: {fileID: 6958740646870629672}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: KeyGlyph for Mastobone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2027,7 +2064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -906, y: -48.23999}
+  m_AnchoredPosition: {x: -86, y: -59.23987}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8036246462925808073
@@ -2058,7 +2095,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 04f92c03f36634e3598a456d0a2d5f58, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2081,7 +2118,7 @@ GameObject:
   - component: {fileID: 6498443523891314495}
   - component: {fileID: 2793332316968213634}
   m_Layer: 5
-  m_Name: Mask
+  m_Name: MiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2096,17 +2133,17 @@ RectTransform:
   m_GameObject: {fileID: 6759632794014674864}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5788919, y: 0.5788919, z: 0.5788919}
+  m_LocalScale: {x: 0.62877, y: 0.62877, z: 0.62877}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7552863489604787847}
   - {fileID: 3610224254949626289}
   - {fileID: 494717622110241476}
-  m_Father: {fileID: 2086186347050925831}
+  m_Father: {fileID: 8080274770723493340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -175}
+  m_AnchoredPosition: {x: 50, y: -66.705}
   m_SizeDelta: {x: 600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3030042042185161520
@@ -2172,7 +2209,7 @@ GameObject:
   - component: {fileID: 2758366071799836119}
   - component: {fileID: 5771843697826469889}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Key Glyph for Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,15 +2224,15 @@ RectTransform:
   m_GameObject: {fileID: 7225647834592026507}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7274382, y: 1.7274382, z: 1.7274382}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2838303112939794265}
-  m_Father: {fileID: 2086186347050925831}
+  m_Father: {fileID: 8080274770723493340}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1571.3324, y: 555.9985}
+  m_AnchoredPosition: {x: 98, y: -112}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2758366071799836119
@@ -2273,14 +2310,13 @@ RectTransform:
   - {fileID: 3307189423260865424}
   - {fileID: 3307724799897966538}
   - {fileID: 1265135638418207500}
+  - {fileID: 8080274770723493340}
   - {fileID: 6901230805485499398}
-  - {fileID: 637892860426999980}
-  - {fileID: 1035166965858663530}
-  - {fileID: 6565303413151853573}
-  - {fileID: 8460754038407293508}
   - {fileID: 7493626316658901605}
   - {fileID: 6617523304533768675}
   - {fileID: 7253705930891792293}
+  - {fileID: 637892860426999980}
+  - {fileID: 1035166965858663530}
   - {fileID: 3290608585361563038}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
