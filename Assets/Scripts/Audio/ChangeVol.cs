@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 namespace Audio
 {
+    //This script automatically sets a slider's value to reflect the value currently in settings. Attach the set level function to the 
+    //slider value changed event to update with the slider.
     public class ChangeVol : MonoBehaviour
     {
-        [Tooltip("The index in the vol list this slider should change. In order: master, music, effects, narration")]
+        [Tooltip("The index in the vol list this slider should change. In order: master, narration, music, effects")]
         public int index;
 
         private void OnEnable()

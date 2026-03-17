@@ -18,13 +18,11 @@ namespace Audio
     {
         public static SoundManager soundManager;
 
-        [Tooltip("Prefab reference to the subtitle shower")] public GameObject subtitlePrefab;
-
         [Tooltip("Ref to BGM audio source")] public AudioSource bgm;
 
         [Tooltip("Ref to narration audio source")] public AudioSource narrator;
 
-        [Tooltip("Standard volume of sounds")] public float standVol;
+        [Tooltip("Standard volume of sounds. Percentage from 0 to 1.0")] public float standVol;
 
         [Tooltip("Reference to the master mixer")] public AudioMixer mainMixer;
 
@@ -51,29 +49,23 @@ namespace Audio
         //currently running narr
         private Narration.Narration currNarr;
 
+        //stores the end times for each line of subtitles
         private List<float> currentSubTimes;
 
+        //stores the lines, in order of display, for the subtitles, matching by index to the end times in the above
         private List<string> currentSubLines;
 
+        //reference to the subtitle text display
         private TextMeshProUGUI subtitleViewer;
 
         //whether the most recent narration finished
         private bool narrFinished = true;
 
+        //reference to a coroutine that checks whether narration has finished playing
         private Coroutine waitforcomp;
 
+        //reference to a coroutine that controls the subtitle display
         private Coroutine runSubs;
-
-        public void ClearSoundManager()
-        {
-            if(waitforcomp != null) StopCoroutine(waitforcomp);
-            if(runSubs != null)StopCoroutine(runSubs);
-            narrator.Stop();
-            narrFinished = true;
-            currNarr = null;
-            currentSubTimes = null;
-            currentSubLines = null;
-        }
 
         //plays a clip through the narration source
         //will run any actions in onComplete after the narration finishes
@@ -163,7 +155,8 @@ namespace Audio
         //invoke all actions that need to be invoked on narration complete
         private void InvokeNarrComplete()
         {
-            StopCoroutine(waitforcomp);
+            if(waitforcomp != null)
+                StopCoroutine(waitforcomp);
             if (HUDManager.hudManager != null)
             {
                 if (HUDManager.hudManager.skipBG != null)
@@ -179,6 +172,7 @@ namespace Audio
             currNarr.InvokeOnComplete();
         }
 
+        //handles the changing the subtitle display over time, running through the set currentSubLines and currentSubTimes arrays
         private IEnumerator RunSubtitles()
         {
             subtitleViewer.text = currentSubLines[0];
@@ -194,29 +188,12 @@ namespace Audio
             subtitleViewer.text = "";
         }
 
-        //checks every frame to see if narration has finished
+        //checks every frame to see if narration has finished, running completion code when it is
         private IEnumerator WaitForNarrationComplete()
         {
             while (true)
             {
-                //Debug.Log(narrator.isPlaying);
-                //Debug.Log(AudioListener.pause);
-                //Debug.Log(waiting);
-                //Debug.Log(narrFinished);
                 if (!narrator.isPlaying && !AudioListener.pause && !waiting && !narrFinished)
-                {
-                    InvokeNarrComplete();
-                }
-                yield return new WaitForSeconds(0);
-            }
-        }
-        
-        //checks every frame to see if narration has finished
-        private IEnumerator WaitForNarrationComplete(List<float> times, List<string> lines, TextMeshProUGUI text)
-        {
-            while (true)
-            {
-                if (!narrator.isPlaying && !AudioListener.pause && !PauseCallback.pauseManager.isPaused && !waiting && !narrFinished)
                 {
                     InvokeNarrComplete();
                 }
@@ -227,7 +204,7 @@ namespace Audio
         //set up singleton and start corountines
         private void Awake()
         {
-            //set relative volume of the bgm and narrator. is not on log scale
+            //set relative volume of the bgm and narrator. is not on log scale, rather it is a percentage.
             bgm.volume = standVol;
             narrator.volume = standVol;
             sliderVals ??= new List<float>();
@@ -258,6 +235,7 @@ namespace Audio
             PauseCallback.pauseManager.SubscribeToResume(SubtitleResume);
         }
 
+        //Loads the user's volume and subtitles settings from file.
         private void Load(string path)
         {
             StopAllCoroutines();
@@ -280,6 +258,7 @@ namespace Audio
             }
         }
 
+        //save volume and subtitle settings to file
         private void Save(string path)
         {
             StopAllCoroutines();
@@ -317,7 +296,7 @@ namespace Audio
             return (sliderVals[index] < 0.01f || sliderVals[0] < 0.01f);
         }
         
-        //change the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects, 3 for narration)
+        //change the volume of the parameter at the passed index (0 for master, 1 for narration, 2 for music, 3 for effects)
         public void SetVol(int index, float vol)
         {
             sliderVals[index] = vol;
@@ -325,13 +304,13 @@ namespace Audio
             mainMixer.SetFloat(volParams[index], ConvertToLogScale(sliderVals[index]));
         }
 
-        //get the volume of the parameter at the passed index (0 for master, 1 for music, 2 for effects, 3 for narration)
+        //get the volume of the parameter at the passed index (0 for master, 1 for narration, 2 for music, 3 for effects)
         public float GetVol(int index)
         {
             return sliderVals[index];
         }
 
-        //set the track list for the current area's background music
+        //set the track list for the current background music
         public void SetBGM(List<AudioClip> clips)
         {
             BGMClips = clips;
@@ -346,7 +325,7 @@ namespace Audio
             bgm.Stop();
         }
 
-        //plays a random song from the list
+        //plays a random song from the BGM list
         private void PlayNewSong()
         {
             bgm.Stop();

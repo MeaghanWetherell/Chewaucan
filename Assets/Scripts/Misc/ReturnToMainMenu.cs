@@ -8,7 +8,7 @@ public class ReturnToMainMenu : MonoBehaviour
 {
     public void OnClick()
     {
-        SoundManager.soundManager.ClearSoundManager();
+        SoundManager.soundManager.StopNarration();
         PlayerPositionManager.playerPositionManager.Reset();
         SaveHandler.saveHandler.Save();
         SceneManager.LoadScene(0);
