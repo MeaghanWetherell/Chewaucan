@@ -10,6 +10,8 @@ namespace Narration.Journal
 {
     public class ClipPlayer : MonoBehaviour
     {
+        private static ClipPlayer curPlayer;
+        
         public Narration clip;
 
         public Sprite playSprite;
@@ -40,14 +42,17 @@ namespace Narration.Journal
         {
             if (playing)
             {
-                StopListener("");
+                StopAudio("");
                 GetComponent<Image>().sprite = playSprite;
             }
             else
             {
+                if(curPlayer != null && curPlayer.playing)
+                    curPlayer.OnButtonPress();
                 GetComponent<Image>().sprite = stopSprite;
                 AudioListener.pause = false;
                 clip.Begin(new List<UnityAction<string>>() {StopListener});
+                curPlayer = this;
             }
             playing = !playing;
         }

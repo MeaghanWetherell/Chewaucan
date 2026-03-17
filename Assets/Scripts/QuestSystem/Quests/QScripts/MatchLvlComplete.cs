@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Audio;
+using LoadGUIFolder;
 using Match3;
 using Misc;
 using Narration;
@@ -45,13 +46,14 @@ namespace QuestSystem.Quests.QScripts
         {
             if (lvl == 0)
             {
+                /* deprecated
                 if (J2.GetPlayability())
                 {
                     J2.Begin();
                     J2.SetPlayability(false);
                 }
                 QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
-                QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
+                 */
             }
             for (int i = 0; i < lvls.Count; i++)
             {
@@ -62,7 +64,7 @@ namespace QuestSystem.Quests.QScripts
                         return;
                     target.AddCount(0, 1);
                     
-                    if (lvl == 1)
+                    if (lvl == 0)
                     {
                         if (J3.GetPlayability())
                         {
@@ -74,8 +76,9 @@ namespace QuestSystem.Quests.QScripts
                             string savePath = SaveHandler.saveHandler.getSavePath();
                             File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
+                            LoadGUIManager.loadGUIManager.SubToTopPopUp(str => {SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map"); });
+                            QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
                         }
-                        
                     }
                     if (lvl == 3)
                     {
