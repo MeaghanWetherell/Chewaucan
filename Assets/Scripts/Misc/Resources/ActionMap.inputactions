@@ -151,10 +151,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "FlipBone",
+                    "name": "Flip Bone",
                     "type": "Button",
                     "id": "03aec262-bfe4-4162-863a-f4f77e0cf3f4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -169,16 +169,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "OpenMastoBone",
+                    "name": "Open Bone UI",
                     "type": "Button",
                     "id": "a18f7bd2-1e12-4224-a956-c91cf5505cc0",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EndClimb",
+                    "name": "Stop Climbing",
                     "type": "Button",
                     "id": "d8993ff3-bce9-4d60-b871-1ae3977ef9e5",
                     "expectedControlType": "",
@@ -187,7 +187,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EndGame",
+                    "name": "End Game",
                     "type": "Value",
                     "id": "e2fb77ab-1a77-41ff-9353-5b8e2152c823",
                     "expectedControlType": "",
@@ -677,7 +677,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "FlipBone",
+                    "action": "Flip Bone",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -699,7 +699,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "OpenMastoBone",
+                    "action": "Open Bone UI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -710,7 +710,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "EndClimb",
+                    "action": "Stop Climbing",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -721,7 +721,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "EndGame",
+                    "action": "End Game",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

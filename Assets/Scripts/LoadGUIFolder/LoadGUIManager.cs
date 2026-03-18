@@ -84,6 +84,20 @@ namespace LoadGUIFolder
             }
         }
 
+        public bool SubToTopPopUp(UnityAction<string> toSub)
+        {
+            if (popUps.Count < 1) return false;
+            GameObject pUp = popUps[^1];
+            PopUpManager manager = pUp.GetComponent<PopUpManager>();
+            if(manager != null)
+                manager.onClose.AddListener(toSub);
+            else
+            {
+                return false;
+            }
+            return true;
+        }
+
         public void InstantiateYNPopUp(string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
             List<UnityAction<string>> onPopUpClosed = null)
         {

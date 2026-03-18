@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Audio;
 using UnityEngine;
 
+//provides access to the SoundManager subtitle on/off methods.
 public class SetSubtitles : MonoBehaviour
 {
     public void ChangeSubtitles()

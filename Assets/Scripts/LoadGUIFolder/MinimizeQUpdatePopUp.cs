@@ -19,6 +19,7 @@ public class MinimizeQUpdatePopUp : PopUpManager
         {
             StartCoroutine(Minimize());
             clicked = true;
+            onClose.Invoke(title);
             LoadGUIManager.loadGUIManager.RegisterPopUpClose(index);
         }
     }
