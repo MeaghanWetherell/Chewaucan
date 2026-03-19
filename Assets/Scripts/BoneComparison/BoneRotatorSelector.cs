@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class BoneRotatorSelector : MonoBehaviour
 {
-    public RectTransform img1;
+    [Tooltip("Image of the compare bone")]public RectTransform img1;
     
-    public RectTransform img2;
+    [Tooltip("Image of the mastodon bone")]public RectTransform img2;
 
-    public BoneRotater rot1;
+    [Tooltip("Ref to the rotator script for the compare bone")]public BoneRotater rot1;
     
-    public BoneRotater rot2;
+    [Tooltip("Ref to the rotator script for the mastodon bone")]public BoneRotater rot2;
 
     [Tooltip("Mouse position vector2 from input sys")]public InputActionReference mousePos;
 
@@ -27,6 +27,7 @@ public class BoneRotatorSelector : MonoBehaviour
         clicked.action.started -= OnClick;
     }
     
+    //When the player clicks on the image of a bone, activate its bone rotator
     private void OnClick(InputAction.CallbackContext context)
     {
         Vector2 clickPos = mousePos.action.ReadValue<Vector2>();

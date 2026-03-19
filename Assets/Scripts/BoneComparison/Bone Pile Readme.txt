@@ -11,19 +11,20 @@ It uses the following packages:
 	Unity UI (Version 1.0.0)
 Input System (Version 1.7.0)
 		TextMeshPro (Version 3.0.6)
-	It relies on scripts from the LoadGUIFolder, QuestSystem, and Misc folders.
 
 General Description
 This is a complete game system that relies on the player finding objects, clicking on them, then rotating them to compare to a second object.
-There are several scripts that are directly associated with this system:
+Scripts and dependencies for the system are as follows:
 	BoneComparison/BoneInteractable.cs
 	BoneComparison/BoneChecker.cs 
 	BoneComparison/BoneRotatorSelector.cs 
 	Interactabes/Interactable.cs
 	Interactables/InteractListenManager.cs
 	Interactables/InteractRaycaster.cs
+	LoadGUI/LoadGUIManager
 	Misc/BoneRotator
 	Misc/IListener.cs
+	QuestSystem/QuestManager.cs and dependencies
 	
 
 There are several assets associated with this system:
@@ -53,7 +54,7 @@ BoneRotatorSelector.cs
 This allows the user to choose between rotating the mastodon femur and the bone they chose
 
 
-InteractListenerManager.cs & InteractRaycaster
+InteractListenerManager.cs & InteractRaycaster.cs
 Both components are attached to the Player object. The latter determines if the player is looking at an interactable object, while the former calls methods on the appropriate object when the player presses the interact key
 
 

@@ -14,10 +14,13 @@ public class CourseTimer : MonoBehaviour
 
     private bool paused = true;
 
+    [Tooltip("Ref to the time display text")]
     public TextMeshProUGUI text;
 
-    public UnityEvent<bool> timerStopped;
+    //called with true when the timer runs out, false when it stops otherwise    
+    [NonSerialized]public UnityEvent<bool> timerStopped = new UnityEvent<bool>();
 
+    //inits the time with the passed time
     public void SetTimer(float time)
     {
         currentTime = time;
@@ -25,18 +28,18 @@ public class CourseTimer : MonoBehaviour
         text.gameObject.SetActive(true);
         SetText();
     }
-
+    
     public void StopTimer()
     {
         StopTimer(false);
     }
     
+    //stops the timer, invokes timerStopped
     private void StopTimer(bool status)
     {
         text.gameObject.SetActive(false);
         paused = true;
         timerStopped.Invoke(status);
-        timerStopped = new UnityEvent<bool>();
     }
 
     private void Update()

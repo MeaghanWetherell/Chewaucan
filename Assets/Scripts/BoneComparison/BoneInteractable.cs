@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using LoadGUIFolder;
@@ -7,25 +8,31 @@ using UnityEngine.SceneManagement;
 
 public class BoneInteractable : Interactable
 {
-    public GameObject defaultBone; //this is the bone the player sees in the modern map scene
+    [Tooltip("This is the bone the player sees normally in the modern map scene")]public GameObject defaultBone; 
 
-    public GameObject outlinedBone; //set this object's layer to outlinedBone
+    [Tooltip("Reference to the outlined version of the bone")]public GameObject outlinedBone; //set this object's layer to outlinedBone
 
-    public GameObject answerBone; //this is the answer key bone
+    [Tooltip("Reference to the answer bone prefab")]public GameObject answerBone; 
 
-    public bool isCorrect;
+    [Tooltip("Whether this is the target bone")]public bool isCorrect;
 
-    public string boneName;
+    [Tooltip("The name of the bone")]public string boneName;
 
-    public AudioSource pickupAudio;
+    [Tooltip("Audio source that should play when the bone is picked up")]public AudioSource pickupAudio;
 
+    //singleton ref
     public static BoneInteractable currBone;
 
-    public bool sendUpdate = false;
+    //whether the script should send a quest update when the menu closes. set by the bonechecker script
+    [NonSerialized]public bool sendUpdate = false;
 
+    //stores whether this script is currently subscribed as an interact listener
     private bool subbed = false;
+    
+    //main light in the modern map
     private Light mainDirectionalLight;
     
+    //when the bone comparison scene is closed, update the bonepile quest if applicable
     public void UpdateQuest(string guiName)
     {
         if (guiName.Equals("BoneComparison"))
@@ -37,6 +44,7 @@ public class BoneInteractable : Interactable
         }
     }
     
+    //called when a raycast from the interact raycaster hits this object. outlines the bone if the bonepile is not complete
     public override void OnInteractEnable()
     {
         QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
@@ -48,6 +56,7 @@ public class BoneInteractable : Interactable
         }
     }
 
+    //disables the outline
     public override void OnInteractDisable()
     {
         outlinedBone.SetActive(false);
@@ -55,6 +64,7 @@ public class BoneInteractable : Interactable
         base.OnInteractDisable();
     }
 
+    //called when the player pressed the interact key. loads the bonecomparison menu
     public override void Listen(int index)
     {
         if (LoadGUIManager.loadGUIManager.Load("BoneComparison"))
