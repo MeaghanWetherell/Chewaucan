@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ScriptTags;
 using UnityEngine;
 
+//deprecated, resets the player when they get too close to a snake
 public class SnakeKill : MonoBehaviour
 {
     public CourseManager manager;

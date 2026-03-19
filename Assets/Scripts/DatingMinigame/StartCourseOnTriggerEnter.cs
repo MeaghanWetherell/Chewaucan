@@ -5,6 +5,7 @@ using QuestSystem;
 using ScriptTags;
 using UnityEngine;
 
+//start the course when the player touches this object
 public class StartCourseOnTriggerEnter : MonoBehaviour
 {
     private CourseManager manager;

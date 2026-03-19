@@ -11,12 +11,15 @@ public class Tumbleweed : MonoBehaviour
     [Tooltip("Stacking modifier to movespeed when hit by a tumbleweed")]
     public float moveSpeedMult;
 
+    [Tooltip("Length of the modifier to move speed")]
     public float multDuration;
 
+    [Tooltip("Overlay sprite to be passed to the hud for display when the player is hit")]
     public Sprite overlay;
 
     public Animator controller;
 
+    [Tooltip("Reference to a prefab that plays sound after the tumbleweed has been destroyed")]
     public GameObject tumbleweedSoundObj;
     
     [Tooltip("Length of time before the tumbleweed fades out")]
@@ -27,9 +30,8 @@ public class Tumbleweed : MonoBehaviour
 
     public MeshRenderer tumbleweedRenderer;
     
+    [Tooltip("Reference to a transparent version of the tumbleweed's material")]
     public Material transMat;
-    
-
 
     private void OnEnable()
     {
@@ -55,6 +57,7 @@ public class Tumbleweed : MonoBehaviour
         controller.speed = 1;
     }
 
+    //track lifetime, fade the tumbleweed out after it expires
     private IEnumerator Lifetime()
     {
         while (lifetime > 0)
@@ -70,7 +73,6 @@ public class Tumbleweed : MonoBehaviour
         {
             curCullTime += 0.05f;
             float val = Mathf.Lerp(1, 0, curCullTime / cullTime);
-            //Debug.Log(val);
             Color temp = tumbleweedRenderer.material.color;
             tumbleweedRenderer.material.color = new Color(temp.r, temp.g, temp.b, val);
             yield return new WaitForSeconds(0.05f);
@@ -79,6 +81,7 @@ public class Tumbleweed : MonoBehaviour
     }
     
 
+    //when the player is hit, change their move speed for a while, play some sounds, display the hit to the hud, and destroy the tumbleweed
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null)

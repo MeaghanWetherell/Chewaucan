@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
+    //on colliding with an object, change directions or, as a failsafe, teleport if inside the object
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponentInChildren<DateRock>() != null)

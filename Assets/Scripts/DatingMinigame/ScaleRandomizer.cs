@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//randomizes this object's scale on start
 public class ScaleRandomizer : MonoBehaviour
 {
-    public float scaleMinX;
+    [Tooltip("Min x scale for random scale")]public float scaleMinX;
 
-    public float scaleMaxX;
+    [Tooltip("Max x scale for random scale")]public float scaleMaxX;
 
-    public float scaleMinY;
+    [Tooltip("Min y scale for random scale")]public float scaleMinY;
 
-    public float scaleMaxY;
+    [Tooltip("Max y scale for random scale")]public float scaleMaxY;
 
-    public float scaleMinZ;
+    [Tooltip("Min z scale for random scale")]public float scaleMinZ;
 
-    public float scaleMaxZ;
+    [Tooltip("Max z scale for random scale")]public float scaleMaxZ;
     private void Awake()
     {
         float scaleX = Random.Range(scaleMinX, scaleMaxX);

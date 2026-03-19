@@ -13,6 +13,7 @@ public class SnakeRotate : MonoBehaviour
 
     public SnakeMove move;
 
+    [Tooltip("Whether this snake moves around or defaults to stationary")]
     public bool isMovingSnake;
 
     public AudioSource rattle;
@@ -20,6 +21,8 @@ public class SnakeRotate : MonoBehaviour
     [Tooltip("The degree by which to quiet the BGM while the sound plays")]
     public float BGMAttenuation;
 
+    //when the player gets close, turn towards them and begin to rattle
+    //stops current movement
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null && enabled)
@@ -35,6 +38,7 @@ public class SnakeRotate : MonoBehaviour
         }
     }
 
+    //stop rattling when the player leaves
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<Player>())
@@ -53,6 +57,7 @@ public class SnakeRotate : MonoBehaviour
         StopAllCoroutines();
     }
 
+    //rotates gradually towards the player
     private IEnumerator rotateTowards()
     {
         Transform player = Player.player.transform;

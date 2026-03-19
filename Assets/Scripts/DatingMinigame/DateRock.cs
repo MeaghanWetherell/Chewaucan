@@ -9,26 +9,32 @@ using Random = UnityEngine.Random;
 
 public class DateRock : MonoBehaviour
 {
+    [Tooltip("Amount of dating 'points' this rock provides. Will be reversed automatically if it is at the wrong height for the current level")]
     public float myPoints;
 
+    [Tooltip("Ref to the audiosource that should play when stepped on")]
     public AudioSource mySE;
 
-    public CourseManager manager;
+    //ref to the active course manager, set automatically by course manager
+    [NonSerialized]public CourseManager manager;
 
-    public float scaleMinX;
+    //dunno why this is duplicated from the scale randomizer instead of just using that component on the date rocks, I'm going to assume there's a reason
+    [Tooltip("Min x scale for random scale")]public float scaleMinX;
 
-    public float scaleMaxX;
+    [Tooltip("Max x scale for random scale")]public float scaleMaxX;
 
-    public float scaleMinY;
+    [Tooltip("Min y scale for random scale")]public float scaleMinY;
 
-    public float scaleMaxY;
+    [Tooltip("Max y scale for random scale")]public float scaleMaxY;
 
-    public float scaleMinZ;
+    [Tooltip("Min z scale for random scale")]public float scaleMinZ;
 
-    public float scaleMaxZ;
+    [Tooltip("Max z scale for random scale")]public float scaleMaxZ;
 
+    //color of the text that displays on dating a rock
     [NonSerialized]public string dateTextColor = "white";
 
+    //the date that corresponds to this rock, set automatically on level start
     [NonSerialized]public string date;
 
     [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMin;
@@ -37,10 +43,13 @@ public class DateRock : MonoBehaviour
 
     [Tooltip("Degree to which to quiet the background music while the sound effect plays")]public float BGMAttenuation;
 
+    //prefab for the text that appears when stepping on the rock
     private static GameObject dateText;
 
+    //ref to the hud
     private static GameObject HUD;
 
+    //sets the objects scale randomly and sets static variables if unitialized
     private void Awake()
     {
         float scaleX = Random.Range(scaleMinX, scaleMaxX);
@@ -52,6 +61,7 @@ public class DateRock : MonoBehaviour
         FillStatics();
     }
 
+    //if this scripts static variables are unitialized, initialize them
     private void FillStatics()
     {
         if (dateText == null)
@@ -60,18 +70,23 @@ public class DateRock : MonoBehaviour
             HUD = GameObject.Find("HUD");
     }
 
+    //when the player steps on the date rock
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Player>() != null && manager != null && manager.active)
         {
+            //play the step sound
             mySE.Play();
             if (!SoundManager.soundManager.IsMuted(2))
             {
                 StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation));
             }
+            //prepare to disable
             StartCoroutine(DisableAfterTime(0.5f));
             GetComponent<BoxCollider>().enabled = false;
+            //ensure statics are filled
             FillStatics();
+            //display the date to the player
             GameObject text = Instantiate(dateText, HUD.transform);
             Gravity grav = text.GetComponent<Gravity>();
             grav.accel = grav.accel * 2 / 3;
@@ -106,10 +121,12 @@ public class DateRock : MonoBehaviour
             }
             dateTextA += "</color>";
             text.GetComponent<TextMeshProUGUI>().text = dateTextA;
+            //add points
             manager.AddPoints(myPoints);
         }
     }
 
+    //recreates the rock when the game finishes
     private void ReenableOnFinish()
     {
         transform.parent.gameObject.SetActive(true);
@@ -117,6 +134,7 @@ public class DateRock : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
     }
 
+    //disables the rock after the passed time
     private IEnumerator DisableAfterTime(float secs)
     {
         yield return new WaitForSeconds(secs);

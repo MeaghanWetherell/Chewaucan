@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using QuestSystem;
 using UnityEngine;
 
+//progress quests when the player wins the plateau game
 public class PlateauQuestManager : MonoBehaviour
 {
     public void Start()

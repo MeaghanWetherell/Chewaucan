@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+//if a snake or date rock spawns in a regular rock, tries to correct their position
 public class Rock : MonoBehaviour
 {
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.GetComponentInChildren<DateRock>() != null || other.gameObject.GetComponentInChildren<SnakeKill>())
+        if (other.gameObject.GetComponentInChildren<DateRock>() != null || other.gameObject.GetComponentInChildren<SnakeSlow>())
         {
             SetPos(other.transform);
         }

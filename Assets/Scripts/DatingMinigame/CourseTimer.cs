@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class CourseTimer : MonoBehaviour
 {
+    //current time remaining on the timer
     private float currentTime;
 
     private bool paused = true;
@@ -42,6 +43,7 @@ public class CourseTimer : MonoBehaviour
         timerStopped.Invoke(status);
     }
 
+    //deducts from the timer and then updates text or stops the game if the time is up
     private void Update()
     {
         if(!paused && !PauseCallback.pauseManager.isPaused)
@@ -52,6 +54,7 @@ public class CourseTimer : MonoBehaviour
             SetText();
     }
 
+    //updates timer UI text
     private void SetText()
     {
         if(currentTime % 60 < 10)

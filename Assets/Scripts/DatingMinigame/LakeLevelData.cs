@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//stores the data about each level in a convenient location accessible to all instances of course manager
+//which allows all rocks to respond with the correct dates, even if they do not belong at the level of the current course manager
 [CreateAssetMenu]
 public class LakeLevelData : ScriptableObject
 {
