@@ -1,10 +1,11 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace LoadGUIFolder
 {
     public class LoadGUIOnButtonPress : LoadGUIFolder.LoadGUI
     {
-        //action to open gui
+        [Tooltip("action to open gui")]
         public InputActionReference openGUI;
 
         private void OnEnable()

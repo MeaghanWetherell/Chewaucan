@@ -8,10 +8,13 @@ using UnityEngine;
 
 public static class GSSaver
 {
-    public static String filepath = "Chewaucan/GraphicsSettings";
+    //path at which to save graphics settings
+    public static String filepath = "SavedSettings/Chewaucan/GraphicsSettings";
 
+    //list of the non-standard resolutions that have been registered
     private static List<Vector2Int> addedResolutions;
 
+    //whether the saver has been initialized
     private static bool initted;
 
     public static List<Vector2Int> GetAddedResolutions()
@@ -26,6 +29,7 @@ public static class GSSaver
         addedResolutions.Add(add);
     }
 
+    //read in added resolutions from disk, sub to save 
     private static void Init()
     {
         if (initted) return;
@@ -45,10 +49,11 @@ public static class GSSaver
         {
             addedResolutions = new List<Vector2Int>();
         }
-        SaveHandler.saveHandler.subToSave(Save);
+        SaveHandler.saveHandler.subSettingToSave(Save);
         initted = true;
     }
 
+    //save to disk
     private static void Save(string path)
     {
         Directory.CreateDirectory(Application.persistentDataPath + filepath);
@@ -59,6 +64,6 @@ public static class GSSaver
             NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
         };
         string json = JsonSerializer.Serialize(addedResolutions, opts);
-        File.WriteAllText(Application.persistentDataPath+filepath+"AddedResolutions.json", json);
+        File.WriteAllText(Application.persistentDataPath+"/"+filepath+"AddedResolutions.json", json);
     }
 }

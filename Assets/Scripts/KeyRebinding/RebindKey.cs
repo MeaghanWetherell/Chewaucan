@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace KeyRebinding
 {
+    //deprecated class for rebinding keys
     public class RebindKey : MonoBehaviour
     {
         public TextMeshProUGUI keyText;

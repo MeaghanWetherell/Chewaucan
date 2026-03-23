@@ -11,10 +11,14 @@ public class LoadGUIOnEnable : LoadGUI
 {
     private PlayerInput playerInput;
 
+    //TODO pretty sure this breaks controller support for menus when its enabled
+    [Tooltip("Whether to disable player input while the GUI is loaded.")]
     public bool disablePlayerInput;
 
+    [Tooltip("Whether audio should be enabled while the GUI is loaded")]
     public bool enableAudio;
 
+    [Tooltip("Wether we should be paused while the GUI is loaded")]
     public bool pause;
     
     private void OnEnable()

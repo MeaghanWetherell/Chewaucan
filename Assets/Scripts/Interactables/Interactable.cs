@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Misc;
 using UnityEngine;
 
+//abstract class implementing IListener interface for interactable objects.
+//Automatically searched for by the InteractListenerManager
 public abstract class Interactable : MonoBehaviour, IListener
 {
 

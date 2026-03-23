@@ -5,6 +5,7 @@ using Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
+//extends PopUpManager to add visual pop-up minimize functionality
 public class MinimizeQUpdatePopUp : PopUpManager
 {
     public RectTransform mainImgRectTransform;
@@ -24,6 +25,7 @@ public class MinimizeQUpdatePopUp : PopUpManager
         }
     }
 
+    //visually shrinks the pop-up into the quest log icon
     private IEnumerator Minimize()
     {
         RectTransform target = HUDManager.hudManager.questJournalIcon;
@@ -40,7 +42,6 @@ public class MinimizeQUpdatePopUp : PopUpManager
             Vector2 originalPos = mainImgRectTransform.anchoredPosition;
             Vector2 originalSize = mainImgRectTransform.rect.size;
             Vector2 targetPos = target.anchoredPosition;
-            //Debug.Log(targetPos);
             Vector2 targetSize = target.rect.size;
             
             float time = 0;

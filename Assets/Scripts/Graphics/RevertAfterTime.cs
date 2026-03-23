@@ -6,10 +6,13 @@ using UnityEngine.UI;
 
 public class RevertAfterTime : MonoBehaviour
 {
+    [Tooltip("Main text of the revert pop-up")]
     public TextMeshProUGUI revertText;
 
+    [Tooltip("Time before automatic reversion")]
     public float timeToRevert = 20;
 
+    [Tooltip("Ref to the close button")]
     public Button closeButton;
 
     private void Update()

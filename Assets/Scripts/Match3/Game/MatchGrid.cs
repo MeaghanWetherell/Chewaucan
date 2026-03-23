@@ -14,7 +14,7 @@ using Vector2 = UnityEngine.Vector2;
 // ReSharper disable once CheckNamespace
 namespace Match3
 {
-    //main monolithic manager for the match 3 system.
+    //main monolithic manager for the match 3 system. I wrote this 3 years ago and it's nasty. hope no ever has to mess with this
     public class MatchGrid : MonoBehaviour
     {
         public static MatchGrid matchGrid;
@@ -144,6 +144,8 @@ namespace Match3
             _waitingOnMatchCheck = false;
         }
 
+        //runs every 0.6 seconds to determine if any possible matches remain
+        //if not, ends the game
         private IEnumerator CheckForLock()
         {
             while (true)
@@ -305,6 +307,7 @@ namespace Match3
             _initialMousePos = mousePos.action.ReadValue<Vector2>();
         }
 
+        //finds any matches of 3+ bones horizontally or vertically and marks them for removal
         private bool DetectMatches()
         {
             bool retval = false;
@@ -348,6 +351,7 @@ namespace Match3
             return retval;
         }
 
+        //finds and returns the furthest coordinate in the passed direction that matches the bone at cur
         private GridCoordinate FindFurthestInDir(GridCoordinate cur, GridCoordinate dir)
         {
             GridCoordinate nextCandidate = new GridCoordinate(cur.x + dir.x, cur.y + dir.y);
@@ -363,6 +367,7 @@ namespace Match3
             return cur;
         }
 
+        //builds a list (vals) of continuous coordinates in the passed direction that all have matching bones
         private void DetectMatchHelper(List<GridCoordinate> vals, GridCoordinate last, GridCoordinate dir)
         {
             GridCoordinate nextCandidate = new GridCoordinate(last.x + dir.x, last.y + dir.y);
@@ -376,6 +381,7 @@ namespace Match3
             }
         }
 
+        //check if the passed coordinate is in the removal queue
         private bool CheckContains(GridCoordinate check)
         {
             foreach (List<GridCoordinate> match in _removalQueue)
@@ -391,6 +397,7 @@ namespace Match3
             return false;
         }
 
+        //adds the passed coordinate to the passed list only if it does not exist in the list
         private void AddIfNotExist(List<GridCoordinate> coords, GridCoordinate coord)
         {
             foreach (GridCoordinate check in coords)

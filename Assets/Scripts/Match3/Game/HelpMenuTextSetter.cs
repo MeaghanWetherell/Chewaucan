@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Match3
 {
+    //Sets up the text for the help menu
     public class HelpMenuTextSetter : MonoBehaviour
     {
         public TextMeshProUGUI maintext;

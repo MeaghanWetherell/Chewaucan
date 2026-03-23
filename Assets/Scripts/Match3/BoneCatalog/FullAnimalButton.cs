@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Match3.BoneCatalog
 {
+    //handles switching to viewing the full animal
     public class FullAnimalButton : MonoBehaviour
     {
         private bool isOpen = false;
