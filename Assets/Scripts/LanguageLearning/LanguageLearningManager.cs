@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class LanguageLearningManager : MonoBehaviour
 {
+    //singleton
     public static LanguageLearningManager llm;
 
     public ClipListPlayer player;
@@ -16,39 +17,55 @@ public class LanguageLearningManager : MonoBehaviour
 
     public TextMeshProUGUI resText;
 
+    [Tooltip("The targets where the player drags words. Should be exactly 3")]
     public List<DragTarget> targets;
 
+    [Tooltip("List of data objects for all the draggable words, including any that start unlocked")]
     public List<DraggableImgData> unlockWords;
 
+    [Tooltip("The full script of the conversation the minigame focuses on. See example script for format.")]
     public TextAsset script;
 
-    public TextAsset validWords;
+    [Tooltip("The text asset that holds all valid sentences (in English) the player can make with the draggable words. See example for format")]
+    public TextAsset validSentenceDoc;
 
+    [Tooltip("Prefab that the player clicks and drags icons from")]
     public GameObject draggableFactoryPrefab;
 
+    [Tooltip("Transform under which the manager will instantiate draggable factories for each word")]
     public Transform mainDFPanel;
 
+    [Tooltip("Words that will be unlocked by default. These should still have full image data objects appearing in unlockWords.")]
     public List<String> defaultUnlockedWords;
 
-    [NonSerialized]public HashSet<String> unlockedIds;
-    
-    private List<DraggableImageFactory> factories = new List<DraggableImageFactory>();
-
-    private List<Sentence>[] parsedScript;
-    
-    private static string saveFileName = "LLWords";
-
+    [Tooltip("Panel that displays the script of the conversation")]
     public Transform TextPanel;
 
-    [NonSerialized]public List<SentenceManager> scriptSentences = new List<SentenceManager>();
-
+    [Tooltip("Prefab for sentences that display in the convo script panel")]
     public GameObject sentencePrefab;
 
+    [Tooltip("Narration for each sentence as it appears in order, in both English and the alternate language")]
     public List<AudioClip> sentenceClips;
 
+    [Tooltip("Audio source set to play an 'aww' sound")]
     public AudioSource awwdioSource;
+    
+    //reference to a component attached to each display line of the script that handles display for that line
+    [NonSerialized]public List<SentenceManager> scriptSentences = new List<SentenceManager>();
+    
+    //ids of the words the player has unlocked
+    [NonSerialized]public HashSet<String> unlockedIds;
 
     private List<ValidSentence> validSentences;
+    
+    //factories that have been created
+    private List<DraggableImageFactory> factories = new List<DraggableImageFactory>();
+
+    //internal representation of the script
+    private List<Sentence>[] parsedScript;
+    
+    //filename that the unlocked words save to
+    private static string saveFileName = "LLWords";
     
     private void Load(string path)
     {
@@ -63,6 +80,8 @@ public class LanguageLearningManager : MonoBehaviour
             foreach (string word in defaultUnlockedWords)
                 unlockedIds.Add(word);
         }
+        if (unlockedIds == null)
+            unlockedIds = new HashSet<string>();
     }
 
     private void Save(string path)
@@ -78,6 +97,7 @@ public class LanguageLearningManager : MonoBehaviour
         Save(SaveHandler.saveHandler.getSavePath());
     }
 
+    //creates the text display for the conversation script
     private void SetTexts()
     {
         int i = 0;
@@ -96,7 +116,6 @@ public class LanguageLearningManager : MonoBehaviour
                 i++;
             }
             scriptSentences.Add(sentM);
-            
         }
         targ = parsedScript[1];
         foreach (Sentence sent in targ)
@@ -116,6 +135,7 @@ public class LanguageLearningManager : MonoBehaviour
         }
     }
 
+    //checks if the words the player currently has in the drag targets form a valid sentence and displays a result
     public void AttemptUnlock()
     {
         string[] attemptWords = new string[3];
@@ -152,6 +172,7 @@ public class LanguageLearningManager : MonoBehaviour
         }
     }
 
+    //registers a word unlocked with this manager, the DraggableImageFactories and the SentenceManagers
     private void Unlock(string word)
     {
         unlockedIds.Add(word);
@@ -167,6 +188,7 @@ public class LanguageLearningManager : MonoBehaviour
         }
     }
 
+    //get and return the appropriate drag targets for the order the sentence should appear in
     private List<DragTarget> GetTargetList(ValidSentence v)
     {
         List<DragTarget> ret = new List<DragTarget>();
@@ -182,6 +204,7 @@ public class LanguageLearningManager : MonoBehaviour
         return ret;
     }
 
+    //gets the word clips in the order they should play based on the sentence
     private List<AudioClip> GetClipList(ValidSentence v)
     {
         List<AudioClip> ret = new List<AudioClip>();
@@ -197,6 +220,7 @@ public class LanguageLearningManager : MonoBehaviour
         return ret;
     }
 
+    //determines whether the words in the check array are a match for any valid sentence
     private ValidSentence CheckAttempt(string[] check)
     {
         foreach (ValidSentence s in validSentences)
@@ -210,12 +234,16 @@ public class LanguageLearningManager : MonoBehaviour
 
     public void Awake()
     {
+        //parse the text files
         parsedScript = LanguageLearningScriptParser.Parse(script.text);
-        validSentences = ValidWordParser.Parse(validWords.text);
+        validSentences = ValidWordParser.Parse(validSentenceDoc.text);
+        unlockedIds = new HashSet<string>();
+        //load save data
         Load(SaveHandler.saveHandler.getSavePath());
         SaveHandler.saveHandler.subToSave(Save);
         SaveHandler.saveHandler.subToLoad(Load);
         int panelInd = 0;
+        //create a draggable factory for each word
         foreach (DraggableImgData data in unlockWords)
         {
             GameObject newFactory = Instantiate(draggableFactoryPrefab, mainDFPanel.GetChild(panelInd));

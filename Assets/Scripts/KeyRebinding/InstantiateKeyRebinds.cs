@@ -12,19 +12,23 @@ namespace KeyRebinding
         public GameObject keyRebindGroupPrefab;
 
         public GameObject mapButtonPrefab;
-
+    
+        [Tooltip("Parent object under which to instantiate map buttons. only needed if useAltMaps is enabled")]
         public Transform mapButtonParent;
 
         [Tooltip("Anything that has a default binding that is on this list will be ineligble for rebinding.")]public List<String> invalidForRebinding;
 
+        [Tooltip("Whether to add buttons for maps other than the main map")]
         public bool useAltMaps;
 
+        //all maps
         private List<InputActionMap> maps;
 
         private PlayerInput playerInput;
 
         private void Awake()
         {
+            //find the player and get the player input component
             playerInput = GameObject.FindWithTag("Player")?.GetComponent<PlayerInput>();
             if (playerInput == null)
                 playerInput = GameObject.Find("SecondaryPInput").GetComponent<PlayerInput>();
@@ -32,6 +36,7 @@ namespace KeyRebinding
             maps = BindingManager.bindingManager.maps;
             if (useAltMaps)
             {
+                //instantiate map buttons
                 GameObject mapButton = null;
                 foreach (InputActionMap map in maps)
                 {
@@ -43,15 +48,18 @@ namespace KeyRebinding
                 }
                 if (mapButton != null)
                 {
+                    //instantiate rebind buttons for the most recent map
                     mapButton.GetComponent<ChangeActionMapButton>().OnClick();
                 }
             }
             else
             {
+                //instantiate rebind buttons for the main map
                 InstantiateRebinds(maps[0]);
             }
         }
 
+        //instantiate rebind buttons for all actions in the passed action map, as children of this object's transform
         public void InstantiateRebinds(InputActionMap map)
         {
             foreach (Transform child in transform)

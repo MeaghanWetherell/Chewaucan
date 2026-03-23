@@ -11,25 +11,33 @@ namespace LoadGUIFolder
 {
     public class LoadGUIManager : MonoBehaviour
     {
+        //singleton
         public static LoadGUIManager loadGUIManager;
 
         public AudioSource menuCloseEffect;
         
+        //name of the active GUI
         private String GUIName;
 
+        //all active pop-ups
         private List<GameObject> popUps = new List<GameObject>();
         
         //store a ref to the HUD object
         private GameObject _hud;
 
+        //pop-up prefab
         private GameObject popUp;
 
+        //yes/no pop-up prefab
         private GameObject YNPopUp;
 
+        //called when unloading a GUI (including pop-ups)
         private UnityEvent<string> OnGUIUnload = new UnityEvent<string>();
         
+        //called when loading a GUI (including pop-ups)
         private UnityEvent<string> OnGUILoad = new UnityEvent<string>();
 
+        //save a reference to camera look
         private CameraLook cacheCamLook;
 
         public void SubtoLoad(UnityAction<String> action)
@@ -75,6 +83,7 @@ namespace LoadGUIFolder
             SceneManager.sceneLoaded -= OnSceneLoad;
         }
         
+        //when a scene is loaded in single mode, all active additive scenes are removed. update internals to reflect this
         private void OnSceneLoad(Scene loaded, LoadSceneMode mode)
         {
             if (mode == LoadSceneMode.Single)
@@ -84,6 +93,7 @@ namespace LoadGUIFolder
             }
         }
 
+        //sub a function to the on close event for the top-most pop-up
         public bool SubToTopPopUp(UnityAction<string> toSub)
         {
             if (popUps.Count < 1) return false;
@@ -98,6 +108,9 @@ namespace LoadGUIFolder
             return true;
         }
 
+        //create a new yes/no pop-up with the passed title and message
+        //onConfirm runs when the player clicks the positive option, onPopUpClosed is invoked when the pop-up is closed without confirming
+        //conf/decText are the text displayed on the buttons to confirm or decline
         public void InstantiateYNPopUp(string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
             List<UnityAction<string>> onPopUpClosed = null)
         {
@@ -126,6 +139,8 @@ namespace LoadGUIFolder
             }
         }
         
+        //overload of InstantiateYNPopUp that takes an existing pop-up object and registers it properly with the manager
+        //actions in onConfirm and onPopUpClosed are *added* to existing subscribed actions
         public void InstantiateYNPopUp(GameObject inPopUp, string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
             List<UnityAction<string>> onPopUpClosed = null)
         {
@@ -154,6 +169,7 @@ namespace LoadGUIFolder
             }
         }
 
+        //creates a new pop-up with the passed title and message. actions in onPopUpClosed run when that popUp is closed
         public void InstantiatePopUp(String title, String msg, List<UnityAction<string>> onPopUpClosed = null)
         {
             GameObject window = Instantiate(popUp);
@@ -177,7 +193,7 @@ namespace LoadGUIFolder
             }
         }
         
-        //registers custom popUp with LoadGUI. setup should be done outside loadGUI unless running with "instantiatePrefab=true". must have a PopUpTextManager and PopUpOnClick attached.
+        //registers custom popUp with LoadGUI. most setup should be done outside loadGUI unless running with "instantiatePrefab=true". must have a PopUpTextManager and PopUpOnClick attached.
         public void InstantiatePopUp(GameObject inPopUp, string popUpName, string msg = "", List<UnityAction<string>> onPopUpClosed = null, bool instantiatePrefab = false)
         {
             if (instantiatePrefab)
@@ -205,6 +221,7 @@ namespace LoadGUIFolder
             }
         }
 
+        //registers that the top pop-up has closed
         public void RegisterPopUpClose()
         {
             if (popUps.Count == 0) return;
@@ -219,6 +236,7 @@ namespace LoadGUIFolder
             }
         }
 
+        //closes the top pop-up
         public void ClosePopUp()
         {
             if (popUps.Count == 0)
@@ -227,6 +245,7 @@ namespace LoadGUIFolder
             RegisterPopUpClose();
         }
 
+        //registers the pop-up at the passed index as closed
         public void RegisterPopUpClose(int index)
         {
             string title = popUps[index].GetComponent<PopUpManager>().title;
@@ -240,6 +259,7 @@ namespace LoadGUIFolder
             }
         }
 
+        //closes the pop-up at the passed index
         public void ClosePopUp(int index)
         {
             if (popUps.Count <= index)
@@ -266,6 +286,7 @@ namespace LoadGUIFolder
             return true;
         }
 
+        //closes the open GUI if it has the passed name. returns true if it successfully closes a GUI
         public bool CloseOpenGUI(String gui)
         {
             if (GUIName == null)
@@ -282,6 +303,7 @@ namespace LoadGUIFolder
             return false;
         }
 
+        //additively loads the GUI specified by the passed string
         public bool Load(String toLoad)
         {
             if (toLoad.Equals(GUIName) || toLoad.Equals(""))
@@ -300,6 +322,7 @@ namespace LoadGUIFolder
             return true;
         }
 
+        //returns whether there is currently an additively loaded GUI open
         public bool isGUIOpen()
         {
             return (GUIName != null);

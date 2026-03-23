@@ -6,9 +6,6 @@ using System.Linq;
 using KeyRebinding;
 using TMPro;
 
-// No need to change the KeyGlyphMap struct if it's in its own file.
-// If it was inside the old script, move it to the GlyphLibrary.cs file.
-
 public class RebindWithGlyphs : MonoBehaviour
 {
     [Header("Action to Rebind")]
@@ -24,9 +21,12 @@ public class RebindWithGlyphs : MonoBehaviour
 
     [Tooltip("Text component ref")] public TextMeshProUGUI mainText;
     
+    //holds all key glyph images 
     private static GlyphLibrary glyphLibrary;
 
+    //maps key names to glyph sprites
     private static Dictionary<string, Sprite> _glyphDictionary;
+    
     private InputActionRebindingExtensions.RebindingOperation _rebindOp;
 
     private void Awake()
@@ -41,7 +41,6 @@ public class RebindWithGlyphs : MonoBehaviour
     
     private void Start()
     {
-
         if (actionToRebind.controls.Count == 0)
         {
             Debug.LogWarning($"On Start, the action '{actionToRebind.name}' has NO controls. This is why the glyph isn't showing up.", this);
@@ -52,19 +51,21 @@ public class RebindWithGlyphs : MonoBehaviour
         BindingManager.bindingManager.bindChange.AddListener(UpdateGlyph);
     }
 
+    //listen for user input. rebind to the next key they input
     public void StartListening()
     {
         actionToRebind.Disable();
 
         _rebindOp = actionToRebind.PerformInteractiveRebinding(index).WithControlsExcluding("<Mouse>/position")
             .WithControlsExcluding("<Mouse>/delta").WithControlsExcluding("<Gamepad>/Start")
-            .WithControlsExcluding("<Keyboard>/escape").WithControlsExcluding("<Mouse>/leftButton").OnMatchWaitForAnother(0.1f)
+            .WithControlsExcluding("<Keyboard>/escape").WithControlsExcluding("<Mouse>/leftButton").WithControlsExcluding("<Mouse>/rightButton").OnMatchWaitForAnother(0.1f)
             .OnComplete(
                 operation => { RebindComplete(); operation.Dispose();}).OnCancel(operation => {operation.Dispose();});
 
         _rebindOp.Start();
     }
 
+    //when the user completes the rebind operation, notify the binding manager and update the key glyph
     private void RebindComplete()
     {
         BindingManager.bindingManager.SetBind(actionToRebind, index);
@@ -80,7 +81,7 @@ public class RebindWithGlyphs : MonoBehaviour
         actionToRebind.Enable();
     }
 
-    
+    //update the glyph used for this key
     public void UpdateGlyph()
     {
         if (actionToRebind.controls.Count == 0) return;
@@ -88,9 +89,6 @@ public class RebindWithGlyphs : MonoBehaviour
 
         if(keyName.Split("/").Length == 2)
             keyName = keyName.Split("/")[1];
-
-
-        //Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);
 
         if (_glyphDictionary.TryGetValue(keyName, out Sprite glyph))
         {

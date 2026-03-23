@@ -10,22 +10,31 @@ using UnityEngine.UI;
 
 public class ApplyGraphics : MonoBehaviour
 {
+    [Tooltip("Fullscreen and vsync toggles")]
     public Toggle FSToggle, VSToggle;
 
+    [Tooltip("Valid resolutions by default. Will automatically sense and record if the user has a resolution not listed here.")]
     public List<V2IntWrapper> validResolutions;
 
+    [Tooltip("Resolution display text")]
     public TextMeshProUGUI resText;
 
+    [Tooltip("Reference to the pop-up prefab made specifically for graphics")]
     public GameObject specialYNPrefab;
 
+    [Tooltip("Resolution right button")]
     public Button resRight;
 
+    [Tooltip("Resolution left button")]
     public Button resLeft;
 
+    [Tooltip("Quality settings dropdown")]
     public TMP_Dropdown qualityDropdown;
 
+    //current resolution
     private int curRes;
 
+    //save previous values to revert if the user doesn't confirm changes
     private bool priorFS;
 
     private int priorVS;
@@ -36,11 +45,13 @@ public class ApplyGraphics : MonoBehaviour
 
     private void Start()
     {
+        //get any non-standard resolutions we've saved previously
         List<Vector2Int> addedReses = GSSaver.GetAddedResolutions();
         foreach(Vector2Int add in addedReses)
             validResolutions.Add(new V2IntWrapper(add));
         validResolutions.Sort();
         Init();
+        //add the current resolution and curRes to match
         if (validResolutions[curRes].x != Screen.width || validResolutions[curRes].y != Screen.height)
         {
             validResolutions.Add(new V2IntWrapper(new Vector2Int(Screen.width, Screen.height)));
@@ -57,6 +68,7 @@ public class ApplyGraphics : MonoBehaviour
         }
     }
 
+    //initalize the toggles, text, and buttons based on the user's current settings
     private void Init()
     {
         FSToggle.isOn = Screen.fullScreen;
@@ -76,6 +88,7 @@ public class ApplyGraphics : MonoBehaviour
         priorQL = QualitySettings.GetQualityLevel();
     }
 
+    //change the resolution to the next one to the right (no wrapping)
     public void ResRight()
     {
         ChangeRes(Mathf.Min(curRes + 1, validResolutions.Count-1));
@@ -84,6 +97,7 @@ public class ApplyGraphics : MonoBehaviour
         resLeft.interactable = true;
     }
 
+    //change the resolution to the next one to the left (no wrapping)
     public void ResLeft()
     {
         ChangeRes(Mathf.Max(curRes - 1, 0));
@@ -92,12 +106,14 @@ public class ApplyGraphics : MonoBehaviour
         resRight.interactable = true;
     }
 
+    //update our curRes variable and the text display for the current resolution
     private void ChangeRes(int res)
     {
         curRes = res;
         resText.text = validResolutions[curRes].x + "x" + validResolutions[curRes].y;
     }
 
+    //revert all settings changes
     public void Revert(string n)
     {
         QualitySettings.vSyncCount = priorVS;
@@ -109,6 +125,7 @@ public class ApplyGraphics : MonoBehaviour
         qualityDropdown.value = priorQL;
     }
 
+    //confirm settings changes
     public void Confirm(string n)
     {
         priorFS = FSToggle.isOn;
@@ -119,7 +136,7 @@ public class ApplyGraphics : MonoBehaviour
         priorQL = qualityDropdown.value;
     }
     
-    
+    //applies the user's current settings, then displays a pop-up asking them to confirm the changes
     public void ApplyGraphicsSettings()
     {
         if (VSToggle.isOn) QualitySettings.vSyncCount = 1;
@@ -132,6 +149,7 @@ public class ApplyGraphics : MonoBehaviour
     }
 }
 
+//serializable wrapper over v2int
 [Serializable]
 public class V2IntWrapper : IComparable<V2IntWrapper>
 {

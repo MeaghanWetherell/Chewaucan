@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//records a single phrase in a sentence
 public class Phrase
 {
+    //id of the phrase. if "freewordid" is always unlocked, if "" is only unlocked if the whole sentence is unlocked or it is punctuation
     public String id;
 
     public String value;
 
+    //whether the phrase is entirely punctuation, in which case it will always return as unlocked
     public bool isPunct;
 
     public bool isEnglish;
@@ -21,6 +24,7 @@ public class Phrase
         isEnglish = inEnglish;
     }
 
+    //get the string of the phrase based on whether it is unlocked or not
     public String GetVal(bool isUnlocked)
     {
         if (isUnlocked || isPunct || id.Equals("freewordid"))

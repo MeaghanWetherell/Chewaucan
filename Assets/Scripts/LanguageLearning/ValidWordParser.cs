@@ -5,6 +5,7 @@ using UnityEngine;
 
 public static class ValidWordParser 
 {
+   //parses a valid sentence text file into a list of ValidSentence objects
    public static List<ValidSentence> Parse(string text)
    {
       List<ValidSentence> ret = new List<ValidSentence>();

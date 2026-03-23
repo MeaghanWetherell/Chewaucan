@@ -15,10 +15,13 @@ public class GetGlyph : MonoBehaviour
     [Tooltip("index of that action for control scheme: Keyboard and Mouse/Controller")]
     public List<int> indexList;
 
+    //list of all glyphs actively listening for binding changes
     public static List<GetGlyph> listenerGlyphs;
     
+    //reference to the library object that holds all glyph images
     private static GlyphLibrary glyphLibrary;
 
+    //maps glyph names to sprites
     private static Dictionary<string, Sprite> _glyphDictionary;
     
     [Header("UI References")]
@@ -29,6 +32,7 @@ public class GetGlyph : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    //index of the binding this should get the glyph for
     private int index;
 
     private void Start()
@@ -36,13 +40,13 @@ public class GetGlyph : MonoBehaviour
         UpdateGlyph();
     }
 
+    //set up private variables add self as a listener
     private void OnEnable()
     {
         if (listenerGlyphs == null)
         {
             listenerGlyphs = new List<GetGlyph>();
         }
-        
         
         if (glyphLibrary == null)
         {
@@ -73,6 +77,7 @@ public class GetGlyph : MonoBehaviour
         listenerGlyphs.Remove(this);
     }
 
+    //find the correct glyph for the binding this corresponds to
     public void UpdateGlyph()
     {
         if (actionToGet.action.controls.Count == 0) return;
@@ -80,9 +85,6 @@ public class GetGlyph : MonoBehaviour
 
         if(keyName.Split("/").Length == 2)
             keyName = keyName.Split("/")[1];
-
-
-        //Debug.Log($"Attempting to find glyph for key: '{keyName}' on action '{actionToRebind.name}'", this);
 
         if (_glyphDictionary.TryGetValue(keyName, out Sprite glyph))
         {

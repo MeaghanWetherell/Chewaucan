@@ -6,12 +6,14 @@ using UnityEngine;
 
 public class SentenceManager : MonoBehaviour
 {
+    //sentence we're managing
     [NonSerialized]public Sentence mySentence;
 
     public TextMeshProUGUI myText;
 
     public GameObject myAudioSource;
 
+    //initialize the manager
     public void Init(Sentence inSent, AudioClip clip, HashSet<string> unlockedIds)
     {
         mySentence = inSent;
@@ -24,6 +26,7 @@ public class SentenceManager : MonoBehaviour
         Refresh(unlockedIds);
     }
 
+    //refreshes the display based on what has been unlocked
     public void Refresh(HashSet<string> unlockedIds)
     {
         (String, bool) tup = mySentence.GetSentenceVal(unlockedIds);

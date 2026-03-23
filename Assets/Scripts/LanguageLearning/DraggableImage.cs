@@ -7,21 +7,27 @@ using UnityEngine.UI;
 
 public class DraggableImage : MonoBehaviour
 {
+    //singleton ref to the current active image. used to prevent creation of more than one
     public static DraggableImage activeImage;
-
-    [NonSerialized]public DraggableImageFactory parent;
 
     public InputActionReference mousePosition;
 
     public InputActionReference leftClick;
 
+    [Tooltip("The rect transform of this image")]
     public RectTransform myRect;
 
+    [Tooltip("The image component of this image")]
     public Image myImg;
 
+    //the canvas this image is on
     [NonSerialized]public Canvas myCanvas;
 
+    //the current drag target this image is being dragged over. set by the drag target on collision
     [NonSerialized]public DragTarget myTarget;
+    
+    //reference to the factory this image came from
+    [NonSerialized]public DraggableImageFactory parent;
 
     private void Start()
     {
@@ -37,6 +43,7 @@ public class DraggableImage : MonoBehaviour
         leftClick.action.canceled -= OnMouseReleased;
     }
 
+    //matches the position of the image to the mouse position
     private void FollowMouse(InputAction.CallbackContext context)
     {
         if (myCanvas == null)
@@ -47,6 +54,7 @@ public class DraggableImage : MonoBehaviour
         myRect.anchoredPosition = pos;
     }
 
+    //when the mouse is released, send our info the drag target we're on if applicable and destroy ourselves
     private void OnMouseReleased(InputAction.CallbackContext context)
     {
         if(myTarget != null)

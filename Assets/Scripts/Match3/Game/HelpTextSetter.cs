@@ -5,6 +5,7 @@ using Match3;
 using TMPro;
 using UnityEngine;
 
+//sets the smaller in game help text
 public class HelpTextSetter : MonoBehaviour
 {
     public GameObject anatomy;

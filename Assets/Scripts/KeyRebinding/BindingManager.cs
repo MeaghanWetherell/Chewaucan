@@ -10,16 +10,21 @@ namespace KeyRebinding
 {
     public class BindingManager : MonoBehaviour
     {
+        //singleton
         public static BindingManager bindingManager;
 
+        [Tooltip("Main input action asset for the project")]
         public InputActionAsset asset;
 
+        //all the maps in our InputActionAsset
         [NonSerialized]public List<InputActionMap> maps = new List<InputActionMap>();
 
+        //invoked when we change a binding
         [NonSerialized]public UnityEvent bindChange = new UnityEvent();
 
         [Tooltip("File name to save to (NOT A FULL PATH, no file extension)")]public String saveFileName;
 
+        //store binding overrides. keys are in the format action map name+action name+bid index concatenated with no spaces
         private Dictionary<String, String> binds = new Dictionary<string, string>();
         private void Awake()
         {
@@ -32,13 +37,13 @@ namespace KeyRebinding
             {
                 maps.Add(map);
             }
-            setBinds();
             bindingManager = this;
             DontDestroyOnLoad(this.gameObject);
             SaveHandler.saveHandler.subSettingToSave(Save);
             SaveHandler.saveHandler.subSettingToLoad(Load);
         }
 
+        //for each binding override in our dictionary, apply that override
         private void setBinds()
         {
             foreach (InputActionMap map in maps)
@@ -47,7 +52,6 @@ namespace KeyRebinding
                 {
                     for (int i = 0; i < action.bindings.Count; i++)
                     {
-                        // ReSharper disable once PossibleNullReferenceException
                         if (binds.ContainsKey(action.actionMap + action.name + i))
                         {
                             action.ApplyBindingOverride(i, binds[action.actionMap + action.name + i]);
@@ -57,6 +61,7 @@ namespace KeyRebinding
             }
         }
 
+        //load existing binding overrides from file
         private void Load(string path)
         {
             try
@@ -67,12 +72,14 @@ namespace KeyRebinding
             setBinds();
         }
 
+        //save overrides dictionary to file
         private void Save(string path)
         {
             string bindJson = JsonSerializer.Serialize(binds);
             File.WriteAllText(path+"/" + saveFileName + ".json", bindJson);
         }
 
+        //get the display string for a particular binding
         public string GetBind(string controlName, int controlIndex = 0)
         {
             foreach (InputActionMap map in maps)
@@ -80,12 +87,13 @@ namespace KeyRebinding
                 foreach (InputAction action in map)
                 {
                     if (action.name.Equals(controlName))
-                        return action.bindings[0].ToDisplayString();
+                        return action.bindings[controlIndex].ToDisplayString();
                 }
             }
             return null;
         }
 
+        //reset all the binding overrides to defaults
         public void ResetBinds()
         {
             foreach (InputActionMap map in maps)
