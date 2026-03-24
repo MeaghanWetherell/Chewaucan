@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 namespace KeyRebinding
 {
@@ -104,6 +105,8 @@ namespace KeyRebinding
                     }
                 }
             }
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
         }
     }
 }

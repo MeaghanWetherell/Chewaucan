@@ -115,15 +115,16 @@ namespace KeyRebinding
 
         public void SetBind(InputAction bind, int index)
         {
+            string overridePath = bind.bindings[index].overridePath;
             //if a bind for this action has already been saved in the manager, change it in the manager to the current binding
             if (binds.ContainsKey(bind.actionMap + bind.name + index))
             {
-                binds[bind.actionMap + bind.name + index] = bind.bindings[index].overridePath;
+                binds[bind.actionMap + bind.name + index] = overridePath;
             }
             //otherwise, save it to the manager
             else
             {
-                binds.Add(bind.actionMap+bind.name+index, bind.bindings[index].overridePath);
+                binds.Add(bind.actionMap+bind.name+index, overridePath);
             }
 
             foreach (InputActionMap map in maps)

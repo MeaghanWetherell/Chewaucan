@@ -14,7 +14,7 @@ public class RebindWithGlyphs : MonoBehaviour
     [Tooltip("index of that action to rebind")]
     public int index;
     [Header("Default Key")]
-    public string defaultKeyName = "w";
+    public string defaultKeyName = "n";
 
     [Header("UI References")]
     public Image glyphImage;
@@ -27,7 +27,7 @@ public class RebindWithGlyphs : MonoBehaviour
     //maps key names to glyph sprites
     private static Dictionary<string, Sprite> _glyphDictionary;
     
-    private InputActionRebindingExtensions.RebindingOperation _rebindOp;
+    private static InputActionRebindingExtensions.RebindingOperation _rebindOp;
 
     private void Awake()
     {
@@ -41,11 +41,6 @@ public class RebindWithGlyphs : MonoBehaviour
     
     private void Start()
     {
-        if (actionToRebind.controls.Count == 0)
-        {
-            Debug.LogWarning($"On Start, the action '{actionToRebind.name}' has NO controls. This is why the glyph isn't showing up.", this);
-        }
-
         UpdateGlyph();
         
         BindingManager.bindingManager.bindChange.AddListener(UpdateGlyph);
@@ -55,10 +50,24 @@ public class RebindWithGlyphs : MonoBehaviour
     public void StartListening()
     {
         actionToRebind.Disable();
+        
+        if(_rebindOp != null)
+            _rebindOp.Cancel();
 
         _rebindOp = actionToRebind.PerformInteractiveRebinding(index).WithControlsExcluding("<Mouse>/position")
-            .WithControlsExcluding("<Mouse>/delta").WithControlsExcluding("<Gamepad>/Start")
-            .WithControlsExcluding("<Keyboard>/escape").WithControlsExcluding("<Mouse>/leftButton").WithControlsExcluding("<Mouse>/rightButton").OnMatchWaitForAnother(0.1f)
+            .WithControlsExcluding("<Mouse>/delta")
+            .WithControlsExcluding("<Gamepad>/Start")
+            .WithControlsExcluding("<Keyboard>/escape")
+            .WithControlsExcluding("<Mouse>/leftButton")
+            .WithControlsExcluding("<Mouse>/rightButton")
+            .WithControlsExcluding("<Mouse>/press")
+            .WithControlsExcluding("<Keyboard>/anyKey")
+            .WithControlsExcluding("<Pointer>/press")
+            .WithControlsExcluding("<Mouse>/backButton")
+            .WithControlsExcluding("<Mouse>/scroll")
+            .WithControlsExcluding("<Mouse>/forwardButton")
+            .WithCancelingThrough("<Keyboard>/escape")
+            .OnMatchWaitForAnother(0.1f)
             .OnComplete(
                 operation => { RebindComplete(); operation.Dispose();}).OnCancel(operation => {operation.Dispose();});
 
@@ -68,6 +77,7 @@ public class RebindWithGlyphs : MonoBehaviour
     //when the user completes the rebind operation, notify the binding manager and update the key glyph
     private void RebindComplete()
     {
+        _rebindOp = null;
         BindingManager.bindingManager.SetBind(actionToRebind, index);
 
         if (GetGlyph.listenerGlyphs != null)
@@ -77,14 +87,14 @@ public class RebindWithGlyphs : MonoBehaviour
                 glyph.UpdateGlyph();
             }
         }
-            
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform.parent);
         actionToRebind.Enable();
     }
 
     //update the glyph used for this key
     public void UpdateGlyph()
     {
-        if (actionToRebind.controls.Count == 0) return;
         string keyName = actionToRebind.bindings[index].effectivePath;
 
         if(keyName.Split("/").Length == 2)
