@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Narration
 {
-    //manages which narration clips are able to be run based on the player's progress
+    //manages which narration clips are able to run based on the player's progress
     public class NarrationManager : MonoBehaviour
     {
         //singleton
@@ -15,7 +15,7 @@ namespace Narration
 
         [Tooltip("Reset flag. Check to reset which narrations can play")]public bool reset;
 
-        //maps the name of a Narration scriptable object with whether it is allowed to run
+        //maps the name of a Narration scriptable object to whether it is allowed to run
         private Dictionary<string, bool> shouldRun;
 
         //stores narration clips that have already played

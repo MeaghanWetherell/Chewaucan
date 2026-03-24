@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 namespace Narration
 {
+    //DEPRECATED
     [CreateAssetMenu(menuName = "Narration/DemoStart")]
     public class DemoStartNarration : Narration
     {

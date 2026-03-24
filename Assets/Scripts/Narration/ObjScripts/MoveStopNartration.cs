@@ -9,6 +9,7 @@ using UnityEngine.Events;
 namespace Narration
 {
     [CreateAssetMenu(menuName = "Narration/moveStopping")]
+    //overload of narration that stops player land movement while playing
     public class MoveStopNarration : Narration
     {
         private FadeFromBlack fader;

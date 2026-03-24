@@ -14,6 +14,7 @@ using UnityEngine.UI;
 
 namespace QuestSystem.Quests.QScripts
 {
+    //interface between match3 and the quest system
     public class MatchLvlComplete : MonoBehaviour
     {
         [Tooltip("Levels that trigger quest completion")]public List<int> lvls;
@@ -42,6 +43,7 @@ namespace QuestSystem.Quests.QScripts
             MatchLevelManager.matchLevelManager.OnComplete.RemoveListener(OnLvlComplete);
         }
 
+        //triggers quest updates and progress per level
         private void OnLvlComplete(int lvl)
         {
             if (lvl == 0)

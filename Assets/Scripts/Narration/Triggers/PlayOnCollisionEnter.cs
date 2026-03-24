@@ -2,16 +2,16 @@ using UnityEngine;
 
 namespace Narration.Triggers
 {
+    //plays a narration clip on collision enter
     public class PlayOnCollisionEnter : MonoBehaviour, IControllerCollisionEnter
     {
+        [Tooltip("Clip to play")]
         public Narration clip;
 
         public void OnControllerCollisionEnter(GameObject collision)
         {
-            //Debug.Log("Collided with "+other.gameObject.name);
             if (!collision.gameObject.CompareTag("Player"))
                 return;
-            //Debug.Log(clip.name+" playability "+clip.GetPlayability());
             if (clip.GetPlayability())
             {
                 clip.Begin();

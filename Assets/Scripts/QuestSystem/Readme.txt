@@ -1,6 +1,7 @@
 Art Team: If you want to write a quest, you need to do three things: 
 1. write a quest description in a text file containing a short description of the quest and a long description of the quest (long is optional)
 2. Right click in project view > create > QuestObj and fill out the fields in your new quest object. All of the fields have tooltips for more in depth descriptions of what they are.
+2.1 Several fields require text objects. They're pretty simple, check out the existing ones for format.
 3. Tell someone from the code team you made a quest and what the objective is. They'll finish hooking it up. 
 ----------------------------------------------------------------------------------------------------------------
 Code Team: Quest system is pretty much a fully closed system. If you need to refactor it, look at my comments in the class files.

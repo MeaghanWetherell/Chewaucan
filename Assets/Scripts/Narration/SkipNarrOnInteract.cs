@@ -11,7 +11,7 @@ namespace Narration
     {
         public InputActionReference interactKey;
 
-        [Tooltip("Text for the text prompt")]public TextMeshProUGUI text;
+        [Tooltip("Text object for the text prompt")]public TextMeshProUGUI text;
 
         //sets the text prompt letting the player know they can skip the narration
         private void Awake()

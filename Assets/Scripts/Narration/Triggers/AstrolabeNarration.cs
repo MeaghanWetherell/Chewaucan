@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace Narration
 {
+    //DEPRECATED
     public class AstrolabeNarration : MonoBehaviour
     {
         public Narration astroClip;

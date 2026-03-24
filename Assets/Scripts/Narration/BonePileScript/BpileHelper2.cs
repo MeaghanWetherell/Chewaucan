@@ -6,7 +6,7 @@ using LoadGUIFolder;
 using UnityEngine;
 using UnityEngine.Events;
 
-//prevent getting stuck in pleistocene if leaving before bp11 plays
+//prevents getting stuck in pleistocene if leaving before bp11 plays
 public class BpileHelper2 : MonoBehaviour
 {
     public Narration.Narration BP11;
@@ -20,7 +20,6 @@ public class BpileHelper2 : MonoBehaviour
             BP11.addToOnComplete(new List<UnityAction<string>>{
             str =>
             {
-                //Debug.Log("Ran BP11 OnComp");
                 LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
                 v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
                 string json = JsonSerializer.Serialize(toSerialize);

@@ -5,6 +5,7 @@ namespace Narration.Triggers
 {
     public class PleistoceneLoad1 : PlayOnLoad
     {
+        //DEPRECATED
         public Narration wallHit;
 
         protected override void Start()

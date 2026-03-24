@@ -15,6 +15,7 @@ namespace QuestSystem
     {
         public static QuestManager questManager;
 
+        [Tooltip("Prefab for quest update pop-ups")]
         public GameObject questUpdatePopUp;
         
         public static bool resetQuests = false;
@@ -152,6 +153,7 @@ namespace QuestSystem
             return _quests;
         }
 
+        //loads all the player's saved quest
         private void LoadFromFile(string path)
         {
             CountsPerQuestType = new int[3];

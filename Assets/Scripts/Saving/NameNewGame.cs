@@ -11,16 +11,19 @@ using UnityEngine.InputSystem;
 
 public class NameNewGame : MonoBehaviour
 {
+    [Tooltip("Title text field")]
     public TextMeshProUGUI headerText;
 
     public TMP_InputField inputField;
 
+    [Tooltip("Placeholder text field from the TMP input component")]
     public TextMeshProUGUI inputPlacehodler;
     
     private int pathNo;
 
     public List<string> reservedNames;
 
+    //initializes the pop-up for the save slot specified by pathNumber
     public void Initialize(int pathNumber)
     {
         pathNo = pathNumber;
@@ -42,9 +45,9 @@ public class NameNewGame : MonoBehaviour
             Player.player.GetComponent<PlayerInput>().enabled = true;
     }
 
+    //attempts to create a new save with the name in the input field, with validation.
     public void OnClick()
     {
-        //Debug.Log(pathNo);
         string inText = inputField.text.Trim();
         if (reservedNames.Contains(inText.ToLower()))
         {

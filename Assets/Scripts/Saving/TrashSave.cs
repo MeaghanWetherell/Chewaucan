@@ -8,19 +8,15 @@ public class TrashSave : MonoBehaviour
 {
     public static int toTrash;
 
+    [Tooltip("The button to trash the save")]
     public Button myButton;
 
+    [Tooltip("The slot to trash")]
     public int mySlot;
-
-    public SetPathAndLoad trashButton;
+    
 
     public void OnEnable()
     {
-        if (trashButton != null)
-        {
-            trashButton.pathNumber = toTrash;
-        }
-
         if (myButton != null)
         {
             if (!SaveHandler.saveHandler.checkPath(SaveHandler.saveHandler.saveSlots[mySlot]))

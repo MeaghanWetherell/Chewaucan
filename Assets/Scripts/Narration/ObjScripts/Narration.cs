@@ -11,17 +11,15 @@ namespace Narration
 {
     [CreateAssetMenu(menuName = "Narration/basic")]
     //scriptable object to store narration details. Recommend extending to add additional actions on narration complete
-    //serialized objects are weird, I believe it will deallocate the memory for the onComplete list on termination,
-    //but if there's a leak check here
     public class Narration : ScriptableObject
     {
-        //clip associated with this narration
+        [Tooltip("clip associated with this narration")]
         public AudioClip narrationClip;
         
-        //the subtitle doc for this narration
+        [Tooltip("the subtitle doc for this narration")]
         public TextAsset subtitles;
 
-        //whether this narration should be playable by default
+        [Tooltip("whether this narration should be playable by default")]
         //disable this is if it should be unavailable until a certain action has been performed,
         //otherwise enable. playability is not automatically used by the narration,
         //but may be checked in code to determine if narration should play
@@ -113,6 +111,7 @@ namespace Narration
             NarrationManager.narrationManager.SetPlayability(name, set);
         }
 
+        //parses a subtitle document into a float list of end times and string list of subtitles to display
         private (List<float>, List<string>) parseSubtitles()
         {
             List<float> times = new List<float>();
@@ -136,6 +135,7 @@ namespace Narration
             return (times, lines);
         }
 
+        //takes a string representation of a time from the subtitle doc and converts it to seconds
         private float stringTimeToFloat(string conv)
         {
             string[] cur = conv.Split(':');

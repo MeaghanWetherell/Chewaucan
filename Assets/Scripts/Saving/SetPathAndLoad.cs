@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
+//handles loading a new game
 public class SetPathAndLoad : MonoBehaviour
 {
     public enum loadType
@@ -19,14 +20,19 @@ public class SetPathAndLoad : MonoBehaviour
     
     public Button myButton;
 
+    [Tooltip("The type of loading this button should. myPath for the path number set below, lastUsed for the last used save path, newGame for a newGame, continueIfPossible to continue from last path if it exists and otherwise start a new game")]
     public loadType lt;
 
+    [Tooltip("The main text for the save slot name")]
     public TextMeshProUGUI text;
     
+    [Tooltip("Save slot to load if set to myPath")]
     public int pathNumber;
 
+    [Tooltip("Prefab pop-up asking the player to name a new save")]
     public GameObject newGameNameObj;
 
+    //initialize the button based on the inspector settings
     private void Start()
     {
         string myPath = SaveHandler.saveHandler.saveSlots[pathNumber];
@@ -101,7 +107,6 @@ public class SetPathAndLoad : MonoBehaviour
 
     private void NewGame()
     {
-        //Debug.Log(pathNumber);
         newGameNameObj.SetActive(true);
         newGameNameObj.GetComponent<NameNewGame>().Initialize(pathNumber);
     }

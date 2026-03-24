@@ -7,19 +7,19 @@ using UnityEngine.Events;
 
 public class CutsceneNarrTrigger : MonoBehaviour
 {
+    [Tooltip("Narration to play when triggered")]
     public Narration.Narration narrToPlay;
 
+    [Tooltip("Narration to trigger automatically when this one completes")]
     public CutsceneNarrTrigger nextNarr;
     
     public void StartNarr()
     {
-            //Debug.Log("Starting narr "+narrToPlay.name);
-            narrToPlay.Begin(new List<UnityAction<string>>{OnNarrEnd},false);
+        narrToPlay.Begin(new List<UnityAction<string>>{OnNarrEnd},false);
     }
 
     public void StopNarr()
     {
-        //Debug.Log("Stopping "+narrToPlay.name);
         narrToPlay.Stop();
     }
 
@@ -31,9 +31,7 @@ public class CutsceneNarrTrigger : MonoBehaviour
 
     private IEnumerator EnableNextNarr()
     {
-        //Debug.Log("Waiting to enable narr "+nextNarr.name);
         yield return new WaitForSeconds(0.2f);
-        //Debug.Log("Enabling "+nextNarr.name);
         nextNarr.StartNarr();
     }
 }

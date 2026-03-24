@@ -40,6 +40,7 @@ namespace QuestSystem
         //quest updates
         [NonSerialized]public List<string> qUpdates;
 
+        //the unlock status of each of this quest's updates, mapped by index
         public List<bool> updateUnlocks;
 
         //completion text

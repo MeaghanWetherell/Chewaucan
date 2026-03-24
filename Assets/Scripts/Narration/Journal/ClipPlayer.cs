@@ -8,14 +8,18 @@ using UnityEngine.UI;
 
 namespace Narration.Journal
 {
+    //handles playing narration in the narration journal
     public class ClipPlayer : MonoBehaviour
     {
         private static ClipPlayer curPlayer;
         
+        [Tooltip("The narration clip handled by this player")]
         public Narration clip;
 
+        [Tooltip("The sprite the button should use when not playing")]
         public Sprite playSprite;
 
+        [Tooltip("The sprite the button should use when playing")]
         public Sprite stopSprite;
 
         private bool playing = false;

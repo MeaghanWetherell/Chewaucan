@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using QuestSystem;
 using UnityEngine;
 
+//destroys this object if the associated quest is complete
 public class WallUntilQuestCompletion : MonoBehaviour
 {
     public string questID;

@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//handles interactions with the steam api
 public static class SteamAPIManager
 {
     private const int appID = 3512920;
     private static bool connected = false;
 
+    //initializes the connection with the steam api, must be called before using steam API methods
     public static bool init()
     {
         if (connected) return true;
@@ -24,6 +26,7 @@ public static class SteamAPIManager
         }
     }
 
+    //unlocks the steam achievement with the passed id
     public static bool UnlockAch(string id)
     {
         if (!connected) return false;
@@ -31,6 +34,7 @@ public static class SteamAPIManager
         return ach.Trigger();
     }
 
+    //gets the stat progress for the stat with the passed id
     public static float GetProg(string id)
     {
         if (!connected) return -1;
@@ -39,6 +43,7 @@ public static class SteamAPIManager
         return ret;
     }
 
+    //sets the stat progress for the stat with the passed id
     public static bool SetProg(string id, float set)
     {
         if (!connected) return false;

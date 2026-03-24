@@ -15,12 +15,17 @@ using UnityEngine.Playables;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+//kind of cludgy script to make the bone pile narrations and pop ups and everything happen at the right times
+//essentially just full of bespoke code for each narration that runs when it completes to do specific things that aren't handled generically by anything
 public class BonepileScript : MonoBehaviour
 {
+    [Tooltip("Parent object containing all the bone pile walls")]
     public GameObject bpileWalls;
 
+    [Tooltip("Quest object for the bone pile quest")]
     public QuestObj bpileQ;
     
+    [Tooltip("The object with the playable director component for cutscene 1")]
     public GameObject cutscene1;
     
     public Narration.Narration BP1;
@@ -41,10 +46,13 @@ public class BonepileScript : MonoBehaviour
 
     public Narration.Narration BP52;
 
+    //the mastodon bone hud image
     private Image mastoBoneUIImage;
 
+    [Tooltip("All the bones in the bonepile the player can interact with")]
     public List<BoneInteractable> allBoneInteractables;
 
+    [Tooltip("The location to return the player to in the modern map after going to the pleistocene")]
     public Vector3 BPilePlayerPosition;
 
     private static BonepileScript scriptSingleton;
@@ -192,6 +200,7 @@ public class BonepileScript : MonoBehaviour
         LoadGUIManager.loadGUIManager.InstantiatePopUp("The Bone Pile", "Interact with bones with Tab. Find the bone that matches yours!");
     }
 
+    //flash the outlines of all the interactable bones
     private IEnumerator FlashOutlines()
     {
         foreach (BoneInteractable bint in allBoneInteractables)

@@ -4,8 +4,10 @@ using UnityEngine;
 
 namespace Narration.Journal
 {
+    //instantiates all the narration clips the player has unlocked in the journal
     public class LoadClips : MonoBehaviour
     {
+        [Tooltip("Prefab for a single narration clip player")]
         public GameObject playerPrefab;
         void Start()
         {
@@ -18,6 +20,7 @@ namespace Narration.Journal
             }
         }
 
+        //finds the correct resource folder that a narration can be found in
         private string GetFolder(string id)
         {
             string folder = "";

@@ -13,32 +13,44 @@ public class SaveHandler : MonoBehaviour
 {
     public static SaveHandler saveHandler;
     
+    //future proofing for in case save files need version conversion
+    [Tooltip("Version number for the current version")]
     public string currentVersion;
 
+    [Tooltip("Save location for metadata such as the last used save path")]
     public string metadataSaveLoc;
 
+    [Tooltip("Path at which settings are saved")]
     public string settingsSavePath;
 
+    //the names of each save slot
     [NonSerialized]public List<String> saveSlots;
 
+    //the path to the current active save folder
     private string savePath;
 
+    //time played on the current save
     private float timePlayed;
 
+    //invoked when loading a new save
     private UnityEvent<string> loadRegular = new UnityEvent<string>();
 
+    //invoked when we should save
     private UnityEvent<string> saveRegular = new UnityEvent<string>();
     
     private UnityEvent<string> loadSettings = new UnityEvent<string>();
 
     private UnityEvent<string> saveSettings = new UnityEvent<string>();
 
+    //invoked on creating a new game
     private UnityEvent<string> newGame = new UnityEvent<string>();
 
+    //flag used when not loading from the main menu to force new subscribers to load to load from file immediately
     private bool loadImmediately;
-
+    
     private Coroutine timeTracker;
 
+    //initialize the save slots and metadata
     private void Awake()
     {
         if (saveHandler != null)
@@ -76,6 +88,7 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
+    //gets the path to the most recently used save
     public string getLastSavePath()
     {
         try
@@ -99,6 +112,7 @@ public class SaveHandler : MonoBehaviour
             loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
     }
 
+    //auto-saves on quit
     private void OnApplicationQuit()
     {
         try
@@ -116,11 +130,13 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
+    //returns whether the current path is valid
     public bool checkPath()
     {
         return checkPath(savePath);
     }
     
+    //returns whether the passed path is valid
     public bool checkPath(string path)
     {
         if (path == null || path.Equals("")) return false;
@@ -170,6 +186,7 @@ public class SaveHandler : MonoBehaviour
         newGame.RemoveListener(ng);
     }
 
+    //sets the current save path
     public void setSavePath(string path)
     {
         if (checkPath())
@@ -181,10 +198,10 @@ public class SaveHandler : MonoBehaviour
 
     private void writeMetaFile(string path, string version, float time)
     {
-        //Debug.Log("Writing Meta File to "+path);
         File.WriteAllText(Application.persistentDataPath+"/"+path+"/meta", version+"\n"+time);
     }
 
+    //reads the meta data for a save slot: version number and time played for the slot
     private (string, float) readMetaFile(string path)
     {
         (string, float) ret = new ValueTuple<string, float>();
@@ -243,6 +260,7 @@ public class SaveHandler : MonoBehaviour
         return Application.persistentDataPath+"/"+savePath;
     }
 
+    //creates a new game at the passed path, deleting the old save if it exists
     public void NewGame(string path)
     {
         try
@@ -256,11 +274,13 @@ public class SaveHandler : MonoBehaviour
         newGame.Invoke(path);
     }
 
+    //currently does nothing. future proofing for in case save files need version conversion
     public void VersionConversion(string fileVersion)
     {
         Debug.Log("Version mismatch");
     }
 
+    //invoke load for the currently set save file
     public void Load()
     {
         (string, float) tup = readMetaFile(savePath);
@@ -280,6 +300,7 @@ public class SaveHandler : MonoBehaviour
         loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
     }
 
+    //save everything to the current save file
     public void Save()
     {
         StopTimer();

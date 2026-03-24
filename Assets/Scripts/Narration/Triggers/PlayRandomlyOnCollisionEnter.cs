@@ -8,10 +8,13 @@ namespace Narration.Triggers
 {
     public class PlayRandomlyOnCollisionEnter : MonoBehaviour, IControllerCollisionEnter
     {
+        [Tooltip("Picks a random one of this clips to play on collision enter")]
         public List<Narration> clips;
         
+        [Tooltip("Minimum time before other *instances of this script* will play again")]
         public float timeBetweenPlays = 10f;
 
+        //Whether the script is able to play (if false) or not (if true)
         private static bool waitForNextPlay;
 
         private void Start()
@@ -21,7 +24,6 @@ namespace Narration.Triggers
 
         public void OnControllerCollisionEnter(GameObject collision)
         {
-            //Debug.Log("Collided");
             if (!collision.gameObject.CompareTag("Player"))
                 return;
             if (waitForNextPlay) return;
