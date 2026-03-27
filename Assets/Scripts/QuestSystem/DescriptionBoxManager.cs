@@ -16,6 +16,9 @@ namespace QuestSystem
 
         [Tooltip("X sprite")]
         public Sprite x;
+
+        [Tooltip("The scrollable text content of the quest description")]
+        public TextMeshProUGUI descContent;
         
         public static DescriptionBoxManager descriptionBoxManager;
 
@@ -29,7 +32,7 @@ namespace QuestSystem
         {
             _cur = newNode;
             transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.name;
-            TextMeshProUGUI longDescTMP = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI longDescTMP = descContent;
             if (_cur.longDescription.Equals(""))
             {
                 longDescTMP.text = _cur.shortDescription;
