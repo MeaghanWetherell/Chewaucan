@@ -13,6 +13,8 @@ public class GameEndScript : MonoBehaviour
 
     public TextMeshProUGUI rating;
 
+    public QuestObj scienceLogObj;
+
     public Narration.Narration startNarration;
     
     public Narration.Narration MC2_1;
@@ -58,6 +60,9 @@ public class GameEndScript : MonoBehaviour
             rating.text = "You told a Bad story! Rating: Bad";
             SteamAPIManager.UnlockAch("BadEnding");
         }
+
+        if (completion >= 0.5f)
+            QuestManager.questManager.CreateQuestNode(scienceLogObj);
 
         if (completion >= 1)
         {

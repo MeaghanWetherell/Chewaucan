@@ -36,6 +36,11 @@ public class PlayerPositionManager : MonoBehaviour
     //the purpose of this flag is to stop update from finding the player's position
     //on the frame a load is triggered, which overwrites the position on a loaded save file
     private bool sceneDirtyFlag = false;
+
+    public void SetSceneDirty(bool flag = true)
+    {
+        sceneDirtyFlag = flag;
+    }
     
     public void Reset()
     {

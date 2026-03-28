@@ -10,6 +10,8 @@ using UnityEngine;
 
 /*
  * You can find the relevant terrain palette in the folder Assests/GroundTextures/TerrainPalette
+ * You do not need to have this terrain palette as the active palette on any terrain
+ * But any layer you want to be linked to a sound needs to be on this palette.
  */
 
 public class CheckGroundTexture : MonoBehaviour

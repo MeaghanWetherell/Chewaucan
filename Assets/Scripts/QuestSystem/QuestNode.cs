@@ -134,13 +134,13 @@ namespace QuestSystem
         }
         
         //Unlocks the update with the passed title
-        public bool UnlockUpdate(string title)
+        public bool UnlockUpdate(string title, bool createPopUp = true)
         {
             for (int i = 0; i < qUpdateTitles.Count; i++)
             {
                 if (qUpdateTitles[i].Trim().Equals(title))
                 {
-                    return UnlockUpdate(i);
+                    return UnlockUpdate(i, createPopUp);
                 }
             }
             return false;
@@ -160,7 +160,7 @@ namespace QuestSystem
         }
 
         //Unlocks the update at the passed position in the order
-        public bool UnlockUpdate(int updateNum)
+        public bool UnlockUpdate(int updateNum, bool createPopUp = true)
         {
             if (updateNum < 0)
             {
@@ -171,7 +171,7 @@ namespace QuestSystem
                 Debug.Log("Got invalid unlock number");
                 return false;
             }
-            if(!updateUnlocks[updateNum])
+            if(!updateUnlocks[updateNum] && createPopUp)
                 CreateUpdatePopUP(updateNum);
             updateUnlocks[updateNum] = true;
             return true;
@@ -240,7 +240,12 @@ namespace QuestSystem
             {
                 updateUnlocks.Add(false);
             }
-            compText = data.completeFile.ToString();
+            if(data.completeFile != null)
+                compText = data.completeFile.ToString();
+            else
+            {
+                compText = "";
+            }
             requiredCounts = data.countsRequired;
             if (requiredCounts == null)
             {
