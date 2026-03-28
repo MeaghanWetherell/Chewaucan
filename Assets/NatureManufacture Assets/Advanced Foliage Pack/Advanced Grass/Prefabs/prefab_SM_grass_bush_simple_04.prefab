@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4026119347050540}
   - component: {fileID: 33358867868890324}
   - component: {fileID: 23934436545877374}
-  - component: {fileID: -532820522409612471}
+  - component: {fileID: -2108914668997951410}
   m_Layer: 0
   m_Name: prefab_SM_grass_bush_simple_04
   m_TagString: Untagged
@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 60ebafc534e7d164ca554165a90ca71b, type: 2}
@@ -74,7 +74,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!205 &-532820522409612471
+--- !u!205 &-2108914668997951410
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,8 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0.002215147, y: 0.5761286, z: -0.014880568}
   m_Size: 1.2075005
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
   - screenRelativeHeight: 0.01
