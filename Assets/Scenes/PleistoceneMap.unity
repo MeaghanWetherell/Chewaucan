@@ -2337,6 +2337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deerflyNarration: {fileID: 11400000, guid: ddb2a524bd3f7b54499f1f64902f804e, type: 2}
+  natLogID: naturelog
+  deerflyUpdateName: Deerflies
 --- !u!4 &334927095
 Transform:
   m_ObjectHideFlags: 0
@@ -10360,7 +10362,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6052605902245000959, guid: c5feab21efe1c6341992e571385c699e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7425177937922730888, guid: c5feab21efe1c6341992e571385c699e, type: 3}
@@ -12943,7 +12946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1922605294
 Transform:
   m_ObjectHideFlags: 0
