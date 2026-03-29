@@ -8,6 +8,7 @@ using LoadGUIFolder;
 using Narration;
 using QuestSystem;
 using ScriptTags;
+using TimeTravel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -127,7 +128,6 @@ public class BonepileScript : MonoBehaviour
                 mastoBoneUIImage.gameObject.SetActive(false);
         }
         BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
-                //Debug.Log("Ran BP10 OnComp");
                 BP11.SetPlayability(true);},
             str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}
         });
@@ -136,12 +136,8 @@ public class BonepileScript : MonoBehaviour
             BP11.addToOnComplete(new List<UnityAction<string>>{
                 str =>
                 {
-                    //Debug.Log("Ran BP11 OnComp");
                     LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
-                    v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
-                    string json = JsonSerializer.Serialize(toSerialize);
-                    string savePath = SaveHandler.saveHandler.getSavePath();
-                    File.WriteAllText(savePath+"/astrolabeteleposition1.json", json);
+                    AstrolabeDestinationManager.SetDestination(BPilePlayerPosition, 1);
                     BP12.SetPlayability(true);
                 }});
         }

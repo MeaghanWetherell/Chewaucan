@@ -9,7 +9,7 @@ using UnityEngine;
 public static class GSSaver
 {
     //path at which to save graphics settings
-    public static String filepath = "SavedSettings/Chewaucan/GraphicsSettings";
+    public static String filepath = "Chewaucan/SavedSettings/GraphicsSettings";
 
     //list of the non-standard resolutions that have been registered
     private static List<Vector2Int> addedResolutions;

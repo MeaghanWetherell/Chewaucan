@@ -17,13 +17,9 @@ namespace QuestSystem.Quests.QScripts
     //interface between match3 and the quest system
     public class MatchLvlComplete : MonoBehaviour
     {
-        [Tooltip("Levels that trigger quest completion (do not use 0 based indexing)")]public List<int> qCompletelvls;
+        [Tooltip("Levels that trigger quest completion")]public List<int> lvls;
 
-        [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> compIds;
-        
-        [Tooltip("Levels that give the player a quest (do not use 0 based indexing)")]public List<int> qGainlvls;
-
-        [Tooltip("IDs of the quests to give, matching the level that needs to be completed by index")] public List<QuestObj> gainObjs;
+        [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> ids;
 
         public QuestObj fishQuestObj;
 
@@ -61,19 +57,11 @@ namespace QuestSystem.Quests.QScripts
                 QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
                  */
             }
-            for(int i = 0; i < qGainlvls.Count; i++)
+            for (int i = 0; i < lvls.Count; i++)
             {
-                if (qGainlvls[i] == lvl + 1)
+                if (lvls[i] == lvl+1)
                 {
-                    QuestManager.questManager.CreateQuestNode(gainObjs[i]);
-                }
-            }
-            for (int i = 0; i < qCompletelvls.Count; i++)
-            {
-                
-                if (qCompletelvls[i] == lvl+1)
-                {
-                    QuestNode target = QuestManager.questManager.GETNode(compIds[i]);
+                    QuestNode target = QuestManager.questManager.GETNode(ids[i]);
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
@@ -85,10 +73,7 @@ namespace QuestSystem.Quests.QScripts
                             J3.Begin();
                             J3.SetPlayability(false);
                             J4.SetPlayability(true);
-                            v3Wrapper toSerialize = new v3Wrapper(new Vector3(814,79,-340));
-                            string json = JsonSerializer.Serialize(toSerialize);
-                            string savePath = SaveHandler.saveHandler.getSavePath();
-                            File.WriteAllText(savePath+"/astrolabeteleposition"+(2)+".json", json);
+                            AstrolabeDestinationManager.SetDestination(new Vector3(814,79,-340));
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                             LoadGUIManager.loadGUIManager.SubToTopPopUp(str => {SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map"); });
                             QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
@@ -103,6 +88,18 @@ namespace QuestSystem.Quests.QScripts
                         {
                             popUp.GetComponentInChildren<Button>().onClick.AddListener(() => {
                                 SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");});
+                        }
+                    }
+                    if (ids[i] == fishQuestObj.uniqueID)
+                    {
+                        QuestNode plateauNode = QuestManager.questManager.GETNode(plateauQuestId);
+                        if (plateauNode is {isComplete: true})
+                        {
+                            //TODO: narration trigger
+                        }
+                        else
+                        {
+                            //TODO: narration trigger    
                         }
                     }
                 }

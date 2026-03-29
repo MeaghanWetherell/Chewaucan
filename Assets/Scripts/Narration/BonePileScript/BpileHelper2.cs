@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using LoadGUIFolder;
+using TimeTravel;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,10 +22,7 @@ public class BpileHelper2 : MonoBehaviour
             str =>
             {
                 LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
-                v3Wrapper toSerialize = new v3Wrapper(BPilePlayerPosition);
-                string json = JsonSerializer.Serialize(toSerialize);
-                string savePath = SaveHandler.saveHandler.getSavePath();
-                File.WriteAllText(savePath+"/astrolabeteleposition1.json", json);
+                AstrolabeDestinationManager.SetDestination(BPilePlayerPosition, 1);
                 BP12.SetPlayability(true);
             }});
     }

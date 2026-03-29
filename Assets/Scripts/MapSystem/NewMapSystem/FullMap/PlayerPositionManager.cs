@@ -6,6 +6,7 @@ using System.IO;
 using System.Text.Json.Serialization;
 using Misc;
 using ScriptTags;
+using TimeTravel;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.SceneManagement;
@@ -36,11 +37,6 @@ public class PlayerPositionManager : MonoBehaviour
     //the purpose of this flag is to stop update from finding the player's position
     //on the frame a load is triggered, which overwrites the position on a loaded save file
     private bool sceneDirtyFlag = false;
-
-    public void SetSceneDirty(bool flag = true)
-    {
-        sceneDirtyFlag = flag;
-    }
     
     public void Reset()
     {
@@ -83,8 +79,6 @@ public class PlayerPositionManager : MonoBehaviour
             };
             json = File.ReadAllText(path + "/" + playerPosFileName + ".json");
             nextPlayerPosition = JsonSerializer.Deserialize<List<Vector3>>(json, opts);
-            //Debug.Log(nextPlayerPosition[0]);
-            //Debug.Log(nextPlayerPosition[1]);
         }
         catch (IOException){ Reset(); }
 
@@ -155,6 +149,14 @@ public class PlayerPositionManager : MonoBehaviour
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (AstrolabeUIIconManager.GetNewDest())
+        {
+            setPlayerPosition(AstrolabeDestinationManager.GetTeleposition(), 0);
+        }
+        if(AstrolabeUIIconManager.GetNewDest(1))
+        {
+            setPlayerPosition(AstrolabeDestinationManager.GetTeleposition(), 1);
+        }
         if (next.name.Equals("Modern Map"))
         {
             loadModernMap = true;

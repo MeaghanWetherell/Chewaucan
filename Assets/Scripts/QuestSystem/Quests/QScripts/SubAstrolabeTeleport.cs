@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using Misc;
 using ScriptTags;
+using TimeTravel;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -63,10 +64,7 @@ namespace QuestSystem.Quests.QScripts
         {
             if(HUDManager.hudManager != null)
                 HUDManager.hudManager?.astrolabeUI?.gameObject.SetActive(true);
-            v3Wrapper toSerialize = new v3Wrapper(playerPosition);
-            string json = JsonSerializer.Serialize(toSerialize);
-            string savePath = SaveHandler.saveHandler.getSavePath();
-            File.WriteAllText(savePath+"/astrolabeteleposition"+(sceneToTeleport+1)+".json", json);
+            AstrolabeDestinationManager.SetDestination(playerPosition, sceneToTeleport+1);
             playOnAstrolabeOpen?.SetPlayability(true);
         }
 
