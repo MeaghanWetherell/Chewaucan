@@ -155,7 +155,8 @@ public class PlayerPositionManager : MonoBehaviour
         }
         if(AstrolabeUIIconManager.GetNewDest(1))
         {
-            setPlayerPosition(AstrolabeDestinationManager.GetTeleposition(), 1);
+            Vector3 pos = AstrolabeDestinationManager.GetTeleposition(2);
+            setPlayerPosition(pos, 1);
         }
         if (next.name.Equals("Modern Map"))
         {

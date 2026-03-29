@@ -20,8 +20,18 @@ public class AstrolabeUIIconManager : MonoBehaviour
 
     public Sprite newThingSprite;
 
-    public void Start()
+    private void OnEnable()
     {
+        StartCoroutine(WaitToInitialize());
+        if(manager != null)
+            Destroy(gameObject);
+        manager = this;
+    }
+
+    //wait a frame to initialize so player position manager can finish
+    private IEnumerator WaitToInitialize()
+    {
+        yield return null;
         if (SceneManager.GetActiveScene().name.Equals("PleistoceneMap"))
         {
             SetNewDest(false, 1);
@@ -34,13 +44,11 @@ public class AstrolabeUIIconManager : MonoBehaviour
             SetNewDest(newDestinationPleist, 1);
             curMap = 0;
         }
-        if(manager != null)
-            Destroy(gameObject);
-        manager = this;
     }
+    
 
     //0 for modern 1 for pleistocene
-    public void SetNewDest(bool set, int map)
+    public static void SetNewDest(bool set, int map)
     {
         if (map == 0)
         {
@@ -50,13 +58,13 @@ public class AstrolabeUIIconManager : MonoBehaviour
         {
             newDestinationPleist = set;
         }
-        if (map != curMap && set)
+        if (manager != null && map != manager.curMap && set)
         {
-            myImage.sprite = newThingSprite;
+            manager.myImage.sprite = manager.newThingSprite;
         }
-        else
+        else if(manager != null)
         {
-            myImage.sprite = defaultSprite;
+            manager.myImage.sprite = manager.defaultSprite;
         }
     }
 

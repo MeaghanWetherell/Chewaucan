@@ -23,7 +23,7 @@ namespace TimeTravel
             string json = JsonSerializer.Serialize(toSerialize);
             string savePath = SaveHandler.saveHandler.getSavePath();
             File.WriteAllText(savePath+"/astrolabeteleposition"+map+".json", json);
-            AstrolabeUIIconManager.manager.SetNewDest(true, map-1);
+            AstrolabeUIIconManager.SetNewDest(true, map-1);
         }
         
         private void Awake()
@@ -47,6 +47,7 @@ namespace TimeTravel
             try
             {
                 string savePath = SaveHandler.saveHandler.getSavePath();
+                Debug.Log(savePath + "/astrolabeteleposition" + map + ".json");
                 v3Wrapper temp =
                     JsonSerializer.Deserialize<v3Wrapper>(
                         File.ReadAllText(savePath + "/astrolabeteleposition" + map + ".json"));

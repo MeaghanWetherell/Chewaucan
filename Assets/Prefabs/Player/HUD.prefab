@@ -1313,7 +1313,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2293490872143940589}
   - component: {fileID: 6360049082842152802}
-  - component: {fileID: 2260689326719931922}
   - component: {fileID: 6640241107433481570}
   - component: {fileID: 1666113960540914276}
   m_Layer: 5
@@ -1344,7 +1343,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -350, y: -62.5}
-  m_SizeDelta: {x: 0, y: 125}
+  m_SizeDelta: {x: 700, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6360049082842152802
 CanvasRenderer:
@@ -1354,36 +1353,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608261650393004896}
   m_CullTransparentMesh: 1
---- !u!114 &2260689326719931922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4608261650393004896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6640241107433481570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,10 +1370,10 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 2
   m_Spacing: 35
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
@@ -1528,7 +1497,7 @@ GameObject:
   - component: {fileID: 199548050714864472}
   - component: {fileID: 2552586939542056018}
   - component: {fileID: 7833420683678606225}
-  - component: {fileID: 2120453008177372316}
+  - component: {fileID: 8095428277038431692}
   m_Layer: 5
   m_Name: Astrolabe Dial
   m_TagString: Untagged
@@ -1614,7 +1583,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &2120453008177372316
+--- !u!114 &8095428277038431692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1623,7 +1592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4998317582249542077}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aacf935364a71f43a38b4a7ef1d7eb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 96445b48e935e3b419831126251a56a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myImage: {fileID: 2552586939542056018}
