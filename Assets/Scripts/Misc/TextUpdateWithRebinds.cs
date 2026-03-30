@@ -36,7 +36,7 @@ public class TextUpdateWithRebinds : MonoBehaviour
         while (charNum < text.Length)
         {
             char ch = text[charNum];
-            if (ch.Equals('<'))
+            if (ch.Equals('['))
             {
                 int initCharNum = charNum;
                 charNum++;
@@ -45,14 +45,14 @@ public class TextUpdateWithRebinds : MonoBehaviour
                 while (charNum < text.Length)
                 {
                     ch2 = text[charNum];
-                    if (ch2 == '>')
+                    if (ch2 == ']')
                         break;
                     replaceAction += ch2;
                     charNum++;
                 }
-                if (ch2 != '>')
+                if (ch2 != ']')
                 {
-                    newText += '>';
+                    newText += ']';
                     charNum = initCharNum;
                     continue;
                 }
