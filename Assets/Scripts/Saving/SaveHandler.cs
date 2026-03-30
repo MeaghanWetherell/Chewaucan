@@ -81,7 +81,7 @@ public class SaveHandler : MonoBehaviour
             string lastPath = getLastSavePath();
             if (!checkPath(lastPath))
             {
-                Debug.LogError("Last Path Not Found!");
+                Debug.Log("Last Path Not Found!");
             }
             setSavePath(lastPath);
             loadImmediately = true;
