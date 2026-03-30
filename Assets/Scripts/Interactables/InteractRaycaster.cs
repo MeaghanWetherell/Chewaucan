@@ -31,7 +31,6 @@ namespace Interactables
             Interactable listener = hit.collider.GetComponent<Interactable>();
             if (listener != null)
             {
-                Debug.Log("Hit an interactable");
                 if (lastInter == null || !ReferenceEquals(lastInter, listener))
                 {
                     if(lastInter != null)lastInter.OnInteractDisable();

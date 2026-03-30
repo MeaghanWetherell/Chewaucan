@@ -62,8 +62,8 @@ public class RotateDialHand : MonoBehaviour
 
         if (dp != null)
         {
-            int[] progresses = { dp.A_progress, dp.B_progress, dp.G_progress };
-            int prog = progresses[0] + progresses[1] + progresses[2];
+            int[] progresses = { dp.A_progress, dp.B_progress, dp.G_progress, dp.N_progress };
+            int prog = progresses[0] + progresses[1] + progresses[2]+progresses[3];
             float interval = CalculateRotInterval(SaveDialProgressData.Dial.NONE);
             float rotationAmount = interval * prog;
             StartCoroutine(RotateOverTime(rotationAmount));
@@ -112,7 +112,7 @@ public class RotateDialHand : MonoBehaviour
         }
         else
         {
-            questNum = SaveDialProgressData.biologyQuestNum+SaveDialProgressData.geologyQuestNum+SaveDialProgressData.archeologyQuestNum;
+            questNum = SaveDialProgressData.biologyQuestNum+SaveDialProgressData.geologyQuestNum+SaveDialProgressData.archeologyQuestNum+SaveDialProgressData.otherQuestNum;
             add = archeologyRotationDefault;
         }
 

@@ -28,18 +28,25 @@ public class GameEndScript : MonoBehaviour
     public Narration.Narration MC2_5;
 
     private float completion = 0;
+
+    public static float calcProg()
+    {
+        DialProgress prog = SaveDialProgressData.LoadDialProgress();
+        int[] countsPerType = QuestManager.questManager.CountsPerQuestType;
+
+        int overallCompletions = prog.A_progress + prog.B_progress + prog.G_progress+prog.N_progress;
+        int overallCount = countsPerType[0] + countsPerType[1] + countsPerType[2]+countsPerType[3];
+        return overallCompletions / (float) overallCount;
+    }
     
     private void Awake()
     {
         PauseCallback.pauseManager.Resume();
-        
         DialProgress prog = SaveDialProgressData.LoadDialProgress();
         int[] countsPerType = QuestManager.questManager.CountsPerQuestType;
-
-        int overallCompletions = prog.A_progress + prog.B_progress + prog.G_progress;
-        int overallCount = countsPerType[0] + countsPerType[1] + countsPerType[2];
+        int overallCompletions = prog.A_progress + prog.B_progress + prog.G_progress+prog.N_progress;
+        int overallCount = countsPerType[0] + countsPerType[1] + countsPerType[2]+countsPerType[3];
         overallScore.text = overallCompletions + "/" + overallCount;
-
         completion = overallCompletions / (float) overallCount;
         if (completion >= 0.75)
         {

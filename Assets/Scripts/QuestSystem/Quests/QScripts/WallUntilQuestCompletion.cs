@@ -4,26 +4,74 @@ using System.Collections.Generic;
 using QuestSystem;
 using UnityEngine;
 
-//destroys this object if the associated quest is complete
+//destroys this object if the associated quests are complete
 public class WallUntilQuestCompletion : MonoBehaviour
 {
-    public string questID;
+    [Tooltip("Ids of the quests that need to be completed to destroy this wall")]
+    public List<string> compIds;
     
-    private void Start()
+    private void OnEnable()
     {
-        QuestNode quest = QuestManager.questManager.GETNode(questID);
-        if (quest.isComplete)
+        
+        if (CheckQuestsComplete())
         {
             Destroy(gameObject);
         }
         else
         {
-            quest.OnComplete.AddListener(QuestComplete);
+            QuestManager.questManager.onQuestCreated.AddListener(OnQuestCreated);
+            foreach (string id in compIds)
+            {
+                QuestNode node = QuestManager.questManager.GETNode(id);
+                if (node != null)
+                {
+                    node.OnComplete.AddListener(QuestComplete);
+                }
+            }
         }
+    }
+
+    private void OnDisable()
+    {
+        QuestManager.questManager.onQuestCreated.RemoveListener(OnQuestCreated);
+        foreach (string id in compIds)
+        {
+            QuestNode node = QuestManager.questManager.GETNode(id);
+            if (node != null)
+            {
+                node.OnComplete.RemoveListener(QuestComplete);
+            }
+        }
+    }
+
+    private void OnQuestCreated(QuestNode node)
+    {
+        foreach (string id in compIds)
+        {
+            if (id.Equals(node.id))
+            {
+                node.OnComplete.AddListener(QuestComplete);
+            }
+        }
+    }
+
+    private bool CheckQuestsComplete()
+    {
+        foreach (string id in compIds)
+        {
+            QuestNode node = QuestManager.questManager.GETNode(id);
+            if (node == null || !node.isComplete)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void QuestComplete(string id)
     {
-        Destroy(gameObject);
+        if(CheckQuestsComplete())
+            Destroy(gameObject);
     }
 }

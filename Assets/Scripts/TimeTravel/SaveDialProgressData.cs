@@ -9,6 +9,7 @@ public class DialProgress
     public int A_progress; // Archeo quests completed
     public int G_progress; // Geology quests completed
     public int B_progress; // Biology quests completed
+    public int N_progress;
 }
 
 public static class SaveDialProgressData
@@ -32,6 +33,7 @@ public static class SaveDialProgressData
     public static int archeologyQuestNum = 10;
     public static int geologyQuestNum = 8;
     public static int biologyQuestNum = 5;
+    public static int otherQuestNum;
 
     public static void CompleteOneQuest(Dial dial)
     {
@@ -42,6 +44,7 @@ public static class SaveDialProgressData
             currentProgress.A_progress = 0;
             currentProgress.G_progress = 0;
             currentProgress.B_progress = 0;
+            currentProgress.N_progress = 0;
         }
 
         if (dial == Dial.ARCHEOLOGY && currentProgress.A_progress < archeologyQuestNum)
@@ -55,6 +58,10 @@ public static class SaveDialProgressData
         else if (dial == Dial.BIOLOGY && currentProgress.B_progress < biologyQuestNum)
         {
             currentProgress.B_progress += 1;
+        }
+        else
+        {
+            currentProgress.N_progress += 1;
         }
 
         SaveDialProgress(currentProgress);
@@ -82,6 +89,7 @@ public static class SaveDialProgressData
         currentProgress.A_progress = 0;
         currentProgress.G_progress = 0;
         currentProgress.B_progress = 0;
+        currentProgress.N_progress = 0;
         return currentProgress;
     }
 

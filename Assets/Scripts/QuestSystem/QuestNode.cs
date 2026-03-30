@@ -325,6 +325,8 @@ namespace QuestSystem
             bool titling = true;
             for (int i = 0; i < fileSplit.Length; i++)
             {
+                if (fileSplit[i].Equals(""))
+                    continue;
                 if (fileSplit[i].Equals("--break--"))
                 {
                     qUpdates.Add(update);

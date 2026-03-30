@@ -25,8 +25,8 @@ namespace QuestSystem
         [Tooltip("List of all quests")] 
         public List<QuestObj> AllQuests;
 
-        //order is archaeology, geology, biology
-        public int[] CountsPerQuestType = new int[3];
+        //order is archaeology, geology, biology, none
+        public int[] CountsPerQuestType = new int[4];
         
         //quests the player has received
         private List<QuestNode> _quests = new List<QuestNode>();
@@ -156,11 +156,10 @@ namespace QuestSystem
         //loads all the player's saved quest
         private void LoadFromFile(string path)
         {
-            CountsPerQuestType = new int[3];
+            CountsPerQuestType = new int[4];
             foreach (QuestObj quest in AllQuests)
             {
-                if(quest.type != SaveDialProgressData.Dial.NONE)
-                    CountsPerQuestType[(int) quest.type]++;
+                CountsPerQuestType[(int) quest.type]++;
             }
             SaveDialProgressData.saveDataPath = path + "/DialProgess.json";
             SaveDialProgressData.archeologyQuestNum = CountsPerQuestType[0];

@@ -17,9 +17,13 @@ namespace QuestSystem.Quests.QScripts
     //interface between match3 and the quest system
     public class MatchLvlComplete : MonoBehaviour
     {
-        [Tooltip("Levels that trigger quest completion")]public List<int> lvls;
+        [Tooltip("Levels that trigger quest completion")]public List<int> questCompLvls;
 
-        [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> ids;
+        [Tooltip("IDs of the quests to complete, matching the level that needs to be completed by index")] public List<String> questCompIds;
+        
+        [Tooltip("Levels that trigger the player gaining a quest")]public List<int> questUnlockLvls;
+
+        [Tooltip("Quest objs of the quests to unlock, matching the level that needs to be completed by index")] public List<QuestObj> questUnlockObs;
 
         public QuestObj fishQuestObj;
 
@@ -57,11 +61,19 @@ namespace QuestSystem.Quests.QScripts
                 QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
                  */
             }
-            for (int i = 0; i < lvls.Count; i++)
+
+            for (int i = 0; i < questUnlockLvls.Count; i++)
             {
-                if (lvls[i] == lvl+1)
+                if (questUnlockLvls[i] == lvl + 1)
                 {
-                    QuestNode target = QuestManager.questManager.GETNode(ids[i]);
+                    QuestManager.questManager.CreateQuestNode(questUnlockObs[i]);
+                }
+            }
+            for (int i = 0; i < questCompLvls.Count; i++)
+            {
+                if (questCompLvls[i] == lvl+1)
+                {
+                    QuestNode target = QuestManager.questManager.GETNode(questCompIds[i]);
                     if(target.isComplete)
                         return;
                     target.AddCount(0, 1);
@@ -90,7 +102,7 @@ namespace QuestSystem.Quests.QScripts
                                 SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");});
                         }
                     }
-                    if (ids[i] == fishQuestObj.uniqueID)
+                    if (questCompIds[i] == fishQuestObj.uniqueID)
                     {
                         QuestNode plateauNode = QuestManager.questManager.GETNode(plateauQuestId);
                         if (plateauNode is {isComplete: true})
