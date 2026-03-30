@@ -124,6 +124,8 @@ namespace Narration
             }
             for (int i = 0; i < textByLine.Length; i++)
             {
+                if(textByLine[i].Equals(""))
+                    continue;
                 string[] cur = textByLine[i].Split('|');
                 if (cur[0][0] != '#')
                 {

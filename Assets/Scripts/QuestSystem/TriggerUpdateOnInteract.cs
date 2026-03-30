@@ -61,6 +61,7 @@ public class TriggerUpdateOnInteract : Interactable
         if (progressObjective)
             quest.AddCount(0);
         OnInteractDisable();
+        Destroy(this);
     }
 
     public override void ListenerRemoved() { }
