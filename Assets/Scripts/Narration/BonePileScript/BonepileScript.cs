@@ -90,9 +90,9 @@ public class BonepileScript : MonoBehaviour
                     wall.gameObject.SetActive(true);
                 }
             }});
-        if (!BP4.HasPlayed())
+        if (!BP3.HasPlayed())
         {
-            BP4.addToOnComplete(new List<UnityAction<string>> { s => { 
+            BP3.addToOnComplete(new List<UnityAction<string>> { s => { 
             
                 QuestManager.questManager.CreateQuestNode(bpileQ); 
                 if (!QuestManager.questManager.SubToCompletion("bonepile", toSub =>

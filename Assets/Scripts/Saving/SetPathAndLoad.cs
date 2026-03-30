@@ -29,7 +29,7 @@ public class SetPathAndLoad : MonoBehaviour
     [Tooltip("Save slot to load if set to myPath")]
     public int pathNumber;
 
-    [Tooltip("Prefab pop-up asking the player to name a new save")]
+    [Tooltip("Reference to an instance of the prefab pop-up asking the player to name a new save")]
     public GameObject newGameNameObj;
 
     //initialize the button based on the inspector settings
