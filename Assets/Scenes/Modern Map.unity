@@ -7098,6 +7098,8 @@ GameObject:
   m_Component:
   - component: {fileID: 595012657}
   - component: {fileID: 595012656}
+  - component: {fileID: 595012659}
+  - component: {fileID: 595012658}
   m_Layer: 0
   m_Name: PlateauQuestStart
   m_TagString: Untagged
@@ -7128,6 +7130,8 @@ PlayableDirector:
     value: {fileID: 1266665312}
   - key: {fileID: 6974178485624157168, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
     value: {fileID: 1562154079}
+  - key: {fileID: -8013397176270688394, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
+    value: {fileID: 595012659}
   m_ExposedReferences:
     m_References:
     - d2cccc6002895f542a76bb62827bdafc: {fileID: 190798749}
@@ -7151,6 +7155,55 @@ Transform:
   - {fileID: 1666510912}
   m_Father: {fileID: 827248805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &595012658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595012655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ba3e062e9ce8a4e99a17e1a4f53f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscene: {fileID: 1668419639240359733}
+--- !u!114 &595012659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595012655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 81c77da9683914b43aad8d397b94dbd2, type: 2}
+    - {fileID: 11400000, guid: efa087b771484254e8b57aaf0ff95783, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls: []
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1666510913}
+          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
+          m_MethodName: StartNarr
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &597885192
 GameObject:
   m_ObjectHideFlags: 0
@@ -12111,7 +12164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11238412, y: -0.0064997924, z: 0.0007351465, w: 0.99364334}
+  m_LocalRotation: {x: 0.16623062, y: -0.021911543, z: 0.003694699, w: 0.9858365}
   m_LocalPosition: {x: 31.310001, y: 30.970001, z: 383.44}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
@@ -25854,7 +25907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090882074}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1662306, y: -0.021911541, z: 0.0036946987, w: 0.9858365}
+  m_LocalRotation: {x: 0.1123841, y: -0.006499792, z: 0.00073514617, w: 0.99364334}
   m_LocalPosition: {x: -4.59, y: -12.37, z: -7.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26628,6 +26681,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a30c2e34d469a1b4380284920920679a, type: 3}
+--- !u!320 &1668419639240359733 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
+  m_PrefabInstance: {fileID: 1668419639240359732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2558412121980778280
 PrefabInstance:
   m_ObjectHideFlags: 0
