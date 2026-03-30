@@ -1594,7 +1594,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 328535203}
+    m_TransformParent: {fileID: 1189613273}
     m_Modifications:
     - target: {fileID: -9119089196180460605, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_Layer
@@ -1602,15 +1602,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2.6794
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2.6794004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2.6794004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1618,19 +1618,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.0026804358
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.21167216
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.70224386
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.71193653
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1754,7 +1754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1876850840889573140, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       propertyPath: m_Layer
@@ -2748,10 +2748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 199100754}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd692aa507041734e9a45d89abd10d42, type: 3}
       insertIndex: -1
@@ -7563,6 +7560,8 @@ PlayableDirector:
     value: {fileID: 1510526072}
   - key: {fileID: 5173088567740030431, guid: 438927f0113f9e0439bf8261738de399, type: 2}
     value: {fileID: 1353114439}
+  - key: {fileID: 8396290345290669053, guid: 438927f0113f9e0439bf8261738de399, type: 2}
+    value: {fileID: 1667525223}
   m_ExposedReferences:
     m_References:
     - 185f510c595ecef49b6f69a03b62d812: {fileID: 1174933205}
@@ -8152,6 +8151,9 @@ PrefabInstance:
     - {fileID: 3403646118111789038, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
     - {fileID: 8125395659417167398, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6747568404994287999, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 199100754}
     - targetCorrespondingSourceObject: {fileID: 6747568404994287999, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 328535203}
@@ -11620,6 +11622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667525221}
   - component: {fileID: 1667525222}
+  - component: {fileID: 1667525223}
   m_Layer: 0
   m_Name: Narr1Trigger
   m_TagString: Untagged
@@ -11656,6 +11659,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrToPlay: {fileID: 11400000, guid: 1b5564111e5b1f241b7ca6632bd3cccb, type: 2}
   nextNarr: {fileID: 0}
+--- !u!114 &1667525223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667525220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 82e6c26db7fecd9438bc041f6b16b5bf, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1667525222}
+          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
+          m_MethodName: StartNarr
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1681947855
 PrefabInstance:
   m_ObjectHideFlags: 0
