@@ -26,8 +26,8 @@ public class BonepileScript : MonoBehaviour
     [Tooltip("Quest object for the bone pile quest")]
     public QuestObj bpileQ;
     
-    [Tooltip("The object with the playable director component for cutscene 1")]
-    public GameObject cutscene1;
+    [Tooltip("The playable director component for cutscene 1")]
+    public PlayableDirector cutscene1;
     
     public Narration.Narration BP1;
 
@@ -69,7 +69,6 @@ public class BonepileScript : MonoBehaviour
 
         if (!BP2.HasPlayed())
         {
-            cutscene1.SetActive(true);
             foreach (Transform wall in bpileWalls.transform)
             {
                 wall.gameObject.SetActive(false);
@@ -122,6 +121,7 @@ public class BonepileScript : MonoBehaviour
         
         if (!BP2.HasPlayed())
         {
+            cutscene1.Play();
             if (mastoBoneUIImage == null)
                 mastoBoneUIImage = GameObject.Find("MastoBoneUI")?.GetComponent<Image>();
             if(mastoBoneUIImage != null)
