@@ -22,5 +22,8 @@ namespace Match3
 
         [Tooltip("The type of matching that should be performed in this level")]
         public MatchObject.MatchType matchType;
+
+        [Tooltip("The objective for the level that should be displayed to the player during the game")]
+        public string objective;
     }
 }
