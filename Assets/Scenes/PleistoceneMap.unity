@@ -2161,31 +2161,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 425.20944
+      value: 753.8895
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.185135
+      value: 86.83
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 40.56305
+      value: -60.833267
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8331906
+      value: 0.95751196
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.23324418
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.4828266
+      value: -0.2883935
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.13516295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2882,11 +2882,11 @@ PrefabInstance:
     - target: {fileID: 4919673200019154899, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       propertyPath: narr
       value: 
-      objectReference: {fileID: 11400000, guid: 1b5564111e5b1f241b7ca6632bd3cccb, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4919673200019154899, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       propertyPath: director
       value: 
-      objectReference: {fileID: 1151125973}
+      objectReference: {fileID: 1332987692}
     - target: {fileID: 4919673200019154899, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       propertyPath: updateName
       value: Mammoth
@@ -5509,7 +5509,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ce8e4e3e17fbf9048a6796959b3c6e3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697806033}
   m_SourcePrefab: {fileID: 100100000, guid: ce8e4e3e17fbf9048a6796959b3c6e3d, type: 3}
 --- !u!4 &697806031 stripped
 Transform:
@@ -5521,6 +5524,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ce8e4e3e17fbf9048a6796959b3c6e3d, type: 3}
   m_PrefabInstance: {fileID: 697806030}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &697806033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697806032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.7844622, y: 3.5352259, z: 5.993036}
+  m_Center: {x: 0.15862788, y: 1.2676116, z: 1.1351826}
 --- !u!1001 &714547669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8904,7 +8928,7 @@ PrefabInstance:
     - target: {fileID: 4919673200019154899, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       propertyPath: narr
       value: 
-      objectReference: {fileID: 11400000, guid: 1b5564111e5b1f241b7ca6632bd3cccb, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4919673200019154899, guid: dcd2a285bf16b0b4db230847cc93a41a, type: 3}
       propertyPath: director
       value: 
