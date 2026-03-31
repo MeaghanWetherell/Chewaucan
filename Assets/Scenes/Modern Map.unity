@@ -1133,7 +1133,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3560310538008493757, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1083640840}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
 --- !u!4 &70202997 stripped
@@ -2946,12 +2949,12 @@ GameObject:
   - component: {fileID: 190798748}
   - component: {fileID: 190798749}
   m_Layer: 0
-  m_Name: Virtual Camera Pan to quest
+  m_Name: VCAM_PlateauPanToStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190798748
 Transform:
   m_ObjectHideFlags: 0
@@ -2960,7 +2963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190798747}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.013996427, y: 0.93837965, z: 0.038269605, w: -0.34319565}
+  m_LocalRotation: {x: 0.013996425, y: 0.93837965, z: 0.0382696, w: -0.34319565}
   m_LocalPosition: {x: -4.06, y: -11.6, z: -7.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2984,7 +2987,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 2123182542}
   m_Follow: {fileID: 0}
@@ -6436,7 +6439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &514981334
 Transform:
   m_ObjectHideFlags: 0
@@ -6490,7 +6493,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6501,6 +6504,12 @@ PlayableDirector:
     value: {fileID: 703435174}
   - key: {fileID: -561576060691873988, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
     value: {fileID: 1487340488}
+  - key: {fileID: -8671438119067007144, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
+    value: {fileID: 703435171}
+  - key: {fileID: -2232963133476894846, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
+    value: {fileID: 1487340486}
+  - key: {fileID: 1866589172346923129, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
+    value: {fileID: 1215927810}
   m_ExposedReferences:
     m_References:
     - c8b603409faa54c48bb2003d19aad9a2: {fileID: 1487340489}
@@ -6516,10 +6525,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 514981333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ba3e062e9ce8a4e99a17e1a4f53f6c, type: 3}
+  m_Script: {fileID: 11500000, guid: a7e850d42a64de94ca05f08b547682db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscene: {fileID: 1668419639240359733}
+  cutscene: {fileID: 514981336}
 --- !u!1001 &524384451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7538,15 +7547,15 @@ GameObject:
   m_Component:
   - component: {fileID: 595012657}
   - component: {fileID: 595012656}
-  - component: {fileID: 595012659}
-  - component: {fileID: 595012658}
+  - component: {fileID: 595012661}
+  - component: {fileID: 595012660}
   m_Layer: 0
   m_Name: PlateauQuestStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &595012656
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -7557,7 +7566,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -7566,12 +7575,16 @@ PlayableDirector:
     value: {fileID: 1562154078}
   - key: {fileID: -1969791422579392226, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
     value: {fileID: 952278264}
-  - key: {fileID: 6825397056651077441, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
-    value: {fileID: 1266665312}
   - key: {fileID: 6974178485624157168, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
     value: {fileID: 1562154079}
   - key: {fileID: -8013397176270688394, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
-    value: {fileID: 595012659}
+    value: {fileID: 1666510914}
+  - key: {fileID: -3959991674370501481, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
+    value: {fileID: 2090882074}
+  - key: {fileID: 8541348593549459880, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
+    value: {fileID: 190798747}
+  - key: {fileID: -45072280514781424, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
+    value: {fileID: 1215927810}
   m_ExposedReferences:
     m_References:
     - d2cccc6002895f542a76bb62827bdafc: {fileID: 190798749}
@@ -7595,7 +7608,28 @@ Transform:
   - {fileID: 1666510912}
   m_Father: {fileID: 827248805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &595012658
+--- !u!65 &595012660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595012655}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: -15.04, y: 8.7, z: 18.79}
+  m_Center: {x: 1.33, y: -14.2, z: -7.2}
+--- !u!114 &595012661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7604,46 +7638,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 595012655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ba3e062e9ce8a4e99a17e1a4f53f6c, type: 3}
+  m_Script: {fileID: 11500000, guid: a7e850d42a64de94ca05f08b547682db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cutscene: {fileID: 1668419639240359733}
---- !u!114 &595012659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595012655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Events:
-    m_Signals:
-    - {fileID: 0}
-    - {fileID: 11400000, guid: 81c77da9683914b43aad8d397b94dbd2, type: 2}
-    - {fileID: 11400000, guid: efa087b771484254e8b57aaf0ff95783, type: 2}
-    m_Events:
-    - m_PersistentCalls:
-        m_Calls: []
-    - m_PersistentCalls:
-        m_Calls: []
-    - m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1666510913}
-          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
-          m_MethodName: StartNarr
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  cutscene: {fileID: 595012656}
 --- !u!1 &597885192
 GameObject:
   m_ObjectHideFlags: 0
@@ -9515,12 +9513,12 @@ GameObject:
   - component: {fileID: 703435173}
   - component: {fileID: 703435174}
   m_Layer: 0
-  m_Name: Virtual Camera
+  m_Name: Vcam_Plateau
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &703435172
 Transform:
   m_ObjectHideFlags: 0
@@ -9529,7 +9527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703435171}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.010906729, y: 0.43485168, z: 0.0052673337, w: 0.9004207}
+  m_LocalRotation: {x: 0.029346976, y: 0.97049624, z: -0.16014162, w: 0.17784967}
   m_LocalPosition: {x: -163.8, y: 38.9, z: 217.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9553,7 +9551,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1674579389}
   m_Follow: {fileID: 0}
@@ -10323,12 +10321,12 @@ GameObject:
   - component: {fileID: 776124243}
   - component: {fileID: 776124244}
   m_Layer: 0
-  m_Name: Virtual Camera Pan to quest
+  m_Name: VCam_Pan to quest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &776124243
 Transform:
   m_ObjectHideFlags: 0
@@ -10361,7 +10359,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 2123182542}
   m_Follow: {fileID: 0}
@@ -12975,8 +12973,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.28691995, z: 0, w: 0.9579546}
-  m_LocalPosition: {x: 369.83295, y: 45.837, z: 95.284065}
+  m_LocalRotation: {x: 0.11238412, y: -0.0064997924, z: 0.0007351465, w: 0.99364334}
+  m_LocalPosition: {x: 31.310001, y: 30.970001, z: 383.44}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14568,12 +14566,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083640839}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.42, y: 0, z: 3.95}
-  m_LocalScale: {x: 1, y: 21.376953, z: 1}
+  m_LocalRotation: {x: 0.000000029802322, y: -0.000000063363224, z: -0.000000020639634, w: 1}
+  m_LocalPosition: {x: 0.2496872, y: 1.881814, z: 0.41039062}
+  m_LocalScale: {x: 1, y: 21.376959, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1258124731}
+  m_Father: {fileID: 70202997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1083640841
 BoxCollider:
@@ -17384,8 +17382,7 @@ Transform:
   m_LocalPosition: {x: -88.771, y: -6.918, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1083640840}
+  m_Children: []
   m_Father: {fileID: 1313976960214731076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1259882666
@@ -19744,12 +19741,12 @@ GameObject:
   - component: {fileID: 1487340489}
   - component: {fileID: 1487340488}
   m_Layer: 0
-  m_Name: Virtual Camera (1)
+  m_Name: Vcam_plateau2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1487340487
 Transform:
   m_ObjectHideFlags: 0
@@ -19758,7 +19755,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487340486}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.021013828, y: 0.91828775, z: -0.049190782, w: 0.3922836}
+  m_LocalRotation: {x: -0.00051324826, y: 0.9921879, z: -0.12468483, w: -0.0040842067}
   m_LocalPosition: {x: -163.8, y: 38.9, z: 217.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19803,7 +19800,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1896417848}
   m_Follow: {fileID: 0}
@@ -22340,6 +22337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1666510912}
   - component: {fileID: 1666510913}
+  - component: {fileID: 1666510914}
   m_Layer: 0
   m_Name: Narr1Trigger
   m_TagString: Untagged
@@ -22376,6 +22374,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   narrToPlay: {fileID: 11400000, guid: 65e563c500617284e8b2c742dec0b08d, type: 2}
   nextNarr: {fileID: 0}
+--- !u!114 &1666510914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666510911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: efa087b771484254e8b57aaf0ff95783, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1666510913}
+          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
+          m_MethodName: StartNarr
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1666662131
 GameObject:
   m_ObjectHideFlags: 0
@@ -26899,12 +26927,12 @@ GameObject:
   - component: {fileID: 2090882076}
   - component: {fileID: 2090882075}
   m_Layer: 0
-  m_Name: Virtual Camera
+  m_Name: VCAM_PlateauQuest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2090882075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26921,7 +26949,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 9
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 1562154077}
   m_Follow: {fileID: 1562154077}
@@ -26952,7 +26980,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090882074}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1662306, y: -0.021911543, z: 0.0036946984, w: 0.9858365}
+  m_LocalRotation: {x: 0.11238411, y: -0.006499792, z: 0.0007351461, w: 0.99364334}
   m_LocalPosition: {x: -4.59, y: -12.37, z: -7.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27711,19 +27739,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1012209679438215009, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.35302973
       objectReference: {fileID: 0}
     - target: {fileID: 1012209679438215009, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.0018635805
       objectReference: {fileID: 0}
     - target: {fileID: 1012209679438215009, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.93559724
       objectReference: {fileID: 0}
     - target: {fileID: 1012209679438215009, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0049388497
       objectReference: {fileID: 0}
     - target: {fileID: 1143640314504589740, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27768,6 +27796,10 @@ PrefabInstance:
     - target: {fileID: 4408142249732935516, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_Name
       value: VCam_DollyTrackIntro
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408142249732935516, guid: a30c2e34d469a1b4380284920920679a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4799510711129392040, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28116,6 +28148,10 @@ PrefabInstance:
     - target: {fileID: 7908825939498024751, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_Name
       value: VCam_CutsceneIntro
+      objectReference: {fileID: 0}
+    - target: {fileID: 7908825939498024751, guid: a30c2e34d469a1b4380284920920679a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
