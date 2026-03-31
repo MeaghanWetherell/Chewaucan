@@ -13,29 +13,7 @@ MonoBehaviour:
   m_Name: Main Camera Pleistocene Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: VCam_PlayerFollow (1)
-    m_To: VCAM_Mammoth
-    m_Blend:
-      m_Style: 1
-      m_Time: 2
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: VCAM_Mammoth
-    m_To: VCam_PlayerFollow (1)
-    m_Blend:
-      m_Style: 1
-      m_Time: 2
-      m_CustomCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-  - m_From: VCAM_Flamingo
+  - m_From: '**ANY CAMERA**'
     m_To: VCam_PlayerFollow (1)
     m_Blend:
       m_Style: 1
@@ -47,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_PlayerFollow (1)
-    m_To: VCAM_Flamingo
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 1
       m_Time: 2
