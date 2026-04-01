@@ -120,7 +120,7 @@ namespace Narration
             string[] textByLine = fileText.Split('\n');
             for (int i = 0; i < textByLine.Length; i++)
             {
-                textByLine[i] = textByLine[i].Trim(new Char[] {'\r'});
+                textByLine[i] = textByLine[i].Trim(new Char[] {'\r', ' '});
             }
             for (int i = 0; i < textByLine.Length; i++)
             {

@@ -6,6 +6,7 @@ using QuestSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class GameEndScript : MonoBehaviour
 {
@@ -15,18 +16,20 @@ public class GameEndScript : MonoBehaviour
 
     public QuestObj scienceLogObj;
 
-    public Narration.Narration startNarration;
+    [Tooltip("The default cutscene to play if the player doesn't meet the requirements for any cutscene")]
+    public PlayableDirector defaultCutscene;
+
+    [Tooltip("The list of all game ending cutscenes. Put these in descending order of priority-the script will play the first one in the list for which the player meets requirements.")]
+    public List<PlayableDirector> unlockableCutscenes;
+
+    [Tooltip("List of the unlock requirements for each cutscene, mapped by index to the cutscene that requires them.")]
+    public List<QuestCompletionGetter> unlockRequirements;
+
+    [Tooltip("Indices in the unlockable cutscenes list of cutscenes that unlock the science log")]
+    public List<int> scienceLogUnlockIndices;
+
+    public Canvas gameEndCanvas;
     
-    public Narration.Narration MC2_1;
-
-    public Narration.Narration MC2_2;
-
-    public Narration.Narration MC2_3;
-
-    public Narration.Narration MC2_4;
-
-    public Narration.Narration MC2_5;
-
     private float completion = 0;
 
     public static float calcProg()
@@ -41,6 +44,26 @@ public class GameEndScript : MonoBehaviour
     
     private void Awake()
     {
+        gameEndCanvas.gameObject.SetActive(false);
+        PlayableDirector playCutscene = null;
+        for (int i = 0; i < unlockableCutscenes.Count; i++)
+        {
+            if (unlockRequirements.Count > i && unlockRequirements[i].isComplete())
+            {
+                playCutscene = unlockableCutscenes[i];
+                if(scienceLogUnlockIndices.Contains(i))
+                    QuestManager.questManager.CreateQuestNode(scienceLogObj);
+                break;
+            }
+        }
+        if (playCutscene == null)
+            playCutscene = defaultCutscene;
+        playCutscene.Play();
+    }
+
+    public void OnCutsceneComplete()
+    {
+        gameEndCanvas.gameObject.SetActive(true);
         PauseCallback.pauseManager.Resume();
         DialProgress prog = SaveDialProgressData.LoadDialProgress();
         int[] countsPerType = QuestManager.questManager.CountsPerQuestType;
@@ -67,52 +90,12 @@ public class GameEndScript : MonoBehaviour
             rating.text = "You told a Bad story! Rating: Bad";
             SteamAPIManager.UnlockAch("BadEnding");
         }
-
-        if (completion >= 0.5f)
-            QuestManager.questManager.CreateQuestNode(scienceLogObj);
+            
 
         if (completion >= 1)
         {
             SteamAPIManager.UnlockAch("FullComp");
         }
-        
-        startNarration.SetPlayability(true);
-        startNarration.Begin(new List<UnityAction<string>>() {RunStoryNarr});
     }
-
-    private void RunStoryNarr(string none)
-    {
-        QuestNode bonePile = QuestManager.questManager.GETNode("bonepile");
-        
-        //TODO change to appropriate id for levels quest
-        QuestNode lakeLevels = QuestManager.questManager.GETNode("lakelevels");
-
-        QuestNode boneJeweled1 = QuestManager.questManager.GETNode("match31");
-
-        if (bonePile is not { isComplete: true })
-        {
-            MC2_1.SetPlayability(true);
-            MC2_1.Begin();
-        }
-        else if (lakeLevels is not { isComplete: true })
-        {
-            MC2_2.SetPlayability(true);
-            MC2_2.Begin();
-        }
-        else if (boneJeweled1 is not { isComplete: true })
-        {
-            MC2_3.SetPlayability(true);
-            MC2_3.Begin();
-        }
-        else if (completion < 1)
-        {
-            MC2_4.SetPlayability(true);
-            MC2_4.Begin();
-        }
-        else
-        {
-            MC2_5.SetPlayability(true);
-            MC2_5.Begin();
-        }
-    }
+    
 }
