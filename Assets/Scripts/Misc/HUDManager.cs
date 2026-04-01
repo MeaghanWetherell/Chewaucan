@@ -205,6 +205,8 @@ namespace Misc
 
         private void Activate()
         {
+            if (!gameObject.activeSelf)
+                return;
             gameObject.GetComponent<Canvas>().enabled = true;
             StartCoroutine(WaitForQuestLoad());
         }

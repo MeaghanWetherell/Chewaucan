@@ -39,6 +39,6 @@ public class LoadGameEnd : MonoBehaviour
 
     public void LoadEnd(string n)
     {
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("GameEnd");
+        SceneLoadWrapper.sceneLoadWrapper.LoadScene("GameEndCutscenes");
     }
 }
