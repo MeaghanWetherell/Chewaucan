@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7466123001452473793}
   - component: {fileID: 7104849415228046298}
   - component: {fileID: 7577640474163682205}
+  - component: {fileID: 6493051481588539173}
   m_Layer: 0
   m_Name: PlayCutsceneOnTriggerEnter
   m_TagString: Untagged
@@ -68,6 +69,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: {fileID: 7577640474163682205}
+  startQuest: {fileID: 0}
+  questToUpdate: 
+  updateName: 
 --- !u!320 &7577640474163682205
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -85,3 +89,33 @@ PlayableDirector:
   m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
+--- !u!114 &6493051481588539173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113745095230151075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1664d222529836243b38861514de1217, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7104849415228046298}
+          m_TargetAssemblyTypeName: StartCutsceneOnTriggerEnter, Assembly-CSharp
+          m_MethodName: OnCutsceneEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

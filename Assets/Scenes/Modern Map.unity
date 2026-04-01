@@ -2989,7 +2989,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 9
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 2123182542}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60.000004
@@ -6433,6 +6433,7 @@ GameObject:
   - component: {fileID: 514981335}
   - component: {fileID: 514981336}
   - component: {fileID: 514981337}
+  - component: {fileID: 514981338}
   m_Layer: 0
   m_Name: LookAtPlateaus
   m_TagString: Untagged
@@ -6510,6 +6511,8 @@ PlayableDirector:
     value: {fileID: 1487340486}
   - key: {fileID: 1866589172346923129, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
     value: {fileID: 1215927810}
+  - key: {fileID: -6304370707008102772, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
+    value: {fileID: 514981338}
   m_ExposedReferences:
     m_References:
     - c8b603409faa54c48bb2003d19aad9a2: {fileID: 1487340489}
@@ -6529,6 +6532,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: {fileID: 514981336}
+  startQuest: {fileID: 11400000, guid: 02846e693a0245c41a409b835c1b17c4, type: 2}
+  questToUpdate: 
+  updateName: 
+--- !u!114 &514981338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514981333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1664d222529836243b38861514de1217, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 514981337}
+          m_TargetAssemblyTypeName: StartCutsceneOnTriggerEnter, Assembly-CSharp
+          m_MethodName: OnCutsceneEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &524384451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7549,6 +7585,7 @@ GameObject:
   - component: {fileID: 595012656}
   - component: {fileID: 595012661}
   - component: {fileID: 595012660}
+  - component: {fileID: 595012662}
   m_Layer: 0
   m_Name: PlateauQuestStart
   m_TagString: Untagged
@@ -7585,6 +7622,8 @@ PlayableDirector:
     value: {fileID: 190798747}
   - key: {fileID: -45072280514781424, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
     value: {fileID: 1215927810}
+  - key: {fileID: 5837228777977885055, guid: dee148cdb138630459a6dc144ba7d748, type: 2}
+    value: {fileID: 595012662}
   m_ExposedReferences:
     m_References:
     - d2cccc6002895f542a76bb62827bdafc: {fileID: 190798749}
@@ -7642,6 +7681,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: {fileID: 595012656}
+  startQuest: {fileID: 0}
+  questToUpdate: plateauquest
+  updateName: Get the right radiocarbon age
+--- !u!114 &595012662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595012655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1664d222529836243b38861514de1217, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 595012661}
+          m_TargetAssemblyTypeName: StartCutsceneOnTriggerEnter, Assembly-CSharp
+          m_MethodName: OnCutsceneEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &597885192
 GameObject:
   m_ObjectHideFlags: 0
@@ -10361,7 +10433,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 9
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 2123182542}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60.000004
@@ -12973,8 +13045,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11238412, y: -0.0064997924, z: 0.0007351465, w: 0.99364334}
-  m_LocalPosition: {x: 31.310001, y: 30.970001, z: 383.44}
+  m_LocalRotation: {x: 0.06293515, y: 0.90995926, z: -0.15015236, w: 0.3814021}
+  m_LocalPosition: {x: -246.09067, y: 105.35899, z: 711.4825}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27133,73 +27205,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
---- !u!1 &2123182539
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2123182542}
-  - component: {fileID: 2123182541}
-  - component: {fileID: 2123182540}
-  m_Layer: 0
-  m_Name: PlateauQuestStartBox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2123182540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123182539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ddfdc2580c23fb43997282fadb90e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questData: {fileID: 11400000, guid: 02846e693a0245c41a409b835c1b17c4, type: 2}
---- !u!65 &2123182541
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123182539}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 50, y: 50, z: 50}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &2123182542
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2123182539}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.54, y: 31.34, z: 327.67}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2144190221 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 347c1e60360e3fd4194c259fe8503ced, type: 3}
@@ -29278,7 +29283,6 @@ SceneRoots:
   - {fileID: 1655547554}
   - {fileID: 1081964246}
   - {fileID: 1404572361}
-  - {fileID: 2123182542}
   - {fileID: 1723590807}
   - {fileID: 1521176916}
   - {fileID: 444365830}
