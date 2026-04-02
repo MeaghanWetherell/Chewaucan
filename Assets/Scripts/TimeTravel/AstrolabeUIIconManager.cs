@@ -22,9 +22,12 @@ public class AstrolabeUIIconManager : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(WaitToInitialize());
-        if(manager != null)
+        if (manager != null)
+        {
             Destroy(gameObject);
+            return;
+        }
+        StartCoroutine(WaitToInitialize());
         manager = this;
     }
 

@@ -56,7 +56,7 @@ public class BonepileScript : MonoBehaviour
     [Tooltip("The location to return the player to in the modern map after going to the pleistocene")]
     public Vector3 BPilePlayerPosition;
 
-    private static BonepileScript scriptSingleton;
+    public static BonepileScript scriptSingleton;
     
     private void Start()
     {
@@ -137,7 +137,7 @@ public class BonepileScript : MonoBehaviour
                 str =>
                 {
                     LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
-                    AstrolabeDestinationManager.SetDestination(BPilePlayerPosition, 1);
+                    AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                     BP12.SetPlayability(true);
                 }});
         }

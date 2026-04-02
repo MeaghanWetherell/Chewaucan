@@ -85,7 +85,6 @@ namespace QuestSystem.Quests.QScripts
                             J3.Begin();
                             J3.SetPlayability(false);
                             J4.SetPlayability(true);
-                            AstrolabeDestinationManager.SetDestination(new Vector3(814,79,-340));
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                             LoadGUIManager.loadGUIManager.SubToTopPopUp(str => {SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map"); });
                             QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);

@@ -825,6 +825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 486142094}
   - component: {fileID: 486142093}
+  - component: {fileID: 486142095}
   m_Layer: 0
   m_Name: AstroTeleSub
   m_TagString: Untagged
@@ -865,6 +866,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &486142095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486142092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ece503f00e1ac54589e6087e7be7d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPosition: {x: 52, y: 65, z: 482}
+  subToId: match32
+  sceneToTeleport: 1
+  playOnAstrolabeOpen: {fileID: 0}
+  openAstrolabe: {fileID: 0}
+  narration: {fileID: 0}
 --- !u!1 &514221270
 GameObject:
   m_ObjectHideFlags: 0

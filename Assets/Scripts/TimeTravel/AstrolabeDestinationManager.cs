@@ -15,21 +15,11 @@ namespace TimeTravel
         private Vector3 Teleposition1 = Vector3.negativeInfinity;
         
         private Vector3 Teleposition2 = Vector3.negativeInfinity;
-
-        //send map = 1 for modern, map = 2 for pleistocene
-        public static void SetDestination(Vector3 dest, int map = 2)
-        {
-            v3Wrapper toSerialize = new v3Wrapper(dest);
-            string json = JsonSerializer.Serialize(toSerialize);
-            string savePath = SaveHandler.saveHandler.getSavePath();
-            File.WriteAllText(savePath+"/astrolabeteleposition"+map+".json", json);
-            AstrolabeUIIconManager.SetNewDest(true, map-1);
-        }
         
         private void Awake()
         {
-            Teleposition1 = GetTeleposition();
-            Teleposition2 = GetTeleposition(2);
+            Teleposition1 = AstrolabeQueueManager.peekModern();
+            Teleposition2 = AstrolabeQueueManager.peekPleist();
             int curScene = SceneLoadWrapper.sceneLoadWrapper.currentSceneType;
             if (Teleposition2.Equals(Vector3.negativeInfinity) && curScene == 0)
             {
@@ -38,23 +28,6 @@ namespace TimeTravel
             else if (Teleposition1.Equals(Vector3.negativeInfinity) && curScene == 1)
             {
                 PastTeleportButton.interactable = false;
-            }
-        }
-
-        //1 for modern 2 for pleistocene
-        public static Vector3 GetTeleposition(int map = 1)
-        {
-            try
-            {
-                string savePath = SaveHandler.saveHandler.getSavePath();
-                v3Wrapper temp =
-                    JsonSerializer.Deserialize<v3Wrapper>(
-                        File.ReadAllText(savePath + "/astrolabeteleposition" + map + ".json"));
-                return temp.getVector();
-            }
-            catch (IOException)
-            {
-                return Vector3.negativeInfinity;
             }
         }
 

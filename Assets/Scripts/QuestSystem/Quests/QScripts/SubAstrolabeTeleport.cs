@@ -14,10 +14,10 @@ namespace QuestSystem.Quests.QScripts
 {
     public class SubAstrolabeTeleport : MonoBehaviour
     {
-        [Tooltip("the position the player should teleport to on completion of the associated quest")]
+        [Tooltip("the position the player should teleport to on completion of the associated quest or narration")]
         public Vector3 playerPosition;
 
-        [Tooltip("The quest to sub to")]
+        [Tooltip("The quest to sub to. Provide either a quest or a narration, not both")]
         public string subToId;
 
         [Tooltip("0 for modern 1 for pleistocene")]
@@ -27,7 +27,7 @@ namespace QuestSystem.Quests.QScripts
 
         public InputActionReference openAstrolabe;
         
-        [Tooltip("Narration that must be played first")]public Narration.Narration narration;
+        [Tooltip("Narration that must be played first. Provide either a quest or a narration, not both")]public Narration.Narration narration;
 
         private void Start()
         {
@@ -37,11 +37,11 @@ namespace QuestSystem.Quests.QScripts
             
             if (narration == null)
             {
-                if (!playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
+                if (playOnAstrolabeOpen != null && !playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
                 {
                     playOnAstrolabeOpen?.SetPlayability(true);
                 }
-                else
+                else if(subbedNode is {isComplete: false})
                 {
                     QuestManager.questManager.SubToCompletion(subToId, OnComp);
                 }
@@ -53,7 +53,7 @@ namespace QuestSystem.Quests.QScripts
             }
             else
             {
-                if (!playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
+                if (playOnAstrolabeOpen != null && !playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
                 {
                     playOnAstrolabeOpen?.SetPlayability(true);
                 }
@@ -64,7 +64,7 @@ namespace QuestSystem.Quests.QScripts
         {
             if(HUDManager.hudManager != null)
                 HUDManager.hudManager?.astrolabeUI?.gameObject.SetActive(true);
-            AstrolabeDestinationManager.SetDestination(playerPosition, sceneToTeleport+1);
+            AstrolabeQueueManager.queueManager.EnqueueDestination(playerPosition, sceneToTeleport+1);
             playOnAstrolabeOpen?.SetPlayability(true);
         }
 

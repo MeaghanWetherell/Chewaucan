@@ -73,8 +73,10 @@ namespace Audio
         public void PlayNarration(Narration.Narration narr, bool skippable = true, List<float> times = null, List<string> lines = null)
         {
             narrator.Stop();
-            narrator.clip = narr.narrationClip;
+            if(!narrFinished && currNarr != null)
+                currNarr.InvokeOnComplete();
             currNarr = narr;
+            narrator.clip = narr.narrationClip;
             GameObject temp = Subtitler.subtitler;
             if (HUDManager.hudManager != null)
             {
@@ -87,15 +89,16 @@ namespace Audio
             {
                 currentSubLines = lines;
                 currentSubTimes = times;
-                if (HUDManager.hudManager != null)
+                if (HUDManager.hudManager != null && HUDManager.hudManager.subtitleBG != null)
                 {
-                    if (HUDManager.hudManager.subtitleBG != null)
-                    {
-                        HUDManager.hudManager.subtitleBG.SetActive(true);
-                    }
+                    HUDManager.hudManager.subtitleBG.SetActive(true);
                 }
                 subtitleViewer = temp.GetComponent<TextMeshProUGUI>();
                 runSubs = StartCoroutine(RunSubtitles());
+            }
+            else if (HUDManager.hudManager != null && HUDManager.hudManager.subtitleBG != null)
+            {
+                HUDManager.hudManager.subtitleBG.SetActive(false);
             }
             PlayNarration();
             if(waitforcomp != null) StopCoroutine(waitforcomp);
@@ -105,8 +108,6 @@ namespace Audio
         //plays the currently set narration
         public void PlayNarration()
         {
-            if(!narrFinished)
-                currNarr.InvokeOnComplete();
             narrFinished = false;
             narrator.Play();
             waiting = false;
@@ -166,7 +167,14 @@ namespace Audio
             }
             narrFinished = true;
             if(runSubs != null)StopCoroutine(runSubs);
-            if(subtitleViewer != null)Destroy(subtitleViewer.transform.parent.parent.gameObject);
+            if (HUDManager.hudManager != null && HUDManager.hudManager.subtitleBG != null)
+            {
+                    HUDManager.hudManager.subtitleBG.SetActive(false);
+            }
+            if (HUDManager.hudManager != null && HUDManager.hudManager.skipBG != null)
+            {
+                    HUDManager.hudManager.skipBG.SetActive(false);
+            }
             currentSubLines = null;
             currentSubTimes = null;
             currNarr.InvokeOnComplete();
