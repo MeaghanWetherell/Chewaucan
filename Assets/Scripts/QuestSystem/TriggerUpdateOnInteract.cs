@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using QuestSystem;
@@ -27,18 +28,26 @@ public class TriggerUpdateOnInteract : Interactable
 
     [Tooltip("Whether interacting with this progresses the first objective of the associated quest")] 
     public bool progressObjective;
-    
+
+    [Tooltip("The trigger instance that must be interacted with before this one is enabled")]
+    public TriggerUpdateOnInteract waitTrigger;
+
+    public void Start()
+    {
+        QuestNode quest = QuestManager.questManager.GETNode(qid);
+        if (quest == null || quest.isUpdateUnlocked(updateName))
+        {
+            enabled = false;
+        }
+    }
+
     //called when a raycast from the interact raycaster hits this object. outlines the object if its update hasn't been obtained
     public override void OnInteractEnable()
     {
-        QuestNode quest = QuestManager.questManager.GETNode(qid);
-        if (quest != null)
+        if (waitTrigger == null || !waitTrigger.enabled)
         {
-            if (!quest.isUpdateUnlocked(updateName))
-            {
-                outlinedObject.SetActive(true);
-                base.OnInteractEnable();
-            }
+            outlinedObject.SetActive(true);
+            base.OnInteractEnable(); 
         }
     }
     

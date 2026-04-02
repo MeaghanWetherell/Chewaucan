@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ScriptTags;
 using UnityEngine;
 
@@ -28,18 +29,22 @@ namespace Interactables
                 return;
             }
             //if we hit an interactable, set it as the current interactable
-            Interactable listener = hit.collider.GetComponent<Interactable>();
-            if (listener != null)
+            Interactable[] listeners = hit.collider.GetComponents<Interactable>();
+            foreach (Interactable listener in listeners)
             {
-                if (lastInter == null || !ReferenceEquals(lastInter, listener))
+                if (listener != null && listener.enabled)
                 {
-                    if(lastInter != null)lastInter.OnInteractDisable();
-                    listener.OnInteractEnable();
-                    lastInter = listener;
+                    if (lastInter == null || !ReferenceEquals(lastInter, listener))
+                    {
+                        if(lastInter != null)lastInter.OnInteractDisable();
+                        listener.OnInteractEnable();
+                        lastInter = listener;
+                    }
+                    return;
                 }
             }
             //if we hit a non-interactable, remove the old interactable
-            else if(lastInter != null)
+            if(lastInter != null)
             {
                 lastInter.OnInteractDisable();
                 lastInter = null;
