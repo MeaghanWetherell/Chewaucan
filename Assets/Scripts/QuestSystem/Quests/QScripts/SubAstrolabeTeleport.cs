@@ -28,7 +28,7 @@ namespace QuestSystem.Quests.QScripts
         public InputActionReference openAstrolabe;
         
         [Tooltip("Narration that must be played first. Provide either a quest or a narration, not both")]public Narration.Narration narration;
-
+        
         private void Start()
         {
             if (openAstrolabe != null)
@@ -72,6 +72,16 @@ namespace QuestSystem.Quests.QScripts
         {
             if(openAstrolabe != null)
                 openAstrolabe.action.performed -= OnAstrolabeOpen;
+            if (narration != null)
+            {
+                narration.RemoveFromOnComplete(new List<UnityAction<string>>{
+                    OnComp});
+            }
+            QuestNode subbedNode = QuestManager.questManager.GETNode(subToId);
+            if(subbedNode is {isComplete: false})
+            {
+                QuestManager.questManager.UnsubToCompletion(subToId, OnComp);
+            }
         }
 
         private void OnAstrolabeOpen(InputAction.CallbackContext context)
