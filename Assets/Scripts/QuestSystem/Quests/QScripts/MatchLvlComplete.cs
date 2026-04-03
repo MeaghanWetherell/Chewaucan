@@ -50,18 +50,6 @@ namespace QuestSystem.Quests.QScripts
         //triggers quest updates and progress per level
         private void OnLvlComplete(int lvl)
         {
-            if (lvl == 0)
-            {
-                /* deprecated
-                if (J2.GetPlayability())
-                {
-                    J2.Begin();
-                    J2.SetPlayability(false);
-                }
-                QuestManager.questManager.GETNode("match31").UnlockUpdate(1);
-                 */
-            }
-
             for (int i = 0; i < questUnlockLvls.Count; i++)
             {
                 if (questUnlockLvls[i] == lvl + 1)
@@ -88,29 +76,6 @@ namespace QuestSystem.Quests.QScripts
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                             LoadGUIManager.loadGUIManager.SubToTopPopUp(str => {SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map"); });
                             QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
-                        }
-                    }
-                    if (lvl == 3)
-                    {
-                        J6.Begin();
-                        QuestManager.questManager.CreateQuestNode(fishQuestObj);
-                        GameObject popUp = GameObject.Find("PopUp(Clone)");
-                        if (popUp != null)
-                        {
-                            popUp.GetComponentInChildren<Button>().onClick.AddListener(() => {
-                                SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");});
-                        }
-                    }
-                    if (questCompIds[i] == fishQuestObj.uniqueID)
-                    {
-                        QuestNode plateauNode = QuestManager.questManager.GETNode(plateauQuestId);
-                        if (plateauNode is {isComplete: true})
-                        {
-                            //TODO: narration trigger
-                        }
-                        else
-                        {
-                            //TODO: narration trigger    
                         }
                     }
                 }

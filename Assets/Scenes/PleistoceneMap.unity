@@ -1432,7 +1432,6 @@ GameObject:
   - component: {fileID: 108846951}
   - component: {fileID: 108846950}
   - component: {fileID: 108846949}
-  - component: {fileID: 108846952}
   m_Layer: 0
   m_Name: FishCutscene
   m_TagString: Untagged
@@ -1536,24 +1535,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 108846950}
   startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
---- !u!114 &108846952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108846947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e850d42a64de94ca05f08b547682db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutscene: {fileID: 108846950}
-  startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: match32
+  updateName: Fishes!
 --- !u!1001 &135230880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2111,6 +2094,7 @@ GameObject:
   - component: {fileID: 203176266}
   - component: {fileID: 203176265}
   - component: {fileID: 203176264}
+  - component: {fileID: 203176267}
   m_Layer: 0
   m_Name: MammothFootprintCutscene
   m_TagString: Untagged
@@ -2170,8 +2154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 203176266}
   startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: match31
+  updateName: Mammoth Footprints
 --- !u!320 &203176266
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -2197,8 +2181,40 @@ PlayableDirector:
     value: {fileID: 1353114439}
   - key: {fileID: -8715006916123980742, guid: a515a6fce00347e4e95197ed172f5a87, type: 2}
     value: {fileID: 1000920604}
+  - key: {fileID: -913567335107776301, guid: a515a6fce00347e4e95197ed172f5a87, type: 2}
+    value: {fileID: 203176267}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &203176267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203176262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1664d222529836243b38861514de1217, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 203176265}
+          m_TargetAssemblyTypeName: StartCutsceneOnTriggerEnter, Assembly-CSharp
+          m_MethodName: OnCutsceneEnd
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &216772471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2550,8 +2566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 254766876}
   startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: sciencelog
+  updateName: Ponderosa Pines
 --- !u!320 &254766876
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -7579,8 +7595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 820859468}
   startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: plateauquest
+  updateName: Ancient Lake
 --- !u!4 &825755562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7338781681404181191, guid: 0f5e54d751b4bc9448ffb17e04608dd7, type: 3}
@@ -9729,7 +9745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1124729466
 Transform:
   m_ObjectHideFlags: 0
@@ -10283,7 +10299,6 @@ GameObject:
   - component: {fileID: 1168971307}
   - component: {fileID: 1168971306}
   - component: {fileID: 1168971309}
-  - component: {fileID: 1168971310}
   m_Layer: 0
   m_Name: NarrationEmpty
   m_TagString: Untagged
@@ -10333,19 +10348,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 11400000, guid: 3358c08e585f05f48ae2cf00a5fa8929, type: 2}
---- !u!114 &1168971310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168971305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67478f260250c3443b6a824c05364510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 11400000, guid: 396ef42cbed9ba34ea58dd0cc6cc8dd4, type: 2}
 --- !u!114 &1174933205 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6849533556985363014, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
@@ -16085,8 +16087,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 1845243620}
   startQuest: {fileID: 0}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: match33
+  updateName: Cute lil marmots
 --- !u!65 &1845243622
 BoxCollider:
   m_ObjectHideFlags: 0

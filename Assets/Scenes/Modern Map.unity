@@ -19653,6 +19653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1404572361}
   - component: {fileID: 1404572360}
+  - component: {fileID: 1404572362}
   m_Layer: 0
   m_Name: PlateauQuestManager
   m_TagString: Untagged
@@ -19687,6 +19688,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404572362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404572359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ece503f00e1ac54589e6087e7be7d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPosition: {x: 112.4, y: 37.7, z: 478.9}
+  subToId: plateauquest
+  sceneToTeleport: 1
+  playOnAstrolabeOpen: {fileID: 0}
+  openAstrolabe: {fileID: 0}
+  narration: {fileID: 0}
 --- !u!1001 &1406060287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29814,17 +29833,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: DatingHelpInteract
       objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Size.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Size.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Size.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4517751519946641429, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -103.21
+      value: -86.24
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.29
+      value: -6.57
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.93
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalRotation.w
