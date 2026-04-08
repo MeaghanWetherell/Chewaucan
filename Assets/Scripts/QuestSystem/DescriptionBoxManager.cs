@@ -19,6 +19,15 @@ namespace QuestSystem
 
         [Tooltip("The scrollable text content of the quest description")]
         public TextMeshProUGUI descContent;
+
+        public GameObject completeCheckmark;
+
+        [Tooltip("Text mesh pro text object with a button as a first child")]
+        public GameObject pinObj;
+
+        public TextMeshProUGUI nameBox;
+
+        public TextMeshProUGUI objectivesBox;
         
         public static DescriptionBoxManager descriptionBoxManager;
 
@@ -31,7 +40,7 @@ namespace QuestSystem
         public void SendNewNode(QuestNode newNode)
         {
             _cur = newNode;
-            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = _cur.name;
+            nameBox.text = _cur.name;
             TextMeshProUGUI longDescTMP = descContent;
             if (_cur.longDescription.Equals(""))
             {
@@ -54,21 +63,20 @@ namespace QuestSystem
             {
                 longDescTMP.text += newNode.compText;
             }
-            TextMeshProUGUI text = transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI text = objectivesBox;
             text.text = "";
             for (int i = 0; i < newNode.objectives.Count; i++)
             {
                 text.text += +newNode.counts[i] + "/" + newNode.requiredCounts[i] + " " + newNode.objectives[i]+"\n";
             }
-            GameObject pinObj = transform.GetChild(4).gameObject;
             if (_cur.isComplete)
             {
-                transform.GetChild(3).gameObject.SetActive(true);
+                completeCheckmark.SetActive(true);
                 pinObj.SetActive(false);
             }
             else
             {
-                transform.GetChild(3).gameObject.SetActive(false);
+                completeCheckmark.SetActive(false);
                 pinObj.SetActive(true);
                 Image pin = pinObj.transform.GetChild(0).gameObject.GetComponent<Image>();
                 if (_cur.isPinned)
