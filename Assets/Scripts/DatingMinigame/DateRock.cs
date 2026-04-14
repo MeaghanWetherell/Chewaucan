@@ -89,7 +89,7 @@ public class DateRock : MonoBehaviour
             //display the date to the player
             GameObject text = Instantiate(dateText, HUD.transform);
             Gravity grav = text.GetComponent<Gravity>();
-            grav.accel = grav.accel * 2 / 3;
+            grav.accel = grav.accel * 1 / 3;
             RectTransform rect = text.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(200, 80);
             rect.anchoredPosition = new Vector3(0, 88, 0);
