@@ -16,14 +16,18 @@ public class AnimalRun : MonoBehaviour
     [Tooltip("Time to fade out after runtime expires")]
     public float cullTime;
 
+    [Tooltip("Renderer for the main animal mesh")]
     public MeshRenderer animalRenderer;
 
+    [Tooltip("Trigger collider that causes this animal to run away")]
     public Collider trigger;
     
     [Tooltip("Time it takes for an animal to respawn after running")]public float TimeToRespawn;
 
+    [Tooltip("Variant of the animal's material that is set transparent")]
     public Material transMat;
 
+    [Tooltip("Variant of the animal's material that is set opaque")]
     public Material opaqueMat;
 
     private float oldSpeed;
