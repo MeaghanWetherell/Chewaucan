@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallTempVariant Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4731628823256804874, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 5395822479363601584, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 548.41
@@ -90,6 +94,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4731628823256804874, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5179429539098073371}
+    - targetCorrespondingSourceObject: {fileID: 4731628823256804874, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 112510402098309886}
   m_SourcePrefab: {fileID: 100100000, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
 --- !u!1 &7967790927371378813 stripped
 GameObject:
@@ -124,3 +131,22 @@ MonoBehaviour:
   compIds:
   - match33
   - plateauquest
+--- !u!114 &112510402098309886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7967790927371378813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
