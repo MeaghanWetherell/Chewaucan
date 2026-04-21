@@ -22,22 +22,34 @@ public class StartCutsceneOnTriggerEnter : MonoBehaviour
 
     private void Awake()
     {
-        if (startQuest != null && QuestManager.questManager.GETNode(startQuest.uniqueID) != null)
+        if(!checkPlayable())
             Destroy(gameObject);
-        else if (questToUpdate != null)
+    }
+
+    private bool checkPlayable()
+    {
+        if (startQuest != null && QuestManager.questManager.GETNode(startQuest.uniqueID) != null)
+            return false;
+        if (questToUpdate != null)
         {
             QuestNode node = QuestManager.questManager.GETNode(questToUpdate);
             if (node != null && node.isUpdateUnlocked(updateName))
             {
-                Destroy(gameObject);
+                return false;
             }
         }
+        return true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        if (other.GetComponent<Player>() != null && checkPlayable())
         {
+            if (questToUpdate != null)
+            {
+                QuestNode node = QuestManager.questManager.GETNode(questToUpdate);
+                if (node == null) return;
+            }
             cutscene.Play();
         }
     }
