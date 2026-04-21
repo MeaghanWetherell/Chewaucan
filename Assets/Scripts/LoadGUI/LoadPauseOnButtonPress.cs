@@ -10,7 +10,7 @@ public class LoadPauseOnButtonPress : LoadGUIOnButtonPress
 {
     protected override void OnButtonPressed(InputAction.CallbackContext callbackContext)
     {
-        if (!SceneLoadWrapper.sceneLoadWrapper.isLoading && !SceneManager.GetActiveScene().name.Equals("MainMenuUI"))
+        if (!SceneLoadWrapper.sceneLoadWrapper.isLoading && !SceneManager.GetActiveScene().name.Equals("MainMenuUI") && !IsAnyCutscenePlaying())
         {
             if (LoadGUIManager.loadGUIManager.isGUIOpen())
             {
@@ -22,5 +22,13 @@ public class LoadPauseOnButtonPress : LoadGUIOnButtonPress
             }
         }
             
+    }
+    
+    private bool IsAnyCutscenePlaying() {
+        var directors = FindObjectsByType<UnityEngine.Playables.PlayableDirector>(FindObjectsSortMode.None);
+        foreach (var d in directors) {
+            if (d.state == UnityEngine.Playables.PlayState.Playing) return true;
+        }
+        return false;
     }
 }
