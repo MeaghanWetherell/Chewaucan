@@ -8496,6 +8496,7 @@ Transform:
   - {fileID: 1487340487}
   - {fileID: 1674579389}
   - {fileID: 1896417848}
+  - {fileID: 976496168}
   m_Father: {fileID: 827248805}
   m_LocalEulerAnglesHint: {x: 0, y: -24.712, z: 0}
 --- !u!65 &514981335
@@ -8548,6 +8549,8 @@ PlayableDirector:
     value: {fileID: 1215927810}
   - key: {fileID: -6304370707008102772, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
     value: {fileID: 514981338}
+  - key: {fileID: 1526546881172455174, guid: 7221067c65bc6b94988ce508070100e4, type: 2}
+    value: {fileID: 976496169}
   m_ExposedReferences:
     m_References:
     - c8b603409faa54c48bb2003d19aad9a2: {fileID: 1487340489}
@@ -12414,7 +12417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703435171}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.029346976, y: 0.97049624, z: -0.16014162, w: 0.17784967}
+  m_LocalRotation: {x: 0.029392624, y: 0.97043777, z: -0.15993062, w: 0.1783505}
   m_LocalPosition: {x: -163.8, y: 38.9, z: 217.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13300,7 +13303,7 @@ MonoBehaviour:
   cutscene: {fileID: 772734300}
   startQuest: {fileID: 11400000, guid: 29c05da01c1eae347b5ae8bfab423af6, type: 2}
   questToUpdate: naturelog
-  updateName: Mazama
+  updateName: Dunes
 --- !u!320 &772734300
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -16625,8 +16628,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.28691995, z: 0, w: 0.9579546}
-  m_LocalPosition: {x: 369.723, y: 45.837, z: 95.117}
+  m_LocalRotation: {x: 0.0629346, y: 0.9097949, z: -0.14993648, w: 0.38187888}
+  m_LocalPosition: {x: -246.22354, y: 105.293304, z: 711.3799}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17065,6 +17068,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: efbb715245b88634891317930a1a95dc, type: 3}
   m_PrefabInstance: {fileID: 94044771}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &976496167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976496168}
+  - component: {fileID: 976496170}
+  - component: {fileID: 976496169}
+  m_Layer: 0
+  m_Name: LookAtPlateausNarrTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976496168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976496167}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.004801358, y: 0.9893575, z: -0.0046310346, w: -0.14535211}
+  m_LocalPosition: {x: 320.26746, y: 14.059998, z: -471.137}
+  m_LocalScale: {x: 1.2378799, y: 1.23788, z: 1.2378802}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 514981334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976496169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976496167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 82e6c26db7fecd9438bc041f6b16b5bf, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 976496170}
+          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
+          m_MethodName: StartNarr
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &976496170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976496167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b77603b3b2d4dd45bfc7145560fd143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narrToPlay: {fileID: 11400000, guid: 43f3eaeea5d442a4ab3a0b50d03fc2a5, type: 2}
+  nextNarr: {fileID: 0}
 --- !u!1001 &995112012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25043,7 +25123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487340486}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00051324826, y: 0.9921879, z: -0.12468483, w: -0.0040842067}
+  m_LocalRotation: {x: -0.00029217248, y: 0.992144, z: -0.12508014, w: -0.0023175173}
   m_LocalPosition: {x: -163.8, y: 38.9, z: 217.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -26831,15 +26911,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.23728135
+      value: 0.41975072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.23728135
+      value: 0.41975072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.23728135
+      value: 0.41975072
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34291,7 +34371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090882074}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11238411, y: -0.006499792, z: 0.0007351461, w: 0.99364334}
+  m_LocalRotation: {x: 0.112384096, y: -0.006499807, z: 0.00073514803, w: 0.99364334}
   m_LocalPosition: {x: -4.59, y: -12.37, z: -7.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
