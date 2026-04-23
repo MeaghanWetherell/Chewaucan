@@ -8640,8 +8640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 514981336}
   startQuest: {fileID: 11400000, guid: 02846e693a0245c41a409b835c1b17c4, type: 2}
-  questToUpdate: plateau
-  updateName: Strange Plateaus
+  questToUpdate: 
+  updateName: 
 --- !u!114 &514981338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10165,7 +10165,6 @@ GameObject:
   - component: {fileID: 595012661}
   - component: {fileID: 595012660}
   - component: {fileID: 595012662}
-  - component: {fileID: 595012663}
   m_Layer: 20
   m_Name: PlateauQuestStart_TE
   m_TagString: Untagged
@@ -10294,19 +10293,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &595012663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595012655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ba3e062e9ce8a4e99a17e1a4f53f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutscene: {fileID: 595012656}
 --- !u!1 &597885192
 GameObject:
   m_ObjectHideFlags: 0

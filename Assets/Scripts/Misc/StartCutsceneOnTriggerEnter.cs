@@ -45,7 +45,7 @@ public class StartCutsceneOnTriggerEnter : MonoBehaviour
     {
         if (other.GetComponent<Player>() != null && checkPlayable())
         {
-            if (questToUpdate != null)
+            if (questToUpdate != null && !questToUpdate.Trim().Equals(""))
             {
                 QuestNode node = QuestManager.questManager.GETNode(questToUpdate);
                 if (node == null) return;

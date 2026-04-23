@@ -285,7 +285,8 @@ public class CourseManager : MonoBehaviour
             rand = Random.Range(0, spawnPrefabs.Count);
             GameObject spawnPrefab = spawnPrefabs[rand];
             rand = Random.Range(0, childList.Count);
-            GameObject obj = Instantiate(spawnPrefab, childList[rand].position + new Vector3(0, ymod, 0),
+            Vector3 targetPos = spawnLocs.localToWorldMatrix * childList[rand].position;
+            GameObject obj = Instantiate(spawnPrefab,  targetPos+ new Vector3(0, ymod, 0),
                 Quaternion.identity);
             ret.Add(obj.transform);
             spawnedObjects.Add(obj);
