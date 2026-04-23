@@ -17,14 +17,20 @@ public class BpileHelper2 : MonoBehaviour
     public Vector3 BPilePlayerPosition;
     void Start()
     {
-        if(!BP11.HasPlayed() && BonepileScript.scriptSingleton == null)
-            BP11.addToOnComplete(new List<UnityAction<string>>{
-            str =>
-            {
-                LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
-                AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
-                BP12.SetPlayability(true);
-            }});
+        if (!BP11.HasPlayed())
+        {
+            MapUIController.canOpenMap = false;
+            if(BonepileScript.scriptSingleton == null)
+                BP11.addToOnComplete(new List<UnityAction<string>>{
+                    str =>
+                    {
+                        LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
+                        AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
+                        MapUIController.canOpenMap = true;
+                        BP12.SetPlayability(true);
+                    }});
+        }
+        
     }
 
 }

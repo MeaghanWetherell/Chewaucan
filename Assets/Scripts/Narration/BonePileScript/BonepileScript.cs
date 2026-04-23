@@ -138,6 +138,7 @@ public class BonepileScript : MonoBehaviour
                 {
                     LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
                     AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
+                    MapUIController.canOpenMap = true;
                     BP12.SetPlayability(true);
                 }});
         }

@@ -17,6 +17,8 @@ public class MapUIController : MonoBehaviour
     public InputActionReference hideMapRef;
     public InputActionReference fullMapViewRef;
 
+    public static bool canOpenMap = true;
+
     private void OnEnable()
     {
         hideMapRef.action.performed += ToggleMap;
@@ -40,7 +42,7 @@ public class MapUIController : MonoBehaviour
     //default button to press is M
     void SwitchToFullMapView(InputAction.CallbackContext context)
     {
-        
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("FullMapView");
+        if(canOpenMap)
+            SceneLoadWrapper.sceneLoadWrapper.LoadScene("FullMapView");
     }
 }
