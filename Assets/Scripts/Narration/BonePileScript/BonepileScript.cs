@@ -128,8 +128,7 @@ public class BonepileScript : MonoBehaviour
                 mastoBoneUIImage.gameObject.SetActive(false);
         }
         BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
-                BP11.SetPlayability(true);},
-            str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}
+                BP11.SetPlayability(true);}
         });
         if (!BP11.HasPlayed())
         {
@@ -140,7 +139,7 @@ public class BonepileScript : MonoBehaviour
                     AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                     MapUIController.canOpenMap = true;
                     BP12.SetPlayability(true);
-                }});
+                }, str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}});
         }
         string questKey = BindingManager.bindingManager.GetBind("Quest Menu");
         string mapKey = BindingManager.bindingManager.GetBind("Open Map");

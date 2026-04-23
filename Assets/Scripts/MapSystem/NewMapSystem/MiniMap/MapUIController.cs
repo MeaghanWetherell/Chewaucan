@@ -42,7 +42,11 @@ public class MapUIController : MonoBehaviour
     //default button to press is M
     void SwitchToFullMapView(InputAction.CallbackContext context)
     {
-        if(canOpenMap)
+        if (canOpenMap)
+        {
+            MapCameraController.sceneToReturn = SceneManager.GetActiveScene().name;
             SceneLoadWrapper.sceneLoadWrapper.LoadScene("FullMapView");
+        }
+            
     }
 }

@@ -18,6 +18,8 @@ public class MapCameraController : MonoBehaviour
     public InputActionReference switchToWorldRef;
     public InputActionReference esc;
 
+    public static string sceneToReturn;
+
     private Vector3 clickOrigin;
     private bool isSlowing = false;
 
@@ -108,6 +110,6 @@ public class MapCameraController : MonoBehaviour
 
     private void SwitchToWorldScene(InputAction.CallbackContext context)
     {
-        SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map");
+        SceneLoadWrapper.sceneLoadWrapper.LoadScene(sceneToReturn);
     }
 }

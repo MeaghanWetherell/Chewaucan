@@ -19,7 +19,6 @@ public class BpileHelper2 : MonoBehaviour
     {
         if (!BP11.HasPlayed())
         {
-            MapUIController.canOpenMap = false;
             if(BonepileScript.scriptSingleton == null)
                 BP11.addToOnComplete(new List<UnityAction<string>>{
                     str =>
@@ -28,7 +27,7 @@ public class BpileHelper2 : MonoBehaviour
                         AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                         MapUIController.canOpenMap = true;
                         BP12.SetPlayability(true);
-                    }});
+                    }, str => { WPUnlockSerializer.wpUnlockSerializer.unlockAllModern = true;}});
         }
         
     }
