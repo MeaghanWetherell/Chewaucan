@@ -221,6 +221,7 @@ public class CourseManager : MonoBehaviour
             SpawnItems(rockSpawnLocations, rocksToSpawn, rockPrefab);
         List<Transform> snakes = SpawnItems(snakeSpawnLocations, stationarySnakeCount, stationarySnakePrefab);
         snakes = SpawnItems(snakeSpawnLocations, movingSnakeCount, movingSnakePrefab, snakes);
+        LoadGUIManager.loadGUIManager.Load("DatingHelpMenu");
         Started.Invoke();
     }
 
