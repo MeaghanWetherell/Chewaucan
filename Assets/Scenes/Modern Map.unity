@@ -3203,6 +3203,83 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140217538}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &154805070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154805073}
+  - component: {fileID: 154805072}
+  - component: {fileID: 154805071}
+  m_Layer: 0
+  m_Name: Narr.RC81
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &154805071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154805070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 82e6c26db7fecd9438bc041f6b16b5bf, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 154805072}
+          m_TargetAssemblyTypeName: CutsceneNarrTrigger, Assembly-CSharp
+          m_MethodName: StartNarr
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &154805072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154805070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b77603b3b2d4dd45bfc7145560fd143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  narrToPlay: {fileID: 11400000, guid: 6b7b4de82f61c6449a8272403199b9cf, type: 2}
+  nextNarr: {fileID: 0}
+--- !u!4 &154805073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154805070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.004867944, y: 0.09512791, z: -0.004560992, w: 0.99544275}
+  m_LocalPosition: {x: -339.72604, y: -4.5728836, z: 310.58853}
+  m_LocalScale: {x: 0.7862052, y: 0.7862051, z: 0.7862052}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1568305955}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &165305067
 GameObject:
   m_ObjectHideFlags: 0
@@ -4888,7 +4965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &291806363
 Transform:
   m_ObjectHideFlags: 0
@@ -17049,8 +17126,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.061115205, y: 0.24881461, z: -0.01573354, w: 0.966493}
-  m_LocalPosition: {x: -121.309616, y: 46.79167, z: 525.0494}
+  m_LocalRotation: {x: 0.060909454, y: 0.27287963, z: -0.017314173, w: 0.95996195}
+  m_LocalPosition: {x: -121.44486, y: 46.7683, z: 525.3631}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28197,8 +28274,8 @@ PlayableDirector:
   m_GameObject: {fileID: 1568305952}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 2d2a373fbae67bd4a86c816648f95985, type: 2}
-  m_InitialState: 1
+  m_PlayableAsset: {fileID: 11400000, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -28211,6 +28288,16 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -352880591311428434, guid: 2a27c0b786362b1458f309da8c969c2c, type: 2}
     value: {fileID: 0}
+  - key: {fileID: 8821585874745285473, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+    value: {fileID: 291806362}
+  - key: {fileID: -2191110676674704591, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+    value: {fileID: 952278264}
+  - key: {fileID: 8188569434765656357, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+    value: {fileID: 1215927810}
+  - key: {fileID: -352880591311428434, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+    value: {fileID: 291806365}
+  - key: {fileID: -8454521033002392254, guid: 154d40413fef3c649b24fe7692a59199, type: 2}
+    value: {fileID: 154805071}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1568305954
@@ -28227,7 +28314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultObject: {fileID: 16293183}
   outlinedObject: {fileID: 954302883}
-  updateName: Petroglyphs
+  updateName: Picture Rock Pass
   qid: sciencelog
   director: {fileID: 1568305953}
   narr: {fileID: 0}
@@ -28246,7 +28333,8 @@ Transform:
   m_LocalPosition: {x: -117.5, y: 43.4, z: 530.61914}
   m_LocalScale: {x: 1.5745001, y: 1.5745, z: 1.5745001}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 154805073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1568672525
