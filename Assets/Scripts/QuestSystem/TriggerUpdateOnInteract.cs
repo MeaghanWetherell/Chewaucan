@@ -65,12 +65,22 @@ public class TriggerUpdateOnInteract : Interactable
         if(director != null)
             director.Play();
         else if (narr != null)
+        {
             narr.Begin();
+            quest.UnlockUpdate(updateName, createPopUp);
+            if (progressObjective)
+                quest.AddCount(0);
+        }
+        OnInteractDisable();
+        Destroy(this);
+    }
+
+    public void SendQuestChanges()
+    {
+        QuestNode quest = QuestManager.questManager.GETNode(qid);
         quest.UnlockUpdate(updateName, createPopUp);
         if (progressObjective)
             quest.AddCount(0);
-        OnInteractDisable();
-        Destroy(this);
     }
 
     public override void ListenerRemoved() { }
