@@ -75,6 +75,7 @@ public class TriggerUpdateOnInteract : Interactable
         Destroy(this);
     }
 
+    //call this via signal when an attached cutscene ends
     public void SendQuestChanges()
     {
         QuestNode quest = QuestManager.questManager.GETNode(qid);
