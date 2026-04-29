@@ -361,7 +361,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2131147460810287194, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: -150.72517
       objectReference: {fileID: 0}
     - target: {fileID: 2131147460810287194, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -369,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131147460810287194, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 483
+      value: 682.19806
       objectReference: {fileID: 0}
     - target: {fileID: 2131147460810287194, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2473,9 +2473,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 254766873}
+  - component: {fileID: 254766876}
   - component: {fileID: 254766875}
   - component: {fileID: 254766874}
-  - component: {fileID: 254766876}
   - component: {fileID: 254766877}
   m_Layer: 0
   m_Name: PonderosaScene_TE
@@ -2688,31 +2688,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.891235
+      value: -150.72517
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 72.76027
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 506.52
+      value: 682.19806
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.68228316
+      value: 0.4307954
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.08157773
+      value: -1.8308918e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.72614413
+      value: -0.90244967
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.02344228
+      value: -1.4383492e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7408,7 +7408,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: e8c4325b52ff54842bcae670a187d1ce, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -10037,8 +10037,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1123939427}
-  - component: {fileID: 1123939426}
   - component: {fileID: 1123939425}
+  - component: {fileID: 1123939426}
+  - component: {fileID: 1123939428}
   m_Layer: 0
   m_Name: Pictograph2_INT
   m_TagString: Untagged
@@ -10081,6 +10082,8 @@ PlayableDirector:
     value: {fileID: 831554871}
   - key: {fileID: -8454521033002392254, guid: aafc400b4df2fb848a18e13cf6860b51, type: 2}
     value: {fileID: 1123555738}
+  - key: {fileID: 7828396928969894494, guid: aafc400b4df2fb848a18e13cf6860b51, type: 2}
+    value: {fileID: 1123939428}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1123939426
@@ -10122,6 +10125,36 @@ Transform:
   - {fileID: 1123555740}
   m_Father: {fileID: 1460211541}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123939428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123939424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 1664d222529836243b38861514de1217, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1123939426}
+          m_TargetAssemblyTypeName: TriggerUpdateOnInteract, Assembly-CSharp
+          m_MethodName: SendQuestChanges
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1124729465
 GameObject:
   m_ObjectHideFlags: 0
@@ -11894,7 +11927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -82
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11902,7 +11935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 101
       objectReference: {fileID: 0}
     - target: {fileID: 2316601286138709315, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalRotation.w
