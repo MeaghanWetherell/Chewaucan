@@ -143,12 +143,13 @@ public class BonepileScript : MonoBehaviour
         }
         string questKey = BindingManager.bindingManager.GetBind("Quest Menu");
         string mapKey = BindingManager.bindingManager.GetBind("Open Map");
+        string endKey = BindingManager.bindingManager.GetBind("End Game");
         BP12.addToOnComplete(new List<UnityAction<string>>
         {
             str =>
             {
                 QuestManager.questManager.CreateQuestNode("match31");
-                LoadGUIManager.loadGUIManager.InstantiatePopUp("The tutorial is done!", "You can now explore the map for more clues. When you think you know enough, press "+questKey+" to open the quest menu where you can choose to tell that kid their birthday story and end the game. If you’d like to fast travel, press "+mapKey+" to open the map.");
+                LoadGUIManager.loadGUIManager.InstantiatePopUp("The tutorial is done!", "You can now explore the map for more clues. Press "+questKey+" to see your progress. Press "+mapKey+" to open the map and fast travel. When you're ready to tell your story, press "+endKey+" to end the game.");
             }
         });
     }
