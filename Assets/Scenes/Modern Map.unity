@@ -1338,15 +1338,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.96
+      value: -1.042
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.73
+      value: -2.884
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.72
+      value: -8.786
       objectReference: {fileID: 0}
     - target: {fileID: 8198315560021848127, guid: 72b4eac3bfee0684a931b9524dd8eecb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4446,10 +4446,11 @@ GameObject:
   - component: {fileID: 236703033}
   - component: {fileID: 236703034}
   - component: {fileID: 236703035}
-  - component: {fileID: 236703036}
   - component: {fileID: 236703037}
+  - component: {fileID: 236703038}
+  - component: {fileID: 236703039}
   m_Layer: 0
-  m_Name: CrescentCutscene_INT
+  m_Name: CrescentCutscene_TE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4521,27 +4522,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: {fileID: 236703034}
---- !u!114 &236703036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236703032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultObject: {fileID: 535570744}
-  outlinedObject: {fileID: 1074622904}
-  updateName: Obsidian Crescent
-  qid: naturelog
-  director: {fileID: 236703034}
-  narr: {fileID: 0}
-  createPopUp: 0
-  progressObjective: 0
-  waitTrigger: {fileID: 0}
 --- !u!114 &236703037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4560,9 +4540,9 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 236703036}
-          m_TargetAssemblyTypeName: TriggerUpdateOnInteract, Assembly-CSharp
-          m_MethodName: SendQuestChanges
+        - m_Target: {fileID: 236703039}
+          m_TargetAssemblyTypeName: StartCutsceneOnTriggerEnter, Assembly-CSharp
+          m_MethodName: OnCutsceneEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4572,6 +4552,43 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!65 &236703038
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236703032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 62.78299, y: 37.847004, z: 55.10054}
+  m_Center: {x: 14.378625, y: 13.923595, z: -4.1298165}
+--- !u!114 &236703039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236703032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e850d42a64de94ca05f08b547682db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutscene: {fileID: 236703034}
+  startQuest: {fileID: 0}
+  questToUpdate: naturelog
+  updateName: Obsidian Crescent
 --- !u!4 &237411676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 453903180178426106, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
@@ -9894,9 +9911,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 535570745}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 535570746}
   m_SourcePrefab: {fileID: 100100000, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
 --- !u!4 &535570743 stripped
@@ -9909,27 +9923,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
   m_PrefabInstance: {fileID: 535570742}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &535570745
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535570744}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &535570746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9947,7 +9940,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.5059193, y: 2.4148757, z: 2.6945627}
   m_Center: {x: -0.69456154, y: -0.028913813, z: 0.19369063}
@@ -16853,8 +16846,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.28691995, z: 0, w: 0.9579546}
-  m_LocalPosition: {x: 369.723, y: 45.837, z: 95.117}
+  m_LocalRotation: {x: 0.0379666, y: 0.90126526, z: -0.08070497, w: 0.4239884}
+  m_LocalPosition: {x: -32.33056, y: 57.520576, z: 668.8804}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18673,42 +18666,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1074622905}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
 --- !u!4 &1074622903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
   m_PrefabInstance: {fileID: 1074622902}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1074622904 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 53f74f4066985ea4f977e8ccbb14b99f, type: 3}
-  m_PrefabInstance: {fileID: 1074622902}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1074622905
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074622904}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1078075064
 GameObject:
   m_ObjectHideFlags: 0
@@ -23646,15 +23610,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c51608d70ade1f47866f23267c966bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.03
+      value: 8.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c51608d70ade1f47866f23267c966bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.35
+      value: -2.49
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c51608d70ade1f47866f23267c966bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.91
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c51608d70ade1f47866f23267c966bf, type: 3}
       propertyPath: m_LocalRotation.w
