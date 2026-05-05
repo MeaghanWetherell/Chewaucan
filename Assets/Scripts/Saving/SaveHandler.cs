@@ -58,10 +58,11 @@ public class SaveHandler : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         saveHandler = this;
         DontDestroyOnLoad(gameObject);
-        Directory.CreateDirectory(Application.persistentDataPath+"/"+metadataSaveLoc);
-        Directory.CreateDirectory(Application.persistentDataPath+"/"+settingsSavePath);
+        Directory.CreateDirectory(Application.persistentDataPath + "/" + metadataSaveLoc);
+        Directory.CreateDirectory(Application.persistentDataPath + "/" + settingsSavePath);
 
         if (File.Exists(Application.persistentDataPath + "/" +
                         metadataSaveLoc + "/saveSlots.json"))
@@ -69,13 +70,15 @@ public class SaveHandler : MonoBehaviour
             saveSlots = JsonSerializer.Deserialize<List<String>>(File.ReadAllText(Application.persistentDataPath + "/" +
                 metadataSaveLoc + "/saveSlots.json"));
         }
-        if(saveSlots == null)
+
+        if (saveSlots == null)
         {
             saveSlots = new List<string>();
             saveSlots.Add("Chewaucan/Save 1");
             saveSlots.Add("Chewaucan/Save 2");
             saveSlots.Add("Chewaucan/Save 3");
         }
+
         if (!SceneManager.GetActiveScene().name.Equals("MainMenu"))
         {
             string lastPath = getLastSavePath();
@@ -83,9 +86,15 @@ public class SaveHandler : MonoBehaviour
             {
                 Debug.Log("Last Path Not Found!");
             }
+
             setSavePath(lastPath);
             loadImmediately = true;
         }
+    }
+
+    public int getCurSlot()
+    {
+        return saveSlots.IndexOf(savePath);
     }
 
     //gets the path to the most recently used save
@@ -110,6 +119,25 @@ public class SaveHandler : MonoBehaviour
     {
         if(!loadImmediately)
             loadSettings.Invoke(Application.persistentDataPath+"/"+settingsSavePath);
+        SceneLoadWrapper.sceneLoadWrapper.OnLoadScene.AddListener(TrySaveOnReturnToMenu);
+    }
+
+    private void TrySaveOnReturnToMenu(string scene)
+    {
+        if (!scene.Equals("MainMenuUI"))
+        {
+            return;
+        }
+        try
+        {
+            Save();
+        }
+        catch(Exception e)
+        {
+            Debug.LogError("Failed to save data. Data may be lost and one or more files may have become corrupted");
+            Debug.LogError(e.Message);
+            Debug.LogError(e.StackTrace);
+        }
     }
 
     //auto-saves on quit
