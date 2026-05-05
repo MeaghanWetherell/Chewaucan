@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EndSceneCameraBlends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: '**ANY CAMERA**'
+  - m_From: VCam_LookAtBone
     m_To: VCam_BirthdayDolly
     m_Blend:
       m_Style: 1
@@ -36,7 +36,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_LookAtBoneonTabl
-    m_To: '**ANY CAMERA**'
+    m_To: VCam_LookAtBone
     m_Blend:
       m_Style: 1
       m_Time: 2
@@ -47,7 +47,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_LookAtBoneonTabl
-    m_To: Pleistocene overview camera
+    m_To: VCAM_Pleistocene overview camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -57,7 +57,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Pleistocene overview camera
+  - m_From: VCAM_Pleistocene overview camera
     m_To: VCam_LookAtBoneonTabl
     m_Blend:
       m_Style: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_LookAtBoneonTabl
-    m_To: CAM_Mammoth
+    m_To: VCAM_Mammoth
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -79,7 +79,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CAM_Mammoth
+  - m_From: VCAM_Mammoth
     m_To: VCam_LookAtBoneonTabl
     m_Blend:
       m_Style: 0
@@ -90,8 +90,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Pleistocene overview camera
-    m_To: CAM_Mammoth
+  - m_From: VCAM_Pleistocene overview camera
+    m_To: VCAM_Mammoth
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -102,7 +102,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_LookAtBoneonTabl
-    m_To: Mammoth View 2 camera
+    m_To: VCAM_Mammoth View 2 camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -112,8 +112,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Mammoth View 2 camera
-    m_To: CAM_Mammoth
+  - m_From: VCAM_Mammoth View 2 camera
+    m_To: VCAM_Mammoth
     m_Blend:
       m_Style: 0
       m_Time: 1
@@ -123,8 +123,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CAM_Mammoth
-    m_To: Pleistocene overview camera
+  - m_From: VCAM_Mammoth
+    m_To: VCAM_Pleistocene overview camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -134,8 +134,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Pleistocene overview camera
-    m_To: Shorline Camera
+  - m_From: VCAM_Pleistocene overview camera
+    m_To: VCAM_Shorline Camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -145,8 +145,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Shorline Camera
-    m_To: Pleistocene overview camera
+  - m_From: VCAM_Shorline Camera
+    m_To: VCAM_Pleistocene overview camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -156,8 +156,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Dead mammoth camera
-    m_To: Modern lake camera
+  - m_From: VCAM_Dead mammoth camera
+    m_To: VCAM_Modern lake camera
     m_Blend:
       m_Style: 0
       m_Time: 2
@@ -167,7 +167,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: Modern lake camera
+  - m_From: VCAM_Modern lake camera
     m_To: VCam_LookAtBoneonTabl
     m_Blend:
       m_Style: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CAM_Mammoth
-    m_To: Dead mammoth camera
+  - m_From: VCAM_Mammoth
+    m_To: VCAM_Dead mammoth camera
     m_Blend:
       m_Style: 0
       m_Time: 2
