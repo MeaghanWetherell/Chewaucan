@@ -35,6 +35,10 @@ public class SetPathAndLoad : MonoBehaviour
     //initialize the button based on the inspector settings
     private void Start()
     {
+        if (pathNumber == -1)
+        {
+            pathNumber = SaveHandler.saveHandler.getCurSlot();
+        }
         string myPath = SaveHandler.saveHandler.saveSlots[pathNumber];
         switch (lt)
         {

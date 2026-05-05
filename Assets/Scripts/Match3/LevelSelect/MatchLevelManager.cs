@@ -177,7 +177,7 @@ namespace Match3
             return levels[curIndex];
         }
 
-        public void SetEndlessHighScore()
+        public void SetEndlessHighScore(string s)
         {
             if (ScoreTracker.scoreTracker != null && curIndex == levels.Count - 1)
             {

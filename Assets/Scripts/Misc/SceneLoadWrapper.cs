@@ -23,7 +23,7 @@ namespace Misc
 
         [Tooltip("List of scenes in pleistocene map")] public List<String> pleistoceneMapScenes;
 
-        public readonly UnityEvent OnLoadScene = new UnityEvent();
+        public readonly UnityEvent<string> OnLoadScene = new UnityEvent<string>();
 
         private void Awake()
         {
@@ -85,7 +85,7 @@ namespace Misc
             {
                 PauseCallback.pauseManager.Resume();
             }
-            OnLoadScene.Invoke();
+            OnLoadScene.Invoke(sceneName);
             SoundManager.soundManager.StopBGM();
             if (modernMapScenes.Contains(sceneName))
             {

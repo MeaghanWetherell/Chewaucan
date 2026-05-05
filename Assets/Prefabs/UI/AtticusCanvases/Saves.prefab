@@ -1025,8 +1025,7 @@ GameObject:
   - component: {fileID: 366422015991063434}
   - component: {fileID: 7254702031767216406}
   - component: {fileID: 4153360559167786017}
-  - component: {fileID: 6520784125635277397}
-  - component: {fileID: 724283912993485879}
+  - component: {fileID: 4695554535723086260}
   m_Layer: 5
   m_Name: Yes
   m_TagString: Untagged
@@ -1193,8 +1192,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7254702031767216406}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6520784125635277397
+      m_Calls:
+      - m_Target: {fileID: 4695554535723086260}
+        m_TargetAssemblyTypeName: TrashSaveHelper, Assembly-CSharp
+        m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4695554535723086260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1203,29 +1214,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6507395517022841842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 479ebd9f884ee884fb6086fb466ec73d, type: 3}
+  m_Script: {fileID: 11500000, guid: bb41b990a6598b744b97b3ff1db98ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myButton: {fileID: 4153360559167786017}
-  lt: 2
-  text: {fileID: 0}
-  pathNumber: 0
   newGameNameObj: {fileID: 2621570838039854915}
---- !u!114 &724283912993485879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6507395517022841842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 659a1da09250a4f4cba56cacd0eba0f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myButton: {fileID: 0}
-  mySlot: 0
-  trashButton: {fileID: 6520784125635277397}
 --- !u!1 &6962134175978099981
 GameObject:
   m_ObjectHideFlags: 0

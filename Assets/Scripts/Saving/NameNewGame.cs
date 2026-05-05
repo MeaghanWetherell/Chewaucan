@@ -32,6 +32,15 @@ public class NameNewGame : MonoBehaviour
         inputPlacehodler.text = "Enter save name...";
         inputField.text = SaveHandler.saveHandler.saveSlots[pathNumber].Split("/")[^1];
     }
+    
+    public void Initialize()
+    {
+        pathNo = TrashSave.toTrash;
+        headerText.text = "Enter name for save in slot " + (pathNo+1) + " or leave blank to use existing name " +
+                          SaveHandler.saveHandler.saveSlots[pathNo].Split("/")[^1];
+        inputPlacehodler.text = "Enter save name...";
+        inputField.text = SaveHandler.saveHandler.saveSlots[pathNo].Split("/")[^1];
+    }
 
     public void OnSelect()
     {
