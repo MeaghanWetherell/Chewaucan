@@ -1607,6 +1607,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 29.795
       objectReference: {fileID: 0}
+    - target: {fileID: 9147128083373749811, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      propertyPath: m_Size.x
+      value: 13.107307
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147128083373749811, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      propertyPath: m_Size.z
+      value: 2.0272217
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147128083373749811, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      propertyPath: m_Center.x
+      value: 3.1689339
+      objectReference: {fileID: 0}
+    - target: {fileID: 9147128083373749811, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      propertyPath: m_Center.z
+      value: 3.643036
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3779,7 +3795,7 @@ GameObject:
   - component: {fileID: 190798748}
   - component: {fileID: 190798749}
   - component: {fileID: 190798750}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: VCAM_PlateauPanToStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8874,8 +8890,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene: {fileID: 514981336}
   startQuest: {fileID: 11400000, guid: 02846e693a0245c41a409b835c1b17c4, type: 2}
-  questToUpdate: 
-  updateName: 
+  questToUpdate: plateauquest
+  updateName: Strange Plateaus
 --- !u!114 &514981338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10610,7 +10626,7 @@ GameObject:
   - component: {fileID: 595012661}
   - component: {fileID: 595012660}
   - component: {fileID: 595012662}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: PlateauQuestStart_TE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10694,8 +10710,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15.040001, y: 12.148666, z: 21.905548}
-  m_Center: {x: 1.3299999, y: -12.475666, z: -5.642227}
+  m_Size: {x: 26.398533, y: 12.148666, z: 21.669739}
+  m_Center: {x: 3.0960522, y: -12.475666, z: -4.639221}
 --- !u!114 &595012661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17052,8 +17068,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.28691995, z: 0, w: 0.9579546}
-  m_LocalPosition: {x: 369.723, y: 45.837, z: 95.117}
+  m_LocalRotation: {x: 0.26894772, y: -0.006300186, z: 0.0017592807, w: 0.96313256}
+  m_LocalPosition: {x: 31.310001, y: 30.970001, z: 383.44}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23727,7 +23743,7 @@ GameObject:
   - component: {fileID: 1338818538}
   - component: {fileID: 1338818541}
   - component: {fileID: 1338818540}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24731,7 +24747,7 @@ MonoBehaviour:
   subToId: plateauquest
   sceneToTeleport: 1
   playOnAstrolabeOpen: {fileID: 0}
-  openAstrolabe: {fileID: 0}
+  openAstrolabe: {fileID: -5942043207093793466, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   narration: {fileID: 0}
 --- !u!1 &1410362284
 GameObject:
@@ -28065,7 +28081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_Layer
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 316fa9db454963446b01ff2de6eab4df, type: 3}
       propertyPath: m_IsActive
@@ -29637,7 +29653,7 @@ GameObject:
   - component: {fileID: 1666510912}
   - component: {fileID: 1666510913}
   - component: {fileID: 1666510914}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: Narr.PQ3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30710,7 +30726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1771747412}
   - component: {fileID: 1771747414}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30924,13 +30940,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804527967}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49, y: 0, z: -15.98}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 3.3490466e-14, y: -0.080334716, z: 7.6816407e-16, w: 0.99676794}
+  m_LocalPosition: {x: 1.9531, y: 0.00000017754, z: -23.244}
+  m_LocalScale: {x: 1.3479158, y: 1, z: 1.1292}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3271419}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -9.216, z: 0}
 --- !u!114 &1804527969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30964,8 +30980,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 24.029888, y: 5.2448845, z: 46.909943}
-  m_Center: {x: 0.7791214, y: 2.1224422, z: 16.15477}
+  m_Size: {x: 24.029888, y: 5.2448845, z: 57.641}
+  m_Center: {x: 0.7791075, y: 2.1224105, z: 2.9659057}
 --- !u!114 &1804527971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35721,7 +35737,7 @@ GameObject:
   - component: {fileID: 2090882076}
   - component: {fileID: 2090882075}
   - component: {fileID: 2090882077}
-  m_Layer: 20
+  m_Layer: 0
   m_Name: VCAM_PlateauQuest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36550,6 +36566,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1258124731}
+    - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 87823424}
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
@@ -36557,7 +36576,7 @@ PrefabInstance:
       addedObject: {fileID: 201624432}
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1258124731}
+      addedObject: {fileID: 2076698658}
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017983587}
@@ -36573,9 +36592,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1445337247}
-    - targetCorrespondingSourceObject: {fileID: 5145784996305372286, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2076698658}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
 --- !u!4 &1313976960214731076 stripped
@@ -37548,20 +37564,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.14493528
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -86.24
+      value: -85.17
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.57
+      value: -6.5699997
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.2
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999888
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalRotation.x
@@ -37569,7 +37589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.0047417344
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalRotation.z
@@ -37581,7 +37601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.543
       objectReference: {fileID: 0}
     - target: {fileID: 7060018555976355266, guid: 73b12f7fae935a9439d48d49205668bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
