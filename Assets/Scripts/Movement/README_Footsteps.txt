@@ -20,13 +20,14 @@ General Description
 	in the 'paint texture' option for terrains. Because you can paint different terrain layer textures on top of one another with different degrees 
 	of transparency, this system evaluates and calls out the texture with the strongest expression at each spot, 
 	using the texture's alpha values (or degree of transparency)
-
 	
 	There are several scripts that are directly associated with this system which are called out by other scripts. Both 
 	MovementSoundEffects and CheckGroundTexture are also attached directly to the player object. 
 		MovementSoundEffects.cs [in SwimmingMovement.cs, LandMovement.cs]
 		CheckGroundTexture.cs [in LandMovement.cs, MovementSoundEffects.cs]
 		MovementSounds.cs
+
+	There is the option to make certain objects climbable. See the ClimbingMovement.cs script and associated readme.
 
 CheckGroundTexture.cs
 	This script is attached to the Player object. It looks for and finds the terrain type the player is standing on. 
@@ -97,7 +98,7 @@ MovementSounds.cs
 
 Troubleshooting and Errors
 	If you happen to have the Player object selected when going into play mode, you may come across this error after
-	going back to edit mode: “NullReferenceException: SerializedObject of SerializedProperty has been Disposed…”
+	going back to edit mode:  NullReferenceException: SerializedObject of SerializedProperty has been Disposed  
 		This is just an error with the inspector UI display and is not dangerous to the gameplay
 		Select any other object when going into game mode to stop the message from appearing.
 
