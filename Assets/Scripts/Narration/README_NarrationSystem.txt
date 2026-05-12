@@ -26,7 +26,7 @@ Narration Triggers:
 	You may find the different narration trigger scripts under "Narration / Triggers".
 		AstrolabeNarration.cs - Not currently used, was previously a prompt to open the Astrolabe. Requires LoadGuiManager.cs
 		CutsceneNarrTrigger.cs - Used extensively in cutscenes
-		PlayOnCollisionEnter.cs - Used to trigger narration using a collider
+		PlayOnCollisionEnter.cs - Used to trigger narration using a collider; must have default playability selected!
 		PlayOnLoad.cs - Plays automatically when a specific scene loads
 		PlayRandomlyOnCollisionEnter.cs - Plays and replays when player interacts with a collider, but has a delay effect
 		PleistoceneLoad1.cs - Depreciated in favor of specific cutscenes, but played when the Pleistocene opened. Requires NarrationManager.cs
