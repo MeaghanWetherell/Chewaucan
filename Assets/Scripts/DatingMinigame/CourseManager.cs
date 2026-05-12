@@ -342,7 +342,7 @@ public class CourseManager : MonoBehaviour
     {
         if (Math.Abs(curPoints - datingPointsToWin) < 0.01f)
         {
-            LoadGUIManager.loadGUIManager.InstantiatePopUp("You Win!", "You got the right date!");
+           // LoadGUIManager.loadGUIManager.InstantiatePopUp("You Win!", "You got the right date!");
         }
         else
         {
