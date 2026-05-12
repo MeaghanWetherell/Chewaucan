@@ -434,9 +434,12 @@ namespace Audio
 
         //audio mixer volumes are in decibels, which are on a logarithmic scale rather than a linear one
         //this converts a linear percentage volume into one that works for a log scale
+        //This does overwrite the maximum volume as set by your audiomixer. So if you, like us, were having fuzzy audio issues
+        //This is where you need to adjust your values
         private float ConvertToLogScale(float input)
         {
-            return Mathf.Log10(input) * 20+10;
+            //return Mathf.Log10(input) * 20+10; //This was making the default dB 10
+            return Mathf.Log10(Mathf.Max(input, 0.0001f)) * 20; //Default dB is 0
         }
     }
 }
