@@ -16,6 +16,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     public InputActionReference endClimb;
+
+    public List<AudioSource> stopOnStartSwimming;
     
     private LandMovement landMovement;
     private SwimmingMovement swimmingMovement;
@@ -84,6 +86,9 @@ public class PlayerMovementController : MonoBehaviour
         walking = false;
         swimming = true;
         climbing = false;
+        gameObject.GetComponentInChildren<RandomAmbientSound>().enabled = false;
+        foreach(var src in stopOnStartSwimming)
+            src.Stop();
         SetScripts();
         swimmingMovement.SetSwimming(waterLevel);
         
@@ -100,6 +105,11 @@ public class PlayerMovementController : MonoBehaviour
         walking = true;
         swimming = false;
         climbing = false;
+        RandomAmbientSound rand = gameObject.GetComponentInChildren<RandomAmbientSound>(true);
+        if(rand != null)
+            rand.enabled = true;
+        foreach(var src in stopOnStartSwimming)
+            src.Play();
         HUDManager.hudManager.CloseMessage();
         SetScripts();
     }

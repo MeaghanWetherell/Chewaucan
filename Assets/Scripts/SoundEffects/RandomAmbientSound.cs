@@ -1,8 +1,10 @@
+using System;
 using Misc;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 // script for ambient sound effects that play at random intervals while exploring the map
 // this script is attached to an empty game object which is a child of the Player prefab
@@ -33,7 +35,7 @@ public class RandomAmbientSound : MonoBehaviour
 
     private bool playing;
     private bool paused;
-    private void Start()
+    private void OnEnable()
     {
         audioSource = GetComponent<AudioSource>();
         playing = false;
@@ -52,8 +54,10 @@ public class RandomAmbientSound : MonoBehaviour
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
+        StopAllCoroutines();
+        audioSource.Stop();
         PauseCallback.pauseManager.UnsubToPause(OnPause);
         PauseCallback.pauseManager.UnsubToResume(OnResume);
     }
