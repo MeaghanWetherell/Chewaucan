@@ -75,7 +75,6 @@ namespace QuestSystem.Quests.QScripts
                             J4.SetPlayability(true);
                             WPUnlockSerializer.wpUnlockSerializer.Unlock("MammothsWP");
                             LoadGUIManager.loadGUIManager.SubToTopPopUp(str => {SceneLoadWrapper.sceneLoadWrapper.LoadScene("Modern Map"); });
-                            QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(1);
                         }
                     }
                 }
