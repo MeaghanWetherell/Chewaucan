@@ -213,8 +213,6 @@ namespace Audio
         private void Awake()
         {
             //set relative volume of the bgm and narrator. is not on log scale, rather it is a percentage.
-            bgm.volume = standVol;
-            narrator.volume = standVol;
             sliderVals ??= new List<float>();
             while (sliderVals.Count < volParams.Count)
             {
