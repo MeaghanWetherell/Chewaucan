@@ -120,7 +120,10 @@ public class CourseManager : MonoBehaviour
     [NonSerialized] public UnityEvent Stopped = new UnityEvent();
 
     [Tooltip("Background music to play during the game")]
-    public List<AudioClip> bgm;
+    public List<AudioClip> bgmMinigame;
+    
+    [Tooltip("Background music to play after the game ends")]
+    public List<AudioClip> bgmMain;
 
 
 
@@ -169,7 +172,7 @@ public class CourseManager : MonoBehaviour
         timer.SetTimer(courseTime);
         timer.timerStopped.AddListener(Reset);
         active = true;
-        SoundManager.soundManager.SetBGM(bgm);
+        SoundManager.soundManager.SetBGM(bgmMinigame);
         Player.player.GetComponentInChildren<RandomAmbientSound>().enabled = false;
         GameObject[] allDrs = GameObject.FindGameObjectsWithTag("dateRock");
         foreach (GameObject rockG in allDrs)
@@ -337,7 +340,7 @@ public class CourseManager : MonoBehaviour
     }
 
     //ends the game with a loss or win depending on current points, sending a popup with the passed loss message in the case of a loss
-    //destroys all spawned objects, stops background music, and resets the player's position
+    //destroys all spawned objects, changes background music, and resets the player's position
     public void Reset(string loseMessage)
     {
         if (Math.Abs(curPoints - datingPointsToWin) < 0.01f)
@@ -359,7 +362,7 @@ public class CourseManager : MonoBehaviour
         Player.player.transform.position = startPosition.position;
         Player.player.transform.eulerAngles = startPosition.eulerAngles;
         Player.player.GetComponentInChildren<RandomAmbientSound>().enabled = true;
-        SoundManager.soundManager.StopBGM();
+        SoundManager.soundManager.SetBGM(bgmMain);
         curPoints = 0;
         AddPoints(0);
         active = false;
