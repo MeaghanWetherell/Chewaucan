@@ -73,21 +73,21 @@ public class GameEndScript : MonoBehaviour
         completion = overallCompletions / (float) overallCount;
         if (completion >= 0.75)
         {
-            rating.text = "You told an Excellent story! Rating: Excellent";
+            rating.text = "You told an excellent story!";
             SteamAPIManager.UnlockAch("BestStory");
         }
         else if (completion >= 0.5)
         {
-            rating.text = "You told a Good story! Rating: Good";
+            rating.text = "You told a decent story!";
             SteamAPIManager.UnlockAch("GoodStory");
         }
         else if (completion >= 0.25)
         {
-            rating.text = "You told an Okay story! Rating: Okay";
+            rating.text = "You told an okay story.";
         }
         else
         {
-            rating.text = "You told a Bad story! Rating: Bad";
+            rating.text = "You told a terrible story!";
             SteamAPIManager.UnlockAch("BadEnding");
         }
             
