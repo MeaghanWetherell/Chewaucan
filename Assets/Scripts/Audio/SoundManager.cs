@@ -392,17 +392,18 @@ namespace Audio
         //quiets the bgm by the set factor until the passed audio source stops playing
         public IEnumerator QuietBGMUntilDone(AudioSource running, float attenuationFactor = quietVol)
         {
+            Debug.Log("About to Quiet BGM. Current Vol = "+bgm.volume);
             bgm.volume *= attenuationFactor;
+            Debug.Log("Quieted BGM. Current Vol = "+bgm.volume);
             waiting = true;
             yield return new WaitForSeconds(0);
-            while (true)
+            while (running != null && (running.isPlaying || AudioListener.pause))
             {
-                if (!running.isPlaying && !AudioListener.pause)
-                    break;
                 yield return new WaitForSeconds(0);
             }
             waiting = false;
             bgm.volume = bgm.volume/attenuationFactor;
+            Debug.Log("Returned BGM to Normal. Current Vol = "+bgm.volume);
         }
         
         //quiets SE by the set factor until the passed audio source stops playing
