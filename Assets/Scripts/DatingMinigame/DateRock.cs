@@ -79,7 +79,7 @@ public class DateRock : MonoBehaviour
             mySE.Play();
             if (!SoundManager.soundManager.IsMuted(2))
             {
-                StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation));
+                SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation);
             }
             //prepare to disable
             StartCoroutine(DisableAfterTime(0.5f));
