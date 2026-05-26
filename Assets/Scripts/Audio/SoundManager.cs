@@ -6,6 +6,7 @@ using System.Text.Json;
 using Misc;
 using QuestSystem;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -111,7 +112,7 @@ namespace Audio
             narrFinished = false;
             narrator.Play();
             waiting = false;
-            StartCoroutine(QuietBGMUntilDone(narrator));
+            StartCoroutine(QuietBGMUntilDoneP(narrator));
             StartCoroutine(QuietSEUntilDone(narrator));
         }
 
@@ -388,22 +389,28 @@ namespace Audio
             waiting = false;
             bgm.Play();
         }
-        
-        //quiets the bgm by the set factor until the passed audio source stops playing
-        public IEnumerator QuietBGMUntilDone(AudioSource running, float attenuationFactor = quietVol)
+
+        public void QuietBGMUntilDone(AudioSource running, float attenuationFactor = quietVol)
         {
-            Debug.Log("About to Quiet BGM. Current Vol = "+bgm.volume);
+            StartCoroutine(QuietBGMUntilDoneP(running, attenuationFactor));
+        }
+
+        //quiets the bgm by the set factor until the passed audio source stops playing
+        private IEnumerator QuietBGMUntilDoneP(AudioSource running, float attenuationFactor = quietVol)
+        {
+            //Debug.Log("About to Quiet BGM. Current Vol = "+bgm.volume);
             bgm.volume *= attenuationFactor;
-            Debug.Log("Quieted BGM. Current Vol = "+bgm.volume);
+            //Debug.Log("Quieted BGM. Current Vol = "+bgm.volume);
             waiting = true;
             yield return new WaitForSeconds(0);
-            while (running != null && (running.isPlaying || AudioListener.pause))
+            while (running != null && running.enabled && running.gameObject.activeSelf && (running.isPlaying || AudioListener.pause))
             {
+                //Debug.Log("Currently Running Coroutine");
                 yield return new WaitForSeconds(0);
             }
-            waiting = false;
-            bgm.volume = bgm.volume/attenuationFactor;
-            Debug.Log("Returned BGM to Normal. Current Vol = "+bgm.volume);
+            waiting = false; 
+            bgm.volume = bgm.volume/attenuationFactor; 
+            //Debug.Log("Returned BGM to Normal. Current Vol = "+bgm.volume);
         }
         
         //quiets SE by the set factor until the passed audio source stops playing

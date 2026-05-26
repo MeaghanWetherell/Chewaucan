@@ -30,7 +30,7 @@ public class SnakeRotate : MonoBehaviour
             rattle.Play();
             if (!SoundManager.soundManager.IsMuted(2))
             {
-                SoundManager.soundManager.StartCoroutine(SoundManager.soundManager.QuietBGMUntilDone(rattle, BGMAttenuation));
+                SoundManager.soundManager.QuietBGMUntilDone(rattle, BGMAttenuation);
             }
             move.enabled = false;
             transform.parent.GetComponentInChildren<Animator>().SetBool("Rattle", true);
