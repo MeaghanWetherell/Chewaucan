@@ -71,23 +71,29 @@ public class GameEndScript : MonoBehaviour
         int overallCount = countsPerType[0] + countsPerType[1] + countsPerType[2]+countsPerType[3];
         overallScore.text = overallCompletions + "/" + overallCount;
         completion = overallCompletions / (float) overallCount;
-        if (completion >= 0.75)
+
+        //There are 5 quests that relate to the story, 1 nature log with partial relation to the story, and 1 science log quest.
+        //Science log is unlocked with 3 quests completed.
+        //So a player with 6/7 (85.7%) or 6/6 would get the perfect ending.
+        //Player with 5/6 (83.3%) or 5/7 (71%) tells a good story.
+
+        if (completion >= 0.84)
         {
-            rating.text = "You told an excellent story!";
+            rating.text = "You told the perfect story! What a good birthday clown you make.";
             SteamAPIManager.UnlockAch("BestStory");
         }
-        else if (completion >= 0.5)
+        else if (completion >= 0.56)
         {
-            rating.text = "You told a decent story!";
+            rating.text = "You told a good story! But there are still more clues to find and an even better story to tell.";
             SteamAPIManager.UnlockAch("GoodStory");
         }
-        else if (completion >= 0.25)
+        else if (completion >= 0.40)
         {
-            rating.text = "You told an okay story.";
+            rating.text = "You told an okay story. But you could do a better job if you went back in time and found more clues.";
         }
         else
         {
-            rating.text = "You told a terrible story!";
+            rating.text = "No wonder you told a terrible story. Fortunately, you're a time traveller... so you can always go back and find more clues.";
             SteamAPIManager.UnlockAch("BadEnding");
         }
             
