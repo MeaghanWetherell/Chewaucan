@@ -149,10 +149,10 @@ public class PlayerPositionManager : MonoBehaviour
     private void FindPlayerWhenSceneChanged(Scene current, Scene next)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (AstrolabeUIIconManager.GetNewDest() && next.name.Equals("Modern Map"))
-        {
-            setPlayerPosition(AstrolabeQueueManager.popModern(), 0);
-        }
+       // if (AstrolabeUIIconManager.GetNewDest() && next.name.Equals("Modern Map"))
+        //{
+          //  setPlayerPosition(AstrolabeQueueManager.popModern(), 0); 
+        //}
         if(AstrolabeUIIconManager.GetNewDest(1) && next.name.Equals("PleistoceneMap"))
         {
             Vector3 pos = AstrolabeQueueManager.popPleist();

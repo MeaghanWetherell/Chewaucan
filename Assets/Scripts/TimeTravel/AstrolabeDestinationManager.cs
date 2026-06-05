@@ -25,10 +25,12 @@ namespace TimeTravel
             {
                 PastTeleportButton.interactable = false;
             }
-            else if (Teleposition1.Equals(Vector3.negativeInfinity) && curScene == 1)
-            {
-                PastTeleportButton.interactable = false;
-            }
+
+            //We want people to always be able to leave the pleistocene so turning this off
+            //else if (Teleposition1.Equals(Vector3.negativeInfinity) && curScene == 1)
+            //{
+              //  PastTeleportButton.interactable = false;
+            //}
         }
 
         public void OnClick()
