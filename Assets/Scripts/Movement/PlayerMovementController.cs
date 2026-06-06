@@ -12,15 +12,22 @@ using UnityEngine.InputSystem;
  * 
  * The SwimmingMovement and LandMovement components should never be both enabled,
  * only ever 1 enabled and the other disabled or both disbled when paused.
+ * 
+ * On 6-6-2026 Meaghan added some adjustments here to make this play better
+ * with the ambient sound manager system and also with the new "move the camera closer during swimming"
+ * stuff. These adjustments were done with Claude Code, and are indicated in case something breaks.
  */
 public class PlayerMovementController : MonoBehaviour
 {
     public InputActionReference endClimb;
 
-    public List<AudioSource> stopOnStartSwimming;
+    [Tooltip("Local water sounds you shouldn't hear underwater")]
+    public List<AudioSource> stopOnStartDiving;
     
     private LandMovement landMovement;
     private SwimmingMovement swimmingMovement;
+    private ActiveSoundManager activeSoundManager; //added 6-6-26
+
     private ClimbingMovement climbingMovement;
 
     private bool walking;
@@ -33,6 +40,7 @@ public class PlayerMovementController : MonoBehaviour
         landMovement = GetComponent<LandMovement>();
         swimmingMovement = GetComponent<SwimmingMovement>();
         climbingMovement = GetComponent<ClimbingMovement>();
+        activeSoundManager = GetComponentInChildren<ActiveSoundManager>(true); // 6-6-26 addition
 
         landMovement.enabled = true;
         swimmingMovement.enabled = false;
@@ -86,9 +94,10 @@ public class PlayerMovementController : MonoBehaviour
         walking = false;
         swimming = true;
         climbing = false;
-        gameObject.GetComponentInChildren<RandomAmbientSound>().enabled = false;
-        foreach(var src in stopOnStartSwimming)
-            src.Stop();
+        //gameObject.GetComponentInChildren<RandomAmbientSound>().enabled = false; //6-6-26 turned off
+        if (activeSoundManager != null) activeSoundManager.DisableAmbientSounds(); //6-6-26
+       // foreach (var src in stopOnStartDiving)
+         //   src.Stop();
         SetScripts();
         swimmingMovement.SetSwimming(waterLevel);
         
@@ -105,11 +114,13 @@ public class PlayerMovementController : MonoBehaviour
         walking = true;
         swimming = false;
         climbing = false;
-        RandomAmbientSound rand = gameObject.GetComponentInChildren<RandomAmbientSound>(true);
-        if(rand != null)
-            rand.enabled = true;
-        foreach(var src in stopOnStartSwimming)
-            src.Play();
+        //RandomAmbientSound rand = gameObject.GetComponentInChildren<RandomAmbientSound>(true);  /6-6-26 disabled
+        //if(rand != null)
+        //  rand.enabled = true;
+
+        if (activeSoundManager != null) activeSoundManager.EnableAmbientSounds(); //enabled 6-6-26
+       // foreach (var src in stopOnStartDiving)
+         //   src.Play();
         HUDManager.hudManager.CloseMessage();
         SetScripts();
     }

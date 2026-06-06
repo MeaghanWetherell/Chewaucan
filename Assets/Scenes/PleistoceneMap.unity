@@ -505,6 +505,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5639228643825228260, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1353114443}
+    - targetCorrespondingSourceObject: {fileID: 5639228643825228260, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1353114444}
   m_SourcePrefab: {fileID: 100100000, guid: a1b29129154ba86489eaa4b65c7a4f3a, type: 3}
 --- !u!1 &56968387
 GameObject:
@@ -2904,31 +2907,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 983.2146
+      value: -469
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.60002
+      value: 43.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -257.7115
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6244846
+      value: 0.4307954
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.087366395
+      value: -1.8308918e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.76864964
+      value: -0.90244967
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.107535325
+      value: -1.4383492e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5758,7 +5761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251401566777113584, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: m_Name
-      value: CootsSound
+      value: CootsSound1
       objectReference: {fileID: 0}
     - target: {fileID: 5755410312033143647, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: Priority
@@ -6270,7 +6273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251401566777113584, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: m_Name
-      value: CootsSound
+      value: CootsSound4
       objectReference: {fileID: 0}
     - target: {fileID: 5755410312033143647, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: Priority
@@ -9048,7 +9051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251401566777113584, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: m_Name
-      value: CootsSound
+      value: CootsSound2
       objectReference: {fileID: 0}
     - target: {fileID: 5755410312033143647, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: Priority
@@ -13168,9 +13171,37 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: stopOnStartSwimming.Array.size
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[0]
+      value: 
+      objectReference: {fileID: 2097612263}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[1]
+      value: 
+      objectReference: {fileID: 1536576296}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[2]
+      value: 
+      objectReference: {fileID: 2143675077}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[3]
+      value: 
+      objectReference: {fileID: 1343444185}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[4]
+      value: 
+      objectReference: {fileID: 600826511}
+    - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: stopOnStartDiving.Array.data[5]
+      value: 
+      objectReference: {fileID: 1712811929}
     - target: {fileID: 30061512974992736, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: stopOnStartSwimming.Array.data[0]
       value: 
@@ -13283,6 +13314,14 @@ PrefabInstance:
       propertyPath: staminaUI
       value: 
       objectReference: {fileID: 1968675285}
+    - target: {fileID: 3190979845072674039, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: swimCameraAdjust
+      value: 
+      objectReference: {fileID: 1353114444}
+    - target: {fileID: 4606230588266111898, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: pleistoceneMapAmbientSounds.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4636437623450494398, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 116.30307
@@ -14147,7 +14186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251401566777113584, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: m_Name
-      value: CootsSound
+      value: CootsSound3
       objectReference: {fileID: 0}
     - target: {fileID: 5755410312033143647, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: Priority
@@ -14439,6 +14478,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1353114444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353114439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56c65ee7e05e574cad4ab18cdf60beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalOffsetY: 1.5
+  swimOffsetY: 0.5
+  diveOffsetY: 0
+  lerpSpeed: 3
 --- !u!1 &1358707384
 GameObject:
   m_ObjectHideFlags: 0
@@ -17786,7 +17841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3251401566777113584, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: m_Name
-      value: CootsSound
+      value: CootsSound5
       objectReference: {fileID: 0}
     - target: {fileID: 5755410312033143647, guid: 66a12328097802f42b72e4a6f18b2b21, type: 3}
       propertyPath: Priority

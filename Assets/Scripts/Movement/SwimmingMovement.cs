@@ -11,7 +11,7 @@ using UnityEngine.UI;
  * This script is attached to the player prefab, and enabled when the player
  * moves into water
  * The enabling of this occurs in StartSwimming, which is attached to bodies of water 
- * the player can swim in
+ * (the global volumes) the player can swim in
  */
 public class SwimmingMovement : MonoBehaviour
 {
@@ -26,6 +26,8 @@ public class SwimmingMovement : MonoBehaviour
     public GameObject minimapCamObj;
     public Slider staminaUI;
     public Slider oxygenUI;
+
+    private PlayerMovementController _movementController; //added 6-6-26
 
     CharacterController _controller;
     Vector2 _moveInput;
@@ -45,6 +47,9 @@ public class SwimmingMovement : MonoBehaviour
 
     private ActiveSoundManager ambientSoundManager;
 
+    // This SwimCameraAdjust code added on 6-6-2026; it is from ClaudeCode
+    public SwimCameraAdjust swimCameraAdjust;
+
     private void InitializeValues()
     {
         _controller = GetComponent<CharacterController>();
@@ -62,6 +67,7 @@ public class SwimmingMovement : MonoBehaviour
     {
         InitializeValues();
         ambientSoundManager = FindFirstObjectByType<ActiveSoundManager>();
+        _movementController = GetComponent<PlayerMovementController>(); //6-6-26
     }
 
     private void OnEnable()
@@ -82,6 +88,12 @@ public class SwimmingMovement : MonoBehaviour
         {
             oxygenUI.gameObject.SetActive(false);
         }
+        // added 6-6-2026
+        if (swimCameraAdjust != null)
+        {
+            swimCameraAdjust.SetDiving(false);
+        }
+            
 
         moveRef.action.performed -= OnMove;
         moveRef.action.canceled -= (InputAction.CallbackContext context) => { _moveInput = Vector2.zero; };
@@ -107,6 +119,13 @@ public class SwimmingMovement : MonoBehaviour
             _waterAudio.Stop();
             ambientSoundManager.EnableAmbientSounds();
             _isDiving = false;
+
+            // This SwimCameraAdjust code added on 6-6-2026; it is from ClaudeCode
+            swimCameraAdjust.SetDiving(false);
+
+            //added 6-6 to turn the sounds back on
+            foreach (var src in _movementController.stopOnStartDiving)
+                src.Play();
         }
 
         //regular swimming movement, like land movement but uses camera forward instead of the player forward
@@ -204,6 +223,14 @@ public class SwimmingMovement : MonoBehaviour
         {
             _waterAudio.Play();
             _isDiving = true;
+
+            // This SwimCameraAdjust code added on 6-6-2026; it is from ClaudeCode
+            swimCameraAdjust.SetDiving(true);
+
+            // Also added on 6-6, turns off list of localized sounds
+            foreach (var src in _movementController.stopOnStartDiving)
+                src.Stop();
+
             if (ambientSoundManager != null)
             {
                 ambientSoundManager.DisableAmbientSounds();

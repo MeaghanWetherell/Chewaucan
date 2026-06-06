@@ -4,9 +4,14 @@ using UnityEngine;
 
 /*
  * This should be attached to the global volume of any body
- * of water that the player can swim in.
- * The
+ * of water that the player can swim in. That volume must have a collider with a ticked trigger.
+ * 
+ * On 6-6-26 Meaghan added some adjustments provided by Claude Code. 
+ * The adjustments are to work with the SwimCameraAdjust script,
+ * which is attached to the Player Follow Vcam.
+ * These changes are indicated with comments in case they need to be removed.
  */
+
 [RequireComponent(typeof(AudioSource))]
 public class StartSwimming : MonoBehaviour
 {
@@ -25,7 +30,8 @@ public class StartSwimming : MonoBehaviour
                 waterBlock.position.y, other.gameObject.transform.position.z);
             swimmingMovement.SetWaterSoundSource(this.GetComponent<AudioSource>());
             mvmtController.SwitchToSwimming(waterBlock.position);
-            //Debug.Log("Debug message: you have entered the swim arena");
+                        
+            other.gameObject.GetComponent<SwimmingMovement>().swimCameraAdjust.SetSwimming(true); // 6-6-26
         }
     }
 
@@ -46,6 +52,8 @@ public class StartSwimming : MonoBehaviour
             CameraLook camLook = other.gameObject.GetComponent<CameraLook>();
             camLook.SetMinDist(30f);
             mvmtController.SwitchToWalking();
+
+            other.gameObject.GetComponent<SwimmingMovement>().swimCameraAdjust.SetSwimming(false); //6-6-26
         }
     }
 }
