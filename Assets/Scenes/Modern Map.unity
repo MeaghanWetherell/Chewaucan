@@ -22425,6 +22425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1215927812}
   - component: {fileID: 1215927811}
+  - component: {fileID: 1215927813}
   m_Layer: 0
   m_Name: VCam_PlayerFollow
   m_TagString: PlayerFollow
@@ -22487,6 +22488,22 @@ Transform:
   - {fileID: 1845334396}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1215927813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215927810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56c65ee7e05e574cad4ab18cdf60beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalOffsetY: 1.5
+  swimOffsetY: 0.5
+  diveOffsetY: 0
+  lerpSpeed: 3
 --- !u!1001 &1219646824
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37104,7 +37121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7132512001301565237, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7689697307385192490, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: m_text
@@ -37853,6 +37870,10 @@ PrefabInstance:
       propertyPath: staminaUI
       value: 
       objectReference: {fileID: 539066329}
+    - target: {fileID: 3190979845072674039, guid: 537d322d564bf6447abce987637ce08e, type: 3}
+      propertyPath: swimCameraAdjust
+      value: 
+      objectReference: {fileID: 1215927813}
     - target: {fileID: 4636437623450494398, guid: 537d322d564bf6447abce987637ce08e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 116.30307
