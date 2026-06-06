@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endClimb: {fileID: 6644580821195962128, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  stopOnStartDiving: []
 --- !u!114 &3190979845072674039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   moveRef: {fileID: 1141918453499061307, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   jumpRef: {fileID: -6898149818460203712, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
   sprintRef: {fileID: 5843193986770153880, guid: c6c400b5879c69e4eafd5d24d3cc9c1f, type: 3}
+  swimCameraAdjust: {fileID: 0}
 --- !u!114 &3004082312838410803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,8 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dc98e8e466f3c49ac394acdb5f1c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedDefault: 10
-  sprintSpeedMultiplier: 2.25
+  moveSpeedDefault: 12
+  sprintSpeedMultiplier: 3
   maxDistToGround: 2.5
   rotationSpeed: 4
   gravity: -2
