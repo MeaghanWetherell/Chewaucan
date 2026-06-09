@@ -16,22 +16,20 @@ namespace TimeTravel
         private Vector3 Teleposition1 = Vector3.negativeInfinity;
         
         private Vector3 Teleposition2 = Vector3.negativeInfinity;
+
+        [Tooltip("Wall hit narration from pleistocene for bonepile")]
+        public Narration.Narration bpilePleistNarr;
         
         private void Awake()
         {
             Teleposition1 = AstrolabeQueueManager.peekModern();
             Teleposition2 = AstrolabeQueueManager.peekPleist();
-            QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
             int curScene = SceneLoadWrapper.sceneLoadWrapper.currentSceneType;
             if (Teleposition2.Equals(Vector3.negativeInfinity) && curScene == 0)
             {
                 PastTeleportButton.interactable = false;
             }
-            else if (bpile == null)
-            {
-                Debug.LogError("Reached Pleistocene without completing BonePil");
-            }
-            else if(!bpile.isComplete)
+            else if(!bpilePleistNarr.HasPlayed() && curScene == 1)
             {
                 PastTeleportButton.interactable = false;
             }
