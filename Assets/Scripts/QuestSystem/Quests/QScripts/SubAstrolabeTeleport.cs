@@ -86,7 +86,7 @@ namespace QuestSystem.Quests.QScripts
 
         private void OnAstrolabeOpen(InputAction.CallbackContext context)
         {
-            if (playOnAstrolabeOpen.GetPlayability())
+            if (playOnAstrolabeOpen != null && playOnAstrolabeOpen.GetPlayability())
             {
                 AudioListener.pause = false;
                 playOnAstrolabeOpen.Begin();

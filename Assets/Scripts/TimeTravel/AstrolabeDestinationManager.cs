@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Misc;
+using QuestSystem;
 using QuestSystem.Quests.QScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,17 +21,20 @@ namespace TimeTravel
         {
             Teleposition1 = AstrolabeQueueManager.peekModern();
             Teleposition2 = AstrolabeQueueManager.peekPleist();
+            QuestNode bpile = QuestManager.questManager.GETNode("bonepile");
             int curScene = SceneLoadWrapper.sceneLoadWrapper.currentSceneType;
             if (Teleposition2.Equals(Vector3.negativeInfinity) && curScene == 0)
             {
                 PastTeleportButton.interactable = false;
             }
-
-            //We want people to always be able to leave the pleistocene so turning this off
-            //else if (Teleposition1.Equals(Vector3.negativeInfinity) && curScene == 1)
-            //{
-              //  PastTeleportButton.interactable = false;
-            //}
+            else if (bpile == null)
+            {
+                Debug.LogError("Reached Pleistocene without completing BonePil");
+            }
+            else if(!bpile.isComplete)
+            {
+                PastTeleportButton.interactable = false;
+            }
         }
 
         public void OnClick()
