@@ -17,7 +17,7 @@ public class AnimalRun : MonoBehaviour
     public float cullTime;
 
     [Tooltip("Renderer for the main animal mesh")]
-    public MeshRenderer animalRenderer;
+    public SkinnedMeshRenderer animalRenderer;
 
     [Tooltip("Trigger collider that causes this animal to run away")]
     public Collider trigger;
