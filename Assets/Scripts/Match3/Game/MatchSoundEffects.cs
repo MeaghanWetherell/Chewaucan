@@ -14,6 +14,10 @@ namespace Match3.Game
 
         [Tooltip("All 'Aw' sounds that can play")] public List<AudioClip> awAud;
 
+        [Tooltip("All 'coin or match' sounds that can play")] public List<AudioClip> coinAud;
+
+        [Tooltip("All 'nomatch' sounds that can play")] public List<AudioClip> missAud;
+
         [Tooltip("BGM to play during match 3")] public List<AudioClip> bgm;
 
         [Tooltip("Degree to quiet BGM")] public float BGMattenuation;
@@ -22,6 +26,18 @@ namespace Match3.Game
         {
             SoundManager.soundManager.SetBGM(bgm);
         }
+
+        public void PlayCoin()
+        {
+            PlayFromList(coinAud);
+        }
+
+
+        public void PlayMiss()
+        {
+            PlayFromList(missAud);
+        }
+
 
         public void PlayAw()
         {
@@ -40,9 +56,10 @@ namespace Match3.Game
             {
                 SoundManager.soundManager.QuietBGMUntilDone(matchAud, BGMattenuation);
             }
-            matchAud.Stop();
+            //matchAud.Stop();
             matchAud.clip = temp;
-            matchAud.Play();
+            //matchAud.Play();
+            matchAud.PlayOneShot(matchAud.clip);
         }
     }
 }

@@ -190,7 +190,7 @@ namespace Audio
             while (currentSubLines != null && currentSubTimes != null && i < currentSubLines.Count && subtitleViewer != null)
             {
                 //while (AudioListener.pause || !subtitleViewer.transform.parent.gameObject.activeSelf) yield return new WaitForSeconds(0);
-                while (AudioListener.pause) yield return new WaitForSeconds(0);
+                while (AudioListener.pause) yield return new WaitForSeconds(0); //this makes the c
                 subtitleViewer.text = currentSubLines[i];
                 yield return new WaitForSeconds(currentSubTimes[i] - currentSubTimes[i - 1]);
                 i++;

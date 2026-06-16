@@ -236,6 +236,7 @@ namespace Match3
                 }
                 if (_removalQueue.Count > 0)
                 {
+                    matchSound.PlayCoin(); // add this line
                     StartCoroutine(Remove());
                 }
                 yield return new WaitForSeconds(0);
@@ -492,12 +493,12 @@ namespace Match3
             Swap(a, b);
             if (!DetectMatches())
             {
-                //matchSound.PlayAw();
+                matchSound.PlayMiss();
                 StartCoroutine(WaitToSwapBack(1f, a, b));
             }
             else
             {
-                //matchSound.PlayYay();
+                matchSound.PlayCoin();
                 StartCoroutine(WaitForMatchCheck(0.4f));
             }
         }
