@@ -10,6 +10,8 @@ public class AnimalRun : MonoBehaviour
 {
     public NavMeshAgent myAgent;
     
+    public Animator animator;
+    
     [Tooltip("Length of time running before the animal fades out")]
     public float runtime;
 
@@ -22,7 +24,8 @@ public class AnimalRun : MonoBehaviour
     [Tooltip("Trigger collider that causes this animal to run away")]
     public Collider trigger;
     
-    [Tooltip("Time it takes for an animal to respawn after running")]public float TimeToRespawn;
+    [Tooltip("Time it takes for an animal to respawn after running")]
+    public float TimeToRespawn;
 
     [Tooltip("Variant of the animal's material that is set transparent")]
     public Material transMat;
@@ -67,6 +70,7 @@ public class AnimalRun : MonoBehaviour
     protected virtual void Run()
     {
         Vector3 point;
+        animator.SetBool("Running", true);
         if (GetTargetPoint(out point, 80f))
         {
             myAgent.SetDestination(point);
@@ -111,6 +115,7 @@ public class AnimalRun : MonoBehaviour
     public void Respawn()
     {
         trigger.enabled = true;
+        animator.SetBool("Running", false);
         transform.parent.gameObject.SetActive(true);
     }
 
