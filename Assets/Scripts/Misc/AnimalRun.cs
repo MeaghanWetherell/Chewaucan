@@ -33,6 +33,10 @@ public class AnimalRun : MonoBehaviour
     [Tooltip("Variant of the animal's material that is set opaque")]
     public Material opaqueMat;
 
+    [Tooltip(
+        "The furthest this animal will run. The script will attempt to target a point this far away for the nav mesh agent, so ensure the animal is far enough from the edge of the map.")]
+    public float maxRunDist;
+
     private float oldSpeed;
     
     private void OnTriggerEnter(Collider other)
@@ -72,7 +76,7 @@ public class AnimalRun : MonoBehaviour
         Vector3 point;
         if(animator != null)
             animator.SetBool("Running", true);
-        if (GetTargetPoint(out point, 80f))
+        if (GetTargetPoint(out point, maxRunDist))
         {
             myAgent.SetDestination(point);
             StartCoroutine(FadeOutAfterTime(runtime, cullTime));
