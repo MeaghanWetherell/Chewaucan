@@ -19,7 +19,7 @@ public class AnimalRun : MonoBehaviour
     public float cullTime;
 
     [Tooltip("Renderer for the main animal mesh")]
-    public SkinnedMeshRenderer animalRenderer;
+    public Renderer animalRenderer;
 
     [Tooltip("Trigger collider that causes this animal to run away")]
     public Collider trigger;
@@ -70,7 +70,8 @@ public class AnimalRun : MonoBehaviour
     protected virtual void Run()
     {
         Vector3 point;
-        animator.SetBool("Running", true);
+        if(animator != null)
+            animator.SetBool("Running", true);
         if (GetTargetPoint(out point, 80f))
         {
             myAgent.SetDestination(point);
@@ -115,7 +116,8 @@ public class AnimalRun : MonoBehaviour
     public void Respawn()
     {
         trigger.enabled = true;
-        animator.SetBool("Running", false);
+        if(animator != null)
+            animator.SetBool("Running", false);
         transform.parent.gameObject.SetActive(true);
     }
 

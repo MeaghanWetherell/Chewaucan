@@ -8010,16 +8010,13 @@ PrefabInstance:
       addedObject: {fileID: 667753346}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 667753351}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 667753350}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 667753349}
     - targetCorrespondingSourceObject: {fileID: -1142577240762397042, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 667753352}
+      addedObject: {fileID: 667753351}
   m_SourcePrefab: {fileID: 100100000, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
 --- !u!1 &667753345 stripped
 GameObject:
@@ -8101,29 +8098,8 @@ NavMeshAgent:
   m_BaseOffset: 0.31
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &667753351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 667753345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8c741a262249d428f6a947ab4bbabc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myAgent: {fileID: 667753350}
-  animator: {fileID: 667753346}
-  runtime: 5
-  cullTime: 3
-  animalRenderer: {fileID: 135584255}
-  trigger: {fileID: 1168643745}
-  TimeToRespawn: 20
-  transMat: {fileID: 2100000, guid: 79cbf6438261ee341aa27b4b13486001, type: 2}
-  opaqueMat: {fileID: -2161606751921341204, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
---- !u!64 &667753352
-MeshCollider:
+--- !u!65 &667753351
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -8140,10 +8116,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8978699532602634877, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 27.63788, y: 58.974945, z: 27.95363}
+  m_Center: {x: -0.732362, y: 8.325603, z: -14.36041}
 --- !u!4 &667753354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
@@ -12481,7 +12456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &976957617
 Transform:
   m_ObjectHideFlags: 0
@@ -14491,6 +14466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1168643744}
   - component: {fileID: 1168643745}
+  - component: {fileID: 1168643746}
   m_Layer: 0
   m_Name: Scared
   m_TagString: Untagged
@@ -14534,6 +14510,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.39, y: 3.28, z: 2.15}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1168643746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168643743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8c741a262249d428f6a947ab4bbabc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAgent: {fileID: 667753350}
+  animator: {fileID: 667753346}
+  runtime: 5
+  cullTime: 3
+  animalRenderer: {fileID: 135584255}
+  trigger: {fileID: 1168643745}
+  TimeToRespawn: 20
+  transMat: {fileID: 2100000, guid: 79cbf6438261ee341aa27b4b13486001, type: 2}
+  opaqueMat: {fileID: -2161606751921341204, guid: ffb991ce326ae4e4a922474de4f6e8b6, type: 3}
 --- !u!1 &1168971305
 GameObject:
   m_ObjectHideFlags: 0
