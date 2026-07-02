@@ -30,6 +30,12 @@ public class ApplyGraphics : MonoBehaviour
 
     [Tooltip("Quality settings dropdown")]
     public TMP_Dropdown qualityDropdown;
+    
+    [Tooltip("Camera speed settings dropdown")]
+    public TMP_Dropdown camSensDropdown;
+    
+    [Tooltip("Camera look script")]
+    public CameraLook cameraLook;
 
     //current resolution
     private int curRes;
@@ -42,6 +48,8 @@ public class ApplyGraphics : MonoBehaviour
     private int priorRes;
 
     private int priorQL;
+    
+    private int priorCS;
 
     private void Start()
     {
@@ -86,6 +94,7 @@ public class ApplyGraphics : MonoBehaviour
         priorRes = curRes;
         qualityDropdown.value = QualitySettings.GetQualityLevel();
         priorQL = QualitySettings.GetQualityLevel();
+        //priorCS = cameraLook.mouseSensitivity;
     }
 
     //change the resolution to the next one to the right (no wrapping)
@@ -123,6 +132,7 @@ public class ApplyGraphics : MonoBehaviour
         VSToggle.isOn = priorVS == 1;
         ChangeRes(priorRes);
         qualityDropdown.value = priorQL;
+        camSensDropdown.value = priorCS;
     }
 
     //confirm settings changes
@@ -134,6 +144,7 @@ public class ApplyGraphics : MonoBehaviour
         else { priorVS = 0;}
         priorRes = curRes;
         priorQL = qualityDropdown.value;
+        priorCS = camSensDropdown.value;
     }
     
     //applies the user's current settings, then displays a pop-up asking them to confirm the changes
@@ -143,6 +154,7 @@ public class ApplyGraphics : MonoBehaviour
         else { QualitySettings.vSyncCount = 0; }
         Screen.SetResolution(validResolutions[curRes].x, validResolutions[curRes].y, FSToggle.isOn);
         QualitySettings.SetQualityLevel(qualityDropdown.value, SceneManager.GetActiveScene().name.Equals("MainMenuUI"));
+        //cameraLook.mouseSensitivity = camSensDropdown.value;
         LoadGUIManager.loadGUIManager.InstantiateYNPopUp(Instantiate(specialYNPrefab), "Confirm Changes", "", 
             new List<UnityAction<string>>{Confirm}, "Confirm","Decline",new List<UnityAction<string>>{Revert});
         //Debug.Log(SceneManager.GetActiveScene().name.Equals("MainMenuUI"));

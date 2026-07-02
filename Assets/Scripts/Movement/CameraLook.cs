@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class CameraLook : MonoBehaviour
 {
     public float minViewDist = 25f;
-    [SerializeField] float mouseSensitivity = 25f;
+    [SerializeField] private int mouseSensitivity = 25;
 
     public Transform mainCamera;
     public InputActionReference lookRef;
@@ -24,6 +24,9 @@ public class CameraLook : MonoBehaviour
     //subscribe to event functions
     private void Start()
     {
+        //TODO load mouse sensitivity
+        
+        
         _lookInput = Vector3.zero;
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
         PauseCallback.pauseManager.SubscribeToResume(OnResume);
