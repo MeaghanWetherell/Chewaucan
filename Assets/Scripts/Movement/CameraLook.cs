@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class CameraLook : MonoBehaviour
 {
     public float minViewDist = 25f;
-    [SerializeField] private int mouseSensitivity = 25;
+    [SerializeField] private int mouseSensitivity = 18;
 
     public Transform mainCamera;
     public InputActionReference lookRef;
@@ -24,8 +24,8 @@ public class CameraLook : MonoBehaviour
     //subscribe to event functions
     private void Start()
     {
-        //TODO load mouse sensitivity
-        
+        //load camera sensitivity from saved settings in GSSaver
+        mouseSensitivity = GSSaver.LoadCamSens();
         
         _lookInput = Vector3.zero;
         PauseCallback.pauseManager.SubscribeToPause(OnPause);
@@ -129,6 +129,7 @@ public class CameraLook : MonoBehaviour
     //reenable on resume
     public void OnResume()
     {
+        mouseSensitivity = GSSaver.LoadCamSens();
         this.enabled = true;
     }
 }

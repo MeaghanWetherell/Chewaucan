@@ -66,4 +66,43 @@ public static class GSSaver
         string json = JsonSerializer.Serialize(addedResolutions, opts);
         File.WriteAllText(Application.persistentDataPath+"/"+filepath+"AddedResolutions.json", json);
     }
+    
+    //save and load camera sensitivity
+
+    public static int LoadCamSens()
+    {
+        string json;
+        int loadedCamSens = 18;
+        try
+        {
+            var opts = new JsonSerializerOptions
+            {
+                IncludeFields = true,
+                IgnoreReadOnlyProperties = true,
+                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+            };
+            json = File.ReadAllText(Application.persistentDataPath + "/" + filepath + "CameraSensitivity.json");
+            loadedCamSens = JsonSerializer.Deserialize<int>(json, opts);
+            return loadedCamSens;
+            
+        }
+        catch (IOException)
+        {
+            return loadedCamSens;
+        }
+        
+        
+    }
+    
+    public static void SaveCamSens(int camSens)
+    {
+        var opts = new JsonSerializerOptions
+        {
+            IncludeFields = true,
+            IgnoreReadOnlyProperties = true,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+        };
+        string camSensStr = JsonSerializer.Serialize(camSens, opts);
+        File.WriteAllText(Application.persistentDataPath+"/"+filepath+"CameraSensitivity.json", camSensStr);
+    }
 }
