@@ -12,6 +12,11 @@ public class BGMManager : MonoBehaviour
     {
         SoundManager.soundManager.SetBGM(bgm);
     }
+    
+    public void StopMusic()
+    {
+        SoundManager.soundManager.StopBGM();
+    }
 
     private void Start()
     {
