@@ -72,7 +72,7 @@ public static class GSSaver
     public static int LoadCamSens()
     {
         string json;
-        int loadedCamSens = 18;
+        int loadedCamSens = 7;
         try
         {
             var opts = new JsonSerializerOptions
