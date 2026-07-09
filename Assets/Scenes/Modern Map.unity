@@ -15773,6 +15773,8 @@ GameObject:
   m_Component:
   - component: {fileID: 831777558}
   - component: {fileID: 831777559}
+  - component: {fileID: 831777560}
+  - component: {fileID: 831777561}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -15809,6 +15811,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgm:
   - {fileID: 8300000, guid: fc27d2d18978f684e8d1bfc73ea5c188, type: 3}
+--- !u!114 &831777560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831777556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: a0420464eaade744fa251a9c64e0c5cb, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 831777559}
+          m_TargetAssemblyTypeName: BGMManager, Assembly-CSharp
+          m_MethodName: StartMusic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &831777561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831777556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 02cd786ca9f296d47812f54ba3782dc8, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 831777559}
+          m_TargetAssemblyTypeName: BGMManager, Assembly-CSharp
+          m_MethodName: StopMusic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &832695164
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38236,7 +38298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].key
@@ -38273,7 +38335,7 @@ PrefabInstance:
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.data[15].key
       value: 
-      objectReference: {fileID: 737159699038342093, guid: c610394fd1ed1504ea1c1d81c3b6890f, type: 2}
+      objectReference: {fileID: 6515787957716882020, guid: c610394fd1ed1504ea1c1d81c3b6890f, type: 2}
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.data[16].key
       value: 
@@ -38337,7 +38399,7 @@ PrefabInstance:
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.data[15].value
       value: 
-      objectReference: {fileID: 5150600527030011555}
+      objectReference: {fileID: 831777560}
     - target: {fileID: 4996293333043350597, guid: a30c2e34d469a1b4380284920920679a, type: 3}
       propertyPath: m_SceneBindings.Array.data[16].value
       value: 
