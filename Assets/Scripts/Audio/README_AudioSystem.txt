@@ -42,5 +42,6 @@ General Description:
 
 Troubleshooting:
 	Having trouble with your narration sounding fuzzy or odd despite controlling the loudness normalization? 
-	This is an issue with the maximum volume as set by the audio mixer. But the SoundManager.cs script does overwrite this, so you can't
+	
+This is an issue with the maximum volume as set by the audio mixer. But the SoundManager.cs script does overwrite this, so you can't
 	just change the audio mixer settings. Instead, go to line 442 and edit as needed. Currently, this ensures that a standvol of 1 has a 	maximum dB of 0.

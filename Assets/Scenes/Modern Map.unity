@@ -1548,6 +1548,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5678247735678785801, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7809391807625016470, guid: e7186013e03288f40aed5b0ea1658cf6, type: 3}
       propertyPath: m_text
       value: Plateau Dating Game
@@ -37598,7 +37602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: rocksToSpawn
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: tuffaToSpawn
@@ -37629,6 +37633,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: a7efb27ce6521ec4a842a96682d7b475, type: 3}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
+      propertyPath: datingPointsToWin
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: goodRockTextColor
       value: '#67c967'
       objectReference: {fileID: 0}
@@ -37642,7 +37650,7 @@ PrefabInstance:
       objectReference: {fileID: 87823424}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: badDateRocksToSpawn
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4160560503155372275, guid: e9eed620495e2c34c9990f57bb5835fe, type: 3}
       propertyPath: snakeSpawnLocations
