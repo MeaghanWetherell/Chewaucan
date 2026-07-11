@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Misc;
 using QuestSystem;
@@ -24,6 +25,8 @@ namespace Audio
         [Tooltip("Ref to narration audio source")] public AudioSource narrator;
 
         [Tooltip("Standard volume of sounds. Percentage from 0 to 1.0")] public float standVol;
+        
+        [Tooltip("Standard volume of music. Percentage from 0 to 1.0")] public float musVol;
 
         [Tooltip("Reference to the master mixer")] public AudioMixer mainMixer;
 
@@ -218,8 +221,16 @@ namespace Audio
             sliderVals ??= new List<float>();
             while (sliderVals.Count < volParams.Count)
             {
-                sliderVals.Add(standVol);
+                if (sliderVals.Count == 2)
+                {
+                    sliderVals.Add(musVol);
+                }
+                else
+                {
+                    sliderVals.Add(standVol);
+                }
             }
+            
             StartCoroutine(RunSongs());
             if (soundManager != null)
             {
@@ -251,15 +262,25 @@ namespace Audio
             StartCoroutine(RunSongs());
             try
             {
-                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path+"/"+fileName+".json"));
-                subtitlesOn = JsonSerializer.Deserialize<bool>(File.ReadAllText(path+"/subtitlesOn.json"));
+                sliderVals = JsonSerializer.Deserialize<List<float>>(File.ReadAllText(path + "/" + fileName + ".json"));
+                subtitlesOn = JsonSerializer.Deserialize<bool>(File.ReadAllText(path + "/subtitlesOn.json"));
             }
-            catch (IOException){ }
-            sliderVals ??= new List<float>();
-            while (sliderVals.Count < volParams.Count)
+            catch (IOException)
             {
-                sliderVals.Add(standVol);
+                sliderVals ??= new List<float>();
+                while (sliderVals.Count < volParams.Count)
+                {
+                    if (sliderVals.Count == 2)
+                    {
+                        sliderVals.Add(musVol);
+                    }
+                    else
+                    {
+                        sliderVals.Add(standVol);
+                    }
+                }
             }
+
             for (int i = 0; i < volParams.Count; i++)
             {
                 mainMixer.SetFloat(volParams[i], ConvertToLogScale(sliderVals[i]));
