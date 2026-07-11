@@ -56,10 +56,10 @@ public class SnakeSlow : MonoBehaviour
         //play the strike
         anim.SetBool("Strike", true);
         bite.Play();
-        if (!SoundManager.soundManager.IsMuted(2))
-        {
-            SoundManager.soundManager.QuietBGMUntilDone(bite, BGMAttenuation);
-        }
+        // if (!SoundManager.soundManager.IsMuted(2))
+        // {
+        //     SoundManager.soundManager.QuietBGMUntilDone(bite, BGMAttenuation);
+        // }
         yield return new WaitForSeconds(0.2f);
         //stop strike animation
         anim.SetBool("Strike", false);

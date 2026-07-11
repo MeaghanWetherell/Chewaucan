@@ -80,10 +80,10 @@ public class DateRock : MonoBehaviour
         {
             //play the step sound
             mySE.Play();
-            if (!SoundManager.soundManager.IsMuted(2))
-            {
-                SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation);
-            }
+            // if (!SoundManager.soundManager.IsMuted(2))
+            // {
+            //     SoundManager.soundManager.QuietBGMUntilDone(mySE, BGMAttenuation);
+            // }
             //prepare to disable
             StartCoroutine(DisableAfterTime(0.5f));
             GetComponent<BoxCollider>().enabled = false;

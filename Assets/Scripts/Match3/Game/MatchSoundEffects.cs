@@ -52,10 +52,10 @@ namespace Match3.Game
         public void PlayFromList(List<AudioClip> audList)
         {
             AudioClip temp = audList[Random.Range(0, audList.Count)];
-            if (!SoundManager.soundManager.IsMuted(2))
-            {
-                SoundManager.soundManager.QuietBGMUntilDone(matchAud, BGMattenuation);
-            }
+            // if (!SoundManager.soundManager.IsMuted(2))
+            // {
+            //     SoundManager.soundManager.QuietBGMUntilDone(matchAud, BGMattenuation);
+            // }
             //matchAud.Stop();
             matchAud.clip = temp;
             //matchAud.Play();
