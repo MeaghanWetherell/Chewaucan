@@ -39,18 +39,18 @@ public class CourseManager : MonoBehaviour
     [Tooltip("Amount of 'points' to win. Points per rock is adjustable on their prefabs")]
     public float datingPointsToWin;
 
-    [Tooltip("Amount of time the player has to complete the dating")]
+    [Tooltip("Amount of time the player has to complete the minigame")]
     public float courseTime;
 
-    [Tooltip("Number of tuffa rocks to spawn")]
+    [Tooltip("Number of tuffa rocks to spawn in the Date Rock Spawn locations")]
     public int tuffaToSpawn;
 
-    [Tooltip("Number of carbonate rocks to spawn")]
+    [Tooltip("Number of carbonate rocks to spawn in the Date Rocks spawn location")]
     public int carbonateToSpawn;
 
-    [Tooltip("Number of rocks to spawn")] public int rocksToSpawn;
+    [Tooltip("Number of non-dateable rocks to spawn")] public int rocksToSpawn;
 
-    [Tooltip("Number of date rocks to spawn at incorrect height")]
+    [Tooltip("Number of tufas to spawn at incorrect height in the Other Horizon Tufa spawn locations")]
     public int badDateRocksToSpawn;
 
     [Tooltip("Number of stationary snakes to spawn")]
@@ -59,14 +59,14 @@ public class CourseManager : MonoBehaviour
     [Tooltip("Number of moving snakes to spawn")]
     public int movingSnakeCount;
 
-    [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for tuffa/carbonate")]
+    [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for tuffa/carbonate, except for tufa at the incorrect height")]
     public Transform dateRockSpawnLocations;
 
     [Tooltip(
         "Reference to an empty gameobject whose children are all possible spawn locations at incorrect height for tuffa/carbonate")]
     public Transform badDateRockSpawnLocations;
 
-    [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for rocks")]
+    [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for random non-datable rocks")]
     public Transform rockSpawnLocations;
 
     [Tooltip("Reference to an empty gameobject whose children are all possible spawn locations for snakes")]
@@ -103,6 +103,10 @@ public class CourseManager : MonoBehaviour
 
     [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]
     public string badRockTextColor;
+
+    [Tooltip("Valid rich text color tag like 'white' or valid hex string like #ffffff")]
+    //This is for tufa that are at the wrong height
+    public string mismatchRockTextColor;
 
     //stores all the objects this manager creates for later cleanup
     private List<GameObject> spawnedObjects = new List<GameObject>();
@@ -175,14 +179,16 @@ public class CourseManager : MonoBehaviour
         SoundManager.soundManager.SetBGM(bgmMinigame);
         Player.player.GetComponentInChildren<RandomAmbientSound>().enabled = false;
         GameObject[] allDrs = GameObject.FindGameObjectsWithTag("dateRock");
+
         foreach (GameObject rockG in allDrs)
         {
             DateRock dr = rockG.GetComponentInChildren<DateRock>();
             dr.manager = this;
             Transform rock = dr.transform;
-            setDateAndColorByPosition(rock.position.y, dr);
+           // setDateAndColorByPosition(rock.position.y, dr);
         }
 
+        //For each of the Tufa in the dateRockSpanLocation
         List<Transform> rocks = SpawnItems(dateRockSpawnLocations, tuffaToSpawn, tuffaPrefab);
         foreach (Transform rock in rocks)
         {
@@ -190,34 +196,64 @@ public class CourseManager : MonoBehaviour
             dr.manager = this;
             dr.date = Random.Range(dateMin, dateMax).ToString();
             dr.dateTextColor = goodRockTextColor;
+            dr.isMismatched = false;
         }
 
+        //For each of the carbonate in the date rock spawn locations
         rocks = SpawnItems(dateRockSpawnLocations, carbonateToSpawn, carboPrefab, rocks);
         foreach (Transform rock in rocks)
         {
             DateRock dr = rock.GetComponentInChildren<DateRock>();
             dr.manager = this;
-            dr.date = Random.Range(20000, 50000).ToString();
+            dr.date = Random.Range(1000, 5000).ToString();
             dr.dateTextColor = badRockTextColor;
+            dr.isMismatched = false;
         }
 
-        List<GameObject> tuffaAndCarbo = new List<GameObject>();
-        foreach (GameObject tuffa in tuffaPrefab)
-            tuffaAndCarbo.Add(tuffa);
-        foreach (GameObject carbo in carboPrefab)
-        {
-            tuffaAndCarbo.Add(carbo);
-        }
+       // List<GameObject> tuffaAndCarbo = new List<GameObject>();
+        //foreach (GameObject tuffa in tuffaPrefab)
+          //  tuffaAndCarbo.Add(tuffa);
+        //foreach (GameObject carbo in carboPrefab)
+        //{
+          //  tuffaAndCarbo.Add(carbo);
+        //}
 
+
+        //For each of the tufa in the bad date spawn location
         if (badDateRockSpawnLocations != null)
         {
-            rocks = SpawnItems(badDateRockSpawnLocations, badDateRocksToSpawn, tuffaAndCarbo);
-            foreach (Transform rock in rocks)
+
+            //real tuffa at the wrong height - right rock, wrong place
+            List<Transform> badTuffaRocks = SpawnItems(badDateRockSpawnLocations, badDateRocksToSpawn, tuffaPrefab);
+            foreach (Transform rock in badTuffaRocks)
             {
                 DateRock dr = rock.GetComponentInChildren<DateRock>();
                 dr.manager = this;
-                setDateAndColorByPosition(dr.transform.position.y, dr);
+                dr.date = Random.Range(20000, 50000).ToString();
+                // setDateAndColorByPosition(dr.transform.position.y, dr);
+                dr.dateTextColor = mismatchRockTextColor;
+                dr.isMismatched = true;
             }
+
+            //carbonate at the wrong height - wrong rock entirely, excludes the spots just used above
+        //    List<Transform> badCarboRocks = SpawnItems(badDateRockSpawnLocations, badDateCarboToSpawn, carboPrefab,
+               // badTuffaRocks);
+          //  foreach (Transform rock in badCarboRocks)
+          //  {
+              //  DateRock dr = rock.GetComponentInChildren<DateRock>();
+             //   dr.manager = this;
+             //   dr.date = Random.Range(20000, 50000).ToString();
+             //   dr.dateTextColor = badRockTextColor;
+          //  }
+            // rocks = SpawnItems(badDateRockSpawnLocations, badDateRocksToSpawn, tuffaAndCarbo);
+          //  foreach (Transform rock in rocks)
+            //{
+              //  DateRock dr = rock.GetComponentInChildren<DateRock>();
+                //dr.manager = this;
+                //setDateAndColorByPosition(dr.transform.position.y, dr);
+                //dr.date = Random.Range(20000, 50000).ToString();
+                //dr.dateTextColor = mismatchRockTextColor;
+           // }
         }
 
         if (rockSpawnLocations != null)

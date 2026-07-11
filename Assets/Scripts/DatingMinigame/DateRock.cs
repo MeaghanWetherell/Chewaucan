@@ -37,6 +37,9 @@ public class DateRock : MonoBehaviour
     //the date that corresponds to this rock, set automatically on level start
     [NonSerialized]public string date;
 
+    //whether this rock was placed at the wrong height for its course set explicitly by CourseManager when spawning
+    [NonSerialized] public bool isMismatched;
+
     [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMin;
 
     [Tooltip("Overrides the date setting from the manager.")]public int overrideDateMax;
@@ -86,6 +89,9 @@ public class DateRock : MonoBehaviour
             GetComponent<BoxCollider>().enabled = false;
             //ensure statics are filled
             FillStatics();
+
+
+
             //display the date to the player
             GameObject text = Instantiate(dateText, HUD.transform);
             Gravity grav = text.GetComponent<Gravity>();
@@ -93,6 +99,8 @@ public class DateRock : MonoBehaviour
             RectTransform rect = text.GetComponent<RectTransform>();
             rect.sizeDelta = new Vector2(200, 80);
             rect.anchoredPosition = new Vector3(0, 88, 0);
+
+            
             string dateTextA = "<color=";
             if (dateTextColor[0].Equals('#'))
             {
@@ -103,17 +111,24 @@ public class DateRock : MonoBehaviour
                 dateTextA += "\"" + dateTextColor + "\"";
             }
             dateTextA += ">" + date;
+
+            //If there are negative points, then this is a bad date.
             if (myPoints < 0)
             {
-                dateTextA += "! Bad date!";
+                rect.sizeDelta = new Vector2(400, 160);
+                dateTextA += "! Bad date! This rock is carbonate!";
                 
             }
-            else if (transform.position.y >= manager.yMax ||
-                transform.position.y <= manager.yMin)
+
+            //turned this off on 7-10 because it wasn't working correctly
+            //else if (transform.position.y >= manager.yMax ||
+            //  transform.position.y <= manager.yMin)
+
+            else if(isMismatched)
             {
-                myPoints *= -1;
+                myPoints /= -2; //take the 10 points of the good date, make it negative and halve it.
                 rect.sizeDelta = new Vector2(400, 160);
-                dateTextA += "! Bad date! This rock is from the wrong level!";
+                dateTextA += "! Bad date! This tufa is from the wrong level!";
             }
             else
             {
