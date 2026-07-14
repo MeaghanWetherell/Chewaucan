@@ -494,6 +494,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 10699739d2029d0499254da419fbe1db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 16293185}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 10699739d2029d0499254da419fbe1db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 16293187}
     - targetCorrespondingSourceObject: {fileID: -9114910620804404823, guid: 10699739d2029d0499254da419fbe1db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 16293186}
@@ -556,6 +559,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3945237826293435758, guid: 10699739d2029d0499254da419fbe1db, type: 3}
+--- !u!114 &16293187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16293183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultObject: {fileID: 16293183}
+  outlinedObject: {fileID: 954302883}
+  updateName: Petroglyphs
+  qid: naturelog
+  director: {fileID: 1636727386}
+  narr: {fileID: 0}
+  createPopUp: 0
+  progressObjective: 0
+  waitTrigger: {fileID: 0}
 --- !u!1 &18156854 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cfa03c2d182888f4285dbb51d4e75c73, type: 3}
@@ -812,6 +836,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 45235045}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 45235046}
   m_SourcePrefab: {fileID: 100100000, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
 --- !u!4 &45235043 stripped
 Transform:
@@ -844,6 +871,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.196926, y: 4.307384, z: 6.8077464}
   m_Center: {x: -1.2083378, y: -0.61032385, z: -0.10915057}
+--- !u!114 &45235046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45235044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultObject: {fileID: 45235044}
+  outlinedObject: {fileID: 531560241}
+  updateName: Raven Nest
+  qid: naturelog
+  director: {fileID: 970485215}
+  narr: {fileID: 0}
+  createPopUp: 1
+  progressObjective: 0
+  waitTrigger: {fileID: 0}
 --- !u!1 &45632500
 GameObject:
   m_ObjectHideFlags: 0
@@ -17981,7 +18029,6 @@ GameObject:
   - component: {fileID: 970485215}
   - component: {fileID: 970485216}
   - component: {fileID: 970485217}
-  - component: {fileID: 970485218}
   m_Layer: 0
   m_Name: RavenNestCutscene2_INT
   m_TagString: Untagged
@@ -18068,7 +18115,7 @@ MonoBehaviour:
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 970485218}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TriggerUpdateOnInteract, Assembly-CSharp
           m_MethodName: SendQuestChanges
           m_Mode: 1
@@ -18080,27 +18127,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &970485218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 970485213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultObject: {fileID: 45235044}
-  outlinedObject: {fileID: 531560241}
-  updateName: Raven Nest
-  qid: naturelog
-  director: {fileID: 970485215}
-  narr: {fileID: 0}
-  createPopUp: 1
-  progressObjective: 0
-  waitTrigger: {fileID: 0}
 --- !u!1 &973363859
 GameObject:
   m_ObjectHideFlags: 0
