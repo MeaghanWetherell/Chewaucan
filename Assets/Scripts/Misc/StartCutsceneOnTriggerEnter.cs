@@ -18,7 +18,9 @@ public class StartCutsceneOnTriggerEnter : MonoBehaviour
 
     [Tooltip("Name of the update to send")]
     public string updateName;
-
+        
+    [Tooltip("Whether interacting with this progresses the first objective of the associated quest")] 
+    public bool progressObjective;
 
     private void Awake()
     {
@@ -61,9 +63,14 @@ public class StartCutsceneOnTriggerEnter : MonoBehaviour
         if (questToUpdate != null)
         {
             QuestNode node = QuestManager.questManager.GETNode(questToUpdate);
-            if (node != null)
+            if (node != null){
                 node.UnlockUpdate(updateName);
+                if (progressObjective){
+                    node.AddCount(0);
+                }
+            }
         }
+
         Destroy(gameObject);
     }
 }

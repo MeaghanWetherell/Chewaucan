@@ -1866,6 +1866,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: match32
   updateName: Fishes!
+  progressObjective: 0
 --- !u!114 &108846952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,6 +3089,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: match31
   updateName: Mammoth Footprints
+  progressObjective: 0
 --- !u!320 &203176266
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -3597,6 +3599,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: sciencelog
   updateName: Ponderosa Pines
+  progressObjective: 0
 --- !u!320 &254766876
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -3747,31 +3750,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.433853
+      value: 372
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 47.050003
+      value: 63.5
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 468.8797
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9822963
+      value: 0.4307954
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -1.8308918e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.18733422
+      value: -0.90244967
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -1.4383492e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2799497491731731270, guid: 1e183430da6e4a34bb668a2cf9e0cf35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10119,6 +10122,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: plateauquest
   updateName: Ancient Lake
+  progressObjective: 0
 --- !u!114 &820859471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13885,7 +13889,7 @@ MonoBehaviour:
   director: {fileID: 1123939425}
   narr: {fileID: 0}
   createPopUp: 0
-  progressObjective: 0
+  progressObjective: 1
   waitTrigger: {fileID: 0}
 --- !u!4 &1123939427
 Transform:
@@ -14186,6 +14190,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: naturelog
   updateName: Flamingo
+  progressObjective: 1
 --- !u!114 &1151125975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23471,6 +23476,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: match33
   updateName: Pika
+  progressObjective: 0
 --- !u!65 &1845243622
 BoxCollider:
   m_ObjectHideFlags: 0
