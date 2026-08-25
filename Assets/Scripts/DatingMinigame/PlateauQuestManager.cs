@@ -14,7 +14,7 @@ public class PlateauQuestManager : MonoBehaviour
 
     private void OnCourseWin(int level)
     {
-        QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(2);
+       // QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(2);
         if (level == 0)
         {
             QuestManager.questManager.GETNode("PlateauQuest").AddCount(0);

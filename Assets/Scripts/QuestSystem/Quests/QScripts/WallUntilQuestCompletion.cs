@@ -16,6 +16,7 @@ public class WallUntilQuestCompletion : MonoBehaviour
         if (CheckQuestsComplete())
         {
             Destroy(gameObject);
+            QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(2); //moved on 8-25-2026
         }
         else
         {
