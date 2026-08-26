@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7788975531222270509}
   - component: {fileID: 1905334180534548076}
+  - component: {fileID: 3541851788754327134}
   m_Layer: 0
   m_Name: Rock1Prefab
   m_TagString: Untagged
@@ -298,5 +299,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4090804543515457890, guid: 08dee1a2a4e5bf64097f272e9817f79e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3541851788754327134}
   m_SourcePrefab: {fileID: 100100000, guid: 08dee1a2a4e5bf64097f272e9817f79e, type: 3}
+--- !u!65 &3541851788754327134
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447879933600651415}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2611237, y: 0.27716637, z: 0.9229584}
+  m_Center: {x: 0.13056183, y: 0.08378887, z: -0.038520813}

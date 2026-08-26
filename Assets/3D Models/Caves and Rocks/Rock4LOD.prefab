@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 78021229392df974082ca64c252a8d14, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 385.87207
+      value: 218.33548
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78021229392df974082ca64c252a8d14, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.689873
+      value: 11.824494
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78021229392df974082ca64c252a8d14, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 130.10454
+      value: -239.14246
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 78021229392df974082ca64c252a8d14, type: 3}
       propertyPath: m_LocalRotation.w
@@ -59,6 +59,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78021229392df974082ca64c252a8d14, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4396225551027331753}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 78021229392df974082ca64c252a8d14, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3974914382223572386}
   m_SourcePrefab: {fileID: 100100000, guid: 78021229392df974082ca64c252a8d14, type: 3}
 --- !u!1 &5883695446476739763 stripped
 GameObject:
@@ -88,6 +91,27 @@ LODGroup:
     renderers:
     - renderer: {fileID: 6448918782355584855}
   m_Enabled: 1
+--- !u!65 &3974914382223572386
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883695446476739763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.6908264, y: 0.723011, z: 1.4530182}
+  m_Center: {x: 0.017990112, y: 0.3353033, z: -0.2265091}
 --- !u!23 &6448918782355584855 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 295361202148564661, guid: 78021229392df974082ca64c252a8d14, type: 3}
