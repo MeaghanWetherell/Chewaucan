@@ -26,7 +26,7 @@ public class TriggerUpdateOnInteract : Interactable
     [Tooltip("Whether to display an update pop-up on interact")]
     public bool createPopUp;
 
-    [Tooltip("Whether interacting with this progresses the first objective of the associated quest")] 
+    [Tooltip("Whether interacting with this should numerically progress the associated quest")] 
     public bool progressObjective;
 
     [Tooltip("The trigger instance that must be interacted with before this one is enabled")]

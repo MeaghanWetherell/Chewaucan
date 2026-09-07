@@ -841,9 +841,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 45235045}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 45235046}
   m_SourcePrefab: {fileID: 100100000, guid: 1b19b1b9a6c0f774db7acae56f2e0ee0, type: 3}
 --- !u!4 &45235043 stripped
 Transform:
@@ -876,27 +873,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.196926, y: 4.307384, z: 6.8077464}
   m_Center: {x: -1.2083378, y: -0.61032385, z: -0.10915057}
---- !u!114 &45235046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45235044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultObject: {fileID: 45235044}
-  outlinedObject: {fileID: 531560241}
-  updateName: Raven Nest
-  qid: naturelog
-  director: {fileID: 970485215}
-  narr: {fileID: 0}
-  createPopUp: 1
-  progressObjective: 1
-  waitTrigger: {fileID: 0}
 --- !u!1 &45632500
 GameObject:
   m_ObjectHideFlags: 0
@@ -17639,8 +17615,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952278263}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.28691995, z: 0, w: 0.9579546}
-  m_LocalPosition: {x: 369.723, y: 47.337, z: 95.117}
+  m_LocalRotation: {x: -0.003699169, y: 0.9975441, z: -0.0055511864, w: 0.069722906}
+  m_LocalPosition: {x: 575.1681, y: 49.544476, z: 99.49518}
   m_LocalScale: {x: 1.00007, y: 1.99982, z: 1.00011}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18039,6 +18015,7 @@ GameObject:
   - component: {fileID: 970485215}
   - component: {fileID: 970485216}
   - component: {fileID: 970485217}
+  - component: {fileID: 970485218}
   m_Layer: 0
   m_Name: RavenNestCutscene2_INT
   m_TagString: Untagged
@@ -18137,6 +18114,27 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &970485218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196a55e6cbf89cb4c8cb1851e5fe4766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultObject: {fileID: 45235044}
+  outlinedObject: {fileID: 531560241}
+  updateName: Raven Nest
+  qid: naturelog
+  director: {fileID: 970485215}
+  narr: {fileID: 0}
+  createPopUp: 1
+  progressObjective: 1
+  waitTrigger: {fileID: 0}
 --- !u!1 &973363859
 GameObject:
   m_ObjectHideFlags: 0
@@ -29039,7 +29037,7 @@ MonoBehaviour:
   director: {fileID: 1568305953}
   narr: {fileID: 0}
   createPopUp: 0
-  progressObjective: 0
+  progressObjective: 1
   waitTrigger: {fileID: 1636727387}
 --- !u!4 &1568305955
 Transform:
@@ -29883,7 +29881,7 @@ MonoBehaviour:
   director: {fileID: 1636727386}
   narr: {fileID: 0}
   createPopUp: 0
-  progressObjective: 0
+  progressObjective: 1
   waitTrigger: {fileID: 0}
 --- !u!114 &1636727388
 MonoBehaviour:
@@ -35709,7 +35707,7 @@ MonoBehaviour:
   startQuest: {fileID: 0}
   questToUpdate: naturelog
   updateName: Ravens
-  progressObjective: 0
+  progressObjective: 1
 --- !u!4 &2064778297 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5395822479363601584, guid: d56d649f88e33cf43959f210d8ef3d5a, type: 3}
@@ -36436,7 +36434,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090882074}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22922796, y: 0.0033852386, z: -0.0007972241, w: 0.97336656}
+  m_LocalRotation: {x: 0.08485987, y: 0.0034652997, z: -0.00029513132, w: 0.9963868}
   m_LocalPosition: {x: -1.37, y: -10.86, z: -8.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -38370,7 +38368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 5284738820574234941}
-  m_PathPosition: 33.45342
+  m_PathPosition: 23.50782
   m_PositionUnits: 1
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -39173,6 +39171,8 @@ PlayableDirector:
     value: {fileID: 5150600527030011556}
   - key: {fileID: 6515787957716882020, guid: c610394fd1ed1504ea1c1d81c3b6890f, type: 2}
     value: {fileID: 831777560}
+  - key: {fileID: 8437990341855706434, guid: c610394fd1ed1504ea1c1d81c3b6890f, type: 2}
+    value: {fileID: 1215927810}
   m_ExposedReferences:
     m_References:
     - 5475f837b7aacb3499efabb3ac4709b1: {fileID: 6989642576803042677}
