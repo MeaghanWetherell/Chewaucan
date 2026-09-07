@@ -68,6 +68,7 @@ public class PlayerPositionManager : MonoBehaviour
 
     private void Load(string path)
     {
+        sceneDirtyFlag = true; //added on 9.7 because we kept swapping player positions
         string json;
         try
         {

@@ -37,14 +37,14 @@ public class AstrolabeUIIconManager : MonoBehaviour
         yield return null;
         if (SceneManager.GetActiveScene().name.Equals("PleistoceneMap"))
         {
-            SetNewDest(false, 1);
-            SetNewDest(newDestinationModern, 0);
+            SetNewDest(false, 1); //Turn off the astrolabe when we return to the Modern; you've completed this pleistocene spot
+            SetNewDest(newDestinationModern, 0); //new destination to return to the modern.
             curMap = 1;
         }
         else 
         {
-            SetNewDest(false, 0);
-            SetNewDest(newDestinationPleist, 1);
+            SetNewDest(false, 0); //no new destination in the modern map
+            SetNewDest(newDestinationPleist, 1); //new destination in the pleistocene
             curMap = 0;
         }
     }
