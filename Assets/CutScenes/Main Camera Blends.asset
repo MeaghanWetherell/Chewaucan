@@ -25,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: VCam_LookAtBone
-    m_To: VCam_DollyTrackIntro
+    m_To: VCAM_GetOut
     m_Blend:
       m_Style: 1
       m_Time: 2
@@ -35,7 +35,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: VCam_DollyTrackIntro
+  - m_From: VCAM_GetOut
     m_To: VCam_PlayerFollow
     m_Blend:
       m_Style: 1
@@ -79,7 +79,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: VCam_Cutscene
+  - m_From: VCam_CutsceneIntro
     m_To: VCam_PlayerFollow
     m_Blend:
       m_Style: 1
