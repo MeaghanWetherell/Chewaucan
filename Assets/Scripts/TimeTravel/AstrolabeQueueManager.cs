@@ -19,6 +19,8 @@ public class AstrolabeQueueManager : MonoBehaviour
 
     private Stack<v3Wrapper> _pleistStack;
 
+    public static event Action<int> DestinationQueued; // 0 = modern, 1 = pleistocene, added 9.11.26
+
     private void Awake()
     {
         if (queueManager != null)
@@ -45,6 +47,7 @@ public class AstrolabeQueueManager : MonoBehaviour
             _pleistStack.Push(destWrapper);
         }
         AstrolabeUIIconManager.SetNewDest(true, map-1);
+        DestinationQueued?.Invoke(map - 1); // <-- new 9.11.26
     }
 
     private static Vector3 pop(Stack<v3Wrapper> queue)
