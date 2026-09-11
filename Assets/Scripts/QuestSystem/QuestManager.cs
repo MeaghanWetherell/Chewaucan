@@ -274,7 +274,7 @@ namespace QuestSystem
             if(node.completionNarration != null)
                 node.completionNarration.Begin();
             _quests.InsertionSort();
-            if (!node.compText.Equals(""))
+            if (!node.compText.Equals("") && node.ShowCompletion)
             {
                 GameObject qNode = Instantiate(questUpdatePopUp);
                 LoadGUIManager.loadGUIManager.InstantiatePopUp(qNode, node.name, node.compText);

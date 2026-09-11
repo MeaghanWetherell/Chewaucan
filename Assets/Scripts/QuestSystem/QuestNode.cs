@@ -46,6 +46,9 @@ namespace QuestSystem
         //completion text
         [NonSerialized]public string compText;
 
+        //Whether the completion text popup should show
+        [NonSerialized] public bool ShowCompletion = true;
+
         //list of the objectives to be completed
         [NonSerialized]public List<string> objectives;
 
@@ -246,7 +249,11 @@ namespace QuestSystem
             {
                 compText = "";
             }
+
+            ShowCompletion = data.ShowCompletion;
+
             requiredCounts = data.countsRequired;
+            
             if (requiredCounts == null)
             {
                 requiredCounts = new List<float>();

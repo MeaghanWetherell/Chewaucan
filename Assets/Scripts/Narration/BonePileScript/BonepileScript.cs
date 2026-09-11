@@ -130,12 +130,15 @@ public class BonepileScript : MonoBehaviour
         BP10.addToOnComplete(new List<UnityAction<string>>{ str => {
                 BP11.SetPlayability(true);}
         });
+
+        string timeKey = BindingManager.bindingManager.GetBind("Astrolabe");
+
         if (!BP11.HasPlayed())
         {
             BP11.addToOnComplete(new List<UnityAction<string>>{
                 str =>
                 {
-                    LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
+                    LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Press "+timeKey+" to open your astrolabe and return to the present!");
                     AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                     MapUIController.canOpenMap = true;
                     BP12.SetPlayability(true);

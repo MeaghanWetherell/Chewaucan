@@ -49,5 +49,8 @@ namespace QuestSystem
         
         [Tooltip("OPTIONAL ids of waypoints to unlock on start")]
         public List<string> OnStartWPIDs;
+
+        [Tooltip("OPTIONAL - set false to turn off quest completion popup")]
+        public bool ShowCompletion = true;
     }
 }
