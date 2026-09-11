@@ -23,11 +23,13 @@ namespace QuestSystem.Quests.QScripts
         [Tooltip("0 for modern 1 for pleistocene")]
         public int sceneToTeleport = 1;
 
+        [Tooltip("Narration is played as astrolabe is opened.")]
         public Narration.Narration playOnAstrolabeOpen;
 
         public InputActionReference openAstrolabe;
         
-        [Tooltip("Narration that must be played first. Provide either a quest or a narration, not both")]public Narration.Narration narration;
+        [Tooltip("Narration that must be played before astrolabe opens. Provide either a quest or a narration, not both")]
+        public Narration.Narration narration;
         
         private void Start()
         {
@@ -60,8 +62,10 @@ namespace QuestSystem.Quests.QScripts
             }
         }
 
+        //On completion of a quest, this tells the astrolabe HUD manager to be turned on and updates the players position to be this one.
         private void OnComp(string n)
         {
+            //this HUDManager code is mostly for the beginning of the game when the astrolabe is not yet active
             if(HUDManager.hudManager != null)
                 HUDManager.hudManager?.astrolabeUI?.gameObject.SetActive(true);
             AstrolabeQueueManager.queueManager.EnqueueDestination(playerPosition, sceneToTeleport+1);
