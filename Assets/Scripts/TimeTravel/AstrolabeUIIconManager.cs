@@ -1,3 +1,4 @@
+using Misc;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,6 @@ public class AstrolabeUIIconManager : MonoBehaviour
     private static bool newDestinationModern;
 
     private static bool newDestinationPleist;
-
-    private int curMap;
 
     public static AstrolabeUIIconManager manager;
 
@@ -39,33 +38,36 @@ public class AstrolabeUIIconManager : MonoBehaviour
         {
             SetNewDest(false, 1); //Turn off the astrolabe when we return to the Modern; you've completed this pleistocene spot
             SetNewDest(newDestinationModern, 0); //new destination to return to the modern.
-            curMap = 1;
         }
-        else 
+        else
         {
             SetNewDest(false, 0); //no new destination in the modern map
             SetNewDest(newDestinationPleist, 1); //new destination in the pleistocene
-            curMap = 0;
         }
     }
-    
+
 
     //0 for modern 1 for pleistocene
     public static void SetNewDest(bool set, int map)
     {
-        if (map == 0)
+        if (map == 0) //if heading to modern map
         {
             newDestinationModern = set;
         }
-        else
+        else //if heading to pleistocene map
         {
             newDestinationPleist = set;
         }
-        if (manager != null && map != manager.curMap && set)
+        //use SceneLoadWrapper's currentSceneType instead of a locally-tracked curMap field:
+        //curMap used to be set a frame late by WaitToInitialize's coroutine, which caused
+        //SetNewDest calls made on the same frame the scene loads (e.g. from AstrolabeReturner)
+        //to compare against a stale value and pick the wrong sprite. currentSceneType is
+        //always correct as soon as the scene is active, so this removes the race entirely.
+        if (manager != null && map != SceneLoadWrapper.sceneLoadWrapper.currentSceneType && set) //if there's a new dest & your map isn't equal to the current map
         {
             manager.myImage.sprite = manager.newThingSprite;
         }
-        else if(manager != null)
+        else if (manager != null)
         {
             manager.myImage.sprite = manager.defaultSprite;
         }

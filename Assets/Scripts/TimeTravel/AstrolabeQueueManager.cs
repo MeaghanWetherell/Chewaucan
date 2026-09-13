@@ -48,6 +48,7 @@ public class AstrolabeQueueManager : MonoBehaviour
         }
         AstrolabeUIIconManager.SetNewDest(true, map-1);
         DestinationQueued?.Invoke(map - 1); // <-- new 9.11.26
+        Debug.Log("Destination Enqued");
     }
 
     private static Vector3 pop(Stack<v3Wrapper> queue)
