@@ -29,6 +29,7 @@ public class TriggerUpdateOnInteract : Interactable
     [Tooltip("Whether interacting with this should numerically progress the associated quest")] 
     public bool progressObjective;
 
+
     [Tooltip("The trigger instance that must be interacted with before this one is enabled")]
     public TriggerUpdateOnInteract waitTrigger;
 
@@ -70,6 +71,7 @@ public class TriggerUpdateOnInteract : Interactable
             quest.UnlockUpdate(updateName, createPopUp);
             if (progressObjective)
                 quest.AddCount(0);
+            
         }
         OnInteractDisable();
         Destroy(this);
