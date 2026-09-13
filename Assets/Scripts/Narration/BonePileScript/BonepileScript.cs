@@ -108,7 +108,7 @@ public class BonepileScript : MonoBehaviour
         {
             QuestManager.questManager.SubToCompletion("bonepile", toSub =>
             {
-                //Debug.Log("Setting BP10 Playable");
+                Debug.Log("Setting BP10 Playable");
                 BP10.SetPlayability(true);
             });
         }

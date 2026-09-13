@@ -109,7 +109,8 @@ public class BoneChecker : MonoBehaviour
                 {
                     resultText.text = "That's it! Your bone is the distal end of a femur.";
                     bpile.AddCount(0);
-                    QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(0);
+                    //QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(0);
+                    QuestManager.questManager.GETNode("MainQuest").UnlockUpdate(0, false); //don't create a popup
                     StopAllCoroutines();
                     this.enabled = false;
 
