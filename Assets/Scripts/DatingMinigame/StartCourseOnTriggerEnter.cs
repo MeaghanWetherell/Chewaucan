@@ -30,7 +30,7 @@ public class StartCourseOnTriggerEnter : MonoBehaviour
             {
                 canv.gameObject.SetActive(false);
                 manager.StartCourse();
-                QuestManager.questManager.GETNode("PlateauQuest").UnlockUpdate(0);
+                //QuestManager.questManager.GETNode("PlateauQuest").UnlockUpdate(0);
             }
         }
     }

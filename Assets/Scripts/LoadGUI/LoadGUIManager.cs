@@ -1,8 +1,9 @@
+using KeyRebinding;
+using Misc;
+using ScriptTags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Misc;
-using ScriptTags;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -176,6 +177,7 @@ namespace LoadGUIFolder
             if (onPopUpClosed == null)
                 onPopUpClosed = new List<UnityAction<string>>();
             PopUpManager manager = window.GetComponent<PopUpManager>();
+            msg = BindingManager.bindingManager.ResolveKeyBindTokens(msg); //added 9.11
             manager.SetText(title, msg);
             manager.index = popUps.Count;
             foreach (UnityAction<string> act in onPopUpClosed)
@@ -204,6 +206,7 @@ namespace LoadGUIFolder
                 onPopUpClosed = new List<UnityAction<string>>();
             GameObject window = inPopUp;
             PopUpManager manager = window.GetComponent<PopUpManager>();
+            msg = BindingManager.bindingManager.ResolveKeyBindTokens(msg); //added 9.11
             manager.SetText(popUpName, msg);
             manager.index = popUps.Count;
             foreach (UnityAction<string> act in onPopUpClosed)

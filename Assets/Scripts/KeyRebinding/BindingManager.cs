@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -91,6 +92,16 @@ namespace KeyRebinding
                 }
             }
             return null;
+        }
+
+        //Gets the regex expression of a keybind present in a popup text file
+        public string ResolveKeyBindTokens(string text)
+        {
+            return Regex.Replace(text, @"\{([^}]+)\}", match =>
+            {
+                string actionName = match.Groups[1].Value;
+                return GetBind(actionName);
+            });
         }
 
         //reset all the binding overrides to defaults
