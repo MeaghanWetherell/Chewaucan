@@ -30,25 +30,39 @@ namespace QuestSystem.Quests.QScripts
         
         [Tooltip("Narration that must be played before astrolabe opens. Provide either a quest or a narration, not both")]
         public Narration.Narration narration;
+
+        public static SubAstrolabeTeleport subAstrolabeTeleport;
+
+        private void Awake()
+        {
+            subAstrolabeTeleport = this;
+        }
         
         private void Start()
+        {
+            CheckForNewDest();
+        }
+
+
+
+        public void CheckForNewDest()
         {
             if (openAstrolabe != null)
                 openAstrolabe.action.performed += OnAstrolabeOpen;
             QuestNode subbedNode = QuestManager.questManager.GETNode(subToId);
-            
+
             if (narration == null)
             {
                 if (playOnAstrolabeOpen != null && !playOnAstrolabeOpen.HasPlayed() && subbedNode is { isComplete: true })
                 {
                     playOnAstrolabeOpen?.SetPlayability(true);
                 }
-                else if(subbedNode is {isComplete: false})
+                else if (subbedNode is { isComplete: false })
                 {
                     QuestManager.questManager.SubToCompletion(subToId, OnComp);
                 }
             }
-            else if(!narration.HasPlayed())
+            else if (!narration.HasPlayed())
             {
                 narration.addToOnComplete(new List<UnityAction<string>>{
                     OnComp});
@@ -61,6 +75,10 @@ namespace QuestSystem.Quests.QScripts
                 }
             }
         }
+
+
+
+
 
         //On completion of a quest, this tells the astrolabe HUD manager to be turned on and updates the players position to be this one.
         private void OnComp(string n)
