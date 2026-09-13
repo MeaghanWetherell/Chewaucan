@@ -530,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 1381824391}
     - target: {fileID: 6846437114299588924, guid: d5ba352a0638dc74bacfceafaa4285d4, type: 3}
       propertyPath: wpNameNice
-      value: ????
+      value: The Past
       objectReference: {fileID: 0}
     - target: {fileID: 6846437114299588924, guid: d5ba352a0638dc74bacfceafaa4285d4, type: 3}
       propertyPath: teleportPositionLabel
@@ -1576,7 +1576,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 500
+  orthographic size: 600
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1847,7 +1847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6846437114299588924, guid: d5ba352a0638dc74bacfceafaa4285d4, type: 3}
       propertyPath: wpNameNice
-      value: Pika
+      value: Pika Territory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2308,7 +2308,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Escape or [open map] to close
+  m_text: 'Press Escape or [open map] to close
+
+    [scrollwheel] to zoom'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c7cae417801c74ed984daadb303d2e72, type: 2}
   m_sharedMaterial: {fileID: -5004407588301443111, guid: c7cae417801c74ed984daadb303d2e72, type: 2}
@@ -2335,7 +2337,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12.8
+  m_fontSize: 11.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

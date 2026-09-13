@@ -14,9 +14,10 @@ library(terra)
 library(ggplot2)
 library(tidyterra)
 
-setwd(this.path::here("../..")) #Note - to get this to run, install the package 'this.path' from CRAN first. 
 
-height.location = paste(getwd(), "/Heightmap/", sep="")
+height.location = gsub("/Scripts/MapSystem", "", paste(getwd(), "/Heightmap/", sep=""))
+
+
 
 wh <- c(1025, 1025) #dimensions of the raw files
 prod(wh) #this should match the raw file size
