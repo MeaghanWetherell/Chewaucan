@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fd1777aece194fa4a91dcef9642d1, type: 3}
   m_Name: BonePileQ
   m_EditorClassIdentifier: 
-  questName: Search Bone Pile
+  questName: Bone Pile Quest
   uniqueID: bonepile
   type: 0
   descriptionFile: {fileID: 4900000, guid: a5203bf860d278d48817e21cea8d0b95, type: 3}
@@ -20,7 +20,7 @@ MonoBehaviour:
   initFile: {fileID: 0}
   completeFile: {fileID: 4900000, guid: b89ec0dae2495bb4ca3310d892c9b53e, type: 3}
   objectives:
-  - Find a Match
+  - 
   countsRequired:
   - 1
   countsAdded:
@@ -30,3 +30,4 @@ MonoBehaviour:
   OnCompleteWPIDs:
   - bonepilewp
   OnStartWPIDs: []
+  ShowCompletion: 1

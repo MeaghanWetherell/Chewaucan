@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16fd1777aece194fa4a91dcef9642d1, type: 3}
   m_Name: PlateauQuest
   m_EditorClassIdentifier: 
-  questName: Investigate the Plateaus
+  questName: Plateau Quest
   uniqueID: PlateauQuest
   type: 2
   descriptionFile: {fileID: 4900000, guid: a63d8d4c558af434683a98a202e04f00, type: 3}
@@ -20,7 +20,7 @@ MonoBehaviour:
   initFile: {fileID: 4900000, guid: 378ef611b9cedea4095bc81436b97696, type: 3}
   completeFile: {fileID: 4900000, guid: fcd9df9f3484f6a44a9976e39c287647, type: 3}
   objectives:
-  - Complete Plateau Platformer Level 1
+  - 
   countsRequired:
   - 1
   countsAdded:
@@ -30,3 +30,4 @@ MonoBehaviour:
   OnCompleteWPIDs:
   - lakewp
   OnStartWPIDs: []
+  ShowCompletion: 1
