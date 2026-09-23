@@ -97,7 +97,6 @@ public class ApplyGraphics : MonoBehaviour
         qualityDropdown.value = QualitySettings.GetQualityLevel();
         priorQL = QualitySettings.GetQualityLevel();
         camSensDropdown.value = (GSSaver.LoadCamSens()-1)/3;
-        Debug.Log("loaded camSensDropdown.value = " + camSensDropdown.value);
         priorCS = GSSaver.LoadCamSens();
     }
 
@@ -137,7 +136,6 @@ public class ApplyGraphics : MonoBehaviour
         ChangeRes(priorRes);
         qualityDropdown.value = priorQL;
         camSensDropdown.value = (priorCS-1)/3;
-        Debug.Log("reverted camSensDropdown.value = " + camSensDropdown.value);
     }
 
     //confirm settings changes
@@ -161,10 +159,8 @@ public class ApplyGraphics : MonoBehaviour
         Screen.SetResolution(validResolutions[curRes].x, validResolutions[curRes].y, FSToggle.isOn);
         QualitySettings.SetQualityLevel(qualityDropdown.value, SceneManager.GetActiveScene().name.Equals("MainMenuUI"));
         curCamSens = (camSensDropdown.value * 3) + 1;
-        Debug.Log("curCamSense = " + curCamSens);
         LoadGUIManager.loadGUIManager.InstantiateYNPopUp(Instantiate(specialYNPrefab), "Confirm Changes", "", 
             new List<UnityAction<string>>{Confirm}, "Confirm","Decline",new List<UnityAction<string>>{Revert});
-        //Debug.Log(SceneManager.GetActiveScene().name.Equals("MainMenuUI"));
     }
 }
 
