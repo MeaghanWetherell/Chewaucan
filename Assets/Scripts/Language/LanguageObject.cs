@@ -89,6 +89,36 @@ namespace Language
         public TextAsset explanation3Text;
         public TextAsset explanation4Text;
         
+        [Header("Create Save")]
+        //Are you sure you would like to delete this save file and start a new game?
+        public string deleteSave;
+        [Tooltip("Slot number should be written as #slot and existing name should be #name")]
+        //"Enter name for save in slot #slot or leave blank to use existing name #name"
+        public string enterSaveName;
+        //"Enter save name..."
+        public string enterSaveNamePlaceholder;
+        
+        //"File name cannot be reserved name #name"
+        [Tooltip("Reserved name should be #name")]
+        public string fileNameInvalidReserved;
+        //"File name cannot end with ."
+        public string fileNameInvalidEnd;
+        //"A save with that name exists in a different slot!"
+        public string fileNameInvalidExists;
+        
+        public string submit;
+        public string cancel;
+        public string yes;
+        public string no;
+        
+        [Header("Map Text")]
+        public string modernMap;
+        public string pleistoceneMap;
+        //Press Escape or [open map] to close \n [scrollwheel] to zoom
+        public string mapControls;
+        //Switch map view
+        public string switchMapView;
+        
         [Header("Subtitles Text Assets")]
         public static TextAsset BP1;
         public static TextAsset BP2;
@@ -181,6 +211,19 @@ namespace Language
                 }
             }
             return null;
+        }
+
+        public string GetSaveHeaderText(int slot, string saveName)
+        {
+            enterSaveName = enterSaveName.Replace("#slot",  slot.ToString());
+            enterSaveName = enterSaveName.Replace("#name",  saveName);
+            return enterSaveName;
+        }
+        
+        public string GetFileNameInvalidReserved(string inText)
+        {
+            fileNameInvalidReserved = fileNameInvalidReserved.Replace("#name", inText);
+            return fileNameInvalidReserved;
         }
     }
 }

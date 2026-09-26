@@ -19,7 +19,7 @@ public class ToggleMapView : MonoBehaviour
         //      might change this later to view the map of the scene we were in
         modernMapView.SetActive(true);
         pleistoceceMapView.SetActive(false);
-        mapName.text = "Modern Map";
+        mapName.text = LanguageManager.GetLanguageObj().modernMap;
     }
 
     // enables/disables game objects so we view the map we are currently not seeing
@@ -29,13 +29,13 @@ public class ToggleMapView : MonoBehaviour
         {
             modernMapView.SetActive(false);
             pleistoceceMapView.SetActive(true);
-            mapName.text = "Pleistocene Map";
+            mapName.text = LanguageManager.GetLanguageObj().pleistoceneMap;
         }
         else if (pleistoceceMapView.activeInHierarchy) // switch to view the modern map
         {
             modernMapView.SetActive(true);
             pleistoceceMapView.SetActive(false);
-            mapName.text = "Modern Map";
+            mapName.text = LanguageManager.GetLanguageObj().modernMap;
         }
 
         // if the teleport menu is open, close it

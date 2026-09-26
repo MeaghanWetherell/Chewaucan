@@ -27,18 +27,19 @@ public class NameNewGame : MonoBehaviour
     public void Initialize(int pathNumber)
     {
         pathNo = pathNumber;
-        headerText.text = "Enter name for save in slot " + (pathNumber+1) + " or leave blank to use existing name " +
-                          SaveHandler.saveHandler.saveSlots[pathNumber].Split("/")[^1];
-        inputPlacehodler.text = "Enter save name...";
+        headerText.text = LanguageManager.GetLanguageObj().GetSaveHeaderText(pathNumber + 1,
+            SaveHandler.saveHandler.saveSlots[pathNumber].Split("/")[^1]);
+        inputPlacehodler.text = LanguageManager.GetLanguageObj().enterSaveNamePlaceholder;
         inputField.text = SaveHandler.saveHandler.saveSlots[pathNumber].Split("/")[^1];
     }
     
     public void Initialize()
     {
         pathNo = TrashSave.toTrash;
-        headerText.text = "Enter name for save in slot " + (pathNo+1) + " or leave blank to use existing name " +
-                          SaveHandler.saveHandler.saveSlots[pathNo].Split("/")[^1];
-        inputPlacehodler.text = "Enter save name...";
+        
+        headerText.text = LanguageManager.GetLanguageObj().GetSaveHeaderText(pathNo+1,
+            SaveHandler.saveHandler.saveSlots[pathNo].Split("/")[^1]);
+        inputPlacehodler.text = LanguageManager.GetLanguageObj().enterSaveNamePlaceholder;
         inputField.text = SaveHandler.saveHandler.saveSlots[pathNo].Split("/")[^1];
     }
 
@@ -60,19 +61,19 @@ public class NameNewGame : MonoBehaviour
         string inText = inputField.text.Trim();
         if (reservedNames.Contains(inText.ToLower()))
         {
-            LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", "File name cannot be reserved name "+inText);
+            LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", LanguageManager.GetLanguageObj().GetFileNameInvalidReserved(inText));
             return;
         }
         if (inText[^1].Equals('.'))
         {
-            LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", "File name cannot end with .");
+            LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", LanguageManager.GetLanguageObj().fileNameInvalidEnd);
             return;
         }
         for (int i = 0; i < SaveHandler.saveHandler.saveSlots.Count; i++)
         {
             if (i != pathNo && inText.Equals(SaveHandler.saveHandler.saveSlots[i].Split("/")[^1]))
             {
-                LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", "A save with that name exists in a different slot!");
+                LoadGUIManager.loadGUIManager.InstantiatePopUp("Invalid Name", LanguageManager.GetLanguageObj().fileNameInvalidExists);
                 return;  
             }
         }
