@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using UnityEngine;
+using Language;
 
 public class LanguageManager : MonoBehaviour
 {
@@ -13,10 +14,28 @@ public class LanguageManager : MonoBehaviour
     //current language set
     //ENGLISH = 0, FRENCH = 1
     private static int lang;
+        
+    //current language object
+    private static LanguageObject langObj;
 
     private void Awake()
     {
         lang = LoadLanguage();
+        InstantiateObj();
+    }
+
+    public static void InstantiateObj()
+    {
+        Debug.Log("instantiate langobj");
+        if (lang == 0)
+        {
+            langObj = Resources.Load<LanguageObject>("Objects/EN");
+        }
+        else
+        {
+            langObj = Resources.Load<LanguageObject>("Objects/FR");
+        }
+        
     }
     
     public static int LoadLanguage()
@@ -43,6 +62,7 @@ public class LanguageManager : MonoBehaviour
         }
 
         lang = curLang;
+        InstantiateObj();
         
         return curLang;
 
@@ -65,6 +85,11 @@ public class LanguageManager : MonoBehaviour
     public static int GetLanguage()
     {
         return lang;
+    }
+    
+    public static LanguageObject GetLanguageObj()
+    {
+        return langObj;
     }
     
 }

@@ -97,6 +97,7 @@ namespace Misc
             }
             isLoading = true;
             loadScene = sceneName;
+            LanguageManager.InstantiateObj();
             SceneManager.LoadScene(sceneName);
         }
 

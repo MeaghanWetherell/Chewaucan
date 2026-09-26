@@ -13,6 +13,9 @@ namespace Narration
     //scriptable object to store narration details. Recommend extending to add additional actions on narration complete
     public class Narration : ScriptableObject
     {
+        [Tooltip("name of the narration, eg BP1")]
+        public string narrName;
+        
         [Tooltip("clip associated with this narration")]
         public AudioClip narrationClip;
         
@@ -34,6 +37,8 @@ namespace Narration
         //start the narration
         public virtual void Begin(bool skippable = true)
         {
+            //set the subtitles to current language
+            subtitles = LanguageManager.GetLanguageObj().GetSubtitles(narrName);
             Begin(new List<UnityAction<string>>(), skippable);
         }
 
@@ -56,6 +61,9 @@ namespace Narration
         //start the narration, running any actions in the passed list when the narration finishes
         public virtual void Begin(List<UnityAction<string>> onComplete, bool skippable = true)
         {
+            //set the subtitles to current language
+            subtitles = LanguageManager.GetLanguageObj().GetSubtitles(narrName);
+            
             addToOnComplete(onComplete);
             if (subtitles != null)
             {
