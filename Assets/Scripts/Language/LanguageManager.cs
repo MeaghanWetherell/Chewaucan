@@ -26,15 +26,16 @@ public class LanguageManager : MonoBehaviour
 
     public static void InstantiateObj()
     {
-        Debug.Log("instantiate langobj");
         if (lang == 0)
         {
             langObj = Resources.Load<LanguageObject>("Objects/EN");
+            
         }
         else
         {
             langObj = Resources.Load<LanguageObject>("Objects/FR");
         }
+        Debug.Log("instantiate langobj = " + langObj);
         
     }
     
@@ -80,6 +81,7 @@ public class LanguageManager : MonoBehaviour
         };
         string langStr = JsonSerializer.Serialize(newLang, opts);
         File.WriteAllText(Application.persistentDataPath+"/"+filepath+"LanguageSettings.json", langStr);
+        InstantiateObj();
     }
 
     public static int GetLanguage()

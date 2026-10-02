@@ -10,6 +10,7 @@ public class LoadPersistentObjects : MonoBehaviour
     private void Awake()
     {
         LoadObjs();
+        LanguageManager.InstantiateObj();
     }
 
     public static void LoadObjs()

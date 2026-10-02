@@ -21,7 +21,7 @@ public class TeleportWaypoint : MonoBehaviour
 
     [Tooltip("Unique name for the waypoint")]
     public String wpName;
-    public String wpNameNice;//the name that is tidy and will be displayed
+    public int wpIndex;//to get the name that is tidy and will be displayed
 
     // the world position this waypoint teleports to. Will be automatically set
     [NonSerialized] public Vector3 teleportToPosition;
@@ -60,7 +60,7 @@ public class TeleportWaypoint : MonoBehaviour
         if (!unlocked) return;
         animator.SetBool("active", true);
         teleportPositionLabel.text = teleportToPosition.ToString();
-        teleportWaypointTitle.text = wpNameNice;
+        teleportWaypointTitle.text = LanguageManager.GetLanguageObj().waypoints[wpIndex];
         teleportButton.setTeleportTo(this);
     }
 

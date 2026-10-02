@@ -30,42 +30,42 @@ public class TextUpdateWithRebinds : MonoBehaviour
 
     void UpdateText()
     {
-        string text = textMesh.text;
-        string newText = "";
-        int charNum = 0;
-        while (charNum < text.Length)
-        {
-            char ch = text[charNum];
-            if (ch.Equals('['))
-            {
-                int initCharNum = charNum;
-                charNum++;
-                string replaceAction = "";
-                char ch2 = ' ';
-                while (charNum < text.Length)
-                {
-                    ch2 = text[charNum];
-                    if (ch2 == ']')
-                        break;
-                    replaceAction += ch2;
-                    charNum++;
-                }
-                if (ch2 != ']')
-                {
-                    newText += ']';
-                    charNum = initCharNum;
-                    continue;
-                }
-                newText += GetActionText(replaceAction);
-            }
-            else
-            {
-                newText += ch;
-            }
-            charNum++;
-        }
+        // string text = textMesh.text;
+        // string newText = "";
+        // int charNum = 0;
+        // while (charNum < text.Length)
+        // {
+        //     char ch = text[charNum];
+        //     if (ch.Equals('['))
+        //     {
+        //         int initCharNum = charNum;
+        //         charNum++;
+        //         string replaceAction = "";
+        //         char ch2 = ' ';
+        //         while (charNum < text.Length)
+        //         {
+        //             ch2 = text[charNum];
+        //             if (ch2 == ']')
+        //                 break;
+        //             replaceAction += ch2;
+        //             charNum++;
+        //         }
+        //         if (ch2 != ']')
+        //         {
+        //             newText += ']';
+        //             charNum = initCharNum;
+        //             continue;
+        //         }
+        //         newText += GetActionText(replaceAction);
+        //     }
+        //     else
+        //     {
+        //         newText += ch;
+        //     }
+        //     charNum++;
+        // }
 
-        textMesh.text = newText;
+        textMesh.text = LanguageManager.GetLanguageObj().GetMapControls(GetActionText("Open Map"));
     }
 
     string GetActionText(string action)

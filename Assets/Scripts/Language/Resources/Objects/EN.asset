@@ -13,64 +13,74 @@ MonoBehaviour:
   m_Name: EN
   m_EditorClassIdentifier: 
   langName: English
-  continueBtn: 
-  resume: 
-  loadGame: 
-  options: 
-  credits: 
-  help: 
-  quit: 
-  graphics: 
-  controls: 
-  audio: 
-  language: 
-  back: 
-  fullScreen: 
-  vSync: 
-  resolution: 
-  cameraSensitivity: 
-  applyChanges: 
-  veryLow: 
-  low: 
-  medium: 
-  high: 
-  veryHigh: 
-  ultra: 
-  moveForward: 
-  moveBackward: 
-  strafeLeft: 
-  strafeRight: 
-  jump: 
-  questMenu: 
-  hideMap: 
-  astrolabe: 
-  turnRight: 
-  turnLeft: 
-  sprint: 
-  openMap: 
-  interact: 
-  skip: 
-  flipBone: 
-  openBoneUI: 
-  stopClimbing: 
-  endGame: 
-  resetToDefaults: 
-  master: 
-  sfx: 
-  dialogue: 
-  music: 
-  subtitles: 
+  mainMenuButtonArray:
+  - Continue
+  - 'Continue with '
+  - 'Load '
+  - New Game
+  - Load Game
+  - Options
+  - Credits
+  - Help
+  - Quit
+  optionsMenuButtonArray:
+  - 
+  - 
+  - 
+  - 
+  - 
+  graphicsMenuText:
+  - 
+  - 
+  - 
+  - 
+  - 
+  dropdownButtons:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  controlsMenuText:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  audioMenuText:
+  - 
+  - 
+  - 
+  - 
+  - 
   creditsText: {fileID: 0}
-  backToMainMenu: 
-  backToHelpMenu: 
-  question1: 
-  question2: 
-  question3: 
-  question4: 
-  explanation1Text: {fileID: 0}
-  explanation2Text: {fileID: 0}
-  explanation3Text: {fileID: 0}
-  explanation4Text: {fileID: 0}
+  backToMainMenu: Back to Main Menu
+  backToHelpMenu: Back to Help Menu
+  questions:
+  - 
+  - 
+  - 
+  - 
+  explanations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   deleteSave: Are you sure you would like to delete this save file and start a new
     game?
   enterSaveName: Enter name for save in slot #slot or leave blank to use existing
@@ -83,6 +93,22 @@ MonoBehaviour:
   cancel: Cancel
   yes: Yes
   no: No
+  modernMap: Modern Map
+  pleistoceneMap: Pleistocene Map
+  mapControls1: Press Escape or M to close
+  mapControls2: Scroll to zoom
+  switchMapView: Switch Map View
+  teleport: Teleport
+  waypoints:
+  - Small Lake
+  - Bone Pile
+  - Strange Plateaus
+  - Cave Site
+  - The Past
+  - Ancient Lake
+  - Pika Territory
+  - Mammoth Footprints
+  - Tui Chub
   subtitlesArr:
   - {fileID: 4900000, guid: 60a69d3d40529984a8fbe8b2980bc8bf, type: 3}
   - {fileID: 4900000, guid: f853b62a45a376148a361fa0ad01a597, type: 3}
