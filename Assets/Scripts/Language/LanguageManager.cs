@@ -17,22 +17,17 @@ public class LanguageManager : MonoBehaviour
     //current language object
     private static LanguageObject langObj;
 
-    private void Awake()
-    {
-        lang = (Language) LoadLanguage();
-        InstantiateObj();
-    }
-
     public static void InstantiateObj()
     {
-        if (lang == 0)
+        lang = (Language) LoadLanguage();
+        switch (lang)
         {
-            langObj = Resources.Load<LanguageObject>("Objects/EN");
-            
-        }
-        else
-        {
-            langObj = Resources.Load<LanguageObject>("Objects/FR");
+            case Language.English:
+                langObj = Resources.Load<LanguageObject>("Objects/EN");
+                break;
+            case Language.French:
+                langObj = Resources.Load<LanguageObject>("Objects/FR");
+                break;
         }
         Debug.Log("instantiate langobj = " + langObj);
         
@@ -40,7 +35,7 @@ public class LanguageManager : MonoBehaviour
     
     public static int LoadLanguage()
     {
-        Language curLang = Language.English;
+        int curLang = 0;
         
         string json;
 
@@ -53,18 +48,17 @@ public class LanguageManager : MonoBehaviour
                 NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
             };
             json = File.ReadAllText(Application.persistentDataPath + "/" + filepath + "LanguageSettings.json");
-            curLang = JsonSerializer.Deserialize<Language>(json, opts);
+            curLang = JsonSerializer.Deserialize<int>(json, opts);
             
         }
         catch (IOException)
         {
-            curLang = Language.English;
+            curLang = 0;
         }
 
-        lang = curLang;
-        InstantiateObj();
+        lang = (Language) curLang;
         
-        return (int) curLang;
+        return curLang;
 
     }
     

@@ -47,7 +47,7 @@ public class SetPathAndLoad : MonoBehaviour
                     myButton.interactable = false;
                 else
                 {
-                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[2] + myPath.Split("/")[^1];
+                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[2] + " " + myPath.Split("/")[^1];
                 }
                 myButton.onClick.AddListener(LoadMyPath);
                 break;
@@ -57,12 +57,13 @@ public class SetPathAndLoad : MonoBehaviour
                     myButton.interactable = false;
                 else
                 {
-                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[1] + myPath.Split("/")[^1];
+                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[1] + " " + myPath.Split("/")[^1];
                 }
                 myButton.onClick.AddListener(LoadLastUsed);
                 break;
             case loadType.newGame:
                 myButton.onClick.AddListener(NewGame);
+                text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[3];
                 break;
             case loadType.continueIfPossible:
                 if (!SaveHandler.saveHandler.checkPath(myPath))
@@ -73,7 +74,8 @@ public class SetPathAndLoad : MonoBehaviour
                 else
                 {
                     myButton.onClick.AddListener(LoadMyPath);
-                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[2] + myPath.Split("/")[^1];
+                    Debug.Log(LanguageManager.GetLanguageObj());
+                    text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[2] + " " + myPath.Split("/")[^1];
                 }
                 break;
         }

@@ -86,16 +86,28 @@ namespace KeyRebinding
                     {
                         rebindKey.mainText.text = action.bindings[i].path switch
                         {
-                            "<Keyboard>/w" => "Move Forward",
-                            "<Keyboard>/s" => "Move Backward",
-                            "<Keyboard>/a" => "Strafe Left",
-                            "<Keyboard>/d" => "Strafe Right",
-                            "<Keyboard>/q" => "Turn Left",
-                            "<Keyboard>/e" => "Turn Right",
-                            "<Keyboard>/upArrow" => "Move Forward",
-                            "<Keyboard>/downArrow" => "Move Backward",
-                            "<Keyboard>/leftArrow" => "Strafe Left",
-                            "<Keyboard>/rightArrow" => "Strafe Right",
+                            "<Keyboard>/w" => LanguageManager.GetLanguageObj().controlsMenuText[0], //"Move Forward"
+                            "<Keyboard>/s" => LanguageManager.GetLanguageObj().controlsMenuText[1], //"Move Backward",
+                            "<Keyboard>/a" => LanguageManager.GetLanguageObj().controlsMenuText[2], //"Strafe Left",
+                            "<Keyboard>/d" => LanguageManager.GetLanguageObj().controlsMenuText[3], //"Strafe Right",
+                            "<Keyboard>/q" => LanguageManager.GetLanguageObj().controlsMenuText[9], //"Turn Left",
+                            "<Keyboard>/e" => LanguageManager.GetLanguageObj().controlsMenuText[8], //"Turn Right",
+                            "<Keyboard>/upArrow" => LanguageManager.GetLanguageObj().controlsMenuText[0], //"Move Forward",
+                            "<Keyboard>/downArrow" => LanguageManager.GetLanguageObj().controlsMenuText[1], //"Move Backward",
+                            "<Keyboard>/leftArrow" => LanguageManager.GetLanguageObj().controlsMenuText[2], //"Strafe Left",
+                            "<Keyboard>/rightArrow" => LanguageManager.GetLanguageObj().controlsMenuText[3], //"Strafe Right",
+                            "<Keyboard>/space" => LanguageManager.GetLanguageObj().controlsMenuText[4], //"Jump",
+                            "<Keyboard>/k" => LanguageManager.GetLanguageObj().controlsMenuText[5], //"Quest Menu",
+                            "<Keyboard>/0" => LanguageManager.GetLanguageObj().controlsMenuText[6], //"Hide Map",
+                            "<Keyboard>/t" => LanguageManager.GetLanguageObj().controlsMenuText[7], //"Astrolabe",
+                            "<Keyboard>/leftShift" => LanguageManager.GetLanguageObj().controlsMenuText[8], //"Sprint",
+                            "<Keyboard>/m" => LanguageManager.GetLanguageObj().controlsMenuText[11], //"Open Map",
+                            "<Keyboard>/tab" => LanguageManager.GetLanguageObj().controlsMenuText[12], //"Interact",
+                            "<Keyboard>/period" => LanguageManager.GetLanguageObj().controlsMenuText[13], //"Skip",
+                            "<Keyboard>/x" => LanguageManager.GetLanguageObj().controlsMenuText[14], //"Flip Bone",
+                            "<Keyboard>/y" => LanguageManager.GetLanguageObj().controlsMenuText[15], //"Open Bone UI",
+                            "<Keyboard>/c" => LanguageManager.GetLanguageObj().controlsMenuText[16], //"Stop Climbing",
+                            "<Keyboard>/l" => LanguageManager.GetLanguageObj().controlsMenuText[17], //"End Game",
                             _ => action.name
                         };
                     }

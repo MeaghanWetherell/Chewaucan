@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainMenuButtonsTextSetter : MonoBehaviour
 {
-    public enum Menu{Main, Options, Graphics, Controls, Audio, Language};
+    public enum Menu{Main, Options, Graphics, Controls, Audio, Language, Help};
     public Menu menuType;
     public int buttonIndex;
     private TextMeshProUGUI textMesh;
@@ -33,6 +33,9 @@ public class MainMenuButtonsTextSetter : MonoBehaviour
                 break;
             case Menu.Language:
                 text = LanguageManager.GetLanguageObj().optionsMenuButtonArray[3];
+                break;
+            case Menu.Help:
+                text = LanguageManager.GetLanguageObj().helpMenuText[buttonIndex];
                 break;
         }
         textMesh.text = text;

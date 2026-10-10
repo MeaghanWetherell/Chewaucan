@@ -92,8 +92,8 @@ namespace Language
         public TextAsset creditsText;
         
         [Header("Help Menu Text")]
-        public string backToMainMenu;
-        public string backToHelpMenu;
+        public static string backToMainMenu;
+        public static string backToHelpMenu;
         
         //What am I supposed to do?
         public static string question1;
@@ -104,7 +104,7 @@ namespace Language
         //Help, my astrolabe won't work!
         public static string question4;
 
-        public string[] questions = { question1, question2, question3, question4 };
+        public string[] helpMenuText = { question1, question2, question3, question4, backToMainMenu, backToHelpMenu };
         
         public static TextAsset explanation1Text;
         public static TextAsset explanation2Text;
