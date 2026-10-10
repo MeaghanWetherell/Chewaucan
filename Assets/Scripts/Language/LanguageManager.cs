@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -12,15 +11,15 @@ public class LanguageManager : MonoBehaviour
     private static string filepath = "Chewaucan/SavedSettings/LanguageSettings";
     
     //current language set
-    //ENGLISH = 0, FRENCH = 1
-    private static int lang;
+    private enum Language {English, French}
+    private static Language lang = Language.English;
         
     //current language object
     private static LanguageObject langObj;
 
     private void Awake()
     {
-        lang = LoadLanguage();
+        lang = (Language) LoadLanguage();
         InstantiateObj();
     }
 
@@ -41,7 +40,7 @@ public class LanguageManager : MonoBehaviour
     
     public static int LoadLanguage()
     {
-        int curLang = 0;
+        Language curLang = Language.English;
         
         string json;
 
@@ -54,24 +53,24 @@ public class LanguageManager : MonoBehaviour
                 NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
             };
             json = File.ReadAllText(Application.persistentDataPath + "/" + filepath + "LanguageSettings.json");
-            curLang = JsonSerializer.Deserialize<int>(json, opts);
+            curLang = JsonSerializer.Deserialize<Language>(json, opts);
             
         }
         catch (IOException)
         {
-            curLang = 0;
+            curLang = Language.English;
         }
 
         lang = curLang;
         InstantiateObj();
         
-        return curLang;
+        return (int) curLang;
 
     }
     
     public static void SaveLanguage(int newLang)
     {
-        lang = newLang;
+        lang = (Language) newLang;
         
         var opts = new JsonSerializerOptions
         {
@@ -84,14 +83,19 @@ public class LanguageManager : MonoBehaviour
         InstantiateObj();
     }
 
-    public static int GetLanguage()
+    public static int GetLanguageInt()
     {
-        return lang;
+        return (int) lang;
     }
     
     public static LanguageObject GetLanguageObj()
     {
         return langObj;
+    }
+
+    public static int GetLanguagesNumber()
+    {
+        return Enum.GetNames(typeof(Language)).Length;
     }
     
 }

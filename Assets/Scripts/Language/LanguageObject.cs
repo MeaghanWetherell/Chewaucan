@@ -33,11 +33,12 @@ namespace Language
         
         [Header("Graphics Menu Text")]
         public static string fullScreen;
+        public static string quality;
         public static string vSync;
         public static string resolution;
         public static string cameraSensitivity;
         public static string applyChanges;
-        public string[] graphicsMenuText = { fullScreen, vSync, resolution, cameraSensitivity, applyChanges };
+        public string[] graphicsMenuText = { fullScreen, quality, vSync, resolution, cameraSensitivity, applyChanges };
 
         [Header("Dropdown Buttons")]
         public static string veryLow;
@@ -47,6 +48,11 @@ namespace Language
         public static string veryHigh;
         public static string ultra;
         public string[] dropdownButtons = { veryLow, low, medium, high, veryHigh, ultra};
+        
+        [Header("Dropdown Languages")]
+        public static string english;
+        public static string french;
+        public string[] dropdownLanguages = { english, french };
         
         [Header("Controls Menu Text")]
         public static string moveForward;
