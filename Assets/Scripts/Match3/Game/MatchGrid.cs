@@ -214,7 +214,7 @@ namespace Match3
                 }
                 else
                 {
-                    MatchLevelManager.matchLevelManager.EndGame("No matches remaining!");
+                    MatchLevelManager.matchLevelManager.EndGame(LanguageManager.GetLanguageObj().noMatches);
                     break;
                 }
             }

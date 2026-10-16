@@ -1,3 +1,4 @@
+using Language;
 using UnityEngine;
 
 namespace Match3
@@ -25,5 +26,27 @@ namespace Match3
 
         [Tooltip("The objective for the level that should be displayed to the player during the game")]
         public string objective;
+        
+        public enum Objectives{Endless, MatchFemurs, MatchVertebrae, MatchBones};
+        public Objectives objectives;
+
+        public void SetObjectiveText()
+        {
+            switch (objectives)
+            {
+                case Objectives.Endless:
+                    objective = LanguageManager.GetLanguageObj().endlessObjective;
+                    break;
+                case Objectives.MatchFemurs:
+                    objective = LanguageManager.GetLanguageObj().femursObjective;
+                    break;
+                case Objectives.MatchVertebrae:
+                    objective = LanguageManager.GetLanguageObj().vertObjective;
+                    break;
+                case Objectives.MatchBones:
+                    objective = LanguageManager.GetLanguageObj().bonesObjective;
+                    break;
+            }
+        }
     }
 }

@@ -31,9 +31,9 @@ namespace Match3
         {
             uiObj.SetActive(true);
             matchSound.PlayAw();
-            mainText.text = "You Lose!";
-            buttonText.text = "Retry";
-            scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
+            mainText.text = LanguageManager.GetLanguageObj().lose;
+            buttonText.text = LanguageManager.GetLanguageObj().retry;
+            scoreText.text = reason+"\n"+ LanguageManager.GetLanguageObj().score + ": " + ScoreTracker.scoreTracker.score;
             int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
             if (num < MatchLevelManager.matchLevelManager.levels.Count)
             {
@@ -42,7 +42,7 @@ namespace Match3
             else
             {
                 buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num-1;
-                buttonText.text = "Play Again!";
+                buttonText.text = LanguageManager.GetLanguageObj().playAgain;
             }
         }
 
@@ -51,9 +51,9 @@ namespace Match3
         {
             uiObj.SetActive(true);
             matchSound.PlayYay();
-            mainText.text = "You Win!";
-            buttonText.text = "Next Level";
-            scoreText.text = reason+"\n"+"Score: " + ScoreTracker.scoreTracker.score;
+            mainText.text = LanguageManager.GetLanguageObj().win;
+            buttonText.text = LanguageManager.GetLanguageObj().nextLevel;
+            scoreText.text = reason+"\n"+ LanguageManager.GetLanguageObj().score + ": " + ScoreTracker.scoreTracker.score;
             int num = MatchLevelManager.matchLevelManager.GETCurLevel().levelNum;
             if (num > 0 && num < MatchLevelManager.matchLevelManager.levels.Count)
             {
@@ -61,9 +61,11 @@ namespace Match3
             }
             else
             {
-                buttonText.text = "Play Again!";
+                buttonText.text = LanguageManager.GetLanguageObj().playAgain;
                 buttonText.gameObject.transform.parent.gameObject.GetComponent<PlayAgainButton>().index = num-1;
             }
         }
     }
 }
+
+

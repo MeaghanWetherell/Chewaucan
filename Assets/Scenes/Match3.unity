@@ -577,6 +577,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &252959407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3242871376819299411, guid: a63036325439cbd4a9361e2d8f8bafb4, type: 3}
+  m_PrefabInstance: {fileID: 1254693570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &252959409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252959407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47b0de2ea951384ab9edd9e28dc8009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuType: 0
+  buttonIndex: 7
 --- !u!1 &325101230
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +689,7 @@ GameObject:
   - component: {fileID: 416363994}
   - component: {fileID: 416363996}
   - component: {fileID: 416363995}
+  - component: {fileID: 416363997}
   m_Layer: 5
   m_Name: IdenticalRules
   m_TagString: Untagged
@@ -815,6 +835,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416363993}
   m_CullTransparentMesh: 1
+--- !u!114 &416363997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416363993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fa5833931c3ee4fbd23d7d95713d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rulesType: 2
 --- !u!1 &486142092
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1495,7 @@ GameObject:
   - component: {fileID: 874229988}
   - component: {fileID: 874229990}
   - component: {fileID: 874229989}
+  - component: {fileID: 874229991}
   m_Layer: 5
   m_Name: AnatomyRules
   m_TagString: Untagged
@@ -1607,6 +1641,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874229987}
   m_CullTransparentMesh: 1
+--- !u!114 &874229991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874229987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fa5833931c3ee4fbd23d7d95713d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rulesType: 0
 --- !u!1 &962136213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,7 +2431,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3242871376819299411, guid: a63036325439cbd4a9361e2d8f8bafb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 252959409}
   m_SourcePrefab: {fileID: 100100000, guid: a63036325439cbd4a9361e2d8f8bafb4, type: 3}
 --- !u!224 &1254693571 stripped
 RectTransform:
@@ -2615,6 +2665,7 @@ GameObject:
   - component: {fileID: 1325906746}
   - component: {fileID: 1325906748}
   - component: {fileID: 1325906747}
+  - component: {fileID: 1325906749}
   m_Layer: 5
   m_Name: SpeciesRules
   m_TagString: Untagged
@@ -2760,6 +2811,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325906745}
   m_CullTransparentMesh: 1
+--- !u!114 &1325906749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325906745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2fa5833931c3ee4fbd23d7d95713d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rulesType: 1
 --- !u!1 &1369134015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4401,6 +4465,7 @@ MonoBehaviour:
   bgm: {fileID: 1819702110}
   narrator: {fileID: 1819702109}
   standVol: 0.8
+  musVol: 0
   mainMixer: {fileID: 24100000, guid: 86bdd75e97db8014aab393229faa7c55, type: 2}
   fileName: soundsettings
   volParams:

@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -259,7 +258,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 459130467}
   lt: 2
-  myPath: Chewaucan/save1
+  text: {fileID: 1147399961}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &635382908
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,12 +526,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &704740376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1255,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 1064115042}
   lt: 2
-  myPath: Chewaucan/save3
+  text: {fileID: 704740378}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &1138816281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1796,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 1434694993}
   lt: 2
-  myPath: Chewaucan/save2
+  text: {fileID: 635382910}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &1639526871
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1935,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 1639526874}
   lt: 0
-  myPath: Chewaucan/save3
+  text: {fileID: 1138816283}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &1880888804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,7 +2178,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 1916706627}
   lt: 0
-  myPath: Chewaucan/save2
+  text: {fileID: 1400817805}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &1994281016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2421,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myButton: {fileID: 2067703370}
   lt: 0
-  myPath: Chewaucan/save1
+  text: {fileID: 717860153}
+  pathNumber: 0
+  newGameNameObj: {fileID: 0}
 --- !u!1 &2078370217
 GameObject:
   m_ObjectHideFlags: 0

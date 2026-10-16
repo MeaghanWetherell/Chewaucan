@@ -74,7 +74,6 @@ public class SetPathAndLoad : MonoBehaviour
                 else
                 {
                     myButton.onClick.AddListener(LoadMyPath);
-                    Debug.Log(LanguageManager.GetLanguageObj());
                     text.text = LanguageManager.GetLanguageObj().mainMenuButtonArray[2] + " " + myPath.Split("/")[^1];
                 }
                 break;

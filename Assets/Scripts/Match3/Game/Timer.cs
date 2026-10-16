@@ -58,7 +58,7 @@ namespace Match3
                 yield return new WaitForSeconds(0.1f);
                 if (paused) continue;
                 timeLeft += 0.1f;
-                text.text = "Time:\n" + ((int) timeLeft) + "s";
+                text.text = LanguageManager.GetLanguageObj().time + "\n" + ((int) timeLeft);
             }
         }
         
@@ -70,9 +70,9 @@ namespace Match3
                 yield return new WaitForSeconds(0.1f);
                 if (paused) continue;
                 timeLeft -= 0.1f;
-                text.text = "Time Remaining: " + ((int) timeLeft) + "s";
+                text.text = LanguageManager.GetLanguageObj().timeRemaining + ((int) timeLeft);
             }
-            MatchLevelManager.matchLevelManager.EndGame("Time up!");
+            MatchLevelManager.matchLevelManager.EndGame(LanguageManager.GetLanguageObj().timeUp);
         }
 
         private void OnPause()

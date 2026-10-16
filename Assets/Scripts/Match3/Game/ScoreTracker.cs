@@ -41,14 +41,14 @@ namespace Match3
 
         public void SetScoreText(bool hs=false)
         {
-            text.text = "Score\n<style=\"Title\"><style=\"M3\">"+ score+"</style></style>\n";
+            text.text = LanguageManager.GetLanguageObj().score + "\n<style=\"Title\"><style=\"M3\">"+ score +"</style></style>\n";
             if (hs)
             {
                 text.text += GetHighScoreText();
             }
             else
             {
-                text.text += "out of\n<style=\"H3\"><style=\"M3\">" + scoreRequired + "</style></style>";
+                text.text += LanguageManager.GetLanguageObj().outOf + "\n<style=\"H3\"><style=\"M3\">" + scoreRequired + "</style></style>";
             }
         }
 
@@ -72,7 +72,7 @@ namespace Match3
             SetScoreText();
             if (score >= scoreRequired)
             {
-                MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
+                MatchLevelManager.matchLevelManager.EndGame(LanguageManager.GetLanguageObj().scoreReached);
             }
         }
         
@@ -88,13 +88,13 @@ namespace Match3
             SetScoreText();
             if (score >= scoreRequired)
             {
-                MatchLevelManager.matchLevelManager.EndGame("You reached the required score!");
+                MatchLevelManager.matchLevelManager.EndGame(LanguageManager.GetLanguageObj().scoreReached);
             }
         }
 
         private string GetHighScoreText()
         {
-            return "High Score\n<style=\"H2\"><style=\"M3\">" + MatchLevelManager.matchLevelManager.GetHighscore()+"</style></style>";
+            return LanguageManager.GetLanguageObj().highScore + "\n<style=\"H2\"><style=\"M3\">" + MatchLevelManager.matchLevelManager.GetHighscore()+"</style></style>";
         }
     }
 }

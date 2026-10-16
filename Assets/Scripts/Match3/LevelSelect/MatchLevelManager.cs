@@ -147,6 +147,7 @@ namespace Match3
         public void LoadLevel(int index)
         {
             SetValidMeshes(levels[index].meshes);
+            levels[index].SetObjectiveText();
             MatchObject.ChangeMatchType(levels[index].matchType);
             MatchLine.shouldRotate = levels[index].rotate;
             curIndex = index;
