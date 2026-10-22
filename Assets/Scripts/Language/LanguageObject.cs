@@ -85,8 +85,6 @@ namespace Language
         public static string subtitles;
         public string[] audioMenuText = { master, sfx, dialogue, music, subtitles };
 
-        [Header("Credits Menu Text Asset")] public TextAsset creditsText;
-
         [Header("Help Menu Text")] public static string backToMainMenu;
         public static string backToHelpMenu;
 
@@ -211,6 +209,7 @@ namespace Language
         [Header("Subtitles Text Assets")] public static TextAsset BP1;
         public static TextAsset BP2;
         public static TextAsset BP3;
+        public static TextAsset BP5_1;
         public static TextAsset BP5_2;
         public static TextAsset BP6_1;
         public static TextAsset BP6_2;
@@ -226,7 +225,6 @@ namespace Language
         public static TextAsset BP12;
         public static TextAsset FC1;
         public static TextAsset J1;
-        public static TextAsset J2;
         public static TextAsset J3;
         public static TextAsset J4;
         public static TextAsset J5;
@@ -235,6 +233,7 @@ namespace Language
         public static TextAsset JL3;
         public static TextAsset JL3_U;
         public static TextAsset MC1;
+        public static TextAsset MC1_0;
         public static TextAsset MC2_1;
         public static TextAsset MC2_2;
         public static TextAsset MC2_3;
@@ -290,8 +289,8 @@ namespace Language
 
         public TextAsset[] subtitlesArr =
         {
-            BP1, BP2, BP3, BP5_2, BP6_1, BP6_2, BP6_3, BP6_4, BP6_5, BP7_1, BP7_2, BP7_3, BP8, BP10, BP11, BP12, FC1,
-            J1, J2, J3, J4, J5, JL2, J2_W, JL3, JL3_U, MC1, MC2_1, MC2_2, MC2_3, MC2_4, MC2_5, MC2_7, MC2_8, MC2_9, PQ1,
+            BP1, BP2, BP3, BP5_1, BP5_2, BP6_1, BP6_2, BP6_3, BP6_4, BP6_5, BP7_1, BP7_2, BP7_3, BP8, BP10, BP11, BP12, FC1,
+            J1, J3, J4, J5, JL2, J2_W, JL3, JL3_U, MC1, MC1_0, MC2_1, MC2_2, MC2_3, MC2_4, MC2_5, MC2_7, MC2_8, MC2_9, PQ1,
             PQ1_3, PQ3, PQ4_1, PQ4_2, PQ4_3, PQ5_1, PQ5_2, PQ5_3, PQ5_4, PQ5_5, PQ5_6, PQ6_1, PQ6_2, PQ6_3, PQ7, PQ8,
             PQ9, PQ10_1, PQ10_2, PQ10_3, PQ10_4, PQ10_5, PQ10_6, PQ10_7, PQ10_8, PQ10_9, PQ10_10, RC0, RC0_1, RC1, RC2,
             RC3, RC4, RC5, RC6_1, RC6_2, RC7, RC8, RC8_1, SC1, SC2, SC3, UP1
