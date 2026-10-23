@@ -11,11 +11,11 @@ public class DisplayHighScores : MonoBehaviour
     {
         List<float> highscores = MatchLevelManager.matchLevelManager.GetAllHighscores();
         TextMeshProUGUI text = transform.GetComponentInChildren<TextMeshProUGUI>();
-        text.text = "High Scores:\n";
+        text.text = LanguageManager.GetLanguageObj().highScores+":\n";
         for (int i = 0; i < highscores.Count-1; i++)
         {
-            text.text += "Level " + (i + 1) + ": " + highscores[i] + "\n";
+            text.text += LanguageManager.GetLanguageObj().level + " " + (i + 1) + ": " + highscores[i] + "\n";
         }
-        text.text += "Endless: " + highscores[^1];
+        text.text += LanguageManager.GetLanguageObj().endless + ": " + highscores[^1];
     }
 }

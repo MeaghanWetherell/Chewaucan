@@ -72,7 +72,6 @@ MonoBehaviour:
   - Dialogue
   - Music
   - Subtitles
-  creditsText: {fileID: 0}
   helpMenuText:
   - What am I supposed to do?
   - How do I fast travel and teleport?
@@ -85,6 +84,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  level: Level
+  levelSelectText:
+  - Levels
+  - The Bone Catalogue
   lose: You Lose!
   retry: Retry
   score: Score
@@ -98,6 +101,8 @@ MonoBehaviour:
   timeRemaining: 'Time Remaining: '
   outOf: out of
   highScore: High Score
+  highScores: High Scores
+  endless: Endless
   objective: 'Objective: '
   boneView: Bone View
   swapBones: Swap bones to identify them by making #threeOrMore matches in a row
@@ -223,3 +228,32 @@ MonoBehaviour:
   - {fileID: 4900000, guid: ff3ddd8b1155b2f4bbb83b44351c26ee, type: 3}
   - {fileID: 4900000, guid: fbf2d1af543fd23409a2cb2372ddb33c, type: 3}
   - {fileID: 4900000, guid: 5a9e23d8ff4de5c44a1844cdf125afc7, type: 3}
+  boneNamesArr:
+  - Antelope Femur
+  - Antelope Humerus
+  - Antelope Radius
+  - Antelope Toe
+  - Antelope Ulna
+  - Antelope Vertebrae
+  - Cow Calcaneum
+  - Cow Femur
+  - Cow Humerus
+  - Cow Talus
+  - Cow Tibia
+  - Horse Humerus
+  - Horse Femur
+  - Jackrabbit Femur
+  - Jackrabbit Humerus
+  - Jackrabbit Skull
+  - Jackrabbit Vertebrae
+  - Mammoth Vertebrae
+  - Marmot Femur
+  - Marmot Humerus
+  - Marmot Skull
+  - Mastodon Femur
+  - Pika Femur1
+  - Pika Humerus
+  - Pika Skull
+  - Salmonid Vertebrae
+  - Giant Ground Sloth Femur
+  - Tui Chub Vertebrae

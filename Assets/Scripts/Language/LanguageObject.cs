@@ -109,6 +109,12 @@ namespace Language
 
         public TextAsset[] explanations = { explanation1Text, explanation2Text, explanation3Text, explanation4Text };
 
+        [Header("Match 3 Level Select")]
+        public string level; //Level
+        public static string levels; //Levels
+        public static string boneCatalogue; //The Bone Catalogue
+        public string[] levelSelectText = {levels, boneCatalogue };
+        
         [Header("Match 3")]
         public string lose; //You Lose!
         public string retry; //Retry
@@ -123,10 +129,10 @@ namespace Language
         public string timeRemaining; //Time Remaining: 
         public string outOf; //out of
         public string highScore; //High Score
+        public string highScores; //High Scores
+        public string endless; //Endless
         public string objective; //Objective:
         public string boneView; //Bone View
-        
-        //public string[] match3MenuText = { score, objective, boneView};
 
         [Header("Match 3 Rules")]
         public string swapBones; //Swap bones to identify them by making #threeOrMore matches in a row
@@ -295,8 +301,44 @@ namespace Language
             PQ9, PQ10_1, PQ10_2, PQ10_3, PQ10_4, PQ10_5, PQ10_6, PQ10_7, PQ10_8, PQ10_9, PQ10_10, RC0, RC0_1, RC1, RC2,
             RC3, RC4, RC5, RC6_1, RC6_2, RC7, RC8, RC8_1, SC1, SC2, SC3, UP1
         };
+    
+        [Header("Bone Names")]
+        public static string antFemur; //Antelope Femur
+        public static string antHum; //Antelope Humerus
+        public static string antRad; //Antelope Radius
+        public static string antToe; //Antelope Toe
+        public static string antUlna; //Antelope Ulna
+        public static string antVert; //Antelope Vertebrae
+        public static string cowCal; //Cow Calcaneum
+        public static string cowFemur; //Cow Femur
+        public static string cowHum; //Cow Humerus
+        public static string cowTalus; //Cow Talus
+        public static string cowTibia; //Cow Tibia
+        public static string horseHum; //Horse Humerus
+        public static string horseFemur; //Horse Femur
+        public static string jackrabbitFemur; //Jackrabbit Femur
+        public static string jackrabbitHum; //Jackrabbit Humerus
+        public static string jackrabbitSkull; //Jackrabbit Skull
+        public static string jackrabbitVert; //Jackrabbit Vertebrae
+        public static string mammothVert; //Mammoth Vertebrae
+        public static string marmotFemur; //Marmot Femur
+        public static string marmotHum; //Marmot Humerus
+        public static string marmotSkull; //Marmot Skull
+        public static string mastodonFemur; //Mastodon Femur
+        public static string pikaFemur; //Pika Femur
+        public static string pikaHum; //Pika Humerus
+        public static string pikaSkull; //Pika Skull
+        public static string salmonidVert; //Salmonid Vertebrae
+        public static string slothFemur; //Giant Ground Sloth Femur
+        public static string chubVert; //Tui Chub Vertebrae
 
-
+        public string[] boneNamesArr =
+        {
+            antFemur, antHum, antRad, antToe, antUlna, antVert, cowCal, 
+            cowFemur, cowHum, cowTalus, cowTibia, horseHum, horseFemur, jackrabbitFemur, jackrabbitHum, 
+            jackrabbitSkull, jackrabbitVert, mammothVert, marmotFemur, marmotHum, marmotSkull,
+            mastodonFemur, pikaFemur, pikaHum, pikaSkull, salmonidVert, slothFemur, chubVert
+        };
 
 
         public TextAsset GetSubtitles(string narrName)
@@ -356,6 +398,20 @@ namespace Language
             rules += "\n";
             rules += viewBones.Replace("#rightClick", "\n<style=\"M3\">" + rightClick + "</style>\n");
             return rules;
+        }
+
+        public string GetBoneName(string bone)
+        {
+            for (int i = 0; i < boneNamesArr.Length; i++)
+            {
+                if (bone == LanguageManager.GetEnglishObj().boneNamesArr[i])
+                {
+                    return boneNamesArr[i];
+                }
+            }
+
+            return null;
+
         }
     }
 }

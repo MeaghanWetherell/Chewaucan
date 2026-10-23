@@ -31,6 +31,20 @@ namespace Match3.DataClasses
         public int endlessIndex;
 
         private int numberMatched;
+        
+        public delegate void Update();
+        public static Update update;
+
+        private void Awake()
+        {
+            LanguageManager.updateLangText += UpdateBoneName;
+            UpdateBoneName();
+        }
+
+        public void UpdateBoneName()
+        {
+            boneName = LanguageManager.GetLanguageObj().GetBoneName(boneName);
+        }
 
         public void Load()
         {

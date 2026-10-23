@@ -59,7 +59,7 @@ namespace Match3
                 CreateButtonPrefab(levels[i], shouldBeEnabled);
             }
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
-            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Endless";
+            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = LanguageManager.GetLanguageObj().endless;
             newButton.GetComponent<OpenLevel>().levelIndex = levels.Count-1;
             newButton.GetComponent<Button>().onClick.AddListener(GetComponent<EndlessModeQuestHandler>().OnClick);
             shouldBeEnabled = MatchLevelManager.matchLevelManager.levelsComplete[levels.Count-2];
@@ -73,7 +73,7 @@ namespace Match3
         private void CreateButtonPrefab(LevelData level, bool shouldBeEnabled)
         {
             GameObject newButton = Instantiate(levelButton, scrollContent, false);
-            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "Level "+level.levelNum;
+            newButton.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text =  LanguageManager.GetLanguageObj().level+" "+level.levelNum;
             if (!shouldBeEnabled)
             {
                 newButton.GetComponent<Button>().interactable = false;

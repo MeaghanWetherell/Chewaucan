@@ -16,6 +16,11 @@ public class LanguageManager : MonoBehaviour
         
     //current language object
     private static LanguageObject langObj;
+    
+    //event that invokes when language is updated
+    //private static event Action UpdateLangText;
+    public delegate void UpdateLangText();
+    public static UpdateLangText updateLangText;
 
     public static void InstantiateObj()
     {
@@ -30,7 +35,8 @@ public class LanguageManager : MonoBehaviour
                 break;
         }
         Debug.Log("instantiate langobj = " + langObj);
-        
+        updateLangText?.Invoke();
+
     }
     
     public static int LoadLanguage()
@@ -84,12 +90,24 @@ public class LanguageManager : MonoBehaviour
     
     public static LanguageObject GetLanguageObj()
     {
-        return langObj;
+        if (langObj != null)
+        {
+            return langObj;
+        }
+        else
+        {
+            return Resources.Load<LanguageObject>("Objects/EN");
+        }
     }
 
     public static int GetLanguagesNumber()
     {
         return Enum.GetNames(typeof(Language)).Length;
+    }
+    
+    public static LanguageObject GetEnglishObj()
+    {
+        return Resources.Load<LanguageObject>("Objects/EN");
     }
     
 }
