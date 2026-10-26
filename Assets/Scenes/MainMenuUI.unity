@@ -824,6 +824,7 @@ GameObject:
   - component: {fileID: 78986891}
   - component: {fileID: 78986895}
   - component: {fileID: 78986894}
+  - component: {fileID: 78986896}
   m_Layer: 5
   m_Name: Goal Menu
   m_TagString: Untagged
@@ -960,6 +961,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78986889}
   m_CullTransparentMesh: 1
+--- !u!114 &78986896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78986889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d772a8df62ea684a9c7599ef8e70352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpMenuType: 2
+  topText: {fileID: 1972855643}
+  leftText: {fileID: 2033191288}
+  rightText: {fileID: 677403642}
 --- !u!1 &118701917
 GameObject:
   m_ObjectHideFlags: 0
@@ -4796,6 +4813,7 @@ GameObject:
   - component: {fileID: 842812856}
   - component: {fileID: 842812860}
   - component: {fileID: 842812859}
+  - component: {fileID: 842812861}
   m_Layer: 5
   m_Name: Astrolabe Bug
   m_TagString: Untagged
@@ -4927,6 +4945,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842812854}
   m_CullTransparentMesh: 1
+--- !u!114 &842812861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842812854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d772a8df62ea684a9c7599ef8e70352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpMenuType: 3
+  topText: {fileID: 460870240}
+  leftText: {fileID: 0}
+  rightText: {fileID: 0}
 --- !u!1 &874767497
 GameObject:
   m_ObjectHideFlags: 0
@@ -8185,6 +8219,7 @@ GameObject:
   - component: {fileID: 1347011147}
   - component: {fileID: 1347011151}
   - component: {fileID: 1347011150}
+  - component: {fileID: 1347011152}
   m_Layer: 5
   m_Name: Fast Travel Menu
   m_TagString: Untagged
@@ -8321,6 +8356,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347011145}
   m_CullTransparentMesh: 1
+--- !u!114 &1347011152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347011145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d772a8df62ea684a9c7599ef8e70352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpMenuType: 0
+  topText: {fileID: 266142984}
+  leftText: {fileID: 2133379151}
+  rightText: {fileID: 1559784302}
 --- !u!1 &1361532465
 GameObject:
   m_ObjectHideFlags: 0
@@ -9002,6 +9053,7 @@ GameObject:
   - component: {fileID: 1502638669}
   - component: {fileID: 1502638673}
   - component: {fileID: 1502638672}
+  - component: {fileID: 1502638674}
   m_Layer: 5
   m_Name: Flies
   m_TagString: Untagged
@@ -9138,6 +9190,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502638667}
   m_CullTransparentMesh: 1
+--- !u!114 &1502638674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502638667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d772a8df62ea684a9c7599ef8e70352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  helpMenuType: 1
+  topText: {fileID: 531597132}
+  leftText: {fileID: 940730147}
+  rightText: {fileID: 900761064}
 --- !u!1 &1508521801
 GameObject:
   m_ObjectHideFlags: 0

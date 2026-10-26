@@ -33,12 +33,23 @@ namespace Narration
 
         //the prefab prompt allowing the player to skip narration
         private static GameObject narrSkipPrompt;
+
+        private void OnEnable()
+        {
+            LanguageManager.updateLangText += UpdateSubtitleLanguage;
+            UpdateSubtitleLanguage();
+        }
+
+        public void UpdateSubtitleLanguage()
+        {
+            //set the subtitles to current language
+            subtitles = LanguageManager.GetLanguageObj().GetSubtitles(narrName);
+        }
         
         //start the narration
         public virtual void Begin(bool skippable = true)
         {
-            //set the subtitles to current language
-            subtitles = LanguageManager.GetLanguageObj().GetSubtitles(narrName);
+            
             Begin(new List<UnityAction<string>>(), skippable);
         }
 
@@ -61,8 +72,6 @@ namespace Narration
         //start the narration, running any actions in the passed list when the narration finishes
         public virtual void Begin(List<UnityAction<string>> onComplete, bool skippable = true)
         {
-            //set the subtitles to current language
-            subtitles = LanguageManager.GetLanguageObj().GetSubtitles(narrName);
             
             addToOnComplete(onComplete);
             if (subtitles != null)

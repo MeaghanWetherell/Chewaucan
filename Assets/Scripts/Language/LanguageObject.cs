@@ -102,13 +102,6 @@ namespace Language
 
         public string[] helpMenuText = { question1, question2, question3, question4, backToMainMenu, backToHelpMenu };
 
-        public static TextAsset explanation1Text;
-        public static TextAsset explanation2Text;
-        public static TextAsset explanation3Text;
-        public static TextAsset explanation4Text;
-
-        public TextAsset[] explanations = { explanation1Text, explanation2Text, explanation3Text, explanation4Text };
-
         [Header("Match 3 Level Select")]
         public string level; //Level
         public static string levels; //Levels
@@ -211,96 +204,6 @@ namespace Language
             smallLake, bonePile, strangePlateaus, caveSite, thePast, ancientLake, pikaTerritory, mammothFootprints,
             tuiChub
         };
-
-        [Header("Subtitles Text Assets")] public static TextAsset BP1;
-        public static TextAsset BP2;
-        public static TextAsset BP3;
-        public static TextAsset BP5_1;
-        public static TextAsset BP5_2;
-        public static TextAsset BP6_1;
-        public static TextAsset BP6_2;
-        public static TextAsset BP6_3;
-        public static TextAsset BP6_4;
-        public static TextAsset BP6_5;
-        public static TextAsset BP7_1;
-        public static TextAsset BP7_2;
-        public static TextAsset BP7_3;
-        public static TextAsset BP8;
-        public static TextAsset BP10;
-        public static TextAsset BP11;
-        public static TextAsset BP12;
-        public static TextAsset FC1;
-        public static TextAsset J1;
-        public static TextAsset J3;
-        public static TextAsset J4;
-        public static TextAsset J5;
-        public static TextAsset JL2;
-        public static TextAsset J2_W;
-        public static TextAsset JL3;
-        public static TextAsset JL3_U;
-        public static TextAsset MC1;
-        public static TextAsset MC1_0;
-        public static TextAsset MC2_1;
-        public static TextAsset MC2_2;
-        public static TextAsset MC2_3;
-        public static TextAsset MC2_4;
-        public static TextAsset MC2_5;
-        public static TextAsset MC2_7;
-        public static TextAsset MC2_8;
-        public static TextAsset MC2_9;
-        public static TextAsset PQ1;
-        public static TextAsset PQ1_3;
-        public static TextAsset PQ3;
-        public static TextAsset PQ4_1;
-        public static TextAsset PQ4_2;
-        public static TextAsset PQ4_3;
-        public static TextAsset PQ5_1;
-        public static TextAsset PQ5_2;
-        public static TextAsset PQ5_3;
-        public static TextAsset PQ5_4;
-        public static TextAsset PQ5_5;
-        public static TextAsset PQ5_6;
-        public static TextAsset PQ6_1;
-        public static TextAsset PQ6_2;
-        public static TextAsset PQ6_3;
-        public static TextAsset PQ7;
-        public static TextAsset PQ8;
-        public static TextAsset PQ9;
-        public static TextAsset PQ10_1;
-        public static TextAsset PQ10_2;
-        public static TextAsset PQ10_3;
-        public static TextAsset PQ10_4;
-        public static TextAsset PQ10_5;
-        public static TextAsset PQ10_6;
-        public static TextAsset PQ10_7;
-        public static TextAsset PQ10_8;
-        public static TextAsset PQ10_9;
-        public static TextAsset PQ10_10;
-        public static TextAsset RC0;
-        public static TextAsset RC0_1;
-        public static TextAsset RC1;
-        public static TextAsset RC2;
-        public static TextAsset RC3;
-        public static TextAsset RC4;
-        public static TextAsset RC5;
-        public static TextAsset RC6_1;
-        public static TextAsset RC6_2;
-        public static TextAsset RC7;
-        public static TextAsset RC8;
-        public static TextAsset RC8_1;
-        public static TextAsset SC1;
-        public static TextAsset SC2;
-        public static TextAsset SC3;
-        public static TextAsset UP1;
-
-        public TextAsset[] subtitlesArr =
-        {
-            BP1, BP2, BP3, BP5_1, BP5_2, BP6_1, BP6_2, BP6_3, BP6_4, BP6_5, BP7_1, BP7_2, BP7_3, BP8, BP10, BP11, BP12, FC1,
-            J1, J3, J4, J5, JL2, J2_W, JL3, JL3_U, MC1, MC1_0, MC2_1, MC2_2, MC2_3, MC2_4, MC2_5, MC2_7, MC2_8, MC2_9, PQ1,
-            PQ1_3, PQ3, PQ4_1, PQ4_2, PQ4_3, PQ5_1, PQ5_2, PQ5_3, PQ5_4, PQ5_5, PQ5_6, PQ6_1, PQ6_2, PQ6_3, PQ7, PQ8,
-            PQ9, PQ10_1, PQ10_2, PQ10_3, PQ10_4, PQ10_5, PQ10_6, PQ10_7, PQ10_8, PQ10_9, PQ10_10, RC0, RC0_1, RC1, RC2,
-            RC3, RC4, RC5, RC6_1, RC6_2, RC7, RC8, RC8_1, SC1, SC2, SC3, UP1
-        };
     
         [Header("Bone Names")]
         public static string antFemur; //Antelope Femur
@@ -343,15 +246,7 @@ namespace Language
 
         public TextAsset GetSubtitles(string narrName)
         {
-            foreach (TextAsset file in subtitlesArr)
-            {
-                if (narrName == file.name)
-                {
-                    return file;
-                }
-            }
-
-            return null;
+            return Resources.Load<TextAsset>("TextFiles/"+LanguageManager.GetLanguageObj().name+"/Subtitles/"+narrName);
         }
 
         public string GetSaveHeaderText(int slot, string saveName)
