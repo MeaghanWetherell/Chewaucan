@@ -147,8 +147,6 @@ namespace Language
         
 
         [Header("Create Save")]
-        //Are you sure you would like to delete this save file and start a new game?
-        public string deleteSave;
 
         [Tooltip("Slot number should be written as #slot and existing name should be #name")]
         //"Enter name for save in slot #slot or leave blank to use existing name #name"
@@ -167,10 +165,13 @@ namespace Language
         //"A save with that name exists in a different slot!"
         public string fileNameInvalidExists;
 
-        public string submit;
-        public string cancel;
-        public string yes;
-        public string no;
+        [Header("Saves menu")]
+        public static string deleteSave; //Are you sure you would like to delete this save file and start a new game?
+        public static string submit;
+        public static string cancel;
+        public static string yes;
+        public static string no;
+        public string[] savesMenuText = {deleteSave, submit, cancel, yes, no};
 
 
         [Header("Map Text")] public string modernMap;
