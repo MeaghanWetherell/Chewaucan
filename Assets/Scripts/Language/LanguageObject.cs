@@ -180,14 +180,16 @@ namespace Language
 
         //Press Escape or #openmap to close
         public string mapControls1;
-
         //scroll to zoom
         public string mapControls2;
-
         //Switch map view
-        public string switchMapView;
+        public static string switchMapView;
+        public static string teleport;
+        
+        public string[] mapMenuText = {switchMapView, teleport};
 
-        public string teleport;
+        [Header("Misc")]
+        public string interactMsg; //Press #key to interact
 
         //waypoints
         public static string smallLake;
@@ -267,6 +269,12 @@ namespace Language
         {
             mapControls1 = mapControls1.Replace("#openmap", inText);
             return mapControls1 + "\n" + mapControls2;
+        }
+        
+        public string GetInteractMsg(string inText)
+        {
+            interactMsg = mapControls1.Replace("#key", inText);
+            return interactMsg;
         }
 
         //0 = anatomy, 1 = species, 2 = both

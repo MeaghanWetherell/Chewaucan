@@ -50,7 +50,7 @@ namespace Misc
                 String key = interact.action.bindings[0].ToDisplayString();
                 if (msg.Equals(""))
                 {
-                    msg = "Press " + key + " to interact";
+                    msg = LanguageManager.GetLanguageObj().GetInteractMsg(key);
                 }
                 HUDManager.hudManager.DisplayMessageToHUD(msg);
                 return true;
