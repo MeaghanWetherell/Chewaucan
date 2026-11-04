@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MainMenuButtonsTextSetter : MonoBehaviour
 {
-    public enum Menu{Main, Options, Graphics, Controls, Audio, Language, Help, Level, Saves, Map};
+    public enum Menu{Main, Options, Graphics, Controls, Audio, Language, Help, Level, Saves, Map, Popup};
     public Menu menuType;
     public int buttonIndex;
     private TextMeshProUGUI textMesh;
@@ -45,6 +45,9 @@ public class MainMenuButtonsTextSetter : MonoBehaviour
                 break;
             case Menu.Map:
                 text = LanguageManager.GetLanguageObj().mapMenuText[buttonIndex];
+                break;
+            case Menu.Popup:
+                text = LanguageManager.GetLanguageObj().popUpText[buttonIndex];
                 break;
         }
         textMesh.text = text;

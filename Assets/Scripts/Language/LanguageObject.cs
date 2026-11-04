@@ -188,6 +188,14 @@ namespace Language
         
         public string[] mapMenuText = {switchMapView, teleport};
 
+        [Header("Popups")]
+        public static string endGameQ; //End Game?
+        public static string confirmEnd; //Are you sure you are ready to end the case and finish the game?
+        public static string decline;
+        public static string confirm;
+        
+        public string[] popUpText = {endGameQ, confirmEnd, decline, confirm};
+
         [Header("Misc")]
         public string interactMsg; //Press #key to interact
 

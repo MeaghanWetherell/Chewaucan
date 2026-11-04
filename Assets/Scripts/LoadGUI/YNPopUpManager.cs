@@ -19,7 +19,7 @@ public class YNPopUpManager : PopUpManager
 
     public override void SetText(string inTitle, string mainText)
     {
-        SetText(inTitle, mainText, "Decline", "Confirm");
+        SetText(inTitle, mainText, LanguageManager.GetLanguageObj().popUpText[2], LanguageManager.GetLanguageObj().popUpText[3]);
     }
 
     public void SetText(string inTitle, string mainText, string decText, string confText)

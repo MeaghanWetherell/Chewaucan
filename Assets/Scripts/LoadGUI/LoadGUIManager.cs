@@ -4,6 +4,7 @@ using ScriptTags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -114,7 +115,22 @@ namespace LoadGUIFolder
         //conf/decText are the text displayed on the buttons to confirm or decline
         public void InstantiateYNPopUp(string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
             List<UnityAction<string>> onPopUpClosed = null)
+            
         {
+            decText = LanguageManager.GetLanguageObj().popUpText[2];
+            confText = LanguageManager.GetLanguageObj().popUpText[3];
+            GameObject nonEnglishOverlay = YNPopUp.transform.GetChild(1).GetChild(0).gameObject;
+            //set to non-english popup version if needed
+            if (LanguageManager.GetLanguageInt() != 0)
+            {
+                nonEnglishOverlay.SetActive(true);
+            }
+            else
+            {
+                nonEnglishOverlay.SetActive(false);
+            }
+            
+
             GameObject window = Instantiate(YNPopUp);
             if (onPopUpClosed == null)
                 onPopUpClosed = new List<UnityAction<string>>();
@@ -145,6 +161,8 @@ namespace LoadGUIFolder
         public void InstantiateYNPopUp(GameObject inPopUp, string title, string msg, List<UnityAction<string>> onConfirm, string confText = "Confirm", string decText = "Decline",
             List<UnityAction<string>> onPopUpClosed = null)
         {
+            decText = LanguageManager.GetLanguageObj().popUpText[2];
+            confText = LanguageManager.GetLanguageObj().popUpText[3];
             GameObject window = inPopUp;
             if (onPopUpClosed == null)
                 onPopUpClosed = new List<UnityAction<string>>();
