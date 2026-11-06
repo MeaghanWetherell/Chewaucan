@@ -41,6 +41,8 @@ namespace Match3
         [NonSerialized]public String myAnimal;
         
         [NonSerialized]public String myBoneType;
+        
+        [NonSerialized]public String myBoneName;
 
         //index of the object in the match line
         [NonSerialized]public int index;
@@ -56,6 +58,7 @@ namespace Match3
             Instantiate(_meshes[myType].meshPrefab, transform);
             myAnimal = _meshes[myType].animal.ToLower();
             myBoneType = _meshes[myType].boneType.ToLower();
+            myBoneName = _meshes[myType].boneName.ToLower();
         }
 
         //move toward a snap point

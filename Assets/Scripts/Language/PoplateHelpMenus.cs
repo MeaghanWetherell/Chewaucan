@@ -1,10 +1,13 @@
 using System.IO;
+using KeyRebinding;
+using Match3;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class PoplateHelpMenus : MonoBehaviour
 {
-    public enum HelpMenu{FastTravel, Flies, Goal, Astrolabe};
+    public enum HelpMenu{FastTravelHelp, FliesHelp, GoalMenuHelp, AstrolabeHelp, Match3Help};
     public HelpMenu helpMenuType;
     private string textAssetPath;
     public TextMeshProUGUI topText;
@@ -15,25 +18,8 @@ public class PoplateHelpMenus : MonoBehaviour
 
     private void OnEnable()
     {
-        switch (helpMenuType)
-        {
-            case HelpMenu.FastTravel:
-                textAssetPath =
-                    "Assets/Scripts/Language/Resources/TextFiles/"+LanguageManager.GetLanguageObj().name+"/FastTravelHelp.txt";
-                break;
-            case HelpMenu.Flies:
-                textAssetPath =
-                    "Assets/Scripts/Language/Resources/TextFiles/"+LanguageManager.GetLanguageObj().name+"/FliesHelp.txt";
-                break;
-            case HelpMenu.Goal:
-                textAssetPath =
-                    "Assets/Scripts/Language/Resources/TextFiles/"+LanguageManager.GetLanguageObj().name+"/GoalMenuHelp.txt";
-                break;
-            case HelpMenu.Astrolabe:
-                textAssetPath =
-                    "Assets/Scripts/Language/Resources/TextFiles/"+LanguageManager.GetLanguageObj().name+"/AstrolabeHelp.txt";
-                break;
-        }
+        textAssetPath =
+                            "Assets/Scripts/Language/Resources/TextFiles/"+LanguageManager.GetLanguageObj().name+"/"+helpMenuType+".txt";
 
         if (topText != null)
         {
@@ -62,20 +48,94 @@ public class PoplateHelpMenus : MonoBehaviour
             switch (curTextBox)
             {
                 case 0:
-                    topText.text += curLineText;
-                    topText.text += "\n";
+                    if (topText != null)
+                    {
+                        topText.text += curLineText;
+                        topText.text += "\n";
+                    }
                     break;
                 case 1:
-                    leftText.text += curLineText;
-                    leftText.text += "\n";
+                    if (leftText != null)
+                    {
+                        leftText.text += curLineText;
+                        leftText.text += "\n";
+                    }
+
                     break;
                 case 2:
-                    rightText.text += curLineText;
-                    rightText.text += "\n";
+                    if (rightText != null)
+                    {
+                        rightText.text += curLineText;
+                        rightText.text += "\n";
+                    }
+
                     break;
             }
         }
 
-        streamReader.Close(); 
+        streamReader.Close();
+
+        if (helpMenuType == HelpMenu.Match3Help)
+        {
+            string addStr = "";
+            if (MatchUIManager.matchUIManager != null)
+            {
+                LevelData data = MatchLevelManager.matchLevelManager.GETCurLevel();
+                switch (data.matchType)
+                {
+                    case MatchObject.MatchType.identical:
+                        addStr = LanguageManager.GetLanguageObj().matchIdentical; //"match identical bones!"
+                        break;
+                    case MatchObject.MatchType.sameBone:
+                        addStr = LanguageManager.GetLanguageObj().matchType; //"match bones of the same type (e.g. skull to skull, femur to femur)"
+                        break;
+                    case MatchObject.MatchType.sameSpecies:
+                        addStr = LanguageManager.GetLanguageObj().matchSpecies; //"match bones from the same species!"
+                        break;
+                }
+                leftText.text += "\n"+ LanguageManager.GetLanguageObj().currently + ": " + addStr;
+            }
+            
+            if (GameObject.FindWithTag("Player") != null)
+            {
+                PlayerInput playerInput = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
+                addStr = "\n";
+                bool first = true;
+                foreach (InputActionMap map in BindingManager.bindingManager.maps)
+                {
+                    if (map.name.Equals("Player"))
+                    {
+                        foreach (InputAction action in map)
+                        {
+                            for (int i = 0; i < action.bindings.Count; i++)
+                            {
+                                if (!action.bindings[i].groups.Contains(playerInput.currentControlScheme))
+                                    continue;
+                                if (action.name.Equals("Move"))
+                                {
+                                    if (!first)
+                                    {
+                                        addStr += ", ";
+                                    }
+                                    else {first = false;}
+                                    if (action.bindings[i].hasOverrides)
+                                    {
+                                        addStr += action.bindings[i].overridePath.Split("/")[1];
+                                    }
+                                    else
+                                    {
+                                        addStr += action.bindings[i].path.Split("/")[1];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                addStr += ": " + LanguageManager.GetLanguageObj().panCamera; //"pan the secondary camera"
+                rightText.text += addStr;
+            }
+            
+        }
     }
 }

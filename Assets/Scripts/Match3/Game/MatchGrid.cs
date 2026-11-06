@@ -260,7 +260,7 @@ namespace Match3
                     new Vector3(flyingText.transform.position.x, flyingText.transform.position.y, -3);
                 flyingTextTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 30);
                 flyingTextTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 12);
-                flyingText.GetComponent<TextMeshProUGUI>().text = targ.myAnimal+" "+targ.myBoneType;
+                flyingText.GetComponent<TextMeshProUGUI>().text = targ.myBoneName;
                 foreach (GridCoordinate coord in _removalQueue[index])
                 {
                     if (MatchLevelManager.matchLevelManager.curIndex ==

@@ -125,7 +125,10 @@ namespace Language
         public string highScores; //High Scores
         public string endless; //Endless
         public string objective; //Objective:
-        public string boneView; //Bone View
+        
+        public static string boneView; //Bone View
+
+        public string[] match3Text = { boneView };
 
         [Header("Match 3 Rules")]
         public string swapBones; //Swap bones to identify them by making #threeOrMore matches in a row
@@ -144,7 +147,13 @@ namespace Language
         public string femursObjective; //Match femurs to identify your fossil.
         public string vertObjective; //Match vertebrae to find clues about the past.
         public string bonesObjective; //Match bones within a species to uncover clues. 
-        
+
+        [Header("Match 3 Help")]
+        public string matchIdentical; //match identical bones!
+        public string matchType; //match bones of the same type (e.g. skull to skull, femur to femur)
+        public string matchSpecies; //match bones from the same species!
+        public string currently;
+        public string panCamera; //pan the secondary camera
 
         [Header("Create Save")]
 
