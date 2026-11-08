@@ -138,7 +138,7 @@ public class BonepileScript : MonoBehaviour
             BP11.addToOnComplete(new List<UnityAction<string>>{
                 str =>
                 {
-                    LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Press "+timeKey+" to open your astrolabe and return to the present!");
+                    LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().backToPresent, LanguageManager.GetLanguageObj().GetReturnToPresentMsg(timeKey));
                     AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                     MapUIController.canOpenMap = true;
                     BP12.SetPlayability(true);
@@ -152,7 +152,7 @@ public class BonepileScript : MonoBehaviour
             str =>
             {
                 QuestManager.questManager.CreateQuestNode("match31");
-                LoadGUIManager.loadGUIManager.InstantiatePopUp("The tutorial is done!", "You can now explore the map for more clues. Press "+questKey+" to see your progress. Press "+mapKey+" to open the map and fast travel. When you're ready to tell your story, press "+endKey+" to end the game.");
+                LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().tutorialDone, LanguageManager.GetLanguageObj().GetTutorialDoneMsg(questKey, mapKey, endKey));
             }
         });
     }
@@ -181,7 +181,7 @@ public class BonepileScript : MonoBehaviour
         BP2.SetPlayability(false);
         BP3.SetPlayability(true);
         BP3.Begin();
-        LoadGUIManager.loadGUIManager.InstantiatePopUp("Movement", "Use WASD to move");
+        LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().movement, LanguageManager.GetLanguageObj().movementMsg);
         BP3.addToOnComplete(new List<UnityAction<string>>{StartBP4});
     }
 
@@ -197,7 +197,7 @@ public class BonepileScript : MonoBehaviour
     {
         BP51.SetPlayability(true);
         BP52.SetPlayability(true);
-        LoadGUIManager.loadGUIManager.InstantiatePopUp("The Bone Pile", "Interact with bones with Tab. Find the bone that matches yours!");
+        LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().theBonePile, LanguageManager.GetLanguageObj().theBonePileMsg);
     }
 
     //flash the outlines of all the interactable bones

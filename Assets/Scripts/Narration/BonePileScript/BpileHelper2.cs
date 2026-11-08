@@ -23,7 +23,7 @@ public class BpileHelper2 : MonoBehaviour
                 BP11.addToOnComplete(new List<UnityAction<string>>{
                     str =>
                     {
-                        LoadGUIManager.loadGUIManager.InstantiatePopUp("Back to the Present!", "Open your astrolabe and return to the present!");
+                        LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().backToPresent, LanguageManager.GetLanguageObj().returnToPresentMsg2);
                         AstrolabeQueueManager.queueManager.EnqueueDestination(BPilePlayerPosition, 1);
                         MapUIController.canOpenMap = true;
                         BP12.SetPlayability(true);

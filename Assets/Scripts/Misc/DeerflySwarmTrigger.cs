@@ -19,6 +19,8 @@ public class DeerflySwarmTrigger : MonoBehaviour
     private void Awake()
     {
         swarmed = false;
+        popupTitle = LanguageManager.GetLanguageObj().deerFliesTitle;
+        popupMsg = LanguageManager.GetLanguageObj().deerFliesMsg;
     }
     
 

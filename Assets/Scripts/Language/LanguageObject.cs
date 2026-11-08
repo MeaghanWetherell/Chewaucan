@@ -20,9 +20,13 @@ namespace Language
         public static string credits;
         public static string help;
         public static string quit;
+        public static string paused;
+        public static string resume;
+        public static string mainMenu;
+        
 
         public string[] mainMenuButtonArray =
-            { continueBtn, continueWith, load, newGame, loadGame, options, credits, help, quit };
+            { continueBtn, continueWith, load, newGame, loadGame, options, credits, help, quit, paused , resume, mainMenu};
 
         [Header("Options Menu Buttons")] public static string graphics;
         public static string controls;
@@ -155,6 +159,25 @@ namespace Language
         public string currently;
         public string panCamera; //pan the secondary camera
 
+        [Header("Plateau Minigame")] public string platLose; //You didn't get the right date in time!
+
+        [Header("Plateau Minigame")]
+        public string deerFliesTitle; //Deer Flies!
+        public string deerFliesMsg; //You've been swarmed by deer flies!
+        
+        [Header("Popups")]
+        public string backToPresent; //Back to the Present!
+        public string returnToPresentMsg; //Press #key to open your astrolabe and return to the present!
+        public string returnToPresentMsg2; //Open your astrolabe and return to the present!
+        public string tutorialDone; //The tutorial is done!
+        public string tutorialDoneMsg; //You can now explore the map for more clues. Press #questKey to see your progress. Press #mapKey to open the map and fast travel. When you're ready to tell your story, press #endKey to end the game.
+        public string movement; //Movement
+        public string movementMsg; //Use WASD to move
+        public string theBonePile; //The Bone Pile
+        public string theBonePileMsg; //Interact with bones with Tab. Find the bone that matches yours!
+        public string openAstrolabe; //Open the Astrolabe!
+        public string openAstrolabeMsg; //Press #key to open the astrolabe.
+        
         [Header("Create Save")]
 
         [Tooltip("Slot number should be written as #slot and existing name should be #name")]
@@ -207,6 +230,8 @@ namespace Language
 
         [Header("Misc")]
         public string interactMsg; //Press #key to interact
+
+        
 
         //waypoints
         public static string smallLake;
@@ -290,7 +315,7 @@ namespace Language
         
         public string GetInteractMsg(string inText)
         {
-            interactMsg = mapControls1.Replace("#key", inText);
+            interactMsg = interactMsg.Replace("#key", inText);
             return interactMsg;
         }
 
@@ -333,6 +358,28 @@ namespace Language
 
             return null;
 
+        }
+
+        public string GetReturnToPresentMsg(string timeKey)
+        {
+            returnToPresentMsg = returnToPresentMsg.Replace("#key", timeKey);
+            return returnToPresentMsg;
+        }
+        
+        public string GetOpenAstrolabeMsg(string key)
+        {
+            openAstrolabeMsg = openAstrolabeMsg.Replace("#key", key);
+            return openAstrolabeMsg;
+        }
+        
+        
+        
+        public string GetTutorialDoneMsg(string questKey, string mapKey, string endKey)
+        {
+            tutorialDoneMsg = tutorialDoneMsg.Replace("#questKey", questKey);
+            tutorialDoneMsg = tutorialDoneMsg.Replace("#mapKey", mapKey);
+            tutorialDoneMsg = tutorialDoneMsg.Replace("#endKey", endKey);
+            return tutorialDoneMsg;
         }
     }
 }

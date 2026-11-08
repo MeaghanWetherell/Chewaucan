@@ -385,7 +385,7 @@ public class CourseManager : MonoBehaviour
         }
         else
         {
-            LoadGUIManager.loadGUIManager.InstantiatePopUp("You Lose!", loseMessage);
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().lose, loseMessage);
         }
 
         Stopped.Invoke();
@@ -415,7 +415,7 @@ public class CourseManager : MonoBehaviour
     private void Reset(bool val)
     {
         if(val)
-            Reset("You didn't get the right date in time!");
+            Reset(LanguageManager.GetLanguageObj().platLose);//You didn't get the right date in time!
     }
 
     //add dating points and update UIs

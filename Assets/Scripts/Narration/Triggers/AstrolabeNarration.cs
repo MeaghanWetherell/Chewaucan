@@ -7,6 +7,7 @@ using Misc;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using KeyRebinding;
 
 namespace Narration
 {
@@ -22,7 +23,8 @@ namespace Narration
         private void Start()
         {
             if (!astroClip.GetPlayability()) return;
-            LoadGUIManager.loadGUIManager.InstantiatePopUp("Open the Astrolabe!", "Press T to open the astrolabe.");
+            string key = BindingManager.bindingManager.GetBind("Astrolabe");
+            LoadGUIManager.loadGUIManager.InstantiatePopUp(LanguageManager.GetLanguageObj().openAstrolabe, LanguageManager.GetLanguageObj().GetOpenAstrolabeMsg(key));
         }
 
         private void OnEnable()
